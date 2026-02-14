@@ -116,6 +116,10 @@ Assignment 2/papers/**
 Assignment 2/docs/supervisor/
 Assignment 2/docs/supervisor/**
 
+# Pitch deck / presentation materials (keep local/untracked)
+Assignment 2/docs/pitches/
+Assignment 2/docs/pitches/**
+
 # Internal writing guides (keep local/untracked)
 Assignment 2/docs/Guides/Report_Writing_Guide.*
 
