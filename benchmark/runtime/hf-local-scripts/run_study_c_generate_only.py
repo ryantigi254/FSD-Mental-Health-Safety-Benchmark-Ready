@@ -8,8 +8,8 @@ from pathlib import Path
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 
-def _ensure_src_on_path(uni_setup_root: Path) -> None:
-    src_dir = uni_setup_root / "src"
+def _ensure_src_on_path(runtime_root: Path) -> None:
+    src_dir = runtime_root / "src"
     if str(src_dir) not in sys.path:
         sys.path.insert(0, str(src_dir))
 
@@ -98,8 +98,8 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
 
 
 def main() -> None:
-    uni_setup_root = Path(__file__).resolve().parents[1]
-    _ensure_src_on_path(uni_setup_root)
+    runtime_root = Path(__file__).resolve().parents[1]
+    _ensure_src_on_path(runtime_root)
 
     # Import only after src is on sys.path.
     from reliable_clinical_benchmark.eval.runtime_checks import validate_study_c_schema
@@ -109,8 +109,8 @@ def main() -> None:
 
     args = _parse_args()
 
-    base_data_dir = Path(args.data_dir) if args.data_dir else (uni_setup_root / "data" / "openr1_psy_splits")
-    output_dir = Path(args.output_dir) if args.output_dir else (uni_setup_root / "results")
+    base_data_dir = Path(args.data_dir) if args.data_dir else (runtime_root / "data" / "openr1_psy_splits")
+    output_dir = Path(args.output_dir) if args.output_dir else (runtime_root / "results")
 
     ok, errors = validate_study_c_schema(str(base_data_dir.parent))
     if not ok:
