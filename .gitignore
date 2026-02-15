@@ -12,6 +12,7 @@ __pycache__/
 benchmark/runtime/.pytest_cache/
 
 # Local scratch/docs
+AGENTS.md
 codex_scratchpad.*
 codex_scratchpad.md
 .claudemd
