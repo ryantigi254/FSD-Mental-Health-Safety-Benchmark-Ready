@@ -19,26 +19,14 @@ Assignment/Samples/**
 
 # Local PsyLLM / clinical-LLM weights (Mac/Uni setups) - do NOT track in git
 # Legacy top-level setups
-Assignment 2/Mac-setup/psy-llm-local/models/
-Assignment 2/Mac-setup/psy-llm-local/models/**
-Assignment 2/Uni-setup/psy-llm-local/models/
-Assignment 2/Uni-setup/psy-llm-local/models/**
 
 # Canonical benchmark setups
-Assignment 2/reliable_clinical_benchmark/*-setup/psy-llm-local/models/
-Assignment 2/reliable_clinical_benchmark/*-setup/psy-llm-local/models/**
 
 # Consolidated local model folder (Uni-setup) - weights stay local
-Assignment 2/reliable_clinical_benchmark/Uni-setup/models/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/models/**
 
 # New consolidated local model folder (Mac-setup)
-Assignment 2/reliable_clinical_benchmark/Mac-setup/clinical-llms-local/models/
-Assignment 2/reliable_clinical_benchmark/Mac-setup/clinical-llms-local/models/**
 
 # Top-level local PsyLLM prototyping (keep out of git)
-Assignment 2/psy-llm-local/
-Assignment 2/psy-llm-local/**
 
 # Local Dissertation prototype clone and dissertation artefacts - keep entirely local, never tracked
 Assignment/Misc/Dissertation/
@@ -46,86 +34,37 @@ Course Material/Assignment/Misc/Dissertation/
 Course Material/Assignment/My Dissertaion/
 
 # Local benchmark environments and coverage (Mac-setup)
-Assignment 2/reliable_clinical_benchmark/Mac-setup/.psy-benchmark-env/
-Assignment 2/reliable_clinical_benchmark/Mac-setup/.mh-llm-benchmark-env/
-Assignment 2/reliable_clinical_benchmark/Mac-setup/.coverage
 
 # Local benchmark coverage (Uni-setup)
-Assignment 2/reliable_clinical_benchmark/Uni-setup/.coverage
-Assignment 2/reliable_clinical_benchmark/Uni-setup/.conda-envs/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/.conda-envs/**
-Assignment 2/reliable_clinical_benchmark/Uni-setup/.conda-pkgs/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/.conda-pkgs/**
 
 # Uni-setup run logs (generated artefacts)
-Assignment 2/reliable_clinical_benchmark/Uni-setup/logs/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/logs/**
 
 # Uni-setup state and swarm worker rollouts (generated artefacts)
-Assignment 2/reliable_clinical_benchmark/Uni-setup/state/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/state/**
-Assignment 2/reliable_clinical_benchmark/Uni-setup/swarm/worker_rollout_*/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/swarm/worker_rollout_*/**
 
 # Uni-setup results cache backups / smoke outputs (generated artefacts)
-Assignment 2/reliable_clinical_benchmark/Uni-setup/results/**/study_a_generations.jsonl
-Assignment 2/reliable_clinical_benchmark/Uni-setup/results/**/study_b_generations.jsonl
-Assignment 2/reliable_clinical_benchmark/Uni-setup/results/**/study_c_generations.jsonl
-Assignment 2/reliable_clinical_benchmark/Uni-setup/results/**/study_a_generations.jsonl.bak-*
-Assignment 2/reliable_clinical_benchmark/Uni-setup/results/**/study_b_generations.jsonl.bak-*
-Assignment 2/reliable_clinical_benchmark/Uni-setup/results/**/study_a_generations.smoke-*.jsonl
-Assignment 2/reliable_clinical_benchmark/Uni-setup/results/**/study_b_generations.smoke-*.jsonl
 
 # AI Usage Log - keep untracked until final submission
 Course Material/Misc/AI_USAGE_LOG.md
 
 # Uni-setup misc notes (keep local/untracked)
-Assignment 2/reliable_clinical_benchmark/Uni-setup/docs/Misc/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/docs/Misc/**
-Assignment 2/reliable_clinical_benchmark/Uni-setup/implementation_plan.md
 
 # Literature Review sources folder - track structure/organization, ignore content
 # Ignore PDFs, HTML, and extracted content
-Assignment 2/Literature Review/sources/**/*.pdf
-Assignment 2/Literature Review/sources/**/*.html
-Assignment 2/Literature Review/sources/**/extracted_data/
-Assignment 2/Literature Review/sources/**/extracted_data/**
-Assignment 2/Literature Review/sources/**/images/
-Assignment 2/Literature Review/sources/**/images/**
 # Ignore scripts folder (superseded by processing/)
-Assignment 2/Literature Review/sources/scripts/
-Assignment 2/Literature Review/sources/scripts/**
 
 # Literature Review misc (local stash folder) - keep local/untracked
-/Assignment 2/Literature Review/misc/
-/Assignment 2/Literature Review/misc/**
 
 # Literature Review processing outputs and intermediate artefacts - keep local/untracked
-Assignment 2/Literature Review/test_output/
-Assignment 2/Literature Review/test_output/**
-Assignment 2/Literature Review/processing/
-Assignment 2/Literature Review/processing/**
-Assignment 2/Literature Review/processed/
-Assignment 2/Literature Review/processed/**
 
 # Local paper drafts / PDFs / write-ups (keep local/untracked)
-Assignment 2/papers/
-Assignment 2/papers/**
 
 # Internal supervisor materials (keep local/untracked)
-Assignment 2/docs/supervisor/
-Assignment 2/docs/supervisor/**
 
 # Pitch deck / presentation materials (keep local/untracked)
-Assignment 2/docs/pitches/
-Assignment 2/docs/pitches/**
 
 # Assignment 2 docs misc (keep local/untracked)
-Assignment 2/docs/misc/
-Assignment 2/docs/misc/**
 
 # Internal writing guides (keep local/untracked)
-Assignment 2/docs/Guides/Report_Writing_Guide.*
 
 # Course material - early papers and samples (keep local/untracked)
 Course Material/Assignment/Misc/
@@ -140,17 +79,8 @@ Course Material/Assignment/Samples/**
 .git-tools/**
 
 # Local environment freeze output (keep local/untracked)
-Assignment 2/reliable_clinical_benchmark/Uni-setup/openr1-env-freeze-final.txt
 
 # Uni-setup processed folder - ignore all except pipeline directories
-Assignment 2/reliable_clinical_benchmark/Uni-setup/processed/*
-!Assignment 2/reliable_clinical_benchmark/Uni-setup/processed/study_a_bias_cleaned_optimized/
-!Assignment 2/reliable_clinical_benchmark/Uni-setup/processed/study_a_bias_pipeline/
-!Assignment 2/reliable_clinical_benchmark/Uni-setup/processed/study_a_pipeline/
-!Assignment 2/reliable_clinical_benchmark/Uni-setup/processed/study_c_pipeline/
-!Assignment 2/reliable_clinical_benchmark/Uni-setup/processed/study_b_pipeline/
-!Assignment 2/reliable_clinical_benchmark/Uni-setup/processed/study_b_multiturn_pipeline/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/processed/_archived/
 
 # Local IDE / Cursor state - do not track
 .cursor/
@@ -165,14 +95,10 @@ WARP.md
 
 # Codex scratchpads (local AI working notes)
 codex_scratchpad.md
-Assignment 2/reliable_clinical_benchmark/codex_scratchpad.md
-Assignment 2/reliable_clinical_benchmark/codex_scratchpad.json
 
 # Misc docs (local notes)
-Assignment 2/reliable_clinical_benchmark/Uni-setup/docs/misc/
 
 # Build artefacts 
-Assignment 2/docs/Guides/build
 
 
 # Large local dataset files
@@ -180,11 +106,31 @@ Course Material/Assignment/Weekly Tasks/Wk4/data/IMDB Reviews.csv
 
 # Public-cleanup exclusions
 json-render-3d-test/
-Assignment 2/Literature Review/
-Assignment 2/docs/pitches/
-Assignment 2/docs/misc/
-Assignment 2/docs/Guides/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/state/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/swarm/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/metric-results/misc/
-Assignment 2/reliable_clinical_benchmark/Uni-setup/scripts/preprocessing/misc/
+
+# Benchmark runtime (canonical)
+benchmark/runtime/.conda-envs/
+benchmark/runtime/.conda-envs/**
+benchmark/runtime/.conda-pkgs/
+benchmark/runtime/.conda-pkgs/**
+benchmark/runtime/.pytest_cache/
+benchmark/runtime/**/__pycache__/
+benchmark/runtime/**/*.pyc
+benchmark/runtime/models/
+benchmark/runtime/models/**
+benchmark/runtime/logs/
+benchmark/runtime/logs/**
+benchmark/runtime/state/
+benchmark/runtime/state/**
+benchmark/runtime/swarm/
+benchmark/runtime/swarm/**
+benchmark/runtime/metric-results/misc/
+benchmark/runtime/metric-results/misc/**
+benchmark/runtime/scripts/preprocessing/misc/
+benchmark/runtime/scripts/preprocessing/misc/**
+benchmark/runtime/docs/misc/
+benchmark/runtime/docs/misc/**
+benchmark/runtime/processed/_archived/
+benchmark/runtime/processed/_archived/**
+benchmark/runtime/results/**/study_a_generations.jsonl
+benchmark/runtime/results/**/study_b_generations.jsonl
+benchmark/runtime/results/**/study_c_generations.jsonl
