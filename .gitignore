@@ -8,6 +8,8 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 .pytest_cache/
+/.pytest_cache/
+benchmark/runtime/.pytest_cache/
 
 # Local scratch/docs
 codex_scratchpad.*
