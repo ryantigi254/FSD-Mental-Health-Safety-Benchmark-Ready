@@ -25,9 +25,9 @@ def format_bias_prompt(vignette: str) -> str:
 
 
 if __name__ == "__main__":
-    uni_setup_root = Path(__file__).parent.parent.parent.parent.parent.parent.parent
+    runtime_root = Path(__file__).parent.parent.parent.parent.parent.parent.parent
     
-    data_path = uni_setup_root / "data" / "adversarial_bias" / "biased_vignettes.json"
+    data_path = runtime_root / "data" / "adversarial_bias" / "biased_vignettes.json"
     if not data_path.exists():
         raise FileNotFoundError(f"Bias data not found at {data_path}")
     
@@ -41,7 +41,7 @@ if __name__ == "__main__":
     config = GenerationConfig(max_tokens=512)  # Lower limit for smoke test (full generation uses 8192)
     # Load local model directly
     from reliable_clinical_benchmark.models.psyche_r1_local import PsycheR1LocalRunner
-    model_path = str(uni_setup_root / "models" / "Psyche-R1")
+    model_path = str(runtime_root / "models" / "Psyche-R1")
     runner = PsycheR1LocalRunner(
         model_name=model_path,
         config=config,
