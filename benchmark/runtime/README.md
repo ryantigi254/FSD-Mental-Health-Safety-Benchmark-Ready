@@ -23,16 +23,19 @@ End-to-end steps for the runtime environment (Windows, x64) to mirror the Mac fl
 
 ## 2) Create the environments (conda)
 
-runtime uses **two** Python environments:
+runtime uses **two** Python environments.
 
-### `mh-llm-benchmark-env` (general benchmark environment)
+**Naming rule (mandatory):** always use unique environment names per machine/run (for example `mh-llm-benchmark-ryan-20260215`, `mh-llm-local-ryan-20260215`, `.venv-ryan-20260215`).  
+Do **not** use shared/generic startup names such as `base`, `default`, `test`, or other canonical names that can collide across projects.
+
+### `mh-llm-benchmark-<user>-<yyyymmdd>` (general benchmark environment)
 
 Use this for **LM Studio runners**, **evaluation pipelines**, and **tests**:
 
 ```powershell
 cd "benchmark\runtime"
-conda create -n mh-llm-benchmark-env python=3.10 -y
-conda activate mh-llm-benchmark-env   # Use your conda activation command if 'conda activate' is not on PATH
+conda create -n mh-llm-benchmark-<user>-<yyyymmdd> python=3.10 -y
+conda activate mh-llm-benchmark-<user>-<yyyymmdd>   # Use your conda activation command if 'conda activate' is not on PATH
 
 pip install -r requirements.txt
 # spaCy model via scispaCy S3 (matches spaCy 3.6.1)
@@ -46,14 +49,14 @@ python -m spacy validate
 - Metric calculations
 - Pytest unit and integration tests
 
-### `mh-llm-local-env` (local HF inference environment)
+### `mh-llm-local-<user>-<yyyymmdd>` (local HF inference environment)
 
 Use this for **local PyTorch model runners** that require a more modern `transformers` stack (e.g., Piaget, Psyche-R1, Psych_Qwen_32B, PsyLLM local):
 
 ```powershell
 cd "benchmark\runtime"
-conda create -n mh-llm-local-env python=3.10 -y
-conda activate mh-llm-local-env   # Use your conda activation command if 'conda activate' is not on PATH
+conda create -n mh-llm-local-<user>-<yyyymmdd> python=3.10 -y
+conda activate mh-llm-local-<user>-<yyyymmdd>   # Use your conda activation command if 'conda activate' is not on PATH
 
 # Install PyTorch with CUDA support (REQUIRED for GPU inference)
 # Check your CUDA version with: nvidia-smi
@@ -131,11 +134,11 @@ python -c "from reliable_clinical_benchmark.pipelines.study_c import run_study_c
 
 ### Using Local HF Models
 
-For **local HF runners** (Piaget, Psyche-R1, Psych_Qwen_32B, PsyLLM), use the **`mh-llm-local-env`** environment:
+For **local HF runners** (Piaget, Psyche-R1, Psych_Qwen_32B, PsyLLM), use your uniquely named **`mh-llm-local-<user>-<yyyymmdd>`** environment:
 
 ```powershell
 # Activate local environment
-conda activate mh-llm-local-env
+conda activate mh-llm-local-<user>-<yyyymmdd>
 $Env:PYTHONNOUSERSITE="1"
 $Env:PYTHONPATH="src"
 
@@ -173,7 +176,7 @@ For **Psych_Qwen_32B** on a **24GB VRAM** GPU, we used **`quantization="4bit"`**
 - Quantisation requires **`bitsandbytes`** to be installed in `mh-llm-local-env`. If you get `PackageNotFoundError: No package metadata was found for bitsandbytes`, install it:
 
 ```powershell
-conda activate mh-llm-local-env
+conda activate mh-llm-local-<user>-<yyyymmdd>
 pip install bitsandbytes
 ```
 
