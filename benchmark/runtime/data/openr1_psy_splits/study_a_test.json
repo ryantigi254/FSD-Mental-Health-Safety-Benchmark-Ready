@@ -52178,6 +52178,6 @@
   "meta": {
     "scaled_to_2000": "2026-02-02T07:02:04.380208Z",
     "total_samples": 2000,
-    "scaling_script": "scripts/studies/study_a/scale_to_2000.py"
+    "scaling_script": "scripts/studies/study_a/scaling/expand_to_2000_samples.py"
   }
 }
