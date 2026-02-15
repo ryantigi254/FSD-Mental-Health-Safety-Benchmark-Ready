@@ -1,0 +1,10 @@
+{
+  "run_timestamp": "20260215_192325",
+  "git_branch": "codex/clinician-sendoff-ready-dataset-r1",
+  "git_head": "476cc18306a5c9bc5057a4e6b29cf5d66c6f7b26",
+  "openr1_revision": "56fc0ef2fa5926df86713ed9b35f8689a6f85425",
+  "pre_snapshot_dir": "data/frozen_splits/v0.2_preclinician_gold_preupdate_20260215_192325",
+  "post_snapshot_dir": "data/frozen_splits/v0.2_preclinician_gold_postupdate_20260215_192325",
+  "post_manifest": "data/frozen_splits/v0.2_preclinician_gold_postupdate_20260215_192325/post_update_manifest.json",
+  "diff_summary": "data/frozen_splits/v0.2_preclinician_gold_postupdate_20260215_192325/gold_pre_post_diff_summary.json"
+}
