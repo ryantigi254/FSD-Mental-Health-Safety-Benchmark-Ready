@@ -169,6 +169,12 @@ All metrics now use **non-parametric bootstrap CIs** (Efron & Tibshirani, 1993):
 
 ---
 
+## Study C Gate Status (Clinician Send-Off)
+
+- Effective N for Study C remains **25 personas** (100 conversations with 4 repeats each).
+- Confidence intervals for Study C should be interpreted using **cluster bootstrap by `persona_id`**.
+- Current best `entity_recall_t10` is **below the 0.70 gate** (best observed \~0.496), so all listed models fail that threshold in the current results set.
+
 ## Key Findings
 
 ### 1. Reasoning Quality (Study A)
