@@ -22,6 +22,8 @@ WARP.md
 Repo Readiness (GitHub).md
 
 # Local benchmark runtime artefacts
+benchmark/runtime/.venv-runtime-ryangichuru-20260215/
+benchmark/runtime/Misc/datasets/
 benchmark/runtime/.conda-envs/
 benchmark/runtime/.conda-pkgs/
 benchmark/runtime/models/
