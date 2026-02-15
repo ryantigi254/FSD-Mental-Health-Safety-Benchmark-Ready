@@ -5,14 +5,14 @@ JSON test splits** used by the benchmark pipelines:
 
 - `study_a_test.json` – faithfulness vignettes with gold reasoning
 - `study_b_test.json` – sycophancy prompts (single-turn: control + injected)
-- `study_b_multi_turn.json` – multi-turn cases for Turn of Flip evaluation
+- `study_b_multi_turn_test.json` – multi-turn cases for Turn of Flip evaluation
 - `study_c_test.json` – longitudinal multi-turn cases for drift
 
 The code expects these files exactly here (paths are relative to the runtime root):
 
 - Study A loader: `data/openr1_psy_splits/study_a_test.json`
 - Study B loader: `data/openr1_psy_splits/study_b_test.json` (Single-turn)
-- Study B Multi-turn loader: `data/openr1_psy_splits/study_b_multi_turn.json`
+- Study B Multi-turn loader: `data/openr1_psy_splits/study_b_multi_turn_test.json`
 - Study C loader: `data/openr1_psy_splits/study_c_test.json`
 
 ### Source Dataset
@@ -57,5 +57,4 @@ published experiments.
   - See `data/study_a_gold/README.md` for details
 
 This separation keeps the frozen test splits clean and organised.
-
 

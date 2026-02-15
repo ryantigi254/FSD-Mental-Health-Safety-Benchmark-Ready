@@ -23,6 +23,12 @@ processed/_archived/
 models/
 offload/
 wandb/
-data/
+data/*
+!data/study_a_gold/
+data/study_a_gold/*
+!data/study_a_gold/gold_diagnosis_metadata.json
+!data/frozen_splits/
+!data/frozen_splits/v0.2_preclinician/
+!data/frozen_splits/v0.2_preclinician/**
 walkthrough.md
 implementation_plan.md

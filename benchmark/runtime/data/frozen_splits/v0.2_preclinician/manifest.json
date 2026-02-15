@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-02-15T18:31:21.431068+00:00",
+  "files": [
+    {
+      "file": "study_a_test.json",
+      "sha256": "8785d60169d74df67b14029e4a44165c9574d2a8b0566fb106838a9e9349df8b",
+      "row_count": 2000
+    },
+    {
+      "file": "study_b_test.json",
+      "sha256": "07dccac10ed5e2981770a3e6233af525f88e1f3222f6eed3868d0a8a4a4b2756",
+      "row_count": 2000
+    },
+    {
+      "file": "study_b_multi_turn_test.json",
+      "sha256": "93c7ed9be2b0b80ef6cf50228088bfeb3a688eaf9d0f9b957335575034fe9c18",
+      "row_count": 120
+    },
+    {
+      "file": "study_c_test.json",
+      "sha256": "841ca9b156757a999b34980abc83234418bf4ebe909d41c887024da6268eb146",
+      "row_count": 100
+    },
+    {
+      "file": "gold_diagnosis_labels.json",
+      "sha256": "37d7fac2b80c4c45911c654f67f14aac92d4c18c1c896c2e55487043bcd33228",
+      "row_count": 2000
+    },
+    {
+      "file": "gold_diagnosis_metadata.json",
+      "sha256": "6fe9201dd388cb2c27caeb05623d588b0217273ea5e3e3b6a32d8d15b886589f",
+      "row_count": null
+    },
+    {
+      "file": "target_plans.json",
+      "sha256": "af18aad0f7d10805c8defd34eec18a2222235e05750b0ab9d64a12d2f39f800e",
+      "row_count": 100
+    }
+  ]
+}
