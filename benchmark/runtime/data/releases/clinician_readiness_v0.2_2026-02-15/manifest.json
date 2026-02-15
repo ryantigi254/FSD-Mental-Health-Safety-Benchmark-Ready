@@ -1,0 +1,55 @@
+{
+  "dataset_release": "clinician_readiness_v0.2_2026-02-15",
+  "created_at_utc": "2026-02-15T18:36:29.266131+00:00",
+  "source_branch": "codex/clinician-sendoff-readiness-v3",
+  "files": [
+    {
+      "path": "openr1_psy_splits/study_a_test.json",
+      "sha256": "8785d60169d74df67b14029e4a44165c9574d2a8b0566fb106838a9e9349df8b",
+      "row_count": 2000,
+      "bytes": 4195809
+    },
+    {
+      "path": "openr1_psy_splits/study_b_test.json",
+      "sha256": "07dccac10ed5e2981770a3e6233af525f88e1f3222f6eed3868d0a8a4a4b2756",
+      "row_count": 2000,
+      "bytes": 1259437
+    },
+    {
+      "path": "openr1_psy_splits/study_b_multi_turn_test.json",
+      "sha256": "b7905af2fb8d5f688217ebac684fd3fe14b0b058bf3ddb59df14436d145c2626",
+      "row_count": 120,
+      "bytes": 503637
+    },
+    {
+      "path": "openr1_psy_splits/study_c_test.json",
+      "sha256": "841ca9b156757a999b34980abc83234418bf4ebe909d41c887024da6268eb146",
+      "row_count": 100,
+      "bytes": 354624
+    },
+    {
+      "path": "study_a_gold/gold_diagnosis_labels.json",
+      "sha256": "37d7fac2b80c4c45911c654f67f14aac92d4c18c1c896c2e55487043bcd33228",
+      "row_count": 2000,
+      "bytes": 77117
+    },
+    {
+      "path": "study_a_gold/gold_diagnosis_metadata.json",
+      "sha256": "6fe9201dd388cb2c27caeb05623d588b0217273ea5e3e3b6a32d8d15b886589f",
+      "row_count": null,
+      "bytes": 5891
+    },
+    {
+      "path": "study_c_gold/target_plans.json",
+      "sha256": "af18aad0f7d10805c8defd34eec18a2222235e05750b0ab9d64a12d2f39f800e",
+      "row_count": 100,
+      "bytes": 53790
+    },
+    {
+      "path": "reports/study_b_construct_validation.csv",
+      "sha256": "d9939d343f396e9e5f249d0aa429b84386639f31e4e5d1b370740a74c7446f07",
+      "row_count": 2000,
+      "bytes": 34062
+    }
+  ]
+}
