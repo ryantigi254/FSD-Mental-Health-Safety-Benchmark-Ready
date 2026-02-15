@@ -8766,12 +8766,12 @@ Reference entities for c_001: {'sertraline 50mg', 'living with parents while at 
     <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
     
     <span class="c1"># Add src directory to path if needed</span>
-    <span class="c1"># Structure: Uni-setup/notebooks/ (current) -&gt; Uni-setup/src/ (target)</span>
+    <span class="c1"># Structure: runtime/notebooks/ (current) -&gt; runtime/src/ (target)</span>
     <span class="n">current_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
     
     <span class="c1"># Check if we're in notebooks directory, then go to parent</span>
-    <span class="c1"># Structure: Uni-setup/src/reliable_clinical_benchmark/</span>
-    <span class="c1"># We need to add Uni-setup/src/ to sys.path so Python can find reliable_clinical_benchmark</span>
+    <span class="c1"># Structure: runtime/src/reliable_clinical_benchmark/</span>
+    <span class="c1"># We need to add runtime/src/ to sys.path so Python can find reliable_clinical_benchmark</span>
     <span class="k">if</span> <span class="n">current_dir</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"notebooks"</span><span class="p">:</span>
         <span class="n">uni_setup_dir</span> <span class="o">=</span> <span class="n">current_dir</span><span class="o">.</span><span class="n">parent</span>
         <span class="n">src_dir</span> <span class="o">=</span> <span class="n">uni_setup_dir</span> <span class="o">/</span> <span class="s2">"src"</span>
@@ -8861,7 +8861,7 @@ Reference entities for c_001: {'sertraline 50mg', 'living with parents while at 
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>
-✓ MedicalNER loaded successfully (from e:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setup\src)
+✓ MedicalNER loaded successfully (from e:\22837352\NLP\NLP-Module\benchmark\runtime\src)
 </pre>
 </div>
 </div>
