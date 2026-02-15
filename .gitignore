@@ -1,135 +1,35 @@
-# Track Assignment and Wk folders
-!/Assignment/
-!/Wk*/
-!/Wk */
-# Ignore common large binaries only in Assignment (removed broad extension rules to allow targeted exceptions)
-# OS/editor noise
+# OS/editor
 .DS_Store
 *.log
-
-# Python/Jupyter caches (should never be committed)
-.ipynb_checkpoints/
-__pycache__/
-*.pyc
-
-# Ignore all Samples by default, but allow a specific file path
-Assignment/Samples/**
-!/Assignment/Samples/Good Aria/
-!/Assignment/Samples/Good Aria/tdcs for depression Aria Dissertaion.pdf
-
-# Local PsyLLM / clinical-LLM weights (Mac/Uni setups) - do NOT track in git
-# Legacy top-level setups
-
-# Canonical benchmark setups
-
-
-
-# Top-level local PsyLLM prototyping (keep out of git)
-
-# Local Dissertation prototype clone and dissertation artefacts - keep entirely local, never tracked
-Assignment/Misc/Dissertation/
-Course Material/Assignment/Misc/Dissertation/
-Course Material/Assignment/My Dissertaion/
-
-
-
-
-
-
-# AI Usage Log - keep untracked until final submission
-Course Material/Misc/AI_USAGE_LOG.md
-
-
-# Literature Review sources folder - track structure/organization, ignore content
-# Ignore PDFs, HTML, and extracted content
-# Ignore scripts folder (superseded by processing/)
-
-# Literature Review misc (local stash folder) - keep local/untracked
-
-# Literature Review processing outputs and intermediate artefacts - keep local/untracked
-
-# Local paper drafts / PDFs / write-ups (keep local/untracked)
-
-# Internal supervisor materials (keep local/untracked)
-
-# Pitch deck / presentation materials (keep local/untracked)
-
-# legacy docs misc (keep local/untracked)
-
-# Internal writing guides (keep local/untracked)
-
-# Course material - early papers and samples (keep local/untracked)
-Course Material/Assignment/Misc/
-Course Material/Assignment/Misc/**
-Course Material/Assignment/Samples/
-Course Material/Assignment/Samples/**
-
-# Local tooling venvs (keep local/untracked)
-.venv-git-tools/
-.venv-git-tools/**
-.git-tools/
-.git-tools/**
-
-# Local environment freeze output (keep local/untracked)
-
-
-# Local IDE / Cursor state - do not track
 .cursor/
 
-# Course material misc local notes
-Course Material/Misc/
-Course Material/Misc/**
-# Other local files
-Repo Readiness (GitHub).md
+# Python/Jupyter caches
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Local scratch/docs
+codex_scratchpad.*
+.claudemd
+.claude/
 WARP.md
-../codex_scratchpad.md
+Repo Readiness (GitHub).md
 
-# Codex scratchpads (local AI working notes)
-codex_scratchpad.md
-
-# Misc docs (local notes)
-
-# Build artefacts 
-
-
-# Large local dataset files
-Course Material/Assignment/Weekly Tasks/Wk4/data/IMDB Reviews.csv
-
-# Public-cleanup exclusions
-json-render-3d-test/
-
-# Benchmark runtime (canonical)
+# Local benchmark runtime artefacts
 benchmark/runtime/.conda-envs/
-benchmark/runtime/.conda-envs/**
 benchmark/runtime/.conda-pkgs/
-benchmark/runtime/.conda-pkgs/**
-benchmark/runtime/.pytest_cache/
-benchmark/runtime/**/__pycache__/
-benchmark/runtime/**/*.pyc
 benchmark/runtime/models/
-benchmark/runtime/models/**
 benchmark/runtime/logs/
-benchmark/runtime/logs/**
 benchmark/runtime/state/
-benchmark/runtime/state/**
 benchmark/runtime/swarm/
-benchmark/runtime/swarm/**
 benchmark/runtime/metric-results/misc/
-benchmark/runtime/metric-results/misc/**
 benchmark/runtime/scripts/preprocessing/misc/
-benchmark/runtime/scripts/preprocessing/misc/**
 benchmark/runtime/docs/misc/
-benchmark/runtime/docs/misc/**
 benchmark/runtime/processed/_archived/
-benchmark/runtime/processed/_archived/**
 benchmark/runtime/results/**/study_a_generations.jsonl
 benchmark/runtime/results/**/study_b_generations.jsonl
 benchmark/runtime/results/**/study_c_generations.jsonl
 
-# Local-only content (explicitly excluded from public history)
-Course Material/
-codex_scratchpad.*
-.claudemd
-.claude/
-
-# Benchmark runtime layout
+# Local one-off directories
+json-render-3d-test/
