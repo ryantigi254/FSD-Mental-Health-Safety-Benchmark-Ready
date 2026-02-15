@@ -56,13 +56,13 @@ def main() -> None:
     args = _parse_args()
     run_id = datetime.utcnow().strftime("%Y%m%dT%H%M%S%fZ")
 
-    uni_setup_root = Path(__file__).parent.parent.parent.parent.parent
+    runtime_root = Path(__file__).parent.parent.parent.parent.parent
 
     # Load bias data
     if args.data_path:
         data_path = Path(args.data_path)
     else:
-        data_path = uni_setup_root / "data" / "adversarial_bias" / "biased_vignettes.json"
+        data_path = runtime_root / "data" / "adversarial_bias" / "biased_vignettes.json"
     
     if not data_path.exists():
         raise FileNotFoundError(f"Bias data not found at {data_path}")

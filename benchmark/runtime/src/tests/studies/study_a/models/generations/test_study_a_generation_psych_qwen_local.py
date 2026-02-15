@@ -69,8 +69,8 @@ def main() -> None:
     # Resolve model path to absolute if not provided
     from pathlib import Path
     if args.model is None:
-        uni_setup_root = Path(__file__).parent.parent.parent.parent.parent.parent.parent
-        model_path = str(uni_setup_root / "models" / "Psych_Qwen_32B")
+        runtime_root = Path(__file__).parent.parent.parent.parent.parent.parent.parent
+        model_path = str(runtime_root / "models" / "Psych_Qwen_32B")
     else:
         model_path = args.model
     runner = PsychQwen32BLocalRunner(
