@@ -144,8 +144,8 @@ def validate_extracted_file(file_path: Path) -> Dict[str, Any]:
 def main():
     """Validate all extracted files."""
     script_dir = Path(__file__).parent
-    uni_setup_root = script_dir.parent.parent.parent
-    processed_dir = uni_setup_root / "processed" / "study_a_extracted"
+    runtime_root = script_dir.parent.parent.parent
+    processed_dir = runtime_root / "processed" / "study_a_extracted"
     
     if not processed_dir.exists():
         print(f"ERROR: Processed directory not found: {processed_dir}")

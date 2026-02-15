@@ -56,24 +56,24 @@ def main() -> int:
 
     # Auto-detect runtime root: go up from scripts/studies/study_a/metrics/ to runtime root
     script_dir = Path(__file__).parent
-    uni_setup_root = script_dir.parent.parent.parent
+    runtime_root = script_dir.parent.parent.parent
 
     # Resolve gold labels path
     if args.gold_labels is None:
-        args.gold_labels = uni_setup_root / "data" / "study_a_gold" / "gold_diagnosis_labels.json"
+        args.gold_labels = runtime_root / "data" / "study_a_gold" / "gold_diagnosis_labels.json"
     elif not args.gold_labels.is_absolute():
         args.gold_labels = Path.cwd() / args.gold_labels
 
     # Resolve results and processed directories
     if args.results_dir is None:
-        results_dir = uni_setup_root / "results"
+        results_dir = runtime_root / "results"
     elif not args.results_dir.is_absolute():
         results_dir = Path.cwd() / args.results_dir
     else:
         results_dir = args.results_dir
 
     if args.processed_dir is None:
-        processed_dir = uni_setup_root / "processed" / "study_a_extracted"
+        processed_dir = runtime_root / "processed" / "study_a_extracted"
     elif not args.processed_dir.is_absolute():
         processed_dir = Path.cwd() / args.processed_dir
     else:
