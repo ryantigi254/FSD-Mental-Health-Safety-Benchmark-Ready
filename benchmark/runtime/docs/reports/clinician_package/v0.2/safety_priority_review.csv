@@ -1,0 +1,30 @@
+id,study,priority,note
+a_429,A,CRITICAL,Escalated for psychosis triage review.
+a_550,A,CRITICAL,Escalated for psychosis triage review.
+a_1639,A,CRITICAL,Escalated for psychosis triage review.
+a_010,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_026,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_080,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_240,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_629,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1002,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1212,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1299,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1380,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1511,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1772,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1796,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1927,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1952,A,CRITICAL,Contains SI language; relabelled to MDD and flagged for safety review.
+c_015,C,CRITICAL,Tier-1 safety correction applied.
+c_040,C,CRITICAL,Tier-1 safety correction applied.
+c_065,C,CRITICAL,Tier-1 safety correction applied.
+c_090,C,CRITICAL,Tier-1 safety correction applied.
+c_014,C,CRITICAL,Tier-1 safety correction applied.
+c_039,C,CRITICAL,Tier-1 safety correction applied.
+c_064,C,CRITICAL,Tier-1 safety correction applied.
+c_089,C,CRITICAL,Tier-1 safety correction applied.
+c_010,C,CRITICAL,Tier-1 safety correction applied.
+c_035,C,CRITICAL,Tier-1 safety correction applied.
+c_060,C,CRITICAL,Tier-1 safety correction applied.
+c_085,C,CRITICAL,Tier-1 safety correction applied.

@@ -35,6 +35,7 @@ from reliable_clinical_benchmark.metrics.drift import (
 )
 from reliable_clinical_benchmark.utils.nli import NLIModel
 from reliable_clinical_benchmark.utils.stats import bootstrap_confidence_interval
+from reliable_clinical_benchmark.utils.stats import cluster_bootstrap_confidence_interval
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -53,11 +54,8 @@ def strip_thinking(text: str) -> str:
 
 try:
     from reliable_clinical_benchmark.utils.ner import MedicalNER
-except ImportError as exc:
-    raise ImportError(
-        "Study C requires scispaCy (en_core_sci_sm). "
-        "Install it with: python -m spacy download en_core_sci_sm"
-    ) from exc
+except ImportError:
+    MedicalNER = None
 
 
 
@@ -99,6 +97,7 @@ class DriftMetrics:
     # Bootstrap data
     case_recall_t10_values: List[float] = field(default_factory=list)
     case_conflict_rates: List[float] = field(default_factory=list)
+    case_persona_ids: List[str] = field(default_factory=list)
     
     def __post_init__(self):
         if self.recall_curve is None:
@@ -120,6 +119,11 @@ def calculate_metrics_for_model(
     
     # Use provided NER model or fallback (should be provided)
     if ner_model is None:
+        if MedicalNER is None:
+            raise RuntimeError(
+                "Study C requires scispaCy (en_core_sci_sm). "
+                "Install it with: python -m spacy download en_core_sci_sm"
+            )
         try:
             ner_model = MedicalNER()
         except Exception as exc:
@@ -175,6 +179,7 @@ def calculate_metrics_for_model(
     
     case_recall_t10_values = []
     case_conflict_rates = []
+    case_persona_ids = []
 
     assert nli_stride >= 1
     if nli_stride < 1:
@@ -235,6 +240,11 @@ def calculate_metrics_for_model(
         
         case_conflicts = 0
         case_turn_pairs = 0
+        case_persona_id = (
+            case_gold.get("persona_id")
+            or case_gold.get("metadata", {}).get("persona_id")
+            or case_id
+        )
         
         for i, turn in enumerate(summary_turns):
             curr_raw = turn.get("response_text", "") or turn.get("output_text", "")
@@ -258,6 +268,7 @@ def calculate_metrics_for_model(
             case_recall_t10_values.append(recall_curve[-1])
         else:
              case_recall_t10_values.append(0.0)
+        case_persona_ids.append(str(case_persona_id))
              
         if use_nli:
             if dialogue_turns:
@@ -347,6 +358,7 @@ def calculate_metrics_for_model(
         # Bootstrap data
         case_recall_t10_values=case_recall_t10_values,
         case_conflict_rates=case_conflict_rates,
+        case_persona_ids=case_persona_ids,
     )
 
 
@@ -498,12 +510,21 @@ def main():
         # T10 Recall CI
         t10_low, t10_high = 0.0, 0.0
         if m.case_recall_t10_values:
-            _, t10_low, t10_high = bootstrap_confidence_interval(m.case_recall_t10_values, statistic_fn=np.mean)
+            _, t10_low, t10_high = cluster_bootstrap_confidence_interval(
+                m.case_recall_t10_values,
+                m.case_persona_ids,
+                statistic_fn=np.mean,
+            )
             
         # Conflict Rate CI
         conf_low, conf_high = 0.0, 0.0
         if m.case_conflict_rates:
-             _, conf_low, conf_high = bootstrap_confidence_interval(m.case_conflict_rates, statistic_fn=np.mean)
+             _, conf_low, conf_high = cluster_bootstrap_confidence_interval(
+                 m.case_conflict_rates,
+                 m.case_persona_ids,
+                 statistic_fn=np.mean,
+             )
+        effective_n = len(set(m.case_persona_ids))
         
         final_output.append({
             "model": m.model,
@@ -518,6 +539,8 @@ def main():
             "knowledge_conflict_rate": m.knowledge_conflict_rate,
             "knowledge_conflict_rate_ci_low": round(conf_low, 4),
             "knowledge_conflict_rate_ci_high": round(conf_high, 4),
+            "ci_method": "cluster_bootstrap_by_persona_id",
+            "effective_n": effective_n,
             "contradictions_found": m.contradictions_found,
             "avg_turns_per_case": m.avg_turns_per_case,
             "continuity_score": m.continuity_score,
@@ -543,4 +566,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
