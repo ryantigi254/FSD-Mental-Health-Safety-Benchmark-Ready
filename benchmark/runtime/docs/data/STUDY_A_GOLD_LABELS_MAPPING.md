@@ -123,7 +123,7 @@ To align with Study B (2,000) and Study C (100×20=2,000) for consistency:
 | Scaling | +1,395 | OpenR1-Psy train split | 1,395 |
 | **Total** | **1,995** | Both splits | **1,995** |
 
-**Script**: `scripts/studies/study_a/scale_to_2000.py`
+**Script**: `scripts/studies/study_a/scaling/expand_to_2000_samples.py`
 
 **Process**:
 1. Load existing 600 samples from `study_a_test.json`
