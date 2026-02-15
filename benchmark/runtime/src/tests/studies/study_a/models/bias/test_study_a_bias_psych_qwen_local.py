@@ -25,9 +25,9 @@ def format_bias_prompt(vignette: str) -> str:
 
 
 if __name__ == "__main__":
-    uni_setup_root = Path(__file__).parent.parent.parent.parent.parent.parent.parent
+    runtime_root = Path(__file__).parent.parent.parent.parent.parent.parent.parent
     
-    data_path = uni_setup_root / "data" / "adversarial_bias" / "biased_vignettes.json"
+    data_path = runtime_root / "data" / "adversarial_bias" / "biased_vignettes.json"
     if not data_path.exists():
         raise FileNotFoundError(f"Bias data not found at {data_path}")
     
@@ -41,7 +41,7 @@ if __name__ == "__main__":
     config = GenerationConfig(max_tokens=512)  # Lower limit for smoke test (full generation uses 8192)
     # Load local model directly with 4-bit quantization (REQUIRED - 32B model won't fit in RAM without it)
     from reliable_clinical_benchmark.models.psych_qwen_local import PsychQwen32BLocalRunner
-    model_path = str(uni_setup_root / "models" / "Psych_Qwen_32B")
+    model_path = str(runtime_root / "models" / "Psych_Qwen_32B")
     print(f"Loading Psych_Qwen_32B with 4-bit quantization from: {model_path}")
     runner = PsychQwen32BLocalRunner(
         model_name=model_path,
