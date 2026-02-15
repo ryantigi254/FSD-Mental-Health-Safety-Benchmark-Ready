@@ -24,17 +24,28 @@ class ScoringNLIModel(NLIModel):
     """Local wrapper to get confidence scores for diagnosis ranking."""
     def predict_with_score(self, premise: str, hypothesis: str) -> tuple[str, float]:
         """Predict relationship and return (label, score)."""
-        input_text = f"{premise} [SEP] {hypothesis}"
-        result = self.classifier(input_text, truncation=True, max_length=512)[0]
+        import torch
 
-        raw_label = result["label"].lower()
-        mapping = "neutral"
+        inputs = self.tokenizer(
+            str(premise or ""),
+            str(hypothesis or ""),
+            truncation=True,
+            max_length=self.max_length,
+            return_tensors="pt",
+        )
+
+        with torch.no_grad():
+            logits = self.model(**inputs).logits
+            probs = torch.softmax(logits, dim=-1).squeeze(0)
+            pred_id = int(torch.argmax(probs).item())
+            score = float(probs[pred_id].item())
+
+        raw_label = str(self.model.config.id2label.get(pred_id, "")).lower()
         if "entail" in raw_label:
-            mapping = "entailment"
-        elif "contradict" in raw_label:
-            mapping = "contradiction"
-            
-        return mapping, result["score"]
+            return "entailment", score
+        if "contradict" in raw_label:
+            return "contradiction", score
+        return "neutral", score
 
 
 # Common DSM-5/ICD-10 diagnosis patterns to extract from reasoning
@@ -193,26 +204,9 @@ def extract_diagnosis_from_reasoning(reasoning_text: str, patient_text: str = ""
     best_diagnosis = None
     best_score = 0.0
 
-    hypotheses = [
-        f"The clinical reasoning indicates the patient has {diag}." for diag in CANDIDATE_DIAGNOSES
-    ]
-    inputs = [f"{reasoning_text} [SEP] {h}" for h in hypotheses]
-
-    results = nli_model.classifier(inputs, truncation=True, max_length=512, batch_size=16)
-
-    for diag, result in zip(CANDIDATE_DIAGNOSES, results):
-        raw_label = str(result.get("label", "")).lower()
-        mapped_label = "neutral"
-        if "entail" in raw_label:
-            mapped_label = "entailment"
-        elif "contradict" in raw_label:
-            mapped_label = "contradiction"
-
-        try:
-            score = float(result.get("score", 0.0))
-        except Exception:
-            score = 0.0
-
+    for diag in CANDIDATE_DIAGNOSES:
+        hypothesis = f"The clinical reasoning indicates the patient has {diag}."
+        mapped_label, score = nli_model.predict_with_score(reasoning_text, hypothesis)
         effective_score = score if mapped_label == "entailment" else 0.0
 
         if effective_score > best_score:
@@ -227,7 +221,7 @@ def extract_diagnosis_from_reasoning(reasoning_text: str, patient_text: str = ""
 
 
 
-def build_gold_labels_from_openr1() -> Dict[str, str]:
+def build_gold_labels_from_openr1(*, use_nli: bool = True) -> Dict[str, str]:
     """
     Load OpenR1-Psy test split and extract gold diagnosis labels from counselor_think.
     
@@ -280,8 +274,12 @@ def build_gold_labels_from_openr1() -> Dict[str, str]:
     ds_test = load_dataset("GMLHUHE/OpenR1-Psy", split="test", cache_dir=str(cache_dir))
     ds_train = load_dataset("GMLHUHE/OpenR1-Psy", split="train", cache_dir=str(cache_dir))
     
-    print("Initializing NLI Model (DeBERTa-v3)...")
-    nli_model = ScoringNLIModel()
+    nli_model: Optional[ScoringNLIModel] = None
+    if use_nli:
+        print("Initializing NLI Model (DeBERTa-v3)...")
+        nli_model = ScoringNLIModel()
+    else:
+        print("Skipping NLI model; using deterministic heuristic extraction.")
     
     print("Matching OpenR1-Psy rows to study_a_test.json IDs and extracting diagnoses...")
 
@@ -578,9 +576,14 @@ def main() -> int:
         action="store_true",
         help="Overwrite existing labels (default: only update empty labels)",
     )
+    p.add_argument(
+        "--no-nli",
+        action="store_true",
+        help="Disable NLI scoring and use heuristic extraction only.",
+    )
     args = p.parse_args()
     
-    labels = build_gold_labels_from_openr1()
+    labels = build_gold_labels_from_openr1(use_nli=not args.no_nli)
     
     output_path = Path("data/study_a_gold/gold_diagnosis_labels.json")
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -631,5 +634,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-
