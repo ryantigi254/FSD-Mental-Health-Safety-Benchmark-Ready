@@ -129,7 +129,7 @@ Each file contains:
 After running evaluations:
 
 ```bash
-python scripts/reporting/update_leaderboard.py
+python notebooks (reporting workflow)
 ```
 
 Generates `results/leaderboard.json` with:

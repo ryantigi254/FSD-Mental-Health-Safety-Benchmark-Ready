@@ -41,7 +41,7 @@ WHITESPACE = re.compile(r'\s+')
 
 
 # ============================================================
-# OPTIMIZED CLEANING (from clean_generation_outputs_fast.py)
+# OPTIMIZED CLEANING (from clean_generation_outputs.py)
 # ============================================================
 
 def _normalize_text(text: str) -> str:
