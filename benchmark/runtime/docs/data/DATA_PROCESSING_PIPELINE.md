@@ -6,7 +6,7 @@ This document describes the complete pipeline for processing model outputs and c
 
 ```powershell
 # 1. Clean all generation files (removes repetitive content)
-python scripts/clean_generations.py --all-studies
+python scripts/clean_generation_outputs.py --all-studies
 
 # 2. Calculate metrics for each study
 python scripts/study_a/metrics/calculate_metrics.py            # Study A: Faithfulness
@@ -33,7 +33,7 @@ results/{model}/    →   processed/{study}_cleaned/  →  metric-results/{study
 
 ## Step 1: Clean Generations
 
-**Script**: `scripts/clean_generations.py`
+**Script**: `scripts/clean_generation_outputs.py`
 
 Removes repetitive/duplicate content from model outputs while preserving diagnosis-relevant text. Uses O(n) hash-based deduplication.
 
@@ -41,13 +41,13 @@ Removes repetitive/duplicate content from model outputs while preserving diagnos
 
 ```powershell
 # Clean all studies
-python scripts/clean_generations.py --all-studies
+python scripts/clean_generation_outputs.py --all-studies
 
 # Clean specific study
-python scripts/clean_generations.py --study study_a
+python scripts/clean_generation_outputs.py --study study_a
 
 # Clean specific model
-python scripts/clean_generations.py --study study_a --model qwen3-lmstudio
+python scripts/clean_generation_outputs.py --study study_a --model qwen3-lmstudio
 ```
 
 ### Input/Output
@@ -59,7 +59,7 @@ python scripts/clean_generations.py --study study_a --model qwen3-lmstudio
 
 ## Step 2: Extract Predictions (Study A Only)
 
-**Script**: `scripts/step2_extract_predictions.py`
+**Script**: `scripts/extract_predictions.py`
 
 Extracts diagnoses, refusals, and complexity metrics from cleaned outputs. Only needed for Study A.
 
@@ -67,10 +67,10 @@ Extracts diagnoses, refusals, and complexity metrics from cleaned outputs. Only 
 
 ```powershell
 # Extract from cleaned files
-python scripts/step2_extract_predictions.py --study study_a
+python scripts/extract_predictions.py --study study_a
 
 # Extract from raw files (skip cleaning)
-python scripts/step2_extract_predictions.py --study study_a --from-raw
+python scripts/extract_predictions.py --study study_a --from-raw
 ```
 
 ### Output Format
@@ -184,8 +184,8 @@ runtime/
 │       └── drift_metrics.json
 │
 └── scripts/
-    ├── clean_generations.py      # Step 1: Cleaning
-    ├── step2_extract_predictions.py  # Step 2: Extraction (Study A)
+    ├── clean_generation_outputs.py      # Step 1: Cleaning
+    ├── extract_predictions.py  # Step 2: Extraction (Study A)
     ├── study_a/metrics/
     │   └── calculate_metrics.py  # Study A metrics
     ├── study_b/metrics/
@@ -200,9 +200,9 @@ runtime/
 
 | Trigger | Scripts to Re-run |
 |---------|-------------------|
-| New model outputs added | clean_generations.py → calculate_metrics.py |
-| Cleaning algorithm updated | clean_generations.py → calculate_metrics.py |
-| Extraction logic changed | step2_extract_predictions.py → calculate_metrics.py |
+| New model outputs added | clean_generation_outputs.py → calculate_metrics.py |
+| Cleaning algorithm updated | clean_generation_outputs.py → calculate_metrics.py |
+| Extraction logic changed | extract_predictions.py → calculate_metrics.py |
 | Gold labels updated | calculate_metrics.py only |
 
 ---
