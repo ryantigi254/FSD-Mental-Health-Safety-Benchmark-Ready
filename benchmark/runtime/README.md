@@ -1,6 +1,6 @@
-# Uni Setup (Windows, LM Studio + local HF)
+# Runtime Setup (Windows, LM Studio + local HF)
 
-End-to-end steps for the Uni environment (Windows, x64) to mirror the Mac flow: create an isolated conda env, ensure spaCy/scispaCy are available, run generations via LM Studio or local HF models, then score from cache.
+End-to-end steps for the runtime environment (Windows, x64) to mirror the Mac flow: create an isolated conda env, ensure spaCy/scispaCy are available, run generations via LM Studio or local HF models, then score from cache.
 
 ## 1) Prerequisites
 
