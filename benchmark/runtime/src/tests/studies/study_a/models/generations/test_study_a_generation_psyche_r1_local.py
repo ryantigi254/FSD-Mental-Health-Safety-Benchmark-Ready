@@ -50,8 +50,8 @@ def main() -> None:
     run_id = datetime.utcnow().strftime("%Y%m%dT%H%M%S%fZ")
     # Load local model directly
     from pathlib import Path
-    uni_setup_root = Path(__file__).parent.parent.parent.parent.parent.parent.parent
-    model_path = str(uni_setup_root / "models" / "Psyche-R1")
+    runtime_root = Path(__file__).parent.parent.parent.parent.parent.parent.parent
+    model_path = str(runtime_root / "models" / "Psyche-R1")
     runner = PsycheR1LocalRunner(
         model_name=model_path,
         config=GenerationConfig(

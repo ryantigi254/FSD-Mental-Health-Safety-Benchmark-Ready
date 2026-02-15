@@ -38,8 +38,8 @@ def main() -> None:
     run_id = datetime.utcnow().strftime("%Y%m%dT%H%M%S%fZ")
     # Load local model directly
     from pathlib import Path
-    uni_setup_root = Path(__file__).parent.parent.parent.parent.parent.parent.parent
-    model_path = str(uni_setup_root / "models" / "Piaget-8B")
+    runtime_root = Path(__file__).parent.parent.parent.parent.parent.parent.parent
+    model_path = str(runtime_root / "models" / "Piaget-8B")
     runner = Piaget8BLocalRunner(
         model_name=model_path,
         config=GenerationConfig(

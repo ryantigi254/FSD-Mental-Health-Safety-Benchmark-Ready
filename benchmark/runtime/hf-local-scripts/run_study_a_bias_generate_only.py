@@ -8,20 +8,20 @@ from pathlib import Path
 from datetime import datetime
 
 
-def _ensure_src_on_path(uni_setup_root: Path) -> None:
-    src_dir = uni_setup_root / "src"
+def _ensure_src_on_path(runtime_root: Path) -> None:
+    src_dir = runtime_root / "src"
     if str(src_dir) not in sys.path:
         sys.path.insert(0, str(src_dir))
 
 
-def _ensure_hf_cache_under_models_dir(uni_setup_root: Path) -> None:
+def _ensure_hf_cache_under_models_dir(runtime_root: Path) -> None:
     """
     Force Hugging Face + Transformers caches to live under runtime/models/.
     
     This ensures large checkpoints are saved under <runtime>/models/
     rather than the default user cache under C:\\Users\\...
     """
-    models_dir = uni_setup_root / "models"
+    models_dir = runtime_root / "models"
     models_dir.mkdir(parents=True, exist_ok=True)
     
     hf_home = models_dir / "hf_home"
@@ -177,11 +177,11 @@ def _parse_args() -> argparse.Namespace:
 
 
 def main() -> None:
-    uni_setup_root = Path(__file__).resolve().parents[1]
-    _ensure_src_on_path(uni_setup_root)
+    runtime_root = Path(__file__).resolve().parents[1]
+    _ensure_src_on_path(runtime_root)
     
     # Set up HF cache directories for local models (before any HF imports)
-    _ensure_hf_cache_under_models_dir(uni_setup_root)
+    _ensure_hf_cache_under_models_dir(runtime_root)
 
     # Import only after src is on sys.path and HF cache env vars are set.
     from reliable_clinical_benchmark.data.adversarial_loader import load_adversarial_bias_cases
@@ -198,28 +198,28 @@ def main() -> None:
     # Check if this is a local HF model and instantiate directly
     if model_id_lower in ("psyllm", "psyllm_gml_local", "psyllm-gml-local", "psyllm-gmlhuhe-local", "gmlhuhe_psyllm_local"):
         from reliable_clinical_benchmark.models.psyllm_gml_local import PsyLLMGMLLocalRunner
-        model_path = args.model or str(uni_setup_root / "models" / "PsyLLM")
+        model_path = args.model or str(runtime_root / "models" / "PsyLLM")
         runner = PsyLLMGMLLocalRunner(
             model_name=model_path,
             config=GenerationConfig(max_tokens=args.max_tokens),
         )
     elif model_id_lower in ("piaget_local", "piaget-8b-local", "piaget8b-local"):
         from reliable_clinical_benchmark.models.piaget_local import Piaget8BLocalRunner
-        model_path = args.model or str(uni_setup_root / "models" / "Piaget-8B")
+        model_path = args.model or str(runtime_root / "models" / "Piaget-8B")
         runner = Piaget8BLocalRunner(
             model_name=model_path,
             config=GenerationConfig(max_tokens=args.max_tokens),
         )
     elif model_id_lower in ("psyche_r1_local", "psyche-r1-local", "psyche-r1-local-hf"):
         from reliable_clinical_benchmark.models.psyche_r1_local import PsycheR1LocalRunner
-        model_path = args.model or str(uni_setup_root / "models" / "Psyche-R1")
+        model_path = args.model or str(runtime_root / "models" / "Psyche-R1")
         runner = PsycheR1LocalRunner(
             model_name=model_path,
             config=GenerationConfig(max_tokens=args.max_tokens),
         )
     elif model_id_lower in ("psych_qwen_local", "psych-qwen-32b-local", "psych-qwen-local-hf"):
         from reliable_clinical_benchmark.models.psych_qwen_local import PsychQwen32BLocalRunner
-        model_path = args.model or str(uni_setup_root / "models" / "Psych_Qwen_32B")
+        model_path = args.model or str(runtime_root / "models" / "Psych_Qwen_32B")
         quantization = args.quantization or "4bit"  # Default to 4bit for 32B model
         runner = PsychQwen32BLocalRunner(
             model_name=model_path,
@@ -236,7 +236,7 @@ def main() -> None:
     if args.data_path:
         data_path = Path(args.data_path)
     else:
-        data_path = uni_setup_root / "data" / "adversarial_bias" / "biased_vignettes.json"
+        data_path = runtime_root / "data" / "adversarial_bias" / "biased_vignettes.json"
     
     if not data_path.exists():
         raise FileNotFoundError(f"Bias data not found at {data_path}")
@@ -264,7 +264,7 @@ def main() -> None:
     if args.output_dir:
         output_dir = Path(args.output_dir)
     else:
-        output_dir = uni_setup_root / "results"
+        output_dir = runtime_root / "results"
 
     cache_out = args.cache_out
     if cache_out is None:
