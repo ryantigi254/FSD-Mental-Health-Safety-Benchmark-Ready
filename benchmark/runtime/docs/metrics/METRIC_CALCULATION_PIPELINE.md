@@ -130,11 +130,11 @@ python scripts\studies\study_a\metrics\calculate_bias.py --bias-dir results --ou
 - Provides a detailed table of bias vulnerabilities.
 
 ### Step 5: Final Analysis Report
-**Script**: `scripts/reporting/generate_final_report.py`
+**Script**: `notebooks (reporting workflow)`
 
 **Command**:
 ```powershell
-python scripts/reporting/generate_final_report.py
+python notebooks (reporting workflow)
 ```
 
 **What it does**:
