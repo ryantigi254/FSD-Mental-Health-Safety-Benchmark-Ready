@@ -4,13 +4,13 @@ import sys
 from pathlib import Path
 
 
-def _ensure_src_on_path(uni_setup_root: Path) -> None:
-    src_dir = uni_setup_root / "src"
+def _ensure_src_on_path(runtime_root: Path) -> None:
+    src_dir = runtime_root / "src"
     if str(src_dir) not in sys.path:
         sys.path.insert(0, str(src_dir))
 
 
-def _ensure_hf_cache_under_models_dir(uni_setup_root: Path) -> None:
+def _ensure_hf_cache_under_models_dir(runtime_root: Path) -> None:
     """
     Force Hugging Face + Transformers caches to live under runtime/models/.
 
@@ -21,7 +21,7 @@ def _ensure_hf_cache_under_models_dir(uni_setup_root: Path) -> None:
     Env vars are only set if not already defined, so users can override.
     """
 
-    models_dir = uni_setup_root / "models"
+    models_dir = runtime_root / "models"
     models_dir.mkdir(parents=True, exist_ok=True)
 
     hf_home = models_dir / "hf_home"
@@ -37,7 +37,7 @@ def _ensure_hf_cache_under_models_dir(uni_setup_root: Path) -> None:
     os.environ.setdefault("TRANSFORMERS_CACHE", str(transformers_cache))
 
 
-def _resolve_hf_model_to_local_dir(model: str, uni_setup_root: Path) -> str:
+def _resolve_hf_model_to_local_dir(model: str, runtime_root: Path) -> str:
     """
     If `model` is a local path, return it unchanged.
 
@@ -59,7 +59,7 @@ def _resolve_hf_model_to_local_dir(model: str, uni_setup_root: Path) -> str:
     if not repo_name:
         return model
 
-    local_dir = uni_setup_root / "models" / repo_name
+    local_dir = runtime_root / "models" / repo_name
     local_dir.mkdir(parents=True, exist_ok=True)
 
     # Import lazily so env vars (HF_HOME / caches) are set before any HF code runs.
@@ -75,9 +75,9 @@ def _resolve_hf_model_to_local_dir(model: str, uni_setup_root: Path) -> str:
 
 
 def main() -> None:
-    uni_setup_root = Path(__file__).resolve().parents[1]
-    _ensure_src_on_path(uni_setup_root)
-    _ensure_hf_cache_under_models_dir(uni_setup_root)
+    runtime_root = Path(__file__).resolve().parents[1]
+    _ensure_src_on_path(runtime_root)
+    _ensure_hf_cache_under_models_dir(runtime_root)
 
     # Import after sys.path + HF cache env vars are set.
     from reliable_clinical_benchmark.models.base import GenerationConfig
@@ -110,11 +110,11 @@ def main() -> None:
     p_study_a.add_argument("--max-samples", type=int, default=None)
     p_study_a.add_argument(
         "--data-dir",
-        default=str(uni_setup_root / "data" / "openr1_psy_splits"),
+        default=str(runtime_root / "data" / "openr1_psy_splits"),
     )
     p_study_a.add_argument(
         "--output-dir",
-        default=str(uni_setup_root / "results"),
+        default=str(runtime_root / "results"),
     )
     p_study_a.add_argument(
         "--generate-only",
@@ -128,14 +128,14 @@ def main() -> None:
 
     # Default to local model path if not provided
     if args.model is None:
-        local_model_path = uni_setup_root / "models" / "PsyLLM"
+        local_model_path = runtime_root / "models" / "PsyLLM"
         if local_model_path.exists():
             resolved_model = str(local_model_path)
         else:
             # Fallback to HF Hub if local doesn't exist
-            resolved_model = _resolve_hf_model_to_local_dir("GMLHUHE/PsyLLM", uni_setup_root)
+            resolved_model = _resolve_hf_model_to_local_dir("GMLHUHE/PsyLLM", runtime_root)
     else:
-        resolved_model = _resolve_hf_model_to_local_dir(args.model, uni_setup_root)
+        resolved_model = _resolve_hf_model_to_local_dir(args.model, runtime_root)
     runner = PsyLLMGMLLocalRunner(
         model_name=resolved_model,
         config=GenerationConfig(

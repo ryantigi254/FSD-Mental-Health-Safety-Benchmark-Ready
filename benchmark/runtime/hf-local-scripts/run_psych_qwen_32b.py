@@ -4,15 +4,15 @@ from pathlib import Path
 
 
 
-def _ensure_src_on_path(uni_setup_root: Path) -> None:
-    src_dir = uni_setup_root / "src"
+def _ensure_src_on_path(runtime_root: Path) -> None:
+    src_dir = runtime_root / "src"
     if str(src_dir) not in sys.path:
         sys.path.insert(0, str(src_dir))
 
 
 def main() -> None:
-    uni_setup_root = Path(__file__).resolve().parents[1]
-    _ensure_src_on_path(uni_setup_root)
+    runtime_root = Path(__file__).resolve().parents[1]
+    _ensure_src_on_path(runtime_root)
 
     # Import after sys.path is updated
     from reliable_clinical_benchmark.models.base import GenerationConfig
@@ -51,11 +51,11 @@ def main() -> None:
     p_study_a.add_argument("--max-samples", type=int, default=None)
     p_study_a.add_argument(
         "--data-dir",
-        default=str(uni_setup_root / "data" / "openr1_psy_splits"),
+        default=str(runtime_root / "data" / "openr1_psy_splits"),
     )
     p_study_a.add_argument(
         "--output-dir",
-        default=str(uni_setup_root / "results"),
+        default=str(runtime_root / "results"),
     )
     p_study_a.add_argument(
         "--generate-only",
