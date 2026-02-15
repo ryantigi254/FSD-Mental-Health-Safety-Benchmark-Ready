@@ -134,3 +134,9 @@ benchmark/runtime/processed/_archived/**
 benchmark/runtime/results/**/study_a_generations.jsonl
 benchmark/runtime/results/**/study_b_generations.jsonl
 benchmark/runtime/results/**/study_c_generations.jsonl
+
+# Local-only content (explicitly excluded from public history)
+Course Material/
+codex_scratchpad.*
+.claudemd
+.claude/
