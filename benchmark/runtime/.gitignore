@@ -4,16 +4,9 @@ __pycache__/
 .pytest_cache/
 .coverage
 htmlcov/
-debug_*.py
-debug_*.txt
 *.log
 tmp/
 temp/
-# Local scripts not for repo
-scripts/test_extraction.py
-scripts/verify_repetition_removal.py
-scripts/dev/smoke_test.py
-scripts/reporting/convert_notebooks_and_patch.py
 
 # Data and Artifacts (large/derived)
 
