@@ -47,14 +47,14 @@ def parse_args() -> tuple[argparse.Namespace, list[str]]:
 def main() -> int:
     args, passthrough = parse_args()
 
-    uni_setup_root = Path(__file__).resolve().parents[2]
+    runtime_root = Path(__file__).resolve().parents[2]
 
     study_script_map = {
-        "study_a": uni_setup_root / "hf-local-scripts" / "run_study_a_generate_only.py",
-        "study_a_bias": uni_setup_root / "hf-local-scripts" / "run_study_a_bias_generate_only.py",
-        "study_b": uni_setup_root / "hf-local-scripts" / "run_study_b_generate_only.py",
-        "study_b_multi_turn": uni_setup_root / "hf-local-scripts" / "run_study_b_multi_turn_generate_only.py",
-        "study_c": uni_setup_root / "hf-local-scripts" / "run_study_c_generate_only.py",
+        "study_a": runtime_root / "hf-local-scripts" / "run_study_a_generate_only.py",
+        "study_a_bias": runtime_root / "hf-local-scripts" / "run_study_a_bias_generate_only.py",
+        "study_b": runtime_root / "hf-local-scripts" / "run_study_b_generate_only.py",
+        "study_b_multi_turn": runtime_root / "hf-local-scripts" / "run_study_b_multi_turn_generate_only.py",
+        "study_c": runtime_root / "hf-local-scripts" / "run_study_c_generate_only.py",
     }
     allowed_model_ids_by_study = {
         "study_a": {
@@ -134,13 +134,13 @@ def main() -> int:
     command.extend([str(target_script), "--model-id", args.model_id])
     command.extend(passthrough)
 
-    print(f"runtime root: {uni_setup_root}")
+    print(f"runtime root: {runtime_root}")
     print(f"Executing: {shlex.join(command)}")
     if args.check_only:
         print("Check-only mode: validation passed; no generation executed.")
         return 0
 
-    completed = subprocess.run(command, cwd=str(uni_setup_root))
+    completed = subprocess.run(command, cwd=str(runtime_root))
     return completed.returncode
 
 
