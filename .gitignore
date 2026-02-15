@@ -22,9 +22,7 @@ Assignment/Samples/**
 
 # Canonical benchmark setups
 
-# Consolidated local model folder (Uni-setup) - weights stay local
 
-# New consolidated local model folder (Mac-setup)
 
 # Top-level local PsyLLM prototyping (keep out of git)
 
@@ -33,20 +31,14 @@ Assignment/Misc/Dissertation/
 Course Material/Assignment/Misc/Dissertation/
 Course Material/Assignment/My Dissertaion/
 
-# Local benchmark environments and coverage (Mac-setup)
 
-# Local benchmark coverage (Uni-setup)
 
-# Uni-setup run logs (generated artefacts)
 
-# Uni-setup state and swarm worker rollouts (generated artefacts)
 
-# Uni-setup results cache backups / smoke outputs (generated artefacts)
 
 # AI Usage Log - keep untracked until final submission
 Course Material/Misc/AI_USAGE_LOG.md
 
-# Uni-setup misc notes (keep local/untracked)
 
 # Literature Review sources folder - track structure/organization, ignore content
 # Ignore PDFs, HTML, and extracted content
@@ -80,7 +72,6 @@ Course Material/Assignment/Samples/**
 
 # Local environment freeze output (keep local/untracked)
 
-# Uni-setup processed folder - ignore all except pipeline directories
 
 # Local IDE / Cursor state - do not track
 .cursor/
@@ -140,3 +131,5 @@ Course Material/
 codex_scratchpad.*
 .claudemd
 .claude/
+
+# Benchmark runtime layout
