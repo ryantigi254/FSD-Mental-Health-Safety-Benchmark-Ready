@@ -11,8 +11,10 @@ __pycache__/
 
 # Local scratch/docs
 codex_scratchpad.*
+codex_scratchpad.md
 .claudemd
 .claude/
+.claude
 WARP.md
 Repo Readiness (GitHub).md
 
