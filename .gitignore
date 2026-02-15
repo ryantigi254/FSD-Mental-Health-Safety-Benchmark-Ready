@@ -120,6 +120,10 @@ Assignment 2/docs/supervisor/**
 Assignment 2/docs/pitches/
 Assignment 2/docs/pitches/**
 
+# Assignment 2 docs misc (keep local/untracked)
+Assignment 2/docs/misc/
+Assignment 2/docs/misc/**
+
 # Internal writing guides (keep local/untracked)
 Assignment 2/docs/Guides/Report_Writing_Guide.*
 
@@ -173,3 +177,14 @@ Assignment 2/docs/Guides/build
 
 # Large local dataset files
 Course Material/Assignment/Weekly Tasks/Wk4/data/IMDB Reviews.csv
+
+# Public-cleanup exclusions
+json-render-3d-test/
+Assignment 2/Literature Review/
+Assignment 2/docs/pitches/
+Assignment 2/docs/misc/
+Assignment 2/docs/Guides/
+Assignment 2/reliable_clinical_benchmark/Uni-setup/state/
+Assignment 2/reliable_clinical_benchmark/Uni-setup/swarm/
+Assignment 2/reliable_clinical_benchmark/Uni-setup/metric-results/misc/
+Assignment 2/reliable_clinical_benchmark/Uni-setup/scripts/preprocessing/misc/
