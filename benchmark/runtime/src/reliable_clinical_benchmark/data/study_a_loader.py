@@ -5,12 +5,16 @@ from pathlib import Path
 from typing import List, Dict, Optional
 import logging
 
+from .study_a_metadata import load_study_a_metadata_map, resolve_study_a_metadata
+
 logger = logging.getLogger(__name__)
 
 
 def load_study_a_data(
     data_path: str,
     gold_diagnosis_labels_path: Optional[str] = None,
+    gold_diagnosis_metadata_path: Optional[str] = None,
+    merge_metadata: bool = False,
 ) -> List[Dict]:
     """
     Load Study A frozen test split.
@@ -61,6 +65,29 @@ def load_study_a_data(
                 )
         except Exception as e:
             logger.warning(f"Failed to load gold diagnosis labels from {labels_path}: {e}")
+
+    if merge_metadata:
+        metadata_path: Optional[Path] = None
+        if gold_diagnosis_metadata_path:
+            metadata_path = Path(gold_diagnosis_metadata_path)
+        else:
+            candidate_new = path.parent.parent / "study_a_gold" / "gold_diagnosis_metadata.json"
+            if candidate_new.exists():
+                metadata_path = candidate_new
+            else:
+                candidate_old = path.parent / "study_a_gold_diagnosis_metadata.json"
+                if candidate_old.exists():
+                    metadata_path = candidate_old
+
+        metadata_map = load_study_a_metadata_map(metadata_path)
+        for sample in samples:
+            sample_id = str(sample.get("id", "")).strip()
+            if not sample_id:
+                continue
+            sample["gold_diagnosis_metadata"] = resolve_study_a_metadata(sample_id, metadata_map)
+        logger.info(
+            f"Merged gold_diagnosis_metadata for {len(samples)} sample(s) "
+            f"from {metadata_path if metadata_path else 'defaults'}"
+        )
     logger.info(f"Loaded {len(samples)} Study A samples from {data_path}")
     return samples
-
