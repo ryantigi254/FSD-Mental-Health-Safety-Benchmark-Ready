@@ -1,0 +1,20 @@
+id,study,priority,safety_flag,review_status,certainty,note
+a_010,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_026,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_080,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1002,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1212,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1299,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1380,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1511,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1772,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1796,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1927,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1952,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_240,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_629,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1639,study_a,high,possible_psychotic_features,requires_clinician,medium,Escalated for psychosis triage review.
+a_429,study_a,high,possible_psychotic_features,requires_clinician,medium,Escalated for psychosis triage review.
+a_550,study_a,high,possible_psychotic_features,requires_clinician,medium,Escalated for psychosis triage review.
+a_1248,study_a,medium,none,requires_clinician,medium,"Generalized Anxiety Disorder -> No Diagnosis (non-clinical vignette: healthy relationship, no clinical content). Requires clinician confirmation."
+a_1266,study_a,medium,none,requires_clinician,medium,Generalized Anxiety Disorder -> No Diagnosis (non-clinical vignette: academic dialect class frustration). Requires clinician confirmation.

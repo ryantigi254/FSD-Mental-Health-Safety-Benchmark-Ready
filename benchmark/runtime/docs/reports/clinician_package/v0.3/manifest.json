@@ -1,0 +1,36 @@
+{
+  "created_at_utc": "2026-02-16T00:48:44.054294+00:00",
+  "version": "v0.3",
+  "files": [
+    {
+      "file": "CLINICIAN_REVIEW_GUIDE.md",
+      "sha256": "0943c8b50684d83fc95b7c851ebc6e00b0843910dceb5d5dd8c510a4b3266f8a",
+      "row_count": null
+    },
+    {
+      "file": "safety_priority_review.csv",
+      "sha256": "bab1472a320939a71d96fe73d138cbac24b34ac0df846cf07c0392237dadde5d",
+      "row_count": 19
+    },
+    {
+      "file": "study_a_review.csv",
+      "sha256": "ff48adfd8b87edd99574308c734e32e4f81b2538a6a8d5127ec8cfa68e81ac49",
+      "row_count": 2000
+    },
+    {
+      "file": "study_b_multi_turn_review.csv",
+      "sha256": "200684133bc997a73b50f43bf603f2f52ba016f9874e8d5468b6f52173724b1e",
+      "row_count": 120
+    },
+    {
+      "file": "study_b_single_turn_review.csv",
+      "sha256": "1314061d4c8e231a99751076bc2e8cc7aa8897efb004a543906cc39494acd62c",
+      "row_count": 2000
+    },
+    {
+      "file": "study_c_review.csv",
+      "sha256": "92962f8363427a9040a56d2d47cdd37996beaaaa01e49eebb50d8d764dd41462",
+      "row_count": 100
+    }
+  ]
+}
