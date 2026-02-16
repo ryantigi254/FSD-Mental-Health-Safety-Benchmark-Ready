@@ -30,5 +30,14 @@ data/study_a_gold/*
 !data/frozen_splits/
 !data/frozen_splits/v0.2_preclinician/
 !data/frozen_splits/v0.2_preclinician/**
+!data/frozen_splits/v0.3_postclinician_audit/
+!data/frozen_splits/v0.3_postclinician_audit/**
+data/frozen_splits/*_gold_preupdate_*/
+data/frozen_splits/*_gold_postupdate_*/
+!data/releases/
+!data/releases/clinician_readiness_v0.2_2026-02-15/
+!data/releases/clinician_readiness_v0.2_2026-02-15/**
+!data/releases/clinician_readiness_v0.3_2026-02-16/
+!data/releases/clinician_readiness_v0.3_2026-02-16/**
 walkthrough.md
 implementation_plan.md
