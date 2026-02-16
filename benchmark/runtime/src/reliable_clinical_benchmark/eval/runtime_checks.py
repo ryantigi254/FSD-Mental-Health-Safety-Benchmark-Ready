@@ -154,6 +154,8 @@ def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
     multi_turn_cases, multi_turn_errors = _normalise_study_b_multi_turn(multi_payload)
     errors.extend(sample_errors)
     errors.extend(multi_turn_errors)
+    if not samples:
+        errors.append("Study B single-turn: payload list must be non-empty")
 
     seen_ids = set()
     for i, item in enumerate(samples):
