@@ -21,3 +21,12 @@ Rows without explicit sidecar metadata use these defaults:
 - `review_status=not_flagged`
 - `certainty=unknown`
 - `metadata_source=default`
+
+`certainty=unknown` means "not flagged by automated triage" and does not imply diagnostic uncertainty in the gold label itself.
+
+## Study C notes
+- `critical_entities` were normalised to a minimum of 8 per case in v0.3 (currently all cases have 8).
+- `persona_id` intentionally repeats across 4 cases per persona in this cycle.
+
+## Study A target_plans naming clarification
+`study_a_gold/target_plans.json` contains extracted OpenR1-Psy plan snippets and provenance. It is not equivalent to Study C clinician/NLI-validated treatment plans.
