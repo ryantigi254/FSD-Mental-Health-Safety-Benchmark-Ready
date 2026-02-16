@@ -1,12 +1,12 @@
 {
   "dataset_release": "clinician_readiness_v0.3_2026-02-16",
-  "created_at_utc": "2026-02-16T00:19:05.518888+00:00",
+  "created_at_utc": "2026-02-16T00:47:46.546175+00:00",
   "source_branch": "codex/clinician-sendoff-ready-dataset-r1",
   "files": [
     {
       "path": "openr1_psy_splits/study_a_test.json",
       "sha256": "8785d60169d74df67b14029e4a44165c9574d2a8b0566fb106838a9e9349df8b",
-      "row_count": 2,
+      "row_count": 2000,
       "bytes": 4195809
     },
     {
@@ -48,19 +48,19 @@
     {
       "path": "study_a_gold/label_canonical_map.json",
       "sha256": "682056000346b8e611d1860cbbf03bda1fb7b7ea91cc3ca658d2f76770cf5e48",
-      "row_count": 5,
+      "row_count": 17,
       "bytes": 1419
     },
     {
       "path": "study_c_gold/target_plans.json",
       "sha256": "da3144c532bbbdb3cebcb212ffbec722bdcd09278d229f2a98b5cc6ec287d0dd",
-      "row_count": 2,
+      "row_count": 100,
       "bytes": 57290
     },
     {
       "path": "study_c_gold/entity_evidence_map.json",
       "sha256": "8061485a7dfe885c7ee8d5b6ee99332b97efd985f087da1137623229675dd462",
-      "row_count": 3,
+      "row_count": 100,
       "bytes": 48300
     },
     {
@@ -84,7 +84,7 @@
     {
       "path": "reports/stage2_gate_report.json",
       "sha256": "05b9fc583a338bd91f7ccdee2d0df05356c7385c968120194e4f1431080ee92a",
-      "row_count": 4,
+      "row_count": 3,
       "bytes": 1720
     }
   ]
