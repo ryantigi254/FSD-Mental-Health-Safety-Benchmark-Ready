@@ -26,6 +26,36 @@ from reliable_clinical_benchmark.data.study_a_metadata import (  # noqa: E402
 DEFAULT_SNAPSHOT_DIR = ROOT / "data" / "frozen_splits" / "v0.3_postclinician_audit"
 DEFAULT_OUTPUT_DIR = ROOT / "docs" / "reports" / "clinician_package" / "v0.3"
 
+ED_REVIEW_FLAG = "eating_disorder_needs_clinician_review"
+EXPECTED_V03_COUNTS = {
+    "study_a": 2000,
+    "study_b_single": 2000,
+    "study_b_multi": 120,
+    "study_c": 100,
+    "safety_priority": 32,
+}
+
+SINGLE_TURN_OPTIONAL_METADATA_KEYS = [
+    "age",
+    "source",
+    "original_id",
+    "matched_condition",
+    "source_type",
+    "condition",
+    "severity",
+    "sex",
+    "setting",
+]
+
+MULTI_TURN_OPTIONAL_METADATA_KEYS = [
+    "age",
+    "variant_id",
+    "pressure_type",
+    "condition_phrase",
+    "source",
+    "original_id",
+]
+
 
 def _load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
@@ -63,7 +93,68 @@ def _normalise_study_b_multi(payload):
     return []
 
 
-def _study_a_rows(snapshot_dir: Path) -> list[dict]:
+def _normalise_text(text: object) -> str:
+    return " ".join(str(text or "").split()).strip()
+
+
+def _format_turns_text(turns: list[dict]) -> str:
+    ordered = []
+    for index, turn in enumerate(turns):
+        if not isinstance(turn, dict):
+            continue
+        turn_no = turn.get("turn")
+        if not isinstance(turn_no, int):
+            turn_no = index + 1
+        message = _normalise_text(turn.get("message", ""))
+        ordered.append((turn_no, message))
+
+    ordered.sort(key=lambda item: item[0])
+    parts = [f"{turn_no}:{message}" for turn_no, message in ordered if message]
+    return " || ".join(parts)
+
+
+def _to_string(value: object, default: str = "") -> str:
+    if value is None:
+        return default
+    text = str(value).strip()
+    return text if text else default
+
+
+def _load_canonical_map(snapshot_dir: Path) -> dict:
+    primary = ROOT / "data" / "study_a_gold" / "label_canonical_map.json"
+    fallback = snapshot_dir / "label_canonical_map.json"
+    target = primary if primary.exists() else fallback
+    if not target.exists():
+        return {"aliases": {}, "canonical_labels": []}
+    payload = _load_json(target)
+    if not isinstance(payload, dict):
+        return {"aliases": {}, "canonical_labels": []}
+    aliases = payload.get("aliases", {})
+    canonical_labels = payload.get("canonical_labels", [])
+    return {
+        "aliases": aliases if isinstance(aliases, dict) else {},
+        "canonical_labels": canonical_labels if isinstance(canonical_labels, list) else [],
+    }
+
+
+def _canonicalise_label(label: str, aliases: dict[str, str]) -> str:
+    return _to_string(aliases.get(label, label))
+
+
+def _priority_rank(priority: str) -> int:
+    order = {"critical": 0, "high": 1, "medium": 2, "low": 3, "none": 4}
+    return order.get(priority, 5)
+
+
+def _priority_for_safety_flag(flag: str) -> str:
+    if flag == "active_suicidal_ideation":
+        return "critical"
+    if flag in {"possible_psychotic_features", ED_REVIEW_FLAG}:
+        return "high"
+    return "medium"
+
+
+def _study_a_rows(snapshot_dir: Path) -> tuple[list[dict], dict, set[str]]:
     split_payload = _load_json(snapshot_dir / "study_a_test.json")
     samples = split_payload.get("samples", []) if isinstance(split_payload, dict) else []
 
@@ -71,23 +162,40 @@ def _study_a_rows(snapshot_dir: Path) -> list[dict]:
     labels = labels_payload.get("labels", {}) if isinstance(labels_payload, dict) else {}
     metadata_map = load_study_a_metadata_map(snapshot_dir / "gold_diagnosis_metadata.json")
 
+    canonical = _load_canonical_map(snapshot_dir)
+    aliases = canonical["aliases"]
+
     rows = []
+    ed_ids: set[str] = set()
     for sample in sorted(samples, key=lambda row: str(row.get("id", ""))):
-        sample_id = str(sample.get("id", ""))
+        sample_id = _to_string(sample.get("id", ""))
         resolved = resolve_study_a_metadata(sample_id, metadata_map)
+
+        raw_label = _to_string(labels.get(sample_id, ""))
+        label = _canonicalise_label(raw_label, aliases)
+        is_ed = label == "Eating Disorder"
+        if is_ed:
+            ed_ids.add(sample_id)
+            resolved["review_status"] = "requires_clinician"
+            resolved["certainty"] = "low"
+            if resolved.get("metadata_source") != "explicit":
+                resolved["metadata_source"] = "derived_rule"
+                resolved["safety_flag"] = ED_REVIEW_FLAG
+
         rows.append(
             {
                 "id": sample_id,
-                "prompt": str(sample.get("prompt", "")),
-                "gold_response": str(sample.get("gold_answer", "")),
-                "gold_label": str(labels.get(sample_id, "")),
-                "safety_flag": str(resolved.get("safety_flag", "none")),
-                "review_status": str(resolved.get("review_status", "not_flagged")),
-                "certainty": str(resolved.get("certainty", "unknown")),
-                "metadata_source": str(resolved.get("metadata_source", "default")),
+                "prompt": _to_string(sample.get("prompt", "")),
+                "gold_response": _to_string(sample.get("gold_answer", "")),
+                "gold_label": label,
+                "safety_flag": _to_string(resolved.get("safety_flag", "none"), "none"),
+                "review_status": _to_string(resolved.get("review_status", "not_flagged"), "not_flagged"),
+                "certainty": _to_string(resolved.get("certainty", "unknown"), "unknown"),
+                "metadata_source": _to_string(resolved.get("metadata_source", "default"), "default"),
             }
         )
-    return rows
+
+    return rows, metadata_map, ed_ids
 
 
 def _study_b_single_rows(snapshot_dir: Path) -> list[dict]:
@@ -95,16 +203,16 @@ def _study_b_single_rows(snapshot_dir: Path) -> list[dict]:
     rows = []
     for sample in sorted(_normalise_study_b_single(payload), key=lambda row: str(row.get("id", ""))):
         metadata = sample.get("metadata", {}) if isinstance(sample.get("metadata"), dict) else {}
-        rows.append(
-            {
-                "id": str(sample.get("id", "")),
-                "prompt": str(sample.get("prompt", "")),
-                "gold_answer": str(sample.get("gold_answer", "")),
-                "incorrect_opinion": str(sample.get("incorrect_opinion", "")),
-                "persona_id": str(metadata.get("persona_id", "")),
-                "age": "" if metadata.get("age") is None else str(metadata.get("age")),
-            }
-        )
+        row = {
+            "id": _to_string(sample.get("id", "")),
+            "prompt": _to_string(sample.get("prompt", "")),
+            "gold_answer": _to_string(sample.get("gold_answer", "")),
+            "incorrect_opinion": _to_string(sample.get("incorrect_opinion", "")),
+            "persona_id": _to_string(metadata.get("persona_id", "")),
+        }
+        for key in SINGLE_TURN_OPTIONAL_METADATA_KEYS:
+            row[key] = _to_string(metadata.get(key, ""))
+        rows.append(row)
     return rows
 
 
@@ -114,18 +222,18 @@ def _study_b_multi_rows(snapshot_dir: Path) -> list[dict]:
     for case in sorted(_normalise_study_b_multi(payload), key=lambda row: str(row.get("id", ""))):
         metadata = case.get("metadata", {}) if isinstance(case.get("metadata"), dict) else {}
         turns = case.get("turns", []) if isinstance(case.get("turns"), list) else []
-        rows.append(
-            {
-                "id": str(case.get("id", "")),
-                "gold_answer": str(case.get("gold_answer", "")),
-                "incorrect_opinion": str(case.get("incorrect_opinion", "")),
-                "pressure_style": str(case.get("pressure_style", "")),
-                "pressure_schedule": str(case.get("pressure_schedule", "")),
-                "turn_count": str(len(turns)),
-                "persona_id": str(metadata.get("persona_id", "")),
-                "age": "" if metadata.get("age") is None else str(metadata.get("age")),
-            }
-        )
+        row = {
+            "id": _to_string(case.get("id", "")),
+            "gold_answer": _to_string(case.get("gold_answer", "")),
+            "incorrect_opinion": _to_string(case.get("incorrect_opinion", "")),
+            "pressure_style": _to_string(case.get("pressure_style", "")),
+            "pressure_schedule": _to_string(case.get("pressure_schedule", "")),
+            "turns_text": _format_turns_text(turns),
+            "persona_id": _to_string(metadata.get("persona_id", "")),
+        }
+        for key in MULTI_TURN_OPTIONAL_METADATA_KEYS:
+            row[key] = _to_string(metadata.get(key, ""))
+        rows.append(row)
     return rows
 
 
@@ -138,56 +246,65 @@ def _study_c_rows(snapshot_dir: Path) -> list[dict]:
 
     rows = []
     for case in sorted(cases, key=lambda row: str(row.get("id", ""))):
-        case_id = str(case.get("id", ""))
+        case_id = _to_string(case.get("id", ""))
+        metadata = case.get("metadata", {}) if isinstance(case.get("metadata"), dict) else {}
         plan_obj = plans.get(case_id, {}) if isinstance(plans, dict) else {}
         rows.append(
             {
                 "id": case_id,
-                "patient_summary": str(case.get("patient_summary", "")),
-                "critical_entities": " | ".join(str(x) for x in case.get("critical_entities", [])),
-                "target_plan": str(plan_obj.get("plan", "")),
-                "source_openr1_id": str(plan_obj.get("source_openr1_id", "")),
-                "source_split": str(plan_obj.get("source_split", "")),
+                "persona_id": _to_string(metadata.get("persona_id", "")),
+                "patient_summary": _to_string(case.get("patient_summary", "")),
+                "critical_entities": " | ".join(_to_string(x) for x in case.get("critical_entities", [])),
+                "target_plan": _to_string(plan_obj.get("plan", "")),
+                "source_openr1_id": _to_string(plan_obj.get("source_openr1_id", "")),
+                "source_split": _to_string(plan_obj.get("source_split", "")),
             }
         )
     return rows
 
 
-def _priority_rank(priority: str) -> int:
-    order = {"critical": 0, "high": 1, "medium": 2, "low": 3, "none": 4}
-    return order.get(priority, 5)
+def _safety_priority_rows(metadata_map: dict, ed_ids: set[str]) -> list[dict]:
+    rows_by_id: dict[str, dict] = {}
 
-
-def _safety_priority_rows(snapshot_dir: Path) -> list[dict]:
-    metadata_map = load_study_a_metadata_map(snapshot_dir / "gold_diagnosis_metadata.json")
-
-    rows = []
     for sample_id, entry in metadata_map.items():
-        safety_flag = str(entry.get("safety_flag", "none"))
-        review_status = str(entry.get("review_status", "not_flagged"))
-        if safety_flag == "none" and review_status != "requires_clinician":
+        safety_flag = _to_string(entry.get("safety_flag", "none"), "none")
+        review_status = _to_string(entry.get("review_status", "not_flagged"), "not_flagged")
+        row = {
+            "id": _to_string(sample_id),
+            "study": "study_a",
+            "priority": _priority_for_safety_flag(safety_flag),
+            "safety_flag": safety_flag,
+            "review_status": review_status,
+            "certainty": _to_string(entry.get("certainty", "unknown"), "unknown"),
+            "metadata_source": "explicit",
+            "note": _to_string(entry.get("note", "")),
+        }
+        rows_by_id[row["id"]] = row
+
+    for sample_id in sorted(ed_ids):
+        existing = rows_by_id.get(sample_id)
+        if existing is None:
+            rows_by_id[sample_id] = {
+                "id": sample_id,
+                "study": "study_a",
+                "priority": _priority_for_safety_flag(ED_REVIEW_FLAG),
+                "safety_flag": ED_REVIEW_FLAG,
+                "review_status": "requires_clinician",
+                "certainty": "low",
+                "metadata_source": "derived_rule",
+                "note": "Derived rule: Eating Disorder label requires clinician review.",
+            }
             continue
 
-        if safety_flag == "active_suicidal_ideation":
-            priority = "critical"
-        elif safety_flag == "possible_psychotic_features":
-            priority = "high"
-        else:
-            priority = "medium"
+        existing["review_status"] = "requires_clinician"
+        existing["certainty"] = "low"
+        if existing.get("metadata_source") != "explicit":
+            existing["metadata_source"] = "derived_rule"
+            existing["safety_flag"] = ED_REVIEW_FLAG
+        existing["priority"] = _priority_for_safety_flag(_to_string(existing.get("safety_flag", "none"), "none"))
 
-        rows.append(
-            {
-                "id": str(sample_id),
-                "study": "study_a",
-                "priority": priority,
-                "safety_flag": safety_flag,
-                "review_status": review_status,
-                "certainty": str(entry.get("certainty", "unknown")),
-                "note": str(entry.get("note", "")),
-            }
-        )
-
-    rows.sort(key=lambda row: (_priority_rank(row["priority"]), row["id"]))
+    rows = list(rows_by_id.values())
+    rows.sort(key=lambda row: (_priority_rank(_to_string(row.get("priority", "none"), "none")), row["id"]))
     return rows
 
 
@@ -223,6 +340,15 @@ Rows without explicit sidecar metadata use these defaults:
 - `review_status=not_flagged`
 - `certainty=unknown`
 - `metadata_source=default`
+
+`certainty=unknown` means "not flagged by automated triage" and does not imply diagnostic uncertainty in the gold label itself.
+
+## Study C notes
+- `critical_entities` were normalised to a minimum of 8 per case in v0.3 (currently all cases have 8).
+- `persona_id` intentionally repeats across 4 cases per persona in this cycle.
+
+## Study A target_plans naming clarification
+`study_a_gold/target_plans.json` contains extracted OpenR1-Psy plan snippets and provenance. It is not equivalent to Study C clinician/NLI-validated treatment plans.
 """
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(body, encoding="utf-8")
@@ -288,11 +414,29 @@ def main() -> int:
         print(f"Missing snapshot artefacts: {missing_snapshot}")
         return 1
 
-    study_a_rows = _study_a_rows(snapshot_dir)
+    study_a_rows, metadata_map, ed_ids = _study_a_rows(snapshot_dir)
     study_b_single_rows = _study_b_single_rows(snapshot_dir)
     study_b_multi_rows = _study_b_multi_rows(snapshot_dir)
     study_c_rows = _study_c_rows(snapshot_dir)
-    safety_rows = _safety_priority_rows(snapshot_dir)
+    safety_rows = _safety_priority_rows(metadata_map, ed_ids)
+
+    actual_counts = {
+        "study_a": len(study_a_rows),
+        "study_b_single": len(study_b_single_rows),
+        "study_b_multi": len(study_b_multi_rows),
+        "study_c": len(study_c_rows),
+        "safety_priority": len(safety_rows),
+    }
+    cardinality_errors = []
+    for key, expected in EXPECTED_V03_COUNTS.items():
+        actual = actual_counts.get(key, -1)
+        if actual != expected:
+            cardinality_errors.append(f"{key}: expected {expected}, found {actual}")
+    if cardinality_errors:
+        print("FAIL: v0.3 cardinality gates failed.")
+        for err in cardinality_errors:
+            print(f"  - {err}")
+        return 1
 
     _write_csv(
         output_dir / "study_a_review.csv",
@@ -316,7 +460,7 @@ def main() -> int:
             "gold_answer",
             "incorrect_opinion",
             "persona_id",
-            "age",
+            *SINGLE_TURN_OPTIONAL_METADATA_KEYS,
         ],
         study_b_single_rows,
     )
@@ -328,9 +472,9 @@ def main() -> int:
             "incorrect_opinion",
             "pressure_style",
             "pressure_schedule",
-            "turn_count",
+            "turns_text",
             "persona_id",
-            "age",
+            *MULTI_TURN_OPTIONAL_METADATA_KEYS,
         ],
         study_b_multi_rows,
     )
@@ -338,6 +482,7 @@ def main() -> int:
         output_dir / "study_c_review.csv",
         [
             "id",
+            "persona_id",
             "patient_summary",
             "critical_entities",
             "target_plan",
@@ -355,6 +500,7 @@ def main() -> int:
             "safety_flag",
             "review_status",
             "certainty",
+            "metadata_source",
             "note",
         ],
         safety_rows,
