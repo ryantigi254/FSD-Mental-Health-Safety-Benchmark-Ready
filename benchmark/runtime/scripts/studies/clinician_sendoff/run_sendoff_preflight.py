@@ -42,6 +42,8 @@ def main() -> int:
     checks = [
         _run(
             [
+                sys.executable,
+                "-m",
                 "pytest",
                 "tests/unit/eval/test_runtime_checks.py",
                 "-q",
@@ -64,6 +66,8 @@ def main() -> int:
         ),
         _run(
             [
+                sys.executable,
+                "-m",
                 "pytest",
                 "tests/unit/data/test_frozen_snapshot_v03_manifest.py",
                 "-q",
@@ -72,6 +76,8 @@ def main() -> int:
         ),
         _run(
             [
+                sys.executable,
+                "-m",
                 "pytest",
                 "tests/unit/data/test_clinician_package_v03_manifest.py",
                 "-q",
@@ -80,6 +86,8 @@ def main() -> int:
         ),
         _run(
             [
+                sys.executable,
+                "-m",
                 "pytest",
                 "tests/unit/data/test_clinician_package_v03_schema.py",
                 "-q",
