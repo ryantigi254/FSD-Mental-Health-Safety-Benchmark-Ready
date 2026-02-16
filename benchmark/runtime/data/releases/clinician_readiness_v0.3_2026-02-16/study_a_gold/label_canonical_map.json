@@ -1,0 +1,35 @@
+{
+  "version": "v0.3_postclinician_audit_stage2",
+  "description": "Canonical diagnosis taxonomy and alias mapping for Study A gold labels.",
+  "canonical_labels": [
+    "Adjustment Disorder",
+    "Generalized Anxiety Disorder",
+    "Major Depressive Disorder",
+    "Post-Traumatic Stress Disorder",
+    "No Diagnosis",
+    "Panic Disorder",
+    "Obsessive-Compulsive Disorder",
+    "Bipolar Disorder",
+    "Attention Deficit Hyperactivity Disorder",
+    "Eating Disorder",
+    "Substance Use Disorder",
+    "Social Anxiety Disorder",
+    "Persistent Depressive Disorder",
+    "Psychotic features suspected",
+    "Sleep Disorder",
+    "Specific Phobia",
+    "Agoraphobia"
+  ],
+  "aliases": {
+    "Attention-Deficit/Hyperactivity Disorder": "Attention Deficit Hyperactivity Disorder",
+    "Evaluate for psychotic features — possible psychotic prodrome": "Psychotic features suspected",
+    "Evaluate for psychotic features — auditory hallucination": "Psychotic features suspected",
+    "Evaluate for psychotic features — command-type auditory experiences": "Psychotic features suspected",
+    "Generalised Anxiety Disorder": "Generalized Anxiety Disorder",
+    "Posttraumatic Stress Disorder": "Post-Traumatic Stress Disorder"
+  },
+  "notes": [
+    "Canonical labels are used by policy gates and clinician-package checks.",
+    "Alias mapping resolves legacy label variants without mutating source records."
+  ]
+}
