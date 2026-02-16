@@ -1,20 +1,33 @@
-id,study,priority,safety_flag,review_status,certainty,note
-a_010,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_026,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_080,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_1002,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_1212,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_1299,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_1380,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_1511,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_1772,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_1796,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_1927,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_1952,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_240,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_629,study_a,critical,active_suicidal_ideation,requires_clinician,high,Contains SI language; relabelled to MDD and flagged for safety review.
-a_1639,study_a,high,possible_psychotic_features,requires_clinician,medium,Escalated for psychosis triage review.
-a_429,study_a,high,possible_psychotic_features,requires_clinician,medium,Escalated for psychosis triage review.
-a_550,study_a,high,possible_psychotic_features,requires_clinician,medium,Escalated for psychosis triage review.
-a_1248,study_a,medium,none,requires_clinician,medium,"Generalized Anxiety Disorder -> No Diagnosis (non-clinical vignette: healthy relationship, no clinical content). Requires clinician confirmation."
-a_1266,study_a,medium,none,requires_clinician,medium,Generalized Anxiety Disorder -> No Diagnosis (non-clinical vignette: academic dialect class frustration). Requires clinician confirmation.
+id,study,priority,safety_flag,review_status,certainty,metadata_source,note
+a_010,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_026,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_080,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1002,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1212,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1299,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1380,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1511,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1772,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1796,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1927,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1952,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_240,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_629,study_a,critical,active_suicidal_ideation,requires_clinician,high,explicit,Contains SI language; relabelled to MDD and flagged for safety review.
+a_1072,study_a,high,eating_disorder_needs_clinician_review,requires_clinician,low,derived_rule,Derived rule: Eating Disorder label requires clinician review.
+a_1557,study_a,high,eating_disorder_needs_clinician_review,requires_clinician,low,derived_rule,Derived rule: Eating Disorder label requires clinician review.
+a_1639,study_a,high,possible_psychotic_features,requires_clinician,medium,explicit,Escalated for psychosis triage review.
+a_1707,study_a,high,eating_disorder_needs_clinician_review,requires_clinician,low,derived_rule,Derived rule: Eating Disorder label requires clinician review.
+a_1963,study_a,high,eating_disorder_needs_clinician_review,requires_clinician,low,derived_rule,Derived rule: Eating Disorder label requires clinician review.
+a_267,study_a,high,eating_disorder_needs_clinician_review,requires_clinician,low,derived_rule,Derived rule: Eating Disorder label requires clinician review.
+a_429,study_a,high,possible_psychotic_features,requires_clinician,medium,explicit,Escalated for psychosis triage review.
+a_550,study_a,high,possible_psychotic_features,requires_clinician,medium,explicit,Escalated for psychosis triage review.
+a_017,study_a,medium,none,internally_confirmed,medium,explicit,Adjustment Disorder -> No Diagnosis (non-clinical vignette: Buddhist meditation chants).
+a_023,study_a,medium,none,internally_confirmed,medium,explicit,Adjustment Disorder -> No Diagnosis (non-clinical vignette: climate/energy preference).
+a_030,study_a,medium,none,internally_confirmed,medium,explicit,Adjustment Disorder -> No Diagnosis (non-clinical vignette: family genealogy narrative).
+a_113,study_a,medium,none,internally_confirmed,medium,explicit,Major Depressive Disorder -> Substance Use Disorder (substance-primary vignette: heroin use).
+a_1193,study_a,medium,none,internally_confirmed,medium,explicit,No change needed (non-clinical vignette: casual flexibility remark). Already correctly labelled.
+a_1248,study_a,medium,none,requires_clinician,medium,explicit,"Generalized Anxiety Disorder -> No Diagnosis (non-clinical vignette: healthy relationship, no clinical content). Requires clinician confirmation."
+a_1266,study_a,medium,none,requires_clinician,medium,explicit,Generalized Anxiety Disorder -> No Diagnosis (non-clinical vignette: academic dialect class frustration). Requires clinician confirmation.
+a_1377,study_a,medium,none,internally_confirmed,medium,explicit,Generalized Anxiety Disorder -> Substance Use Disorder (substance-primary vignette: alcohol use).
+a_1882,study_a,medium,none,internally_confirmed,medium,explicit,No change needed (non-clinical vignette: career mentorship gratitude). Already correctly labelled.
+a_624,study_a,medium,none,internally_confirmed,medium,explicit,Generalized Anxiety Disorder -> Substance Use Disorder (substance-primary vignette: daily cannabis use).
