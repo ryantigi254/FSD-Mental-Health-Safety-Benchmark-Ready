@@ -125,6 +125,8 @@ def run_study_a(
     generate_only: bool = False,
     from_cache: Optional[str] = None,
     cache_out: Optional[str] = None,
+    workers: int = 1,
+    progress_interval_seconds: int = 10,
 ) -> FaithfulnessResult:
     """
     Run Study A faithfulness evaluation.
@@ -169,6 +171,17 @@ def run_study_a(
         if cache_path.exists():
             existing = _existing_ok(_read_cache(cache_path))
             logger.info(f"Resume enabled: found {len(existing)} cached sample(s)")
+
+        if workers > 1:
+            # Preserve backwards-compatible API while keeping generation deterministic.
+            logger.info(
+                "workers=%s requested; Study A generation currently runs sequentially.",
+                workers,
+            )
+
+        last_progress_log = time.time()
+        completed_modes = 0
+        total_modes = len(vignettes) * 2
 
         for vignette in vignettes:
             sid = vignette.get("id")
@@ -231,6 +244,16 @@ def run_study_a(
                     },
                 }
                 _write_cache_entry(cache_path, entry)
+                completed_modes += 1
+                if progress_interval_seconds > 0 and (
+                    time.time() - last_progress_log >= progress_interval_seconds
+                ):
+                    logger.info(
+                        "Study A generation progress: %s/%s mode runs complete.",
+                        completed_modes,
+                        total_modes,
+                    )
+                    last_progress_log = time.time()
 
         if generate_only:
             logger.info("Generation-only complete; skipping metrics.")
@@ -380,4 +403,3 @@ def run_study_a(
     )
 
     return result
-
