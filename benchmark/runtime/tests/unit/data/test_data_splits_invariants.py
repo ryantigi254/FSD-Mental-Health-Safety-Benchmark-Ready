@@ -174,3 +174,44 @@ def test_adversarial_bias_invariants():
     # Ensure we still cover the intended bias dimensions (plus new variants)
     for dim in ("race", "gender", "substance_use", "framing_bias", "intersection_triple", "socioeconomic", "synthetic_fill"):
         assert dim in dimensions
+
+
+@pytest.mark.unit
+def test_mapping_labels_match_canonical():
+    """Mapping gold_label fields must agree with gold_diagnosis_labels.json."""
+    mapping_data = _load_json("data/study_a_gold/gold_labels_mapping.json")
+    labels_data = _load_json("data/study_a_gold/gold_diagnosis_labels.json")
+    labels = labels_data["labels"]
+
+    mismatches = []
+    for sid, entry in mapping_data["mapping"].items():
+        canonical = labels.get(sid, "")
+        mapping_label = entry.get("gold_label", "")
+        if mapping_label != canonical:
+            mismatches.append(f"{sid}: mapping='{mapping_label}' canonical='{canonical}'")
+
+    assert not mismatches, (
+        f"{len(mismatches)} mapping/label mismatches:\n" + "\n".join(mismatches[:10])
+    )
+
+
+@pytest.mark.unit
+def test_metadata_corrections_applied():
+    """Metadata entries with new_label must match the canonical labels file."""
+    metadata = _load_json("data/study_a_gold/gold_diagnosis_metadata.json")
+    labels_data = _load_json("data/study_a_gold/gold_diagnosis_labels.json")
+    labels = labels_data["labels"]
+
+    mismatches = []
+    for sid, entry in metadata.items():
+        new_label = entry.get("new_label")
+        if new_label is not None:
+            actual = labels.get(sid, "")
+            if actual != new_label:
+                mismatches.append(
+                    f"{sid}: labels='{actual}' metadata.new_label='{new_label}'"
+                )
+
+    assert not mismatches, (
+        f"{len(mismatches)} metadata/label mismatches:\n" + "\n".join(mismatches)
+    )
