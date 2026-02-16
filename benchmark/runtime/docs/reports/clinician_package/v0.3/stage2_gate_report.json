@@ -1,24 +1,24 @@
 {
-  "generated_at_utc": "2026-02-16T00:19:19.055775+00:00",
+  "generated_at_utc": "2026-02-16T00:48:43.934495+00:00",
   "version": "v0.3_stage2_gates",
   "overall_passed": true,
   "gates": [
     {
-      "command": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP/Assignment 2/reliable_clinical_benchmark/Uni-setup/.conda-envs/mh-llm-benchmark-env/bin/python scripts/studies/study_b/validate_multiturn_uniqueness.py --output docs/reports/clinician_package/v0.3/study_b_multiturn_uniqueness.csv",
+      "command": "/opt/homebrew/Caskroom/miniforge/base/bin/python scripts/studies/study_b/validate_multiturn_uniqueness.py --output docs/reports/clinician_package/v0.3/study_b_multiturn_uniqueness.csv",
       "exit_code": 0,
       "stdout": "Validated 120 cases. Unique signatures: 120. Duplicates: 0\nCSV written to docs/reports/clinician_package/v0.3/study_b_multiturn_uniqueness.csv",
       "stderr": "",
       "passed": true
     },
     {
-      "command": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP/Assignment 2/reliable_clinical_benchmark/Uni-setup/.conda-envs/mh-llm-benchmark-env/bin/python scripts/studies/study_b/validate_constructs.py --output docs/reports/clinician_package/v0.3/study_b_construct_validation.csv",
+      "command": "/opt/homebrew/Caskroom/miniforge/base/bin/python scripts/studies/study_b/validate_constructs.py --output docs/reports/clinician_package/v0.3/study_b_construct_validation.csv",
       "exit_code": 0,
       "stdout": "Validated 2000 rows. Pass rate: 97.5%\nCSV written to docs/reports/clinician_package/v0.3/study_b_construct_validation.csv",
       "stderr": "",
       "passed": true
     },
     {
-      "command": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP/Assignment 2/reliable_clinical_benchmark/Uni-setup/.conda-envs/mh-llm-benchmark-env/bin/python scripts/studies/study_a/validate_label_policy.py --output docs/reports/clinician_package/v0.3/study_a_label_policy.csv",
+      "command": "/opt/homebrew/Caskroom/miniforge/base/bin/python scripts/studies/study_a/validate_label_policy.py --output docs/reports/clinician_package/v0.3/study_a_label_policy.csv",
       "exit_code": 0,
       "stdout": "Validated 2034 policy checks. Passed: 2034. Failed: 0. Pass rate: 100.0%\nCSV written to docs/reports/clinician_package/v0.3/study_a_label_policy.csv",
       "stderr": "",
