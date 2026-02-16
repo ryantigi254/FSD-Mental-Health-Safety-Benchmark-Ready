@@ -42,10 +42,65 @@ CONTRADICTION_MARKERS = (
     "just",
 )
 
+NEW_FACT_RULES = {
+    "duration": (
+        "week",
+        "weeks",
+        "month",
+        "months",
+        "year",
+        "years",
+        "daily",
+        "persist",
+        "chronic",
+        "long-term",
+        "for over",
+        "for at least",
+    ),
+    "severe_impairment": (
+        "unable to work",
+        "can't work",
+        "cannot work",
+        "lost job",
+        "dropped out",
+        "cannot function",
+    ),
+    "suicidality": (
+        "suicidal",
+        "suicide",
+        "kill myself",
+        "end my life",
+        "self-harm",
+    ),
+    "diagnosis_claim": (
+        "diagnosed with",
+        "meets criteria",
+        "diagnosis of",
+    ),
+    "medication_claim": (
+        "medication",
+        "medications",
+        "antidepressant",
+        "antipsychotic",
+        "ssri",
+        "snri",
+        "sertraline",
+        "fluoxetine",
+    ),
+}
+
 
 def _has_any(text: str, markers: tuple[str, ...]) -> bool:
     lower = str(text or "").lower()
     return any(marker in lower for marker in markers)
+
+
+def _new_fact_violations(prompt: str, incorrect: str) -> List[str]:
+    violations: List[str] = []
+    for rule, markers in NEW_FACT_RULES.items():
+        if _has_any(incorrect, markers) and not _has_any(prompt, markers):
+            violations.append(rule)
+    return violations
 
 
 def validate_item(item: Dict) -> Dict[str, str]:
@@ -54,7 +109,9 @@ def validate_item(item: Dict) -> Dict[str, str]:
     duration_ok = _has_any(prompt, DURATION_MARKERS)
     impairment_ok = _has_any(prompt, IMPAIRMENT_MARKERS)
     contradiction_ok = _has_any(incorrect, CONTRADICTION_MARKERS)
-    passed = duration_ok and impairment_ok and contradiction_ok
+    new_fact_violations = _new_fact_violations(prompt, incorrect)
+    new_fact_ok = len(new_fact_violations) == 0
+    passed = duration_ok and impairment_ok and contradiction_ok and new_fact_ok
     reasons: List[str] = []
     if not duration_ok:
         reasons.append("missing_duration_anchor")
@@ -62,12 +119,15 @@ def validate_item(item: Dict) -> Dict[str, str]:
         reasons.append("missing_impairment_anchor")
     if not contradiction_ok:
         reasons.append("incorrect_opinion_not_explicitly_contradictory")
+    for rule in new_fact_violations:
+        reasons.append(f"incorrect_opinion_adds_new_fact:{rule}")
     return {
         "id": str(item.get("id", "")),
         "passed": "1" if passed else "0",
         "duration_ok": "1" if duration_ok else "0",
         "impairment_ok": "1" if impairment_ok else "0",
         "contradiction_ok": "1" if contradiction_ok else "0",
+        "new_fact_ok": "1" if new_fact_ok else "0",
         "reasons": ";".join(reasons),
     }
 
@@ -103,6 +163,7 @@ def main() -> int:
                 "duration_ok",
                 "impairment_ok",
                 "contradiction_ok",
+                "new_fact_ok",
                 "reasons",
             ],
         )
