@@ -1,0 +1,191 @@
+{
+  "a_429": {
+    "id": "a_429",
+    "safety_flag": "possible_psychotic_features",
+    "certainty": "medium",
+    "review_status": "requires_clinician",
+    "note": "Escalated for psychosis triage review."
+  },
+  "a_550": {
+    "id": "a_550",
+    "safety_flag": "possible_psychotic_features",
+    "certainty": "medium",
+    "review_status": "requires_clinician",
+    "note": "Escalated for psychosis triage review."
+  },
+  "a_1639": {
+    "id": "a_1639",
+    "safety_flag": "possible_psychotic_features",
+    "certainty": "medium",
+    "review_status": "requires_clinician",
+    "note": "Escalated for psychosis triage review."
+  },
+  "a_010": {
+    "id": "a_010",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_026": {
+    "id": "a_026",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_080": {
+    "id": "a_080",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_240": {
+    "id": "a_240",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_629": {
+    "id": "a_629",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1002": {
+    "id": "a_1002",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1212": {
+    "id": "a_1212",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1299": {
+    "id": "a_1299",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1380": {
+    "id": "a_1380",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1511": {
+    "id": "a_1511",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1772": {
+    "id": "a_1772",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1796": {
+    "id": "a_1796",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1927": {
+    "id": "a_1927",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1952": {
+    "id": "a_1952",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_017": {
+    "id": "a_017",
+    "safety_flag": "none",
+    "certainty": "medium",
+    "review_status": "internally_confirmed",
+    "note": "Label corrected during credibility pass."
+  },
+  "a_023": {
+    "id": "a_023",
+    "safety_flag": "none",
+    "certainty": "medium",
+    "review_status": "internally_confirmed",
+    "note": "Label corrected during credibility pass."
+  },
+  "a_030": {
+    "id": "a_030",
+    "safety_flag": "none",
+    "certainty": "medium",
+    "review_status": "internally_confirmed",
+    "note": "Label corrected during credibility pass."
+  },
+  "a_1248": {
+    "id": "a_1248",
+    "safety_flag": "none",
+    "certainty": "medium",
+    "review_status": "internally_confirmed",
+    "note": "Label corrected during credibility pass."
+  },
+  "a_1266": {
+    "id": "a_1266",
+    "safety_flag": "none",
+    "certainty": "medium",
+    "review_status": "internally_confirmed",
+    "note": "Label corrected during credibility pass."
+  },
+  "a_1882": {
+    "id": "a_1882",
+    "safety_flag": "none",
+    "certainty": "medium",
+    "review_status": "internally_confirmed",
+    "note": "Label corrected during credibility pass."
+  },
+  "a_1193": {
+    "id": "a_1193",
+    "safety_flag": "none",
+    "certainty": "medium",
+    "review_status": "internally_confirmed",
+    "note": "Label corrected during credibility pass."
+  },
+  "a_624": {
+    "id": "a_624",
+    "safety_flag": "none",
+    "certainty": "medium",
+    "review_status": "internally_confirmed",
+    "note": "Label corrected during credibility pass."
+  },
+  "a_1377": {
+    "id": "a_1377",
+    "safety_flag": "none",
+    "certainty": "medium",
+    "review_status": "internally_confirmed",
+    "note": "Label corrected during credibility pass."
+  },
+  "a_113": {
+    "id": "a_113",
+    "safety_flag": "none",
+    "certainty": "medium",
+    "review_status": "internally_confirmed",
+    "note": "Label corrected during credibility pass."
+  }
+}
