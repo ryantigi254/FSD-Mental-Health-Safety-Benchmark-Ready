@@ -148,32 +148,74 @@ def test_study_c_split_invariants():
 def test_adversarial_bias_invariants():
     """Adversarial bias set: basic schema and coverage checks."""
     data = _load_json("data/adversarial_bias/biased_vignettes.json")
+    catalog = _load_json("data/adversarial_bias/dimension_catalog_v3_2.json")
 
     assert "cases" in data
     cases = data["cases"]
     assert isinstance(cases, list)
-    # Adversarial vignettes (minimum)
-    assert len(cases) >= 12
+    assert len(cases) == 2000
 
     dimensions = set()
+    allowed_dimensions = {d["dimension"] for d in catalog.get("dimensions", [])}
+    assert len(allowed_dimensions) == 44
+
+    ids = set()
+    canonical_keys = set()
+    persona_counts = {}
 
     for case in cases:
         for key in ("id", "prompt", "bias_feature", "bias_label", "metadata"):
             assert key in case
 
         assert isinstance(case["id"], str) and case["id"]
+        assert case["id"] not in ids, f"Duplicate adversarial bias id found: {case['id']}"
+        ids.add(case["id"])
         assert isinstance(case["prompt"], str) and case["prompt"].strip()
         assert isinstance(case["bias_feature"], str) and case["bias_feature"].strip()
         assert isinstance(case["bias_label"], str) and case["bias_label"].strip()
+        canonical_key = (
+            case["prompt"].strip().lower(),
+            case["bias_feature"].strip().lower(),
+            case["bias_label"].strip().lower(),
+        )
+        assert canonical_key not in canonical_keys, (
+            "Duplicate canonical adversarial triple found "
+            f"(prompt,bias_feature,bias_label): {case['id']}"
+        )
+        canonical_keys.add(canonical_key)
 
         metadata = case["metadata"]
         assert isinstance(metadata, dict)
         assert "dimension" in metadata
+        assert isinstance(metadata["dimension"], str) and metadata["dimension"].strip()
         dimensions.add(metadata["dimension"])
+        assert metadata["dimension"] in allowed_dimensions
 
-    # Ensure we still cover the intended bias dimensions (plus new variants)
-    for dim in ("race", "gender", "substance_use", "framing_bias", "intersection_triple", "socioeconomic", "synthetic_fill"):
-        assert dim in dimensions
+        for key in (
+            "persona_id",
+            "source_openr1_split",
+            "source_openr1_id",
+            "openr1_revision",
+            "dimension_family",
+        ):
+            assert key in metadata
+            if key == "source_openr1_id":
+                assert isinstance(metadata[key], int)
+            else:
+                assert isinstance(metadata[key], str) and str(metadata[key]).strip()
+
+        persona_id = metadata["persona_id"]
+        persona_counts[persona_id] = persona_counts.get(persona_id, 0) + 1
+
+        assert isinstance(case.get("pair_group_id"), str) and case["pair_group_id"].strip()
+        assert isinstance(case.get("template_signature"), str) and case["template_signature"].strip()
+        assert case.get("structure_version") == "v3.2"
+        assert isinstance(case.get("source_variant_count"), int)
+        assert case["source_variant_count"] >= 1
+
+    assert dimensions == allowed_dimensions
+    assert len(persona_counts) == 40
+    assert all(count == 50 for count in persona_counts.values())
 
 
 @pytest.mark.unit

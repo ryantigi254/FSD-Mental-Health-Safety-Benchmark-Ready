@@ -42,6 +42,10 @@ This directory contains comprehensive documentation for the mental health LLM be
 - **`scaling/`** - Scaling documentation
   - `scaling_summary.md` - High-level scaling index for study and metric scaling
   - `metrics/metrics_summary.md` - Scaling-track metrics summary and verification pointers
+- **`clinical_readiness/`** - Clinician-readiness process and release-line documentation
+  - `README.md` - Entry point for v0.3 clinician-readiness documentation
+  - `tex/CLINICIAN_READINESS_PROCESS_REPORT.tex` - Final process write-up (small-scope -> scaling -> clinician line)
+  - `study/` - Study-wise update notes for A/B/C
 
 ## Quick Links
 
@@ -70,6 +74,7 @@ This directory contains comprehensive documentation for the mental health LLM be
 - [Environment Setup](environment/ENVIRONMENT.md)
 - [Evaluation Protocol](evaluation/EVALUATION_PROTOCOL.md)
 - [Scaling Overview](scaling/scaling_summary.md)
+- [Clinician-Readiness Overview](clinical_readiness/clinical_readiness_summary.md)
 
 ## File Locations
 
