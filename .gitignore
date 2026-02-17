@@ -2,6 +2,7 @@
 .DS_Store
 *.log
 *.zip
+*.llamafile
 .cursor/
 
 # Python/Jupyter caches
