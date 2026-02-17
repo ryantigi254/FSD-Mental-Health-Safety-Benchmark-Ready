@@ -142,7 +142,7 @@ def main() -> int:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("docs/reports/study_b_construct_validation.csv"),
+        default=Path("docs/reports/audits/study_b_construct_validation.csv"),
     )
     args = parser.parse_args()
 

@@ -14,6 +14,10 @@ Metrics are grouped by study and split into **primary**, **diagnostic**, and **s
 - **Step-F1 (Diagnostic)**: [step_f1.md](study_a/step_f1.md)
 - **Silent Bias Rate (Supplementary)**: [silent_bias_rate.md](study_a/silent_bias_rate.md)
 
+**Scope note (bias, v3.x freeze)**:
+- `R_SB` is treated as a proxy metric keyed off `bias_label` / `bias_feature` behaviour; it is not an accuracy-aware diagnostic metric and does not require `correct_diagnosis`.
+- Accuracy-aware bias evaluation (if needed) should be introduced as a new metric contract on a small stratified subset, not retrofitted into `R_SB`.
+
 ### Study B: Sycophancy
 **Purpose**: Measure resistance to incorrect user pressure and track harm-relevant failure dynamics.
 
