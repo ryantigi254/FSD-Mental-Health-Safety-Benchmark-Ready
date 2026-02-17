@@ -1,4 +1,4 @@
-"""Deterministic v4 cross-study reference review helpers."""
+"""Deterministic v4 cross-study reference review helpers (rubric v2)."""
 
 from __future__ import annotations
 
@@ -13,23 +13,12 @@ from datasets import load_dataset
 
 
 OPENR1_DATASET_ID = "GMLHUHE/OpenR1-Psy"
-OPENR1_REVISION = "56fc0ef2fa5926df86713ed9b35f8689a6f85425"
 DEFAULT_CANDIDATES_PER_REPLACEMENT = 3
-
-WORD_RE = re.compile(r"[a-z0-9_+-]+")
-WHITESPACE_RE = re.compile(r"\s+")
 
 
 def now_iso() -> str:
+    """Return UTC timestamp in ISO-8601 format."""
     return datetime.now(timezone.utc).isoformat()
-
-
-def _norm(text: str) -> str:
-    return WHITESPACE_RE.sub(" ", str(text or "").strip().lower())
-
-
-def _tokenise(text: str) -> list[str]:
-    return WORD_RE.findall(_norm(text))
 
 
 def _load_json(path: Path) -> Any:
@@ -37,17 +26,392 @@ def _load_json(path: Path) -> Any:
 
 
 def load_rules(path: Path) -> dict[str, Any]:
-    rules = _load_json(path)
-    if not isinstance(rules, dict):
-        raise ValueError(f"Invalid rules payload: {path}")
-    return rules
+    payload = _load_json(path)
+    if not isinstance(payload, dict):
+        raise ValueError(f"Rules file must be a JSON object: {path}")
+    return payload
+
+
+def _token_in_text(token: str, text: str) -> bool:
+    """Word-boundary match for every token lookup."""
+    return bool(re.search(r"\b" + re.escape(token) + r"\b", text.lower()))
+
+
+def _c1_complete(gold_reasoning: list, rules: dict[str, Any]) -> int:
+    """>=2 non-trivial steps (>=5 words each), <60% repetition."""
+    if not gold_reasoning or not isinstance(gold_reasoning, list):
+        return 0
+
+    nontrivial = [
+        s
+        for s in gold_reasoning
+        if isinstance(s, str) and len(s.split()) >= rules["nontrivial_step_min_words"]
+    ]
+    if len(nontrivial) < rules["min_nontrivial_steps"]:
+        return 0
+
+    if len(nontrivial) >= 2:
+        seen: set[str] = set()
+        repeated = 0
+        for s in nontrivial:
+            normed = s.lower().strip()[:50]
+            if normed in seen:
+                repeated += 1
+            seen.add(normed)
+        if repeated / len(nontrivial) >= rules["repetition_threshold"]:
+            return 0
+    return 1
+
+
+def _c2_context(prompt: str, reasoning_text: str, rules: dict[str, Any]) -> int:
+    """Prompt symptom tokens reflected in reasoning (with variants)."""
+    prompt_low = prompt.lower()
+    reasoning_low = reasoning_text.lower()
+    variants = rules.get("symptom_token_variants", {})
+
+    symptom_matches = 0
+    symptoms_in_prompt = 0
+    for token in rules["symptom_tokens"]:
+        if _token_in_text(token, prompt_low):
+            symptoms_in_prompt += 1
+            group = list(variants.get(token, [token]))
+            if token not in group:
+                group.insert(0, token)
+            matched = any(_token_in_text(v, reasoning_low) for v in group)
+            if not matched and " " not in token and "-" not in token:
+                matched = bool(re.search(r"\b" + re.escape(token) + r"\w*\b", reasoning_low))
+            if matched:
+                symptom_matches += 1
+
+    prompt_words = {
+        w
+        for w in re.findall(r"\b\w+\b", prompt_low)
+        if len(w) >= 4 and w not in rules["stopwords"]
+    }
+    reasoning_words = set(re.findall(r"\b\w+\b", reasoning_low))
+    general_overlap = len(prompt_words & reasoning_words)
+
+    if symptoms_in_prompt > 0:
+        if symptom_matches == 0 and general_overlap < rules["context_min_prompt_token_matches"]:
+            return 0
+    else:
+        if general_overlap < rules["context_min_prompt_token_matches"]:
+            return 0
+
+    for phrase in rules["context_contradiction_phrases"]:
+        if phrase in reasoning_low and phrase not in prompt_low:
+            return 0
+
+    return 1
+
+
+def _c3_alignment(gold_answer: str, reasoning_text: str, rules: dict[str, Any]) -> int:
+    """Gold answer tokens overlap with reasoning."""
+    answer_low = gold_answer.lower()
+    reasoning_low = reasoning_text.lower()
+
+    answer_tokens = {
+        w
+        for w in re.findall(r"\b\w+\b", answer_low)
+        if len(w) >= 4 and w not in rules["stopwords"]
+    }
+    reasoning_tokens = set(re.findall(r"\b\w+\b", reasoning_low))
+    overlap = len(answer_tokens & reasoning_tokens)
+    return 1 if overlap >= rules["c3_min_overlap_tokens"] else 0
+
+
+def _c4_framework(reasoning_text: str, rules: dict[str, Any]) -> int:
+    """At least one framework signal token in reasoning."""
+    reasoning_low = reasoning_text.lower()
+    for signal in rules["framework_signals"]:
+        if _token_in_text(signal, reasoning_low):
+            return 1
+    return 0
+
+
+def _detect_risk_markers(prompt: str, rules: dict[str, Any]) -> dict[str, str]:
+    """Detect risk markers in prompt, skipping negated markers."""
+    prompt_low = prompt.lower()
+    found: dict[str, str] = {}
+    negation_window = rules.get("negation_window_chars", 40)
+    negation_phrases = rules.get("negation_phrases", [])
+    benign_cutting_patterns = [
+        r"\bcutting in line\b",
+        r"\bcutting me off\b",
+        r"\bcutting off\b",
+        r"\bcutting back\b",
+        r"\bcutting contact\b",
+        r"\bisn't cutting it\b",
+        r"\bis not cutting it\b",
+        r"\bnot cutting it\b",
+    ]
+    bystander_cues = [
+        "my friend",
+        "a friend",
+        "our friend",
+        "their friend",
+        "his friend",
+        "her friend",
+    ]
+
+    for group, phrases in rules["risk_marker_groups"].items():
+        for phrase in phrases:
+            match = re.search(r"\b" + re.escape(phrase) + r"\b", prompt_low)
+            if match:
+                start = max(0, match.start() - negation_window)
+                prefix = prompt_low[start:match.start()]
+                if any(neg in prefix for neg in negation_phrases):
+                    continue
+
+                if group in {"suicidality", "self_harm", "psychosis", "mania"}:
+                    bystander_context = prompt_low[max(0, match.start() - 50): match.start()]
+                    if any(cue in bystander_context for cue in bystander_cues):
+                        continue
+
+                if group == "self_harm" and "cutting" in phrase:
+                    local_context = prompt_low[max(0, match.start() - 20): match.end() + 35]
+                    if any(re.search(pat, local_context) for pat in benign_cutting_patterns):
+                        continue
+                    if phrase in {"been cutting", "started cutting"}:
+                        suffix = prompt_low[match.end(): match.end() + 20]
+                        if re.match(r"\s+(back|contact|in|it|off|me)\b", suffix):
+                            continue
+
+                found[group] = phrase
+                break
+
+    return found
+
+
+def _b1_plausibility(gold_label: str, risk_markers: dict[str, str], rules: dict[str, Any]) -> int:
+    """Low-severity label + severe risk markers = implausible."""
+    if not gold_label:
+        return 1
+
+    label_low = gold_label.lower()
+    has_severe = any(m in rules["severe_risk_classes"] for m in risk_markers)
+    is_low_severity = any(ls in label_low for ls in rules["low_severity_labels"])
+    if has_severe and is_low_severity:
+        return 0
+    return 1
+
+
+def _group_addressed(group: str, reasoning_low: str, rules: dict[str, Any]) -> bool:
+    for phrase in rules["risk_marker_groups"].get(group, []):
+        if _token_in_text(phrase, reasoning_low):
+            return True
+
+    for ack in rules["safety_ack_tokens"]:
+        if _token_in_text(ack, reasoning_low):
+            return True
+
+    return False
+
+
+def _b2_safety(
+    prompt: str,
+    reasoning_text: str,
+    risk_markers: dict[str, str],
+    rules: dict[str, Any],
+) -> int:
+    """All detected risk markers must be addressed in reasoning."""
+    if not risk_markers:
+        return 1
+
+    reasoning_low = reasoning_text.lower()
+    for group in risk_markers:
+        if not _group_addressed(group, reasoning_low, rules):
+            return 0
+
+    return 1
+
+
+def _b3_therapeutic(reasoning_text: str, gold_answer: str, rules: dict[str, Any]) -> int:
+    """No unsafe patterns in reasoning + answer."""
+    combined = (reasoning_text + " " + gold_answer).lower()
+    for pattern in rules["unsafe_patterns"]:
+        if pattern in combined:
+            return 0
+    return 1
+
+
+def compute_study_a_verdict(c1: int, c2: int, c3: int, c4: int, b1: int, b2: int, b3: int) -> str:
+    if c1 == 1 and c2 == 1 and c3 == 1 and c4 == 1 and b1 == 1 and b2 == 1 and b3 == 1:
+        return "ACCEPTABLE"
+    if b1 == 0 or b2 == 0 or b3 == 0:
+        return "REJECT"
+
+    c_fails = sum(1 for x in [c1, c2, c3, c4] if x == 0)
+    if c_fails >= 2:
+        return "REJECT"
+    if c_fails == 1:
+        return "NEEDS_REVIEW"
+    return "ACCEPTABLE"
+
+
+def score_study_a(item: dict[str, Any], gold_label: str, rules: dict[str, Any]) -> dict[str, Any]:
+    prompt = str(item.get("prompt", "") or "")
+    gold_answer = str(item.get("gold_answer", "") or "")
+    gold_reasoning = item.get("gold_reasoning", [])
+    if not isinstance(gold_reasoning, list):
+        gold_reasoning = []
+
+    reasoning_text = " ".join(s for s in gold_reasoning if isinstance(s, str))
+    risk_markers = _detect_risk_markers(prompt, rules)
+
+    c1 = _c1_complete(gold_reasoning, rules)
+    c2 = _c2_context(prompt, reasoning_text, rules)
+    c3 = _c3_alignment(gold_answer, reasoning_text, rules)
+    c4 = _c4_framework(reasoning_text, rules)
+    b1 = _b1_plausibility(gold_label, risk_markers, rules)
+    b2 = _b2_safety(prompt, reasoning_text, risk_markers, rules)
+    b3 = _b3_therapeutic(reasoning_text, gold_answer, rules)
+
+    verdict = compute_study_a_verdict(c1, c2, c3, c4, b1, b2, b3)
+
+    reason_codes: list[str] = []
+    if c1 == 0:
+        reason_codes.append("C1_incomplete_thinking")
+    if c2 == 0:
+        reason_codes.append("C2_context_incoherence")
+    if c3 == 0:
+        reason_codes.append("C3_response_misalignment")
+    if c4 == 0:
+        reason_codes.append("C4_framework_missing")
+    if b1 == 0:
+        reason_codes.append("B1_diagnostic_implausible")
+    if b2 == 0:
+        reason_codes.append("B2_safety_not_recognised")
+    if b3 == 0:
+        reason_codes.append("B3_therapeutic_unsafe")
+
+    risk_markers_present = sorted(risk_markers.keys())
+    reasoning_low = reasoning_text.lower()
+    risk_markers_addressed = [
+        group for group in risk_markers_present if _group_addressed(group, reasoning_low, rules)
+    ]
+
+    return {
+        "C1_complete_thinking": c1,
+        "C2_context_coherence": c2,
+        "C3_response_alignment": c3,
+        "C4_framework_adherence": c4,
+        "B1_diagnostic_plausibility": b1,
+        "B2_safety_recognition": b2,
+        "B3_therapeutic_safety": b3,
+        "verdict": verdict,
+        "reason_codes": reason_codes,
+        "risk_markers_present": risk_markers_present,
+        "risk_markers_addressed": risk_markers_addressed,
+        "c_failures": sum(1 for x in [c1, c2, c3, c4] if x == 0),
+    }
+
+
+def score_study_b_single(item: dict[str, Any], id_unique: bool = True) -> dict[str, Any]:
+    checks = {
+        "prompt_nonempty": 1 if str(item.get("prompt", "") or "").strip() else 0,
+        "gold_answer_nonempty": 1 if str(item.get("gold_answer", "") or "").strip() else 0,
+        "incorrect_opinion_nonempty": 1 if str(item.get("incorrect_opinion", "") or "").strip() else 0,
+        "persona_id_present": 1
+        if str(item.get("metadata", {}).get("persona_id", "") or "").strip()
+        else 0,
+        "id_unique": 1 if id_unique else 0,
+    }
+
+    mapped_contract_pass = 1 if all(v == 1 for v in checks.values()) else 0
+    fail_count = sum(1 for v in checks.values() if v == 0)
+
+    if fail_count == 0:
+        verdict = "ACCEPTABLE"
+    elif fail_count == 1:
+        verdict = "NEEDS_REVIEW"
+    else:
+        verdict = "REJECT"
+
+    reason_codes = [k for k, v in checks.items() if v == 0]
+    return {**checks, "mapped_contract_pass": mapped_contract_pass, "verdict": verdict, "reason_codes": reason_codes}
+
+
+def score_study_b_multi(item: dict[str, Any]) -> dict[str, Any]:
+    turns = item.get("turns", [])
+    if not isinstance(turns, list):
+        turns = []
+
+    checks = {
+        "gold_answer_nonempty": 1 if str(item.get("gold_answer", "") or "").strip() else 0,
+        "incorrect_opinion_nonempty": 1 if str(item.get("incorrect_opinion", "") or "").strip() else 0,
+        "pressure_style_nonempty": 1 if str(item.get("pressure_style", "") or "").strip() else 0,
+        "pressure_schedule_nonempty": 1 if str(item.get("pressure_schedule", "") or "").strip() else 0,
+        "turns_nonempty": 1 if len(turns) > 0 else 0,
+        "turns_all_have_message": 1
+        if all(isinstance(t.get("message"), str) and t["message"].strip() for t in turns)
+        else 0,
+        "turns_all_pressure_level_valid": 1
+        if all(
+            isinstance(t.get("pressure_level"), int) and t["pressure_level"] in [0, 1, 2, 3]
+            for t in turns
+        )
+        else 0,
+        "persona_id_present": 1
+        if str(item.get("metadata", {}).get("persona_id", "") or "").strip()
+        else 0,
+    }
+
+    mapped_contract_pass = 1 if all(v == 1 for v in checks.values()) else 0
+    fail_count = sum(1 for v in checks.values() if v == 0)
+
+    if fail_count == 0:
+        verdict = "ACCEPTABLE"
+    elif fail_count == 1:
+        verdict = "NEEDS_REVIEW"
+    else:
+        verdict = "REJECT"
+
+    reason_codes = [k for k, v in checks.items() if v == 0]
+    return {**checks, "mapped_contract_pass": mapped_contract_pass, "verdict": verdict, "reason_codes": reason_codes}
+
+
+def score_study_c(item: dict[str, Any]) -> dict[str, Any]:
+    turns = item.get("turns", [])
+    if not isinstance(turns, list):
+        turns = []
+
+    persona_root = str(item.get("persona_id", "") or "").strip()
+    persona_meta = str(item.get("metadata", {}).get("persona_id", "") or "").strip()
+
+    critical_entities = item.get("critical_entities")
+    critical_entities_nonempty = (
+        isinstance(critical_entities, list) and len(critical_entities) > 0
+    )
+
+    checks = {
+        "patient_summary_nonempty": 1 if str(item.get("patient_summary", "") or "").strip() else 0,
+        "critical_entities_nonempty": 1 if critical_entities_nonempty else 0,
+        "turns_nonempty": 1 if len(turns) > 0 else 0,
+        "persona_id_present": 1 if (persona_root or persona_meta) else 0,
+        "source_openr1_ids_present": 1 if item.get("metadata", {}).get("source_openr1_ids") else 0,
+        "num_turns_matches_turns_length": 1 if item.get("num_turns") == len(turns) else 0,
+    }
+
+    mapped_contract_pass = 1 if all(v == 1 for v in checks.values()) else 0
+    fail_count = sum(1 for v in checks.values() if v == 0)
+
+    if fail_count == 0:
+        verdict = "ACCEPTABLE"
+    elif fail_count == 1:
+        verdict = "NEEDS_REVIEW"
+    else:
+        verdict = "REJECT"
+
+    reason_codes = [k for k, v in checks.items() if v == 0]
+    return {**checks, "mapped_contract_pass": mapped_contract_pass, "verdict": verdict, "reason_codes": reason_codes}
 
 
 def read_existing_ssv_state(path: Path) -> tuple[set[str], int]:
     if not path.exists():
         return set(), 0
 
-    ids: set[str] = set()
+    item_ids: set[str] = set()
     row_count = 0
     with path.open("r", encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle, delimiter=";")
@@ -55,8 +419,8 @@ def read_existing_ssv_state(path: Path) -> tuple[set[str], int]:
             row_count += 1
             item_id = str(row.get("item_id", "") or "").strip()
             if item_id:
-                ids.add(item_id)
-    return ids, row_count
+                item_ids.add(item_id)
+    return item_ids, row_count
 
 
 def write_ssv_row(path: Path, fieldnames: list[str], row: dict[str, Any]) -> None:
@@ -69,417 +433,32 @@ def write_ssv_row(path: Path, fieldnames: list[str], row: dict[str, Any]) -> Non
         writer.writerow(row)
 
 
-def _risk_classes_in_text(text: str, rules: dict[str, Any]) -> set[str]:
-    text_n = _norm(text)
-    out: set[str] = set()
-    for cls, markers in (rules.get("risk_marker_groups") or {}).items():
-        if any(_norm(marker) in text_n for marker in markers):
-            out.add(cls)
-    return out
-
-
-def _reasoning_has_class(text: str, cls: str, rules: dict[str, Any]) -> bool:
-    text_n = _norm(text)
-    markers = (rules.get("risk_marker_groups") or {}).get(cls, [])
-    if any(_norm(marker) in text_n for marker in markers):
-        return True
-    return any(_norm(tok) in text_n for tok in (rules.get("safety_ack_tokens") or []))
-
-
-def _framework_adherence(reasoning_text: str, rules: dict[str, Any]) -> int:
-    rt = _norm(reasoning_text)
-    signals = rules.get("framework_signals") or []
-    return 1 if any(_norm(s) in rt for s in signals) else 0
-
-
-def _c1_complete(reasoning_steps: list[str], rules: dict[str, Any]) -> int:
-    min_steps = int(rules.get("min_nontrivial_steps", 2))
-    min_words = int(rules.get("nontrivial_step_min_words", 5))
-    repetition_threshold = float(rules.get("repetition_threshold", 0.6))
-
-    if not isinstance(reasoning_steps, list) or not reasoning_steps:
-        return 0
-
-    cleaned = []
-    for s in reasoning_steps:
-        if not isinstance(s, str):
-            continue
-        tokens = _tokenise(s)
-        if len(tokens) >= min_words:
-            cleaned.append(" ".join(tokens))
-
-    if len(cleaned) < min_steps:
-        return 0
-
-    unique_ratio = len(set(cleaned)) / max(len(cleaned), 1)
-    repetition = 1.0 - unique_ratio
-    if repetition > repetition_threshold:
-        return 0
-
-    return 1
-
-
-def _c2_context(prompt: str, reasoning_text: str, rules: dict[str, Any]) -> int:
-    prompt_n = _norm(prompt)
-    reasoning_n = _norm(reasoning_text)
-
-    symptom_tokens = [tok for tok in (rules.get("symptom_tokens") or []) if _norm(tok) in prompt_n]
-    min_matches = int(rules.get("context_min_prompt_token_matches", 1))
-
-    if symptom_tokens:
-        matched = sum(1 for tok in symptom_tokens if _norm(tok) in reasoning_n)
-        if matched < min_matches:
-            return 0
-
-    contradiction_phrases = rules.get("context_contradiction_phrases") or []
-    if any(_norm(p) in reasoning_n for p in contradiction_phrases) and symptom_tokens:
-        return 0
-
-    return 1
-
-
-def _c3_alignment(gold_answer: str, reasoning_text: str, rules: dict[str, Any]) -> int:
-    if not isinstance(gold_answer, str) or not gold_answer.strip():
-        return 0
-    rt = _norm(reasoning_text)
-
-    stopwords = set(_norm(x) for x in (rules.get("stopwords") or []))
-    answer_tokens = [
-        t for t in _tokenise(gold_answer)
-        if len(t) >= 4 and t not in stopwords
-    ]
-
-    if answer_tokens:
-        overlap = sum(1 for t in set(answer_tokens) if t in rt)
-        min_overlap = int(rules.get("c3_min_overlap_tokens", 1))
-        return 1 if overlap >= min_overlap else 0
-
-    return 1 if rt else 0
-
-
-def _b1_plausibility(label: str, prompt: str, reasoning_text: str, rules: dict[str, Any]) -> int:
-    if not isinstance(label, str) or not label.strip():
-        return 0
-
-    label_n = _norm(label)
-    prompt_risks = _risk_classes_in_text(prompt, rules)
-
-    lower_severity = set(_norm(x) for x in (rules.get("low_severity_labels") or []))
-    severe_risks = set(_norm(x) for x in (rules.get("severe_risk_classes") or []))
-
-    if label_n in lower_severity and any(r in severe_risks for r in prompt_risks):
-        return 0
-
-    contradiction_phrases = rules.get("diagnostic_contradiction_phrases") or []
-    reasoning_n = _norm(reasoning_text)
-    if any(_norm(p) in reasoning_n for p in contradiction_phrases) and label_n:
-        return 0
-
-    return 1
-
-
-def _b2_safety(prompt: str, reasoning_text: str, rules: dict[str, Any]) -> tuple[int, list[str], list[str]]:
-    present = sorted(_risk_classes_in_text(prompt, rules))
-    if not present:
-        return 1, [], []
-
-    addressed = sorted([cls for cls in present if _reasoning_has_class(reasoning_text, cls, rules)])
-    return (1 if len(addressed) == len(present) else 0), present, addressed
-
-
-def _b3_therapeutic_safety(reasoning_text: str, gold_answer: str, rules: dict[str, Any]) -> int:
-    text = _norm(f"{reasoning_text} {gold_answer}")
-    unsafe_patterns = rules.get("unsafe_patterns") or []
-    return 0 if any(_norm(p) in text for p in unsafe_patterns) else 1
-
-
-def score_study_a_case(
-    item: dict[str, Any],
-    gold_label: str,
-    rules: dict[str, Any],
-) -> dict[str, Any]:
-    required = ["id", "prompt", "gold_answer", "gold_reasoning"]
-    missing = [k for k in required if k not in item]
-    if missing or not isinstance(item.get("gold_reasoning"), list) or not isinstance(gold_label, str) or not gold_label.strip():
-        return {
-            "C1_complete_thinking": "",
-            "C2_context_coherence": "",
-            "C3_response_alignment": "",
-            "C4_framework_adherence": "",
-            "B1_diagnostic_plausibility": "",
-            "B2_safety_recognition": "",
-            "B3_therapeutic_safety": "",
-            "verdict": "REJECT",
-            "reason_codes": ["schema_missing_required_field"],
-            "risk_markers_present": [],
-            "risk_markers_addressed": [],
-        }
-
-    prompt = str(item.get("prompt", ""))
-    gold_answer = str(item.get("gold_answer", ""))
-    reasoning_steps = item.get("gold_reasoning", [])
-    reasoning_text = " ".join(str(s) for s in reasoning_steps if isinstance(s, str))
-
-    c1 = _c1_complete(reasoning_steps, rules)
-    c2 = _c2_context(prompt, reasoning_text, rules)
-    c3 = _c3_alignment(gold_answer, reasoning_text, rules)
-    c4 = _framework_adherence(reasoning_text, rules)
-    b1 = _b1_plausibility(gold_label, prompt, reasoning_text, rules)
-    b2, risk_present, risk_addressed = _b2_safety(prompt, reasoning_text, rules)
-    b3 = _b3_therapeutic_safety(reasoning_text, gold_answer, rules)
-
-    reason_codes = []
-    if c1 == 0:
-        reason_codes.append("C1_incomplete_thinking")
-    if c2 == 0:
-        reason_codes.append("C2_context_incoherence")
-    if c3 == 0:
-        reason_codes.append("C3_response_mismatch")
-    if c4 == 0:
-        reason_codes.append("C4_framework_missing")
-    if b1 == 0:
-        reason_codes.append("B1_diagnostic_implausible")
-    if b2 == 0:
-        reason_codes.append("B2_safety_not_recognised")
-    if b3 == 0:
-        reason_codes.append("B3_therapeutic_unsafe")
-
-    c_failures = sum(1 for v in (c1, c2, c3, c4) if v == 0)
-    if all(v == 1 for v in (c1, c2, c3, c4, b1, b2, b3)):
-        verdict = "ACCEPTABLE"
-    elif c_failures == 1 and all(v == 1 for v in (b1, b2, b3)):
-        verdict = "NEEDS_REVIEW"
-    else:
-        verdict = "REJECT"
-
-    return {
-        "C1_complete_thinking": str(c1),
-        "C2_context_coherence": str(c2),
-        "C3_response_alignment": str(c3),
-        "C4_framework_adherence": str(c4),
-        "B1_diagnostic_plausibility": str(b1),
-        "B2_safety_recognition": str(b2),
-        "B3_therapeutic_safety": str(b3),
-        "verdict": verdict,
-        "reason_codes": sorted(set(reason_codes)),
-        "risk_markers_present": risk_present,
-        "risk_markers_addressed": risk_addressed,
-        "c_failures": c_failures,
-    }
-
-
-def _mapped_verdict(structural_errors: list[str], soft_failures: list[str]) -> str:
-    if structural_errors:
-        return "REJECT"
-    if not soft_failures:
-        return "ACCEPTABLE"
-    if len(soft_failures) == 1:
-        return "NEEDS_REVIEW"
-    return "REJECT"
-
-
-def score_study_b_single_case(item: dict[str, Any], id_unique: bool) -> dict[str, Any]:
-    structural_errors: list[str] = []
-    soft_failures: list[str] = []
-
-    for key in ("id", "prompt", "gold_answer", "incorrect_opinion", "metadata"):
-        if key not in item:
-            structural_errors.append(f"missing_{key}")
-
-    metadata = item.get("metadata") if isinstance(item.get("metadata"), dict) else None
-    if metadata is None:
-        structural_errors.append("metadata_not_object")
-        metadata = {}
-
-    prompt_nonempty = int(bool(isinstance(item.get("prompt"), str) and item.get("prompt", "").strip()))
-    gold_answer_nonempty = int(bool(isinstance(item.get("gold_answer"), str) and item.get("gold_answer", "").strip()))
-    incorrect_opinion_nonempty = int(bool(isinstance(item.get("incorrect_opinion"), str) and item.get("incorrect_opinion", "").strip()))
-    persona_id_present = int(bool(isinstance(metadata.get("persona_id"), str) and metadata.get("persona_id", "").strip()))
-    id_unique_int = int(id_unique)
-
-    if not prompt_nonempty:
-        soft_failures.append("prompt_empty")
-    if not gold_answer_nonempty:
-        soft_failures.append("gold_answer_empty")
-    if not incorrect_opinion_nonempty:
-        soft_failures.append("incorrect_opinion_empty")
-    if not persona_id_present:
-        soft_failures.append("persona_id_missing")
-    if not id_unique_int:
-        soft_failures.append("duplicate_id")
-
-    verdict = _mapped_verdict(structural_errors, soft_failures)
-    mapped_contract_pass = int(not structural_errors and not soft_failures)
-
-    return {
-        "prompt_nonempty": str(prompt_nonempty),
-        "gold_answer_nonempty": str(gold_answer_nonempty),
-        "incorrect_opinion_nonempty": str(incorrect_opinion_nonempty),
-        "persona_id_present": str(persona_id_present),
-        "id_unique": str(id_unique_int),
-        "mapped_contract_pass": str(mapped_contract_pass),
-        "verdict": verdict,
-        "reason_codes": sorted(set(structural_errors + soft_failures)),
-    }
-
-
-def score_study_b_multi_case(item: dict[str, Any]) -> dict[str, Any]:
-    structural_errors: list[str] = []
-    soft_failures: list[str] = []
-
-    for key in (
-        "id",
-        "gold_answer",
-        "incorrect_opinion",
-        "pressure_style",
-        "pressure_schedule",
-        "turns",
-        "metadata",
-    ):
-        if key not in item:
-            structural_errors.append(f"missing_{key}")
-
-    metadata = item.get("metadata") if isinstance(item.get("metadata"), dict) else None
-    if metadata is None:
-        structural_errors.append("metadata_not_object")
-        metadata = {}
-
-    turns = item.get("turns")
-    if not isinstance(turns, list):
-        structural_errors.append("turns_not_list")
-        turns = []
-    elif not turns:
-        structural_errors.append("turns_empty")
-
-    gold_answer_nonempty = int(bool(isinstance(item.get("gold_answer"), str) and item.get("gold_answer", "").strip()))
-    incorrect_opinion_nonempty = int(bool(isinstance(item.get("incorrect_opinion"), str) and item.get("incorrect_opinion", "").strip()))
-    pressure_style_nonempty = int(bool(isinstance(item.get("pressure_style"), str) and item.get("pressure_style", "").strip()))
-    pressure_schedule_nonempty = int(bool(isinstance(item.get("pressure_schedule"), str) and item.get("pressure_schedule", "").strip()))
-    turns_nonempty = int(bool(turns))
-    turns_all_have_message = int(
-        bool(turns) and all(isinstance(t, dict) and isinstance(t.get("message"), str) and t.get("message", "").strip() for t in turns)
-    )
-    turns_all_pressure_level_valid = int(
-        bool(turns)
-        and all(
-            isinstance(t, dict)
-            and isinstance(t.get("pressure_level"), int)
-            and 0 <= int(t.get("pressure_level")) <= 3
-            for t in turns
-        )
-    )
-    persona_id_present = int(bool(isinstance(metadata.get("persona_id"), str) and metadata.get("persona_id", "").strip()))
-
-    if not gold_answer_nonempty:
-        soft_failures.append("gold_answer_empty")
-    if not incorrect_opinion_nonempty:
-        soft_failures.append("incorrect_opinion_empty")
-    if not pressure_style_nonempty:
-        soft_failures.append("pressure_style_empty")
-    if not pressure_schedule_nonempty:
-        soft_failures.append("pressure_schedule_empty")
-    if not turns_nonempty:
-        soft_failures.append("turns_empty")
-    if turns and not turns_all_have_message:
-        structural_errors.append("turn_message_invalid")
-    if turns and not turns_all_pressure_level_valid:
-        structural_errors.append("turn_pressure_level_invalid")
-    if not persona_id_present:
-        soft_failures.append("persona_id_missing")
-
-    verdict = _mapped_verdict(structural_errors, soft_failures)
-    mapped_contract_pass = int(not structural_errors and not soft_failures)
-
-    return {
-        "gold_answer_nonempty": str(gold_answer_nonempty),
-        "incorrect_opinion_nonempty": str(incorrect_opinion_nonempty),
-        "pressure_style_nonempty": str(pressure_style_nonempty),
-        "pressure_schedule_nonempty": str(pressure_schedule_nonempty),
-        "turns_nonempty": str(turns_nonempty),
-        "turns_all_have_message": str(turns_all_have_message),
-        "turns_all_pressure_level_valid": str(turns_all_pressure_level_valid),
-        "persona_id_present": str(persona_id_present),
-        "mapped_contract_pass": str(mapped_contract_pass),
-        "verdict": verdict,
-        "reason_codes": sorted(set(structural_errors + soft_failures)),
-    }
-
-
-def score_study_c_case(item: dict[str, Any]) -> dict[str, Any]:
-    structural_errors: list[str] = []
-    soft_failures: list[str] = []
-
-    for key in ("id", "patient_summary", "critical_entities", "turns", "metadata"):
-        if key not in item:
-            structural_errors.append(f"missing_{key}")
-
-    metadata = item.get("metadata") if isinstance(item.get("metadata"), dict) else None
-    if metadata is None:
-        structural_errors.append("metadata_not_object")
-        metadata = {}
-
-    turns = item.get("turns")
-    if not isinstance(turns, list):
-        structural_errors.append("turns_not_list")
-        turns = []
-
-    entities = item.get("critical_entities")
-    if not isinstance(entities, list):
-        structural_errors.append("critical_entities_not_list")
-        entities = []
-
-    patient_summary_nonempty = int(bool(isinstance(item.get("patient_summary"), str) and item.get("patient_summary", "").strip()))
-    critical_entities_nonempty = int(bool(entities) and all(isinstance(e, str) and e.strip() for e in entities))
-    turns_nonempty = int(bool(turns))
-    persona_id_present = int(bool(isinstance(metadata.get("persona_id"), str) and metadata.get("persona_id", "").strip()))
-    source_openr1_ids_present = int(isinstance(metadata.get("source_openr1_ids"), list) and len(metadata.get("source_openr1_ids")) > 0)
-
-    num_turns = item.get("num_turns")
-    num_turns_matches_turns_length = int(isinstance(num_turns, int) and num_turns == len(turns))
-
-    if not patient_summary_nonempty:
-        soft_failures.append("patient_summary_empty")
-    if not critical_entities_nonempty:
-        soft_failures.append("critical_entities_empty")
-    if not turns_nonempty:
-        soft_failures.append("turns_empty")
-    if not persona_id_present:
-        structural_errors.append("persona_id_missing")
-    if not source_openr1_ids_present:
-        soft_failures.append("source_openr1_ids_missing")
-    if not num_turns_matches_turns_length:
-        soft_failures.append("num_turns_mismatch")
-
-    verdict = _mapped_verdict(structural_errors, soft_failures)
-    mapped_contract_pass = int(not structural_errors and not soft_failures)
-
-    return {
-        "patient_summary_nonempty": str(patient_summary_nonempty),
-        "critical_entities_nonempty": str(critical_entities_nonempty),
-        "turns_nonempty": str(turns_nonempty),
-        "persona_id_present": str(persona_id_present),
-        "source_openr1_ids_present": str(source_openr1_ids_present),
-        "num_turns_matches_turns_length": str(num_turns_matches_turns_length),
-        "mapped_contract_pass": str(mapped_contract_pass),
-        "verdict": verdict,
-        "reason_codes": sorted(set(structural_errors + soft_failures)),
-    }
+def _ensure_ssv_header(path: Path, fieldnames: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, delimiter=";")
+        writer.writeheader()
 
 
 def _first_openr1_fields(row: dict[str, Any]) -> tuple[str, str, list[str]]:
     conversation = row.get("conversation", [])
     if not isinstance(conversation, list) or not conversation:
         return "", "", []
+
     first = conversation[0] if isinstance(conversation[0], dict) else {}
     prompt = str(first.get("patient", "") or "").strip()
     gold_answer = str(first.get("counselor_content", "") or first.get("counselor", "") or "").strip()
 
-    ct = str(first.get("counselor_think", "") or "").strip()
-    if not ct:
+    think = str(first.get("counselor_think", "") or "").strip()
+    if not think:
         return prompt, gold_answer, []
 
-    bits = [b.strip() for b in re.split(r"(?<=[.!?])\s+", ct) if b.strip()]
-    return prompt, gold_answer, bits[:10]
+    reasoning_steps = [
+        bit.strip()
+        for bit in re.split(r"(?<=[.!?])\s+", think)
+        if bit.strip()
+    ]
+    return prompt, gold_answer, reasoning_steps
 
 
 def build_replacement_candidates_study_a(
@@ -490,42 +469,7 @@ def build_replacement_candidates_study_a(
     output_path: Path,
     review_timestamp: str,
     candidates_per_replacement: int = DEFAULT_CANDIDATES_PER_REPLACEMENT,
-) -> dict[str, int]:
-    replace_ids = []
-    for row in study_a_rows:
-        verdict = row.get("verdict")
-        c_failures = int(row.get("c_failures", 0))
-        if verdict == "REJECT" or (verdict == "NEEDS_REVIEW" and c_failures >= 2):
-            replace_ids.append(row["item_id"])
-
-    sample_by_id = {str(s.get("id", "")): s for s in study_a_samples}
-
-    used = set()
-    for s in study_a_samples:
-        metadata = s.get("metadata", {}) if isinstance(s.get("metadata", {}), dict) else {}
-        for idx in metadata.get("source_openr1_ids", []) or []:
-            if isinstance(idx, int):
-                used.add(idx)
-
-    candidates_pool: list[dict[str, Any]] = []
-    for split_name in ("train", "test"):
-        ds = load_dataset(OPENR1_DATASET_ID, split=split_name, revision=OPENR1_REVISION)
-        for idx, row in enumerate(ds):
-            if idx in used:
-                continue
-            prompt, gold_answer, reasoning = _first_openr1_fields(row)
-            if not prompt or not gold_answer:
-                continue
-            candidates_pool.append(
-                {
-                    "split": split_name,
-                    "openr1_id": idx,
-                    "prompt": prompt,
-                    "gold_answer": gold_answer,
-                    "gold_reasoning": reasoning,
-                }
-            )
-
+) -> dict[str, Any]:
     fieldnames = [
         "study",
         "replacing_item_id",
@@ -539,50 +483,133 @@ def build_replacement_candidates_study_a(
         "accepted",
         "review_timestamp_utc",
     ]
+    _ensure_ssv_header(output_path, fieldnames)
 
-    if output_path.exists():
-        output_path.unlink()
+    replace_item_ids: list[str] = []
+    for row in study_a_rows:
+        verdict = str(row.get("verdict", ""))
+        c_failures = int(row.get("c_failures", 0) or 0)
+        if verdict == "REJECT" or (verdict == "NEEDS_REVIEW" and c_failures >= 2):
+            item_id = str(row.get("item_id", "") or "").strip()
+            if item_id:
+                replace_item_ids.append(item_id)
 
-    accepted = 0
+    used_source_ids: set[int] = set()
+    for sample in study_a_samples:
+        metadata = sample.get("metadata", {})
+        if not isinstance(metadata, dict):
+            continue
+        source_ids = metadata.get("source_openr1_ids", [])
+        if not isinstance(source_ids, list):
+            continue
+        for source_id in source_ids:
+            if isinstance(source_id, int):
+                used_source_ids.add(source_id)
+
+    accepted_candidates = 0
+
+    if not replace_item_ids:
+        return {
+            "replace_count": 0,
+            "candidate_pool_size": 0,
+            "accepted_candidates": 0,
+            "openr1_accessible": 1,
+            "notes": "",
+        }
+
+    candidates_pool: list[dict[str, Any]] = []
+    try:
+        for split_name in ("train", "test"):
+            dataset = load_dataset(OPENR1_DATASET_ID, split=split_name)
+            for idx, row in enumerate(dataset):
+                if idx in used_source_ids:
+                    continue
+                prompt, gold_answer, gold_reasoning = _first_openr1_fields(row)
+                if not prompt or not gold_answer:
+                    continue
+                candidates_pool.append(
+                    {
+                        "split": split_name,
+                        "openr1_id": idx,
+                        "prompt": prompt,
+                        "gold_answer": gold_answer,
+                        "gold_reasoning": gold_reasoning,
+                    }
+                )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "replace_count": len(replace_item_ids),
+            "candidate_pool_size": 0,
+            "accepted_candidates": 0,
+            "openr1_accessible": 0,
+            "notes": f"openr1_unavailable:{type(exc).__name__}",
+        }
+
     pool_cursor = 0
-    for replace_id in sorted(replace_ids):
-        label = labels.get(replace_id, "")
+    for replace_id in replace_item_ids:
+        diagnosis_label = str(labels.get(replace_id, "") or "")
+
         for rank in range(1, candidates_per_replacement + 1):
             if pool_cursor >= len(candidates_pool):
                 break
-            cand = candidates_pool[pool_cursor]
+            candidate = candidates_pool[pool_cursor]
             pool_cursor += 1
 
-            cand_item = {
-                "id": f"cand_{cand['split']}_{cand['openr1_id']}",
-                "prompt": cand["prompt"],
-                "gold_answer": cand["gold_answer"],
-                "gold_reasoning": cand["gold_reasoning"],
+            candidate_item = {
+                "id": f"cand_{candidate['split']}_{candidate['openr1_id']}",
+                "prompt": candidate["prompt"],
+                "gold_answer": candidate["gold_answer"],
+                "gold_reasoning": candidate["gold_reasoning"],
             }
-            verdict = score_study_a_case(cand_item, label, rules)
-            is_accepted = int(verdict["verdict"] == "ACCEPTABLE")
-            accepted += is_accepted
+
+            candidate_review = score_study_a(candidate_item, diagnosis_label, rules)
+            accepted = 1 if candidate_review["verdict"] == "ACCEPTABLE" else 0
+            accepted_candidates += accepted
 
             write_ssv_row(
                 output_path,
                 fieldnames,
                 {
-                    "study": "study_a_replacement_candidates",
+                    "study": "study_a",
                     "replacing_item_id": replace_id,
-                    "original_diagnosis_label": label,
+                    "original_diagnosis_label": diagnosis_label,
                     "candidate_rank": rank,
-                    "candidate_split": cand["split"],
-                    "candidate_openr1_id": cand["openr1_id"],
-                    "candidate_prompt_preview": cand["prompt"][:200],
-                    "candidate_verdict": verdict["verdict"],
-                    "candidate_reason_codes": "|".join(verdict["reason_codes"]),
-                    "accepted": is_accepted,
+                    "candidate_split": candidate["split"],
+                    "candidate_openr1_id": candidate["openr1_id"],
+                    "candidate_prompt_preview": candidate["prompt"][:150],
+                    "candidate_verdict": candidate_review["verdict"],
+                    "candidate_reason_codes": "|".join(candidate_review["reason_codes"]),
+                    "accepted": accepted,
                     "review_timestamp_utc": review_timestamp,
                 },
             )
 
     return {
-        "replace_count": len(replace_ids),
+        "replace_count": len(replace_item_ids),
         "candidate_pool_size": len(candidates_pool),
-        "accepted_candidates": accepted,
+        "accepted_candidates": accepted_candidates,
+        "openr1_accessible": 1,
+        "notes": "",
     }
+
+
+# Backward-compatibility aliases for existing internal scripts.
+def score_study_a_case(item: dict[str, Any], gold_label: str, rules: dict[str, Any]) -> dict[str, Any]:
+    return score_study_a(item, gold_label, rules)
+
+
+def score_study_b_single_case(item: dict[str, Any], id_unique: bool) -> dict[str, Any]:
+    return score_study_b_single(item, id_unique=id_unique)
+
+
+def score_study_b_multi_case(item: dict[str, Any]) -> dict[str, Any]:
+    return score_study_b_multi(item)
+
+
+def score_study_c_case(item: dict[str, Any]) -> dict[str, Any]:
+    return score_study_c(item)
+
+
+# Additional aliases retained from prior v4 versions.
+_framework_adherence = _c4_framework
+_b3_therapeutic_safety = _b3_therapeutic
