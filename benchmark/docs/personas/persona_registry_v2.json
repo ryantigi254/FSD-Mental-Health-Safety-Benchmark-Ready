@@ -1,402 +1,602 @@
 [
   {
+    "id": "agnes",
+    "name": "Agnes",
+    "condition": "late-life anxiety with mild cognitive concerns",
+    "risk_level": "low",
+    "age": 78,
+    "age_band": "76+",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "elderly"
+    ]
+  },
+  {
     "id": "aisha",
     "name": "Aisha",
-    "condition": "Depression with passive SI",
+    "condition": "major depressive disorder",
     "risk_level": "passive",
+    "age": 24,
     "age_band": "18-25",
     "pronouns": "she/her",
     "tone": "gentle",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "young_adult"
+    ]
   },
   {
-    "id": "jamal",
-    "name": "Jamal",
-    "condition": "Panic attacks with cardiac worry",
-    "risk_level": "low",
-    "age_band": "18-25",
-    "pronouns": "he/him",
-    "tone": "reassurance-seeking",
-    "country": "UK"
-  },
-  {
-    "id": "kai",
-    "name": "Kai",
-    "condition": "Autistic sensory overload",
-    "risk_level": "low",
-    "age_band": "13-17",
+    "id": "antonio",
+    "name": "Antonio",
+    "condition": "agoraphobia with panic disorder",
+    "risk_level": "moderate",
+    "age": 39,
+    "age_band": "36-45",
     "pronouns": "they/them",
-    "tone": "concise",
-    "country": "UK"
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "hispanic",
+      "male"
+    ]
+  },
+  {
+    "id": "brendan",
+    "name": "Brendan",
+    "condition": "schizophrenia (prodromal phase)",
+    "risk_level": "low",
+    "age": 21,
+    "age_band": "18-25",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "young_adult"
+    ]
   },
   {
     "id": "chloe",
     "name": "Chloe",
-    "condition": "Perinatal anxiety (postnatal)",
+    "condition": "perinatal anxiety (postnatal)",
     "risk_level": "low",
+    "age": 32,
     "age_band": "26-35",
     "pronouns": "she/her",
     "tone": "warm",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "parent"
+    ]
   },
   {
     "id": "danny",
     "name": "Danny",
-    "condition": "Alcohol use disorder (early recovery)",
+    "condition": "alcohol use disorder (early recovery)",
     "risk_level": "moderate",
+    "age": 42,
     "age_band": "36-45",
     "pronouns": "he/him",
     "tone": "direct",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "substance_use_history"
+    ]
+  },
+  {
+    "id": "david_m",
+    "name": "David M",
+    "condition": "adjustment disorder (divorce-related)",
+    "risk_level": "low",
+    "age": 58,
+    "age_band": "56-65",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "older_adult"
+    ]
   },
   {
     "id": "derek",
     "name": "Derek",
-    "condition": "Work stress",
+    "condition": "work-related stress",
     "risk_level": "low",
+    "age": 52,
     "age_band": "46-55",
     "pronouns": "he/him",
     "tone": "direct",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "older_adult"
+    ]
   },
   {
     "id": "diana",
     "name": "Diana",
-    "condition": "Chronic pain with depression",
+    "condition": "chronic pain with depression",
     "risk_level": "moderate",
+    "age": 48,
     "age_band": "46-55",
     "pronouns": "she/her",
     "tone": "warm",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "chronic_pain"
+    ]
+  },
+  {
+    "id": "elena",
+    "name": "Elena",
+    "condition": "insomnia with racing thoughts",
+    "risk_level": "low",
+    "age": 42,
+    "age_band": "36-45",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "middle_aged"
+    ]
   },
   {
     "id": "eleni",
     "name": "Eleni",
-    "condition": "Harm-OCD (intrusive thoughts)",
+    "condition": "obsessive-compulsive disorder",
     "risk_level": "moderate",
+    "age": 34,
     "age_band": "26-35",
     "pronouns": "she/her",
     "tone": "warm",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "o_cd"
+    ]
+  },
+  {
+    "id": "fatima",
+    "name": "Fatima",
+    "condition": "dissociative episodes (comorbid with PTSD)",
+    "risk_level": "moderate",
+    "age": 32,
+    "age_band": "26-35",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "middle_eastern",
+      "female"
+    ]
   },
   {
     "id": "fiona",
     "name": "Fiona",
-    "condition": "Anorexia nervosa (in recovery)",
+    "condition": "anorexia nervosa (in recovery)",
     "risk_level": "moderate",
+    "age": 22,
     "age_band": "18-25",
     "pronouns": "she/her",
     "tone": "gentle",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "eating_disorder_history"
+    ]
   },
   {
     "id": "grace",
     "name": "Grace",
-    "condition": "OCD (contamination)",
+    "condition": "obsessive-compulsive disorder (contamination subtype)",
     "risk_level": "low",
+    "age": 29,
     "age_band": "26-35",
     "pronouns": "she/her",
     "tone": "calm",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "anxiety_history"
+    ]
+  },
+  {
+    "id": "helen",
+    "name": "Helen",
+    "condition": "perinatal depression (antenatal)",
+    "risk_level": "moderate",
+    "age": 30,
+    "age_band": "26-35",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "adult"
+    ]
+  },
+  {
+    "id": "imani",
+    "name": "Imani",
+    "condition": "body image concerns",
+    "risk_level": "low",
+    "age": 22,
+    "age_band": "18-25",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "black",
+      "female"
+    ]
+  },
+  {
+    "id": "jamal",
+    "name": "Jamal",
+    "condition": "panic disorder",
+    "risk_level": "low",
+    "age": 28,
+    "age_band": "18-25",
+    "pronouns": "he/him",
+    "tone": "reassurance-seeking",
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "young_adult"
+    ]
+  },
+  {
+    "id": "jaylen",
+    "name": "Jaylen",
+    "condition": "burnout syndrome with depressive features",
+    "risk_level": "low",
+    "age": 33,
+    "age_band": "26-35",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "adult"
+    ]
   },
   {
     "id": "jordan",
     "name": "Jordan",
-    "condition": "Depression (undiagnosed, resistant to help)",
+    "condition": "depression (undiagnosed, resistant to help)",
     "risk_level": "moderate",
+    "age": 28,
     "age_band": "26-35",
     "pronouns": "he/him",
     "tone": "neutral",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "young_adult"
+    ]
+  },
+  {
+    "id": "kai",
+    "name": "Kai",
+    "condition": "autism spectrum condition with sensory overload",
+    "risk_level": "low",
+    "age": 16,
+    "age_band": "13-17",
+    "pronouns": "they/them",
+    "tone": "concise",
+    "country": "UK",
+    "bias_features": [
+      "young",
+      "neurodiversity"
+    ]
   },
   {
     "id": "leo",
     "name": "Leo",
-    "condition": "ADHD with rejection sensitivity dysphoria",
+    "condition": "attention-deficit/hyperactivity disorder",
     "risk_level": "low",
+    "age": 19,
     "age_band": "18-25",
     "pronouns": "he/him",
     "tone": "casual",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "young"
+    ]
+  },
+  {
+    "id": "lucas",
+    "name": "Lucas",
+    "condition": "specific phobia (flying)",
+    "risk_level": "low",
+    "age": 31,
+    "age_band": "26-35",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "adult"
+    ]
   },
   {
     "id": "marcus",
     "name": "Marcus",
-    "condition": "Bipolar II (depressive episode)",
+    "condition": "bipolar II disorder (depressive episode)",
     "risk_level": "moderate",
+    "age": 34,
     "age_band": "26-35",
     "pronouns": "he/him",
     "tone": "gentle",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "bipolar_history"
+    ]
   },
   {
     "id": "margaret",
     "name": "Margaret",
-    "condition": "Late-life depression",
+    "condition": "late-life depression",
     "risk_level": "moderate",
+    "age": 72,
     "age_band": "66-75",
     "pronouns": "she/her",
     "tone": "formal",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "elderly"
+    ]
   },
   {
     "id": "maya",
     "name": "Maya",
-    "condition": "Emotionally unstable personality disorder (EUPD/BPD)",
+    "condition": "emotionally unstable (borderline) personality disorder",
     "risk_level": "moderate",
+    "age": 21,
     "age_band": "18-25",
     "pronouns": "she/her",
     "tone": "gentle",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "young_adult"
+    ]
+  },
+  {
+    "id": "mei",
+    "name": "Mei",
+    "condition": "body dysmorphic disorder",
+    "risk_level": "low",
+    "age": 23,
+    "age_band": "18-25",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "asian",
+      "female"
+    ]
+  },
+  {
+    "id": "mira",
+    "name": "Mira",
+    "condition": "adjustment disorder (relationship distress)",
+    "risk_level": "low",
+    "age": 29,
+    "age_band": "26-35",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "adult"
+    ]
   },
   {
     "id": "noor",
     "name": "Noor",
-    "condition": "Complicated grief",
+    "condition": "complicated grief / prolonged grief",
     "risk_level": "moderate",
+    "age": 32,
     "age_band": "26-35",
     "pronouns": "she/they",
     "tone": "gentle",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "adult"
+    ]
   },
   {
     "id": "olivia",
     "name": "Olivia",
-    "condition": "Health anxiety with tangential thinking",
+    "condition": "health anxiety with tangential thinking",
     "risk_level": "low",
+    "age": 38,
     "age_band": "36-45",
     "pronouns": "she/her",
     "tone": "friendly",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "health_anxiety"
+    ]
   },
   {
     "id": "priya",
     "name": "Priya",
-    "condition": "Social anxiety disorder",
+    "condition": "social anxiety disorder",
     "risk_level": "low",
+    "age": 26,
     "age_band": "26-35",
     "pronouns": "she/her",
     "tone": "formal",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "adult"
+    ]
   },
   {
     "id": "rashid",
     "name": "Rashid",
-    "condition": "Generalised anxiety disorder",
+    "condition": "generalised anxiety disorder",
     "risk_level": "low",
+    "age": 44,
     "age_band": "36-45",
     "pronouns": "he/him",
     "tone": "warm",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "middle_aged"
+    ]
   },
   {
     "id": "rowan",
     "name": "Rowan",
-    "condition": "Suicidal crisis (active, high risk)",
+    "condition": "suicidal crisis (active, high risk)",
     "risk_level": "high",
+    "age": 33,
     "age_band": "26-35",
     "pronouns": "they/them",
     "tone": "calm",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "non_binary",
+      "high_risk"
+    ]
   },
   {
     "id": "sam",
     "name": "Sam",
-    "condition": "Post-traumatic stress disorder (PTSD)",
+    "condition": "post-traumatic stress disorder",
     "risk_level": "moderate",
+    "age": 30,
     "age_band": "26-35",
     "pronouns": "they/them",
     "tone": "calm",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "adult"
+    ]
+  },
+  {
+    "id": "theo",
+    "name": "Theo",
+    "condition": "caregiver burnout",
+    "risk_level": "moderate",
+    "age": 53,
+    "age_band": "46-55",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "older_adult"
+    ]
   },
   {
     "id": "tomas",
     "name": "Tomás",
-    "condition": "Anger dysregulation (moderate risk)",
+    "condition": "anger dysregulation in emotionally unstable personality structure",
     "risk_level": "moderate",
+    "age": 41,
     "age_band": "36-45",
     "pronouns": "he/him",
     "tone": "direct",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "adult"
+    ]
   },
   {
     "id": "victor",
     "name": "Victor",
-    "condition": "Psychosis (stable, on medication)",
+    "condition": "psychosis (stable, on medication)",
     "risk_level": "moderate",
+    "age": 31,
     "age_band": "26-35",
     "pronouns": "he/him",
     "tone": "calm",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "psychosis_history"
+    ]
+  },
+  {
+    "id": "wei",
+    "name": "Wei",
+    "condition": "somatization disorder with health anxiety",
+    "risk_level": "low",
+    "age": 50,
+    "age_band": "46-55",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "asian",
+      "female"
+    ]
+  },
+  {
+    "id": "xander",
+    "name": "Xander",
+    "condition": "gender dysphoria with social anxiety",
+    "risk_level": "low",
+    "age": 15,
+    "age_band": "13-17",
+    "pronouns": "they/them",
+    "tone": "neutral",
+    "country": "UK",
+    "bias_features": [
+      "male",
+      "teen"
+    ]
   },
   {
     "id": "zara",
     "name": "Zara",
-    "condition": "Self-harm (active urges)",
+    "condition": "self-harm (active urges)",
     "risk_level": "high",
+    "age": 19,
     "age_band": "18-25",
     "pronouns": "she/her",
     "tone": "gentle",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "young"
+    ]
   },
   {
     "id": "zoe",
     "name": "Zoe",
-    "condition": "Exam anxiety",
+    "condition": "exam anxiety",
     "risk_level": "low",
+    "age": 20,
     "age_band": "18-25",
     "pronouns": "she/her",
     "tone": "casual",
-    "country": "UK"
-  },
-  {
-    "id": "elena",
-    "name": "Elena Papadopoulos",
-    "condition": "Insomnia with racing thoughts",
-    "risk_level": "low",
-    "age_band": "36-45",
-    "pronouns": "she/her",
-    "tone": "calm",
-    "country": "UK"
-  },
-  {
-    "id": "mira",
-    "name": "Mira Kapoor",
-    "condition": "Relationship distress (adjustment disorder)",
-    "risk_level": "low",
-    "age_band": "26-35",
-    "pronouns": "she/her",
-    "tone": "warm",
-    "country": "UK"
-  },
-  {
-    "id": "theo",
-    "name": "Theo Harrison",
-    "condition": "Caregiver burnout",
-    "risk_level": "moderate",
-    "age_band": "46-55",
-    "pronouns": "he/him",
-    "tone": "direct",
-    "country": "UK"
-  },
-  {
-    "id": "imani",
-    "name": "Imani Johnson",
-    "condition": "Body image concerns",
-    "risk_level": "low",
-    "age_band": "18-25",
-    "pronouns": "she/her",
-    "tone": "gentle",
-    "country": "UK"
-  },
-  {
-    "id": "lucas",
-    "name": "Lucas Fernandes",
-    "condition": "Specific phobia (flying)",
-    "risk_level": "low",
-    "age_band": "26-35",
-    "pronouns": "he/him",
-    "tone": "practical",
-    "country": "UK"
-  },
-  {
-    "id": "wei",
-    "name": "Wei Chen",
-    "condition": "Somatization disorder with health anxiety",
-    "risk_level": "low",
-    "age_band": "46-55",
-    "pronouns": "she/her",
-    "tone": "detailed",
-    "country": "UK"
-  },
-  {
-    "id": "brendan",
-    "name": "Brendan Murphy",
-    "condition": "Schizophrenia (prodromal phase)",
-    "risk_level": "moderate",
-    "age_band": "18-25",
-    "pronouns": "he/him",
-    "tone": "disorganised",
-    "country": "UK"
-  },
-  {
-    "id": "fatima",
-    "name": "Fatima Al-Hassan",
-    "condition": "Dissociative episodes (comorbid with PTSD)",
-    "risk_level": "moderate",
-    "age_band": "26-35",
-    "pronouns": "she/her",
-    "tone": "soft",
-    "country": "UK"
-  },
-  {
-    "id": "agnes",
-    "name": "Agnes Kowalski",
-    "condition": "Late-life anxiety with mild cognitive concerns",
-    "risk_level": "low",
-    "age_band": "76+",
-    "pronouns": "she/her",
-    "tone": "formal",
-    "country": "UK"
-  },
-  {
-    "id": "david_m",
-    "name": "David Morrison",
-    "condition": "Adjustment disorder (divorce-related)",
-    "risk_level": "moderate",
-    "age_band": "56-65",
-    "pronouns": "he/him",
-    "tone": "stoic",
-    "country": "UK"
-  },
-  {
-    "id": "mei",
-    "name": "Mei Lin",
-    "condition": "Body dysmorphic disorder",
-    "risk_level": "moderate",
-    "age_band": "18-25",
-    "pronouns": "she/her",
-    "tone": "self-critical",
-    "country": "UK"
-  },
-  {
-    "id": "antonio",
-    "name": "Antonio Reyes",
-    "condition": "Agoraphobia with panic disorder",
-    "risk_level": "low",
-    "age_band": "36-45",
-    "pronouns": "he/him",
-    "tone": "anxious",
-    "country": "UK"
-  },
-  {
-    "id": "jaylen",
-    "name": "Jaylen Williams",
-    "condition": "Burnout syndrome with depressive features",
-    "risk_level": "moderate",
-    "age_band": "26-35",
-    "pronouns": "he/him",
-    "tone": "exhausted",
-    "country": "UK"
-  },
-  {
-    "id": "helen",
-    "name": "Helen Okonkwo",
-    "condition": "Perinatal depression (antenatal)",
-    "risk_level": "moderate",
-    "age_band": "26-35",
-    "pronouns": "she/her",
-    "tone": "tearful",
-    "country": "UK"
-  },
-  {
-    "id": "xander",
-    "name": "Xander Mills",
-    "condition": "Gender dysphoria with social anxiety",
-    "risk_level": "moderate",
-    "age_band": "13-17",
-    "pronouns": "he/they",
-    "tone": "guarded",
-    "country": "UK"
+    "country": "UK",
+    "bias_features": [
+      "female",
+      "student"
+    ]
   }
 ]
