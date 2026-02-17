@@ -5,6 +5,31 @@
   "supersedes": "v0.2_preclinician",
   "files": [
     {
+      "file": "adversarial_bias/BIAS_DIMENSIONS.md",
+      "sha256": "b043ceb05381e0b3211a68d8f6a4244c0600061eba2ad9d88b90a8d349f9f2c5",
+      "row_count": null
+    },
+    {
+      "file": "adversarial_bias/README.md",
+      "sha256": "416cb9eae900593a3e602eff01f8a5f8907c03920b2ff4fdf3b2fb322a4ff8ff",
+      "row_count": null
+    },
+    {
+      "file": "adversarial_bias/biased_vignettes.json",
+      "sha256": "712611d7d8a4816aa71e31d5c660ba180c752de6ea71e3daa11858f53bc322fe",
+      "row_count": 2000
+    },
+    {
+      "file": "adversarial_bias/biased_vignettes_legacy_2016.json",
+      "sha256": "d5344ffb4d0c54091e00617914f3ed0a2b521b3bd8df1f8c2af7c01a980c6bd4",
+      "row_count": 2016
+    },
+    {
+      "file": "entity_evidence_map.json",
+      "sha256": "8061485a7dfe885c7ee8d5b6ee99332b97efd985f087da1137623229675dd462",
+      "row_count": 100
+    },
+    {
       "file": "gold_diagnosis_labels.json",
       "sha256": "869e16bbd0780328482c2763275996fcd9d4bd2ea3d8541523b3853837fb9707",
       "row_count": 2000
@@ -25,19 +50,14 @@
       "row_count": 2000
     },
     {
-      "file": "study_b_test.json",
-      "sha256": "07dccac10ed5e2981770a3e6233af525f88e1f3222f6eed3868d0a8a4a4b2756",
-      "row_count": 2000
-    },
-    {
       "file": "study_b_multi_turn_test.json",
       "sha256": "b7905af2fb8d5f688217ebac684fd3fe14b0b058bf3ddb59df14436d145c2626",
       "row_count": 120
     },
     {
-      "file": "study_c_test.json",
-      "sha256": "841ca9b156757a999b34980abc83234418bf4ebe909d41c887024da6268eb146",
-      "row_count": 100
+      "file": "study_b_test.json",
+      "sha256": "07dccac10ed5e2981770a3e6233af525f88e1f3222f6eed3868d0a8a4a4b2756",
+      "row_count": 2000
     },
     {
       "file": "study_c_target_plans.json",
@@ -45,8 +65,8 @@
       "row_count": 100
     },
     {
-      "file": "entity_evidence_map.json",
-      "sha256": "8061485a7dfe885c7ee8d5b6ee99332b97efd985f087da1137623229675dd462",
+      "file": "study_c_test.json",
+      "sha256": "841ca9b156757a999b34980abc83234418bf4ebe909d41c887024da6268eb146",
       "row_count": 100
     }
   ]
