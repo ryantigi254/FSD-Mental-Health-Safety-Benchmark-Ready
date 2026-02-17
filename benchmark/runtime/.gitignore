@@ -24,6 +24,12 @@ models/
 offload/
 wandb/
 data/*
+!data/adversarial_bias/
+!data/adversarial_bias/biased_vignettes.json
+!data/adversarial_bias/biased_vignettes_legacy_2016.json
+!data/adversarial_bias/BIAS_DIMENSIONS.md
+!data/adversarial_bias/README.md
+!data/adversarial_bias/dimension_catalog_v3_2.json
 !data/study_a_gold/
 data/study_a_gold/*
 !data/study_a_gold/gold_diagnosis_metadata.json
@@ -41,3 +47,7 @@ data/frozen_splits/*_gold_postupdate_*/
 !data/releases/clinician_readiness_v0.3_2026-02-16/**
 walkthrough.md
 implementation_plan.md
+
+# Generated clinician sendoff reports (reproducible artefacts, avoid churn in VCS)
+docs/reports/clinician_package/v0.3/sendoff_preflight_report.json
+docs/reports/clinician_package/v0.3/stage2_gate_report.json
