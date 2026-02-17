@@ -79,6 +79,46 @@ def main() -> int:
                 sys.executable,
                 "-m",
                 "pytest",
+                "tests/unit/data/test_adversarial_bias_v03_contract.py",
+                "-q",
+            ],
+            ROOT,
+        ),
+        _run(
+            [
+                sys.executable,
+                "-m",
+                "pytest",
+                "tests/unit/data/test_adversarial_bias_structure_quality.py",
+                "-q",
+            ],
+            ROOT,
+        ),
+        _run(
+            [
+                sys.executable,
+                "-m",
+                "pytest",
+                "tests/unit/review/test_v4_reference_review.py",
+                "-q",
+            ],
+            ROOT,
+        ),
+        _run(
+            [
+                sys.executable,
+                "-m",
+                "pytest",
+                "tests/unit/review/test_v4_ssv_contract.py",
+                "-q",
+            ],
+            ROOT,
+        ),
+        _run(
+            [
+                sys.executable,
+                "-m",
+                "pytest",
                 "tests/unit/data/test_clinician_package_v03_manifest.py",
                 "-q",
             ],
