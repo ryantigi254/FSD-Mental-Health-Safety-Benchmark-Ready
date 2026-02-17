@@ -2,6 +2,8 @@
 
 > **Purpose**: This document provides a comprehensive framework for scaling Study A's bias evaluation by expanding personas, applying intersectional bias combinations, and integrating conditions from external psychological datasets.
 
+> **Status note (v3.2)**: This guide has been implemented through the canonical v3.2 rebuild. Runtime source-of-truth is `benchmark/runtime/data/adversarial_bias/biased_vignettes.json` (2000 rows), with legacy archive at `biased_vignettes_legacy_2016.json`.
+
 ---
 
 ## 1. Overview
