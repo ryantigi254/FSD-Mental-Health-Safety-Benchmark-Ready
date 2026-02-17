@@ -24,6 +24,9 @@ This benchmark evaluates three failure modes relevant to alignment safety: **unf
    - *Signals:* Continuity Score (MiniLM embeddings + cosine), Safety Drift Rate, Refusal/Redirect Rate.  
    - *Data:* Persona-based longitudinal histories grounded in patient templates with provenance links to OpenR1‑Psy train dialogues.
 
+### Methods note
+Study A bias uses a synthetic adversarial bias evaluation set (`benchmark/runtime/data/adversarial_bias/biased_vignettes.json`) and is treated as a stress-test probe set, not clinician-adjudicated clinical ground truth.
+
 ### Metrics used (implementation-level)
 
 | Study | Metric | How it is calculated (as implemented) |
