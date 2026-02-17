@@ -3,8 +3,8 @@ import sys
 from pathlib import Path
 
 
-def _ensure_src_on_path(runtime_root: Path) -> None:
-    src_dir = runtime_root / "src"
+def _ensure_src_on_path(uni_setup_root: Path) -> None:
+    src_dir = uni_setup_root / "src"
     if str(src_dir) not in sys.path:
         sys.path.insert(0, str(src_dir))
 
@@ -21,26 +21,41 @@ def _parse_args() -> argparse.Namespace:
         "--data-dir",
         type=str,
         default=None,
-        help="Directory containing study_a_test.json (defaults to runtime/data/openr1_psy_splits).",
+        help="Directory containing study_a_test.json (defaults to Uni-setup/data/openr1_psy_splits).",
     )
     parser.add_argument(
         "--output-dir",
         type=str,
         default=None,
-        help="Results directory (defaults to runtime/results).",
+        help="Results directory (defaults to Uni-setup/results).",
     )
     parser.add_argument("--max-samples", type=int, default=None, help="Limit Study A samples.")
     parser.add_argument(
         "--max-tokens",
         type=int,
-        default=16384,
-        help="Max new tokens per generation (default: 16384 for long reasoning traces).",
+        default=32000,
+        help="Max new tokens per generation (default: 32000 for long reasoning traces).",
     )
     parser.add_argument(
         "--cache-out",
         type=str,
         default=None,
         help="Explicit cache path (defaults to results/<model-id>/study_a_generations.jsonl).",
+    )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=None,
+        help=(
+            "Number of parallel generation workers. "
+            "Default is auto: 4 for LM Studio runners, 1 for non-LM Studio runners."
+        ),
+    )
+    parser.add_argument(
+        "--progress-interval-seconds",
+        type=int,
+        default=10,
+        help="Heartbeat interval for progress logging while waiting for workers.",
     )
     return parser.parse_args()
 
@@ -91,17 +106,18 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
 
 
 def main() -> None:
-    runtime_root = Path(__file__).resolve().parents[1]
-    _ensure_src_on_path(runtime_root)
+    uni_setup_root = Path(__file__).resolve().parents[1]
+    _ensure_src_on_path(uni_setup_root)
 
     from reliable_clinical_benchmark.models.base import GenerationConfig
     from reliable_clinical_benchmark.models.factory import get_model_runner
     from reliable_clinical_benchmark.pipelines.study_a import run_study_a
+    from reliable_clinical_benchmark.utils.worker_runtime import resolve_worker_count
 
     args = _parse_args()
 
-    base_data_dir = Path(args.data_dir) if args.data_dir else (runtime_root / "data" / "openr1_psy_splits")
-    output_dir = Path(args.output_dir) if args.output_dir else (runtime_root / "results")
+    base_data_dir = Path(args.data_dir) if args.data_dir else (uni_setup_root / "data" / "openr1_psy_splits")
+    output_dir = Path(args.output_dir) if args.output_dir else (uni_setup_root / "results")
 
     study_a_path = base_data_dir / "study_a_test.json"
     if not study_a_path.exists():
@@ -109,6 +125,7 @@ def main() -> None:
 
     config = GenerationConfig(max_tokens=args.max_tokens)
     runner = get_model_runner(args.model_id, config)
+    worker_count = resolve_worker_count(args.workers, runner, lmstudio_default=4, non_lm_default=1)
 
     normalized_model_id = _normalize_model_id_for_path(args.model_id, output_dir)
 
@@ -124,8 +141,11 @@ def main() -> None:
         model_name=normalized_model_id,
         generate_only=True,
         cache_out=cache_out,
+        workers=worker_count,
+        progress_interval_seconds=args.progress_interval_seconds,
     )
 
+    print(f"Workers: {worker_count}")
     print(cache_out)
 
 
