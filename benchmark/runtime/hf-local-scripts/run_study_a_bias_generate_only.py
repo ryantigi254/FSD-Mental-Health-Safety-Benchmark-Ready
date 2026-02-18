@@ -137,7 +137,7 @@ def _parse_args() -> argparse.Namespace:
         "--data-path",
         type=str,
         default=None,
-        help="Path to biased_vignettes.json (defaults to runtime/data/adversarial_bias/biased_vignettes.json).",
+        help="Path to biased_vignettes.json (defaults to runtime/data/releases/clinician_readiness_v0.3_2026-02-16/adversarial_bias/biased_vignettes.json).",
     )
     p.add_argument(
         "--output-dir",
@@ -236,7 +236,7 @@ def main() -> None:
     if args.data_path:
         data_path = Path(args.data_path)
     else:
-        data_path = runtime_root / "data" / "adversarial_bias" / "biased_vignettes.json"
+        data_path = runtime_root / "data" / "releases" / "clinician_readiness_v0.3_2026-02-16" / "adversarial_bias" / "biased_vignettes.json"
     
     if not data_path.exists():
         raise FileNotFoundError(f"Bias data not found at {data_path}")

@@ -3,16 +3,18 @@
 ## Scope
 Study A bias generation writes to `results/<model-folder>/study_a_bias_generations.jsonl` and metrics write to `metric-results/.../study_a`.
 
+**Data source**: `data/releases/clinician_readiness_v0.3_2026-02-16/adversarial_bias/biased_vignettes.json` (2000 vignettes, SHA256-verified in release manifest).
+
 ## One-Time Setup
 
 ### Mac/Linux
 ```bash
-cd "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP/benchmark/runtime"
+cd "<path-to-repo>/benchmark/runtime"
 ```
 
 ### Windows (PC)
 ```powershell
-cd "E:\22837352\NLP\NLP-Module\benchmark\runtime"
+cd "E:\22837352\NLP\FSD-Mental-Health-Safety-Benchmark-Ready\benchmark\runtime"
 ```
 
 ## Generation Commands (Automatic Cross-Platform Runner)
@@ -41,6 +43,26 @@ python scripts/dev/run_generation_auto.py --study study_a_bias --model-id psyche
 python scripts/dev/run_generation_auto.py --study study_a_bias --model-id psych_qwen_local --env mh-llm-local-env --quantization 4bit
 ```
 
+### Direct Script (Alternative)
+If you prefer to call the underlying script directly instead of `run_generation_auto.py`:
+```bash
+# Set PYTHONPATH first (from benchmark/runtime/)
+export PYTHONPATH=src   # Mac/Linux
+$env:PYTHONPATH="src"   # Windows PowerShell
+
+# LM Studio models
+python hf-local-scripts/run_study_a_bias_generate_only.py --model-id qwq
+python hf-local-scripts/run_study_a_bias_generate_only.py --model-id deepseek_r1_lmstudio
+python hf-local-scripts/run_study_a_bias_generate_only.py --model-id gpt_oss_lmstudio
+python hf-local-scripts/run_study_a_bias_generate_only.py --model-id qwen3_lmstudio
+
+# Local HF models
+python hf-local-scripts/run_study_a_bias_generate_only.py --model-id psyllm_gml_local
+python hf-local-scripts/run_study_a_bias_generate_only.py --model-id piaget_local
+python hf-local-scripts/run_study_a_bias_generate_only.py --model-id psyche_r1_local
+python hf-local-scripts/run_study_a_bias_generate_only.py --model-id psych_qwen_local --quantization 4bit
+```
+
 ## Metrics Commands
 
 ### Mac/Linux
@@ -65,3 +87,16 @@ $RUN_TAG=Get-Date -Format "yyyyMMdd_HHmm"; $OUT_ROOT="metric-results/misc/$RUN_T
 python scripts/dev/run_generation_auto.py --study study_a_bias --model-id gpt_oss_lmstudio --check-only
 python hf-local-scripts/run_study_a_bias_generate_only.py --model-id gpt_oss_lmstudio --workers 8 --max-cases 5
 ```
+
+## Key Paths
+
+| Item | Path (relative to `benchmark/runtime/`) |
+|---|---|
+| Bias data (default) | `data/releases/clinician_readiness_v0.3_2026-02-16/adversarial_bias/biased_vignettes.json` |
+| Data manifest | `data/releases/clinician_readiness_v0.3_2026-02-16/manifest.json` |
+| Generation script | `hf-local-scripts/run_study_a_bias_generate_only.py` |
+| Auto-runner wrapper | `scripts/dev/run_generation_auto.py` |
+| Generation output | `results/<model-folder>/study_a_bias_generations.jsonl` |
+| Processed pipeline | `processed/study_a_bias_pipeline/<model-folder>/study_a_bias_processed.jsonl` |
+| Metrics script | `scripts/studies/study_a/metrics/calculate_bias.py` |
+| Metrics output | `metric-results/study_a_bias/study_a_bias_metrics.json` |
