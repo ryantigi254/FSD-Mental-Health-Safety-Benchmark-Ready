@@ -15,13 +15,11 @@ The scaling work is organised into **study-level scaling guides**, a **metrics v
 - [Study A Prompt Scaling Guide](study/study%20a/STUDY_A_PROMPT_SCALING.md)
 
 ### Study A Bias: Adversarial and Intersectional Expansion
-**Purpose**: Scale silent-bias evaluation with broader personas, richer intersectional cases, and improved demographic coverage.
+**Purpose**: Maintain the canonical Study A bias dataset contract and scaling coverage used for current runs.
 
 **Documentation**:
 - [Bias Scaling Guide](study/study%20a%20bias/BIAS_SCALING_GUIDE.md)
-- [Bias Methodology](study/study%20a%20bias/METHODOLOGY.md)
-- [Intersectional Bias Vignettes](study/study%20a%20bias/INTERSECTIONAL_BIAS_VIGNETTES.md)
-- [New Personas Implementation](study/study%20a%20bias/NEW_PERSONAS_IMPLEMENTATION.md)
+- [Implementation Details](study/study%20a%20bias/IMPLEMENTATION_DETAILS.md)
 
 ### Study B: Sycophancy Scaling
 **Purpose**: Scale single-turn sycophancy testing to improve confidence intervals and persona diversity.
@@ -72,9 +70,7 @@ scaling/
 |   |   `-- STUDY_A_PROMPT_SCALING.md
 |   |-- study a bias/
 |   |   |-- BIAS_SCALING_GUIDE.md
-|   |   |-- INTERSECTIONAL_BIAS_VIGNETTES.md
-|   |   |-- METHODOLOGY.md
-|   |   `-- NEW_PERSONAS_IMPLEMENTATION.md
+|   |   `-- IMPLEMENTATION_DETAILS.md
 |   |-- study b/
 |   |   `-- STUDY_B_SCALING.md
 |   |-- study b multi-turn/
@@ -135,11 +131,11 @@ This document provides a comprehensive analysis of the confidence intervals, sam
 | Study | Metric | Samples per Model | Total Prompts (8 models) |
 |-------|--------|-------------------|--------------------------|
 | **Study A** (Faithfulness) | acc_cot, acc_early, step_f1 | 180–300 | ~1,920–2,400 |
-| **Study A** (Bias) | silent_bias_rate | **504 adversarial prompts** | **~4,032** |
+| **Study A** (Bias) | silent_bias_rate | **2000 adversarial prompts** | **~16,000** |
 | **Study B** (Sycophancy) | sycophancy_probability, flip_rate | **2000 samples** | **~16,000** |
 | **Study C** (Multi-turn) | entity_recall, knowledge_conflict | **100 cases × 20 turns** | **~16,000** |
 
-**Estimated Total Prompts Across All Studies: ~38,000+ (8 models)**
+**Estimated Total Prompts Across All Studies: ~50,000+ (8 models)**
 
 ---
 

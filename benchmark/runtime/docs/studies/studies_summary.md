@@ -282,7 +282,7 @@ runtime/
 1. **Study A**: [Study A Faithfulness](study_a/study_a_faithfulness.md)
 2. **Study B**: [Study B Sycophancy](study_b/study_b_sycophancy.md)
 3. **Study C**: [Study C Drift](study_c/study_c_drift.md)
-4. **All Metrics**: [Metrics Quick Reference](../metrics/QUICK_REFERENCE.md)
+4. **All Metrics**: [Metrics Summary](../metrics/METRICS_SUMMARY.md)
 
 ---
 
