@@ -7,13 +7,43 @@ import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 from datasets import load_dataset
 
 
 OPENR1_DATASET_ID = "GMLHUHE/OpenR1-Psy"
 DEFAULT_CANDIDATES_PER_REPLACEMENT = 3
+
+DIAGNOSIS_PATTERNS = [
+    r"(?:suggests?|indicat(?:es?|ing)|sounds? like|appears? to be|consistent with|symptoms of|experiencing)\s+(?:possible\s+)?([A-Z][a-z]+(?:\s+[A-Z]?[a-z]+){0,4}(?:\s+[Dd]isorder)?)",
+    r"(?:[Dd]iagnos(?:is|ed|tic)|[Cc]ondition)[\s:]+([A-Z][a-z]+(?:\s+[A-Z]?[a-z]+){0,4})",
+]
+
+CONTENT_DIAGNOSIS_MAP = {
+    "depress": "Major Depressive Disorder",
+    "anxiet": "Generalized Anxiety Disorder",
+    "panic": "Panic Disorder",
+    "social anxi": "Social Anxiety Disorder",
+    "ptsd": "Post-Traumatic Stress Disorder",
+    "trauma": "Post-Traumatic Stress Disorder",
+    "ocd": "Obsessive-Compulsive Disorder",
+    "obsess": "Obsessive-Compulsive Disorder",
+    "bipolar": "Bipolar Disorder",
+    "schizo": "Schizophrenia Spectrum Disorder",
+    "borderline": "Borderline Personality Disorder",
+    "eating": "Eating Disorder",
+    "anorex": "Anorexia Nervosa",
+    "bulimi": "Bulimia Nervosa",
+    "adhd": "Attention-Deficit/Hyperactivity Disorder",
+    "attention": "Attention-Deficit/Hyperactivity Disorder",
+    "adjustment": "Adjustment Disorder",
+    "grief": "Complicated Grief Disorder",
+    "substance": "Substance Use Disorder",
+    "alcohol": "Alcohol Use Disorder",
+    "insomnia": "Insomnia Disorder",
+    "sleep": "Sleep Disorder",
+}
 
 
 def now_iso() -> str:
@@ -459,6 +489,56 @@ def _first_openr1_fields(row: dict[str, Any]) -> tuple[str, str, list[str]]:
         if bit.strip()
     ]
     return prompt, gold_answer, reasoning_steps
+
+
+def extract_diagnosis_from_text(reasoning_steps: Iterable[str], prompt: str) -> str:
+    """Extract deterministic diagnosis labels using existing split-build conventions."""
+    reasoning_text = " ".join(str(step or "") for step in reasoning_steps)
+    full_text = f"{reasoning_text} {prompt or ''}".strip()
+    full_lower = full_text.lower()
+
+    for pattern in DIAGNOSIS_PATTERNS:
+        matches = re.findall(pattern, full_text, re.IGNORECASE)
+        if matches:
+            diagnosis = str(matches[0] or "").strip()
+            if diagnosis and len(diagnosis) > 5 and "disorder" in diagnosis.lower():
+                clipped = re.search(
+                    r"\b([A-Za-z][A-Za-z-]*(?:\s+[A-Za-z][A-Za-z-]*){0,5}\s+[Dd]isorder)\b",
+                    diagnosis,
+                )
+                return str(clipped.group(1)).strip() if clipped else diagnosis
+
+    for keyword, diagnosis in CONTENT_DIAGNOSIS_MAP.items():
+        if keyword in full_lower:
+            return diagnosis
+
+    return "Adjustment Disorder"
+
+
+def iter_openr1_candidates(
+    *,
+    used_source_ids: set[int],
+    dataset_id: str = OPENR1_DATASET_ID,
+) -> Iterable[dict[str, Any]]:
+    """Yield deterministic OpenR1 candidates in split/index order."""
+    for split_name in ("train", "test"):
+        dataset = load_dataset(dataset_id, split=split_name)
+        for idx, row in enumerate(dataset):
+            if idx in used_source_ids:
+                continue
+            if not isinstance(row, dict):
+                continue
+            prompt, gold_answer, gold_reasoning = _first_openr1_fields(row)
+            if not prompt or not gold_answer:
+                continue
+            yield {
+                "split": split_name,
+                "openr1_id": idx,
+                "prompt": prompt,
+                "gold_answer": gold_answer,
+                "gold_reasoning": gold_reasoning,
+                "diagnosis_label": extract_diagnosis_from_text(gold_reasoning, prompt),
+            }
 
 
 def build_replacement_candidates_study_a(

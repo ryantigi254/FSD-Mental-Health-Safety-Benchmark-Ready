@@ -1,0 +1,123 @@
+{
+  "created_at_utc": "2026-02-16T00:08:24.414245+00:00",
+  "version": "v4_1_resampled",
+  "description": "Study A non-acceptable rows deterministically resampled from OpenR1-Psy and validated with v4 rubric v2 scorer.",
+  "supersedes": "v0.3_postclinician_audit",
+  "files": [
+    {
+      "file": "README.md",
+      "sha256": "67f56c9e0b79ab0c159b695d25fe187d933fd00dae265c076b51717e7c020803",
+      "row_count": null
+    },
+    {
+      "file": "README_NOTE.txt",
+      "sha256": "b40e3c26ae7fd4f54c74ce76302553ddaeb824f9cb2f436e2ca3c1173a8acca5",
+      "row_count": null
+    },
+    {
+      "file": "adversarial_bias/BIAS_DIMENSIONS.md",
+      "sha256": "b043ceb05381e0b3211a68d8f6a4244c0600061eba2ad9d88b90a8d349f9f2c5",
+      "row_count": null
+    },
+    {
+      "file": "adversarial_bias/README.md",
+      "sha256": "416cb9eae900593a3e602eff01f8a5f8907c03920b2ff4fdf3b2fb322a4ff8ff",
+      "row_count": null
+    },
+    {
+      "file": "adversarial_bias/biased_vignettes.json",
+      "sha256": "712611d7d8a4816aa71e31d5c660ba180c752de6ea71e3daa11858f53bc322fe",
+      "row_count": 2000
+    },
+    {
+      "file": "adversarial_bias/biased_vignettes_legacy_2016.json",
+      "sha256": "d5344ffb4d0c54091e00617914f3ed0a2b521b3bd8df1f8c2af7c01a980c6bd4",
+      "row_count": 2016
+    },
+    {
+      "file": "audit_fix_diff_summary.json",
+      "sha256": "9589f25d1e44b09ea72b409ee44201b40bb4192bad259880c546a7d7b38fe711",
+      "row_count": 9
+    },
+    {
+      "file": "entity_evidence_map.json",
+      "sha256": "8061485a7dfe885c7ee8d5b6ee99332b97efd985f087da1137623229675dd462",
+      "row_count": 3
+    },
+    {
+      "file": "gold_diagnosis_labels.json",
+      "sha256": "2eedaea53664864582f1a095be2ffb2e5436d9dfef2e71f7ae0b0502146a6285",
+      "row_count": 2000
+    },
+    {
+      "file": "gold_diagnosis_metadata.json",
+      "sha256": "50e5b8e1aa3e9a3b63b85e5463640477e2c0a7ad94db51b89a84582b01163408",
+      "row_count": 27
+    },
+    {
+      "file": "gold_labels_mapping.json",
+      "sha256": "911f96b624b017adfca310eb3a75eabcce3f6e4e267c582a86ad83574d53a9c6",
+      "row_count": 4
+    },
+    {
+      "file": "study_a/gold_diagnosis_labels.json",
+      "sha256": "2eedaea53664864582f1a095be2ffb2e5436d9dfef2e71f7ae0b0502146a6285",
+      "row_count": 2000
+    },
+    {
+      "file": "study_a/gold_diagnosis_metadata.json",
+      "sha256": "50e5b8e1aa3e9a3b63b85e5463640477e2c0a7ad94db51b89a84582b01163408",
+      "row_count": 27
+    },
+    {
+      "file": "study_a/gold_labels_mapping.json",
+      "sha256": "911f96b624b017adfca310eb3a75eabcce3f6e4e267c582a86ad83574d53a9c6",
+      "row_count": 4
+    },
+    {
+      "file": "study_a/study_a_test.json",
+      "sha256": "17b01715e13dc6f2179b3204eab3f1ebfac76fafcb40d6ecb32083e7ff1dfd6a",
+      "row_count": 2000
+    },
+    {
+      "file": "study_a_test.json",
+      "sha256": "17b01715e13dc6f2179b3204eab3f1ebfac76fafcb40d6ecb32083e7ff1dfd6a",
+      "row_count": 2000
+    },
+    {
+      "file": "study_b_multi_turn_test.json",
+      "sha256": "b7905af2fb8d5f688217ebac684fd3fe14b0b058bf3ddb59df14436d145c2626",
+      "row_count": 120
+    },
+    {
+      "file": "study_b_test.json",
+      "sha256": "07dccac10ed5e2981770a3e6233af525f88e1f3222f6eed3868d0a8a4a4b2756",
+      "row_count": 2000
+    },
+    {
+      "file": "study_c/entity_evidence_map.json",
+      "sha256": "8061485a7dfe885c7ee8d5b6ee99332b97efd985f087da1137623229675dd462",
+      "row_count": 3
+    },
+    {
+      "file": "study_c/study_c_target_plans.json",
+      "sha256": "da3144c532bbbdb3cebcb212ffbec722bdcd09278d229f2a98b5cc6ec287d0dd",
+      "row_count": 2
+    },
+    {
+      "file": "study_c/study_c_test.json",
+      "sha256": "841ca9b156757a999b34980abc83234418bf4ebe909d41c887024da6268eb146",
+      "row_count": 100
+    },
+    {
+      "file": "study_c_target_plans.json",
+      "sha256": "da3144c532bbbdb3cebcb212ffbec722bdcd09278d229f2a98b5cc6ec287d0dd",
+      "row_count": 2
+    },
+    {
+      "file": "study_c_test.json",
+      "sha256": "841ca9b156757a999b34980abc83234418bf4ebe909d41c887024da6268eb146",
+      "row_count": 100
+    }
+  ]
+}
