@@ -1,0 +1,250 @@
+# V4.1 History Audit
+
+## Scope
+- Required lineage commits are present in reachable history from current HEAD.
+- Current branch: `codex/worker-system-all-studies-port`
+- Current HEAD: `fdb83c0c314a4383e126bcee5cf666ed606224b7`
+
+## Required Commit Checks
+### 3cbc5ed
+- Subject: feat(clinician-sendoff): apply readiness updates and build release dataset
+- Authored: 2026-02-15T18:42:37Z
+- Touched files:
+  - `benchmark/runtime/.gitignore`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/gold_diagnosis_labels.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/gold_diagnosis_metadata.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/manifest.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/study_a_test.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/study_b_multi_turn_test.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/study_b_test.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/study_c_test.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/target_plans.json`
+  - `benchmark/runtime/data/openr1_psy_splits/README.md`
+  - `benchmark/runtime/data/openr1_psy_splits/study_b_multi_turn_test.json`
+  - `benchmark/runtime/data/openr1_psy_splits/study_b_test.json`
+  - `benchmark/runtime/data/openr1_psy_splits/study_c_test.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.2_2026-02-15/manifest.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.2_2026-02-15/openr1_psy_splits/study_a_test.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.2_2026-02-15/openr1_psy_splits/study_b_multi_turn_test.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.2_2026-02-15/openr1_psy_splits/study_b_test.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.2_2026-02-15/openr1_psy_splits/study_c_test.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.2_2026-02-15/reports/study_b_construct_validation.csv`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.2_2026-02-15/study_a_gold/gold_diagnosis_labels.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.2_2026-02-15/study_a_gold/gold_diagnosis_metadata.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.2_2026-02-15/study_c_gold/target_plans.json`
+  - `benchmark/runtime/data/study_a_gold/gold_diagnosis_labels.json`
+  - `benchmark/runtime/data/study_a_gold/gold_diagnosis_metadata.json`
+  - `benchmark/runtime/data/study_c_gold/target_plans.json`
+  - `benchmark/runtime/docs/metrics/METRICS_SUMMARY.md`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.2/CLINICIAN_REVIEW_GUIDE.md`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.2/manifest.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.2/safety_priority_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.2/study_a_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.2/study_b_multi_turn_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.2/study_b_single_turn_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.2/study_c_review.csv`
+  - `benchmark/runtime/docs/reports/study_b_construct_validation.csv`
+  - `benchmark/runtime/scripts/preprocessing/build_splits.py`
+  - `benchmark/runtime/scripts/studies/study_b/validate_constructs.py`
+  - `benchmark/runtime/scripts/studies/study_c/metrics/calculate_metrics.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/eval/runtime_checks.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/utils/stats.py`
+  - `benchmark/runtime/tests/unit/eval/__init__.py`
+  - `benchmark/runtime/tests/unit/eval/test_runtime_checks.py`
+  - `benchmark/runtime/tests/unit/metrics/test_cluster_bootstrap.py`
+  - `benchmark/runtime/tests/unit/study_b/test_study_b_multi_turn_schema.py`
+
+### bec71fc
+- Subject: chore(runtime): finalise clinician v0.3 snapshots, release package, and stage2 gates
+- Authored: 2026-02-16T00:19:28Z
+- Touched files:
+  - `benchmark/runtime/.gitignore`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/SUPERSEDED.md`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician_gold_postupdate_20260215_192325/gold_pre_post_diff_summary.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician_gold_postupdate_20260215_192325/post_update_manifest.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician_gold_postupdate_20260215_192325/study_a_target_plans.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician_gold_preupdate_20260215_192325/pre_update_manifest.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician_gold_preupdate_20260215_192325/pre_update_snapshot_notes.md`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician_gold_preupdate_20260215_192325/study_a_target_plans.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/audit_fix_diff_summary.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/entity_evidence_map.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/gold_diagnosis_labels.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/gold_diagnosis_metadata.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/gold_labels_mapping.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/manifest.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_a_test.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_b_multi_turn_test.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_b_test.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_c_target_plans.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_c_test.json`
+  - `benchmark/runtime/data/releases/LATEST.md`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/manifest.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/openr1_psy_splits/study_a_test.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/openr1_psy_splits/study_b_multi_turn_test.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/openr1_psy_splits/study_b_test.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/openr1_psy_splits/study_c_test.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/reports/stage2_gate_report.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/reports/study_a_label_policy.csv`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/reports/study_b_construct_validation.csv`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/reports/study_b_multiturn_uniqueness.csv`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/study_a_gold/gold_diagnosis_labels.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/study_a_gold/gold_diagnosis_metadata.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/study_a_gold/gold_labels_mapping.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/study_a_gold/label_canonical_map.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/study_c_gold/entity_evidence_map.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/study_c_gold/target_plans.json`
+  - `benchmark/runtime/data/study_a_gold/README.md`
+  - `benchmark/runtime/data/study_a_gold/gold_diagnosis_labels.json`
+  - `benchmark/runtime/data/study_a_gold/gold_diagnosis_metadata.json`
+  - `benchmark/runtime/data/study_a_gold/gold_labels_mapping.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/stage2_gate_report.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/study_a_label_policy.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/study_b_construct_validation.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/study_b_multiturn_uniqueness.csv`
+  - `benchmark/runtime/scripts/studies/clinician_sendoff/run_stage2_gates.py`
+  - `benchmark/runtime/scripts/studies/study_a/validate_label_policy.py`
+  - `benchmark/runtime/scripts/studies/study_b/validate_constructs.py`
+  - `benchmark/runtime/scripts/studies/study_b/validate_multiturn_uniqueness.py`
+  - `benchmark/runtime/scripts/studies/study_c/validate_entity_anchoring.py`
+  - `benchmark/runtime/tests/unit/data/test_data_splits_invariants.py`
+  - `benchmark/runtime/tests/unit/data/test_frozen_snapshot_v03_manifest.py`
+  - `benchmark/runtime/tests/unit/study_a/test_validate_label_policy.py`
+  - `benchmark/runtime/tests/unit/study_b/test_validate_multiturn_uniqueness.py`
+  - `benchmark/runtime/tests/unit/study_c/test_study_c_entity_anchoring.py`
+  - `benchmark/runtime/tests/unit/study_c/test_validate_entity_anchoring_logic.py`
+
+### 3f99a38
+- Subject: feat(data): finalise clinician send-off v0.3 package and validation gates
+- Authored: 2026-02-16T00:51:10Z
+- Touched files:
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/manifest.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/CLINICIAN_REVIEW_GUIDE.md`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/manifest.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/safety_priority_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/sendoff_preflight_report.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/stage2_gate_report.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/study_a_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/study_b_multi_turn_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/study_b_single_turn_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/study_c_review.csv`
+  - `benchmark/runtime/scripts/studies/clinician_sendoff/build_clinician_package.py`
+  - `benchmark/runtime/scripts/studies/clinician_sendoff/rebuild_release_manifest.py`
+  - `benchmark/runtime/scripts/studies/clinician_sendoff/run_sendoff_preflight.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/data/__init__.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/data/study_a_loader.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/data/study_a_metadata.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/pipelines/study_a.py`
+  - `benchmark/runtime/tests/unit/data/test_clinician_package_v03_manifest.py`
+  - `benchmark/runtime/tests/unit/data/test_clinician_package_v03_schema.py`
+  - `benchmark/runtime/tests/unit/data/test_release_latest_pointer.py`
+  - `benchmark/runtime/tests/unit/eval/test_runtime_checks.py`
+  - `benchmark/runtime/tests/unit/study_a/test_study_a_metadata_defaults.py`
+
+### fd3a955
+- Subject: fix(sendoff): tighten v0.3 package gates and preflight
+- Authored: 2026-02-16T04:07:39Z
+- Touched files:
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/README_NOTE.txt`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/README_NOTE.txt`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/manifest.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/CLINICIAN_REVIEW_GUIDE.md`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/manifest.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/safety_priority_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/sendoff_preflight_report.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/stage2_gate_report.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/study_a_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/study_b_multi_turn_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/study_b_single_turn_review.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/study_c_review.csv`
+  - `benchmark/runtime/scripts/studies/clinician_sendoff/build_clinician_package.py`
+  - `benchmark/runtime/scripts/studies/clinician_sendoff/run_sendoff_preflight.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/eval/runtime_checks.py`
+  - `benchmark/runtime/tests/unit/data/test_clinician_package_v03_schema.py`
+  - `benchmark/runtime/tests/unit/eval/test_runtime_checks.py`
+
+### 582c5f3
+- Subject: Add clinician readiness docs and freeze/release snapshots
+- Authored: 2026-02-17T20:00:35Z
+- Touched files:
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/README.md`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/study_a/gold_diagnosis_labels.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/study_a/gold_diagnosis_metadata.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/study_a/study_a_test.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/study_c/study_c_test.json`
+  - `benchmark/runtime/data/frozen_splits/v0.2_preclinician/study_c/target_plans.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/README.md`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/adversarial_bias/BIAS_DIMENSIONS.md`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/adversarial_bias/README.md`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/adversarial_bias/biased_vignettes.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/adversarial_bias/biased_vignettes_legacy_2016.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/manifest.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_a/gold_diagnosis_labels.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_a/gold_diagnosis_metadata.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_a/gold_labels_mapping.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_a/study_a_test.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_c/entity_evidence_map.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_c/study_c_target_plans.json`
+  - `benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/study_c/study_c_test.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/adversarial_bias/BIAS_DIMENSIONS.md`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/adversarial_bias/README.md`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/adversarial_bias/biased_vignettes.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/adversarial_bias/biased_vignettes_legacy_2016.json`
+  - `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/manifest.json`
+  - `benchmark/runtime/docs/clinical_readiness/README.md`
+  - `benchmark/runtime/docs/clinical_readiness/clinical_readiness_summary.md`
+  - `benchmark/runtime/docs/clinical_readiness/study/study_a_clinical_readiness.md`
+  - `benchmark/runtime/docs/clinical_readiness/study/study_b_clinical_readiness.md`
+  - `benchmark/runtime/docs/clinical_readiness/study/study_c_clinical_readiness.md`
+  - `benchmark/runtime/docs/clinical_readiness/tex/CLINICIAN_READINESS_PROCESS_REPORT.tex`
+
+### c13caf1
+- Subject: Finalize v3.2/v4 docs, reports layout, and review tooling
+- Authored: 2026-02-17T20:11:18Z
+- Touched files:
+  - `.gitignore`
+  - `README.md`
+  - `benchmark/runtime/.gitignore`
+  - `benchmark/runtime/docs/README.md`
+  - `benchmark/runtime/docs/metrics/METRICS_SUMMARY.md`
+  - `benchmark/runtime/docs/reports/README.md`
+  - `benchmark/runtime/docs/reports/audits/gold_rerun_20260215_192325.json`
+  - `benchmark/runtime/docs/reports/audits/gold_rerun_patch_audit_20260215_192325.csv`
+  - `benchmark/runtime/docs/reports/audits/study_b_construct_validation.csv`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/adversarial_bias_structure_report.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/manifest.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/sendoff_preflight_report.json`
+  - `benchmark/runtime/docs/reports/clinician_package/v0.3/stage2_gate_report.json`
+  - `benchmark/runtime/docs/reports/comparisons/all_studies_comparison_report.md`
+  - `benchmark/runtime/docs/reports/comparisons/cleaning_comparison_report.md`
+  - `benchmark/runtime/docs/reports/comparisons/comparison_report.md`
+  - `benchmark/runtime/docs/reports/comparisons/comparison_results.md`
+  - `benchmark/runtime/docs/reports/comparisons/repetition_report.md`
+  - `benchmark/runtime/docs/scaling/metrics/metrics_summary.md`
+  - `benchmark/runtime/docs/scaling/metrics/study_a/silent_bias_rate.md`
+  - `benchmark/runtime/docs/scaling/study/study a bias/BIAS_SCALING_GUIDE.md`
+  - `benchmark/runtime/docs/studies/study_a/study_a_bias.md`
+  - `benchmark/runtime/scripts/studies/clinician_sendoff/run_sendoff_preflight.py`
+  - `benchmark/runtime/scripts/studies/study_a/rebuild_adversarial_bias_2000.py`
+  - `benchmark/runtime/scripts/studies/study_a/restructure_adversarial_bias.py`
+  - `benchmark/runtime/scripts/studies/study_b/validate_constructs.py`
+  - `benchmark/runtime/scripts/studies/v4_review/run_v4_cross_study_review.py`
+  - `benchmark/runtime/scripts/studies/v4_review/run_v4_cross_study_review_batch.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/data/adversarial_loader.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/review/__init__.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/review/v4_reference_review.py`
+  - `benchmark/runtime/tests/unit/data/test_adversarial_bias_structure_quality.py`
+  - `benchmark/runtime/tests/unit/data/test_adversarial_bias_v03_contract.py`
+  - `benchmark/runtime/tests/unit/data/test_data_splits_invariants.py`
+  - `benchmark/runtime/tests/unit/review/test_v4_reference_review.py`
+  - `benchmark/runtime/tests/unit/review/test_v4_ssv_contract.py`
+
+### 8fbe579
+- Subject: Add v4 cross-study review updates
+- Authored: 2026-02-17T22:37:22Z
+- Touched files:
+  - `benchmark/runtime/scripts/studies/v4_review/run_v4_cross_study_review.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/review/__init__.py`
+  - `benchmark/runtime/src/reliable_clinical_benchmark/review/v4_reference_review.py`
+  - `benchmark/runtime/tests/unit/review/test_v4_reference_review.py`
+  - `benchmark/runtime/tests/unit/review/test_v4_ssv_contract.py`
+  - `docs/assets 2/Mental Health LLM Benchmark Architecture.png`
