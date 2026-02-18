@@ -10,8 +10,8 @@ This directory contains comprehensive documentation for the mental health LLM be
   - `STUDY_A_GOLD_LABELS_MAPPING.md` - Study A gold diagnosis labels mapping and extraction process
 
 - **`metrics/`** - Metrics documentation
+  - `METRICS_SUMMARY.md` - Metrics contracts, scope notes, and quick reference
   - `METRIC_CALCULATION_PIPELINE.md` - Detailed metric calculation pipeline
-  - `QUICK_REFERENCE.md` - Quick reference for all metrics
 
 - **`studies/`** - Study-specific documentation
   - `studies_summary.md` - **Benchmark Overview** - High-level summary of all studies, models, and workflow
@@ -56,8 +56,8 @@ This directory contains comprehensive documentation for the mental health LLM be
 - [Study Overview](studies/study_a/study_a_faithfulness.md)
 - [Bias Evaluation](studies/study_a/study_a_bias.md)
 - [Gold Labels Mapping](data/STUDY_A_GOLD_LABELS_MAPPING.md)
+- [Metrics Summary](metrics/METRICS_SUMMARY.md)
 - [Metrics Pipeline](metrics/METRIC_CALCULATION_PIPELINE.md)
-- [Metrics Reference](metrics/QUICK_REFERENCE.md)
 
 ### Study B (Sycophancy)
 - [Study Overview](studies/study_b/study_b_sycophancy.md)
