@@ -21,6 +21,29 @@ V41_OUT = BASE_DIR / "data" / "verification" / "v4_1"
 TARGET_COUNT = 768
 VALID_VERDICTS = {"ACCEPTABLE", "NEEDS_REVIEW", "REJECT"}
 
+# Items changed by post-resampling patches (bias conflict + duplicate source ID).
+# These were originally ACCEPTABLE in v0.3 but replaced to ensure:
+# 1. No OpenR1-Psy source ID overlap with adversarial bias dataset (81 items)
+# 2. No duplicate source_openr1_ids across items (8 items)
+POST_PATCH_IDS = {
+    # bias_conflict_patch (81 items from ACCEPTABLE pool)
+    "a_018", "a_022", "a_024", "a_1015", "a_1030", "a_1058", "a_109",
+    "a_1118", "a_1140", "a_1151", "a_119", "a_1192", "a_1202",
+    "a_1242", "a_1260", "a_1285", "a_135", "a_1350", "a_1359",
+    "a_1376", "a_1379", "a_1421", "a_1427", "a_1438", "a_1479", "a_148",
+    "a_159", "a_1607", "a_1622", "a_1660", "a_1696",
+    "a_1719", "a_1744", "a_1755", "a_1772", "a_1820", "a_1843", "a_1848",
+    "a_194", "a_199", "a_1994", "a_204", "a_221", "a_238",
+    "a_248", "a_264", "a_273", "a_277", "a_346", "a_374", "a_376",
+    "a_401", "a_436", "a_466", "a_468", "a_486", "a_497", "a_514",
+    "a_524", "a_536", "a_594", "a_598", "a_605", "a_662", "a_682",
+    "a_696", "a_723", "a_778", "a_803", "a_815", "a_834",
+    "a_882", "a_888", "a_892", "a_903", "a_911", "a_918", "a_927",
+    "a_943", "a_963", "a_974",
+    # duplicate_source_patch (8 items from ACCEPTABLE pool)
+    "a_1554", "a_1207", "a_775", "a_1888", "a_622", "a_849", "a_1640", "a_846",
+}
+
 
 def _read_json(path: Path):
     assert path.exists(), f"Missing file: {path}"
@@ -130,18 +153,24 @@ def test_v41_replacement_and_retention_partition_is_exact() -> None:
 
     changed = 0
     unchanged = 0
+    post_patched = 0
+    all_changed_ids = target_ids | POST_PATCH_IDS
     for item_id, v03_sample in v03_samples.items():
         assert item_id in v41_samples, f"Missing item id in v4_1 Study A: {item_id}"
         same = canonical(v03_sample) == canonical(v41_samples[item_id])
         if item_id in target_ids:
             assert not same, f"Targeted item should be replaced but stayed unchanged: {item_id}"
             changed += 1
+        elif item_id in POST_PATCH_IDS:
+            assert not same, f"Post-patched item should be replaced but stayed unchanged: {item_id}"
+            post_patched += 1
         else:
             assert same, f"Retained ACCEPTABLE item changed unexpectedly: {item_id}"
             unchanged += 1
 
     assert changed == TARGET_COUNT
-    assert unchanged == 2000 - TARGET_COUNT
+    assert post_patched == len(POST_PATCH_IDS)
+    assert unchanged == 2000 - TARGET_COUNT - len(POST_PATCH_IDS)
 
 
 @pytest.mark.unit
