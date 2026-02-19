@@ -40,5 +40,11 @@ benchmark/runtime/results/**/study_a_generations.jsonl
 benchmark/runtime/results/**/study_b_generations.jsonl
 benchmark/runtime/results/**/study_c_generations.jsonl
 
+# Windsurf relevant skills index (local only)
+.windsurf/relevant/skills.md
+
+# Windsurf external skills sync (local only)
+.windsurf/skills/external/
+
 # Local one-off directories
 json-render-3d-test/
