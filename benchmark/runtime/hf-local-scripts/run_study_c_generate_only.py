@@ -58,6 +58,22 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
     Checks if a folder exists with the model_id (or variations) and returns
     the existing folder name. Uses partial matching if exact match fails.
     """
+    # Explicit aliases for known models
+    alias_map = {
+        "gpt_oss": "gpt-oss-20b",
+        "deepseek_r1_lmstudio": "deepseek-r1-lmstudio",
+        "piaget_local": "piaget-8b-local",
+        "psych_qwen_local": "psych-qwen-32b-local",
+        "psyllm_gml_local": "psyllm-gml-local",
+        "psyche_r1_local": "psyche-r1-local",
+        "qwen3_lmstudio": "qwen3-lmstudio",
+    }
+    alias_target = alias_map.get(model_id)
+    if alias_target:
+        alias_path = output_dir / alias_target
+        if alias_path.exists() and alias_path.is_dir():
+            return alias_target
+
     # First, try exact match
     exact_path = output_dir / model_id
     if exact_path.exists() and exact_path.is_dir():
