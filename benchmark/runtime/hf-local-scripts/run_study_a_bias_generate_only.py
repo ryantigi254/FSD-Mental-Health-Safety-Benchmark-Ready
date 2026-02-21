@@ -14,6 +14,26 @@ def _ensure_src_on_path(runtime_root: Path) -> None:
         sys.path.insert(0, str(src_dir))
 
 
+# External models root: weights live here (downloaded via Uni-setup), not in runtime/models/.
+EXTERNAL_MODELS_ROOT = Path(r"E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setup\models")
+
+
+def _resolve_local_model_path(model_name: str, fallback_runtime_root: Path) -> str:
+    """Resolve a local model directory, preferring EXTERNAL_MODELS_ROOT."""
+    external = EXTERNAL_MODELS_ROOT / model_name
+    if external.is_dir():
+        return str(external)
+    local = fallback_runtime_root / "models" / model_name
+    if local.is_dir():
+        return str(local)
+    raise FileNotFoundError(
+        f"Model weights not found for '{model_name}'.\n"
+        f"  Checked: {external}\n"
+        f"  Checked: {local}\n"
+        f"Download the model first or pass --model <path>."
+    )
+
+
 def _ensure_hf_cache_under_models_dir(runtime_root: Path) -> None:
     """
     Force Hugging Face + Transformers caches to live under runtime/models/.
@@ -198,28 +218,28 @@ def main() -> None:
     # Check if this is a local HF model and instantiate directly
     if model_id_lower in ("psyllm", "psyllm_gml_local", "psyllm-gml-local", "psyllm-gmlhuhe-local", "gmlhuhe_psyllm_local"):
         from reliable_clinical_benchmark.models.psyllm_gml_local import PsyLLMGMLLocalRunner
-        model_path = args.model or str(runtime_root / "models" / "PsyLLM")
+        model_path = args.model or _resolve_local_model_path("PsyLLM", runtime_root)
         runner = PsyLLMGMLLocalRunner(
             model_name=model_path,
             config=GenerationConfig(max_tokens=args.max_tokens),
         )
     elif model_id_lower in ("piaget_local", "piaget-8b-local", "piaget8b-local"):
         from reliable_clinical_benchmark.models.piaget_local import Piaget8BLocalRunner
-        model_path = args.model or str(runtime_root / "models" / "Piaget-8B")
+        model_path = args.model or _resolve_local_model_path("Piaget-8B", runtime_root)
         runner = Piaget8BLocalRunner(
             model_name=model_path,
             config=GenerationConfig(max_tokens=args.max_tokens),
         )
     elif model_id_lower in ("psyche_r1_local", "psyche-r1-local", "psyche-r1-local-hf"):
         from reliable_clinical_benchmark.models.psyche_r1_local import PsycheR1LocalRunner
-        model_path = args.model or str(runtime_root / "models" / "Psyche-R1")
+        model_path = args.model or _resolve_local_model_path("Psyche-R1", runtime_root)
         runner = PsycheR1LocalRunner(
             model_name=model_path,
             config=GenerationConfig(max_tokens=args.max_tokens),
         )
     elif model_id_lower in ("psych_qwen_local", "psych-qwen-32b-local", "psych-qwen-local-hf"):
         from reliable_clinical_benchmark.models.psych_qwen_local import PsychQwen32BLocalRunner
-        model_path = args.model or str(runtime_root / "models" / "Psych_Qwen_32B")
+        model_path = args.model or _resolve_local_model_path("Psych_Qwen_32B", runtime_root)
         quantization = args.quantization or "4bit"  # Default to 4bit for 32B model
         runner = PsychQwen32BLocalRunner(
             model_name=model_path,
