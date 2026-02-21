@@ -1,6 +1,9 @@
 """Factory for creating model runners."""
 
+import logging
+from pathlib import Path
 from typing import Optional
+
 from .base import ModelRunner, GenerationConfig
 from .psyllm import PsyLLMRunner
 from .psyllm_local import PsyLLMLocalRunner
@@ -18,9 +21,20 @@ from .psych_qwen_local import PsychQwen32BLocalRunner
 from .lmstudio_qwq import QwQLMStudioRunner
 from .lmstudio_gpt_oss import GPTOSSLMStudioRunner
 from .lmstudio_qwen3 import Qwen3LMStudioRunner
-import logging
 
 logger = logging.getLogger(__name__)
+
+# External models root: weights live here (downloaded via Uni-setup), not in runtime/models/.
+EXTERNAL_MODELS_ROOT = Path(r"E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setup\models")
+
+
+def _resolve_local_model_path(model_name: str) -> str:
+    """Resolve a local model directory, preferring EXTERNAL_MODELS_ROOT."""
+    external = EXTERNAL_MODELS_ROOT / model_name
+    if external.is_dir():
+        return str(external)
+    # Fallback to relative path (original behaviour)
+    return f"models/{model_name}"
 
 
 def get_model_runner(
@@ -46,7 +60,7 @@ def get_model_runner(
     elif model_id_lower in ("psyllm_local", "psyllm-8b-local", "psyllm-local-hf"):
         return PsyLLMLocalRunner(config=config)
     elif model_id_lower in ("psyllm_gml_local", "psyllm-gml-local", "psyllm-gmlhuhe-local", "gmlhuhe_psyllm_local"):
-        return PsyLLMGMLLocalRunner(config=config)
+        return PsyLLMGMLLocalRunner(model_name=_resolve_local_model_path("PsyLLM"), config=config)
     elif model_id_lower in ("qwq", "qwq-32b", "qwq_lmstudio", "qwq-lmstudio", "qwq-32b-lmstudio"):
         return QwQLMStudioRunner(config=config)
     elif model_id_lower in ("deepseek_r1", "deepseek-r1-32b"):
@@ -66,15 +80,15 @@ def get_model_runner(
     elif model_id_lower in ("piaget", "piaget-8b"):
         return Piaget8BRunner(config=config)
     elif model_id_lower in ("piaget_local", "piaget-8b-local", "piaget8b-local"):
-        return Piaget8BLocalRunner(config=config)
+        return Piaget8BLocalRunner(model_name=_resolve_local_model_path("Piaget-8B"), config=config)
     elif model_id_lower in ("psyche_r1", "psyche-r1"):
         return PsycheR1Runner(config=config)
     elif model_id_lower in ("psyche_r1_local", "psyche-r1-local", "psyche-r1-local-hf"):
-        return PsycheR1LocalRunner(config=config)
+        return PsycheR1LocalRunner(model_name=_resolve_local_model_path("Psyche-R1"), config=config)
     elif model_id_lower in ("psych_qwen", "psych_qwen_32b", "psych-qwen-32b"):
         return PsychQwen32BRunner(config=config)
     elif model_id_lower in ("psych_qwen_local", "psych-qwen-32b-local", "psych-qwen-local-hf"):
-        return PsychQwen32BLocalRunner(config=config)
+        return PsychQwen32BLocalRunner(model_name=_resolve_local_model_path("Psych_Qwen_32B"), config=config)
     else:
         raise ValueError(
             f"Unknown model ID: {model_id}. "

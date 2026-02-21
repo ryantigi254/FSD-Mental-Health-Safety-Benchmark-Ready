@@ -28,6 +28,7 @@ benchmark/runtime/.venv-runtime-ryangichuru-20260215/
 benchmark/runtime/Misc/datasets/
 benchmark/runtime/.conda-envs/
 benchmark/runtime/.conda-pkgs/
+benchmark/runtime/.pip-tmp/
 benchmark/runtime/models/
 benchmark/runtime/logs/
 benchmark/runtime/state/
@@ -40,11 +41,8 @@ benchmark/runtime/results/**/study_a_generations.jsonl
 benchmark/runtime/results/**/study_b_generations.jsonl
 benchmark/runtime/results/**/study_c_generations.jsonl
 
-# Windsurf relevant skills index (local only)
-.windsurf/relevant/skills.md
-
-# Windsurf external skills sync (local only)
-.windsurf/skills/external/
+# Windsurf local config/state (ignore everything)
+.windsurf/
 
 # Local one-off directories
 json-render-3d-test/

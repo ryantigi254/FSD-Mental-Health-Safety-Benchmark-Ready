@@ -113,6 +113,13 @@ def main() -> int:
         },
     }
 
+    # Inject default bias data path for Study A bias if not explicitly provided.
+    # This ensures the adversarial bias generations use the v4.1 resampled frozen split
+    # without requiring callers to pass --data-path manually.
+    if args.study == "study_a_bias" and "--data-path" not in passthrough:
+        default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
+        passthrough = ["--data-path", default_bias_data, *passthrough]
+
     target_script = study_script_map[args.study]
     if not target_script.exists():
         print(f"Script not found: {target_script}", file=sys.stderr)
