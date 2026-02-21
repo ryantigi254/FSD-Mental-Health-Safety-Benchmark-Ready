@@ -61,6 +61,8 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         # HF local naming vs existing results folders
         "piaget_local": "piaget-8b-local",
         "psych_qwen_local": "psych-qwen-32b-local",
+        "psyllm_gml_local": "psyllm-gml-local",
+        "psyche_r1_local": "psyche-r1-local",
     }
     alias_target = alias_map.get(model_id)
     if alias_target:
