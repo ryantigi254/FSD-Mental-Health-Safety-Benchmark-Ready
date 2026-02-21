@@ -21,6 +21,7 @@ from .psych_qwen_local import PsychQwen32BLocalRunner
 from .lmstudio_qwq import QwQLMStudioRunner
 from .lmstudio_gpt_oss import GPTOSSLMStudioRunner
 from .lmstudio_qwen3 import Qwen3LMStudioRunner
+from .vllm_runner import VLLMRunner
 
 logger = logging.getLogger(__name__)
 
@@ -89,6 +90,14 @@ def get_model_runner(
         return PsychQwen32BRunner(config=config)
     elif model_id_lower in ("psych_qwen_local", "psych-qwen-32b-local", "psych-qwen-local-hf"):
         return PsychQwen32BLocalRunner(model_name=_resolve_local_model_path("Psych_Qwen_32B"), config=config)
+    elif model_id_lower in ("psyllm_gml_vllm", "psyllm-gml-vllm", "psyllm-vllm"):
+        return VLLMRunner(model_name="GMLHUHE/PsyLLM-8B", port=8101, config=config)
+    elif model_id_lower in ("piaget_vllm", "piaget-vllm", "piaget-8b-vllm"):
+        return VLLMRunner(model_name="gustavecortal/Piaget-8B", port=8102, config=config)
+    elif model_id_lower in ("psyche_r1_vllm", "psyche-r1-vllm"):
+        return VLLMRunner(model_name="MindIntLab/Psyche-R1", port=8103, config=config)
+    elif model_id_lower in ("psych_qwen_vllm", "psych-qwen-vllm", "psych-qwen-32b-vllm"):
+        return VLLMRunner(model_name="Compumacy/Psych_Qwen_32B", port=8104, config=config)
     else:
         raise ValueError(
             f"Unknown model ID: {model_id}. "

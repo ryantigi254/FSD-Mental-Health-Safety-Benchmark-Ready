@@ -15,6 +15,7 @@ from .psyche_r1_local import PsycheR1LocalRunner
 from .psych_qwen_local import PsychQwen32BLocalRunner
 from .psyllm_local import PsyLLMLocalRunner
 from .psyllm_gml_local import PsyLLMGMLLocalRunner
+from .vllm_runner import VLLMRunner
 
 __all__ = [
     "ModelRunner",
@@ -33,5 +34,6 @@ __all__ = [
     "PsychQwen32BLocalRunner",
     "PsyLLMLocalRunner",
     "PsyLLMGMLLocalRunner",
+    "VLLMRunner",
 ]
 
