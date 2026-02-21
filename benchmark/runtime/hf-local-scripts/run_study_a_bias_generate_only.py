@@ -111,6 +111,11 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "psyllm": "psyllm-gml-local",
         "psyllm_gml_local": "psyllm-gml-local",
         "psyllm-gml-local": "psyllm-gml-local",
+        # vLLM-served local models → same results folders as HF-local
+        "psyllm_gml_vllm": "psyllm-gml-local",
+        "piaget_vllm": "piaget-8b-local",
+        "psyche_r1_vllm": "psyche-r1-local",
+        "psych_qwen_vllm": "psych-qwen-32b-local",
     }
     return canonical_names.get(model_id_lower, model_id)
 
