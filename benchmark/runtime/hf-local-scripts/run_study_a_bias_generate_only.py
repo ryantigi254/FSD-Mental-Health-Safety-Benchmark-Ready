@@ -176,57 +176,6 @@ def _persist_entry_with_retry(cache_path: Path, entry: dict, max_attempts: int =
 
 
 
-def _canonical_model_output_dir(model_id: str) -> str:
-
-    """Map model IDs/aliases to canonical results directory names."""
-
-    model_id_lower = model_id.lower()
-
-    canonical_names = {
-
-        "gpt_oss": "gpt-oss-20b",
-
-        "gpt_oss_lmstudio": "gpt-oss-20b",
-
-        "gpt-oss-lmstudio": "gpt-oss-20b",
-
-        "gpt-oss-20b": "gpt-oss-20b",
-
-        "qwen3_lmstudio": "qwen3-lmstudio",
-
-        "qwen3-lmstudio": "qwen3-lmstudio",
-
-        "deepseek_r1_lmstudio": "deepseek-r1-lmstudio",
-
-        "deepseek-r1-lmstudio": "deepseek-r1-lmstudio",
-
-        "qwq": "qwq",
-
-        "qwq_lmstudio": "qwq",
-
-        "qwq-lmstudio": "qwq",
-
-        "piaget_local": "piaget-8b-local",
-
-        "piaget-8b-local": "piaget-8b-local",
-
-        "psyche_r1_local": "psyche-r1-local",
-
-        "psyche-r1-local": "psyche-r1-local",
-
-        "psych_qwen_local": "psych-qwen-32b-local",
-
-        "psych-qwen-32b-local": "psych-qwen-32b-local",
-
-        "psyllm": "psyllm-gml-local",
-
-        "psyllm_gml_local": "psyllm-gml-local",
-
-        "psyllm-gml-local": "psyllm-gml-local",
-
-    }
-
-    return canonical_names.get(model_id_lower, model_id)
 
 
 
