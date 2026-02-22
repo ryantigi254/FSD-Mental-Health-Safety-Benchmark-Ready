@@ -20,7 +20,9 @@ processed/*
 !processed/study_b_pipeline/
 !processed/study_b_multiturn_pipeline/
 processed/_archived/
+# Local model weights and caches (all contents ignored)
 models/
+models/**
 offload/
 wandb/
 data/*
