@@ -67,6 +67,22 @@ pip install transformers accelerate bitsandbytes
 pip install -r requirements.txt --upgrade transformers
 ```
 
+### `mh-llm-vllm-env` (vLLM server environment)
+
+Use this for **vLLM OpenAI-compatible servers** for local HF models:
+
+```powershell
+cd "benchmark\runtime"
+conda create -n mh-llm-vllm-env python=3.10 -y
+conda activate mh-llm-vllm-env   # Use your conda activation command if 'conda activate' is not on PATH
+
+# Install PyTorch with CUDA support (REQUIRED for GPU inference)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Install vLLM and quantization dependencies
+pip install -r requirements-local-vllm.txt
+```
+
 **Important:** PyTorch must be installed with CUDA support for GPU inference. If you install PyTorch without the CUDA index URL, you'll get the CPU-only build (`torch-2.x.x+cpu`), which will not detect your GPU. Always use the CUDA-specific index URL matching your CUDA version (check with `nvidia-smi`).
 
 **Key points:**
@@ -79,6 +95,10 @@ pip install -r requirements.txt --upgrade transformers
 **What runs in this env:**
 - Local HF model runners: `piaget_local`, `psyche_r1_local`, `psych_qwen_local`, `psyllm_gml_local`
 - Generation scripts: `hf-local-scripts/run_study_*_generate_only.py` (for local models)
+
+**What runs in vLLM env:**
+- vLLM OpenAI-compatible servers for local HF models: `psyllm_gml_vllm`, `piaget_vllm`, `psyche_r1_vllm`, `psych_qwen_vllm`
+- vLLM generation via automatic runner: `python scripts/dev/run_generation_auto.py --model-id *_vllm`
 
 **Note:** If `en_core_sci_sm` is unavailable, the S3 link above is the tested path for v0.5.4. NER-dependent tests auto-skip if the model is missing.
 
