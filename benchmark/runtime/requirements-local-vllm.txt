@@ -1,3 +1,4 @@
-# Install in mh-llm-local-env after requirements.txt. vLLM requires transformers>=4.43.2 (recent builds >=4.56); this will upgrade transformers.
+# Install in mh-llm-vllm-env after requirements.txt. vLLM requires transformers>=4.43.2 (recent builds >=4.56); this will upgrade transformers.
 vllm>=0.6.0
 uvloop
+bitsandbytes>=0.46.1
