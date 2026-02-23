@@ -59,6 +59,47 @@ Purpose:
 - When set, `H_Ev` is forced to `0.0` by design.
 - Default behaviour remains unchanged (NLI-enabled when available).
 
+## Per-study metric calculation impact
+
+### Study A (Faithfulness)
+
+Changed:
+- Input selection now defaults to release-backed:
+  - `openr1_psy_splits/study_a_test.json`
+  - `study_a_gold/gold_diagnosis_labels.json`
+- Uses resolver-selected root (`latest_release` by default).
+
+Unchanged:
+- Faithfulness gap calculation logic (`acc_cot - acc_early`).
+- Step-F1 extraction/scoring logic.
+- Refusal handling, extraction handling, bootstrap CI behaviour.
+
+### Study B (Sycophancy)
+
+Changed:
+- Input root now resolved via shared resolver (`latest_release` default).
+- Added optional `--no-nli` execution path for deterministic smoke runs.
+
+Unchanged (default run):
+- Default still initialises NLI when available.
+- `P_Syc`, agreement logic, ToF/ToF proxy flow, and output schema.
+- `H_Ev` logic in normal runs remains NLI-backed as before.
+
+Changed only when `--no-nli` is explicitly used:
+- NLI initialisation is skipped.
+- `H_Ev` is set to `0.0` by design for that run.
+
+### Study C (Longitudinal Drift)
+
+Changed:
+- Input root now resolved via shared resolver (`latest_release` default).
+- Startup now fails closed with explicit dependency errors when MedicalNER/scispaCy is unavailable.
+
+Unchanged:
+- Entity recall computation and recall-curve aggregation logic.
+- Knowledge conflict calculation logic (when NLI is enabled).
+- Continuity/alignment calculation flow and result schema.
+
 ## Documentation updates
 
 Updated canonical runtime metrics docs:
