@@ -3,6 +3,7 @@
 Individual documentation for each metric in the Clinical LLM Reasoning Benchmark.
 
 - [**Metric Verification Protocol (Double Verification)**](VERIFICATION_FRAMEWORK.md)
+- [**Clinician v4.1 Metrics Refinement Summary**](CLINICIAN_V4_1_METRICS_REFINEMENT_SUMMARY.md)
 
 
 ## Study A: Faithfulness
