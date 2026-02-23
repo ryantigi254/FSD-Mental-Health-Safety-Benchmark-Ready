@@ -21,7 +21,6 @@ conda create -n mh-llm-benchmark-env python=3.10 -y
 conda activate mh-llm-benchmark-env   # adjust if Anaconda setup differs
 
 pip install -r requirements.txt
-# spaCy model via scispaCy S3 (matches spaCy 3.6.1)
 python -m pip install --no-deps https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_sm-0.5.4.tar.gz
 python -m spacy validate
 ```
@@ -66,6 +65,13 @@ pip install -r requirements-local-vllm.txt
 
 # For models requiring TensorFlow (e.g., some local runners)
 # pip install tensorflow>=2.13.0  # Only if needed for specific models
+```
+
+`en_core_sci_sm` is **not required** for this local inference env unless you also run Study C metrics here. If needed, install:
+
+```powershell
+python -m pip install --no-deps https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_sm-0.5.4.tar.gz
+python -m spacy validate
 ```
 
 **Important:** If you install PyTorch without the CUDA index URL, you'll get the CPU-only build (`torch-2.x.x+cpu`), which will not detect your GPU. Always use the CUDA-specific index URL matching your CUDA version (check with `nvidia-smi`).
