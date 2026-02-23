@@ -10,7 +10,9 @@ Inputs (read-only runtime data and generation caches):
 - Study A bias cache: `results/{model-id}/study_a_bias_generations.jsonl`
 - Study B cache: `results/{model-id}/study_b_generations.jsonl`
 - Study C cache: `results/{model-id}/study_c_generations.jsonl`
-- Gold/test data under `data/openr1_psy_splits/` and `data/study_a_gold/`
+- Gold/test data resolved from:
+  - default: latest release pointed to by `data/releases/LATEST.md`
+  - fallback mode: legacy working data under `data/`
 
 Outputs:
 
@@ -22,9 +24,13 @@ Outputs:
 ## 2. Calculation flow
 
 1. Generate and cache model outputs in `results/{model-id}/...`.
-2. Run metric scripts by study.
-3. Persist metric JSON artefacts under `metric-results/`.
-4. Use downstream analysis notebooks/reports from `metric-results/` outputs.
+2. Resolve dataset root:
+   - default: `--data-source latest_release`
+   - legacy mode: `--data-source working_data`
+   - explicit override: `--data-root <root-containing-openr1_psy_splits-study_a_gold-study_c_gold>`
+3. Run metric scripts by study.
+4. Persist metric JSON artefacts under `metric-results/`.
+5. Use downstream analysis notebooks/reports from `metric-results/` outputs.
 
 `results/` stores raw generations; metric scripts do not rewrite those cached generation files.
 
@@ -40,6 +46,18 @@ PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/studies/study_c/metrics/calcula
 ```
 
 Optional cleaned-path mode is available where supported (`--use-cleaned`).
+For Study B deterministic smoke runs in constrained environments, use `--no-nli`.
+
+Data-source options (Study A/B/C metric scripts):
+
+```bash
+# Use legacy in-tree working data
+PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/studies/study_a/metrics/calculate_metrics.py --data-source working_data
+
+# Use explicit data root (release directory or custom root with required subfolders)
+PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/studies/study_b/metrics/calculate_metrics.py \
+  --data-root data/releases/clinician_readiness_v4_2026-02-22
+```
 
 ## 4. Study A bias metric contract
 

@@ -29,6 +29,10 @@ import numpy as np
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent.parent / "src"))
 
+from reliable_clinical_benchmark.data.release_data_resolver import (
+    DATA_SOURCE_CHOICES,
+    resolve_metric_data_roots,
+)
 from reliable_clinical_benchmark.metrics.drift import (
     _extract_advice,
     calculate_alignment_score,
@@ -401,6 +405,24 @@ def main():
     parser.add_argument("--output-dir", type=Path, default=None,
                         help="Output directory for results")
     parser.add_argument(
+        "--data-source",
+        choices=DATA_SOURCE_CHOICES,
+        default="latest_release",
+        help=(
+            "Dataset source mode (default: latest_release). "
+            "Use working_data for legacy data/ paths."
+        ),
+    )
+    parser.add_argument(
+        "--data-root",
+        type=Path,
+        default=None,
+        help=(
+            "Optional explicit root containing openr1_psy_splits/, study_a_gold/, "
+            "and study_c_gold/."
+        ),
+    )
+    parser.add_argument(
         "--use-nli",
         action="store_true",
         help="Use NLI for knowledge conflict detection (actions-only advice)",
@@ -421,7 +443,16 @@ def main():
     args = parser.parse_args()
     
     base_dir = Path(__file__).parent.parent.parent.parent.parent
-    data_dir = base_dir / "data"
+    try:
+        data_roots = resolve_metric_data_roots(
+            runtime_root=base_dir,
+            data_source=args.data_source,
+            data_root=args.data_root,
+        )
+    except (ValueError, FileNotFoundError) as exc:
+        logger.error(str(exc))
+        return 1
+    data_dir = data_roots.root
     
     if args.use_cleaned:
         results_dir = base_dir / "processed" / "study_c_pipeline"
@@ -435,9 +466,11 @@ def main():
     print("STUDY C: LONGITUDINAL DRIFT METRICS")
     print("=" * 60)
     print(f"Source:   {results_dir}")
+    print(f"Data root:{data_roots.root}")
     print(f"Output:   {output_dir}")
     print(f"Time:     {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
+    logger.info("Using data source: %s", data_roots.source)
     
     # Load gold data
     gold_data = load_gold_data(data_dir)
@@ -462,7 +495,21 @@ def main():
     
     # Initialize NER model once
     print("Loading MedicalNER (scispaCy)...")
-    ner_model = MedicalNER()
+    if MedicalNER is None:
+        logger.error(
+            "MedicalNER is unavailable. Study C metrics require scispaCy "
+            "(install `en_core_sci_sm`)."
+        )
+        return 1
+    try:
+        ner_model = MedicalNER()
+    except Exception as exc:
+        logger.error(
+            "Failed to initialise MedicalNER. Study C metrics require scispaCy "
+            "(`en_core_sci_sm`): %s",
+            exc,
+        )
+        return 1
 
     all_results = []
     nli_model = None
@@ -562,7 +609,8 @@ def main():
     
     print("=" * 60)
     print(f"Results saved to: {results_file}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

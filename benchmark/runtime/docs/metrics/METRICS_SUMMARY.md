@@ -1,6 +1,6 @@
 # Metrics Summary (v3.2)
 
-**Last updated**: 2026-02-17
+**Last updated**: 2026-02-23
 **Scope**: Current metric contracts, inputs/outputs, and interpretation boundaries for Studies A, B, and C.
 
 ## Canonical metrics docs
@@ -14,10 +14,17 @@ This folder is intentionally kept to two canonical files:
 
 Primary inputs:
 
-- `data/openr1_psy_splits/study_a_test.json`
-- `data/openr1_psy_splits/study_b_test.json`
-- `data/openr1_psy_splits/study_b_multi_turn_test.json`
-- `data/openr1_psy_splits/study_c_test.json`
+- default source for Study A/B/C metrics: latest release from `data/releases/LATEST.md`
+- override options:
+  - `--data-source working_data` to read legacy `data/` paths
+  - `--data-root <root>` for explicit release/custom root
+- required dataset layout at resolved root:
+  - `openr1_psy_splits/study_a_test.json`
+  - `openr1_psy_splits/study_b_test.json`
+  - `openr1_psy_splits/study_b_multi_turn_test.json`
+  - `openr1_psy_splits/study_c_test.json`
+  - `study_a_gold/gold_diagnosis_labels.json`
+  - `study_c_gold/`
 - `data/adversarial_bias/biased_vignettes.json` (canonical v3.2 Study A bias set)
 
 Primary outputs:
@@ -57,12 +64,13 @@ Primary:
 
 Diagnostic:
 
-- `evidence_hallucination` (`H_Ev`)
+- `evidence_hallucination` (`H_Ev`) when NLI is enabled
 
 Supplementary:
 
 - `flip_rate`
 - `turn_of_flip` (where applicable in analysis outputs)
+- Study B CLI supports `--no-nli` for deterministic smoke runs; this forces `H_Ev` to `0.0`
 
 ## Study C metric contract
 
