@@ -3,18 +3,81 @@ Local runner for gustavecortal/Piaget-8B using Hugging Face transformers.
 
 Loads the model into local memory (no LM Studio) and runs generation with
 chat template + enable_thinking to preserve <think> traces.
+
+Adds a sentinel end marker (<END>) + token-level stopping criteria to prevent
+runaway repetition loops in long generations.
 """
 
-import re
-from typing import Tuple
 import logging
+import re
+from typing import Tuple, List
 
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
+from transformers import (
+    AutoConfig,
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    StoppingCriteria,
+    StoppingCriteriaList,
+)
 
 from .base import ModelRunner, GenerationConfig
 
 logger = logging.getLogger(__name__)
+
+
+class StopOnTokenSequence(StoppingCriteria):
+    """Stop generation once the most-recent tokens match a target token sequence."""
+    def __init__(self, seq_ids: List[int]):
+        super().__init__()
+        self.seq_ids = list(seq_ids)
+
+    def __call__(self, input_ids, scores, **kwargs):
+        if not self.seq_ids:
+            return False
+        ids = input_ids[0].tolist()
+        n = len(self.seq_ids)
+        if len(ids) < n:
+            return False
+        return ids[-n:] == self.seq_ids
+
+
+class NgramRepeatStop(StoppingCriteria):
+    """Stop when the recent token window is dominated by repeated n-grams.
+
+    This catches ABAB loops / paragraph loops even when EOS or <END> is never produced.
+    """
+
+    def __init__(
+        self,
+        prompt_len: int,
+        window: int = 256,
+        n: int = 8,
+        dup_frac: float = 0.25,
+        min_new: int = 256,
+    ):
+        super().__init__()
+        self.prompt_len = int(prompt_len)
+        self.window = int(window)
+        self.n = int(n)
+        self.dup_frac = float(dup_frac)
+        self.min_new = int(min_new)
+
+    def __call__(self, input_ids, scores, **kwargs):
+        ids = input_ids[0].tolist()
+        new = len(ids) - self.prompt_len
+        if new < self.min_new:
+            return False
+        if len(ids) < self.window + self.n:
+            return False
+
+        tail = ids[-self.window :]
+        # Build n-grams over the tail window
+        ngrams = [tuple(tail[i : i + self.n]) for i in range(len(tail) - self.n + 1)]
+        if not ngrams:
+            return False
+        dup = 1.0 - (len(set(ngrams)) / max(1, len(ngrams)))
+        return dup >= self.dup_frac
 
 
 class Piaget8BLocalRunner(ModelRunner):
@@ -39,12 +102,25 @@ class Piaget8BLocalRunner(ModelRunner):
                 max_tokens=1024,
             ),
         )
+        self._model_name = model_name
+        self._device_map = device_map
+        self._dtype = dtype
+        self._local_files_only = local_files_only
+
         logger.info(f"Loading {model_name} locally (device_map={device_map})")
         self.tokenizer = AutoTokenizer.from_pretrained(
-            model_name, trust_remote_code=True, use_fast=False,
+            model_name,
+            trust_remote_code=True,
+            use_fast=False,
             local_files_only=local_files_only,
         )
-        config = AutoConfig.from_pretrained(
+
+        # Precompute sentinel stop sequences as token IDs
+        self._end_ids = self.tokenizer("<END>", add_special_tokens=False).input_ids
+        self._end_ids_nl = self.tokenizer("\n<END>", add_special_tokens=False).input_ids
+        self._end_ids_nl2 = self.tokenizer("\n<END>\n", add_special_tokens=False).input_ids
+
+        model_cfg = AutoConfig.from_pretrained(
             model_name,
             trust_remote_code=True,
             local_files_only=local_files_only,
@@ -54,19 +130,29 @@ class Piaget8BLocalRunner(ModelRunner):
             device_map=device_map,
             dtype=dtype,
             trust_remote_code=True,
-            config=config,
+            config=model_cfg,
             local_files_only=local_files_only,
         )
+        self.model.eval()
 
     def _build_inputs(self, prompt: str, mode: str = "default"):
         formatted_prompt = self._format_prompt(prompt, mode)
         messages = [{"role": "user", "content": formatted_prompt}]
-        prompt_text = self.tokenizer.apply_chat_template(
-            messages,
-            tokenize=False,
-            add_generation_prompt=True,
-            enable_thinking=True,
-        )
+        try:
+            prompt_text = self.tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=True,
+                enable_thinking=(mode == "cot"),
+            )
+        except TypeError:
+            # Some templates ignore enable_thinking
+            prompt_text = self.tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=True,
+            )
+
         tokenized = self.tokenizer(
             prompt_text,
             return_tensors="pt",
@@ -78,8 +164,21 @@ class Piaget8BLocalRunner(ModelRunner):
     def generate(self, prompt: str, mode: str = "default") -> str:
         encoded = self._build_inputs(prompt, mode)
         input_token_count = int(encoded["input_ids"].shape[-1])
-        
-        # Try GPU generation first
+
+        stops = StoppingCriteriaList(
+            [
+                StopOnTokenSequence(self._end_ids),
+                StopOnTokenSequence(self._end_ids_nl),
+                StopOnTokenSequence(self._end_ids_nl2),
+                NgramRepeatStop(prompt_len=input_token_count),
+            ]
+        )
+
+        pad_id = self.tokenizer.pad_token_id
+        if pad_id is None:
+            pad_id = self.tokenizer.eos_token_id
+
+        # Try GPU generation first; if CUDA OOM occurs, retry with reduced max_new_tokens.
         try:
             gen = self.model.generate(
                 **encoded,
@@ -87,94 +186,59 @@ class Piaget8BLocalRunner(ModelRunner):
                 do_sample=True,
                 temperature=self.config.temperature,
                 top_p=self.config.top_p,
+                repetition_penalty=1.05,
                 eos_token_id=self.tokenizer.eos_token_id,
-                pad_token_id=self.tokenizer.eos_token_id,
+                pad_token_id=pad_id,
+                stopping_criteria=stops,
             )
         except RuntimeError as e:
-            # Check if it's a CUDA OOM error
             error_str = str(e).lower()
             if "cuda" in error_str and ("out of memory" in error_str or "oom" in error_str):
                 logger.warning(f"GPU OOM error: {error_str[:200]}")
-                
-                # Clear GPU cache aggressively before retry
                 if torch.cuda.is_available():
-                    logger.info("Clearing GPU cache before retry...")
                     torch.cuda.empty_cache()
                     torch.cuda.synchronize()
                     torch.cuda.reset_peak_memory_stats(0)
-                    import gc
-                    gc.collect()
-                    torch.cuda.empty_cache()
-                
-                # Retry with progressively reduced tokens
+
+                # Retry with progressively reduced tokens.
+                last_err = e
                 for reduced_tokens in [self.config.max_tokens // 2, self.config.max_tokens // 4, 512, 256]:
+                    if reduced_tokens <= 0:
+                        continue
                     try:
-                        logger.info(f"Retrying GPU generation with max_new_tokens={reduced_tokens}")
+                        logger.info(f"Retrying generation with max_new_tokens={reduced_tokens}")
                         gen = self.model.generate(
                             **encoded,
                             max_new_tokens=reduced_tokens,
                             do_sample=True,
                             temperature=self.config.temperature,
                             top_p=self.config.top_p,
+                            repetition_penalty=1.05,
                             eos_token_id=self.tokenizer.eos_token_id,
-                            pad_token_id=self.tokenizer.eos_token_id,
+                            pad_token_id=pad_id,
+                            stopping_criteria=stops,
                         )
-                        logger.info(f"GPU generation succeeded with reduced max_new_tokens={reduced_tokens}")
                         break
                     except RuntimeError as retry_error:
-                        error_str_retry = str(retry_error).lower()
-                        if "cuda" in error_str_retry and ("out of memory" in error_str_retry or "oom" in error_str_retry):
-                            if reduced_tokens == 256:
-                                # All GPU retries failed - try CPU fallback
-                                logger.warning(
-                                    f"GPU generation failed even with minimal tokens ({reduced_tokens}). "
-                                    f"Attempting CPU fallback (this will be slow but should work with available RAM)"
-                                )
-                                
-                                # Clear GPU cache before CPU fallback
-                                if torch.cuda.is_available():
-                                    torch.cuda.empty_cache()
-                                    torch.cuda.synchronize()
-                                    torch.cuda.reset_peak_memory_stats(0)
-                                    import gc
-                                    gc.collect()
-                                    torch.cuda.empty_cache()
-                                
-                                # Move model and inputs to CPU
-                                try:
-                                    cpu_model = self.model.cpu()
-                                    encoded_cpu = {k: v.cpu() for k, v in encoded.items()}
-                                    
-                                    logger.info(f"Attempting CPU generation with max_new_tokens={reduced_tokens}")
-                                    gen = cpu_model.generate(
-                                        **encoded_cpu,
-                                        max_new_tokens=reduced_tokens,
-                                        do_sample=True,
-                                        temperature=self.config.temperature,
-                                        top_p=self.config.top_p,
-                                        eos_token_id=self.tokenizer.eos_token_id,
-                                        pad_token_id=self.tokenizer.eos_token_id,
-                                    )
-                                    
-                                    # Move model back to GPU for next generation
-                                    self.model = cpu_model.to(next(self.model.parameters()).device if torch.cuda.is_available() else "cpu")
-                                    
-                                    logger.info("CPU generation succeeded")
-                                    break
-                                except Exception as cpu_error:
-                                    logger.error(f"CPU generation also failed: {cpu_error}")
-                                    raise retry_error from cpu_error
-                            continue
-                        else:
-                            raise retry_error
+                        last_err = retry_error
+                        err2 = str(retry_error).lower()
+                        if not ("cuda" in err2 and ("out of memory" in err2 or "oom" in err2)):
+                            raise
+                        if torch.cuda.is_available():
+                            torch.cuda.empty_cache()
+                            torch.cuda.synchronize()
+                            torch.cuda.reset_peak_memory_stats(0)
                 else:
-                    raise e
+                    raise last_err
             else:
                 raise
-        
+
         generated_only = gen[0, input_token_count:]
         output = self.tokenizer.decode(generated_only, skip_special_tokens=True)
-        
+
+        # Remove sentinel from output if present
+        output = output.replace("<END>", "").strip()
+
         # Clear GPU cache after each generation to prevent memory buildup
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
@@ -183,15 +247,8 @@ class Piaget8BLocalRunner(ModelRunner):
             import gc
             gc.collect()
             torch.cuda.empty_cache()
-        
-        return output.strip()
 
-    def _strip_prompt(self, text: str) -> str:
-        # Remove echoed prompt if present
-        split = text.split("<|im_start|>assistant", 1)
-        if len(split) == 2:
-            return split[1].replace("<|im_end|>", "").strip()
-        return text.strip()
+        return output.strip()
 
     def generate_with_reasoning(self, prompt: str) -> Tuple[str, str]:
         full_response = self.generate(prompt, mode="cot")
@@ -219,5 +276,3 @@ class Piaget8BLocalRunner(ModelRunner):
                 answer = full_response
 
         return answer, reasoning
-
-

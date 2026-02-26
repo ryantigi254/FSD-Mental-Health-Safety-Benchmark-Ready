@@ -155,7 +155,7 @@ class PsychQwen32BLocalRunner(ModelRunner):
             ),
         )
 
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True, local_files_only=local_files_only)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False, local_files_only=local_files_only)
         # Ensure the chat template matches Qwen3-style thinking/non-thinking separation.
         self.tokenizer.chat_template = PSYCH_QWEN_CHAT_TEMPLATE
         model_config = AutoConfig.from_pretrained(model_name, local_files_only=local_files_only)
