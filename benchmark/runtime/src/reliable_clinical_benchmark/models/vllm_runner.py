@@ -13,6 +13,7 @@ Default port assignments (one model per GPU at a time):
     Psych_Qwen_32B    → 8104
 """
 
+import os
 import re
 from typing import Dict, List, Optional, Tuple
 
@@ -53,9 +54,12 @@ def _extract_answer_and_reasoning(full_response: str) -> Tuple[str, str]:
 
 # ── Runner ──────────────────────────────────────────────────────────────────
 
-# vLLM enforces input_tokens + max_tokens <= max_model_len.
-# With --max-model-len 24576, we reserve headroom for the prompt.
-_VLLM_MAX_COMPLETION_TOKENS = 16384
+# vLLM enforces input_tokens + max_tokens <= max_model_len. We cap client requests
+# so a server started with default --max-model-len 4096 works. For 16384 context
+# with ~2 GiB KV, start the server with:
+#   --max-model-len 16384 --kv-cache-memory-bytes 2147483648
+# and set env VLLM_MAX_COMPLETION_TOKENS=16384 if you need longer generations.
+_VLLM_MAX_COMPLETION_TOKENS = int(os.environ.get("VLLM_MAX_COMPLETION_TOKENS", "4096"))
 
 
 class VLLMRunner(ModelRunner):

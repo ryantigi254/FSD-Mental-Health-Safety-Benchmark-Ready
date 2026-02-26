@@ -105,7 +105,7 @@ python -m vllm.entrypoints.openai.api_server --model "Compumacy/Psych_Qwen_32B" 
 
 ```
 
-
+**vLLM context length and client `max_tokens`:** The benchmark client caps requests at the server’s `max_model_len`. If your server is started with the default 4096 context (or you omit `--max-model-len`), the client uses **4096** max completion tokens so generation works. If the server fails with context-length errors, ensure the client is not asking for more than the server’s `--max-model-len`. For **16384** context with ~2 GiB KV cache, start the server with `--max-model-len 16384 --kv-cache-memory-bytes 2147483648` and set `VLLM_MAX_COMPLETION_TOKENS=16384` in the environment when running the benchmark.
 
 ### vLLM Generation Commands
 
