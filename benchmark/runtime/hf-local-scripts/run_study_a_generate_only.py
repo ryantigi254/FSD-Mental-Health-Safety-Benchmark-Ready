@@ -98,7 +98,7 @@ def _parse_args() -> argparse.Namespace:
 
             "Number of parallel generation workers. "
 
-            "Default is auto: 4 for LM Studio runners, 1 for non-LM Studio runners."
+            "Default is auto: 4 for LM Studio/Ollama API runners, 1 for non-LM Studio runners."
 
         ),
 
@@ -145,6 +145,8 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "psyche_r1_local": "psyche-r1-local",
 
         "qwen3_lmstudio": "qwen3-lmstudio",
+        "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax_m2_5_cloud": "minimax-m2.5-cloud",
 
     }
 
@@ -355,7 +357,7 @@ def _parse_args() -> argparse.Namespace:
         default=None,
         help=(
             "Number of parallel generation workers. "
-            "Default is auto: 4 for LM Studio runners, 1 for non-LM Studio runners."
+            "Default is auto: 4 for LM Studio/Ollama API runners, 1 for non-LM Studio runners."
         ),
     )
     parser.add_argument(
@@ -379,6 +381,8 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "psyllm_gml_local": "psyllm-gml-local",
         "psyche_r1_local": "psyche-r1-local",
         "qwen3_lmstudio": "qwen3-lmstudio",
+        "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax_m2_5_cloud": "minimax-m2.5-cloud",
         # vLLM-served local models → same results folders as HF-local
         "psyllm_gml_vllm": "psyllm-gml-local",
         "piaget_vllm": "piaget-8b-local",

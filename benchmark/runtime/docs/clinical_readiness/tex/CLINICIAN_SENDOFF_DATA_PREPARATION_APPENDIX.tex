@@ -1,0 +1,274 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{listings}
+
+\lstdefinestyle{mystyle}{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible
+}
+\lstset{style=mystyle}
+
+\title{Clinician Send-off Data Preparation and Rubric Traceability Report}
+\author{Runtime Benchmark Team}
+\date{2026-02-22}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This appendix documents the data-preparation pipeline, validation criteria, and artefact provenance for clinician send-off across versions v0.3, v4, and v4.1. The workflow follows a pipeline of baseline freeze, deterministic rubric-based review, and constrained resampling---analogous to multi-stage data construction and systematic validation used in clinically grounded dialogue datasets (e.g.\ OpenR1-Psy). We specify the operations performed at each stage, the formal criteria and gating strategy used for acceptability, and the reproducibility artefacts that support replication.
+\end{abstract}
+
+\paragraph{Unit of review.}
+Throughout this appendix, one \emph{row} means one \emph{case}. For multi-turn studies, the reviewed unit is the case record, not per-turn messages.
+
+\section{Objective}
+The preparation programme had three concrete objectives:
+\begin{enumerate}[leftmargin=1.5em]
+  \item Freeze a reproducible clinician-ready baseline (\texttt{v0.3\_postclinician\_audit}).
+  \item Run deterministic cross-study reference review with rubric v2 (v4 review outputs).
+  \item Produce a fully acceptable Study A variant via deterministic replacement of non-acceptable rows only (v4.1), whilst keeping Study B and Study C unchanged.
+\end{enumerate}
+
+\section{Data Preparation Pipeline}
+The construction follows a staged pipeline: (1) baseline freeze and manifest contract; (2) line-by-line cross-study review under a fixed rubric; (3) deterministic resampling of non-acceptable Study A rows. Figure~\ref{fig:pipeline} summarises inputs, operations, and outputs at each stage.
+
+\begin{figure}[h]
+\centering
+\fbox{\parbox{0.9\textwidth}{
+\textbf{Stage A: Baseline freeze}\\
+Input: Study A/B/C payloads and gold artefacts.\\
+Operations: Consolidate into \texttt{frozen\_splits/v0.3\_postclinician\_audit/}; materialise snapshot \texttt{manifest.json} (file hashes, row counts); add Stage~2 and preflight gates to send-off scripts.\\
+Output: Frozen snapshot, release package, and package-generation gates.\\[0.5em]
+\textbf{Stage B: Cross-study review}\\
+Input: Frozen v0.3 snapshot; rubric v2 (\texttt{rubric\_rules\_v4.json}, word-boundary matching).\\
+Operations: Line-by-line rule-based review over 4,220 rows (Study A: 2,000; Study B single: 2,000; Study B multi: 120; Study C: 100); enforce rubric criteria and token-boundary logic.\\
+Output: SSV verdict files and \texttt{run\_metadata.json} in \texttt{benchmark/runtime/data/verification/v4/}.\\[0.5em]
+\textbf{Stage C: Study A resampling (v4.1)}\\
+Input: v4 verdicts; OpenR1-Psy candidate pool; same rubric v2 and scorer.\\
+Operations: Identify non-acceptable Study A rows (NEEDS\_REVIEW + REJECT); replace only those rows using deterministic candidate ordering and in-repo v4 scorer acceptance; preserve Study A IDs and order; leave acceptable rows and Studies B/C untouched.\\
+Output: \texttt{frozen\_splits/v4\_1\_resampled}; \texttt{benchmark/runtime/data/verification/v4\_1} artefacts.
+}}
+\caption{Data preparation pipeline: stages, inputs, operations, and outputs.}
+\label{fig:pipeline}
+\end{figure}
+
+\subsection{Stage A: Baseline freeze (v0.3)}
+Consolidated Study A/B/C payloads and gold artefacts into \texttt{benchmark/runtime/data/frozen\_splits/v0.3\_postclinician\_audit/}. Snapshot-level \texttt{manifest.json} records file-level hashes and row counts. Stage~2 and preflight checks in clinician send-off scripts gate package generation. Primary release anchor: \texttt{clinician\_readiness\_v0.3\_2026-02-16}.
+
+\subsection{Stage B: Deterministic reference review (v4)}
+Implemented line-by-line, rule-based cross-study review over 4,220 rows with word-boundary token matching and rubric v2. Generated intermediate review artefacts in \texttt{benchmark/runtime/data/verification/v4/} from the frozen v0.3 baseline. These v4 outputs are review-stage artefacts; the final released remediated snapshot is \texttt{v4\_1\_resampled} under release label \texttt{clinician\_readiness\_v4\_2026-02-22}.
+
+\subsection{Stage C: Deterministic Study A resampling (v4.1)}
+Identified 768 non-acceptable Study A rows from v4 (761 NEEDS\_REVIEW, 7 REJECT). Replaced only those rows from OpenR1-Psy using deterministic candidate ordering and acceptance with the in-repo v4 scorer. Preserved Study A IDs and order; retained acceptable rows untouched. Produced \texttt{frozen\_splits/v4\_1\_resampled} and \texttt{verification/v4\_1} artefacts.
+
+\paragraph{Deterministic resampling procedure.}
+\begin{lstlisting}[language={}]
+flagged_ids = [study_a ids where verdict in {NEEDS_REVIEW, REJECT}]  # source order
+used_source_ids = source_openr1_ids from retained ACCEPTABLE rows
+
+for item_id in flagged_ids:
+    for candidate in OpenR1Pool(train_then_test, ascending_index):
+        if candidate.source_id in used_source_ids:
+            continue
+        score = score_study_a(candidate, rubric_v2)
+        if score.verdict == "ACCEPTABLE":
+            replace_row_preserving_id_and_position(item_id, candidate)
+            used_source_ids.add(candidate.source_id)
+            break
+\end{lstlisting}
+
+\paragraph{OpenR1 reproducibility pin.}
+OpenR1-based artefacts in this pipeline are pinned to dataset \texttt{GMLHUHE/OpenR1-Psy}, revision
+\texttt{56fc0ef2fa5926df86713ed9b35f8689a6f85425}. Candidate pool for Stage C is iterated in deterministic order
+(\texttt{train} then \texttt{test}, ascending dataset index) with eligibility constrained to rows that yield non-empty
+prompt/answer/reasoning fields via \texttt{iter\_openr1\_candidates()} and \texttt{\_first\_openr1\_fields()}
+in \texttt{benchmark/runtime/src/reliable\_clinical\_benchmark/review/v4\_reference\_review.py}; already-used source IDs are excluded.
+
+\section{Validation Criteria and Scoring}
+\subsection{Verdict space and gate condition}
+Each reviewed row receives one of three verdicts: \textsc{Acceptable}, \textsc{Needs\_Review}, or \textsc{Reject}. The review logic is deterministic and rule-based. Clinician audit is applied in the baseline freeze process (\texttt{v0.3\_postclinician\_audit}); v4/v4.1 review and replacement selection are fully automated. Quality is enforced by requiring that published releases use only rows passing the acceptability bar (v4.1 achieves 100\% \textsc{Acceptable} for Study A by replacing non-acceptable rows).
+
+\subsection{Rubric dimensions (v2)}
+Canonical rubric version is \texttt{v2}. File names \texttt{rubric\_rules\_v4.json} and \texttt{rubric\_rules\_v4\_1.json} are historical dataset-version labels that both encode rubric v2. These files define criteria for \emph{row acceptability} (not model scoring), summarised below.
+
+\begin{longtable}{p{0.22\textwidth}p{0.78\textwidth}}
+\caption{Rubric v2 operational dimensions (summary).} \label{tab:rubric-dims} \\
+\toprule
+\textbf{Dimension} & \textbf{Criterion} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Dimension} & \textbf{Criterion} \\
+\midrule
+\endhead
+Matching & \texttt{rule\_version}: v2; \texttt{matching\_mode}: \texttt{word\_boundary}; negation handled within \texttt{negation\_window\_chars} via \texttt{negation\_phrases}. \\
+\midrule
+Completeness & \texttt{min\_nontrivial\_steps}, \texttt{nontrivial\_step\_min\_words}; \texttt{repetition\_threshold} to penalise repetitive content. \\
+\midrule
+Context alignment & \texttt{context\_min\_prompt\_token\_matches}; \texttt{c3\_min\_overlap\_tokens}; \texttt{context\_contradiction\_phrases} and \texttt{diagnostic\_contradiction\_phrases} for contradiction detection. \\
+\midrule
+Framework and symptoms & \texttt{framework\_signals} (e.g.\ DSM, ICD, CBT, ACT, humanistic); \texttt{symptom\_tokens} and \texttt{symptom\_token\_variants} (e.g.\ eating-disorder variants) with word-boundary matching to avoid false positives. \\
+\midrule
+Risk and safety & \texttt{risk\_marker\_groups} (suicidality, self\_harm, psychosis, mania, substance, eating\_disorder); \texttt{severe\_risk\_classes}; \texttt{safety\_ack\_tokens}; \texttt{unsafe\_patterns} for disqualifying language. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Gating strategy}
+The preparation pipeline relies on deterministic, fail-closed checks:
+\begin{itemize}[leftmargin=1.5em]
+  \item Snapshot/release manifest integrity (presence and hash verification).
+  \item Unit tests for scoring primitives (token boundaries, risk detection, verdict logic).
+  \item SSV contract tests (strict semicolon-separated values with fixed headers and verdict schema; row counts, uniqueness, valid verdict space, summary consistency).
+  \item Send-off preflight and Stage~2 gates to prevent ambiguous package publication.
+\end{itemize}
+
+\section{Rubric Evolution and Contract}
+\subsection{Canonical rubric inventory}
+Canonical files: \texttt{benchmark/runtime/data/rubrics/rubric\_rules\_v3.json}, \texttt{rubric\_rules\_v4.json}, \texttt{rubric\_rules\_v4\_1.json}.
+
+\begin{longtable}{p{0.24\textwidth}p{0.12\textwidth}p{0.14\textwidth}p{0.38\textwidth}}
+\toprule
+\textbf{File} & \textbf{Rule version} & \textbf{Matching mode} & \textbf{SHA256} \\
+\midrule
+\endhead
+\texttt{rubric\_rules\_v3.json} & \texttt{v1} & -- &
+\texttt{de4af1034cd7fe89ca20c18dd218a86710a03eeb756201ebe3d2af36b67078e6} \\
+\texttt{rubric\_rules\_v4.json} & \texttt{v2} & \texttt{word\_boundary} &
+\texttt{e7a453e38bce8aba05997eb619d82534cfc32d648410f4666d520ff1bdd6d3ba} \\
+\texttt{rubric\_rules\_v4\_1.json} & \texttt{v2} & \texttt{word\_boundary} &
+\texttt{e7a453e38bce8aba05997eb619d82534cfc32d648410f4666d520ff1bdd6d3ba} \\
+\bottomrule
+\end{longtable}
+
+\subsection{Operational role of v2}
+v2 introduced strict word-boundary matching and explicit negation handling, reducing false positives from substring collisions (e.g.\ \textit{eating} in unrelated contexts). It also expanded framework and risk-marker handling whilst keeping scoring deterministic and local. v4 and v4.1 share the same rubric v2 contract.
+
+\section{Minimal Rebuild Commands}
+Code pin for this appendix and command paths: git commit \texttt{a5e2870} (release label \texttt{clinician\_readiness\_v4\_2026-02-22}).
+
+The minimal deterministic replay sequence is:
+\begin{lstlisting}[language={}]
+PYTHONPATH=src python scripts/studies/v4_review/run_v4_cross_study_review.py \
+  --clean --input-root benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit \
+  --out-dir benchmark/runtime/data/verification/v4 \
+  --rules benchmark/runtime/data/rubrics/rubric_rules_v4.json
+
+PYTHONPATH=src python scripts/studies/v4_review/run_v4_1_resample_study_a.py --clean
+
+PYTHONPATH=src python scripts/studies/v4_review/run_v4_cross_study_review.py \
+  --clean --input-root benchmark/runtime/data/frozen_splits/v4_1_resampled \
+  --out-dir benchmark/runtime/data/verification/v4_1 \
+  --rules benchmark/runtime/data/rubrics/rubric_rules_v4_1.json
+
+PYTHONPATH=src python -m pytest tests/unit/review/test_v4_reference_review.py \
+  tests/unit/review/test_v4_ssv_contract.py \
+  tests/unit/review/test_v4_1_resample.py \
+  tests/unit/review/test_v4_1_contract.py -q
+\end{lstlisting}
+Commands above are pinned to this repository release label (\texttt{clinician\_readiness\_v4\_2026-02-22}); paths may differ outside this release line.
+Determinism check in release workflow: rerun with identical inputs and verify hash-equality for
+\texttt{benchmark/runtime/data/frozen\_splits/v4\_1\_resampled/manifest.json},
+\texttt{benchmark/runtime/data/verification/v4/study\_*\_verdicts.ssv},
+\texttt{benchmark/runtime/data/verification/v4/review\_summary.ssv},
+\texttt{benchmark/runtime/data/verification/v4/run\_metadata.json},
+\texttt{benchmark/runtime/data/verification/v4\_1/study\_*\_verdicts.ssv},
+\texttt{benchmark/runtime/data/verification/v4\_1/review\_summary.ssv}, and
+\texttt{benchmark/runtime/data/verification/v4\_1/run\_metadata.json}.
+
+\section{Dataset and Run Statistics}
+Table~\ref{tab:v4stats} gives the v4 review summary (run metadata). Table~\ref{tab:beforeafter} summarises the before/after quality snapshot for Study A.
+
+\begin{table}[h]
+\centering
+\caption{v4 cross-study review summary (from \texttt{run\_metadata.json}).}
+\label{tab:v4stats}
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Study} & \textbf{Rows} & \textbf{Acceptable} & \textbf{Needs\_review} & \textbf{Reject} & \textbf{Duplicate IDs} \\
+\midrule
+Study A & 2,000 & 1,232 & 761 & 7 & 0 \\
+Study B (single) & 2,000 & 2,000 & 0 & 0 & 0 \\
+Study B (multi) & 120 & 120 & 0 & 0 & 0 \\
+Study C & 100 & 100 & 0 & 0 & 0 \\
+\midrule
+Total & 4,220 & 3,452 & 761 & 7 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Study A quality before and after v4.1 resampling.}
+\label{tab:beforeafter}
+\begin{tabular}{lrrr}
+\toprule
+& \textbf{Acceptable} & \textbf{Needs\_review} & \textbf{Reject} \\
+\midrule
+Pre-resample (v4 review) & 1,232 & 761 & 7 \\
+Post-resample (v4.1 target) & 2,000 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The v4.1 change was achieved by deterministic replacement of the 768 non-acceptable rows only; retained acceptable rows were not modified. Study B and Study C were unchanged.
+
+\section{Release-Level Provenance}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\begingroup
+\setlength{\tabcolsep}{5pt}
+\begin{longtable}{L{0.22\textwidth}L{0.28\textwidth}L{0.42\textwidth}}
+\toprule
+\textbf{Release/State} & \textbf{Primary focus} & \textbf{Key artefacts} \\
+\midrule
+\endhead
+\texttt{v0.3\_postclinician\_audit} &
+Clinician baseline freeze &
+Frozen snapshot payloads and \texttt{manifest.json}; Stage 2 and preflight gates; clinician package source baseline. \\
+\texttt{v4 review outputs} &
+Deterministic cross-study acceptability review &
+\texttt{study\_*\_verdicts.ssv}, \texttt{review\_summary.ssv}, \texttt{run\_metadata.json}, rubric v2 rule file copy. \\
+\texttt{v4\_1\_resampled} &
+Constrained Study A replacement &
+Study A deterministic replacement logs, refreshed frozen snapshot, and rerun review outputs at \texttt{verification/v4\_1}. \\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\section{Reproducibility Artefacts}
+Primary traceability files:
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{benchmark/runtime/data/README.md} (top-level data runbook and canonical rebuild steps)
+  \item \texttt{benchmark/runtime/data/rubrics/README.md} (rubric version mapping)
+  \item \texttt{benchmark/runtime/data/releases/LATEST.md} (release pointer; current label: \texttt{clinician\_readiness\_v4\_2026-02-22}, dataset snapshot state: \texttt{v4.1})
+  \item \texttt{benchmark/runtime/data/frozen\_splits/*/manifest.json} (snapshot contracts)
+  \item \texttt{benchmark/runtime/data/verification/v4*/run\_metadata.json} (review run contracts)
+\end{itemize}
+
+\section{Limitations for Interpretation}
+\begin{itemize}[leftmargin=1.5em]
+  \item The automated rubric can still be sensitive to lexical edge-cases (for example, idiomatic symptom words), even with word-boundary and negation guards.
+  \item Generation-time output formatting may vary across model backends; post-processing policy should be held constant when comparing runs.
+  \item Inclusion filters in downstream analysis (for example, response-status filters) affect reported aggregates and must be declared with each run.
+\end{itemize}
+
+\section{Conclusion}
+The clinician send-off work is documented as an evidence-driven data-engineering pipeline:
+(1) freeze and validate baseline data contracts;
+(2) apply deterministic rubric-based review at full cross-study scale;
+(3) remediate Study A quality via constrained deterministic resampling; and
+(4) preserve release and artefact-level provenance for reproducibility.
+The central rubric set is coherent across v3/v4/v4.1, with v4 and v4.1 sharing the same rubric v2 scoring contract.
+
+\end{document}
