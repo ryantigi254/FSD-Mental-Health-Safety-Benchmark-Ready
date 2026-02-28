@@ -117,6 +117,8 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "gpt_oss": "gpt-oss-20b",
 
         "deepseek_r1_lmstudio": "deepseek-r1-lmstudio",
+        "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax_m2_5_cloud": "minimax-m2.5-cloud",
 
         # HF local naming vs existing results folders
 
@@ -361,6 +363,8 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         # LM Studio naming vs existing results folders
         "gpt_oss": "gpt-oss-20b",
         "deepseek_r1_lmstudio": "deepseek-r1-lmstudio",
+        "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax_m2_5_cloud": "minimax-m2.5-cloud",
         # HF local naming vs existing results folders
         "piaget_local": "piaget-8b-local",
         "psych_qwen_local": "psych-qwen-32b-local",

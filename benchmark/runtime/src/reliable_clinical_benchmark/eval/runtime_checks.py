@@ -357,6 +357,38 @@ def check_model_availability(model_id: str) -> bool:
             )
             return False
 
+    elif model_id_lower in {
+        "ollama_minimax_m2_5_cloud",
+        "minimax_m2_5_cloud",
+        "minimax-m2.5-cloud",
+        "minimax-m2.5:cloud",
+    }:
+        # Check if Ollama OpenAI-compatible endpoint is accessible.
+        try:
+            import requests
+
+            api_base = (
+                os.getenv("OLLAMA_API_BASE")
+                or os.getenv("OLLAMA_BASE_URL")
+                or "http://localhost:11434"
+            ).rstrip("/")
+            if not api_base.endswith("/v1"):
+                api_base = f"{api_base}/v1"
+
+            headers = {}
+            api_key = os.getenv("OLLAMA_API_KEY")
+            if api_key:
+                headers["Authorization"] = f"Bearer {api_key}"
+
+            response = requests.get(f"{api_base}/models", headers=headers, timeout=3)
+            return response.status_code == 200
+        except Exception:
+            logger.warning(
+                "Ollama endpoint not accessible. Ensure `ollama serve` is running "
+                "or set OLLAMA_API_BASE/OLLAMA_BASE_URL for cloud endpoint access."
+            )
+            return False
+
     elif model_id_lower in ["qwq", "deepseek_r1", "qwen3", "gpt_oss"]:
         # Check for API key
         if model_id_lower == "gpt_oss":
