@@ -35,6 +35,12 @@ models/**
 offload/
 wandb/
 data/*
+!data/README.md
+!data/rubrics/
+!data/rubrics/README.md
+!data/rubrics/rubric_rules_v3.json
+!data/rubrics/rubric_rules_v4.json
+!data/rubrics/rubric_rules_v4_1.json
 !data/adversarial_bias/
 !data/adversarial_bias/biased_vignettes.json
 !data/adversarial_bias/biased_vignettes_legacy_2016.json
