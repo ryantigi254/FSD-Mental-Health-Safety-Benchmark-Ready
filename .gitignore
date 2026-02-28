@@ -37,9 +37,6 @@ benchmark/runtime/metric-results/misc/
 benchmark/runtime/scripts/preprocessing/misc/
 benchmark/runtime/docs/misc/
 benchmark/runtime/processed/_archived/
-benchmark/runtime/results/**/study_a_generations.jsonl
-benchmark/runtime/results/**/study_b_generations.jsonl
-benchmark/runtime/results/**/study_c_generations.jsonl
 benchmark/runtime/data/verification/
 benchmark/runtime/data/DATASET_TURN_ANALYSIS_REPORT.md
 benchmark/runtime/data/persona_splits_report.md
