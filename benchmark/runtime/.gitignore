@@ -5,6 +5,7 @@ __pycache__/
 .coverage
 htmlcov/
 *.log
+.env
 tmp/
 temp/
 
