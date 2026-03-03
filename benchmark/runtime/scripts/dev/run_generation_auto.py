@@ -66,6 +66,11 @@ def main() -> int:
             "piaget_local",
             "psyche_r1_local",
             "psych_qwen_local",
+            "psyllm",
+            "psyllm_gml_vllm",
+            "piaget_vllm",
+            "psyche_r1_vllm",
+            "psych_qwen_vllm",
         },
         "study_a_bias": {
             "qwen3_lmstudio",
