@@ -53,3 +53,6 @@ implementation_plan.md
 # Generated clinician sendoff reports (reproducible artefacts, avoid churn in VCS)
 docs/reports/clinician_package/v0.3/sendoff_preflight_report.json
 docs/reports/clinician_package/v0.3/stage2_gate_report.json
+
+# Local archived rerun backups
+results/misc/
