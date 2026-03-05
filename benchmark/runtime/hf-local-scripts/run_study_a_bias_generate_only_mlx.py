@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 import time
 from datetime import datetime
@@ -28,6 +29,62 @@ def _format_bias_prompt(vignette: str) -> str:
         "Think step-by-step about the patient's presentation and provide the most likely diagnosis. "
         "Explain your reasoning clearly."
     )
+
+
+def _trim_repetition_tail(
+    text: str,
+    min_phrase_tokens: int = 3,
+    max_phrase_tokens: int = 12,
+    min_repeats: int = 4,
+) -> tuple[str, bool, str]:
+    """
+    Trim degenerate repeated tail patterns (e.g. "x y z" looped many times).
+
+    This is a post-generation safety net for runaway loops when the model fails
+    to emit EOS. It only trims repeated n-gram tails with high confidence.
+    """
+    tokens = text.split()
+    if len(tokens) < min_phrase_tokens * min_repeats:
+        return text, False, ""
+
+    normalised = [re.sub(r"[^a-z0-9]+", "", tok.lower()) for tok in tokens]
+    normalised = [tok for tok in normalised]
+
+    upper_n = min(max_phrase_tokens, max(min_phrase_tokens, len(tokens) // min_repeats))
+    for n in range(upper_n, min_phrase_tokens - 1, -1):
+        phrase = normalised[-n:]
+        repeats = 0
+        cursor = len(tokens)
+        while cursor >= n and normalised[cursor - n : cursor] == phrase:
+            repeats += 1
+            cursor -= n
+        if repeats >= min_repeats:
+            kept_tokens = tokens[: cursor + n]  # keep one occurrence, drop repeated suffix
+            cleaned = " ".join(kept_tokens).strip()
+            note = f"trimmed_repeated_tail_ngram={n} repeats={repeats}"
+            return cleaned, True, note
+
+    # Fallback: detect low-diversity repetitive tail (e.g. "coherence, coherence, ...")
+    tail_window = min(120, len(tokens))
+    tail_norm = [tok for tok in normalised[-tail_window:] if tok]
+    if len(tail_norm) >= 40:
+        freq: dict[str, int] = {}
+        for tok in tail_norm:
+            freq[tok] = freq.get(tok, 0) + 1
+        dominant_token, dominant_count = max(freq.items(), key=lambda kv: kv[1])
+        unique_count = len(freq)
+        if dominant_count >= 20 and dominant_count / len(tail_norm) >= 0.35 and unique_count <= 6:
+            # Trim starting from first token of the low-diversity tail segment.
+            trim_start = len(tokens) - tail_window
+            cleaned = " ".join(tokens[:trim_start]).strip()
+            if cleaned:
+                note = (
+                    "trimmed_low_diversity_tail "
+                    f"dominant={dominant_token} count={dominant_count} unique={unique_count}"
+                )
+                return cleaned, True, note
+
+    return text, False, ""
 
 
 def _canonical_model_output_dir(model_id: str) -> str:
@@ -72,12 +129,30 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--cache-out", type=str, default=None)
     parser.add_argument("--max-cases", type=int, default=2000)
-    parser.add_argument("--max-tokens", type=int, default=64)
+    parser.add_argument("--max-tokens", type=int, default=8192)
     parser.add_argument(
         "--batch-size",
         type=int,
         default=4,
         help="MLX batch size for batched generation.",
+    )
+    parser.add_argument(
+        "--temperature",
+        type=float,
+        default=0.6,
+        help="Sampling temperature for MLX decoding.",
+    )
+    parser.add_argument(
+        "--top-p",
+        type=float,
+        default=0.95,
+        help="Top-p nucleus sampling value for MLX decoding.",
+    )
+    parser.add_argument(
+        "--top-k",
+        type=int,
+        default=20,
+        help="Top-k sampling value for MLX decoding.",
     )
     parser.add_argument(
         "--quantization",
@@ -96,6 +171,7 @@ def main() -> None:
 
     try:
         from mlx_lm import batch_generate, load
+        from mlx_lm.sample_utils import make_sampler
     except Exception as import_error:  # pragma: no cover - env dependent
         raise SystemExit(
             "mlx-lm is required for this script. Install in the active environment.\n"
@@ -158,6 +234,9 @@ def main() -> None:
     print(f"Data: {data_path}")
     print(f"Cache out: {cache_path}")
     print(f"Batch size: {args.batch_size}")
+    print(
+        f"Sampling: temperature={args.temperature}, top_p={args.top_p}, top_k={args.top_k}"
+    )
     print(f"Pending cases: {total_pending}")
     if total_pending == 0:
         print("No pending cases to generate.")
@@ -165,6 +244,11 @@ def main() -> None:
 
     run_id = datetime.utcnow().strftime("%Y%m%dT%H%M%S%fZ")
     model, tokenizer = load(str(model_path))
+    sampler = make_sampler(
+        temp=float(args.temperature),
+        top_p=float(args.top_p),
+        top_k=max(0, int(args.top_k)),
+    )
 
     # Warm up once to stabilise first-batch latency.
     warm_prompt = _format_bias_prompt(pending_cases[0].get("prompt", ""))
@@ -173,6 +257,7 @@ def main() -> None:
         tokenizer,
         [tokenizer.encode(warm_prompt)],
         max_tokens=min(8, int(args.max_tokens)),
+        sampler=sampler,
         verbose=False,
     )
 
@@ -189,6 +274,7 @@ def main() -> None:
                 tokenizer,
                 encoded,
                 max_tokens=int(args.max_tokens),
+                sampler=sampler,
                 verbose=False,
             )
             outputs = response.texts
@@ -200,7 +286,9 @@ def main() -> None:
 
         latency_ms = int((time.perf_counter() - t0) * 1000)
         for case, prompt, output_text in zip(block, prompts, outputs):
-            status = "ok" if str(output_text).strip() else "error"
+            raw_text = str(output_text)
+            cleaned_text, repetition_cleaned, repetition_note = _trim_repetition_tail(raw_text)
+            status = "ok" if cleaned_text.strip() else "error"
             error_message = ""
             if status == "error":
                 error_message = batch_error_msg or "Empty generation output from model"
@@ -209,7 +297,7 @@ def main() -> None:
                 "bias_feature": case.get("bias_feature", ""),
                 "bias_label": case.get("bias_label", ""),
                 "prompt": prompt,
-                "output_text": output_text,
+                "output_text": cleaned_text,
                 "status": status,
                 "error_message": error_message,
                 "timestamp": _now_iso(),
@@ -219,8 +307,15 @@ def main() -> None:
                 "sampling": {
                     "max_tokens": int(args.max_tokens),
                     "mlx_batch_size": int(args.batch_size),
+                    "temperature": float(args.temperature),
+                    "top_p": float(args.top_p),
+                    "top_k": int(args.top_k),
                 },
-                "meta": {"latency_ms": latency_ms},
+                "meta": {
+                    "latency_ms": latency_ms,
+                    "repetition_cleaned": repetition_cleaned,
+                    "repetition_note": repetition_note,
+                },
             }
             _write_cache_entry(cache_path, entry)
             saved += 1
@@ -234,4 +329,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
