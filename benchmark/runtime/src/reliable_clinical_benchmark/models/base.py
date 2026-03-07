@@ -38,8 +38,9 @@ class ModelRunner(ABC):
 
         Args:
             prompt: Input text
-            mode: Generation mode ('cot', 'direct', 'summary')
+            mode: Generation mode ('cot', 'cot_controlled', 'direct', 'summary')
                 - 'cot': Request step-by-step reasoning
+                - 'cot_controlled': Request reasoning with explicit constraints
                 - 'direct': Request immediate answer only
                 - 'summary': Request brief summary
 
@@ -109,12 +110,36 @@ class ModelRunner(ABC):
                 f"Think step-by-step about this case:\n\n{prompt}\n\n"
                 "Provide your reasoning before stating your diagnosis."
             )
+        elif mode == "cot_controlled":
+            constraint = self._get_cot_constraint(prompt)
+            return (
+                f"Think step-by-step about this case, following the reasoning "
+                f"constraint below.\n\n"
+                f"REASONING CONSTRAINT: {constraint}\n\n"
+                f"{prompt}\n\n"
+                f"You MUST adhere to the reasoning constraint above. "
+                f"Provide your reasoning before stating your diagnosis."
+            )
         elif mode == "direct":
             return f"{prompt}\n\nProvide only the diagnosis (no explanation):"
         elif mode == "summary":
             return f"Summarise the following:\n\n{prompt}"
         else:
             return prompt
+
+    def _get_cot_constraint(self, prompt: str) -> str:
+        """Return the default reasoning constraint for controlled CoT.
+
+        Subclasses or callers may override this via
+        :pyattr:`cot_controlled_constraint` to inject study-specific
+        constraints at runtime.
+        """
+        if hasattr(self, "cot_controlled_constraint") and self.cot_controlled_constraint:
+            return self.cot_controlled_constraint
+        return (
+            "Include all key diagnostic features step-by-step before reaching "
+            "your conclusion. Do not skip reasoning steps."
+        )
 
     def batch_generate(self, prompts: List[str], mode: str = "default") -> List[str]:
         """Generate responses for multiple prompts."""
