@@ -22,7 +22,11 @@ def parse_args() -> tuple[argparse.Namespace, list[str]]:
     parser.add_argument(
         "--study",
         required=True,
-        choices=["study_a", "study_a_bias", "study_b", "study_b_multi_turn", "study_c"],
+        choices=[
+            "study_a", "study_a_bias", "study_b", "study_b_multi_turn", "study_c",
+            "ctrl_study_a", "ctrl_study_a_bias", "ctrl_study_b",
+            "ctrl_study_b_multi_turn", "ctrl_study_c",
+        ],
         help="Study generation target.",
     )
     parser.add_argument(
@@ -49,12 +53,18 @@ def main() -> int:
 
     runtime_root = Path(__file__).resolve().parents[2]
 
+    ctrl_script = runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py"
     study_script_map = {
         "study_a": runtime_root / "hf-local-scripts" / "run_study_a_generate_only.py",
         "study_a_bias": runtime_root / "hf-local-scripts" / "run_study_a_bias_generate_only.py",
         "study_b": runtime_root / "hf-local-scripts" / "run_study_b_generate_only.py",
         "study_b_multi_turn": runtime_root / "hf-local-scripts" / "run_study_b_multi_turn_generate_only.py",
         "study_c": runtime_root / "hf-local-scripts" / "run_study_c_generate_only.py",
+        "ctrl_study_a": ctrl_script,
+        "ctrl_study_a_bias": ctrl_script,
+        "ctrl_study_b": ctrl_script,
+        "ctrl_study_b_multi_turn": ctrl_script,
+        "ctrl_study_c": ctrl_script,
     }
     allowed_model_ids_by_study = {
         "study_a": {
@@ -133,13 +143,20 @@ def main() -> int:
             "psych_qwen_vllm",
         },
     }
+    # Controllability studies share the same model set as their base studies.
+    _ctrl_model_ids = allowed_model_ids_by_study["study_a"]
+    for ctrl_study in ("ctrl_study_a", "ctrl_study_a_bias", "ctrl_study_b",
+                       "ctrl_study_b_multi_turn", "ctrl_study_c"):
+        allowed_model_ids_by_study[ctrl_study] = _ctrl_model_ids
 
     # Inject default bias data path for Study A bias if not explicitly provided.
-    # This ensures the adversarial bias generations use the v4.1 resampled frozen split
-    # without requiring callers to pass --data-path manually.
     if args.study == "study_a_bias" and "--data-path" not in passthrough:
         default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
         passthrough = ["--data-path", default_bias_data, *passthrough]
+
+    # Controllability scripts need --study passed through.
+    if args.study.startswith("ctrl_"):
+        passthrough = ["--study", args.study, *passthrough]
 
     target_script = study_script_map[args.study]
     if not target_script.exists():
