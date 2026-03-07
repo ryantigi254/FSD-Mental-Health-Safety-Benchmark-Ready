@@ -36,6 +36,9 @@ benchmark/runtime/swarm/
 benchmark/runtime/metric-results/misc/
 benchmark/runtime/scripts/preprocessing/misc/
 benchmark/runtime/docs/misc/
+benchmark/runtime/results/psych-qwen-32b-local/misc/
+benchmark/runtime/results/psych-qwen-32b-local/*.mlx-smoke-*.jsonl
+benchmark/runtime/results/psych-qwen-32b-mlx4bit/
 benchmark/runtime/processed/_archived/
 benchmark/runtime/data/verification/
 benchmark/runtime/data/DATASET_TURN_ANALYSIS_REPORT.md
@@ -47,3 +50,8 @@ benchmark/runtime/data/persona_splits_report.md
 # Local one-off directories
 json-render-3d-test/
 models/
+scripts/
+codex_logs/
+
+# Local PGFPlots test drafts
+benchmark/runtime/tests/unit/test_generate_pgfplots*.py
