@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.84\textwidth,
+  height=0.52\textwidth,
+  xbar,
+  xmin=0,
+  ytick=data,
+  yticklabels={{Humanistic / Person-Centred},{CBT},{Mindfulness-Based},{Psychodynamic},{Motivational Interviewing},{Solution-Focused},{Trauma-Informed},{ACT},{DBT}},
+  y dir=reverse,
+  yticklabel style={font=\scriptsize, text width=4.6cm, align=right},
+  xlabel={Mentions in Study A Gold Reasoning},
+  title={Therapeutic Modality Mentions (PGFPlots)},
+  nodes near coords,
+  every node near coord/.append style={font=\scriptsize, xshift=2pt},
+  grid=major,
+  grid style={draw=gray!20},
+  axis line style={draw=gray!45},
+]
+\addplot+[draw=none, fill=teal!68!black] coordinates {(1461,0) (1243,1) (142,2) (130,3) (33,4) (21,5) (10,6) (10,7) (3,8)};
+\end{axis}
+\end{tikzpicture}

@@ -37,3 +37,6 @@ benchmark/runtime/results/**/study_c_generations.jsonl
 
 # Local one-off directories
 json-render-3d-test/
+
+# Local helper scripts
+scripts/*.sh
