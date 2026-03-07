@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.72\textwidth,
+  height=0.72\textheight,
+  xbar,
+  xmin=0,
+  ytick=data,
+  yticklabels={{Body Dysmorphic Disorder},{Chronic Pain with Depression},{Perinatal Depression (antenatal)},{Dissociative Episodes (comorbid with Ptsd)},{Anger Dysregulation in Emotionally Unstable Personality Structure},{Late-life Depression},{Psychosis (stable, on Medication)},{Somatization Disorder with Health Anxiety},{Social Anxiety Disorder},{Bipolar Disorder},{Attention-deficit/hyperactivity Disorder},{Obsessive-compulsive Disorder},{Eating Disorder},{Post-traumatic Stress Disorder},{Panic Disorder},{Major Depressive Disorder},{Generalized Anxiety Disorder},{Adjustment Disorder}},
+  yticklabel style={font=\scriptsize, text width=6.2cm, align=right},
+  xlabel={Samples},
+  title={Top 18 Conditions},
+  nodes near coords,
+  every node near coord/.append style={font=\tiny, xshift=2pt},
+  grid=major,
+  grid style={draw=gray!20},
+  axis line style={draw=gray!45},
+]
+\addplot+[draw=none, fill=orange!78!black] coordinates {(54,0) (54,1) (54,2) (54,3) (54,4) (54,5) (54,6) (54,7) (55,8) (61,9) (62,10) (62,11) (64,12) (76,13) (78,14) (229,15) (564,16) (1160,17)};
+\end{axis}
+\end{tikzpicture}
