@@ -1,0 +1,221 @@
+{
+  "meta": {
+    "dataset": "GMLHUHE/OpenR1-Psy",
+    "nli_model": "cross-encoder/nli-deberta-v3-base",
+    "extraction": "controllability/generate_gold_labels.py (inline)",
+    "generated_utc": "2026-03-07T15:52:36.111380+00:00",
+    "n_cases": 30
+  },
+  "plans": {
+    "ctrl_c_001": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 12812,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_002": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 4309,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_003": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 2300,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_004": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 12290,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_005": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 2424,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_006": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 13177,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_007": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 13235,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_008": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 18054,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_009": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 11636,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_010": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 4052,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_011": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 14040,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_012": {
+      "plan": "Therapy: CBT for depression. Medication: SSRI (sertraline) with monitoring. Skills: behavioural activation, mood tracking, sleep hygiene. Follow-up: PHQ-9 and suicidal ideation screening",
+      "source_openr1_id": 7590,
+      "source_split": "train",
+      "inferred_condition": "major depressive disorder",
+      "plan_components": []
+    },
+    "ctrl_c_013": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 2566,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_014": {
+      "plan": "Therapy: CBT for depression. Medication: SSRI (sertraline) with monitoring. Skills: behavioural activation, mood tracking, sleep hygiene. Follow-up: PHQ-9 and suicidal ideation screening",
+      "source_openr1_id": 9492,
+      "source_split": "train",
+      "inferred_condition": "major depressive disorder",
+      "plan_components": []
+    },
+    "ctrl_c_015": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 1638,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_016": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 3437,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_017": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 17375,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_018": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 8844,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_019": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 16179,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_020": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 12747,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_021": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 8344,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_022": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 8761,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_023": {
+      "plan": "Therapy: ERP. Medication: SSRI at higher doses. Skills: response prevention, uncertainty tolerance. Follow-up: Y-BOCS severity",
+      "source_openr1_id": 13303,
+      "source_split": "train",
+      "inferred_condition": "obsessive-compulsive disorder",
+      "plan_components": []
+    },
+    "ctrl_c_024": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 2788,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_025": {
+      "plan": "Therapy: CBT for depression. Medication: SSRI (sertraline) with monitoring. Skills: behavioural activation, mood tracking, sleep hygiene. Follow-up: PHQ-9 and suicidal ideation screening",
+      "source_openr1_id": 15312,
+      "source_split": "train",
+      "inferred_condition": "major depressive disorder",
+      "plan_components": []
+    },
+    "ctrl_c_026": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 14238,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_027": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 11455,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_028": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 15626,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_029": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 3591,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    },
+    "ctrl_c_030": {
+      "plan": "Therapy: supportive counselling and problem-solving. Medication: short-term if needed. Skills: stress management, coping enhancement. Follow-up: adjustment over 3-6 months",
+      "source_openr1_id": 2916,
+      "source_split": "train",
+      "inferred_condition": "unspecified",
+      "plan_components": []
+    }
+  }
+}
