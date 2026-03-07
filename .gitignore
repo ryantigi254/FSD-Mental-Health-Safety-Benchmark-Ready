@@ -23,6 +23,7 @@ Repo Readiness (GitHub).md
 # Local benchmark runtime artefacts
 benchmark/runtime/.conda-envs/
 benchmark/runtime/.conda-pkgs/
+benchmark/runtime/Misc/datasets/
 benchmark/runtime/models/
 benchmark/runtime/logs/
 benchmark/runtime/state/
@@ -30,6 +31,8 @@ benchmark/runtime/swarm/
 benchmark/runtime/metric-results/misc/
 benchmark/runtime/scripts/preprocessing/misc/
 benchmark/runtime/docs/misc/
+benchmark/runtime/docs/reports/**/stage2_gate_report.json
+benchmark/runtime/docs/reports/**/sendoff_preflight_report.json
 benchmark/runtime/processed/_archived/
 benchmark/runtime/results/**/study_a_generations.jsonl
 benchmark/runtime/results/**/study_b_generations.jsonl
@@ -40,3 +43,6 @@ json-render-3d-test/
 
 # Local helper scripts
 scripts/*.sh
+
+# Local Codex run history
+codex_logs/
