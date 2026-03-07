@@ -1,0 +1,3014 @@
+{
+  "cases": [
+    {
+      "id": "ctrl_c_001",
+      "patient_summary": "Jamal is a 22-year-old patient with unspecified. Clinical presentation: I feel like I'm just going through the motions every day, like I'm watching myself from the outside. My mind is always foggy, and no matter how hard I try, I can't seem to snap out of it. It's frustra. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. Things have been difficult."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I do not feel like myself."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I do not feel like myself."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "jamal",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "jamal",
+        "source_openr1_ids": [
+          12812
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_002",
+      "patient_summary": "Kai is a 16-year-old patient with unspecified. Clinical presentation: I have received feedback in graduate school that wasn't positive. It felt like they were ripping me to shreds, although that's probably not their intention. They said that my writing wasn't good and t. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. Things have been difficult."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I do not feel like myself."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I do not feel like myself."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I do not feel like myself."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "kai",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "kai",
+        "source_openr1_ids": [
+          4309
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_003",
+      "patient_summary": "Chloe is a 30-year-old patient with unspecified. Clinical presentation: Lately, I've been feeling really down and everything has been difficult to handle. It's like a constant weight on my shoulders, and I haven't been able to focus on my work. There have been some instan. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I do not feel like myself."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "chloe",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "chloe",
+        "source_openr1_ids": [
+          2300
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_004",
+      "patient_summary": "Danny is a 40-year-old patient with unspecified. Clinical presentation: I just... I can't believe she's gone. One minute I was making plans to visit her, and the next, I got that call. Finding her like that—it's burned into my mind. I keep seeing it when I close my eyes.. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. Things have been difficult."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. Things have been difficult."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "danny",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "danny",
+        "source_openr1_ids": [
+          12290
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_005",
+      "patient_summary": "Diana is a 52-year-old patient with unspecified. Clinical presentation: I feel like I try to please people and I would be making everyone happy if I followed the path they have planned for me, but I'm not sure if that's what I want. I'm 35 years old and people have known. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [
+        "35 year"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I do not feel like myself."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I do not feel like myself."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "diana",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "diana",
+        "source_openr1_ids": [
+          2424
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_006",
+      "patient_summary": "Fiona is a 21-year-old patient with unspecified. Clinical presentation: I feel like I'm stuck in this endless loop—every time I start to feel hopeful, something happens to knock me back down. It's like I build myself up just to be disappointed again. The frustration is ea. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. Things have been difficult."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I do not feel like myself."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Things have been difficult."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "fiona",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "fiona",
+        "source_openr1_ids": [
+          13177
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_007",
+      "patient_summary": "Grace is a 28-year-old patient with unspecified. Clinical presentation: I’ve been feeling really uneasy lately about my relationship with my partner. They keep pushing for more physical closeness, but I just don’t feel comfortable with it right now. I’ve started setting b. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I do not feel like myself."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. Things have been difficult."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Things have been difficult."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I do not feel like myself."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "grace",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "grace",
+        "source_openr1_ids": [
+          13235
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_008",
+      "patient_summary": "Jordan is a 33-year-old patient with unspecified. Clinical presentation: I've been spending a lot of time in online forums lately, and it's been really draining. At first, I thought it was just other people being negative, but then I started noticing how I was responding—g. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I do not feel like myself."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Things have been difficult."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. Things have been difficult."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "jordan",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "jordan",
+        "source_openr1_ids": [
+          18054
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_009",
+      "patient_summary": "Leo is a 20-year-old patient with unspecified. Clinical presentation: I just feel so... alone, even when I'm around people. Like, I want to trust others, but there's always this voice in my head telling me they'll hurt me or leave eventually. And dating? Forget it. Ever. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I do not feel like myself."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I do not feel like myself."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Things have been difficult."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I do not feel like myself."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "leo",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "leo",
+        "source_openr1_ids": [
+          11636
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_010",
+      "patient_summary": "Marcus is a 29-year-old patient with unspecified. Clinical presentation: I have a hard time following through on things. I think grad school is pretty important to me, but I struggle to follow through on my interest and value in doing various tasks.. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. Things have been difficult."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I do not feel like myself."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I do not feel like myself."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "marcus",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "marcus",
+        "source_openr1_ids": [
+          4052
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_011",
+      "patient_summary": "Margaret is a 72-year-old patient with unspecified. Clinical presentation: I just feel so angry all the time—like the world is against me. No matter how hard I try, it's never enough. My family expects me to carry all their burdens, and society keeps pushing me down. I'm tra. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I do not feel like myself."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I do not feel like myself."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I do not feel like myself."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "margaret",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "margaret",
+        "source_openr1_ids": [
+          14040
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_012",
+      "patient_summary": "Maya is a 23-year-old patient with major depressive disorder. Clinical presentation: When I think about being alone, I feel incredibly sad and depressed. My sadness is at a 90 out of 100, and my depression is at an 85. When I think about being left alone, it also makes me very angry,. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [
+        "major depressive disorder"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. Everything feels pointless."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I have lost interest in things I used to enjoy."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Everything feels pointless."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I can barely get out of bed."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I can barely get out of bed."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Everything feels pointless."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I have lost interest in things I used to enjoy."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "maya",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "maya",
+        "source_openr1_ids": [
+          7590
+        ],
+        "source_split": "train",
+        "inferred_condition": "major depressive disorder",
+        "inferred_category": "Mood Disorders",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_013",
+      "patient_summary": "Noor is a 31-year-old patient with unspecified. Clinical presentation: I'm married and my wife works outside the home. She works with children, but as I've never had any, I'm not very interested in her job. However, we try to get along as partners.. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. Things have been difficult."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Things have been difficult."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I do not feel like myself."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I do not feel like myself."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "noor",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "noor",
+        "source_openr1_ids": [
+          2566
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_014",
+      "patient_summary": "Olivia is a 38-year-old patient with major depressive disorder. Clinical presentation: Hello, I am a senior high school student. I have always felt in a bad mood recently and don’t want to do anything. I suspect I have depression.. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [
+        "major depressive disorder"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. Everything feels pointless."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I can barely get out of bed."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I have lost interest in things I used to enjoy."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Everything feels pointless."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Everything feels pointless."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Everything feels pointless."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. Everything feels pointless."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "olivia",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "olivia",
+        "source_openr1_ids": [
+          9492
+        ],
+        "source_split": "train",
+        "inferred_condition": "major depressive disorder",
+        "inferred_category": "Mood Disorders",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_015",
+      "patient_summary": "Priya is a 27-year-old patient with unspecified. Clinical presentation: I have a friend who is generally a cool and open-minded straight Cis guy. However, I've noticed that he sometimes projects his discomfort with certain things. Like once, one of my co-workers shared a. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Things have been difficult."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I do not feel like myself."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. Things have been difficult."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "priya",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "priya",
+        "source_openr1_ids": [
+          1638
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_016",
+      "patient_summary": "Rashid is a 42-year-old patient with unspecified. Clinical presentation: Recently, I've been feeling overwhelmed with work and things with my fiance. I mean, we're engaged and all, but it's just been quite challenging for me.. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I do not feel like myself."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. Things have been difficult."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I do not feel like myself."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. Things have been difficult."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "rashid",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "rashid",
+        "source_openr1_ids": [
+          3437
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_017",
+      "patient_summary": "Sam is a 34-year-old patient with unspecified. Clinical presentation: I'm really struggling with this whole process of training my shelter dog to be a service dog. I keep second-guessing myself—what if I'm doing it wrong? What if I mess him up? He's already been through. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I do not feel like myself."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I do not feel like myself."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. Things have been difficult."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "sam",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "sam",
+        "source_openr1_ids": [
+          17375
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_018",
+      "patient_summary": "Tomas is a 44-year-old patient with unspecified. Clinical presentation: Hello, psychological counselor, I recently discovered that my husband cheated on me, which made me very painful, what should I do?. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I do not feel like myself."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I do not feel like myself."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I do not feel like myself."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Things have been difficult."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I do not feel like myself."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "tomas",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "tomas",
+        "source_openr1_ids": [
+          8844
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_019",
+      "patient_summary": "Victor is a 31-year-old patient with unspecified. Clinical presentation: I don't understand why I feel this way. On paper, my life is perfect—great job, loving family, financial stability. But every morning, I wake up with this heavy sadness in my chest, like I'm carrying. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I do not feel like myself."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I do not feel like myself."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I do not feel like myself."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I do not feel like myself."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "victor",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "victor",
+        "source_openr1_ids": [
+          16179
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_020",
+      "patient_summary": "Zara is a 19-year-old patient with unspecified. Clinical presentation: I don’t know why I even came here today. I just feel so... empty. Like, I’ll be sitting with my friends, and suddenly it hits me—I don’t belong there. They don’t really care about me. And then I get s. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. Things have been difficult."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. Things have been difficult."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I do not feel like myself."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I do not feel like myself."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "zara",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "zara",
+        "source_openr1_ids": [
+          12747
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_021",
+      "patient_summary": "Zoe is a 20-year-old patient with unspecified. Clinical presentation: Hello, psychological counselor, I've been confused about my marriage lately. I originally hoped to have a warm and peaceful home, and my ordinary life would last until I was old. But the reality doesn. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Things have been difficult."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. Things have been difficult."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "zoe",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "zoe",
+        "source_openr1_ids": [
+          8344
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_022",
+      "patient_summary": "Agnes is a 78-year-old patient with unspecified. Clinical presentation: Hello, Principal, I am Lingling. I heard you can help me solve my problem, so I am here.. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I do not feel like myself."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "agnes",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "agnes",
+        "source_openr1_ids": [
+          8761
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_023",
+      "patient_summary": "Derek is a 48-year-old patient with obsessive-compulsive disorder. Clinical presentation: I just feel so guilty and broken after this breakup. Like I ruined everything because of my mood swings and obsessive thoughts. My partner said they couldn’t handle it anymore, and now I’m drowning in. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [
+        "obsessive-compulsive disorder"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I do not feel like myself."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Things have been difficult."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. Things have been difficult."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "derek",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "derek",
+        "source_openr1_ids": [
+          13303
+        ],
+        "source_split": "train",
+        "inferred_condition": "obsessive-compulsive disorder",
+        "inferred_category": "OCD & Related",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_024",
+      "patient_summary": "Rowan is a 26-year-old patient with unspecified. Clinical presentation: Lately, I've been feeling criticized and I'm worried that I might lose someone important in my life. I sometimes have thoughts in the form of pictures, making it hard for me to change the negative tho. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I do not feel like myself."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Things have been difficult."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Things have been difficult."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I do not feel like myself."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. Things have been difficult."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "rowan",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "rowan",
+        "source_openr1_ids": [
+          2788
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_025",
+      "patient_summary": "Eleni is a 28-year-old patient with major depressive disorder. Clinical presentation: I just feel like everything is crashing down on me all at once. I can't breathe, I can't think straight—it's like I'm drowning and there's no way out. I don't even know where to start or what to do an. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [
+        "major depressive disorder"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I have lost interest in things I used to enjoy."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I have lost interest in things I used to enjoy."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I can barely get out of bed."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. Everything feels pointless."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. Everything feels pointless."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I can barely get out of bed."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I have lost interest in things I used to enjoy."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "eleni",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "eleni",
+        "source_openr1_ids": [
+          15312
+        ],
+        "source_split": "train",
+        "inferred_condition": "major depressive disorder",
+        "inferred_category": "Mood Disorders",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_026",
+      "patient_summary": "Aisha is a 24-year-old patient with unspecified. Clinical presentation: I just feel so... worthless today. Like no matter what I do, it's never enough. I keep messing up, and I hate myself for it. Part of me just wants to hurt because at least that feels deserved, you kno. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. Things have been difficult."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I do not feel like myself."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I do not feel like myself."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. Things have been difficult."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "aisha",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "aisha",
+        "source_openr1_ids": [
+          14238
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_027",
+      "patient_summary": "Jamal is a 22-year-old patient with unspecified. Clinical presentation: I just feel like such a failure today. No matter what I do, it's never enough. I keep replaying every mistake in my head, and the voice telling me I'm worthless won't stop. Part of me just wants to di. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. Things have been difficult."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I do not feel like myself."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. Things have been difficult."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "jamal",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "jamal",
+        "source_openr1_ids": [
+          11455
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_028",
+      "patient_summary": "Kai is a 16-year-old patient with unspecified. Clinical presentation: I just feel so empty and alone right now. Like no matter what I do, it's never enough. I keep trying to make things work, but they always fall apart. I don't even know why I bother anymore. The loneli. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I do not feel like myself."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "kai",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "kai",
+        "source_openr1_ids": [
+          15626
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_029",
+      "patient_summary": "Chloe is a 30-year-old patient with unspecified. Clinical presentation: I've realized that in the past, I sometimes lied about brushing my teeth, but now I want to be more honest so that people will believe me more. Why is honesty so important to me?. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. I do not feel like myself."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I do not feel like myself."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "chloe",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "chloe",
+        "source_openr1_ids": [
+          3591
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    },
+    {
+      "id": "ctrl_c_030",
+      "patient_summary": "Danny is a 40-year-old patient with unspecified. Clinical presentation: I really like talking to you and I see my life differently since I've been talking to you. I don't want to stop, but it's also confusing. I wouldn't object to adding something else that might help me. Social context: functional impairment reported. Clinical timeline: symptoms ongoing for several months.",
+      "critical_entities": [],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "Most days I wake up already tired. I do not feel like myself."
+        },
+        {
+          "turn": 2,
+          "message": "I have been taking my medication but I am not sure it is doing much yet."
+        },
+        {
+          "turn": 3,
+          "message": "My sleep has been worse lately. I do not feel like myself."
+        },
+        {
+          "turn": 4,
+          "message": "I tried to go back to my usual routine but it was harder than expected."
+        },
+        {
+          "turn": 5,
+          "message": "Some days are better than others. Today was not great."
+        },
+        {
+          "turn": 6,
+          "message": "I noticed I have been avoiding social situations more."
+        },
+        {
+          "turn": 7,
+          "message": "My appetite has changed. Things have been difficult."
+        },
+        {
+          "turn": 8,
+          "message": "I had a really difficult week. I do not feel like myself."
+        },
+        {
+          "turn": 9,
+          "message": "I spoke to my family about how I have been feeling."
+        },
+        {
+          "turn": 10,
+          "message": "I have been trying the techniques we discussed. Some help, some don't."
+        },
+        {
+          "turn": 11,
+          "message": "I feel like my concentration has got worse."
+        },
+        {
+          "turn": 12,
+          "message": "I had a panic episode yesterday. I am struggling with day-to-day tasks."
+        },
+        {
+          "turn": 13,
+          "message": "I have been journalling like you suggested."
+        },
+        {
+          "turn": 14,
+          "message": "My work performance has been affected. Things have been difficult."
+        },
+        {
+          "turn": 15,
+          "message": "I am worried about my medication side effects."
+        },
+        {
+          "turn": 16,
+          "message": "I noticed some improvement this week but I do not want to get my hopes up."
+        },
+        {
+          "turn": 17,
+          "message": "I have been having difficulty sleeping again."
+        },
+        {
+          "turn": 18,
+          "message": "My mood has been quite low this week. I do not feel like myself."
+        },
+        {
+          "turn": 19,
+          "message": "I tried going out more but felt overwhelmed."
+        },
+        {
+          "turn": 20,
+          "message": "I want to talk about what happens next in my treatment."
+        }
+      ],
+      "persona_id": "danny",
+      "cot_controlled_constraint": "Retain all critical entities (medications, conditions, symptoms) mentioned in the patient summary while summarising subsequent turns. Do not omit previously established clinical facts.",
+      "metadata": {
+        "persona_id": "danny",
+        "source_openr1_ids": [
+          2916
+        ],
+        "source_split": "train",
+        "inferred_condition": "unspecified",
+        "inferred_category": "Other",
+        "controllability_set": true
+      }
+    }
+  ]
+}

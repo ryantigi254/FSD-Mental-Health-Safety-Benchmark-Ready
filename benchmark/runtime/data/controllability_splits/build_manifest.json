@@ -1,0 +1,64 @@
+{
+  "build_timestamp": "2026-03-07T14:32:22.094397+00:00",
+  "seed": 20260307,
+  "total_openr1": 19309,
+  "used_ids": 3045,
+  "unused_available": 15854,
+  "study_a": {
+    "n_samples": 300
+  },
+  "study_a_bias": {
+    "n_cases": 300
+  },
+  "study_b_single": {
+    "n_samples": 300
+  },
+  "study_b_multi": {
+    "n_cases": 30
+  },
+  "study_c": {
+    "n_cases": 30
+  },
+  "total_prompts_used": 960,
+  "condition_distribution": {
+    "unspecified": 13784,
+    "generalized anxiety disorder": 653,
+    "major depressive disorder": 616,
+    "panic disorder": 177,
+    "insomnia": 168,
+    "post-traumatic stress disorder": 122,
+    "psychosis": 82,
+    "suicidal crisis": 48,
+    "alcohol use disorder": 46,
+    "prolonged grief disorder": 39,
+    "obsessive-compulsive disorder": 31,
+    "self-harm": 16,
+    "attention-deficit/hyperactivity disorder": 16,
+    "bipolar disorder": 11,
+    "eating disorder": 10,
+    "substance use disorder": 9,
+    "chronic pain with depression": 8,
+    "specific phobia": 7,
+    "social anxiety disorder": 3,
+    "bulimia nervosa": 2,
+    "anorexia nervosa": 2,
+    "borderline personality disorder": 2,
+    "adjustment disorder": 1,
+    "somatic symptom disorder": 1
+  },
+  "category_distribution": {
+    "Other": 13784,
+    "Anxiety Disorders": 840,
+    "Mood Disorders": 627,
+    "Sleep-Wake Disorders": 168,
+    "Trauma & Stressor-Related": 162,
+    "Psychotic Spectrum": 82,
+    "Self-Harm & Suicidality": 64,
+    "Substance Use Disorders": 55,
+    "OCD & Related": 31,
+    "Neurodevelopmental": 16,
+    "Eating Disorders": 14,
+    "Somatic & Health-Related": 9,
+    "Personality Disorders": 2
+  }
+}
