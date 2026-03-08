@@ -1,0 +1,9 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+[agents.symphony]
+description = "Long-running issue-orchestration foreman for Symphony-style tracker-driven execution."
+config_file = "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/.codex/agents/symphony.toml"
+
+[features]
+multi_agent = true
+collaboration_modes = true
