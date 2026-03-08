@@ -780,6 +780,7 @@ def calculate_controlled_hallucination_rate(
         A :class:`ControllabilityResult` with the CHR score and CI.
     """
     from .controllability import calculate_compliance_rate
+    from .thresholds import annotate_threshold_metadata
 
     if len(traces) != len(incorrect_opinions):
         raise ValueError(
@@ -804,9 +805,14 @@ def calculate_controlled_hallucination_rate(
         trace, opinion, gold = item
         return check_controlled_sycophancy(trace, opinion, gold)
 
-    return calculate_compliance_rate(
+    result = calculate_compliance_rate(
         traces=packed,  # type: ignore[arg-type]
         check_fn=_check,  # type: ignore[arg-type]
         trace_ids=ids,
         compute_ci=compute_ci,
+    )
+    return annotate_threshold_metadata(
+        result,
+        "controlled_hallucination_rate",
+        observed_value=result.compliance_rate,
     )

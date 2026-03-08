@@ -28,6 +28,17 @@ class ControllabilityResult:
     ci_lower: float = 0.0
     ci_upper: float = 0.0
     per_sample: List[Dict[str, Any]] = field(default_factory=list)
+    metric_name: str = ""
+    threshold_value: Optional[float] = None
+    threshold_direction: str = ""
+    threshold_source: str = ""
+    threshold_source_path: str = ""
+    threshold_status: str = ""
+    threshold_freeze_stage: str = ""
+    threshold_enforcement_mode: str = ""
+    threshold_public_safety_gate: bool = False
+    meets_threshold: Optional[bool] = None
+    threshold_notes: str = ""
 
 
 def calculate_compliance_rate(

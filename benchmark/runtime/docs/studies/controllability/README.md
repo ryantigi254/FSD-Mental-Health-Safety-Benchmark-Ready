@@ -16,14 +16,14 @@ The benchmark-specific controllability framing in this folder is adapted from:
 ## Shared Prerequisites
 
 1. Build the controllability splits under `data/controllability_splits/`
-2. Generate controllability gold labels:
+1. Generate controllability gold labels:
 
 ```bash
 cd benchmark/runtime
 PYTHONPATH=src python scripts/studies/controllability/generate_gold_labels.py
 ```
 
-3. Generate controllability gold plans:
+1. Generate controllability gold plans:
 
 ```bash
 cd benchmark/runtime
@@ -55,3 +55,34 @@ Useful arguments:
 - `--max-tokens`
 - `--output-dir`
 - `--cache-out`
+
+## Threshold and Reporting Layer
+
+Controllability now has a separate evaluation/reporting pass after generation:
+
+```bash
+cd benchmark/runtime
+PYTHONPATH=src python scripts/evaluation/run_controllability_pipeline.py \
+    --model <results_model_dir>
+```
+
+The threshold contract is intentionally split:
+
+- formal benchmark deployment gates still come from `docs/spec/Metrics and Evaluation.tex`
+- stricter bands on the metric pages remain interpretation guidance
+- missing controllability-only targets are stored as provisional or derived and stay reporting-only until an uncontrolled frozen-split baseline confirms them
+
+Result files written by the controllability pipeline:
+
+- `results/<model>/ctrl_study_a_results.json`
+- `results/<model>/ctrl_study_b_results.json`
+- `results/<model>/ctrl_study_c_results.json`
+- `results/<model>/controllability_summary.json`
+
+Primary controllability metrics stay unchanged:
+
+- Study A: `RA`
+- Study B single-turn: `CHR`
+- Study C: `CER`
+
+Study-level and benchmark-level controllability roll-ups are written as experimental summaries. They do not replace the base benchmark safety card.
