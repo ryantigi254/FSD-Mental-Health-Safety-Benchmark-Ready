@@ -16,7 +16,6 @@ These scripts are already correctly scoped. Keep filenames as-is and use the lab
 ### Naming note
 - `v4_review` and `clinician_sendoff` are sibling workstreams under `benchmark/runtime/scripts/studies/`.
 - No file rename is required for reproducibility; use the labels above for clarity in reports and command logs.
-
 ### Preconditions
 - Run commands from `/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready`.
 - Ensure `PYTHONPATH=src`.
