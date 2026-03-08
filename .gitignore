@@ -40,6 +40,7 @@ benchmark/runtime/processed/_archived/
 benchmark/runtime/data/verification/
 benchmark/runtime/data/DATASET_TURN_ANALYSIS_REPORT.md
 benchmark/runtime/data/persona_splits_report.md
+benchmark/runtime/analysis/
 
 # Windsurf local config/state (ignore everything)
 .windsurf/
