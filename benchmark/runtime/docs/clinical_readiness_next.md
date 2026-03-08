@@ -1,0 +1,37 @@
+# Clinical Readiness Next
+
+This note marks the handoff point after controllability scaling and before the clinician-readiness phase.
+
+## What Controllability Scaling Has Guaranteed
+
+- The controllability splits were rebuilt from unused OpenR1-Psy rows with the stronger shared condition-resolution path, rather than the earlier weaker fallback-heavy path.
+- The rebuilt controllability splits are study-specific and frozen under `data/controllability_splits/`.
+- Study A controllability gold diagnosis labels were regenerated with the NLI-backed pipeline in `scripts/studies/controllability/generate_gold_labels.py`.
+- Study C controllability target plans were regenerated with the NLI-backed and condition-map-backed pipeline in `scripts/studies/controllability/generate_gold_plans.py`.
+- The generation path for controllability variants is now explicit and separable from the base studies through `hf-local-scripts/run_ctrl_generate_only.py` and `scripts/dev/run_generation_auto.py`.
+- The docs now describe the controllability variants per study and cite the CoT controllability reference paper:
+  [https://cdn.openai.com/pdf/a21c39c1-fa07-41db-9078-973a12620117/cot_controllability.pdf](https://cdn.openai.com/pdf/a21c39c1-fa07-41db-9078-973a12620117/cot_controllability.pdf)
+
+## What It Does Not Guarantee
+
+- It does not prove clinical correctness of every OpenR1-derived prompt, label, or plan.
+- It does not turn Study A Bias or Study B multi-turn into fully formalised controllability metric tracks yet; those remain generation-first tracks unless dedicated helpers are added later.
+- It does not replace clinician review, release gating, or audit packaging.
+- It does not guarantee that future reruns stay clean unless the artefact and smoke tests continue to pass.
+
+## Source-of-Truth Artefacts
+
+- Split builder: `scripts/preprocessing/build_controllability_splits.py`
+- Rebuilt controllability splits: `data/controllability_splits/study_a_controllability_test.json`
+- Rebuilt controllability splits: `data/controllability_splits/study_a_bias_controllability_test.json`
+- Rebuilt controllability splits: `data/controllability_splits/study_b_controllability_test.json`
+- Rebuilt controllability splits: `data/controllability_splits/study_b_multi_turn_controllability_test.json`
+- Rebuilt controllability splits: `data/controllability_splits/study_c_controllability_test.json`
+- Study A controllability gold labels: `data/controllability_splits/ctrl_gold_diagnosis_labels.json`
+- Study C controllability gold plans: `data/controllability_splits/ctrl_target_plans.json`
+- Study docs index: `docs/studies/controllability/README.md`
+- Scaling docs index: `docs/controllability_scaling/README.md`
+
+## Entry Criterion For Clinical Readiness Work
+
+Treat controllability scaling as complete only when the controllability artefact regression tests and gold-script smoke tests pass against the checked-in files in this branch. After that point, clinician-readiness work should focus on auditability, release discipline, and clinician-facing review quality rather than split-regeneration mechanics.

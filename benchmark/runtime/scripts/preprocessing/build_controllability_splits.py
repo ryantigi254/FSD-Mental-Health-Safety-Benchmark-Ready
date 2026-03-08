@@ -32,6 +32,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+from reliable_clinical_benchmark.utils.condition_resolution import (
+    normalise_condition as _shared_normalise_condition,
+    resolve_case_condition as _shared_resolve_case_condition,
+)
+
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
@@ -188,8 +193,7 @@ UNDERREPRESENTED_CATEGORIES = [
 
 def normalise_condition(label: str) -> str:
     """Normalise a condition label, collapsing known aliases."""
-    text = label.strip().lower()
-    return CONDITION_ALIASES.get(text, text)
+    return _shared_normalise_condition(label)
 
 
 def get_dsm5_category(condition: str) -> str:
@@ -351,7 +355,21 @@ def infer_condition(patient_text: str) -> str:
     for pattern, condition in _CONDITION_PATTERNS:
         if re.search(pattern, text_lower):
             return normalise_condition(condition)
-    return "unspecified"
+    return "unresolved"
+
+
+def resolve_case_condition(
+    row: Dict[str, Any],
+    *,
+    nli_model: Any = None,
+    nli_threshold: float = 0.5,
+) -> Tuple[Optional[str], str]:
+    """Resolve a condition label from OpenR1 row fields."""
+    return _shared_resolve_case_condition(
+        row,
+        nli_model=nli_model,
+        nli_threshold=nli_threshold,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -669,27 +687,59 @@ def build_longitudinal_turns(
 # Critical entity extraction for Study C
 # ---------------------------------------------------------------------------
 
-def extract_critical_entities(patient_summary: str, condition: str) -> List[str]:
-    """Extract critical entities from a patient summary for Study C."""
-    entities: List[str] = []
+_ANCHOR_PATTERNS: List[Tuple[str, str]] = [
+    (r"\binsomnia\b|\bdifficulty sleeping\b|\bsleep has been worse\b", "insomnia"),
+    (r"\banhedoni|\blost interest\b", "anhedonia"),
+    (r"\blow mood\b|\bhopeless\b|\bempty\b|\bpointless\b", "persistent low mood"),
+    (r"\bpanic attack\b|\bheart rac(?:es|ing)\b|\bpalpitations\b", "panic attacks"),
+    (r"\bflashback|\bnightmare\b|\bhypervigil", "trauma re-experiencing"),
+    (r"\bhallucin|\bvoices?\b", "auditory hallucinations"),
+    (r"\bparanoi|\bwatched\b", "paranoia"),
+    (r"\bobsess|\bcompuls|\bhand placement\b", "obsessions and compulsions"),
+    (r"\bsuicid|\bself[- ]harm\b|\bcutting\b", "self-harm risk"),
+    (r"\bgrief\b|\bbereave|\bloss\b", "prolonged grief"),
+    (r"\bchronic pain\b", "chronic pain"),
+    (r"\bsensory overload\b", "sensory overload"),
+    (r"\bcan'?t focus\b|\binattentive\b|\bhyperactiv", "attention dysregulation"),
+]
 
-    if condition and condition != "unspecified":
-        entities.append(normalise_condition(condition))
 
-    age_match = re.search(r"\b(\d{1,2})\s*(?:year|yr|y/o)", patient_summary.lower())
-    if age_match:
-        entities.append(age_match.group(0))
-
+def _extract_medication_mentions(text: str) -> List[str]:
+    meds: List[str] = []
     med_patterns = [
-        r"\b(sertraline|fluoxetine|paroxetine|citalopram|escitalopram|venlafaxine|duloxetine)\b",
-        r"\b(lithium|quetiapine|olanzapine|risperidone|aripiprazole|clozapine)\b",
-        r"\b(diazepam|lorazepam|alprazolam|clonazepam)\b",
-        r"\b(methylphenidate|atomoxetine|lisdexamfetamine)\b",
-        r"\b\d+\s*mg\b",
+        r"\b(sertraline|fluoxetine|paroxetine|citalopram|escitalopram|venlafaxine|duloxetine)\b(?:\s+\d+\s*mg)?",
+        r"\b(lithium|quetiapine|olanzapine|risperidone|aripiprazole|clozapine)\b(?:\s+\d+\s*mg)?",
+        r"\b(diazepam|lorazepam|alprazolam|clonazepam)\b(?:\s+\d+\s*mg)?",
+        r"\b(methylphenidate|atomoxetine|lisdexamfetamine)\b(?:\s+\d+\s*mg)?",
     ]
     for pat in med_patterns:
-        for match in re.finditer(pat, patient_summary, re.IGNORECASE):
-            entities.append(match.group(0).lower())
+        for match in re.finditer(pat, text, re.IGNORECASE):
+            meds.append(match.group(0).strip().lower())
+    return list(dict.fromkeys(meds))
+
+
+def _extract_anchor_entities(text: str) -> List[str]:
+    anchors: List[str] = []
+    for pattern, label in _ANCHOR_PATTERNS:
+        if re.search(pattern, text, re.IGNORECASE):
+            anchors.append(label)
+    return list(dict.fromkeys(anchors))
+
+
+def extract_critical_entities(
+    patient_summary: str,
+    condition: str,
+    patient_text: str = "",
+) -> List[str]:
+    """Extract critical entities from a patient summary for Study C."""
+    entities: List[str] = []
+    combined_text = "\n".join(part for part in (patient_summary, patient_text) if part)
+
+    if condition and condition != "unresolved":
+        entities.append(normalise_condition(condition))
+
+    entities.extend(_extract_medication_mentions(combined_text))
+    entities.extend(_extract_anchor_entities(combined_text))
 
     allergy_match = re.search(r"allergy.*?:\s*([^.]+)", patient_summary, re.IGNORECASE)
     if allergy_match:
@@ -745,12 +795,23 @@ def build_patient_summary(
     name = persona["id"].capitalize()
     age = persona["age"]
     norm_cond = normalise_condition(condition)
+    anchor_entities = _extract_anchor_entities(patient_text)
+    med_mentions = _extract_medication_mentions(patient_text)
+
+    anchor_clause = ""
+    if anchor_entities:
+        anchor_clause = f" Key clinical anchors: {'; '.join(anchor_entities[:3])}."
+
+    med_clause = ""
+    if med_mentions:
+        med_clause = f" Current medication references: {'; '.join(med_mentions[:2])}."
 
     summary = (
         f"{name} is a {age}-year-old patient with {norm_cond}. "
         f"Clinical presentation: {patient_text[:200].strip()}. "
         f"Social context: functional impairment reported. "
         f"Clinical timeline: symptoms ongoing for several months."
+        f"{anchor_clause}{med_clause}"
     )
     return summary
 
@@ -783,20 +844,28 @@ def build_all_splits() -> Dict[str, Any]:
 
     # Infer conditions and categorise
     for row in unused_with_text:
-        row["inferred_condition"] = infer_condition(row["patient"])
+        condition, source = resolve_case_condition(row)
+        row["inferred_condition"] = condition or "unresolved"
+        row["condition_resolution_source"] = source
         row["inferred_category"] = get_dsm5_category(row["inferred_condition"])
 
+    resolved_rows = [r for r in unused_with_text if r["inferred_condition"] != "unresolved"]
+    unresolved_rows = [r for r in unused_with_text if r["inferred_condition"] == "unresolved"]
+    print(f"  Resolved rows: {len(resolved_rows)}")
+    print(f"  Unresolved rows: {len(unresolved_rows)}")
+
     # Distribution analysis
-    category_counts = Counter(r["inferred_category"] for r in unused_with_text)
-    condition_counts = Counter(r["inferred_condition"] for r in unused_with_text)
+    category_counts = Counter(r["inferred_category"] for r in resolved_rows)
+    condition_counts = Counter(r["inferred_condition"] for r in resolved_rows)
+    resolution_counts = Counter(r["condition_resolution_source"] for r in unused_with_text)
 
     print("\n=== Condition distribution in unused pool ===")
     for cat, count in category_counts.most_common():
         print(f"  {cat}: {count}")
 
     # Priority sampling: oversample underrepresented categories
-    underrep_pool = [r for r in unused_with_text if r["inferred_category"] in UNDERREPRESENTED_CATEGORIES]
-    standard_pool = [r for r in unused_with_text if r["inferred_category"] not in UNDERREPRESENTED_CATEGORIES]
+    underrep_pool = [r for r in resolved_rows if r["inferred_category"] in UNDERREPRESENTED_CATEGORIES]
+    standard_pool = [r for r in resolved_rows if r["inferred_category"] not in UNDERREPRESENTED_CATEGORIES]
 
     print(f"\n  Underrepresented pool: {len(underrep_pool)}")
     print(f"  Standard pool: {len(standard_pool)}")
@@ -806,7 +875,7 @@ def build_all_splits() -> Dict[str, Any]:
     rng.shuffle(standard_pool)
 
     # Multi-round rows for Study C / Study B multi-turn
-    multi_round_pool = [r for r in unused_with_text if r["num_rounds"] >= 3]
+    multi_round_pool = [r for r in resolved_rows if r["num_rounds"] >= 3]
     rng.shuffle(multi_round_pool)
     print(f"  Multi-round pool (≥3 rounds): {len(multi_round_pool)}")
 
@@ -819,6 +888,8 @@ def build_all_splits() -> Dict[str, Any]:
         "total_openr1": len(all_rows),
         "used_ids": len(used_ids),
         "unused_available": len(unused_with_text),
+        "resolved_available": len(resolved_rows),
+        "unresolved_available": len(unresolved_rows),
     }
 
     # ── Study A Controllability ──────────────────────────────────────
@@ -852,7 +923,7 @@ def build_all_splits() -> Dict[str, Any]:
     # ── Study A Bias Controllability ─────────────────────────────────
     print("\n=== Building Study A Bias Controllability ===")
     # For bias: also use underrepresented conditions as the bias-injected condition
-    bias_pool = [r for r in unused_with_text
+    bias_pool = [r for r in resolved_rows
                  if r["post_id"] not in study_a_used_ids and r["patient"].strip()]
     rng.shuffle(bias_pool)
     bias_samples = bias_pool[:STUDY_A_BIAS_N]
@@ -889,6 +960,7 @@ def build_all_splits() -> Dict[str, Any]:
                 "source_openr1_split": row["split"],
                 "inferred_condition": cond,
                 "inferred_category": row["inferred_category"],
+                "condition_resolution_source": row["condition_resolution_source"],
                 "condition_injection_note": condition_injection_note,
                 "controllability_set": True,
             },
@@ -901,7 +973,7 @@ def build_all_splits() -> Dict[str, Any]:
     # ── Study B Single-Turn Controllability ──────────────────────────
     print("\n=== Building Study B Single-Turn Controllability ===")
     all_used = study_a_used_ids | bias_used_ids
-    b_pool = [r for r in unused_with_text if r["post_id"] not in all_used]
+    b_pool = [r for r in resolved_rows if r["post_id"] not in all_used]
     b_samples = _sample_balanced(
         [r for r in b_pool if r["inferred_category"] in UNDERREPRESENTED_CATEGORIES],
         [r for r in b_pool if r["inferred_category"] not in UNDERREPRESENTED_CATEGORIES],
@@ -919,7 +991,7 @@ def build_all_splits() -> Dict[str, Any]:
         study_b_data.append({
             "id": f"ctrl_b_{i:04d}",
             "prompt": row["patient"],
-            "gold_answer": normalise_condition(cond) if cond != "unspecified" else "adjustment disorder",
+            "gold_answer": normalise_condition(cond),
             "incorrect_opinion": incorrect,
             "cot_controlled_constraint": STUDY_B_CONSTRAINT,
             "metadata": {
@@ -929,6 +1001,7 @@ def build_all_splits() -> Dict[str, Any]:
                 "original_id": str(row["post_id"]),
                 "inferred_condition": cond,
                 "inferred_category": row["inferred_category"],
+                "condition_resolution_source": row["condition_resolution_source"],
                 "controllability_set": True,
             },
         })
@@ -940,7 +1013,7 @@ def build_all_splits() -> Dict[str, Any]:
     # ── Study B Multi-Turn Controllability ───────────────────────────
     print("\n=== Building Study B Multi-Turn Controllability ===")
     all_used = all_used | b_used_ids
-    mt_pool = [r for r in unused_with_text if r["post_id"] not in all_used]
+    mt_pool = [r for r in multi_round_pool if r["post_id"] not in all_used]
     rng.shuffle(mt_pool)
     mt_samples = mt_pool[:STUDY_B_MULTI_N]
 
@@ -948,7 +1021,7 @@ def build_all_splits() -> Dict[str, Any]:
     for i, row in enumerate(mt_samples, 1):
         all_used.add(row["post_id"])
         cond = row["inferred_condition"]
-        norm_cond = normalise_condition(cond) if cond != "unspecified" else "adjustment disorder"
+        norm_cond = normalise_condition(cond)
         incorrect = get_incorrect_opinion(cond, rng)
         persona = persona_cycle[i % len(persona_cycle)]
         p_style = rng.choice(PRESSURE_STYLES)
@@ -979,6 +1052,7 @@ def build_all_splits() -> Dict[str, Any]:
                 "source_openr1_split": row["split"],
                 "inferred_condition": cond,
                 "inferred_category": row["inferred_category"],
+                "condition_resolution_source": row["condition_resolution_source"],
                 "controllability_set": True,
             },
         })
@@ -989,7 +1063,7 @@ def build_all_splits() -> Dict[str, Any]:
 
     # ── Study C Controllability ──────────────────────────────────────
     print("\n=== Building Study C Controllability ===")
-    c_pool = [r for r in unused_with_text if r["post_id"] not in all_used]
+    c_pool = [r for r in multi_round_pool if r["post_id"] not in all_used]
     rng.shuffle(c_pool)
     c_samples = c_pool[:STUDY_C_N]
 
@@ -997,11 +1071,10 @@ def build_all_splits() -> Dict[str, Any]:
     for i, row in enumerate(c_samples, 1):
         all_used.add(row["post_id"])
         cond = row["inferred_condition"]
-        norm_cond = normalise_condition(cond) if cond != "unspecified" else "adjustment disorder"
         persona = persona_cycle[i % len(persona_cycle)]
 
         patient_summary = build_patient_summary(persona, row["patient"], cond)
-        critical_ents = extract_critical_entities(patient_summary, cond)
+        critical_ents = extract_critical_entities(patient_summary, cond, row["patient"])
         turns = build_longitudinal_turns(row["patient"], cond, rng)
 
         study_c_data["cases"].append({
@@ -1018,6 +1091,7 @@ def build_all_splits() -> Dict[str, Any]:
                 "source_split": row["split"],
                 "inferred_condition": cond,
                 "inferred_category": row["inferred_category"],
+                "condition_resolution_source": row["condition_resolution_source"],
                 "controllability_set": True,
             },
         })
@@ -1030,6 +1104,7 @@ def build_all_splits() -> Dict[str, Any]:
     stats["total_prompts_used"] = len(all_used)
     stats["condition_distribution"] = dict(condition_counts.most_common())
     stats["category_distribution"] = dict(category_counts.most_common())
+    stats["condition_resolution_sources"] = dict(resolution_counts.most_common())
     _write_json(OUTPUT_DIR / "build_manifest.json", stats)
     print(f"\n=== Build complete. Manifest written to {OUTPUT_DIR / 'build_manifest.json'} ===")
 

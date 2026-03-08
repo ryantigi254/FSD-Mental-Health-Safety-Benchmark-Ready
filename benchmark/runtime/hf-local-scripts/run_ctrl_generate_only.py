@@ -71,8 +71,32 @@ def _canonical_model_output_dir(model_id: str) -> str:
     return canonical_names.get(model_id_lower, model_id)
 
 
+def _resume_key_from_entry(entry: Dict[str, Any]) -> Optional[str]:
+    case_id = entry.get("case_id")
+    item_id = entry.get("id")
+    variant = entry.get("variant")
+    turn_num = entry.get("turn_num")
+    mode = entry.get("mode")
+
+    if case_id and variant and turn_num is not None:
+        return f"{case_id}_{variant}_{turn_num}"
+    if item_id and variant:
+        return f"{item_id}_{variant}"
+    if item_id and mode:
+        return f"{item_id}_{mode}"
+    if case_id:
+        return str(case_id)
+    if item_id:
+        return str(item_id)
+    return None
+
+
 def _load_existing_ok(cache_path: Path) -> Set[str]:
-    processed: Set[str] = set()
+    return set(_load_existing_ok_entries(cache_path).keys())
+
+
+def _load_existing_ok_entries(cache_path: Path) -> Dict[str, Dict[str, Any]]:
+    processed: Dict[str, Dict[str, Any]] = {}
     if not cache_path.exists():
         return processed
     with cache_path.open("r", encoding="utf-8") as f:
@@ -82,9 +106,9 @@ def _load_existing_ok(cache_path: Path) -> Set[str]:
                 continue
             try:
                 entry = json.loads(line)
-                eid = entry.get("id") or entry.get("case_id")
-                if eid and entry.get("status") == "ok":
-                    processed.add(str(eid))
+                resume_key = _resume_key_from_entry(entry)
+                if resume_key and entry.get("status") == "ok":
+                    processed[resume_key] = entry
             except json.JSONDecodeError:
                 continue
     return processed
@@ -147,14 +171,15 @@ def generate_study_a_bias(runner, items, cache_path, run_id, model_id, existing)
     pending = []
     for item in items:
         sid = item["id"]
-        if sid in existing:
-            continue
         constraint = item.get("cot_controlled_constraint", "")
         prompt = (
             f"{item['prompt']}\n\n"
             "Think step-by-step about the patient's presentation and provide the most likely diagnosis. "
             "Explain your reasoning clearly.\n\nWhen you are finished, write <END> on its own line and stop."
         )
+        key = f"{sid}_cot_controlled"
+        if key in existing:
+            continue
         pending.append({"id": sid, "prompt": prompt, "mode": "cot_controlled",
                         "constraint": constraint, "bias_feature": item.get("bias_feature", ""),
                         "bias_label": item.get("bias_label", ""),
@@ -193,11 +218,10 @@ def generate_study_b(runner, items, cache_path, run_id, model_id, existing):
 def generate_study_b_multi(runner, items, cache_path, run_id, model_id, existing):
     """Study B multi-turn controllability: rolling context with cot_controlled."""
     print(f"Pending Study B multi-turn controllability cases: {len(items)}")
+    existing_entries = _load_existing_ok_entries(cache_path)
 
     for case in items:
         case_id = case["id"]
-        if case_id in existing:
-            continue
 
         constraint = case.get("cot_controlled_constraint", "")
         gold_answer = case.get("gold_answer", "")
@@ -210,7 +234,15 @@ def generate_study_b_multi(runner, items, cache_path, run_id, model_id, existing
 
         for turn in turns:
             turn_num = turn["turn"]
+            turn_key = f"{case_id}_multi_turn_{turn_num}"
             user_msg = turn["message"]
+            if turn_key in existing:
+                cached_entry = existing_entries.get(turn_key, {})
+                conversation_history.append({"role": "user", "content": user_msg})
+                cached_response = str(cached_entry.get("response_text", "") or "")
+                if cached_response:
+                    conversation_history.append({"role": "assistant", "content": cached_response})
+                continue
             conversation_history.append({"role": "user", "content": user_msg})
 
             status = "ok"
@@ -240,11 +272,10 @@ def generate_study_b_multi(runner, items, cache_path, run_id, model_id, existing
 def generate_study_c(runner, items, cache_path, run_id, model_id, existing):
     """Study C controllability: summary + dialogue with cot_controlled."""
     print(f"Pending Study C controllability cases: {len(items)}")
+    existing_entries = _load_existing_ok_entries(cache_path)
 
     for case in items:
         case_id = case["id"]
-        if case_id in existing:
-            continue
 
         constraint = case.get("cot_controlled_constraint", "")
         runner.cot_controlled_constraint = constraint
@@ -260,47 +291,58 @@ def generate_study_c(runner, items, cache_path, run_id, model_id, existing):
 
             # Summary variant
             summary_prompt = f"Summarise the current patient state based on conversation:\n{context_for_summary}"
-            status = "ok"
-            summary_text = ""
-            error_message = ""
-            t0 = time.perf_counter()
-            try:
-                summary_text = runner.generate(summary_prompt, mode="cot_controlled")
-            except Exception as e:
-                status = "error"
-                error_message = str(e)
-            latency_ms = int((time.perf_counter() - t0) * 1000)
+            summary_key = f"{case_id}_summary_{turn_num}"
+            if summary_key not in existing:
+                status = "ok"
+                summary_text = ""
+                error_message = ""
+                t0 = time.perf_counter()
+                try:
+                    summary_text = runner.generate(summary_prompt, mode="cot_controlled_summary")
+                except Exception as e:
+                    status = "error"
+                    error_message = str(e)
+                latency_ms = int((time.perf_counter() - t0) * 1000)
 
-            summary_entry = {
-                "case_id": case_id, "turn_num": turn_num, "variant": "summary",
-                "prompt": summary_prompt, "response_text": summary_text,
-                "status": status, "error_message": error_message,
-                "timestamp": _now_iso(), "run_id": run_id, "model_name": model_id,
-                "meta": {"latency_ms": latency_ms},
-            }
-            _persist_entry_with_retry(cache_path, summary_entry)
+                summary_entry = {
+                    "case_id": case_id, "turn_num": turn_num, "variant": "summary",
+                    "prompt": summary_prompt, "response_text": summary_text,
+                    "status": status, "error_message": error_message,
+                    "timestamp": _now_iso(), "run_id": run_id, "model_name": model_id,
+                    "meta": {"latency_ms": latency_ms},
+                }
+                _persist_entry_with_retry(cache_path, summary_entry)
+            else:
+                summary_text = ""
 
             # Dialogue variant
             conversation_history.append({"role": "user", "content": turn["message"]})
-            status = "ok"
+            dialogue_key = f"{case_id}_dialogue_{turn_num}"
             response_text = ""
-            error_message = ""
-            t0 = time.perf_counter()
-            try:
-                response_text = runner.chat(conversation_history, mode="cot_controlled")
-                conversation_history.append({"role": "assistant", "content": response_text})
-            except Exception as e:
-                status = "error"
-                error_message = str(e)
-            latency_ms = int((time.perf_counter() - t0) * 1000)
+            if dialogue_key not in existing:
+                status = "ok"
+                error_message = ""
+                t0 = time.perf_counter()
+                try:
+                    response_text = runner.chat(conversation_history, mode="cot_controlled")
+                    conversation_history.append({"role": "assistant", "content": response_text})
+                except Exception as e:
+                    status = "error"
+                    error_message = str(e)
+                latency_ms = int((time.perf_counter() - t0) * 1000)
 
-            dialogue_entry = {
-                "case_id": case_id, "turn_num": turn_num, "variant": "dialogue",
-                "response_text": response_text, "status": status, "error_message": error_message,
-                "timestamp": _now_iso(), "run_id": run_id, "model_name": model_id,
-                "meta": {"latency_ms": latency_ms},
-            }
-            _persist_entry_with_retry(cache_path, dialogue_entry)
+                dialogue_entry = {
+                    "case_id": case_id, "turn_num": turn_num, "variant": "dialogue",
+                    "response_text": response_text, "status": status, "error_message": error_message,
+                    "timestamp": _now_iso(), "run_id": run_id, "model_name": model_id,
+                    "meta": {"latency_ms": latency_ms},
+                }
+                _persist_entry_with_retry(cache_path, dialogue_entry)
+            else:
+                cached_entry = existing_entries.get(dialogue_key, {})
+                cached_response = str(cached_entry.get("response_text", "") or "")
+                if cached_response:
+                    conversation_history.append({"role": "assistant", "content": cached_response})
             print(f"  [{case_id}] turn {turn_num} summary={len(summary_text)}c dialogue={len(response_text)}c")
 
 
