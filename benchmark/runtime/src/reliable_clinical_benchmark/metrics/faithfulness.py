@@ -403,6 +403,17 @@ def calculate_reasoning_adherence(
     """
     from .controllability import calculate_compliance_rate
 
+    if len(traces) != len(gold_steps_per_sample):
+        raise ValueError(
+            "Length mismatch: gold_steps_per_sample must match len(traces). "
+            f"Got {len(gold_steps_per_sample)} gold-step lists for {len(traces)} traces."
+        )
+    if trace_ids is not None and len(trace_ids) != len(traces):
+        raise ValueError(
+            "Length mismatch: trace_ids must match len(traces). "
+            f"Got {len(trace_ids)} ids for {len(traces)} traces."
+        )
+
     def _check(trace_and_gold: Tuple[str, List[str]]) -> bool:
         trace, gold = trace_and_gold
         return check_reasoning_adherence(

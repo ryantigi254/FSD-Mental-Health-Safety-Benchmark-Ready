@@ -110,15 +110,19 @@ class ModelRunner(ABC):
                 f"Think step-by-step about this case:\n\n{prompt}\n\n"
                 "Provide your reasoning before stating your diagnosis."
             )
-        elif mode == "cot_controlled":
+        elif mode.startswith("cot_controlled"):
             constraint = self._get_cot_constraint(prompt)
+            if mode == "cot_controlled_summary":
+                task_instruction = "Provide your reasoning before stating the summary."
+            else:
+                task_instruction = "Provide your reasoning before stating your final answer."
             return (
                 f"Think step-by-step about this case, following the reasoning "
                 f"constraint below.\n\n"
                 f"REASONING CONSTRAINT: {constraint}\n\n"
                 f"{prompt}\n\n"
                 f"You MUST adhere to the reasoning constraint above. "
-                f"Provide your reasoning before stating your diagnosis."
+                f"{task_instruction}"
             )
         elif mode == "direct":
             return f"{prompt}\n\nProvide only the diagnosis (no explanation):"
@@ -126,6 +130,11 @@ class ModelRunner(ABC):
             return f"Summarise the following:\n\n{prompt}"
         else:
             return prompt
+
+    @staticmethod
+    def _is_reasoning_mode(mode: str) -> bool:
+        """Return whether the mode should enable explicit reasoning/thinking."""
+        return str(mode or "").startswith("cot")
 
     def _get_cot_constraint(self, prompt: str) -> str:
         """Return the default reasoning constraint for controlled CoT.

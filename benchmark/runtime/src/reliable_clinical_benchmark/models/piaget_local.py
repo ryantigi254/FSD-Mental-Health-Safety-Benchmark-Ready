@@ -143,7 +143,7 @@ class Piaget8BLocalRunner(ModelRunner):
                 messages,
                 tokenize=False,
                 add_generation_prompt=True,
-                enable_thinking=(mode == "cot"),
+                enable_thinking=self._is_reasoning_mode(mode),
             )
         except TypeError:
             # Some templates ignore enable_thinking

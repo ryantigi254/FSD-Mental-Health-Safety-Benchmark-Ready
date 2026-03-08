@@ -23,6 +23,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
 
 from datasets import load_dataset
 from reliable_clinical_benchmark.utils.nli import NLIModel
+from reliable_clinical_benchmark.utils.condition_resolution import (
+    normalise_condition,
+    resolve_case_condition,
+)
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[3]
 CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
@@ -79,6 +83,10 @@ DIAGNOSIS_PATTERNS = [
     (r"\badjustment disorder", "Adjustment Disorder"),
 ]
 
+DISPLAY_LABELS = {
+    normalise_condition(label): label for label in DIAGNOSIS_CANDIDATES
+}
+
 
 class ScoringNLIModel(NLIModel):
     """NLI model with confidence scoring for diagnosis ranking."""
@@ -111,6 +119,11 @@ def extract_label_heuristic(think_text: str) -> Optional[str]:
         if re.search(pattern, text):
             return label
     return None
+
+
+def _display_label(label: str) -> str:
+    norm = normalise_condition(label)
+    return DISPLAY_LABELS.get(norm, norm.replace("/", "/").title())
 
 
 def extract_label_nli(
@@ -163,7 +176,8 @@ def main() -> None:
     print(f"  Controllability Study A samples: {len(samples)}")
 
     labels: Dict[str, str] = {}
-    stats = {"nli": 0, "heuristic": 0, "inferred": 0, "fallback": 0}
+    stats = {"nli": 0, "heuristic": 0, "resolved": 0}
+    unresolved: List[str] = []
 
     for sample in samples:
         sid = sample["id"]
@@ -192,17 +206,36 @@ def main() -> None:
             if label:
                 stats["heuristic"] += 1
 
-        # Strategy 3: Use inferred condition from build script
-        if not label and inferred and inferred != "unspecified":
-            label = inferred.title()
-            stats["inferred"] += 1
-
-        # Strategy 4: Fallback
+        # Strategy 3: shared case resolver over source row fields
         if not label:
-            label = "Adjustment Disorder"
-            stats["fallback"] += 1
+            resolved, source = resolve_case_condition(
+                {
+                    "patient": patient_text,
+                    "counselor_think": think_text,
+                    "counselor_content": "",
+                },
+                nli_model=nli,
+            )
+            if resolved:
+                label = _display_label(resolved)
+                stats["resolved"] += 1
+
+        if not label and inferred and inferred not in {"", "unresolved"}:
+            label = _display_label(inferred)
+            stats["resolved"] += 1
+
+        if not label:
+            unresolved.append(sid)
+            continue
 
         labels[sid] = label
+
+    if unresolved:
+        missing_preview = ", ".join(unresolved[:10])
+        raise SystemExit(
+            f"Unable to resolve {len(unresolved)} controllability gold labels. "
+            f"Examples: {missing_preview}"
+        )
 
     output = {"labels": labels}
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -210,8 +243,10 @@ def main() -> None:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     print(f"\nGold labels written to {OUTPUT_PATH}")
-    print(f"  NLI: {stats['nli']}, Heuristic: {stats['heuristic']}, "
-          f"Inferred: {stats['inferred']}, Fallback: {stats['fallback']}")
+    print(
+        f"  NLI: {stats['nli']}, Heuristic: {stats['heuristic']}, "
+        f"Resolved: {stats['resolved']}"
+    )
     print(f"  Total: {len(labels)}")
 
 

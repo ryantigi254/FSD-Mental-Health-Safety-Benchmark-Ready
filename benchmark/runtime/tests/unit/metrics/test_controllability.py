@@ -84,6 +84,16 @@ class TestCalculateComplianceRate:
         assert result.compliance_rate == 0.0
         assert result.n_compliant == 0
 
+    @pytest.mark.unit
+    def test_trace_ids_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="trace_ids"):
+            calculate_compliance_rate(
+                ["trace1", "trace2"],
+                lambda t: True,
+                trace_ids=["only-one-id"],
+                compute_ci=False,
+            )
+
 
 # ── Study A: Reasoning Adherence (RA) ──────────────────────────────────
 
@@ -161,6 +171,25 @@ class TestCalculateReasoningAdherence:
         result = calculate_reasoning_adherence(traces, gold, compute_ci=False)
         assert result.compliance_rate == 0.0
 
+    @pytest.mark.unit
+    def test_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="gold_steps_per_sample"):
+            calculate_reasoning_adherence(
+                ["trace1", "trace2"],
+                [["step one"]],
+                compute_ci=False,
+            )
+
+    @pytest.mark.unit
+    def test_trace_ids_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="trace_ids"):
+            calculate_reasoning_adherence(
+                ["trace1"],
+                [["step one"]],
+                trace_ids=["id-1", "id-2"],
+                compute_ci=False,
+            )
+
 
 # ── Study B: Controlled Hallucination Rate (CHR) ──────────────────────
 
@@ -228,6 +257,27 @@ class TestCalculateControlledHallucinationRate:
         )
         assert result.compliance_rate == 0.0
 
+    @pytest.mark.unit
+    def test_parallel_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="incorrect_opinions"):
+            calculate_controlled_hallucination_rate(
+                ["trace1", "trace2"],
+                ["opinion1"],
+                ["gold1", "gold2"],
+                compute_ci=False,
+            )
+
+    @pytest.mark.unit
+    def test_trace_ids_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="trace_ids"):
+            calculate_controlled_hallucination_rate(
+                ["trace1"],
+                ["opinion1"],
+                ["gold1"],
+                trace_ids=["id-1", "id-2"],
+                compute_ci=False,
+            )
+
 
 # ── Study C: Controlled Entity Recall ──────────────────────────────────
 
@@ -289,6 +339,25 @@ class TestCalculateControlledEntityRecall:
         )
         assert result.compliance_rate == 0.0
 
+    @pytest.mark.unit
+    def test_parallel_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="critical_entities_per_sample"):
+            calculate_controlled_entity_recall(
+                ["summary1", "summary2"],
+                [["entity1"]],
+                compute_ci=False,
+            )
+
+    @pytest.mark.unit
+    def test_trace_ids_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="trace_ids"):
+            calculate_controlled_entity_recall(
+                ["summary1"],
+                [["entity1"]],
+                trace_ids=["id-1", "id-2"],
+                compute_ci=False,
+            )
+
 
 # ── Constraint strings ─────────────────────────────────────────────────
 
@@ -321,6 +390,8 @@ class TestModelRunnerCotControlled:
         assert "REASONING CONSTRAINT" in formatted
         assert "patient has low mood" in formatted
         assert "cot_controlled" not in formatted
+        assert "final answer" in formatted.lower()
+        assert "stating your diagnosis" not in formatted.lower()
 
     @pytest.mark.unit
     def test_custom_constraint_override(self):
@@ -337,3 +408,29 @@ class TestModelRunnerCotControlled:
         runner.cot_controlled_constraint = "Custom constraint for testing."
         formatted = runner._format_prompt("prompt text", "cot_controlled")
         assert "Custom constraint for testing." in formatted
+
+    @pytest.mark.unit
+    def test_format_prompt_cot_controlled_summary(self):
+        from reliable_clinical_benchmark.models.base import ModelRunner
+
+        class _Stub(ModelRunner):
+            def generate(self, prompt, mode="default"):
+                return ""
+
+            def generate_with_reasoning(self, prompt):
+                return ("", "")
+
+        runner = _Stub("test-model")
+        formatted = runner._format_prompt("current patient state", "cot_controlled_summary")
+        assert "reasoning constraint" in formatted.lower()
+        assert "summary" in formatted.lower()
+        assert "diagnosis" not in formatted.lower()
+
+    @pytest.mark.unit
+    def test_reasoning_mode_helper_accepts_all_cot_variants(self):
+        from reliable_clinical_benchmark.models.base import ModelRunner
+
+        assert ModelRunner._is_reasoning_mode("cot") is True
+        assert ModelRunner._is_reasoning_mode("cot_controlled") is True
+        assert ModelRunner._is_reasoning_mode("cot_controlled_summary") is True
+        assert ModelRunner._is_reasoning_mode("summary") is False

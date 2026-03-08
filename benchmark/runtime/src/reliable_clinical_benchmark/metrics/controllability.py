@@ -10,7 +10,7 @@ the generic compliance-rate calculation and result dataclass.
 """
 
 from dataclasses import dataclass, field
-from typing import List, Dict, Any, Callable, Optional, Tuple
+from typing import List, Dict, Any, Callable, Optional
 import logging
 
 from .stats import compute_bootstrap_ci
@@ -57,6 +57,12 @@ def calculate_compliance_rate(
     if not traces:
         return ControllabilityResult(
             compliance_rate=0.0, n_total=0, n_compliant=0,
+        )
+
+    if trace_ids is not None and len(trace_ids) != len(traces):
+        raise ValueError(
+            "Length mismatch: trace_ids must match len(traces). "
+            f"Got {len(trace_ids)} ids for {len(traces)} traces."
         )
 
     ids = trace_ids or [str(i) for i in range(len(traces))]

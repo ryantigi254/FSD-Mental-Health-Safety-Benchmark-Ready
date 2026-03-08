@@ -46,6 +46,7 @@ This directory contains comprehensive documentation for the mental health LLM be
   - `README.md` - Entry point for v0.3 clinician-readiness documentation
   - `tex/CLINICIAN_READINESS_PROCESS_REPORT.tex` - Final process write-up (small-scope -> scaling -> clinician line)
   - `study/` - Study-wise update notes for A/B/C
+- **`clinical_readiness_next.md`** - Short handoff note from controllability scaling into clinician readiness
 
 ## Quick Links
 
@@ -74,6 +75,7 @@ This directory contains comprehensive documentation for the mental health LLM be
 - [Environment Setup](environment/ENVIRONMENT.md)
 - [Evaluation Protocol](evaluation/EVALUATION_PROTOCOL.md)
 - [Scaling Overview](scaling/scaling_summary.md)
+- [Clinical Readiness Handoff](clinical_readiness_next.md)
 - [Clinician-Readiness Overview](clinical_readiness/clinical_readiness_summary.md)
 
 ## File Locations
