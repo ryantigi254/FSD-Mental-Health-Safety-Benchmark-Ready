@@ -28,6 +28,7 @@ class Piaget8BLocalRunner(ModelRunner):
         device_map: str = "auto",
         dtype: torch.dtype = torch.bfloat16,
         config: GenerationConfig = None,
+        local_files_only: bool = True,
     ):
         super().__init__(
             model_name,
@@ -40,11 +41,13 @@ class Piaget8BLocalRunner(ModelRunner):
         )
         logger.info(f"Loading {model_name} locally (device_map={device_map})")
         self.tokenizer = AutoTokenizer.from_pretrained(
-            model_name, trust_remote_code=True, use_fast=False
+            model_name, trust_remote_code=True, use_fast=False,
+            local_files_only=local_files_only,
         )
         config = AutoConfig.from_pretrained(
             model_name,
             trust_remote_code=True,
+            local_files_only=local_files_only,
         )
         self.model = AutoModelForCausalLM.from_pretrained(
             model_name,
@@ -52,6 +55,7 @@ class Piaget8BLocalRunner(ModelRunner):
             dtype=dtype,
             trust_remote_code=True,
             config=config,
+            local_files_only=local_files_only,
         )
 
     def _build_inputs(self, prompt: str, mode: str = "default"):

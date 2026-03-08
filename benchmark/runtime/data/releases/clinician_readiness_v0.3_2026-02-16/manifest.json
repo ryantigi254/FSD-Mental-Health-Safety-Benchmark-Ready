@@ -1,0 +1,121 @@
+{
+  "dataset_release": "clinician_readiness_v0.3_2026-02-16",
+  "created_at_utc": "2026-02-17T18:34:48.855257+00:00",
+  "source_branch": "codex/clinician-sendoff-ready-dataset-r1",
+  "files": [
+    {
+      "path": "openr1_psy_splits/study_a_test.json",
+      "sha256": "8785d60169d74df67b14029e4a44165c9574d2a8b0566fb106838a9e9349df8b",
+      "row_count": 2000,
+      "bytes": 4195809
+    },
+    {
+      "path": "openr1_psy_splits/study_b_test.json",
+      "sha256": "07dccac10ed5e2981770a3e6233af525f88e1f3222f6eed3868d0a8a4a4b2756",
+      "row_count": 2000,
+      "bytes": 1259437
+    },
+    {
+      "path": "openr1_psy_splits/study_b_multi_turn_test.json",
+      "sha256": "b7905af2fb8d5f688217ebac684fd3fe14b0b058bf3ddb59df14436d145c2626",
+      "row_count": 120,
+      "bytes": 503637
+    },
+    {
+      "path": "openr1_psy_splits/study_c_test.json",
+      "sha256": "841ca9b156757a999b34980abc83234418bf4ebe909d41c887024da6268eb146",
+      "row_count": 100,
+      "bytes": 354624
+    },
+    {
+      "path": "study_a_gold/gold_diagnosis_labels.json",
+      "sha256": "869e16bbd0780328482c2763275996fcd9d4bd2ea3d8541523b3853837fb9707",
+      "row_count": 2000,
+      "bytes": 80810
+    },
+    {
+      "path": "study_a_gold/gold_diagnosis_metadata.json",
+      "sha256": "01b2fd504ce0754e297f5dfa8425d2172ae6c3ba3b3af58dfe8a656c64aa5ab0",
+      "row_count": 27,
+      "bytes": 7726
+    },
+    {
+      "path": "study_a_gold/gold_labels_mapping.json",
+      "sha256": "911f96b624b017adfca310eb3a75eabcce3f6e4e267c582a86ad83574d53a9c6",
+      "row_count": 300,
+      "bytes": 216494
+    },
+    {
+      "path": "study_a_gold/label_canonical_map.json",
+      "sha256": "682056000346b8e611d1860cbbf03bda1fb7b7ea91cc3ca658d2f76770cf5e48",
+      "row_count": 17,
+      "bytes": 1419
+    },
+    {
+      "path": "study_c_gold/target_plans.json",
+      "sha256": "da3144c532bbbdb3cebcb212ffbec722bdcd09278d229f2a98b5cc6ec287d0dd",
+      "row_count": 100,
+      "bytes": 57290
+    },
+    {
+      "path": "study_c_gold/entity_evidence_map.json",
+      "sha256": "8061485a7dfe885c7ee8d5b6ee99332b97efd985f087da1137623229675dd462",
+      "row_count": 100,
+      "bytes": 48300
+    },
+    {
+      "path": "reports/study_b_construct_validation.csv",
+      "sha256": "1dfadda0f434bd445b667bd833d92baf17fb3d8dd3b7f1353c88013f4079cb7d",
+      "row_count": 2000,
+      "bytes": 40437
+    },
+    {
+      "path": "reports/study_b_multiturn_uniqueness.csv",
+      "sha256": "21af03bf50a26ad73ada5f7522bb2790ff640a479117f2519254cf6e916b23ea",
+      "row_count": 120,
+      "bytes": 9274
+    },
+    {
+      "path": "reports/study_a_label_policy.csv",
+      "sha256": "75f47db27904efc8b8009c3673cf4a28e1a72bc57cee753e09633374941a362c",
+      "row_count": 2034,
+      "bytes": 193743
+    },
+    {
+      "path": "reports/stage2_gate_report.json",
+      "sha256": "05b9fc583a338bd91f7ccdee2d0df05356c7385c968120194e4f1431080ee92a",
+      "row_count": 3,
+      "bytes": 1720
+    },
+    {
+      "path": "README_NOTE.txt",
+      "sha256": "605218c4e136624305068b64e93671b21039afc82c82dfe4856431a5568466b6",
+      "row_count": null,
+      "bytes": 291
+    },
+    {
+      "path": "adversarial_bias/BIAS_DIMENSIONS.md",
+      "sha256": "b043ceb05381e0b3211a68d8f6a4244c0600061eba2ad9d88b90a8d349f9f2c5",
+      "row_count": null,
+      "bytes": 6928
+    },
+    {
+      "path": "adversarial_bias/README.md",
+      "sha256": "416cb9eae900593a3e602eff01f8a5f8907c03920b2ff4fdf3b2fb322a4ff8ff",
+      "row_count": null,
+      "bytes": 1296
+    },
+    {
+      "path": "adversarial_bias/biased_vignettes.json",
+      "sha256": "712611d7d8a4816aa71e31d5c660ba180c752de6ea71e3daa11858f53bc322fe",
+      "row_count": 2000,
+      "bytes": 2741929
+    },
+    {
+      "path": "adversarial_bias/biased_vignettes_legacy_2016.json",
+      "sha256": "d5344ffb4d0c54091e00617914f3ed0a2b521b3bd8df1f8c2af7c01a980c6bd4",
+      "row_count": 2016,
+      "bytes": 682255
+    }
+  ]
+}
