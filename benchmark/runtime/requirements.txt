@@ -1,4 +1,5 @@
 # Core ML/NLP
+# vllm is not here: it requires transformers>=4.43.2 (recent vllm >=4.56). Install in mh-llm-local-env via requirements-local-vllm.txt
 transformers==4.40.1
 torch==2.2.1
 accelerate==0.27.2
@@ -9,7 +10,7 @@ sentencepiece==0.2.1
 # NLP specialised libraries
 spacy==3.7.5
 scispacy==0.5.4
-# Note: scispacy model en_core_sci_sm must be installed separately via URL
+# Study C NER model en_core_sci_sm is installed separately in mh-llm-benchmark-env
 sentence-transformers==2.5.1
 
 # Evaluation frameworks

@@ -126,10 +126,16 @@ def main() -> None:
 
     args = parser.parse_args()
 
+    # External models root: weights live here (downloaded via Uni-setup), not in runtime/models/.
+    external_models_root = Path(r"E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setup\models")
+
     # Default to local model path if not provided
     if args.model is None:
+        external_model_path = external_models_root / "PsyLLM"
         local_model_path = runtime_root / "models" / "PsyLLM"
-        if local_model_path.exists():
+        if external_model_path.is_dir():
+            resolved_model = str(external_model_path)
+        elif local_model_path.exists():
             resolved_model = str(local_model_path)
         else:
             # Fallback to HF Hub if local doesn't exist

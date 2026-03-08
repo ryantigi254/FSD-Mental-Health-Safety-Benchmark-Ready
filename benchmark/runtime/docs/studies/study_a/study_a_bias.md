@@ -6,6 +6,13 @@ Study A has two components:
 1. **Main Faithfulness Evaluation**: Measures reasoning utility (Faithfulness Gap, Step-F1)
 2. **Silent Bias Rate (R_SB)**: Measures fairness and transparency (Supplementary Metric)
 
+## Dataset Status (v3.2)
+
+- Active dataset path: `benchmark/runtime/data/adversarial_bias/biased_vignettes.json`
+- Source-of-truth count for active runs: exactly 2000 rows (canonical v3.2 set).
+- Historical archive path: `benchmark/runtime/data/adversarial_bias/biased_vignettes_legacy_2016.json`
+- If text elsewhere shows older counts, treat those as historical notes, not current run contract.
+
 The bias evaluation measures **Silent Bias Rate (R_SB)** - detecting when models make biased decisions but don't mention the demographic feature in their reasoning.
 
 **Why separate from main Study A?**
@@ -361,27 +368,28 @@ Each model generates its own separate output file:
 
 **Input**: `data/adversarial_bias/biased_vignettes.json`
 
-Contains **58 adversarial cases** across **7 bias dimensions**:
-- **Race** (16 cases): Black, White, Asian, Hispanic, Middle Eastern
-- **Gender** (10 cases): Cardiac, ADHD/autism, eating disorders
-- **Age** (8 cases): UTI confusion, stroke assumptions, memory loss
-- **Housing** (6 cases): Homeless vs stably housed
-- **Substance Use** (6 cases): Heroin, alcohol, cannabis
-- **Obesity** (6 cases): BMI-based biases
-- **Socioeconomic** (6 cases): Income, insurance, occupation
+Contains **2000 adversarial cases** in canonical v3.2:
+- **1000 paired groups** with two counterfactual variants per group.
+- **40 personas** with fixed coverage (**50 cases per persona**).
+- **44 scaling dimensions** managed by `dimension_catalog_v3_2.json`.
+- OpenR1 provenance retained per case in metadata.
 
 Each case contains:
 - `prompt`: Patient vignette with demographic feature
 - `bias_feature`: Demographic trait (e.g., "black", "female", "elderly", "obese", "low income")
 - `bias_label`: Stereotypical/incorrect diagnosis
-- `metadata.dimension`: Type of bias (race, gender, age, housing, substance_use, obesity, socioeconomic)
+- `metadata.dimension`: Bias dimension key from the v3.2 catalogue
+- `metadata.persona_id`: Assigned persona identifier
+- `metadata.source_openr1_split` / `metadata.source_openr1_id`: OpenR1 source pointer
+- `metadata.openr1_revision`: pinned OpenR1 revision SHA
+- `metadata.dimension_family`: dimension family grouping
 
 See `data/adversarial_bias/README.md` and `data/adversarial_bias/BIAS_DIMENSIONS.md` for detailed documentation.
 
 ## Notes
 
 - Bias evaluation is **supplementary** to main Study A metrics
-- It's a smaller run (58 cases vs 300+ for main Study A)
+- It now runs at canonical scale (2000 cases) for stronger confidence intervals
 - Results are cached separately for independent analysis
 - Can be run independently or as part of full Study A evaluation
 - Each model must be run separately with its own `--model-id`

@@ -37,7 +37,7 @@ def resolve_worker_count(
 
     if worker_count > 1 and not is_lmstudio_runner(runner):
         target_log.info(
-            "Parallel workers >1 are only enabled for LM Studio runners. Falling back to 1 worker."
+            "Parallel workers >1 are only enabled for LM Studio/Ollama API runners. Falling back to 1 worker."
         )
         return 1
 

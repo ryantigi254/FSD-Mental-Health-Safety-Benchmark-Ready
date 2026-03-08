@@ -29,12 +29,17 @@ import numpy as np
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent.parent / "src"))
 
+from reliable_clinical_benchmark.data.release_data_resolver import (
+    DATA_SOURCE_CHOICES,
+    resolve_metric_data_roots,
+)
 from reliable_clinical_benchmark.metrics.drift import (
     _extract_advice,
     calculate_alignment_score,
 )
 from reliable_clinical_benchmark.utils.nli import NLIModel
 from reliable_clinical_benchmark.utils.stats import bootstrap_confidence_interval
+from reliable_clinical_benchmark.utils.stats import cluster_bootstrap_confidence_interval
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -53,11 +58,8 @@ def strip_thinking(text: str) -> str:
 
 try:
     from reliable_clinical_benchmark.utils.ner import MedicalNER
-except ImportError as exc:
-    raise ImportError(
-        "Study C requires scispaCy (en_core_sci_sm). "
-        "Install it with: python -m spacy download en_core_sci_sm"
-    ) from exc
+except ImportError:
+    MedicalNER = None
 
 
 
@@ -99,6 +101,7 @@ class DriftMetrics:
     # Bootstrap data
     case_recall_t10_values: List[float] = field(default_factory=list)
     case_conflict_rates: List[float] = field(default_factory=list)
+    case_persona_ids: List[str] = field(default_factory=list)
     
     def __post_init__(self):
         if self.recall_curve is None:
@@ -120,6 +123,11 @@ def calculate_metrics_for_model(
     
     # Use provided NER model or fallback (should be provided)
     if ner_model is None:
+        if MedicalNER is None:
+            raise RuntimeError(
+                "Study C requires scispaCy (en_core_sci_sm). "
+                "Install it with: python -m spacy download en_core_sci_sm"
+            )
         try:
             ner_model = MedicalNER()
         except Exception as exc:
@@ -175,6 +183,7 @@ def calculate_metrics_for_model(
     
     case_recall_t10_values = []
     case_conflict_rates = []
+    case_persona_ids = []
 
     assert nli_stride >= 1
     if nli_stride < 1:
@@ -235,6 +244,11 @@ def calculate_metrics_for_model(
         
         case_conflicts = 0
         case_turn_pairs = 0
+        case_persona_id = (
+            case_gold.get("persona_id")
+            or case_gold.get("metadata", {}).get("persona_id")
+            or case_id
+        )
         
         for i, turn in enumerate(summary_turns):
             curr_raw = turn.get("response_text", "") or turn.get("output_text", "")
@@ -258,6 +272,7 @@ def calculate_metrics_for_model(
             case_recall_t10_values.append(recall_curve[-1])
         else:
              case_recall_t10_values.append(0.0)
+        case_persona_ids.append(str(case_persona_id))
              
         if use_nli:
             if dialogue_turns:
@@ -347,6 +362,7 @@ def calculate_metrics_for_model(
         # Bootstrap data
         case_recall_t10_values=case_recall_t10_values,
         case_conflict_rates=case_conflict_rates,
+        case_persona_ids=case_persona_ids,
     )
 
 
@@ -389,6 +405,24 @@ def main():
     parser.add_argument("--output-dir", type=Path, default=None,
                         help="Output directory for results")
     parser.add_argument(
+        "--data-source",
+        choices=DATA_SOURCE_CHOICES,
+        default="latest_release",
+        help=(
+            "Dataset source mode (default: latest_release). "
+            "Use working_data for legacy data/ paths."
+        ),
+    )
+    parser.add_argument(
+        "--data-root",
+        type=Path,
+        default=None,
+        help=(
+            "Optional explicit root containing openr1_psy_splits/, study_a_gold/, "
+            "and study_c_gold/."
+        ),
+    )
+    parser.add_argument(
         "--use-nli",
         action="store_true",
         help="Use NLI for knowledge conflict detection (actions-only advice)",
@@ -409,7 +443,16 @@ def main():
     args = parser.parse_args()
     
     base_dir = Path(__file__).parent.parent.parent.parent.parent
-    data_dir = base_dir / "data"
+    try:
+        data_roots = resolve_metric_data_roots(
+            runtime_root=base_dir,
+            data_source=args.data_source,
+            data_root=args.data_root,
+        )
+    except (ValueError, FileNotFoundError) as exc:
+        logger.error(str(exc))
+        return 1
+    data_dir = data_roots.root
     
     if args.use_cleaned:
         results_dir = base_dir / "processed" / "study_c_pipeline"
@@ -423,9 +466,11 @@ def main():
     print("STUDY C: LONGITUDINAL DRIFT METRICS")
     print("=" * 60)
     print(f"Source:   {results_dir}")
+    print(f"Data root:{data_roots.root}")
     print(f"Output:   {output_dir}")
     print(f"Time:     {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
+    logger.info("Using data source: %s", data_roots.source)
     
     # Load gold data
     gold_data = load_gold_data(data_dir)
@@ -450,7 +495,21 @@ def main():
     
     # Initialize NER model once
     print("Loading MedicalNER (scispaCy)...")
-    ner_model = MedicalNER()
+    if MedicalNER is None:
+        logger.error(
+            "MedicalNER is unavailable. Study C metrics require scispaCy "
+            "(install `en_core_sci_sm`)."
+        )
+        return 1
+    try:
+        ner_model = MedicalNER()
+    except Exception as exc:
+        logger.error(
+            "Failed to initialise MedicalNER. Study C metrics require scispaCy "
+            "(`en_core_sci_sm`): %s",
+            exc,
+        )
+        return 1
 
     all_results = []
     nli_model = None
@@ -498,12 +557,21 @@ def main():
         # T10 Recall CI
         t10_low, t10_high = 0.0, 0.0
         if m.case_recall_t10_values:
-            _, t10_low, t10_high = bootstrap_confidence_interval(m.case_recall_t10_values, statistic_fn=np.mean)
+            _, t10_low, t10_high = cluster_bootstrap_confidence_interval(
+                m.case_recall_t10_values,
+                m.case_persona_ids,
+                statistic_fn=np.mean,
+            )
             
         # Conflict Rate CI
         conf_low, conf_high = 0.0, 0.0
         if m.case_conflict_rates:
-             _, conf_low, conf_high = bootstrap_confidence_interval(m.case_conflict_rates, statistic_fn=np.mean)
+             _, conf_low, conf_high = cluster_bootstrap_confidence_interval(
+                 m.case_conflict_rates,
+                 m.case_persona_ids,
+                 statistic_fn=np.mean,
+             )
+        effective_n = len(set(m.case_persona_ids))
         
         final_output.append({
             "model": m.model,
@@ -518,6 +586,8 @@ def main():
             "knowledge_conflict_rate": m.knowledge_conflict_rate,
             "knowledge_conflict_rate_ci_low": round(conf_low, 4),
             "knowledge_conflict_rate_ci_high": round(conf_high, 4),
+            "ci_method": "cluster_bootstrap_by_persona_id",
+            "effective_n": effective_n,
             "contradictions_found": m.contradictions_found,
             "avg_turns_per_case": m.avg_turns_per_case,
             "continuity_score": m.continuity_score,
@@ -539,8 +609,8 @@ def main():
     
     print("=" * 60)
     print(f"Results saved to: {results_file}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
-
+    raise SystemExit(main())

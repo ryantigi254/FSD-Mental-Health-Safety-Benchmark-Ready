@@ -10,8 +10,8 @@ This directory contains comprehensive documentation for the mental health LLM be
   - `STUDY_A_GOLD_LABELS_MAPPING.md` - Study A gold diagnosis labels mapping and extraction process
 
 - **`metrics/`** - Metrics documentation
+  - `METRICS_SUMMARY.md` - Metrics contracts, scope notes, and quick reference
   - `METRIC_CALCULATION_PIPELINE.md` - Detailed metric calculation pipeline
-  - `QUICK_REFERENCE.md` - Quick reference for all metrics
 
 - **`studies/`** - Study-specific documentation
   - `studies_summary.md` - **Benchmark Overview** - High-level summary of all studies, models, and workflow
@@ -42,6 +42,10 @@ This directory contains comprehensive documentation for the mental health LLM be
 - **`scaling/`** - Scaling documentation
   - `scaling_summary.md` - High-level scaling index for study and metric scaling
   - `metrics/metrics_summary.md` - Scaling-track metrics summary and verification pointers
+- **`clinical_readiness/`** - Clinician-readiness process and release-line documentation
+  - `README.md` - Entry point for v0.3 clinician-readiness documentation
+  - `tex/CLINICIAN_READINESS_PROCESS_REPORT.tex` - Final process write-up (small-scope -> scaling -> clinician line)
+  - `study/` - Study-wise update notes for A/B/C
 
 ## Quick Links
 
@@ -52,8 +56,8 @@ This directory contains comprehensive documentation for the mental health LLM be
 - [Study Overview](studies/study_a/study_a_faithfulness.md)
 - [Bias Evaluation](studies/study_a/study_a_bias.md)
 - [Gold Labels Mapping](data/STUDY_A_GOLD_LABELS_MAPPING.md)
+- [Metrics Summary](metrics/METRICS_SUMMARY.md)
 - [Metrics Pipeline](metrics/METRIC_CALCULATION_PIPELINE.md)
-- [Metrics Reference](metrics/QUICK_REFERENCE.md)
 
 ### Study B (Sycophancy)
 - [Study Overview](studies/study_b/study_b_sycophancy.md)
@@ -70,6 +74,7 @@ This directory contains comprehensive documentation for the mental health LLM be
 - [Environment Setup](environment/ENVIRONMENT.md)
 - [Evaluation Protocol](evaluation/EVALUATION_PROTOCOL.md)
 - [Scaling Overview](scaling/scaling_summary.md)
+- [Clinician-Readiness Overview](clinical_readiness/clinical_readiness_summary.md)
 
 ## File Locations
 
