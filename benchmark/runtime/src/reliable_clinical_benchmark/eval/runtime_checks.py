@@ -92,6 +92,37 @@ def validate_environment() -> Tuple[bool, List[str]]:
     return True, []
 
 
+def _load_json_payload(path: Path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8")), None
+    except Exception as exc:
+        return None, str(exc)
+
+
+def _normalise_study_b_single_turn(payload):
+    if isinstance(payload, list):
+        return payload, []
+    if isinstance(payload, dict):
+        samples = payload.get("samples")
+        if isinstance(samples, list):
+            return samples, []
+        return [], ["Study B single-turn: dict payload must include list field 'samples'"]
+    return [], ["Study B single-turn: payload must be list or dict"]
+
+
+def _normalise_study_b_multi_turn(payload):
+    if isinstance(payload, list):
+        return payload, []
+    if isinstance(payload, dict):
+        cases = payload.get("multi_turn_cases")
+        if not isinstance(cases, list):
+            cases = payload.get("cases")
+        if isinstance(cases, list):
+            return cases, []
+        return [], ["Study B multi-turn: dict payload must include list field 'multi_turn_cases' or 'cases'"]
+    return [], ["Study B multi-turn: payload must be list or dict"]
+
+
 def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
     """
     Validate Study B split has persona IDs + well-formed IDs before running generations.
@@ -104,25 +135,27 @@ def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
     """
     data_path = Path(data_dir)
     study_b_path = data_path / "openr1_psy_splits" / "study_b_test.json"
+    study_b_mt_path = data_path / "openr1_psy_splits" / "study_b_multi_turn_test.json"
     if not study_b_path.exists():
         return False, [f"Study B split not found: {study_b_path}"]
-
-    try:
-        payload = json.loads(study_b_path.read_text(encoding="utf-8"))
-    except Exception as e:
-        return False, [f"Study B split is not valid JSON: {study_b_path} ({e})"]
+    if not study_b_mt_path.exists():
+        return False, [f"Study B multi-turn split not found: {study_b_mt_path}"]
 
     errors: List[str] = []
 
-    samples = payload.get("samples")
-    multi_turn_cases = payload.get("multi_turn_cases")
+    single_payload, single_err = _load_json_payload(study_b_path)
+    if single_err:
+        return False, [f"Study B split is not valid JSON: {study_b_path} ({single_err})"]
+    multi_payload, multi_err = _load_json_payload(study_b_mt_path)
+    if multi_err:
+        return False, [f"Study B multi-turn split is not valid JSON: {study_b_mt_path} ({multi_err})"]
 
-    if not isinstance(samples, list):
-        errors.append("Study B: 'samples' must be a list")
-        samples = []
-    if not isinstance(multi_turn_cases, list):
-        errors.append("Study B: 'multi_turn_cases' must be a list")
-        multi_turn_cases = []
+    samples, sample_errors = _normalise_study_b_single_turn(single_payload)
+    multi_turn_cases, multi_turn_errors = _normalise_study_b_multi_turn(multi_payload)
+    errors.extend(sample_errors)
+    errors.extend(multi_turn_errors)
+    if not samples:
+        errors.append("Study B single-turn: payload list must be non-empty")
 
     seen_ids = set()
     for i, item in enumerate(samples):
@@ -163,6 +196,10 @@ def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
         gold = case.get("gold_answer")
         if not isinstance(gold, str) or not gold.strip():
             errors.append(f"Study B multi_turn_cases[{cid or j}]: missing/invalid 'gold_answer'")
+        for top_level in ("incorrect_opinion", "pressure_style", "pressure_schedule"):
+            value = case.get(top_level)
+            if not isinstance(value, str) or not value.strip():
+                errors.append(f"Study B multi_turn_cases[{cid or j}]: missing/invalid '{top_level}'")
 
         turns = case.get("turns")
         if not isinstance(turns, list) or not turns:
@@ -175,6 +212,11 @@ def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
                 msg = t.get("message")
                 if not isinstance(msg, str) or not msg.strip():
                     errors.append(f"Study B multi_turn_cases[{cid or j}] turn[{k}]: missing/invalid 'message'")
+                lvl = t.get("pressure_level")
+                if not isinstance(lvl, int) or lvl < 0 or lvl > 3:
+                    errors.append(
+                        f"Study B multi_turn_cases[{cid or j}] turn[{k}]: missing/invalid 'pressure_level'"
+                    )
 
         metadata = case.get("metadata")
         if not isinstance(metadata, dict):
@@ -312,6 +354,38 @@ def check_model_availability(model_id: str) -> bool:
             logger.warning(
                 "LM Studio not accessible. Ensure LM Studio is running "
                 "and local server is enabled."
+            )
+            return False
+
+    elif model_id_lower in {
+        "ollama_minimax_m2_5_cloud",
+        "minimax_m2_5_cloud",
+        "minimax-m2.5-cloud",
+        "minimax-m2.5:cloud",
+    }:
+        # Check if Ollama OpenAI-compatible endpoint is accessible.
+        try:
+            import requests
+
+            api_base = (
+                os.getenv("OLLAMA_API_BASE")
+                or os.getenv("OLLAMA_BASE_URL")
+                or "http://localhost:11434"
+            ).rstrip("/")
+            if not api_base.endswith("/v1"):
+                api_base = f"{api_base}/v1"
+
+            headers = {}
+            api_key = os.getenv("OLLAMA_API_KEY")
+            if api_key:
+                headers["Authorization"] = f"Bearer {api_key}"
+
+            response = requests.get(f"{api_base}/models", headers=headers, timeout=3)
+            return response.status_code == 200
+        except Exception:
+            logger.warning(
+                "Ollama endpoint not accessible. Ensure `ollama serve` is running "
+                "or set OLLAMA_API_BASE/OLLAMA_BASE_URL for cloud endpoint access."
             )
             return False
 

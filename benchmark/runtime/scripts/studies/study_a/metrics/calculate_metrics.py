@@ -1,5 +1,7 @@
 """Calculate Study A metrics from existing generations without modifying results."""
 
+import argparse
+from datetime import datetime
 import json
 import sys
 from pathlib import Path
@@ -10,6 +12,10 @@ import logging
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent.parent / "src"))
 
 from reliable_clinical_benchmark.data.study_a_loader import load_study_a_data
+from reliable_clinical_benchmark.data.release_data_resolver import (
+    DATA_SOURCE_CHOICES,
+    resolve_metric_data_roots,
+)
 from reliable_clinical_benchmark.metrics.faithfulness import (
     _is_correct_diagnosis,
     extract_reasoning_steps,
@@ -231,10 +237,6 @@ def calculate_metrics_from_cache(
         "correct_early": correct_early,
     }
 
-
-from datetime import datetime
-import argparse
-
 def main():
     """Calculate metrics for all models in results directory."""
     parser = argparse.ArgumentParser(description="Calculate Study A (Faithfulness) metrics")
@@ -243,11 +245,37 @@ def main():
     parser.add_argument("--model", type=str, help="Process specific model only")
     parser.add_argument("--output-dir", type=Path, default=None,
                         help="Output directory for results")
+    parser.add_argument(
+        "--data-source",
+        choices=DATA_SOURCE_CHOICES,
+        default="latest_release",
+        help=(
+            "Dataset source mode (default: latest_release). "
+            "Use working_data for legacy data/ paths."
+        ),
+    )
+    parser.add_argument(
+        "--data-root",
+        type=Path,
+        default=None,
+        help=(
+            "Optional explicit root containing openr1_psy_splits/, study_a_gold/, "
+            "and study_c_gold/."
+        ),
+    )
     
     args = parser.parse_args()
     
     base_dir = Path(__file__).parent.parent.parent.parent.parent
-    data_dir = base_dir / "data" / "openr1_psy_splits"
+    try:
+        data_roots = resolve_metric_data_roots(
+            runtime_root=base_dir,
+            data_source=args.data_source,
+            data_root=args.data_root,
+        )
+    except (ValueError, FileNotFoundError) as exc:
+        logger.error(str(exc))
+        return 1
     
     if args.use_cleaned:
         results_dir = base_dir / "processed" / "study_a_pipeline"
@@ -261,17 +289,26 @@ def main():
     print("STUDY A: FAITHFULNESS METRICS")
     print("=" * 60)
     print(f"Source:   {results_dir}")
+    print(f"Data root:{data_roots.root}")
     print(f"Output:   {output_dir}")
     print(f"Time:     {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
+    logger.info("Using data source: %s", data_roots.source)
     
     # Load gold data
-    study_a_path = data_dir / "study_a_test.json"
+    study_a_path = data_roots.openr1_splits_dir / "study_a_test.json"
+    labels_path = data_roots.study_a_gold_dir / "gold_diagnosis_labels.json"
     if not study_a_path.exists():
         logger.error(f"Study A data not found: {study_a_path}")
-        return
+        return 1
+    if not labels_path.exists():
+        logger.error(f"Study A labels not found: {labels_path}")
+        return 1
     
-    vignettes = load_study_a_data(str(study_a_path))
+    vignettes = load_study_a_data(
+        str(study_a_path),
+        gold_diagnosis_labels_path=str(labels_path),
+    )
     logger.info(f"Loaded {len(vignettes)} vignettes from {study_a_path}")
     
     # Process each model directory
@@ -348,9 +385,9 @@ def main():
     
     if bias_metrics:
         logger.info(f"Merged bias metrics for {len([m for m in all_metrics.values() if m.get('n_total_adversarial', 0) > 0])} models")
+    return 0
 
 if __name__ == "__main__":
-    main()
-
+    raise SystemExit(main())
 
 
