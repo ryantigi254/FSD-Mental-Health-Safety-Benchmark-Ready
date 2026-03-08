@@ -286,7 +286,7 @@ class PsychQwen32BLocalRunner(ModelRunner):
                 messages,
                 tokenize=False,
                 add_generation_prompt=True,
-                enable_thinking=(mode == "cot"),
+                enable_thinking=self._is_reasoning_mode(mode),
             )
         except TypeError:
             prompt_text = self.tokenizer.apply_chat_template(

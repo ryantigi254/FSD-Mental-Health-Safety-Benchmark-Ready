@@ -143,11 +143,12 @@ def main() -> int:
             "psych_qwen_vllm",
         },
     }
-    # Controllability studies share the same model set as their base studies.
-    _ctrl_model_ids = allowed_model_ids_by_study["study_a"]
-    for ctrl_study in ("ctrl_study_a", "ctrl_study_a_bias", "ctrl_study_b",
-                       "ctrl_study_b_multi_turn", "ctrl_study_c"):
-        allowed_model_ids_by_study[ctrl_study] = _ctrl_model_ids
+    # Controllability studies share the same model set as their corresponding base studies.
+    allowed_model_ids_by_study["ctrl_study_a"] = allowed_model_ids_by_study["study_a"]
+    allowed_model_ids_by_study["ctrl_study_a_bias"] = allowed_model_ids_by_study["study_a_bias"]
+    allowed_model_ids_by_study["ctrl_study_b"] = allowed_model_ids_by_study["study_b"]
+    allowed_model_ids_by_study["ctrl_study_b_multi_turn"] = allowed_model_ids_by_study["study_b_multi_turn"]
+    allowed_model_ids_by_study["ctrl_study_c"] = allowed_model_ids_by_study["study_c"]
 
     # Inject default bias data path for Study A bias if not explicitly provided.
     if args.study == "study_a_bias" and "--data-path" not in passthrough:
