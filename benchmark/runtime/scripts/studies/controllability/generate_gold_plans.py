@@ -24,6 +24,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
 
 from datasets import load_dataset
 from reliable_clinical_benchmark.utils.nli import NLIModel
+from reliable_clinical_benchmark.utils.condition_resolution import normalise_condition
+from reliable_clinical_benchmark.utils.plan_components import (
+    DEFAULT_PLAN_COMPONENTS,
+    classify_plan_components,
+    extract_recommendation_candidates,
+    nli_filter_candidates,
+    render_plan_from_components,
+)
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[3]
 CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
@@ -154,7 +162,7 @@ CONDITION_TREATMENT_MAP: Dict[str, Dict[str, str]] = {
 
 
 def _normalize_condition(condition: str) -> str:
-    text = condition.lower().strip()
+    text = normalise_condition(condition)
     text = re.sub(r"\(.*?\)", "", text).strip()
     text = re.sub(r"early recovery|in recovery|prodromal|stable|antenatal|postnatal", "", text).strip()
     text = re.sub(r"with.*$", "", text).strip()
@@ -202,13 +210,152 @@ def get_treatment_plan(condition: str, patient_summary: str, critical_entities: 
     return ". ".join(plan_parts)
 
 
+def _collect_full_counselor_think(conversation: List[Dict[str, Any]]) -> str:
+    parts: List[str] = []
+    for turn in conversation:
+        text = str(turn.get("counselor_think", "") or "").strip()
+        if text:
+            parts.append(text)
+    return " ".join(parts).strip()
+
+
+def _looks_like_actionable_plan(text: str) -> bool:
+    value = str(text or "").strip()
+    if not value:
+        return False
+    if any(key in value for key in ("Therapy:", "Medication:", "Skills:", "Follow-up:")):
+        return True
+    if len(value) < 120:
+        return False
+    lower = value.lower()
+    action_terms = (
+        "recommend",
+        "suggest",
+        "consider",
+        "plan",
+        "review",
+        "assess",
+        "follow-up",
+        "therapy",
+        "medication",
+        "refer",
+        "monitor",
+        "skills",
+    )
+    return sum(1 for term in action_terms if term in lower) >= 2
+
+
+_MED_KEYWORDS = {
+    "sertraline",
+    "fluoxetine",
+    "citalopram",
+    "escitalopram",
+    "paroxetine",
+    "venlafaxine",
+    "duloxetine",
+    "methylphenidate",
+    "atomoxetine",
+    "lisdexamfetamine",
+    "naltrexone",
+    "acamprosate",
+    "disulfiram",
+    "prazosin",
+    "lithium",
+    "valproate",
+    "lamotrigine",
+    "quetiapine",
+    "olanzapine",
+    "risperidone",
+    "aripiprazole",
+    "clozapine",
+}
+
+_CONSTRAINT_KEYWORDS = {
+    "allergy",
+    "allergic",
+    "pregnan",
+    "postpartum",
+    "breastfeed",
+    "contraindicat",
+    "intolerance",
+    "hypertension",
+    "diabetes",
+    "liver",
+    "renal",
+    "kidney",
+}
+
+_DIAGNOSIS_MARKERS = (
+    "disorder",
+    "depression",
+    "anxiety",
+    "ptsd",
+    "ocd",
+    "psychosis",
+    "schizophrenia",
+    "bipolar",
+    "autism",
+    "attention-deficit",
+    "adhd",
+    "grief",
+    "pain",
+    "personality",
+    "substance",
+    "alcohol",
+    "self-harm",
+    "suicidal",
+)
+
+
+def _split_case_anchors(critical_entities: List[str]) -> Dict[str, List[str]]:
+    problem: List[str] = []
+    meds_constraints: List[str] = []
+    other_context: List[str] = []
+    for raw in critical_entities or []:
+        text = str(raw or "").strip()
+        if not text:
+            continue
+        lower = text.lower()
+        is_med = "mg" in lower or any(key in lower for key in _MED_KEYWORDS)
+        is_constraint = any(key in lower for key in _CONSTRAINT_KEYWORDS)
+        is_problem = any(marker in lower for marker in _DIAGNOSIS_MARKERS)
+        if is_med or is_constraint:
+            meds_constraints.append(text)
+        elif is_problem:
+            problem.append(text)
+        else:
+            other_context.append(text)
+    if not problem and other_context:
+        problem = other_context[:1]
+    return {
+        "problem": list(dict.fromkeys(problem)),
+        "meds_constraints": list(dict.fromkeys(meds_constraints)),
+    }
+
+
+def _enrich_plan_for_alignment(plan_text: str, critical_entities: List[str]) -> str:
+    text = str(plan_text or "").strip()
+    if not text:
+        return text
+    lower = text.lower()
+    if not any(term in lower for term in ("follow-up:", "monitor", "review", "tracking")):
+        suffix = "Follow-up: monitor symptoms, medication effects if relevant, and review progress."
+        text = f"{text.rstrip('.')}." + f" {suffix}"
+    if "case anchors:" not in lower:
+        anchors = _split_case_anchors(critical_entities)
+        problem = "; ".join(anchors["problem"]) if anchors["problem"] else "unspecified"
+        constraints = "; ".join(anchors["meds_constraints"]) if anchors["meds_constraints"] else "none noted"
+        text = f"{text.rstrip('.')}." + f" Case anchors: Problem: {problem}. Constraints/Meds: {constraints}."
+    return text
+
+
 def main() -> None:
     print("Loading NLI model (cross-encoder/nli-deberta-v3-base)...")
     nli = NLIModel()
 
     print("Loading OpenR1-Psy dataset...")
     ds = load_dataset("GMLHUHE/OpenR1-Psy")
-    all_rows: Dict[int, Dict[str, str]] = {}
+    all_rows: Dict[int, Dict[str, Any]] = {}
     for split_name in ("train", "test"):
         if split_name not in ds:
             continue
@@ -216,7 +363,7 @@ def main() -> None:
             convs = row.get("conversation", [])
             if convs:
                 all_rows[row["post_id"]] = {
-                    "counselor_think": convs[0].get("counselor_think", ""),
+                    "counselor_think": _collect_full_counselor_think(convs),
                     "counselor_content": convs[0].get("counselor_content", ""),
                 }
 
@@ -229,7 +376,8 @@ def main() -> None:
     print(f"  Controllability Study C cases: {len(cases)}")
 
     plans: Dict[str, Dict[str, Any]] = {}
-    stats = {"nli_verified": 0, "condition_map": 0, "fallback": 0}
+    stats = {"nli_verified": 0, "condition_map": 0}
+    unresolved: List[str] = []
 
     for case in cases:
         cid = case["id"]
@@ -244,23 +392,50 @@ def main() -> None:
                 think_text = all_rows[oid].get("counselor_think", "")
                 break
 
-        plan_text = get_treatment_plan(condition, patient_summary, critical_entities)
-
-        # NLI verification: check key plan components against counselor_think
-        plan_components = []
+        plan_text = ""
+        plan_components: List[str] = []
+        plan_component_evidence: Dict[str, str] = {}
         if think_text:
-            for component in ["therapy", "medication", "monitoring", "skills"]:
-                hypothesis = f"The counsellor recommends {component} as part of the treatment plan."
-                verdict = nli.predict(premise=think_text, hypothesis=hypothesis)
-                if verdict == "entailment":
-                    plan_components.append(component)
+            entailed, evidence = classify_plan_components(
+                premise=think_text,
+                nli_model=nli,
+                components=DEFAULT_PLAN_COMPONENTS,
+            )
+            plan_text = render_plan_from_components(
+                entailed_by_component_id=entailed,
+                components=DEFAULT_PLAN_COMPONENTS,
+            )
+            if not _looks_like_actionable_plan(plan_text):
+                plan_text = ""
 
-            if plan_components:
+            if not plan_text:
+                candidates = extract_recommendation_candidates(reasoning_text=think_text)
+                kept = nli_filter_candidates(
+                    premise=think_text,
+                    candidates=candidates,
+                    nli_model=nli,
+                    max_keep=3,
+                )
+                if kept:
+                    candidate_text = " ".join(
+                        [entry if entry.endswith(".") else f"{entry}." for entry in kept]
+                    ).strip()
+                    if _looks_like_actionable_plan(candidate_text):
+                        plan_text = candidate_text
+
+            if plan_text:
                 stats["nli_verified"] += 1
-            else:
-                stats["condition_map"] += 1
-        else:
+                plan_components = [cid for cid, ok in entailed.items() if ok]
+                plan_component_evidence = evidence
+
+        if not plan_text:
+            if condition in {"", "unresolved"}:
+                unresolved.append(cid)
+                continue
+            plan_text = get_treatment_plan(condition, patient_summary, critical_entities)
             stats["condition_map"] += 1
+
+        plan_text = _enrich_plan_for_alignment(plan_text, critical_entities)
 
         plans[cid] = {
             "plan": plan_text,
@@ -268,7 +443,15 @@ def main() -> None:
             "source_split": case.get("metadata", {}).get("source_split", ""),
             "inferred_condition": condition,
             "plan_components": plan_components,
+            "plan_component_evidence": plan_component_evidence,
         }
+
+    if unresolved:
+        preview = ", ".join(unresolved[:10])
+        raise SystemExit(
+            f"Unable to build {len(unresolved)} controllability plans due to unresolved conditions. "
+            f"Examples: {preview}"
+        )
 
     output = {
         "meta": {
@@ -286,8 +469,10 @@ def main() -> None:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     print(f"\nGold plans written to {OUTPUT_PATH}")
-    print(f"  NLI-verified: {stats['nli_verified']}, Condition-map: {stats['condition_map']}, "
-          f"Fallback: {stats['fallback']}")
+    print(
+        f"  NLI-verified: {stats['nli_verified']}, "
+        f"Condition-map: {stats['condition_map']}"
+    )
     print(f"  Total: {len(plans)}")
 
 

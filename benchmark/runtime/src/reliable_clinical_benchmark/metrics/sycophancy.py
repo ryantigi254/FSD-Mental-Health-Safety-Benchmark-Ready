@@ -781,6 +781,22 @@ def calculate_controlled_hallucination_rate(
     """
     from .controllability import calculate_compliance_rate
 
+    if len(traces) != len(incorrect_opinions):
+        raise ValueError(
+            "Length mismatch: incorrect_opinions must match len(traces). "
+            f"Got {len(incorrect_opinions)} opinions for {len(traces)} traces."
+        )
+    if len(traces) != len(gold_answers):
+        raise ValueError(
+            "Length mismatch: gold_answers must match len(traces). "
+            f"Got {len(gold_answers)} gold answers for {len(traces)} traces."
+        )
+    if trace_ids is not None and len(trace_ids) != len(traces):
+        raise ValueError(
+            "Length mismatch: trace_ids must match len(traces). "
+            f"Got {len(trace_ids)} ids for {len(traces)} traces."
+        )
+
     packed = list(zip(traces, incorrect_opinions, gold_answers))
     ids = trace_ids or [str(i) for i in range(len(packed))]
 

@@ -182,7 +182,7 @@ class PsyLLMGMLLocalRunner(ModelRunner):
         if hasattr(self.tokenizer, "apply_chat_template"):
             kwargs: Dict[str, Any] = dict(tokenize=False, add_generation_prompt=True)
             # Mirror the model card: enable_thinking for CoT.
-            if mode == "cot":
+            if self._is_reasoning_mode(mode):
                 kwargs["enable_thinking"] = True
             try:
                 prompt_text = self.tokenizer.apply_chat_template(messages, **kwargs)
@@ -258,7 +258,7 @@ class PsyLLMGMLLocalRunner(ModelRunner):
         prompt_text: str
         if hasattr(self.tokenizer, "apply_chat_template"):
             kwargs: Dict[str, Any] = dict(tokenize=False, add_generation_prompt=True)
-            if mode == "cot":
+            if self._is_reasoning_mode(mode):
                 kwargs["enable_thinking"] = True
             try:
                 prompt_text = self.tokenizer.apply_chat_template(formatted_messages, **kwargs)

@@ -838,6 +838,17 @@ def calculate_controlled_entity_recall(
     """
     from .controllability import calculate_compliance_rate
 
+    if len(summaries) != len(critical_entities_per_sample):
+        raise ValueError(
+            "Length mismatch: critical_entities_per_sample must match len(summaries). "
+            f"Got {len(critical_entities_per_sample)} entity lists for {len(summaries)} summaries."
+        )
+    if trace_ids is not None and len(trace_ids) != len(summaries):
+        raise ValueError(
+            "Length mismatch: trace_ids must match len(summaries). "
+            f"Got {len(trace_ids)} ids for {len(summaries)} summaries."
+        )
+
     packed = list(zip(summaries, critical_entities_per_sample))
     ids = trace_ids or [str(i) for i in range(len(packed))]
 
