@@ -39,6 +39,8 @@ benchmark/runtime/metric-results/misc/
 benchmark/runtime/scripts/preprocessing/misc/
 benchmark/runtime/docs/misc/
 benchmark/runtime/analysis/
+benchmark/runtime/docs/reports/**/stage2_gate_report.json
+benchmark/runtime/docs/reports/**/sendoff_preflight_report.json
 benchmark/runtime/processed/_archived/
 benchmark/runtime/results/**/study_a_generations.jsonl
 benchmark/runtime/results/**/study_b_generations.jsonl
@@ -61,3 +63,13 @@ models/
 
 # Root policy file kept local
 /AGENTS.md
+
+# Local helper scripts
+scripts/*.sh
+
+# Local Codex run history
+codex_logs/
+
+# Local PGFPlots test drafts
+benchmark/runtime/tests/unit/test_generate_pgfplots.py
+benchmark/runtime/tests/unit/test_generate_pgfplots_additional.py
