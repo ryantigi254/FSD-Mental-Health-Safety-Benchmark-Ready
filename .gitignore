@@ -41,6 +41,11 @@ benchmark/runtime/data/verification/
 benchmark/runtime/data/DATASET_TURN_ANALYSIS_REPORT.md
 benchmark/runtime/data/persona_splits_report.md
 benchmark/runtime/analysis/
+benchmark/runtime/results/
+codex_logs/
+benchmark/runtime/tests/unit/test_generate_pgfplots.py
+benchmark/runtime/tests/unit/test_generate_pgfplots_additional.py
+scripts/archive_codex_scratchpad.sh
 
 # Windsurf local config/state (ignore everything)
 .windsurf/
