@@ -1,236 +1,116 @@
-# Metrics Calculation Summary
+# Metrics Summary (v3.2)
 
-**Last Updated**: 2026-01-27  
-**Status**: All metrics calculated with bootstrap confidence intervals (95% CI)
+**Last updated**: 2026-02-23
+**Scope**: Current metric contracts, inputs/outputs, and interpretation boundaries for Studies A, B, and C.
 
-## Overview
+## Canonical metrics docs
 
-This document summarises all metrics calculated across the three studies after implementing supervisor feedback improvements. All metrics now include **bootstrap confidence intervals** (95% CI) for publication-quality statistical reporting.
+This folder is intentionally kept to two canonical files:
 
----
+- `METRICS_SUMMARY.md` (this file): contract and interpretation scope
+- `METRIC_CALCULATION_PIPELINE.md`: operational calculation pipeline and commands
 
-## Study A: Faithfulness & Reasoning Quality
+## Inputs and outputs
 
-### Primary Metrics
+Primary inputs:
 
-#### 1. **Faithfulness Gap (Δ_Reasoning)**
-- **Formula**: `Δ_Reasoning = Acc_CoT - Acc_Early`
-- **Interpretation**: Measures whether Chain-of-Thought reasoning improves accuracy. Negative values indicate reasoning degrades performance.
-- **CI**: ✅ Bootstrap 95% CI included
-- **Sample Results** (deepseek-r1-distill-qwen-7b):
-  - Point estimate: -0.081
-  - CI: [-0.114, -0.047]
-  - **Finding**: Reasoning reduces accuracy by ~8% (statistically significant)
+- default source for Study A/B/C metrics: latest release from `data/releases/LATEST.md`
+- override options:
+  - `--data-source working_data` to read legacy `data/` paths
+  - `--data-root <root>` for explicit release/custom root
+- required dataset layout at resolved root:
+  - `openr1_psy_splits/study_a_test.json`
+  - `openr1_psy_splits/study_b_test.json`
+  - `openr1_psy_splits/study_b_multi_turn_test.json`
+  - `openr1_psy_splits/study_c_test.json`
+  - `study_a_gold/gold_diagnosis_labels.json`
+  - `study_c_gold/`
+- `data/adversarial_bias/biased_vignettes.json` (canonical v3.2 Study A bias set)
 
-#### 2. **Accuracy Metrics**
-- **Acc_CoT**: Accuracy with Chain-of-Thought reasoning
-  - Sample: 0.010 (1.0%) [CI: 0.000, 0.023]
-- **Acc_Early**: Accuracy with direct diagnosis (no reasoning)
-  - Sample: 0.091 (9.1%) [CI: 0.060, 0.124]
-- **CI**: ✅ Bootstrap 95% CI included
+Primary outputs:
 
-### Diagnostic Metrics
+- `metric-results/study_a/all_models_metrics.json`
+- `metric-results/study_a/study_a_bias_metrics.json`
+- `metric-results/study_b/sycophancy_metrics.json`
+- `metric-results/study_c/drift_metrics.json`
 
-#### 3. **Step-F1**
-- **Formula**: F1 score for reasoning step matching (greedy overlap ≥0.6)
-- **Interpretation**: Measures quality of extracted reasoning steps vs. gold standard
-- **CI**: ✅ Bootstrap 95% CI included
-- **Sample Results**:
-  - deepseek-r1-distill-qwen-7b: 0.013 [CI: 0.010, 0.016]
-  - deepseek-r1-lmstudio: 0.016 [CI: 0.013, 0.019]
-  - psyllm-gml-local: 0.110 [CI: varies]
-- **Finding**: Low Step-F1 scores (0.013-0.027) indicate **poor reasoning quality**, not extraction errors. Extraction verified working (21 steps extracted from `<think>` tags).
+## Study A metric contract
 
-### Supplementary Metrics
+Primary:
 
-#### 4. **Silent Bias Rate (R_SB)**
-- **Formula**: `R_SB = Silent_Biased / Total_Biased`
-- **Interpretation**: Proportion of biased answers where biasing feature not mentioned in reasoning
-- **Sample**: deepseek-r1-lmstudio: 0.143 (14.3% of biased outcomes are silent)
+- `faithfulness_gap = acc_cot - acc_early`
+- `acc_cot`
+- `acc_early`
 
-#### 5. **Refusal Rate**
-- **Interpretation**: Proportion of cases where model refuses to provide diagnosis
-- **Sample**: deepseek-r1-distill-qwen-7b: 0.003 (0.3%)
+Diagnostic:
 
-### Improvements Made
-- ✅ **Reasoning Extraction**: Updated `extract_reasoning_steps()` to handle:
-  - `<think>...</think>` XML tags (DeepSeek-R1, QwQ style)
-  - `REASONING:...DIAGNOSIS:` markers (fallback)
-  - Everything before `DIAGNOSIS:` (final fallback)
-- ✅ **Bootstrap CIs**: All metrics now include 95% confidence intervals
+- `step_f1`
 
----
+Supplementary:
 
-## Study B: Sycophancy & Resistance to Pressure
+- `silent_bias_rate` (`R_SB`)
 
-### Primary Metrics
+### Study A bias scope note (current contract)
 
-#### 1. **Sycophancy Probability (P_Syc)**
-- **Formula**: `P_Syc = P(Agree | Injected) - P(Agree | Control)`
-- **Interpretation**: Measures tendency to agree with incorrect user opinions. Negative values indicate resistance to sycophancy.
-- **CI**: ✅ Bootstrap 95% CI included
-- **Sample Results**:
-  - deepseek-r1-distill-qwen-7b: -0.105 [CI: -0.137, -0.072]
-  - deepseek-r1-lmstudio: -0.166 [CI: -0.209, -0.123]
-  - qwen3-lmstudio: -0.040 [CI: varies]
-- **Finding**: All models show **negative P_Syc** (resistant to sycophancy), with statistically significant CIs.
+- `R_SB` is computed from `bias_label` and `bias_feature` behaviour in generated reasoning/output.
+- Current contract is proxy-based and does **not** require `correct_diagnosis`.
+- `correct_diagnosis` is reserved for a future, separate metric version (accuracy-aware/pair-aware bias scoring), not for current v3.x reporting.
 
-### Diagnostic Metrics
+## Study B metric contract
 
-#### 2. **Evidence Hallucination (H_Ev)**
-- **Formula**: `H_Ev = Unsupported_Claims / Total_Claims`
-- **Interpretation**: Rate of unsupported claims in responses that agree with incorrect opinions (verified via NLI)
-- **CI**: ✅ Bootstrap 95% CI included
-- **Sample**: Most models: 0.000 (no evidence hallucination detected)
+Primary:
 
-### Supplementary Metrics
+- `sycophancy_probability` (`P_Syc`)
 
-#### 3. **Flip Rate**
-- **Formula**: `Flip_Rate = Count(Correct_Control → Incorrect_Injected) / Count(Correct_Control)`
-- **Interpretation**: Rate of changing correct diagnosis to incorrect under pressure
-- **Computation**: Analysis notebooks (from cached control/injected generations)
-- **Sample**: All models: 0.000 (verify in analysis after rerun)
-- **Finding**: Zero flip rates suggest models maintain correctness even under pressure (or agreement detection needs further refinement).
+Diagnostic:
 
-#### 4. **Turn of Flip (ToF)**
-- **Interpretation**: First turn at which model leaves ground-truth stance
-- **Sample**: All models: 5.0 (safe window, no early flips detected)
+- `evidence_hallucination` (`H_Ev`) when NLI is enabled
 
-### Improvements Made
-- ✅ **Agreement Detection**: Enhanced `is_agreement()` to catch:
-  - Nuanced phrases: "you raise a valid point", "that makes sense", "that's a possibility"
-  - Context-aware detection with contradiction checking
-  - Better handling of soft corrections vs. true agreement
-- ✅ **Bootstrap CIs**: P_Syc and H_Ev include 95% confidence intervals; Flip Rate computed offline when needed
+Supplementary:
 
----
+- `flip_rate`
+- `turn_of_flip` (where applicable in analysis outputs)
+- Study B CLI supports `--no-nli` for deterministic smoke runs; this forces `H_Ev` to `0.0`
 
-## Study C: Longitudinal Drift & Memory Retention
+## Study C metric contract
 
-### Primary Metrics
+Primary:
 
-#### 1. **Entity Recall @ Turn 10 (Recall@T10)**
-- **Formula**: `Recall_t = |E_Pred(S_t) ∩ E_True(T_1)| / |E_True(T_1)|`
-- **Interpretation**: Percentage of critical medical entities (from Turn 1) still mentioned at Turn 10. Measures memory retention over conversation length.
-- **CI**: ✅ Bootstrap 95% CI included
-- **Sample Results**:
-  - deepseek-r1-lmstudio: 1.000 [CI: 1.000, 1.000]
-  - qwen3-lmstudio: 1.000 [CI: 1.000, 1.000]
-  - All models: 1.000 (perfect retention)
-- **Finding**: All models show perfect entity recall at T10 (may indicate limited test cases or high-quality summaries).
+- `entity_recall_t10`
+- entity recall curve metrics
 
-#### 2. **Entity Recall Curve**
-- **Interpretation**: Recall at each turn (T1, T5, T10, etc.)
-- **Sample**: Most models show flat curve at 1.0 across all turns
+Diagnostic:
 
-### Diagnostic Metrics
+- `knowledge_conflict_rate`
 
-#### 3. **Knowledge Conflict Rate (K_Conflict)**
-- **Formula**: `K_Conflict = Count(NLI(Contradiction)) / Total_Turn_Pairs`
-- **Interpretation**: Rate of self-contradiction between consecutive turns
-- **CI**: ✅ Bootstrap 95% CI included
-- **Sample**: All models: 0.000 [CI: 0.000, 0.000]
-- **Finding**: No contradictions detected (may indicate consistent advice or limited test cases).
+Supplementary:
 
-#### 4. **Truth Decay Rate (TDR)**
-- **Formula**: Linear regression slope of recall curve: `Recall_t = α + β × t`
-- **Interpretation**: Speed of entity forgetting (negative slope = degradation)
-- **Sample**: Most models: 0.0000 (no decay detected)
+- `session_goal_alignment` family (only when required target-plan data is available)
 
-### Supplementary Metrics
+## Reproducibility and omission behaviour
 
-#### 5. **Session Goal Alignment**
-- **Formula**: Cosine similarity between model actions and target plan (sentence embeddings)
-- **Interpretation**: Measures adherence to clinical care plan
-- **Sample**: Not calculated (requires target_plan data in case structure)
+- Bootstrap CIs are computed for supported metrics via the shared stats utilities.
+- Deterministic sampling/index order is used where applicable in offline scoring stages.
+- When a supplementary metric cannot be computed from available data, it is treated as missing and omitted from result payloads instead of being forced to `0.0`.
 
-### Improvements Made
-- ✅ **Bootstrap CIs**: Entity Recall@T10 and Knowledge Conflict Rate now include 95% confidence intervals
-- ✅ **Import Fixes**: Resolved spacy dependency issues for metric calculation scripts
+## Quick reference
 
----
+Core calculation scripts:
 
-## Statistical Reporting
+- `scripts/studies/study_a/metrics/calculate_metrics.py`
+- `scripts/studies/study_a/metrics/calculate_bias.py`
+- `scripts/studies/study_b/metrics/calculate_metrics.py`
+- `scripts/studies/study_c/metrics/calculate_metrics.py`
 
-### Bootstrap Confidence Intervals
+Core metric modules:
 
-All metrics now use **non-parametric bootstrap CIs** (Efron & Tibshirani, 1993):
-- **Method**: 1000 resamples with replacement
-- **Confidence Level**: 95% (α = 0.05)
-- **Percentiles**: 2.5th and 97.5th percentiles
+- `src/reliable_clinical_benchmark/metrics/faithfulness.py`
+- `src/reliable_clinical_benchmark/metrics/sycophancy.py`
+- `src/reliable_clinical_benchmark/metrics/drift.py`
+- `src/reliable_clinical_benchmark/utils/stats.py`
 
-### CI Coverage by Study
+## Related docs
 
-| Study | Metrics with CIs | Status |
-|-------|------------------|--------|
-| **Study A** | Faithfulness Gap, Acc_CoT, Acc_Early, Step-F1 | ✅ Complete |
-| **Study B** | P_Syc, H_Ev (Flip Rate offline) | ✅ Complete |
-| **Study C** | Entity Recall@T10, Knowledge Conflict Rate | ✅ Complete |
-
----
-
-## Key Findings
-
-### 1. Reasoning Quality (Study A)
-- **Step-F1 scores are low (0.013-0.027)** despite working extraction
-- **Conclusion**: Models produce poor-quality reasoning, not extraction errors
-- **Faithfulness Gap**: Negative across all models (reasoning degrades accuracy)
-
-### 2. Sycophancy Resistance (Study B)
-- **All models show negative P_Syc** (resistant to sycophancy)
-- **Flip Rate**: 0.000 across all models (verify in analysis; may need agreement detection refinement)
-- **Evidence Hallucination**: 0.000 (no unsupported claims detected)
-
-### 3. Memory Retention (Study C)
-- **Perfect entity recall** at T10 across all models
-- **No knowledge conflicts** detected
-- **Note**: Current test cases (1-30 cases per model) are below ideal sample size
-
-#### Ideal Sample Size for Study C
-Based on the evaluation protocol specification:
-- **Target**: 40 base cases × 10 turns = 400 prompts per model
-- **With 15% buffer**: 46 cases = 460 prompts per model
-- **Current**: 30 cases (75% of target)
-- **Recommendation**: Increase to 40-46 cases for statistically robust generalisability
-
-**Rationale**: 
-- Longitudinal drift evaluation requires sufficient cases to capture variability in entity retention patterns
-- 40 cases provides adequate statistical power for bootstrap confidence intervals
-- 15% buffer accounts for generation failures and quality control rejects
-
----
-
-## Files & Locations
-
-### Metric Results
-- **Study A**: `metric-results/study_a/all_models_metrics.json`
-- **Study B**: `metric-results/study_b/sycophancy_metrics.json`
-- **Study C**: `metric-results/study_c/drift_metrics.json`
-
-### Calculation Scripts
-- **Study A**: `scripts/studies/study_a/metrics/calculate_metrics.py`
-- **Study B**: `scripts/studies/study_b/metrics/calculate_metrics.py`
-- **Study C**: `scripts/studies/study_c/metrics/calculate_metrics.py`
-
-### Metric Implementations
-- **Faithfulness**: `src/reliable_clinical_benchmark/metrics/faithfulness.py`
-- **Sycophancy**: `src/reliable_clinical_benchmark/metrics/sycophancy.py`
-- **Drift**: `src/reliable_clinical_benchmark/metrics/drift.py`
-- **Stats Utils**: `src/reliable_clinical_benchmark/utils/stats.py`
-
----
-
-## Next Steps
-
-1. **Investigate Flip Rate = 0.0**: May need further refinement of agreement detection heuristics
-2. **Analyse Step-F1**: Low scores suggest reasoning quality issues; consider prompt engineering
-3. **Expand Study C**: More test cases needed for generalisable drift analysis
-4. **Update Analysis Notebooks**: Regenerate visualisations with new CI data
-
----
-
-## References
-
-- **Bootstrap Method**: Efron, B., & Tibshirani, R. J. (1993). *An Introduction to the Bootstrap*. Chapman & Hall.
-- **Metric Specifications**: `benchmark/runtime/docs/spec/Metrics and Evaluation.tex`
-- **Implementation Details**: `benchmark/runtime/docs/studies/`
+- `benchmark/runtime/docs/studies/study_a/study_a_bias.md`
+- `benchmark/runtime/docs/scaling/study/study a bias/BIAS_SCALING_GUIDE.md`
+- `benchmark/runtime/docs/spec/Metrics and Evaluation.tex`

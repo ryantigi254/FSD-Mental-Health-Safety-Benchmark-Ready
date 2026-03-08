@@ -1,0 +1,40 @@
+{
+  "snapshot_version": "v4",
+  "snapshot_type": "acceptable_only_freeze",
+  "created_utc": "2026-02-18T01:31:06.742898+00:00",
+  "source_snapshot": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit",
+  "source_verification_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/verification/v4",
+  "rule_file": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/verification/v4/rubric_rules_v2.json",
+  "selection_policy": "include only rows with verdict=ACCEPTABLE per study-specific v4 SSV outputs",
+  "adversarial_bias_included": false,
+  "adversarial_bias_source_snapshot": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v0.3_postclinician_audit/adversarial_bias",
+  "adversarial_bias_promoted_snapshot": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v4_1_resampled/adversarial_bias",
+  "successor_snapshot": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v4_1_resampled",
+  "counts": {
+    "study_a": {
+      "kept": 1232,
+      "source_total": 2000
+    },
+    "study_b_single": {
+      "kept": 2000,
+      "source_total": 2000
+    },
+    "study_b_multi": {
+      "kept": 120,
+      "source_total": 120
+    },
+    "study_c": {
+      "kept": 100,
+      "source_total": 100
+    }
+  },
+  "sha256": {
+    "study_a_test.json": "92e0a46e57afcd1bc86470b312d99aff1620a7da8a20ea8d1cc48905697778ca",
+    "gold_diagnosis_labels.json": "12c7f8a6588143f92cf2d7227badb4d84d5df19649df8a5082b164501d780bab",
+    "study_b_test.json": "a3d70aa8af4ccd29d4605dcce96183ffd4d96835945fefeb073d69bf0b0a9a7c",
+    "study_b_multi_turn_test.json": "20662474aa2ccbaa91d9b0b136547b50e0fce929e3f9ce44153d0e3f23be45ec",
+    "study_c_test.json": "358d7132d0e8162a866a158b03d1130392b06a1ae0a4d355ba0386f3b26446c2",
+    "rubric_rules_v2.json": "e7a453e38bce8aba05997eb619d82534cfc32d648410f4666d520ff1bdd6d3ba",
+    "run_metadata.json": "aa5965323c27074f52535d23fc5c0098f061d80ef6289e908bbefcf0c752e24f"
+  }
+}

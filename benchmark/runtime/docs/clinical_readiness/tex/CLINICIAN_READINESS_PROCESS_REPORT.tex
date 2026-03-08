@@ -1,0 +1,192 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\title{Clinician-Readiness Dataset Process Report\\v0.3 Final Line}
+\author{FSD Mental Health Safety Benchmark Team}
+\date{17 February 2026}
+
+\begin{document}
+\maketitle
+
+\section{Purpose}
+This report documents the final process that led to the current clinician-readiness dataset line in this repository. The intent is to describe why the changes were made and what changed at study level, not to justify individual commits.
+
+The process is framed as three phases:
+\begin{enumerate}[leftmargin=1.5em]
+  \item small-scope benchmark run,
+  \item scaling to publication-grade sample sizes,
+  \item clinician-readiness hardening and reproducibility gates.
+\end{enumerate}
+
+\section{Claim Boundary and Positioning}
+OpenR1-Psy is used as the upstream source corpus and is treated as clinically grounded according to the published construction process (DSM/ICD-guided reasoning plus automated filtering). This project does \textbf{not} claim full clinician adjudication of all labels/plans in the current release line.
+
+The v0.3 work therefore focuses on:
+\begin{itemize}[leftmargin=1.5em]
+  \item reproducibility (frozen snapshots, local hash manifests, release discipline),
+  \item benchmark integrity (label/mapping/schema consistency),
+  \item clinician usability (join-free exports with explicit review metadata),
+  \item fail-closed validation behaviour.
+\end{itemize}
+
+\section{Process Timeline}
+\subsection{Phase 0: Small-Scope Baseline}
+The initial benchmark documentation records a small run configuration (Study A around 300 prompts, Study B around 276 single-turn plus 10 multi-turn, Study C around 30 cases). This phase established metric wiring and runner behaviour before full scaling.
+
+\subsection{Phase 1: Scaling}
+Scaling moved the benchmark to larger operational sample sizes used by the current branch:
+\begin{itemize}[leftmargin=1.5em]
+  \item Study A split: 2000 samples,
+  \item Study B split: 2000 single-turn samples,
+  \item Study B multi-turn split: 120 cases (20-turn conversations),
+  \item Study C split: 100 cases.
+\end{itemize}
+
+This stage was about statistical adequacy, persona coverage, and stress-testing conditions, not clinician package readiness.
+
+\subsection{Phase 2: Clinician-Readiness}
+The clinician-readiness line then introduced auditability and packaging controls. Commit sequence on this branch shows a clean evolution:
+\begin{itemize}[leftmargin=1.5em]
+  \item pre-update freeze capture,
+  \item gold artefact rerun and diff capture,
+  \item v0.3 frozen snapshot with declared artefacts,
+  \item clinician package builder and stage gates,
+  \item final tightening pass (schema, routing, preflight robustness).
+\end{itemize}
+
+\section{Study-Wise Updates}
+\subsection{Study A: Label and Metadata Integrity}
+\textbf{What changed}
+\begin{itemize}[leftmargin=1.5em]
+  \item Frozen v0.2 to v0.3 comparison shows 560/2000 label value differences in \texttt{gold\_diagnosis\_labels.json}.
+  \item Tier-2 correction set applied for 8 audited IDs (non-clinical and substance-primary cases).
+  \item Mapping coherence repaired on the legacy 300-row mapping surface (176 entries synced).
+  \item Metadata remained sparse by design (27 explicit IDs), with 10 enriched entries and explicit review/certainty fields.
+  \item Export canonicalisation added through \texttt{label\_canonical\_map.json} (17 canonical labels, 6 aliases).
+\end{itemize}
+
+\textbf{Why it was needed}
+\begin{itemize}[leftmargin=1.5em]
+  \item Remove label provenance conflicts that break audit defensibility.
+  \item Prevent format-only label drift in clinician-facing exports.
+  \item Keep uncertainty explicit for high-risk review rows.
+\end{itemize}
+
+\subsection{Study B: Schema Safety and Pressure Construct Reliability}
+\textbf{What changed}
+\begin{itemize}[leftmargin=1.5em]
+  \item Runtime schema validation was hardened to return structured failure on malformed payloads (instead of raising).
+  \item Multi-turn pressure set remained balanced (40/40/40 by style and schedule).
+  \item Deterministic \texttt{turns\_text} export was added for spreadsheet review.
+  \item Stage-2 validators were attached to package gates:
+  \begin{itemize}[leftmargin=1.5em]
+    \item multi-turn uniqueness (no duplicate full-turn signatures),
+    \item construct validation (pass rate 97.5\% on 2000 rows).
+  \end{itemize}
+\end{itemize}
+
+\textbf{Why it was needed}
+\begin{itemize}[leftmargin=1.5em]
+  \item Prevent runtime/schema edge cases from surfacing only after generation.
+  \item Ensure pressure tests remain credible and non-template-like.
+  \item Make clinician sheet review operational without JSON parsing.
+\end{itemize}
+
+\subsection{Study C: Plan Quality and Entity Anchoring Defensibility}
+\textbf{What changed}
+\begin{itemize}[leftmargin=1.5em]
+  \item Frozen v0.2 to v0.3 comparison shows 92/100 target-plan entries changed.
+  \item Entity evidence map added (100 case entries, 2 semantic synonym groups).
+  \item Anchoring validator logic hardened:
+  \begin{itemize}[leftmargin=1.5em]
+    \item case evidence must be non-empty and present in \texttt{patient\_summary},
+    \item synonym miss must still evaluate case-evidence fallback.
+  \end{itemize}
+  \item Study C exports include explicit \texttt{persona\_id} for duplicated-persona interpretation.
+\end{itemize}
+
+\textbf{Why it was needed}
+\begin{itemize}[leftmargin=1.5em]
+  \item Stop false-positive ``anchored'' outcomes from weak evidence handling.
+  \item Keep plan/entity artefacts inspectable at case level.
+  \item Avoid ambiguity in duplicated-persona review scenarios.
+\end{itemize}
+
+\section{Reproducibility and Release Discipline}
+\subsection{Snapshot and Release Separation}
+Two contracts are kept separate:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Frozen snapshot source-of-truth}: \texttt{data/frozen\_splits/v0.3\_postclinician\_audit/}
+  \item \textbf{Consumer release source-of-truth}: \texttt{data/releases/clinician\_readiness\_v0.3\_2026-02-16/}
+\end{itemize}
+
+\subsection{Deterministic Package Outputs}
+Current clinician package row counts are fixed by builder gates:
+\begin{itemize}[leftmargin=1.5em]
+  \item Study A review: 2000 rows,
+  \item Study B single-turn review: 2000 rows,
+  \item Study B multi-turn review: 120 rows,
+  \item Study C review: 100 rows,
+  \item Safety-priority review: 32 rows.
+\end{itemize}
+
+\subsection{Preflight and Gate Status}
+The v0.3 preflight report records all checks passing, including:
+\begin{itemize}[leftmargin=1.5em]
+  \item runtime schema tests,
+  \item stage-2 gate script,
+  \item package build and manifest checks,
+  \item frozen snapshot manifest checks,
+  \item release manifest verify checks.
+\end{itemize}
+
+\section{What Changed vs What Did Not}
+\subsection{Changed}
+\begin{itemize}[leftmargin=1.5em]
+  \item Reference labels/plans/metadata consistency and review policy overlays.
+  \item Validator strictness, packaging semantics, and reproducibility controls.
+  \item Clinician-facing ergonomics (explicit columns, deterministic fields, routeable safety sheet).
+\end{itemize}
+
+\subsection{Not Changed}
+\begin{itemize}[leftmargin=1.5em]
+  \item No raw split regeneration in the final tightening pass.
+  \item No schema rewrite of upstream raw OpenR1-Psy payload files.
+  \item No claim of full clinician adjudication for the entire corpus.
+\end{itemize}
+
+\section{Decision Rationale for Keeping v0.3}
+Keeping the v0.3 line is the defensible stop point for this cycle:
+\begin{itemize}[leftmargin=1.5em]
+  \item it preserves comparability with upstream OpenR1-Psy content,
+  \item it materially improves benchmark reliability and reproducibility,
+  \item it avoids overclaiming clinician validation,
+  \item it provides a clean base for optional future clinician subset adjudication.
+\end{itemize}
+
+\section{Future Work (Optional)}
+\begin{itemize}[leftmargin=1.5em]
+  \item stratified clinician review subset for reference-quality calibration,
+  \item expansion from sparse to dense Study A metadata if operationally required,
+  \item further Study C entity-count naturalisation beyond the v0.3 normalised baseline.
+\end{itemize}
+
+\section{Primary Artefact References}
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{benchmark/runtime/data/frozen\_splits/v0.2\_preclinician/manifest.json}
+  \item \texttt{benchmark/runtime/data/frozen\_splits/v0.3\_postclinician\_audit/manifest.json}
+  \item \texttt{benchmark/runtime/data/frozen\_splits/v0.3\_postclinician\_audit/audit\_fix\_diff\_summary.json}
+  \item \texttt{benchmark/runtime/docs/reports/clinician\_package/v0.3/sendoff\_preflight\_report.json}
+  \item \texttt{benchmark/runtime/docs/reports/clinician\_package/v0.3/stage2\_gate\_report.json}
+  \item \texttt{benchmark/runtime/data/releases/LATEST.md}
+\end{itemize}
+
+\end{document}

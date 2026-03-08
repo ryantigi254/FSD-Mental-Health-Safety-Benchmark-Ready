@@ -155,10 +155,37 @@ class PsychQwen32BLocalRunner(ModelRunner):
             ),
         )
 
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True, local_files_only=local_files_only)
+        try:
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                model_name,
+                use_fast=True,
+                local_files_only=local_files_only,
+            )
+        except Exception as exc:
+            logger.warning(
+                "Fast tokenizer init failed for %s (%s). Falling back to slow tokenizer.",
+                model_name,
+                exc,
+            )
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                model_name,
+                use_fast=False,
+                local_files_only=local_files_only,
+            )
         # Ensure the chat template matches Qwen3-style thinking/non-thinking separation.
         self.tokenizer.chat_template = PSYCH_QWEN_CHAT_TEMPLATE
         model_config = AutoConfig.from_pretrained(model_name, local_files_only=local_files_only)
+
+        if torch.backends.mps.is_available() and device_map == "auto":
+            logger.warning(
+                "Forcing CPU device_map for %s on Apple Silicon to avoid MPS warmup/allocation failures.",
+                model_name,
+            )
+            device_map = "cpu"
+
+        if torch.backends.mps.is_available() and device_map != "cpu" and dtype == torch.bfloat16:
+            logger.warning("MPS does not support bfloat16; falling back to float16 for %s.", model_name)
+            dtype = torch.float16
 
         # Quantization + offload notes:
         # - 32B in bf16 won't fit 24GB VRAM. 8-bit usually still too big (~32GB weights).
@@ -172,37 +199,58 @@ class PsychQwen32BLocalRunner(ModelRunner):
         
         if q in ("4bit", "4-bit", "bnb4", "bnb_4bit", "nf4"):
             if not has_cuda:
-                raise RuntimeError(
-                    "4-bit quantization requires CUDA/GPU, but no GPU is available. "
-                    "Either use a GPU-enabled system or set quantization='none' for CPU-only inference."
+                if torch.backends.mps.is_available():
+                    logger.warning(
+                        "4-bit quantization requested for %s on Apple Silicon unified memory. "
+                        "bitsandbytes 4-bit is CUDA-only in this runtime, so falling back to non-quantized mode.",
+                        model_name,
+                    )
+                    quantization_config = None
+                    q = "none"
+                else:
+                    raise RuntimeError(
+                        "4-bit quantization requires CUDA/GPU, but no GPU is available. "
+                        "Either use a GPU-enabled system or set quantization='none' for CPU-only inference."
+                    )
+            if q == "none":
+                pass
+            else:
+                try:
+                    from transformers import BitsAndBytesConfig
+                except Exception as e:  # pragma: no cover
+                    raise RuntimeError(
+                        "4-bit quantization requested but BitsAndBytesConfig is unavailable. "
+                        "Install bitsandbytes (and a compatible CUDA build), or use WSL2/Linux."
+                    ) from e
+                quantization_config = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_quant_type="nf4",
+                    bnb_4bit_use_double_quant=True,
+                    bnb_4bit_compute_dtype=dtype,
                 )
-            try:
-                from transformers import BitsAndBytesConfig
-            except Exception as e:  # pragma: no cover
-                raise RuntimeError(
-                    "4-bit quantization requested but BitsAndBytesConfig is unavailable. "
-                    "Install bitsandbytes (and a compatible CUDA build), or use WSL2/Linux."
-                ) from e
-            quantization_config = BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_quant_type="nf4",
-                bnb_4bit_use_double_quant=True,
-                bnb_4bit_compute_dtype=dtype,
-            )
         elif q in ("8bit", "8-bit", "bnb8", "bnb_8bit"):
             if not has_cuda:
-                raise RuntimeError(
-                    "8-bit quantization requires CUDA/GPU, but no GPU is available. "
-                    "Either use a GPU-enabled system or set quantization='none' for CPU-only inference."
-                )
-            try:
-                from transformers import BitsAndBytesConfig
-            except Exception as e:  # pragma: no cover
-                raise RuntimeError(
-                    "8-bit quantization requested but BitsAndBytesConfig is unavailable. "
-                    "Install bitsandbytes (and a compatible CUDA build), or use WSL2/Linux."
-                ) from e
-            quantization_config = BitsAndBytesConfig(load_in_8bit=True)
+                if torch.backends.mps.is_available():
+                    logger.warning(
+                        "8-bit quantization requested for %s on Apple Silicon unified memory. "
+                        "bitsandbytes 8-bit is CUDA-only in this runtime, so falling back to non-quantized mode.",
+                        model_name,
+                    )
+                    quantization_config = None
+                else:
+                    raise RuntimeError(
+                        "8-bit quantization requires CUDA/GPU, but no GPU is available. "
+                        "Either use a GPU-enabled system or set quantization='none' for CPU-only inference."
+                    )
+            else:
+                try:
+                    from transformers import BitsAndBytesConfig
+                except Exception as e:  # pragma: no cover
+                    raise RuntimeError(
+                        "8-bit quantization requested but BitsAndBytesConfig is unavailable. "
+                        "Install bitsandbytes (and a compatible CUDA build), or use WSL2/Linux."
+                    ) from e
+                quantization_config = BitsAndBytesConfig(load_in_8bit=True)
         elif q in ("", "none", "no"):
             quantization_config = None
         else:
@@ -238,7 +286,7 @@ class PsychQwen32BLocalRunner(ModelRunner):
             base_model = AutoModelForCausalLM.from_pretrained(
                 adapter_base,
                 device_map=device_map,
-                dtype=dtype,
+                torch_dtype=dtype,
                 config=AutoConfig.from_pretrained(adapter_base, local_files_only=local_files_only),
                 quantization_config=quantization_config,
                 max_memory=max_memory,
@@ -257,7 +305,7 @@ class PsychQwen32BLocalRunner(ModelRunner):
             self.model = AutoModelForCausalLM.from_pretrained(
                 model_name,
                 device_map=device_map,
-                dtype=dtype,
+                torch_dtype=dtype,
                 config=model_config,
                 quantization_config=quantization_config,
                 max_memory=max_memory,
@@ -431,7 +479,7 @@ class PsychQwen32BLocalRunner(ModelRunner):
                 self._cpu_model = AutoModelForCausalLM.from_pretrained(
                     self._model_name,
                     device_map="cpu",  # Force CPU
-                    dtype=torch.float16,  # Use float16 as fallback
+                    torch_dtype=torch.float16,  # Use float16 as fallback
                     config=self._model_config,
                     quantization_config=None,
                     local_files_only=self._local_files_only,
@@ -463,7 +511,7 @@ class PsychQwen32BLocalRunner(ModelRunner):
         if mem_info["free"] < estimated_needed * 3.0:  # Need 3x buffer for safety (increased from 2x)
             # Reduce max_new_tokens proportionally, but be more aggressive
             reduction_factor = max(0.3, (mem_info["free"] / (estimated_needed * 3.0)))
-            max_new_tokens = max(256, int(self.config.max_tokens * reduction_factor))
+            max_new_tokens = max(1, int(self.config.max_tokens * reduction_factor))
             logger.warning(
                 f"Memory tight ({mem_info['free']:.2f} GiB free < {estimated_needed * 3.0:.2f} GiB needed). "
                 f"Reducing max_new_tokens from {self.config.max_tokens} to {max_new_tokens} "
@@ -592,5 +640,3 @@ class PsychQwen32BLocalRunner(ModelRunner):
         full_response = self.generate(prompt, mode="cot")
         reasoning, answer = self._extract_reasoning_and_answer(full_response)
         return answer.strip(), reasoning.strip()
-
-
