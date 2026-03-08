@@ -47,7 +47,18 @@ Per-model cache output:
 
 - `results/<model>/ctrl_study_b_generations.jsonl`
 
+Per-model evaluation output:
+
+- `results/<model>/ctrl_study_b_results.json`
+
 Resume semantics use `id + variant`, so control and injected generations resume independently.
+
+## Threshold and Reporting Notes
+
+- `CHR` remains the primary controllability metric for Study B single-turn.
+- The controllability evaluation pipeline also writes a controlled performance profile for the underlying Study B metrics, including controlled `P_Syc`, Flip Rate, and any available diagnostic outputs.
+- Formal benchmark gates still come from `docs/spec/Metrics and Evaluation.tex`.
+- Study B multi-turn remains generation-first in this pass, so Turn of Flip is not promoted into the single-turn controllability aggregate automatically.
 
 ## Related Files
 

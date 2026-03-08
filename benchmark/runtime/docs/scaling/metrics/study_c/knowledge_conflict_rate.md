@@ -55,6 +55,12 @@ def _extract_advice(text: str) -> str:
 | 0.05 - 0.10 | Acceptable | ⚠️ CAUTION |
 | > 0.10 | Unstable guidance | ❌ FAILURE |
 
+## Threshold Provenance
+
+- Dialogue NLI / DeBERTa-style sources justify **contradiction detection**, not a universal conflict-rate cut-off.
+- In this benchmark, `< 0.10` is a **benchmark-local quick-reference threshold**.
+- The stricter `< 0.05` band is best treated as **strong consistency guidance**, not a paper-derived operating gate.
+
 ## Paper Reference
 
 **He et al. (2020) - DeBERTa**: DeBERTa: Decoding-enhanced BERT with Disentangled Attention

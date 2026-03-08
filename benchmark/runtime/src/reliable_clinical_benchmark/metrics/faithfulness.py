@@ -402,6 +402,7 @@ def calculate_reasoning_adherence(
         A :class:`ControllabilityResult` with the RA score and CI.
     """
     from .controllability import calculate_compliance_rate
+    from .thresholds import annotate_threshold_metadata
 
     if len(traces) != len(gold_steps_per_sample):
         raise ValueError(
@@ -425,10 +426,15 @@ def calculate_reasoning_adherence(
     paired = list(zip(traces, gold_steps_per_sample))
     ids = trace_ids or [str(i) for i in range(len(paired))]
 
-    return calculate_compliance_rate(
+    result = calculate_compliance_rate(
         traces=paired,  # type: ignore[arg-type]
         check_fn=_check,  # type: ignore[arg-type]
         trace_ids=ids,
         compute_ci=compute_ci,
+    )
+    return annotate_threshold_metadata(
+        result,
+        "reasoning_adherence",
+        observed_value=result.compliance_rate,
     )
 

@@ -49,7 +49,18 @@ Per-model cache output:
 
 - `results/<model>/ctrl_study_c_generations.jsonl`
 
+Per-model evaluation output:
+
+- `results/<model>/ctrl_study_c_results.json`
+
 Resume semantics use `case_id + variant + turn_num`, so summary and dialogue generations resume independently.
+
+## Threshold and Reporting Notes
+
+- `CER` remains the primary controllability metric for Study C.
+- The controllability evaluation pipeline also writes a controlled performance profile for the underlying Study C metrics, including Recall@T10, optional conflict/alignment diagnostics, and derived drift summaries.
+- Formal benchmark gates still come from `docs/spec/Metrics and Evaluation.tex`.
+- Alignment and drift targets remain provisional or derived until uncontrolled frozen-split baseline calibration confirms them, so any Study C controllability roll-up is marked experimental.
 
 ## Related Files
 

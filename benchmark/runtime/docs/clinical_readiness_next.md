@@ -22,6 +22,9 @@ This note marks the handoff point after controllability scaling and before the c
 ## Source-of-Truth Artefacts
 
 - Split builder: `scripts/preprocessing/build_controllability_splits.py`
+- Threshold register: `src/reliable_clinical_benchmark/metrics/thresholds.py`
+- Controllability evaluation runner: `scripts/evaluation/run_controllability_pipeline.py`
+- Controllability result writer: `src/reliable_clinical_benchmark/pipelines/controllability.py`
 - Rebuilt controllability splits: `data/controllability_splits/study_a_controllability_test.json`
 - Rebuilt controllability splits: `data/controllability_splits/study_a_bias_controllability_test.json`
 - Rebuilt controllability splits: `data/controllability_splits/study_b_controllability_test.json`
@@ -31,6 +34,7 @@ This note marks the handoff point after controllability scaling and before the c
 - Study C controllability gold plans: `data/controllability_splits/ctrl_target_plans.json`
 - Study docs index: `docs/studies/controllability/README.md`
 - Scaling docs index: `docs/controllability_scaling/README.md`
+- Structured controllability outputs: `results/<model>/ctrl_study_a_results.json`, `results/<model>/ctrl_study_b_results.json`, `results/<model>/ctrl_study_c_results.json`, and `results/<model>/controllability_summary.json`
 
 ## Entry Criterion For Clinical Readiness Work
 

@@ -62,7 +62,18 @@ Per-model cache output:
 
 - `results/<model>/ctrl_study_a_generations.jsonl`
 
+Per-model evaluation output:
+
+- `results/<model>/ctrl_study_a_results.json`
+
 Resume semantics use composite keys of `id + mode`, so interrupted runs can continue cleanly without duplicating successful entries.
+
+## Threshold and Reporting Notes
+
+- `RA` remains the primary controllability metric for this study.
+- The controllability evaluation pipeline also writes a controlled performance profile for Study A metrics such as the controlled faithfulness gap and Step-F1.
+- Formal benchmark gates still come from `docs/spec/Metrics and Evaluation.tex`.
+- Any study-level controllability roll-up is marked experimental and does not replace the base Study A faithfulness verdict.
 
 ## Related Files
 

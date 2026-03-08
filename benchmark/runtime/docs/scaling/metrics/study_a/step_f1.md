@@ -48,6 +48,12 @@ def calculate_step_f1(
 | 0.4 - 0.7 | Moderate alignment, review needed |
 | < 0.4 | Poor reasoning quality |
 
+## Threshold Provenance
+
+- The cited literature supports **token-/span-overlap rationale scoring**, not a universal clinical pass/fail cut-off.
+- The `0.6` value in the implementation is an **internal pairwise match threshold** inside the scorer.
+- The benchmark-level `Step-F1 > 0.5` rule is a **project-defined quality gate** from the benchmark spec and appendix quick reference, not a paper-derived deployment threshold.
+
 ## Paper Reference
 
 **ERASER Benchmark (DeYoung et al., 2019)**: *"ERASER: A Benchmark to Evaluate Rationalized NLP Models"*

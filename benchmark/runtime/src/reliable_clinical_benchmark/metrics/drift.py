@@ -837,6 +837,7 @@ def calculate_controlled_entity_recall(
         A :class:`ControllabilityResult` with the CER score and CI.
     """
     from .controllability import calculate_compliance_rate
+    from .thresholds import annotate_threshold_metadata
 
     if len(summaries) != len(critical_entities_per_sample):
         raise ValueError(
@@ -856,9 +857,14 @@ def calculate_controlled_entity_recall(
         summary, entities = item
         return check_controlled_entity_recall(summary, entities, min_recall=min_recall)
 
-    return calculate_compliance_rate(
+    result = calculate_compliance_rate(
         traces=packed,  # type: ignore[arg-type]
         check_fn=_check,  # type: ignore[arg-type]
         trace_ids=ids,
         compute_ci=compute_ci,
+    )
+    return annotate_threshold_metadata(
+        result,
+        "controlled_entity_recall",
+        observed_value=result.compliance_rate,
     )
