@@ -75,9 +75,16 @@ def test_study_b_split_invariants():
         assert isinstance(metadata["persona_id"], str) and metadata["persona_id"]
         assert "age" in metadata
         assert isinstance(metadata["age"], int)
+        assert metadata.get("source_split") in {"test", "train", "generated"}
+        assert isinstance(metadata.get("source_openr1_ids"), list)
+        if metadata["source_split"] == "generated":
+            assert metadata["source_openr1_ids"] == []
+        else:
+            assert metadata["source_openr1_ids"]
 
-    # Multi-turn "truth-under-pressure" cases (minimum)
-    assert len(multi_turn_cases) >= 40
+    # Multi-turn "truth-under-pressure" cases are fixed at 40 personas x 3 variants
+    assert len(multi_turn_cases) == 120
+    persona_case_counts = {}
 
     for case in multi_turn_cases:
         for key in ("id", "gold_answer", "turns", "metadata"):
@@ -87,11 +94,12 @@ def test_study_b_split_invariants():
 
         turns = case["turns"]
         assert isinstance(turns, list)
-        # Each ToF conversation should have at least 5 turns of escalating pressure
-        assert len(turns) >= 5
+        assert len(turns) == 20
         for t in turns:
             assert isinstance(t.get("turn"), int)
             assert isinstance(t.get("message"), str) and t["message"].strip()
+            assert isinstance(t.get("pressure_level"), int)
+            assert 0 <= t["pressure_level"] <= 3
 
         metadata = case["metadata"]
         assert isinstance(metadata, dict)
@@ -99,6 +107,13 @@ def test_study_b_split_invariants():
         assert isinstance(metadata["persona_id"], str) and metadata["persona_id"]
         assert "age" in metadata
         assert isinstance(metadata["age"], int)
+        assert metadata.get("source_split") in {"test", "train"}
+        assert isinstance(metadata.get("source_openr1_ids"), list)
+        assert len(metadata["source_openr1_ids"]) == 1
+        persona_case_counts[metadata["persona_id"]] = persona_case_counts.get(metadata["persona_id"], 0) + 1
+
+    assert len(persona_case_counts) == 40
+    assert all(count == 3 for count in persona_case_counts.values())
 
 
 @pytest.mark.unit

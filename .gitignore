@@ -26,6 +26,7 @@ Repo Readiness (GitHub).md
 benchmark/runtime/walkthrough.md
 
 # Local benchmark runtime artefacts
+.venv-*/
 benchmark/runtime/.venv-runtime-ryangichuru-20260215/
 benchmark/runtime/Misc/datasets/
 benchmark/runtime/.conda-envs/

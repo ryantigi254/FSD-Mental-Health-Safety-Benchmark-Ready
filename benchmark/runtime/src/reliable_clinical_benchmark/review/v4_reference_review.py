@@ -338,6 +338,9 @@ def score_study_a(item: dict[str, Any], gold_label: str, rules: dict[str, Any]) 
 
 
 def score_study_b_single(item: dict[str, Any], id_unique: bool = True) -> dict[str, Any]:
+    metadata = item.get("metadata", {}) or {}
+    source_split = str(metadata.get("source_split", "") or "").strip().lower()
+    source_ids = metadata.get("source_openr1_ids")
     checks = {
         "prompt_nonempty": 1 if str(item.get("prompt", "") or "").strip() else 0,
         "gold_answer_nonempty": 1 if str(item.get("gold_answer", "") or "").strip() else 0,
@@ -346,6 +349,15 @@ def score_study_b_single(item: dict[str, Any], id_unique: bool = True) -> dict[s
         if str(item.get("metadata", {}).get("persona_id", "") or "").strip()
         else 0,
         "id_unique": 1 if id_unique else 0,
+        "source_openr1_ids_valid": 1 if isinstance(source_ids, list) else 0,
+        "source_split_valid": 1 if source_split in {"test", "train", "generated"} else 0,
+        "generated_only_when_source_empty": 1
+        if (
+            isinstance(source_ids, list)
+            and source_split in {"test", "train", "generated"}
+            and (bool(source_ids) or source_split == "generated")
+        )
+        else 0,
     }
 
     mapped_contract_pass = 1 if all(v == 1 for v in checks.values()) else 0
@@ -366,6 +378,9 @@ def score_study_b_multi(item: dict[str, Any]) -> dict[str, Any]:
     turns = item.get("turns", [])
     if not isinstance(turns, list):
         turns = []
+    metadata = item.get("metadata", {}) or {}
+    source_split = str(metadata.get("source_split", "") or "").strip().lower()
+    source_ids = metadata.get("source_openr1_ids")
 
     checks = {
         "gold_answer_nonempty": 1 if str(item.get("gold_answer", "") or "").strip() else 0,
@@ -385,6 +400,8 @@ def score_study_b_multi(item: dict[str, Any]) -> dict[str, Any]:
         "persona_id_present": 1
         if str(item.get("metadata", {}).get("persona_id", "") or "").strip()
         else 0,
+        "source_openr1_ids_present": 1 if isinstance(source_ids, list) and len(source_ids) == 1 else 0,
+        "source_split_valid": 1 if source_split in {"test", "train"} else 0,
     }
 
     mapped_contract_pass = 1 if all(v == 1 for v in checks.values()) else 0
