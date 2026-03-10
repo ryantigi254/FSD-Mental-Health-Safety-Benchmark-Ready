@@ -26,6 +26,7 @@ import json
 import hashlib
 import random
 import re
+import subprocess
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -45,6 +46,7 @@ SEED = 20260307
 RUNTIME_ROOT = Path(__file__).resolve().parents[2]
 DATA_ROOT = RUNTIME_ROOT / "data"
 OUTPUT_DIR = DATA_ROOT / "controllability_splits"
+V5_REFERENCE_BRANCH = "codex/v4_1-data-refresh"
 
 # Target sizes
 STUDY_A_N = 300
@@ -215,13 +217,14 @@ def load_openr1_psy() -> List[Dict[str, Any]]:
     for split_name in ("train", "test"):
         if split_name not in ds:
             continue
-        for row in ds[split_name]:
+        for row_idx, row in enumerate(ds[split_name]):
             conversations = row.get("conversation", [])
             if not conversations:
                 continue
             entry = conversations[0] if conversations else {}
             rows.append({
                 "post_id": row["post_id"],
+                "source_openr1_id": row_idx,
                 "split": split_name,
                 "patient": entry.get("patient", ""),
                 "counselor_content": entry.get("counselor_content", ""),
@@ -233,9 +236,41 @@ def load_openr1_psy() -> List[Dict[str, Any]]:
     return rows
 
 
-def collect_used_post_ids() -> Set[int]:
-    """Collect all OpenR1-Psy post_ids already used in frozen splits."""
-    used: Set[int] = set()
+def _metadata_refs(metadata: Dict[str, Any]) -> Set[Tuple[str, int]]:
+    refs: Set[Tuple[str, int]] = set()
+    split = str(metadata.get("source_split") or metadata.get("source_openr1_split") or "").strip().lower()
+    if split in {"test", "train"}:
+        ids = metadata.get("source_openr1_ids")
+        if isinstance(ids, list):
+            for source_id in ids:
+                try:
+                    refs.add((split, int(source_id)))
+                except Exception:
+                    pass
+        source_id = metadata.get("source_openr1_id")
+        if source_id is not None:
+            try:
+                refs.add((split, int(source_id)))
+            except Exception:
+                pass
+    return refs
+
+
+def _load_git_json(branch: str, rel_path: str) -> Any | None:
+    try:
+        text = subprocess.check_output(
+            ["git", "show", f"{branch}:{rel_path}"],
+            cwd=str(RUNTIME_ROOT.parent),
+            text=True,
+        )
+    except subprocess.CalledProcessError:
+        return None
+    return json.loads(text)
+
+
+def collect_used_source_refs() -> Set[Tuple[str, int]]:
+    """Collect OpenR1 dataset-index references already reserved by benchmark and frozen v5."""
+    used: Set[Tuple[str, int]] = set()
 
     # Study A
     path = DATA_ROOT / "openr1_psy_splits" / "study_a_test.json"
@@ -244,7 +279,7 @@ def collect_used_post_ids() -> Set[int]:
             data = json.load(f)
         samples = data.get("samples", data) if isinstance(data, dict) else data
         for s in samples:
-            used.update(s.get("metadata", {}).get("source_openr1_ids", []))
+            used.update(_metadata_refs(s.get("metadata", {}) or {}))
 
     # Study B
     path = DATA_ROOT / "openr1_psy_splits" / "study_b_test.json"
@@ -252,12 +287,7 @@ def collect_used_post_ids() -> Set[int]:
         with path.open("r", encoding="utf-8") as f:
             data = json.load(f)
         for s in data:
-            oid = s.get("metadata", {}).get("original_id")
-            if oid and oid != "synthetic":
-                try:
-                    used.add(int(oid))
-                except (ValueError, TypeError):
-                    pass
+            used.update(_metadata_refs(s.get("metadata", {}) or {}))
 
     # Study C
     path = DATA_ROOT / "openr1_psy_splits" / "study_c_test.json"
@@ -266,7 +296,7 @@ def collect_used_post_ids() -> Set[int]:
             data = json.load(f)
         cases = data.get("cases", data) if isinstance(data, dict) else data
         for s in cases:
-            used.update(s.get("metadata", {}).get("source_openr1_ids", []))
+            used.update(_metadata_refs(s.get("metadata", {}) or {}))
 
     # Adversarial bias
     import glob
@@ -279,9 +309,30 @@ def collect_used_post_ids() -> Set[int]:
                 bdata = json.load(f)
             items = bdata.get("cases", bdata) if isinstance(bdata, dict) else bdata
             for s in items:
-                oid = s.get("metadata", {}).get("source_openr1_id")
-                if oid is not None:
-                    used.add(int(oid))
+                used.update(_metadata_refs(s.get("metadata", {}) or {}))
+
+    v5_local = DATA_ROOT / "frozen_splits" / "v5"
+    v5_sources = [
+        ("study_a_test.json", "samples"),
+        ("study_b_test.json", None),
+        ("study_b_multi_turn_test.json", None),
+        ("study_c_test.json", "cases"),
+        ("adversarial_bias/biased_vignettes.json", "cases"),
+    ]
+    if v5_local.exists():
+        for rel_path, key in v5_sources:
+            payload = json.loads((v5_local / rel_path).read_text(encoding="utf-8"))
+            items = payload if isinstance(payload, list) else payload.get(key, []) if key else payload.get("cases", payload.get("samples", []))
+            for item in items:
+                used.update(_metadata_refs(item.get("metadata", {}) or {}))
+    else:
+        for rel_path, key in v5_sources:
+            payload = _load_git_json(V5_REFERENCE_BRANCH, f"benchmark/runtime/data/frozen_splits/v5/{rel_path}")
+            if payload is None:
+                continue
+            items = payload if isinstance(payload, list) else payload.get(key, []) if key else payload.get("cases", payload.get("samples", []))
+            for item in items:
+                used.update(_metadata_refs(item.get("metadata", {}) or {}))
 
     return used
 
@@ -832,11 +883,11 @@ def build_all_splits() -> Dict[str, Any]:
     all_rows = load_openr1_psy()
     print(f"  Total rows: {len(all_rows)}")
 
-    print("Collecting used post_ids from existing frozen splits...")
-    used_ids = collect_used_post_ids()
-    print(f"  Used IDs: {len(used_ids)}")
+    print("Collecting used source refs from benchmark and frozen v5...")
+    used_refs = collect_used_source_refs()
+    print(f"  Used source refs: {len(used_refs)}")
 
-    unused = [r for r in all_rows if r["post_id"] not in used_ids]
+    unused = [r for r in all_rows if (r["split"], r["source_openr1_id"]) not in used_refs]
     print(f"  Unused rows: {len(unused)}")
 
     unused_with_text = [r for r in unused if r["patient"].strip()]
@@ -886,7 +937,7 @@ def build_all_splits() -> Dict[str, Any]:
         "build_timestamp": _now_iso(),
         "seed": SEED,
         "total_openr1": len(all_rows),
-        "used_ids": len(used_ids),
+        "used_source_refs": len(used_refs),
         "unused_available": len(unused_with_text),
         "resolved_available": len(resolved_rows),
         "unresolved_available": len(unresolved_rows),
@@ -895,11 +946,11 @@ def build_all_splits() -> Dict[str, Any]:
     # ── Study A Controllability ──────────────────────────────────────
     print("\n=== Building Study A Controllability ===")
     study_a_samples = _sample_balanced(underrep_pool, standard_pool, STUDY_A_N, rng, fraction_underrep=0.4)
-    study_a_used_ids: Set[int] = set()
+    study_a_used_refs: Set[Tuple[str, int]] = set()
 
     study_a_data = {"samples": []}
     for i, row in enumerate(study_a_samples, 1):
-        study_a_used_ids.add(row["post_id"])
+        study_a_used_refs.add((row["split"], row["source_openr1_id"]))
         gold_reasoning = _extract_reasoning_steps(row["counselor_think"])
         study_a_data["samples"].append({
             "id": f"ctrl_a_{i:04d}",
@@ -908,7 +959,7 @@ def build_all_splits() -> Dict[str, Any]:
             "gold_reasoning": gold_reasoning,
             "cot_controlled_constraint": STUDY_A_CONSTRAINT,
             "metadata": {
-                "source_openr1_ids": [row["post_id"]],
+                "source_openr1_ids": [row["source_openr1_id"]],
                 "source_split": row["split"],
                 "inferred_condition": row["inferred_condition"],
                 "inferred_category": row["inferred_category"],
@@ -923,15 +974,18 @@ def build_all_splits() -> Dict[str, Any]:
     # ── Study A Bias Controllability ─────────────────────────────────
     print("\n=== Building Study A Bias Controllability ===")
     # For bias: also use underrepresented conditions as the bias-injected condition
-    bias_pool = [r for r in resolved_rows
-                 if r["post_id"] not in study_a_used_ids and r["patient"].strip()]
+    bias_pool = [
+        r
+        for r in resolved_rows
+        if (r["split"], r["source_openr1_id"]) not in study_a_used_refs and r["patient"].strip()
+    ]
     rng.shuffle(bias_pool)
     bias_samples = bias_pool[:STUDY_A_BIAS_N]
-    bias_used_ids: Set[int] = set()
+    bias_used_refs: Set[Tuple[str, int]] = set()
 
     study_a_bias_data = {"cases": []}
     for i, row in enumerate(bias_samples, 1):
-        bias_used_ids.add(row["post_id"])
+        bias_used_refs.add((row["split"], row["source_openr1_id"]))
         probe = get_bias_probe(row["inferred_condition"], rng)
         cond = row["inferred_condition"]
         # For underrepresented conditions, inject the condition itself as a secondary bias feature
@@ -956,8 +1010,10 @@ def build_all_splits() -> Dict[str, Any]:
             "cot_controlled_constraint": STUDY_A_BIAS_CONSTRAINT,
             "metadata": {
                 "dimension_family": probe["dimension_family"],
-                "source_openr1_id": row["post_id"],
+                "source_openr1_id": row["source_openr1_id"],
                 "source_openr1_split": row["split"],
+                "source_openr1_ids": [row["source_openr1_id"]],
+                "source_split": row["split"],
                 "inferred_condition": cond,
                 "inferred_category": row["inferred_category"],
                 "condition_resolution_source": row["condition_resolution_source"],
@@ -972,19 +1028,19 @@ def build_all_splits() -> Dict[str, Any]:
 
     # ── Study B Single-Turn Controllability ──────────────────────────
     print("\n=== Building Study B Single-Turn Controllability ===")
-    all_used = study_a_used_ids | bias_used_ids
-    b_pool = [r for r in resolved_rows if r["post_id"] not in all_used]
+    all_used_refs = study_a_used_refs | bias_used_refs
+    b_pool = [r for r in resolved_rows if (r["split"], r["source_openr1_id"]) not in all_used_refs]
     b_samples = _sample_balanced(
         [r for r in b_pool if r["inferred_category"] in UNDERREPRESENTED_CATEGORIES],
         [r for r in b_pool if r["inferred_category"] not in UNDERREPRESENTED_CATEGORIES],
         STUDY_B_SINGLE_N, rng, fraction_underrep=0.4,
     )
-    b_used_ids: Set[int] = set()
+    b_used_refs: Set[Tuple[str, int]] = set()
 
     study_b_data: List[Dict[str, Any]] = []
     persona_cycle = list(PERSONAS)
     for i, row in enumerate(b_samples, 1):
-        b_used_ids.add(row["post_id"])
+        b_used_refs.add((row["split"], row["source_openr1_id"]))
         cond = row["inferred_condition"]
         persona = persona_cycle[i % len(persona_cycle)]
         incorrect = get_incorrect_opinion(cond, rng)
@@ -999,6 +1055,9 @@ def build_all_splits() -> Dict[str, Any]:
                 "age": persona["age"],
                 "source": "openr1_" + row["split"],
                 "original_id": str(row["post_id"]),
+                "source_openr1_ids": [row["source_openr1_id"]],
+                "source_split": row["split"],
+                "source_type": "real",
                 "inferred_condition": cond,
                 "inferred_category": row["inferred_category"],
                 "condition_resolution_source": row["condition_resolution_source"],
@@ -1012,14 +1071,14 @@ def build_all_splits() -> Dict[str, Any]:
 
     # ── Study B Multi-Turn Controllability ───────────────────────────
     print("\n=== Building Study B Multi-Turn Controllability ===")
-    all_used = all_used | b_used_ids
-    mt_pool = [r for r in multi_round_pool if r["post_id"] not in all_used]
+    all_used_refs = all_used_refs | b_used_refs
+    mt_pool = [r for r in multi_round_pool if (r["split"], r["source_openr1_id"]) not in all_used_refs]
     rng.shuffle(mt_pool)
     mt_samples = mt_pool[:STUDY_B_MULTI_N]
 
     study_b_mt_data: List[Dict[str, Any]] = []
     for i, row in enumerate(mt_samples, 1):
-        all_used.add(row["post_id"])
+        all_used_refs.add((row["split"], row["source_openr1_id"]))
         cond = row["inferred_condition"]
         norm_cond = normalise_condition(cond)
         incorrect = get_incorrect_opinion(cond, rng)
@@ -1048,8 +1107,10 @@ def build_all_splits() -> Dict[str, Any]:
                 "incorrect_opinion": incorrect,
                 "pressure_type": "dynamic_20_turn",
                 "condition_phrase": norm_cond,
-                "source_openr1_id": row["post_id"],
+                "source_openr1_id": row["source_openr1_id"],
                 "source_openr1_split": row["split"],
+                "source_openr1_ids": [row["source_openr1_id"]],
+                "source_split": row["split"],
                 "inferred_condition": cond,
                 "inferred_category": row["inferred_category"],
                 "condition_resolution_source": row["condition_resolution_source"],
@@ -1063,13 +1124,13 @@ def build_all_splits() -> Dict[str, Any]:
 
     # ── Study C Controllability ──────────────────────────────────────
     print("\n=== Building Study C Controllability ===")
-    c_pool = [r for r in multi_round_pool if r["post_id"] not in all_used]
+    c_pool = [r for r in multi_round_pool if (r["split"], r["source_openr1_id"]) not in all_used_refs]
     rng.shuffle(c_pool)
     c_samples = c_pool[:STUDY_C_N]
 
     study_c_data = {"cases": []}
     for i, row in enumerate(c_samples, 1):
-        all_used.add(row["post_id"])
+        all_used_refs.add((row["split"], row["source_openr1_id"]))
         cond = row["inferred_condition"]
         persona = persona_cycle[i % len(persona_cycle)]
 
@@ -1087,7 +1148,7 @@ def build_all_splits() -> Dict[str, Any]:
             "cot_controlled_constraint": STUDY_C_CONSTRAINT,
             "metadata": {
                 "persona_id": persona["id"],
-                "source_openr1_ids": [row["post_id"]],
+                "source_openr1_ids": [row["source_openr1_id"]],
                 "source_split": row["split"],
                 "inferred_condition": cond,
                 "inferred_category": row["inferred_category"],
@@ -1101,7 +1162,7 @@ def build_all_splits() -> Dict[str, Any]:
     print(f"  Written {len(study_c_data['cases'])} cases")
 
     # Write build manifest
-    stats["total_prompts_used"] = len(all_used)
+    stats["total_prompts_used"] = len(all_used_refs)
     stats["condition_distribution"] = dict(condition_counts.most_common())
     stats["category_distribution"] = dict(category_counts.most_common())
     stats["condition_resolution_sources"] = dict(resolution_counts.most_common())
