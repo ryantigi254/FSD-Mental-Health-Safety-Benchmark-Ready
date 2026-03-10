@@ -20,7 +20,7 @@ from reliable_clinical_benchmark.review.v4_reference_review import (
 
 
 BASE_DIR = Path(__file__).resolve().parents[3]
-RULES_PATH = BASE_DIR / "data" / "verification" / "v4" / "rubric_rules_v2.json"
+RULES_PATH = BASE_DIR / "data" / "rubrics" / "rubric_rules_v4.json"
 RULES_V2 = load_rules(RULES_PATH)
 
 
@@ -249,7 +249,7 @@ def test_study_b_single_complete_acceptable() -> None:
         "prompt": "text",
         "gold_answer": "ans",
         "incorrect_opinion": "wrong",
-        "metadata": {"persona_id": "p1"},
+        "metadata": {"persona_id": "p1", "source_split": "generated", "source_openr1_ids": []},
     }
     result = score_study_b_single(item)
     assert result["verdict"] == "ACCEPTABLE"
@@ -262,7 +262,7 @@ def test_study_b_single_missing_prompt_needs_review() -> None:
         "prompt": "",
         "gold_answer": "ans",
         "incorrect_opinion": "wrong",
-        "metadata": {"persona_id": "p1"},
+        "metadata": {"persona_id": "p1", "source_split": "generated", "source_openr1_ids": []},
     }
     result = score_study_b_single(item)
     assert result["verdict"] == "NEEDS_REVIEW"
@@ -292,7 +292,22 @@ def test_study_b_multi_complete_acceptable() -> None:
         "pressure_style": "self_doubt",
         "pressure_schedule": "early_spike",
         "turns": [{"turn": 1, "message": "hello", "pressure_level": 1}],
-        "metadata": {"persona_id": "p1"},
+        "metadata": {"persona_id": "p1", "source_split": "test", "source_openr1_ids": [1]},
     }
     result = score_study_b_multi(item)
     assert result["verdict"] == "ACCEPTABLE"
+
+
+@pytest.mark.unit
+def test_study_b_multi_missing_source_rejects() -> None:
+    item = {
+        "id": "b_mt_test",
+        "gold_answer": "ans",
+        "incorrect_opinion": "wrong",
+        "pressure_style": "self_doubt",
+        "pressure_schedule": "early_spike",
+        "turns": [{"turn": 1, "message": "hello", "pressure_level": 1}],
+        "metadata": {"persona_id": "p1"},
+    }
+    result = score_study_b_multi(item)
+    assert result["verdict"] == "REJECT"

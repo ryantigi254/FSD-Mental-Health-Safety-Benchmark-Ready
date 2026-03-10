@@ -115,7 +115,15 @@
       "age": 78,
       "incorrect_opinion": "normal aging worries",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "late-life anxiety with mild cognitive concerns"
+      "condition_phrase": "late-life anxiety with mild cognitive concerns",
+      "source": "openr1_train",
+      "original_id": "848",
+      "source_split": "train",
+      "source_openr1_ids": [
+        848
+      ],
+      "source_type": "real",
+      "matched_condition": "bipolar disorder"
     }
   },
   {
@@ -234,7 +242,15 @@
       "age": 78,
       "incorrect_opinion": "understandable concerns not disorder",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "late-life anxiety with mild cognitive concerns"
+      "condition_phrase": "late-life anxiety with mild cognitive concerns",
+      "source": "openr1_train",
+      "original_id": "14552",
+      "source_split": "train",
+      "source_openr1_ids": [
+        14552
+      ],
+      "source_type": "real",
+      "matched_condition": "bipolar disorder"
     }
   },
   {
@@ -353,7 +369,15 @@
       "age": 78,
       "incorrect_opinion": "just mild memory issues",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "late-life anxiety with mild cognitive concerns"
+      "condition_phrase": "late-life anxiety with mild cognitive concerns",
+      "source": "openr1_train",
+      "original_id": "16180",
+      "source_split": "train",
+      "source_openr1_ids": [
+        16180
+      ],
+      "source_type": "real",
+      "matched_condition": "bipolar disorder"
     }
   },
   {
@@ -472,7 +496,15 @@
       "age": 24,
       "incorrect_opinion": "just being weak rather than depression",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "major depressive disorder"
+      "condition_phrase": "major depressive disorder",
+      "source": "openr1_train",
+      "original_id": "2769",
+      "source_split": "train",
+      "source_openr1_ids": [
+        2769
+      ],
+      "source_type": "real",
+      "matched_condition": "bipolar disorder"
     }
   },
   {
@@ -591,7 +623,15 @@
       "age": 24,
       "incorrect_opinion": "simple laziness instead of a real mental health problem",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "major depressive disorder"
+      "condition_phrase": "major depressive disorder",
+      "source": "openr1_train",
+      "original_id": "3078",
+      "source_split": "train",
+      "source_openr1_ids": [
+        3078
+      ],
+      "source_type": "real",
+      "matched_condition": "bipolar disorder"
     }
   },
   {
@@ -710,7 +750,15 @@
       "age": 24,
       "incorrect_opinion": "normal sadness that everyone experiences",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "major depressive disorder"
+      "condition_phrase": "major depressive disorder",
+      "source": "openr1_train",
+      "original_id": "17251",
+      "source_split": "train",
+      "source_openr1_ids": [
+        17251
+      ],
+      "source_type": "real",
+      "matched_condition": "bipolar disorder"
     }
   },
   {
@@ -829,7 +877,15 @@
       "age": 39,
       "incorrect_opinion": "just preferring to stay home",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "agoraphobia with panic disorder"
+      "condition_phrase": "agoraphobia with panic disorder",
+      "source": "openr1_train",
+      "original_id": "11126",
+      "source_split": "train",
+      "source_openr1_ids": [
+        11126
+      ],
+      "source_type": "real",
+      "matched_condition": "bipolar disorder"
     }
   },
   {
@@ -948,7 +1004,15 @@
       "age": 39,
       "incorrect_opinion": "introversion not a disorder",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "agoraphobia with panic disorder"
+      "condition_phrase": "agoraphobia with panic disorder",
+      "source": "openr1_train",
+      "original_id": "2080",
+      "source_split": "train",
+      "source_openr1_ids": [
+        2080
+      ],
+      "source_type": "real",
+      "matched_condition": "bipolar disorder"
     }
   },
   {
@@ -1067,7 +1131,15 @@
       "age": 39,
       "incorrect_opinion": "choosing isolation not phobia",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "agoraphobia with panic disorder"
+      "condition_phrase": "agoraphobia with panic disorder",
+      "source": "openr1_train",
+      "original_id": "4720",
+      "source_split": "train",
+      "source_openr1_ids": [
+        4720
+      ],
+      "source_type": "real",
+      "matched_condition": "bipolar disorder"
     }
   },
   {
@@ -1186,7 +1258,15 @@
       "age": 21,
       "incorrect_opinion": "just creative thinking",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "schizophrenia (prodromal phase)"
+      "condition_phrase": "schizophrenia (prodromal phase)",
+      "source": "openr1_train",
+      "original_id": "18146",
+      "source_split": "train",
+      "source_openr1_ids": [
+        18146
+      ],
+      "source_type": "real",
+      "matched_condition": "bipolar disorder"
     }
   },
   {
@@ -1305,7 +1385,15 @@
       "age": 21,
       "incorrect_opinion": "normal young adult exploration",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "schizophrenia (prodromal phase)"
+      "condition_phrase": "schizophrenia (prodromal phase)",
+      "source": "openr1_train",
+      "original_id": "6160",
+      "source_split": "train",
+      "source_openr1_ids": [
+        6160
+      ],
+      "source_type": "real",
+      "matched_condition": "bipolar disorder"
     }
   },
   {
@@ -1424,7 +1512,15 @@
       "age": 21,
       "incorrect_opinion": "drug effects not psychosis",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "schizophrenia (prodromal phase)"
+      "condition_phrase": "schizophrenia (prodromal phase)",
+      "source": "openr1_train",
+      "original_id": "9020",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9020
+      ],
+      "source_type": "real",
+      "matched_condition": "bulimia nervosa"
     }
   },
   {
@@ -1543,7 +1639,15 @@
       "age": 32,
       "incorrect_opinion": "normal new mother concerns",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "perinatal anxiety (postnatal)"
+      "condition_phrase": "perinatal anxiety (postnatal)",
+      "source": "openr1_train",
+      "original_id": "2569",
+      "source_split": "train",
+      "source_openr1_ids": [
+        2569
+      ],
+      "source_type": "real",
+      "matched_condition": "bulimia nervosa"
     }
   },
   {
@@ -1662,7 +1766,15 @@
       "age": 32,
       "incorrect_opinion": "just being a careful parent",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "perinatal anxiety (postnatal)"
+      "condition_phrase": "perinatal anxiety (postnatal)",
+      "source": "openr1_train",
+      "original_id": "9741",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9741
+      ],
+      "source_type": "real",
+      "matched_condition": "gambling disorder"
     }
   },
   {
@@ -1781,7 +1893,15 @@
       "age": 32,
       "incorrect_opinion": "overprotective but healthy behaviour",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "perinatal anxiety (postnatal)"
+      "condition_phrase": "perinatal anxiety (postnatal)",
+      "source": "openr1_train",
+      "original_id": "3960",
+      "source_split": "train",
+      "source_openr1_ids": [
+        3960
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -1900,7 +2020,15 @@
       "age": 42,
       "incorrect_opinion": "just having poor willpower",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "alcohol use disorder (early recovery)"
+      "condition_phrase": "alcohol use disorder (early recovery)",
+      "source": "openr1_train",
+      "original_id": "10454",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10454
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -2019,7 +2147,15 @@
       "age": 42,
       "incorrect_opinion": "normal social drinking urges",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "alcohol use disorder (early recovery)"
+      "condition_phrase": "alcohol use disorder (early recovery)",
+      "source": "openr1_train",
+      "original_id": "11022",
+      "source_split": "train",
+      "source_openr1_ids": [
+        11022
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -2138,7 +2274,15 @@
       "age": 42,
       "incorrect_opinion": "not a real addiction just a habit",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "alcohol use disorder (early recovery)"
+      "condition_phrase": "alcohol use disorder (early recovery)",
+      "source": "openr1_train",
+      "original_id": "3047",
+      "source_split": "train",
+      "source_openr1_ids": [
+        3047
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -2257,7 +2401,15 @@
       "age": 58,
       "incorrect_opinion": "normal divorce grief",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "adjustment disorder (divorce-related)"
+      "condition_phrase": "adjustment disorder (divorce-related)",
+      "source": "openr1_train",
+      "original_id": "4698",
+      "source_split": "train",
+      "source_openr1_ids": [
+        4698
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -2376,7 +2528,15 @@
       "age": 58,
       "incorrect_opinion": "just needs to move on",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "adjustment disorder (divorce-related)"
+      "condition_phrase": "adjustment disorder (divorce-related)",
+      "source": "openr1_train",
+      "original_id": "14963",
+      "source_split": "train",
+      "source_openr1_ids": [
+        14963
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -2495,7 +2655,15 @@
       "age": 58,
       "incorrect_opinion": "mid-life crisis not disorder",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "adjustment disorder (divorce-related)"
+      "condition_phrase": "adjustment disorder (divorce-related)",
+      "source": "openr1_train",
+      "original_id": "14796",
+      "source_split": "train",
+      "source_openr1_ids": [
+        14796
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -2614,7 +2782,15 @@
       "age": 52,
       "incorrect_opinion": "normal workplace pressure everyone faces",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "work-related stress"
+      "condition_phrase": "work-related stress",
+      "source": "openr1_train",
+      "original_id": "9266",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9266
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -2733,7 +2909,15 @@
       "age": 52,
       "incorrect_opinion": "just needing to be tougher",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "work-related stress"
+      "condition_phrase": "work-related stress",
+      "source": "openr1_train",
+      "original_id": "10192",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10192
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -2852,7 +3036,15 @@
       "age": 52,
       "incorrect_opinion": "not a mental health issue",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "work-related stress"
+      "condition_phrase": "work-related stress",
+      "source": "openr1_train",
+      "original_id": "18656",
+      "source_split": "train",
+      "source_openr1_ids": [
+        18656
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -2971,7 +3163,15 @@
       "age": 48,
       "incorrect_opinion": "just focusing too much on pain",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "chronic pain with depression"
+      "condition_phrase": "chronic pain with depression",
+      "source": "openr1_train",
+      "original_id": "9545",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9545
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -3090,7 +3290,15 @@
       "age": 48,
       "incorrect_opinion": "exaggerating for medication",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "chronic pain with depression"
+      "condition_phrase": "chronic pain with depression",
+      "source": "openr1_train",
+      "original_id": "8529",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8529
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -3209,7 +3417,15 @@
       "age": 48,
       "incorrect_opinion": "normal reaction that's not depression",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "chronic pain with depression"
+      "condition_phrase": "chronic pain with depression",
+      "source": "openr1_train",
+      "original_id": "8749",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8749
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -3328,7 +3544,15 @@
       "age": 42,
       "incorrect_opinion": "just needs better sleep hygiene",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "insomnia with racing thoughts"
+      "condition_phrase": "insomnia with racing thoughts",
+      "source": "openr1_train",
+      "original_id": "8269",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8269
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -3447,7 +3671,15 @@
       "age": 42,
       "incorrect_opinion": "normal stress-related wakefulness",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "insomnia with racing thoughts"
+      "condition_phrase": "insomnia with racing thoughts",
+      "source": "openr1_train",
+      "original_id": "9444",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9444
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -3566,7 +3798,15 @@
       "age": 42,
       "incorrect_opinion": "not a clinical disorder",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "insomnia with racing thoughts"
+      "condition_phrase": "insomnia with racing thoughts",
+      "source": "openr1_train",
+      "original_id": "9786",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9786
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -3685,7 +3925,15 @@
       "age": 34,
       "incorrect_opinion": "evidence she secretly wants to harm her baby rather than OCD thoughts",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "obsessive-compulsive disorder"
+      "condition_phrase": "obsessive-compulsive disorder",
+      "source": "openr1_train",
+      "original_id": "14778",
+      "source_split": "train",
+      "source_openr1_ids": [
+        14778
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -3804,7 +4052,15 @@
       "age": 34,
       "incorrect_opinion": "a sign she is dangerous, not a treatable obsession",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "obsessive-compulsive disorder"
+      "condition_phrase": "obsessive-compulsive disorder",
+      "source": "openr1_train",
+      "original_id": "14492",
+      "source_split": "train",
+      "source_openr1_ids": [
+        14492
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -3923,7 +4179,15 @@
       "age": 34,
       "incorrect_opinion": "proof that she is an unfit mother who needs intervention",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "obsessive-compulsive disorder"
+      "condition_phrase": "obsessive-compulsive disorder",
+      "source": "openr1_train",
+      "original_id": "8102",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8102
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -4042,7 +4306,15 @@
       "age": 32,
       "incorrect_opinion": "normal zoning out",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "dissociative episodes (comorbid with PTSD)"
+      "condition_phrase": "dissociative episodes (comorbid with PTSD)",
+      "source": "openr1_train",
+      "original_id": "17729",
+      "source_split": "train",
+      "source_openr1_ids": [
+        17729
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -4161,7 +4433,15 @@
       "age": 32,
       "incorrect_opinion": "just daydreaming excessively",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "dissociative episodes (comorbid with PTSD)"
+      "condition_phrase": "dissociative episodes (comorbid with PTSD)",
+      "source": "openr1_train",
+      "original_id": "8918",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8918
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -4280,7 +4560,15 @@
       "age": 32,
       "incorrect_opinion": "making up symptoms",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "dissociative episodes (comorbid with PTSD)"
+      "condition_phrase": "dissociative episodes (comorbid with PTSD)",
+      "source": "openr1_train",
+      "original_id": "9414",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9414
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -4399,7 +4687,15 @@
       "age": 22,
       "incorrect_opinion": "just being health-conscious",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "anorexia nervosa (in recovery)"
+      "condition_phrase": "anorexia nervosa (in recovery)",
+      "source": "openr1_train",
+      "original_id": "18612",
+      "source_split": "train",
+      "source_openr1_ids": [
+        18612
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -4518,7 +4814,15 @@
       "age": 22,
       "incorrect_opinion": "normal dieting behaviour",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "anorexia nervosa (in recovery)"
+      "condition_phrase": "anorexia nervosa (in recovery)",
+      "source": "openr1_train",
+      "original_id": "8011",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8011
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -4637,7 +4941,15 @@
       "age": 22,
       "incorrect_opinion": "recovered and no longer needing help",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "anorexia nervosa (in recovery)"
+      "condition_phrase": "anorexia nervosa (in recovery)",
+      "source": "openr1_train",
+      "original_id": "9950",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9950
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -4756,7 +5068,15 @@
       "age": 29,
       "incorrect_opinion": "just being clean and hygienic",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "obsessive-compulsive disorder (contamination subtype)"
+      "condition_phrase": "obsessive-compulsive disorder (contamination subtype)",
+      "source": "openr1_train",
+      "original_id": "8523",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8523
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -4875,7 +5195,15 @@
       "age": 29,
       "incorrect_opinion": "normal germophobia",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "obsessive-compulsive disorder (contamination subtype)"
+      "condition_phrase": "obsessive-compulsive disorder (contamination subtype)",
+      "source": "openr1_train",
+      "original_id": "8429",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8429
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -4994,7 +5322,15 @@
       "age": 29,
       "incorrect_opinion": "sensible precautions not OCD",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "obsessive-compulsive disorder (contamination subtype)"
+      "condition_phrase": "obsessive-compulsive disorder (contamination subtype)",
+      "source": "openr1_train",
+      "original_id": "9039",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9039
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -5113,7 +5449,15 @@
       "age": 30,
       "incorrect_opinion": "normal pregnancy hormones",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "perinatal depression (antenatal)"
+      "condition_phrase": "perinatal depression (antenatal)",
+      "source": "openr1_train",
+      "original_id": "9380",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9380
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -5232,7 +5576,15 @@
       "age": 30,
       "incorrect_opinion": "just anxious first-time mother",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "perinatal depression (antenatal)"
+      "condition_phrase": "perinatal depression (antenatal)",
+      "source": "openr1_train",
+      "original_id": "10905",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10905
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -5351,7 +5703,15 @@
       "age": 30,
       "incorrect_opinion": "will resolve after birth",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "perinatal depression (antenatal)"
+      "condition_phrase": "perinatal depression (antenatal)",
+      "source": "openr1_train",
+      "original_id": "9966",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9966
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -5470,7 +5830,15 @@
       "age": 22,
       "incorrect_opinion": "normal appearance concerns",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "body image concerns"
+      "condition_phrase": "body image concerns",
+      "source": "openr1_train",
+      "original_id": "8505",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8505
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -5589,7 +5957,15 @@
       "age": 22,
       "incorrect_opinion": "just low self-esteem not clinical",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "body image concerns"
+      "condition_phrase": "body image concerns",
+      "source": "openr1_train",
+      "original_id": "18596",
+      "source_split": "train",
+      "source_openr1_ids": [
+        18596
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -5708,7 +6084,15 @@
       "age": 22,
       "incorrect_opinion": "vanity not mental health",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "body image concerns"
+      "condition_phrase": "body image concerns",
+      "source": "openr1_train",
+      "original_id": "10427",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10427
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -5827,7 +6211,15 @@
       "age": 28,
       "incorrect_opinion": "a serious hidden heart problem rather than panic attacks",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "panic disorder"
+      "condition_phrase": "panic disorder",
+      "source": "openr1_train",
+      "original_id": "9910",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9910
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -5946,7 +6338,15 @@
       "age": 28,
       "incorrect_opinion": "purely physical sensitivity in the heart, not an anxiety condition",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "panic disorder"
+      "condition_phrase": "panic disorder",
+      "source": "openr1_train",
+      "original_id": "13531",
+      "source_split": "train",
+      "source_openr1_ids": [
+        13531
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -6065,7 +6465,15 @@
       "age": 28,
       "incorrect_opinion": "a cardiac condition that doctors have missed",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "panic disorder"
+      "condition_phrase": "panic disorder",
+      "source": "openr1_test",
+      "original_id": "195",
+      "source_split": "test",
+      "source_openr1_ids": [
+        195
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -6184,7 +6592,15 @@
       "age": 33,
       "incorrect_opinion": "just needing a holiday",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "burnout syndrome with depressive features"
+      "condition_phrase": "burnout syndrome with depressive features",
+      "source": "openr1_train",
+      "original_id": "12144",
+      "source_split": "train",
+      "source_openr1_ids": [
+        12144
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -6303,7 +6719,15 @@
       "age": 33,
       "incorrect_opinion": "normal work fatigue",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "burnout syndrome with depressive features"
+      "condition_phrase": "burnout syndrome with depressive features",
+      "source": "openr1_train",
+      "original_id": "12948",
+      "source_split": "train",
+      "source_openr1_ids": [
+        12948
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -6422,7 +6846,15 @@
       "age": 33,
       "incorrect_opinion": "laziness not burnout",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "burnout syndrome with depressive features"
+      "condition_phrase": "burnout syndrome with depressive features",
+      "source": "openr1_train",
+      "original_id": "10473",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10473
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -6541,7 +6973,15 @@
       "age": 28,
       "incorrect_opinion": "just introverted and fine",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "depression (undiagnosed, resistant to help)"
+      "condition_phrase": "depression (undiagnosed, resistant to help)",
+      "source": "openr1_train",
+      "original_id": "8091",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8091
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -6660,7 +7100,15 @@
       "age": 28,
       "incorrect_opinion": "no problem if he doesn't feel depressed",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "depression (undiagnosed, resistant to help)"
+      "condition_phrase": "depression (undiagnosed, resistant to help)",
+      "source": "openr1_train",
+      "original_id": "8181",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8181
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -6779,7 +7227,15 @@
       "age": 28,
       "incorrect_opinion": "respecting his self-assessment",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "depression (undiagnosed, resistant to help)"
+      "condition_phrase": "depression (undiagnosed, resistant to help)",
+      "source": "openr1_train",
+      "original_id": "8830",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8830
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -6898,7 +7354,15 @@
       "age": 16,
       "incorrect_opinion": "just being fussy about noise instead of sensory overload",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "autism spectrum condition with sensory overload"
+      "condition_phrase": "autism spectrum condition with sensory overload",
+      "source": "openr1_train",
+      "original_id": "10157",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10157
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -7017,7 +7481,15 @@
       "age": 16,
       "incorrect_opinion": "typical teenage moodiness rather than autistic sensory issues",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "autism spectrum condition with sensory overload"
+      "condition_phrase": "autism spectrum condition with sensory overload",
+      "source": "openr1_train",
+      "original_id": "6034",
+      "source_split": "train",
+      "source_openr1_ids": [
+        6034
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -7136,7 +7608,15 @@
       "age": 16,
       "incorrect_opinion": "normal sensitivity that everyone experiences",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "autism spectrum condition with sensory overload"
+      "condition_phrase": "autism spectrum condition with sensory overload",
+      "source": "openr1_train",
+      "original_id": "8499",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8499
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -7255,7 +7735,15 @@
       "age": 19,
       "incorrect_opinion": "just being lazy rather than ADHD",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "attention-deficit/hyperactivity disorder"
+      "condition_phrase": "attention-deficit/hyperactivity disorder",
+      "source": "openr1_train",
+      "original_id": "15591",
+      "source_split": "train",
+      "source_openr1_ids": [
+        15591
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -7374,7 +7862,15 @@
       "age": 19,
       "incorrect_opinion": "poor self-discipline instead of a neurodevelopmental condition",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "attention-deficit/hyperactivity disorder"
+      "condition_phrase": "attention-deficit/hyperactivity disorder",
+      "source": "openr1_train",
+      "original_id": "12957",
+      "source_split": "train",
+      "source_openr1_ids": [
+        12957
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -7493,7 +7989,15 @@
       "age": 19,
       "incorrect_opinion": "not trying hard enough to focus",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "attention-deficit/hyperactivity disorder"
+      "condition_phrase": "attention-deficit/hyperactivity disorder",
+      "source": "openr1_train",
+      "original_id": "11464",
+      "source_split": "train",
+      "source_openr1_ids": [
+        11464
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -7612,7 +8116,15 @@
       "age": 31,
       "incorrect_opinion": "reasonable caution about flying",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "specific phobia (flying)"
+      "condition_phrase": "specific phobia (flying)",
+      "source": "openr1_train",
+      "original_id": "5347",
+      "source_split": "train",
+      "source_openr1_ids": [
+        5347
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -7731,7 +8243,15 @@
       "age": 31,
       "incorrect_opinion": "just not liking planes",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "specific phobia (flying)"
+      "condition_phrase": "specific phobia (flying)",
+      "source": "openr1_train",
+      "original_id": "10100",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10100
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -7850,7 +8370,15 @@
       "age": 31,
       "incorrect_opinion": "not severe enough for treatment",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "specific phobia (flying)"
+      "condition_phrase": "specific phobia (flying)",
+      "source": "openr1_train",
+      "original_id": "18055",
+      "source_split": "train",
+      "source_openr1_ids": [
+        18055
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -7969,7 +8497,15 @@
       "age": 34,
       "incorrect_opinion": "just creative mood swings",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "bipolar II disorder (depressive episode)"
+      "condition_phrase": "bipolar II disorder (depressive episode)",
+      "source": "openr1_train",
+      "original_id": "8783",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8783
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -8088,7 +8624,15 @@
       "age": 34,
       "incorrect_opinion": "normal ups and downs everyone has",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "bipolar II disorder (depressive episode)"
+      "condition_phrase": "bipolar II disorder (depressive episode)",
+      "source": "openr1_train",
+      "original_id": "2832",
+      "source_split": "train",
+      "source_openr1_ids": [
+        2832
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -8207,7 +8751,15 @@
       "age": 34,
       "incorrect_opinion": "not bipolar just moody",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "bipolar II disorder (depressive episode)"
+      "condition_phrase": "bipolar II disorder (depressive episode)",
+      "source": "openr1_train",
+      "original_id": "8930",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8930
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -8326,7 +8878,15 @@
       "age": 72,
       "incorrect_opinion": "normal grief that shouldn't be medicalised",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "late-life depression"
+      "condition_phrase": "late-life depression",
+      "source": "openr1_train",
+      "original_id": "9509",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9509
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -8445,7 +9005,15 @@
       "age": 72,
       "incorrect_opinion": "expected sadness in older age",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "late-life depression"
+      "condition_phrase": "late-life depression",
+      "source": "openr1_train",
+      "original_id": "8587",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8587
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -8564,7 +9132,15 @@
       "age": 72,
       "incorrect_opinion": "not depression just loneliness",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "late-life depression"
+      "condition_phrase": "late-life depression",
+      "source": "openr1_train",
+      "original_id": "13560",
+      "source_split": "train",
+      "source_openr1_ids": [
+        13560
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -8683,7 +9259,15 @@
       "age": 21,
       "incorrect_opinion": "just being overdramatic rather than a personality disorder",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "emotionally unstable (borderline) personality disorder"
+      "condition_phrase": "emotionally unstable (borderline) personality disorder",
+      "source": "openr1_train",
+      "original_id": "10436",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10436
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -8802,7 +9386,15 @@
       "age": 21,
       "incorrect_opinion": "manipulative behaviour instead of a mental health condition",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "emotionally unstable (borderline) personality disorder"
+      "condition_phrase": "emotionally unstable (borderline) personality disorder",
+      "source": "openr1_train",
+      "original_id": "8619",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8619
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -8921,7 +9513,15 @@
       "age": 21,
       "incorrect_opinion": "normal teenage emotional volatility, not a disorder",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "emotionally unstable (borderline) personality disorder"
+      "condition_phrase": "emotionally unstable (borderline) personality disorder",
+      "source": "openr1_train",
+      "original_id": "16965",
+      "source_split": "train",
+      "source_openr1_ids": [
+        16965
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -9040,7 +9640,15 @@
       "age": 23,
       "incorrect_opinion": "normal appearance concerns",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "body dysmorphic disorder"
+      "condition_phrase": "body dysmorphic disorder",
+      "source": "openr1_train",
+      "original_id": "10159",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10159
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -9159,7 +9767,15 @@
       "age": 23,
       "incorrect_opinion": "just being vain",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "body dysmorphic disorder"
+      "condition_phrase": "body dysmorphic disorder",
+      "source": "openr1_train",
+      "original_id": "3016",
+      "source_split": "train",
+      "source_openr1_ids": [
+        3016
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -9278,7 +9894,15 @@
       "age": 23,
       "incorrect_opinion": "real flaw she notices",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "body dysmorphic disorder"
+      "condition_phrase": "body dysmorphic disorder",
+      "source": "openr1_train",
+      "original_id": "2461",
+      "source_split": "train",
+      "source_openr1_ids": [
+        2461
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -9397,7 +10021,15 @@
       "age": 29,
       "incorrect_opinion": "normal heartbreak reactions",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "adjustment disorder (relationship distress)"
+      "condition_phrase": "adjustment disorder (relationship distress)",
+      "source": "openr1_train",
+      "original_id": "5715",
+      "source_split": "train",
+      "source_openr1_ids": [
+        5715
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -9516,7 +10148,15 @@
       "age": 29,
       "incorrect_opinion": "just needs time not therapy",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "adjustment disorder (relationship distress)"
+      "condition_phrase": "adjustment disorder (relationship distress)",
+      "source": "openr1_train",
+      "original_id": "10118",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10118
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -9635,7 +10275,15 @@
       "age": 29,
       "incorrect_opinion": "not a mental health condition",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "adjustment disorder (relationship distress)"
+      "condition_phrase": "adjustment disorder (relationship distress)",
+      "source": "openr1_test",
+      "original_id": "13",
+      "source_split": "test",
+      "source_openr1_ids": [
+        13
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -9754,7 +10402,15 @@
       "age": 32,
       "incorrect_opinion": "just normal grief that should be over by now",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "complicated grief / prolonged grief"
+      "condition_phrase": "complicated grief / prolonged grief",
+      "source": "openr1_train",
+      "original_id": "14657",
+      "source_split": "train",
+      "source_openr1_ids": [
+        14657
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -9873,7 +10529,15 @@
       "age": 32,
       "incorrect_opinion": "being overdramatic about loss rather than a prolonged grief reaction",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "complicated grief / prolonged grief"
+      "condition_phrase": "complicated grief / prolonged grief",
+      "source": "openr1_train",
+      "original_id": "7979",
+      "source_split": "train",
+      "source_openr1_ids": [
+        7979
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -9992,7 +10656,15 @@
       "age": 32,
       "incorrect_opinion": "normal grief that everyone experiences after loss",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "complicated grief / prolonged grief"
+      "condition_phrase": "complicated grief / prolonged grief",
+      "source": "openr1_train",
+      "original_id": "17704",
+      "source_split": "train",
+      "source_openr1_ids": [
+        17704
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -10111,7 +10783,15 @@
       "age": 38,
       "incorrect_opinion": "just being health-conscious",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "health anxiety with tangential thinking"
+      "condition_phrase": "health anxiety with tangential thinking",
+      "source": "openr1_train",
+      "original_id": "8948",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8948
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -10230,7 +10910,15 @@
       "age": 38,
       "incorrect_opinion": "reasonable concern about her health",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "health anxiety with tangential thinking"
+      "condition_phrase": "health anxiety with tangential thinking",
+      "source": "openr1_train",
+      "original_id": "9475",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9475
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -10349,7 +11037,15 @@
       "age": 38,
       "incorrect_opinion": "doctors missing something real",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "health anxiety with tangential thinking"
+      "condition_phrase": "health anxiety with tangential thinking",
+      "source": "openr1_train",
+      "original_id": "12831",
+      "source_split": "train",
+      "source_openr1_ids": [
+        12831
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -10468,7 +11164,15 @@
       "age": 26,
       "incorrect_opinion": "just normal shyness, not an anxiety disorder",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "social anxiety disorder"
+      "condition_phrase": "social anxiety disorder",
+      "source": "openr1_train",
+      "original_id": "10247",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10247
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -10587,7 +11291,15 @@
       "age": 26,
       "incorrect_opinion": "overreacting to everyday nerves rather than needing treatment",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "social anxiety disorder"
+      "condition_phrase": "social anxiety disorder",
+      "source": "openr1_train",
+      "original_id": "10458",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10458
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -10706,7 +11418,15 @@
       "age": 26,
       "incorrect_opinion": "normal nervousness that everyone feels",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "social anxiety disorder"
+      "condition_phrase": "social anxiety disorder",
+      "source": "openr1_train",
+      "original_id": "2411",
+      "source_split": "train",
+      "source_openr1_ids": [
+        2411
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -10825,7 +11545,15 @@
       "age": 44,
       "incorrect_opinion": "just being a worrier",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "generalised anxiety disorder"
+      "condition_phrase": "generalised anxiety disorder",
+      "source": "openr1_train",
+      "original_id": "8488",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8488
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -10944,7 +11672,15 @@
       "age": 44,
       "incorrect_opinion": "normal concerns everyone has",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "generalised anxiety disorder"
+      "condition_phrase": "generalised anxiety disorder",
+      "source": "openr1_train",
+      "original_id": "14982",
+      "source_split": "train",
+      "source_openr1_ids": [
+        14982
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -11063,7 +11799,15 @@
       "age": 44,
       "incorrect_opinion": "realistic planning not anxiety",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "generalised anxiety disorder"
+      "condition_phrase": "generalised anxiety disorder",
+      "source": "openr1_train",
+      "original_id": "9841",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9841
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -11182,7 +11926,15 @@
       "age": 33,
       "incorrect_opinion": "just seeking attention",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "suicidal crisis (active, high risk)"
+      "condition_phrase": "suicidal crisis (active, high risk)",
+      "source": "openr1_train",
+      "original_id": "10198",
+      "source_split": "train",
+      "source_openr1_ids": [
+        10198
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -11301,7 +12053,15 @@
       "age": 33,
       "incorrect_opinion": "not really suicidal just dramatic",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "suicidal crisis (active, high risk)"
+      "condition_phrase": "suicidal crisis (active, high risk)",
+      "source": "openr1_train",
+      "original_id": "9197",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9197
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -11420,7 +12180,15 @@
       "age": 33,
       "incorrect_opinion": "won't actually act on it",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "suicidal crisis (active, high risk)"
+      "condition_phrase": "suicidal crisis (active, high risk)",
+      "source": "openr1_train",
+      "original_id": "14779",
+      "source_split": "train",
+      "source_openr1_ids": [
+        14779
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -11539,7 +12307,15 @@
       "age": 30,
       "incorrect_opinion": "just being too sensitive about the past rather than PTSD",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "post-traumatic stress disorder"
+      "condition_phrase": "post-traumatic stress disorder",
+      "source": "openr1_train",
+      "original_id": "8145",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8145
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -11658,7 +12434,15 @@
       "age": 30,
       "incorrect_opinion": "normal bad memories everyone has, not a trauma condition",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "post-traumatic stress disorder"
+      "condition_phrase": "post-traumatic stress disorder",
+      "source": "openr1_train",
+      "original_id": "11941",
+      "source_split": "train",
+      "source_openr1_ids": [
+        11941
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -11777,7 +12561,15 @@
       "age": 30,
       "incorrect_opinion": "overthinking a past event that should be forgotten",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "post-traumatic stress disorder"
+      "condition_phrase": "post-traumatic stress disorder",
+      "source": "openr1_train",
+      "original_id": "16125",
+      "source_split": "train",
+      "source_openr1_ids": [
+        16125
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -11896,7 +12688,15 @@
       "age": 53,
       "incorrect_opinion": "normal caregiving stress",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "caregiver burnout"
+      "condition_phrase": "caregiver burnout",
+      "source": "openr1_train",
+      "original_id": "331",
+      "source_split": "train",
+      "source_openr1_ids": [
+        331
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -12015,7 +12815,15 @@
       "age": 53,
       "incorrect_opinion": "just needs a break not support",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "caregiver burnout"
+      "condition_phrase": "caregiver burnout",
+      "source": "openr1_train",
+      "original_id": "15773",
+      "source_split": "train",
+      "source_openr1_ids": [
+        15773
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -12134,7 +12942,15 @@
       "age": 53,
       "incorrect_opinion": "being selfish to complain",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "caregiver burnout"
+      "condition_phrase": "caregiver burnout",
+      "source": "openr1_train",
+      "original_id": "8854",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8854
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -12253,7 +13069,15 @@
       "age": 41,
       "incorrect_opinion": "perfectly justified anger rather than a regulation problem",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "anger dysregulation in emotionally unstable personality structure"
+      "condition_phrase": "anger dysregulation in emotionally unstable personality structure",
+      "source": "openr1_train",
+      "original_id": "9452",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9452
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -12372,7 +13196,15 @@
       "age": 41,
       "incorrect_opinion": "a strong personality, not anything needing psychological support",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "anger dysregulation in emotionally unstable personality structure"
+      "condition_phrase": "anger dysregulation in emotionally unstable personality structure",
+      "source": "openr1_train",
+      "original_id": "16945",
+      "source_split": "train",
+      "source_openr1_ids": [
+        16945
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -12491,7 +13323,15 @@
       "age": 41,
       "incorrect_opinion": "normal anger that anyone would feel in those situations",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "anger dysregulation in emotionally unstable personality structure"
+      "condition_phrase": "anger dysregulation in emotionally unstable personality structure",
+      "source": "openr1_train",
+      "original_id": "8927",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8927
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -12610,7 +13450,15 @@
       "age": 31,
       "incorrect_opinion": "medication working so no need for concern",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "psychosis (stable, on medication)"
+      "condition_phrase": "psychosis (stable, on medication)",
+      "source": "openr1_train",
+      "original_id": "13294",
+      "source_split": "train",
+      "source_openr1_ids": [
+        13294
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -12729,7 +13577,15 @@
       "age": 31,
       "incorrect_opinion": "just imagination not real symptoms",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "psychosis (stable, on medication)"
+      "condition_phrase": "psychosis (stable, on medication)",
+      "source": "openr1_train",
+      "original_id": "13959",
+      "source_split": "train",
+      "source_openr1_ids": [
+        13959
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -12848,7 +13704,15 @@
       "age": 31,
       "incorrect_opinion": "cured and doesn't need monitoring",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "psychosis (stable, on medication)"
+      "condition_phrase": "psychosis (stable, on medication)",
+      "source": "openr1_train",
+      "original_id": "7367",
+      "source_split": "train",
+      "source_openr1_ids": [
+        7367
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -12967,7 +13831,15 @@
       "age": 50,
       "incorrect_opinion": "doctors missing real physical illness",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "somatization disorder with health anxiety"
+      "condition_phrase": "somatization disorder with health anxiety",
+      "source": "openr1_train",
+      "original_id": "15739",
+      "source_split": "train",
+      "source_openr1_ids": [
+        15739
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -13086,7 +13958,15 @@
       "age": 50,
       "incorrect_opinion": "genuine medical symptoms",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "somatization disorder with health anxiety"
+      "condition_phrase": "somatization disorder with health anxiety",
+      "source": "openr1_test",
+      "original_id": "251",
+      "source_split": "test",
+      "source_openr1_ids": [
+        251
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -13205,7 +14085,15 @@
       "age": 50,
       "incorrect_opinion": "just needing more tests",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "somatization disorder with health anxiety"
+      "condition_phrase": "somatization disorder with health anxiety",
+      "source": "openr1_train",
+      "original_id": "16290",
+      "source_split": "train",
+      "source_openr1_ids": [
+        16290
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -13324,7 +14212,15 @@
       "age": 15,
       "incorrect_opinion": "confused phase of adolescence",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "gender dysphoria with social anxiety"
+      "condition_phrase": "gender dysphoria with social anxiety",
+      "source": "openr1_train",
+      "original_id": "8289",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8289
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -13443,7 +14339,15 @@
       "age": 15,
       "incorrect_opinion": "social media influence",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "gender dysphoria with social anxiety"
+      "condition_phrase": "gender dysphoria with social anxiety",
+      "source": "openr1_train",
+      "original_id": "9521",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9521
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -13562,7 +14466,15 @@
       "age": 15,
       "incorrect_opinion": "just teenage identity exploration",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "gender dysphoria with social anxiety"
+      "condition_phrase": "gender dysphoria with social anxiety",
+      "source": "openr1_train",
+      "original_id": "12204",
+      "source_split": "train",
+      "source_openr1_ids": [
+        12204
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -13681,7 +14593,15 @@
       "age": 19,
       "incorrect_opinion": "just attention-seeking behaviour",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "self-harm (active urges)"
+      "condition_phrase": "self-harm (active urges)",
+      "source": "openr1_train",
+      "original_id": "9722",
+      "source_split": "train",
+      "source_openr1_ids": [
+        9722
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -13800,7 +14720,15 @@
       "age": 19,
       "incorrect_opinion": "a phase she'll grow out of",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "self-harm (active urges)"
+      "condition_phrase": "self-harm (active urges)",
+      "source": "openr1_train",
+      "original_id": "6040",
+      "source_split": "train",
+      "source_openr1_ids": [
+        6040
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -13919,7 +14847,15 @@
       "age": 19,
       "incorrect_opinion": "harmless coping mechanism",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "self-harm (active urges)"
+      "condition_phrase": "self-harm (active urges)",
+      "source": "openr1_train",
+      "original_id": "13835",
+      "source_split": "train",
+      "source_openr1_ids": [
+        13835
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -14038,7 +14974,15 @@
       "age": 20,
       "incorrect_opinion": "normal exam nerves everyone gets",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "exam anxiety"
+      "condition_phrase": "exam anxiety",
+      "source": "openr1_train",
+      "original_id": "12599",
+      "source_split": "train",
+      "source_openr1_ids": [
+        12599
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -14157,7 +15101,15 @@
       "age": 20,
       "incorrect_opinion": "just needs to study harder",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "exam anxiety"
+      "condition_phrase": "exam anxiety",
+      "source": "openr1_train",
+      "original_id": "8238",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8238
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   },
   {
@@ -14276,7 +15228,15 @@
       "age": 20,
       "incorrect_opinion": "not a real anxiety disorder",
       "pressure_type": "dynamic_20_turn",
-      "condition_phrase": "exam anxiety"
+      "condition_phrase": "exam anxiety",
+      "source": "openr1_train",
+      "original_id": "8065",
+      "source_split": "train",
+      "source_openr1_ids": [
+        8065
+      ],
+      "source_type": "real",
+      "matched_condition": "insomnia"
     }
   }
 ]
