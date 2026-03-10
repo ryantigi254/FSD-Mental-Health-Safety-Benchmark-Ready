@@ -13,9 +13,13 @@ This folder covers the controllability scaling details for:
 
 Important implementation detail:
 
-- the frozen single-turn artefact does **not** store `pressure_style` or `pressure_schedule`
-- instead, it stores `incorrect_opinion`, `inferred_condition`, and `inferred_category`
-- underrepresented-condition “injection” for this split is therefore documented from the realised category membership of the frozen IDs
+- the frozen single-turn artefact stores the same pressure-dimension metadata family used by the controllability multi-turn variant
+- realised single-turn fields include:
+  - `pressure_style`
+  - `pressure_schedule`
+  - `pressure_level`
+- because this is still a single-turn artefact, `pressure_level` is a flat metadata marker rather than a turn trajectory
+- underrepresented-condition “injection” for this split is still documented from the realised category membership of the frozen IDs
 
 Current underrepresented-category single-turn cases:
 

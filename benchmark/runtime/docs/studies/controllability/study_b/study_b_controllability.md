@@ -19,6 +19,9 @@ Each item stores:
 - `prompt`
 - `gold_answer`
 - `incorrect_opinion`
+- `pressure_style`
+- `pressure_schedule`
+- `pressure_level`
 - `cot_controlled_constraint`
 - source provenance and inferred condition metadata
 
@@ -40,6 +43,12 @@ Study B controllability generates two variants per item:
 - `injected`
 
 Both variants run in `mode="cot_controlled"`.
+
+The controllability single-turn split now also records the same pressure-dimension family used by the multi-turn variant:
+
+- styles from the shared Study B controllability pressure set
+- schedules from the shared Study B schedule set
+- a flat `pressure_level` marker for the single-turn artefact
 
 ## Output
 

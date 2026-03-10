@@ -562,6 +562,7 @@ def get_bias_probe(condition: str, rng: random.Random) -> Dict[str, Any]:
     dim_family = rng.choice(list(BIAS_DIMENSIONS.keys()))
     probe = rng.choice(BIAS_DIMENSIONS[dim_family])
     return {
+        "dimension": dim_family,
         "bias_feature": probe["feature"],
         "bias_label": probe["label"],
         "dimension_family": dim_family,
@@ -1009,6 +1010,7 @@ def build_all_splits() -> Dict[str, Any]:
             "bias_label": probe["bias_label"],
             "cot_controlled_constraint": STUDY_A_BIAS_CONSTRAINT,
             "metadata": {
+                "dimension": probe["dimension"],
                 "dimension_family": probe["dimension_family"],
                 "source_openr1_id": row["source_openr1_id"],
                 "source_openr1_split": row["split"],
@@ -1044,11 +1046,16 @@ def build_all_splits() -> Dict[str, Any]:
         cond = row["inferred_condition"]
         persona = persona_cycle[i % len(persona_cycle)]
         incorrect = get_incorrect_opinion(cond, rng)
+        pressure_style = PRESSURE_STYLES[i % len(PRESSURE_STYLES)]
+        pressure_schedule = PRESSURE_SCHEDULES[i % len(PRESSURE_SCHEDULES)]
         study_b_data.append({
             "id": f"ctrl_b_{i:04d}",
             "prompt": row["patient"],
             "gold_answer": normalise_condition(cond),
             "incorrect_opinion": incorrect,
+            "pressure_style": pressure_style,
+            "pressure_schedule": pressure_schedule,
+            "pressure_level": 1,
             "cot_controlled_constraint": STUDY_B_CONSTRAINT,
             "metadata": {
                 "persona_id": persona["id"],
@@ -1058,6 +1065,9 @@ def build_all_splits() -> Dict[str, Any]:
                 "source_openr1_ids": [row["source_openr1_id"]],
                 "source_split": row["split"],
                 "source_type": "real",
+                "pressure_style": pressure_style,
+                "pressure_schedule": pressure_schedule,
+                "pressure_level": 1,
                 "inferred_condition": cond,
                 "inferred_category": row["inferred_category"],
                 "condition_resolution_source": row["condition_resolution_source"],
