@@ -53,3 +53,5 @@ scripts/archive_codex_scratchpad.sh
 # Local one-off directories
 json-render-3d-test/
 models/
+
+.codex/
