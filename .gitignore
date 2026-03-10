@@ -57,3 +57,7 @@ codex_logs/
 benchmark/runtime/tests/unit/test_generate_pgfplots*.py
 
 .codex/
+
+.agent/
+Assignment/Misc/
+benchmark/runtime/Misc/
