@@ -13,12 +13,14 @@ Run from runtime root:
 
 from __future__ import annotations
 
+import argparse
 import json
+import os
 import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Sequence
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
 
@@ -34,7 +36,8 @@ from reliable_clinical_benchmark.utils.plan_components import (
 )
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[3]
-CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
+DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
+CTRL_DIR = Path(os.environ.get("CONTROLLABILITY_DIR", str(DEFAULT_CTRL_DIR)))
 OUTPUT_PATH = CTRL_DIR / "ctrl_target_plans.json"
 
 CONDITION_TREATMENT_MAP: Dict[str, Dict[str, str]] = {
@@ -349,23 +352,46 @@ def _enrich_plan_for_alignment(plan_text: str, critical_entities: List[str]) -> 
     return text
 
 
-def main() -> None:
-    print("Loading NLI model (cross-encoder/nli-deberta-v3-base)...")
-    nli = NLIModel()
+def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Generate controllability Study C gold target plans.")
+    parser.add_argument(
+        "--ctrl-dir",
+        type=Path,
+        default=CTRL_DIR,
+        help="Controllability split directory containing study_c_controllability_test.json.",
+    )
+    parser.add_argument(
+        "--skip-nli",
+        action="store_true",
+        help="Build plans from condition maps and case anchors without loading the NLI verifier.",
+    )
+    return parser.parse_args(list(argv) if argv is not None else [])
 
-    print("Loading OpenR1-Psy dataset...")
-    ds = load_dataset("GMLHUHE/OpenR1-Psy")
-    all_rows: Dict[int, Dict[str, Any]] = {}
-    for split_name in ("train", "test"):
-        if split_name not in ds:
-            continue
-        for row in ds[split_name]:
-            convs = row.get("conversation", [])
-            if convs:
-                all_rows[row["post_id"]] = {
-                    "counselor_think": _collect_full_counselor_think(convs),
-                    "counselor_content": convs[0].get("counselor_content", ""),
-                }
+
+def main(argv: Optional[Sequence[str]] = None) -> None:
+    global CTRL_DIR, OUTPUT_PATH
+    args = parse_args(argv)
+    CTRL_DIR = args.ctrl_dir
+    OUTPUT_PATH = CTRL_DIR / "ctrl_target_plans.json"
+
+    all_rows: Dict[tuple[str, int], Dict[str, Any]] = {}
+    nli = None
+    if not args.skip_nli:
+        print("Loading NLI model (cross-encoder/nli-deberta-v3-base)...")
+        nli = NLIModel()
+
+        print("Loading OpenR1-Psy dataset...")
+        ds = load_dataset("GMLHUHE/OpenR1-Psy")
+        for split_name in ("train", "test"):
+            if split_name not in ds:
+                continue
+            for row_idx, row in enumerate(ds[split_name]):
+                convs = row.get("conversation", [])
+                if convs:
+                    all_rows[(split_name, row_idx)] = {
+                        "counselor_think": _collect_full_counselor_think(convs),
+                        "counselor_content": convs[0].get("counselor_content", ""),
+                    }
 
     # Load controllability Study C split
     ctrl_c_path = CTRL_DIR / "study_c_controllability_test.json"
@@ -382,20 +408,22 @@ def main() -> None:
     for case in cases:
         cid = case["id"]
         openr1_ids = case.get("metadata", {}).get("source_openr1_ids", [])
+        source_split = str(case.get("metadata", {}).get("source_split", "")).strip().lower()
         condition = case.get("metadata", {}).get("inferred_condition", "unspecified")
         patient_summary = case.get("patient_summary", "")
         critical_entities = case.get("critical_entities", [])
 
         think_text = ""
         for oid in openr1_ids:
-            if oid in all_rows:
-                think_text = all_rows[oid].get("counselor_think", "")
+            row_key = (source_split, int(oid))
+            if row_key in all_rows:
+                think_text = all_rows[row_key].get("counselor_think", "")
                 break
 
         plan_text = ""
         plan_components: List[str] = []
         plan_component_evidence: Dict[str, str] = {}
-        if think_text:
+        if think_text and nli is not None:
             entailed, evidence = classify_plan_components(
                 premise=think_text,
                 nli_model=nli,
@@ -456,7 +484,7 @@ def main() -> None:
     output = {
         "meta": {
             "dataset": "GMLHUHE/OpenR1-Psy",
-            "nli_model": "cross-encoder/nli-deberta-v3-base",
+            "nli_model": "" if args.skip_nli else "cross-encoder/nli-deberta-v3-base",
             "extraction": "controllability/generate_gold_plans.py",
             "generated_utc": datetime.now(timezone.utc).isoformat(),
             "n_cases": len(plans),
@@ -477,4 +505,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])

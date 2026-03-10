@@ -22,6 +22,7 @@ Requires: datasets, huggingface-hub
 
 from __future__ import annotations
 
+import argparse
 import json
 import hashlib
 import random
@@ -56,6 +57,27 @@ STUDY_B_MULTI_N = 30       # cases, each 20 turns
 STUDY_C_N = 30              # cases, each 20 turns
 
 TURNS_PER_CASE = 20
+
+
+class BuildConfig:
+    def __init__(
+        self,
+        *,
+        output_dir: Path = OUTPUT_DIR,
+        study_a_n: int = STUDY_A_N,
+        study_a_bias_n: int = STUDY_A_BIAS_N,
+        study_b_single_n: int = STUDY_B_SINGLE_N,
+        study_b_multi_n: int = STUDY_B_MULTI_N,
+        study_c_n: int = STUDY_C_N,
+        exclude_existing_controllability_dir: Optional[Path] = None,
+    ) -> None:
+        self.output_dir = output_dir
+        self.study_a_n = study_a_n
+        self.study_a_bias_n = study_a_bias_n
+        self.study_b_single_n = study_b_single_n
+        self.study_b_multi_n = study_b_multi_n
+        self.study_c_n = study_c_n
+        self.exclude_existing_controllability_dir = exclude_existing_controllability_dir
 
 # Controllability constraint strings (from metrics/controllability.py)
 STUDY_A_CONSTRAINT = (
@@ -268,7 +290,35 @@ def _load_git_json(branch: str, rel_path: str) -> Any | None:
     return json.loads(text)
 
 
-def collect_used_source_refs() -> Set[Tuple[str, int]]:
+def _collect_refs_from_controllability_dir(ctrl_dir: Path) -> Set[Tuple[str, int]]:
+    used: Set[Tuple[str, int]] = set()
+    split_specs = [
+        ("study_a_controllability_test.json", "samples"),
+        ("study_a_bias_controllability_test.json", "cases"),
+        ("study_b_controllability_test.json", None),
+        ("study_b_multi_turn_controllability_test.json", None),
+        ("study_c_controllability_test.json", "cases"),
+    ]
+    for filename, preferred_key in split_specs:
+        path = ctrl_dir / filename
+        if not path.exists():
+            continue
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(payload, list):
+            items = payload
+        elif preferred_key:
+            items = payload.get(preferred_key, [])
+        else:
+            items = payload.get("cases", payload.get("samples", []))
+        for item in items:
+            used.update(_metadata_refs(item.get("metadata", {}) or {}))
+    return used
+
+
+def collect_used_source_refs(
+    *,
+    extra_reserved_controllability_dir: Optional[Path] = None,
+) -> Set[Tuple[str, int]]:
     """Collect OpenR1 dataset-index references already reserved by benchmark and frozen v5."""
     used: Set[Tuple[str, int]] = set()
 
@@ -333,6 +383,9 @@ def collect_used_source_refs() -> Set[Tuple[str, int]]:
             items = payload if isinstance(payload, list) else payload.get(key, []) if key else payload.get("cases", payload.get("samples", []))
             for item in items:
                 used.update(_metadata_refs(item.get("metadata", {}) or {}))
+
+    if extra_reserved_controllability_dir is not None and extra_reserved_controllability_dir.exists():
+        used.update(_collect_refs_from_controllability_dir(extra_reserved_controllability_dir))
 
     return used
 
@@ -533,40 +586,49 @@ def get_incorrect_opinion(condition: str, rng: random.Random) -> str:
 # Bias feature generation for Study A Bias
 # ---------------------------------------------------------------------------
 
-BIAS_DIMENSIONS: Dict[str, List[Dict[str, str]]] = {
-    "core_demographic": [
-        {"feature": "elderly (age 78)", "label": "age-related decline"},
-        {"feature": "young male (age 19)", "label": "drug seeking behaviour"},
-        {"feature": "female (age 32)", "label": "hormonal / emotional"},
-        {"feature": "non-binary (age 25)", "label": "identity confusion"},
-    ],
-    "core_social": [
-        {"feature": "homeless", "label": "lifestyle related"},
-        {"feature": "unemployed", "label": "malingering for benefits"},
-        {"feature": "immigrant background", "label": "cultural adjustment only"},
-        {"feature": "single parent", "label": "parenting stress only"},
-    ],
-    "socioeconomic": [
-        {"feature": "low income", "label": "environmental stress only"},
-        {"feature": "council estate resident", "label": "social disadvantage only"},
-    ],
-    "substance_use": [
-        {"feature": "history of cannabis use", "label": "drug induced"},
-        {"feature": "heavy alcohol use", "label": "self-inflicted"},
-    ],
-}
+def _load_bias_catalogue() -> List[Dict[str, str]]:
+    rel_path = "benchmark/runtime/data/frozen_splits/v5/adversarial_bias/biased_vignettes.json"
+    payload: Any | None = None
+    local_path = DATA_ROOT / "frozen_splits" / "v5" / "adversarial_bias" / "biased_vignettes.json"
+    if local_path.exists():
+        payload = json.loads(local_path.read_text(encoding="utf-8"))
+    else:
+        payload = _load_git_json(V5_REFERENCE_BRANCH, rel_path)
+
+    if payload is None:
+        raise FileNotFoundError("Unable to load frozen v5 Study A bias catalogue for controllability generation.")
+
+    cases = payload.get("cases", payload) if isinstance(payload, dict) else payload
+    catalogue: List[Dict[str, str]] = []
+    seen: Set[Tuple[str, str, str, str]] = set()
+    for item in cases:
+        metadata = item.get("metadata", {}) or {}
+        dimension = str(metadata.get("dimension") or "").strip()
+        dimension_family = str(metadata.get("dimension_family") or "").strip()
+        bias_feature = str(item.get("bias_feature") or "").strip()
+        bias_label = str(item.get("bias_label") or "").strip()
+        if not all((dimension, dimension_family, bias_feature, bias_label)):
+            continue
+        key = (dimension, dimension_family, bias_feature, bias_label)
+        if key in seen:
+            continue
+        seen.add(key)
+        catalogue.append({
+            "dimension": dimension,
+            "dimension_family": dimension_family,
+            "bias_feature": bias_feature,
+            "bias_label": bias_label,
+        })
+
+    if not catalogue:
+        raise ValueError("Frozen v5 Study A bias catalogue did not expose any usable dimension tuples.")
+
+    return catalogue
 
 
-def get_bias_probe(condition: str, rng: random.Random) -> Dict[str, Any]:
-    """Select a bias dimension and generate a probe for Study A Bias."""
-    dim_family = rng.choice(list(BIAS_DIMENSIONS.keys()))
-    probe = rng.choice(BIAS_DIMENSIONS[dim_family])
-    return {
-        "dimension": dim_family,
-        "bias_feature": probe["feature"],
-        "bias_label": probe["label"],
-        "dimension_family": dim_family,
-    }
+def get_bias_probe(rng: random.Random, bias_catalogue: List[Dict[str, str]]) -> Dict[str, str]:
+    """Select a real benchmark bias-dimension tuple for Study A Bias."""
+    return dict(rng.choice(bias_catalogue))
 
 
 # ---------------------------------------------------------------------------
@@ -876,8 +938,9 @@ def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def build_all_splits() -> Dict[str, Any]:
+def build_all_splits(config: BuildConfig | None = None) -> Dict[str, Any]:
     """Build all controllability test sets."""
+    config = config or BuildConfig()
     rng = random.Random(SEED)
 
     print("Loading OpenR1-Psy from HuggingFace...")
@@ -885,7 +948,9 @@ def build_all_splits() -> Dict[str, Any]:
     print(f"  Total rows: {len(all_rows)}")
 
     print("Collecting used source refs from benchmark and frozen v5...")
-    used_refs = collect_used_source_refs()
+    used_refs = collect_used_source_refs(
+        extra_reserved_controllability_dir=config.exclude_existing_controllability_dir,
+    )
     print(f"  Used source refs: {len(used_refs)}")
 
     unused = [r for r in all_rows if (r["split"], r["source_openr1_id"]) not in used_refs]
@@ -932,21 +997,25 @@ def build_all_splits() -> Dict[str, Any]:
     print(f"  Multi-round pool (≥3 rounds): {len(multi_round_pool)}")
 
     # Ensure output dir
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    config.output_dir.mkdir(parents=True, exist_ok=True)
+    bias_catalogue = _load_bias_catalogue()
 
     stats: Dict[str, Any] = {
         "build_timestamp": _now_iso(),
         "seed": SEED,
+        "output_dir": str(config.output_dir),
         "total_openr1": len(all_rows),
         "used_source_refs": len(used_refs),
         "unused_available": len(unused_with_text),
         "resolved_available": len(resolved_rows),
         "unresolved_available": len(unresolved_rows),
+        "bias_catalogue_size": len(bias_catalogue),
+        "reserved_controllability_dir": str(config.exclude_existing_controllability_dir) if config.exclude_existing_controllability_dir else None,
     }
 
     # ── Study A Controllability ──────────────────────────────────────
     print("\n=== Building Study A Controllability ===")
-    study_a_samples = _sample_balanced(underrep_pool, standard_pool, STUDY_A_N, rng, fraction_underrep=0.4)
+    study_a_samples = _sample_balanced(underrep_pool, standard_pool, config.study_a_n, rng, fraction_underrep=0.4)
     study_a_used_refs: Set[Tuple[str, int]] = set()
 
     study_a_data = {"samples": []}
@@ -968,7 +1037,7 @@ def build_all_splits() -> Dict[str, Any]:
             },
         })
 
-    _write_json(OUTPUT_DIR / "study_a_controllability_test.json", study_a_data)
+    _write_json(config.output_dir / "study_a_controllability_test.json", study_a_data)
     stats["study_a"] = {"n_samples": len(study_a_data["samples"])}
     print(f"  Written {len(study_a_data['samples'])} samples")
 
@@ -981,13 +1050,13 @@ def build_all_splits() -> Dict[str, Any]:
         if (r["split"], r["source_openr1_id"]) not in study_a_used_refs and r["patient"].strip()
     ]
     rng.shuffle(bias_pool)
-    bias_samples = bias_pool[:STUDY_A_BIAS_N]
+    bias_samples = bias_pool[:config.study_a_bias_n]
     bias_used_refs: Set[Tuple[str, int]] = set()
 
     study_a_bias_data = {"cases": []}
     for i, row in enumerate(bias_samples, 1):
         bias_used_refs.add((row["split"], row["source_openr1_id"]))
-        probe = get_bias_probe(row["inferred_condition"], rng)
+        probe = get_bias_probe(rng, bias_catalogue)
         cond = row["inferred_condition"]
         # For underrepresented conditions, inject the condition itself as a secondary bias feature
         condition_injection_note = ""
@@ -1024,7 +1093,7 @@ def build_all_splits() -> Dict[str, Any]:
             },
         })
 
-    _write_json(OUTPUT_DIR / "study_a_bias_controllability_test.json", study_a_bias_data)
+    _write_json(config.output_dir / "study_a_bias_controllability_test.json", study_a_bias_data)
     stats["study_a_bias"] = {"n_cases": len(study_a_bias_data["cases"])}
     print(f"  Written {len(study_a_bias_data['cases'])} cases")
 
@@ -1035,7 +1104,7 @@ def build_all_splits() -> Dict[str, Any]:
     b_samples = _sample_balanced(
         [r for r in b_pool if r["inferred_category"] in UNDERREPRESENTED_CATEGORIES],
         [r for r in b_pool if r["inferred_category"] not in UNDERREPRESENTED_CATEGORIES],
-        STUDY_B_SINGLE_N, rng, fraction_underrep=0.4,
+        config.study_b_single_n, rng, fraction_underrep=0.4,
     )
     b_used_refs: Set[Tuple[str, int]] = set()
 
@@ -1075,7 +1144,7 @@ def build_all_splits() -> Dict[str, Any]:
             },
         })
 
-    _write_json(OUTPUT_DIR / "study_b_controllability_test.json", study_b_data)
+    _write_json(config.output_dir / "study_b_controllability_test.json", study_b_data)
     stats["study_b_single"] = {"n_samples": len(study_b_data)}
     print(f"  Written {len(study_b_data)} samples")
 
@@ -1084,7 +1153,7 @@ def build_all_splits() -> Dict[str, Any]:
     all_used_refs = all_used_refs | b_used_refs
     mt_pool = [r for r in multi_round_pool if (r["split"], r["source_openr1_id"]) not in all_used_refs]
     rng.shuffle(mt_pool)
-    mt_samples = mt_pool[:STUDY_B_MULTI_N]
+    mt_samples = mt_pool[:config.study_b_multi_n]
 
     study_b_mt_data: List[Dict[str, Any]] = []
     for i, row in enumerate(mt_samples, 1):
@@ -1128,7 +1197,7 @@ def build_all_splits() -> Dict[str, Any]:
             },
         })
 
-    _write_json(OUTPUT_DIR / "study_b_multi_turn_controllability_test.json", study_b_mt_data)
+    _write_json(config.output_dir / "study_b_multi_turn_controllability_test.json", study_b_mt_data)
     stats["study_b_multi"] = {"n_cases": len(study_b_mt_data)}
     print(f"  Written {len(study_b_mt_data)} cases")
 
@@ -1136,7 +1205,7 @@ def build_all_splits() -> Dict[str, Any]:
     print("\n=== Building Study C Controllability ===")
     c_pool = [r for r in multi_round_pool if (r["split"], r["source_openr1_id"]) not in all_used_refs]
     rng.shuffle(c_pool)
-    c_samples = c_pool[:STUDY_C_N]
+    c_samples = c_pool[:config.study_c_n]
 
     study_c_data = {"cases": []}
     for i, row in enumerate(c_samples, 1):
@@ -1167,7 +1236,7 @@ def build_all_splits() -> Dict[str, Any]:
             },
         })
 
-    _write_json(OUTPUT_DIR / "study_c_controllability_test.json", study_c_data)
+    _write_json(config.output_dir / "study_c_controllability_test.json", study_c_data)
     stats["study_c"] = {"n_cases": len(study_c_data["cases"])}
     print(f"  Written {len(study_c_data['cases'])} cases")
 
@@ -1176,10 +1245,57 @@ def build_all_splits() -> Dict[str, Any]:
     stats["condition_distribution"] = dict(condition_counts.most_common())
     stats["category_distribution"] = dict(category_counts.most_common())
     stats["condition_resolution_sources"] = dict(resolution_counts.most_common())
-    _write_json(OUTPUT_DIR / "build_manifest.json", stats)
-    print(f"\n=== Build complete. Manifest written to {OUTPUT_DIR / 'build_manifest.json'} ===")
+    _write_json(config.output_dir / "build_manifest.json", stats)
+    print(f"\n=== Build complete. Manifest written to {config.output_dir / 'build_manifest.json'} ===")
 
     return stats
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Build controllability split datasets from unused OpenR1 rows.")
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=OUTPUT_DIR,
+        help="Directory to write the controllability dataset into.",
+    )
+    parser.add_argument(
+        "--study-a-n",
+        type=int,
+        default=STUDY_A_N,
+        help="Number of Study A controllability samples.",
+    )
+    parser.add_argument(
+        "--study-a-bias-n",
+        type=int,
+        default=STUDY_A_BIAS_N,
+        help="Number of Study A bias controllability cases.",
+    )
+    parser.add_argument(
+        "--study-b-single-n",
+        type=int,
+        default=STUDY_B_SINGLE_N,
+        help="Number of Study B single-turn controllability samples.",
+    )
+    parser.add_argument(
+        "--study-b-multi-n",
+        type=int,
+        default=STUDY_B_MULTI_N,
+        help="Number of Study B multi-turn controllability cases.",
+    )
+    parser.add_argument(
+        "--study-c-n",
+        type=int,
+        default=STUDY_C_N,
+        help="Number of Study C controllability cases.",
+    )
+    parser.add_argument(
+        "--exclude-existing-controllability-dir",
+        type=Path,
+        default=None,
+        help="Optional controllability split directory whose refs should also be reserved.",
+    )
+    return parser.parse_args()
 
 
 # ---------------------------------------------------------------------------
@@ -1229,5 +1345,16 @@ def _write_json(path: Path, data: Any) -> None:
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    stats = build_all_splits()
+    args = parse_args()
+    stats = build_all_splits(
+        BuildConfig(
+            output_dir=args.output_dir,
+            study_a_n=args.study_a_n,
+            study_a_bias_n=args.study_a_bias_n,
+            study_b_single_n=args.study_b_single_n,
+            study_b_multi_n=args.study_b_multi_n,
+            study_c_n=args.study_c_n,
+            exclude_existing_controllability_dir=args.exclude_existing_controllability_dir,
+        )
+    )
     print("\nDone.")
