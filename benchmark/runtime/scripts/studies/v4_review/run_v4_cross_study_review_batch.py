@@ -229,6 +229,9 @@ def _process_study_b_single(items: list[dict[str, Any]], out_path: Path, batch_s
         "incorrect_opinion_nonempty",
         "persona_id_present",
         "id_unique",
+        "source_openr1_ids_valid",
+        "source_split_valid",
+        "generated_only_when_source_empty",
         "mapped_contract_pass",
     ]
 
@@ -262,6 +265,9 @@ def _process_study_b_single(items: list[dict[str, Any]], out_path: Path, batch_s
                 "incorrect_opinion_nonempty": review.get("incorrect_opinion_nonempty", ""),
                 "persona_id_present": review.get("persona_id_present", ""),
                 "id_unique": review.get("id_unique", ""),
+                "source_openr1_ids_valid": review.get("source_openr1_ids_valid", ""),
+                "source_split_valid": review.get("source_split_valid", ""),
+                "generated_only_when_source_empty": review.get("generated_only_when_source_empty", ""),
                 "mapped_contract_pass": review.get("mapped_contract_pass", ""),
             },
         )
@@ -286,6 +292,8 @@ def _process_study_b_multi(items: list[dict[str, Any]], out_path: Path, batch_si
         "turns_all_have_message",
         "turns_all_pressure_level_valid",
         "persona_id_present",
+        "source_openr1_ids_present",
+        "source_split_valid",
         "mapped_contract_pass",
     ]
 
@@ -321,6 +329,8 @@ def _process_study_b_multi(items: list[dict[str, Any]], out_path: Path, batch_si
                 "turns_all_have_message": review.get("turns_all_have_message", ""),
                 "turns_all_pressure_level_valid": review.get("turns_all_pressure_level_valid", ""),
                 "persona_id_present": review.get("persona_id_present", ""),
+                "source_openr1_ids_present": review.get("source_openr1_ids_present", ""),
+                "source_split_valid": review.get("source_split_valid", ""),
                 "mapped_contract_pass": review.get("mapped_contract_pass", ""),
             },
         )

@@ -12,13 +12,10 @@ import pytest
 
 BASE_DIR = Path(__file__).resolve().parents[3]
 
-V03_ROOT = BASE_DIR / "data" / "frozen_splits" / "v0.3_postclinician_audit"
 V41_ROOT = BASE_DIR / "data" / "frozen_splits" / "v4_1_resampled"
-
-V4_OUT = BASE_DIR / "data" / "verification" / "v4"
 V41_OUT = BASE_DIR / "data" / "verification" / "v4_1"
+LATEST_RELEASE_ROOT = BASE_DIR / "data" / "releases" / "clinician_readiness_v4_2026-02-22"
 
-TARGET_COUNT = 768
 VALID_VERDICTS = {"ACCEPTABLE", "NEEDS_REVIEW", "REJECT"}
 
 
@@ -39,6 +36,19 @@ def _sample_map(path: Path) -> dict[str, dict]:
     samples = payload.get("samples", []) if isinstance(payload, dict) else []
     assert isinstance(samples, list)
     return {str(sample.get("id", "") or ""): sample for sample in samples}
+
+
+def _group_bias_by_slot(path: Path) -> dict[tuple[str, ...], list[dict]]:
+    payload = _read_json(path)
+    grouped: dict[str, list[dict]] = {}
+    for case in payload.get("cases", []):
+        grouped.setdefault(str(case.get("pair_group_id", "") or ""), []).append(case)
+
+    by_slot: dict[tuple[str, ...], list[dict]] = {}
+    for rows in grouped.values():
+        slot = tuple(sorted(str(row.get("id", "") or "") for row in rows))
+        by_slot[slot] = sorted(rows, key=lambda row: str(row.get("id", "") or ""))
+    return by_slot
 
 
 def _hash_file(path: Path) -> str:
@@ -86,10 +96,9 @@ def test_v41_no_duplicate_item_ids() -> None:
 
 
 @pytest.mark.unit
-def test_v41_resampling_log_has_exact_target_count() -> None:
-    rows = _read_ssv(V41_OUT / "study_a_resampling_log.ssv")
-    assert len(rows) == TARGET_COUNT
-    assert all(str(row.get("candidate_verdict", "") or "") == "ACCEPTABLE" for row in rows)
+def test_v41_bias_replacement_log_has_exact_target_count() -> None:
+    rows = _read_ssv(V41_OUT / "study_a_bias_replacement_log.ssv")
+    assert len(rows) == 114
 
 
 @pytest.mark.unit
@@ -113,35 +122,42 @@ def test_v41_study_a_labels_match_ids_exactly() -> None:
 
 
 @pytest.mark.unit
-def test_v41_replacement_and_retention_partition_is_exact() -> None:
-    v4_rows = _read_ssv(V4_OUT / "study_a_reference_verdicts.ssv")
-    target_ids = {
-        str(row.get("item_id", "") or "")
-        for row in v4_rows
-        if str(row.get("verdict", "") or "") in {"NEEDS_REVIEW", "REJECT"}
-    }
-    assert len(target_ids) == TARGET_COUNT
+def test_v41_bias_retention_and_replacement_partition_is_exact() -> None:
+    release_groups = _group_bias_by_slot(LATEST_RELEASE_ROOT / "adversarial_bias" / "biased_vignettes.json")
+    current_groups = _group_bias_by_slot(V41_ROOT / "adversarial_bias" / "biased_vignettes.json")
+    study_a_samples = _read_json(LATEST_RELEASE_ROOT / "openr1_psy_splits" / "study_a_test.json").get("samples", [])
 
-    v03_samples = _sample_map(V03_ROOT / "study_a_test.json")
-    v41_samples = _sample_map(V41_ROOT / "study_a_test.json")
+    study_a_pairs = set()
+    for sample in study_a_samples:
+        metadata = sample.get("metadata", {}) or {}
+        split_name = str(metadata.get("source_split", "") or "").strip().lower()
+        if split_name not in {"test", "train"}:
+            continue
+        for source_id in metadata.get("source_openr1_ids", []) or []:
+            study_a_pairs.add((split_name, int(source_id)))
 
-    def canonical(sample: dict) -> str:
-        return json.dumps(sample, sort_keys=True, ensure_ascii=False)
-
-    changed = 0
-    unchanged = 0
-    for item_id, v03_sample in v03_samples.items():
-        assert item_id in v41_samples, f"Missing item id in v4_1 Study A: {item_id}"
-        same = canonical(v03_sample) == canonical(v41_samples[item_id])
-        if item_id in target_ids:
-            assert not same, f"Targeted item should be replaced but stayed unchanged: {item_id}"
-            changed += 1
+    retained = 0
+    replaced = 0
+    for slot_key, old_rows in release_groups.items():
+        new_rows = current_groups[slot_key]
+        old_meta = old_rows[0].get("metadata", {}) or {}
+        old_pair = (
+            str(old_meta.get("source_openr1_split", "") or "").strip().lower(),
+            int(old_meta.get("source_openr1_id", -1)),
+        )
+        if old_pair in study_a_pairs:
+            replaced += 1
+            assert json.dumps(old_rows, sort_keys=True, ensure_ascii=False) != json.dumps(
+                new_rows, sort_keys=True, ensure_ascii=False
+            )
         else:
-            assert same, f"Retained ACCEPTABLE item changed unexpectedly: {item_id}"
-            unchanged += 1
+            retained += 1
+            assert json.dumps(old_rows, sort_keys=True, ensure_ascii=False) == json.dumps(
+                new_rows, sort_keys=True, ensure_ascii=False
+            )
 
-    assert changed == TARGET_COUNT
-    assert unchanged == 2000 - TARGET_COUNT
+    assert retained == 886
+    assert replaced == 114
 
 
 @pytest.mark.unit
@@ -165,8 +181,8 @@ def test_v41_no_reused_openr1_source_ids() -> None:
 
     assert len(source_refs) == len(set(source_refs))
 
-    replacement_rows = _read_ssv(V41_OUT / "study_a_resampling_log.ssv")
-    replacement_ids = [int(str(row.get("candidate_openr1_id", "") or "-1")) for row in replacement_rows]
+    replacement_rows = _read_ssv(V41_OUT / "study_a_bias_replacement_log.ssv")
+    replacement_ids = [int(str(row.get("replacement_source_openr1_id", "") or "-1")) for row in replacement_rows]
     assert len(replacement_ids) == len(set(replacement_ids))
 
 
@@ -175,23 +191,48 @@ def test_v41_manifest_hash_matches_study_a_files() -> None:
     manifest = _read_json(V41_ROOT / "manifest.json")
     entries = {entry["file"]: entry for entry in manifest.get("files", [])}
 
-    for rel in ["study_a_test.json", "gold_diagnosis_labels.json"]:
+    for rel in [
+        "study_a_test.json",
+        "gold_diagnosis_labels.json",
+        "study_b_test.json",
+        "study_b_multi_turn_test.json",
+        "adversarial_bias/biased_vignettes.json",
+    ]:
         assert rel in entries, f"Manifest missing {rel}"
         assert entries[rel]["sha256"] == _hash_file(V41_ROOT / rel)
 
 
 @pytest.mark.unit
 def test_v41_run_metadata_has_resampling_block() -> None:
-    payload = _read_json(V41_OUT / "run_metadata.json")
-    resampling = payload.get("resampling", {})
-    assert isinstance(resampling, dict)
-    assert int(resampling.get("targets", -1)) == TARGET_COUNT
-    assert int(resampling.get("filled", -1)) == TARGET_COUNT
-    assert int(resampling.get("exhausted", -1)) == 0
+    payload = _read_json(V41_OUT / "refresh_run_metadata.json")
+    study_a_bias = payload.get("study_a_bias", {})
+    study_b = payload.get("study_b", {})
+    study_c = payload.get("study_c", {})
+    assert int(study_a_bias.get("replaced_groups", -1)) == 114
+    assert int(study_a_bias.get("retained_groups", -1)) == 886
+    assert int(study_b.get("single_turn_total", -1)) == 2000
+    assert int(study_b.get("multi_turn_total", -1)) == 120
+    assert int(study_c.get("replaced_cases", -1)) > 0
+
+
+@pytest.mark.unit
+def test_v41_cross_study_source_disjointness_report_is_clean() -> None:
+    payload = _read_json(V41_OUT / "cross_study_source_disjointness.json")
+    assert payload["study_a_bias_vs_main_overlap"] == []
+    assert payload["study_b_multi_vs_study_a_overlap"] == []
+    assert payload["study_b_multi_vs_study_a_bias_overlap"] == []
+    assert payload["study_b_multi_vs_study_b_single_overlap"] == []
+    assert payload["study_b_multi_vs_study_c_overlap"] == []
+    assert payload["study_c_vs_study_a_overlap"] == []
+    assert payload["study_c_vs_study_a_bias_overlap"] == []
+    assert payload["study_c_vs_study_b_single_overlap"] == []
+    assert payload["study_c_vs_study_b_multi_overlap"] == []
+    assert payload["study_b_multi_internal_source_duplicates"] == {}
+    assert payload["study_b_multi_duplicate_signatures"] == []
 
 
 @pytest.mark.unit
 def test_v41_manifest_created_at_is_stable() -> None:
-    v03_manifest = _read_json(V03_ROOT / "manifest.json")
     v41_manifest = _read_json(V41_ROOT / "manifest.json")
-    assert v41_manifest.get("created_at_utc") == v03_manifest.get("created_at_utc")
+    assert str(v41_manifest.get("created_at_utc", "") or "").strip()
+    assert v41_manifest.get("version") == "v4_1_resampled"

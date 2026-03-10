@@ -10,16 +10,16 @@
     "revision": "56fc0ef2fa5926df86713ed9b35f8689a6f85425",
     "cache_dir": "Misc/datasets/openr1_psy",
     "source_split_counts": {
-      "linked": 24,
-      "generated": 0,
-      "linked_fallback": 76,
+      "linked_fallback": 36,
+      "test": 4,
+      "train": 60,
       "total": 100
     }
   },
   "plans": {
     "c_001": {
       "plan": "Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: major depressive disorder. Constraints/Meds: sertraline 50 mg daily; penicillin allergy.",
-      "source_openr1_id": 23,
+      "source_openr1_id": 9467,
       "source_split": "train",
       "plan_components": [
         "cbt_cognitive_restructuring",
@@ -32,8 +32,8 @@
     },
     "c_002": {
       "plan": "Therapy: trauma-focused CBT or EMDR. Medication: Continue/monitor sertraline 50 mg daily; SSRI (e.g., sertraline) with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 4,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 4604,
+      "source_split": "train"
     },
     "c_003": {
       "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: Continue/monitor sertraline 50 mg daily; antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief disorder symptoms and functioning. Case anchors: Problem: complicated grief / prolonged grief. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -66,12 +66,12 @@
     },
     "c_006": {
       "plan": "Therapy: CBT with exposure hierarchy for social situations. Medication: Continue/monitor sertraline 100 mg daily; SSRI (e.g., sertraline) for moderate-severe anxiety. Skills: cognitive restructuring, gradual exposure, and relaxation techniques. Follow-up: avoidance behaviors and functional impairment. Case anchors: Problem: social anxiety disorder. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 61,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 10694,
+      "source_split": "train"
     },
     "c_007": {
       "plan": "Safety: assess risk and develop a safety plan if indicated. Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: behavioural activation (schedule small, achievable activities). Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: anger dysregulation in emotionally unstable personality structure. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 63,
+      "source_openr1_id": 18127,
       "source_split": "train",
       "plan_components": [
         "risk_safety",
@@ -93,8 +93,8 @@
     },
     "c_009": {
       "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: Continue/monitor sertraline 50 mg daily; SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: sertraline 50 mg daily; penicillin allergy.",
-      "source_openr1_id": 169,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 3145,
+      "source_split": "train"
     },
     "c_010": {
       "plan": "Therapy: DBT first-line (skills group plus individual sessions) or MBT where DBT is unavailable. Medication: symptom-targeted adjuncts only; do not rely on medication as primary treatment. Risk management: maintain collaborative safety plan and weekly review of self-harm urges and triggers.",
@@ -119,8 +119,8 @@
     },
     "c_013": {
       "plan": "Therapy: family-based therapy (FBT) or CBT-E for eating disorders. Medication: limited role; address comorbid depression/anxiety. Skills: meal planning, body image work, and cognitive flexibility. Follow-up: weight restoration, vital signs, and electrolytes. Case anchors: Problem: anorexia nervosa (in recovery). Constraints/Meds: codeine allergy.",
-      "source_openr1_id": 182,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 6063,
+      "source_split": "train"
     },
     "c_014": {
       "plan": "Therapy: CBT with behavioural activation for depression. Medication: SSRI first-line (for example sertraline) with routine side-effect monitoring. Monitoring: PHQ-9 tracking at each review and functional recovery goals. Safety: assess suicidal ideation at every contact and maintain a collaborative safety plan if risk escalates.",
@@ -129,8 +129,8 @@
     },
     "c_015": {
       "plan": "Therapy: psychoeducation and CBT-focused relapse prevention for bipolar depression. Medication: mood stabiliser first-line (lamotrigine preferred; alternatives include lithium or quetiapine). Avoid SSRI monotherapy; consider antidepressant only as adjunct with mood-stabiliser cover. Monitoring: assess mood switching, sleep pattern, and suicidality at each review.",
-      "source_openr1_id": 111,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 4964,
+      "source_split": "train"
     },
     "c_016": {
       "plan": "Therapy: CBT adapted for older adults; reminiscence therapy. Medication: Continue/monitor sertraline 50 mg daily; SSRI with attention to drug interactions and side effects. Skills: behavioral activation, social engagement, and meaningful activity. Follow-up: depression severity, cognitive status, and medical comorbidities. Case anchors: Problem: late-life depression. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -139,8 +139,8 @@
     },
     "c_017": {
       "plan": "Therapy: CBTp (CBT for psychosis) and family intervention. Medication: Continue/monitor psychosis (stable, on medication); antipsychotic medication with metabolic monitoring. Skills: reality testing, early warning sign recognition, and social skills. Follow-up: positive/negative symptoms, medication side effects. Case anchors: Problem: psychosis (stable, on medication). Constraints/Meds: risperidone 2 mg nightly; codeine allergy.",
-      "source_openr1_id": 4304,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 2399,
+      "source_split": "train"
     },
     "c_018": {
       "plan": "Therapy: stress management and supportive counseling. Medication: Continue/monitor sertraline 50 mg daily; antidepressant if depression develops. Skills: respite planning, boundary setting, and self-care scheduling. Follow-up: burnout symptoms, depression screening, and respite utilization. Case anchors: Problem: caregiver burnout. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -149,13 +149,13 @@
     },
     "c_019": {
       "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: Continue/monitor sertraline 100 mg daily; low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilization and symptom distress. Case anchors: Problem: somatization disorder with health anxiety. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 222,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 6683,
+      "source_split": "train"
     },
     "c_020": {
       "plan": "Therapy: CBTp and family intervention; vocational rehabilitation. Medication: Continue/monitor risperidone 2 mg nightly; antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: schizophrenia (prodromal phase). Constraints/Meds: risperidone 2 mg nightly; codeine allergy.",
-      "source_openr1_id": 1052,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 15444,
+      "source_split": "train"
     },
     "c_021": {
       "plan": "Therapy: phase-oriented trauma therapy with grounding focus. Medication: Continue/monitor sertraline 100 mg daily; address comorbid PTSD/depression. Skills: grounding techniques, safety signals, and containment strategies. Follow-up: dissociation frequency and trauma processing progress. Case anchors: Problem: dissociative episodes (comorbid with PTSD). Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
@@ -164,17 +164,17 @@
     },
     "c_022": {
       "plan": "Therapy: CBT adapted for older adults; relaxation training. Medication: Continue/monitor sertraline 100 mg daily; SSRI with careful titration; avoid benzodiazepines. Skills: worry management, relaxation, and cognitive restructuring. Follow-up: anxiety severity, fall risk, and cognitive function. Case anchors: Problem: late-life anxiety with mild cognitive concerns. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 181,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 8668,
+      "source_split": "train"
     },
     "c_023": {
       "plan": "Therapy: CBT with mirror exposure and response prevention. Medication: Continue/monitor fluoxetine 20 mg daily; SSRI at higher doses (similar to OCD). Skills: reducing checking/camouflaging, cognitive restructuring. Follow-up: BDD severity and insight level. Case anchors: Problem: body dysmorphic disorder. Constraints/Meds: fluoxetine 20 mg daily; codeine allergy.",
-      "source_openr1_id": 315,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 18172,
+      "source_split": "train"
     },
     "c_024": {
       "plan": "Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: burnout syndrome with depressive features. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 167,
+      "source_openr1_id": 12050,
       "source_split": "train",
       "plan_components": [
         "exposure"
@@ -190,7 +190,7 @@
     },
     "c_026": {
       "plan": "Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: major depressive disorder. Constraints/Meds: sertraline 50 mg daily; penicillin allergy.",
-      "source_openr1_id": 23,
+      "source_openr1_id": 6231,
       "source_split": "train",
       "plan_components": [
         "cbt_cognitive_restructuring",
@@ -203,8 +203,8 @@
     },
     "c_027": {
       "plan": "Therapy: trauma-focused CBT or EMDR. Medication: Continue/monitor sertraline 50 mg daily; SSRI (e.g., sertraline) with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 4,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 12696,
+      "source_split": "train"
     },
     "c_028": {
       "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: Continue/monitor sertraline 50 mg daily; antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief disorder symptoms and functioning. Case anchors: Problem: complicated grief / prolonged grief. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -237,12 +237,12 @@
     },
     "c_031": {
       "plan": "Therapy: CBT with exposure hierarchy for social situations. Medication: Continue/monitor sertraline 100 mg daily; SSRI (e.g., sertraline) for moderate-severe anxiety. Skills: cognitive restructuring, gradual exposure, and relaxation techniques. Follow-up: avoidance behaviors and functional impairment. Case anchors: Problem: social anxiety disorder. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 61,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 11124,
+      "source_split": "train"
     },
     "c_032": {
       "plan": "Safety: assess risk and develop a safety plan if indicated. Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: behavioural activation (schedule small, achievable activities). Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: anger dysregulation in emotionally unstable personality structure. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 63,
+      "source_openr1_id": 13114,
       "source_split": "train",
       "plan_components": [
         "risk_safety",
@@ -264,8 +264,8 @@
     },
     "c_034": {
       "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: Continue/monitor sertraline 50 mg daily; SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: sertraline 50 mg daily; penicillin allergy.",
-      "source_openr1_id": 169,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 10712,
+      "source_split": "train"
     },
     "c_035": {
       "plan": "Therapy: DBT first-line (skills group plus individual sessions) or MBT where DBT is unavailable. Medication: symptom-targeted adjuncts only; do not rely on medication as primary treatment. Risk management: maintain collaborative safety plan and weekly review of self-harm urges and triggers.",
@@ -290,8 +290,8 @@
     },
     "c_038": {
       "plan": "Therapy: family-based therapy (FBT) or CBT-E for eating disorders. Medication: limited role; address comorbid depression/anxiety. Skills: meal planning, body image work, and cognitive flexibility. Follow-up: weight restoration, vital signs, and electrolytes. Case anchors: Problem: anorexia nervosa (in recovery). Constraints/Meds: codeine allergy.",
-      "source_openr1_id": 182,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 16023,
+      "source_split": "train"
     },
     "c_039": {
       "plan": "Therapy: CBT with behavioural activation for depression. Medication: SSRI first-line (for example sertraline) with routine side-effect monitoring. Monitoring: PHQ-9 tracking at each review and functional recovery goals. Safety: assess suicidal ideation at every contact and maintain a collaborative safety plan if risk escalates.",
@@ -300,8 +300,8 @@
     },
     "c_040": {
       "plan": "Therapy: psychoeducation and CBT-focused relapse prevention for bipolar depression. Medication: mood stabiliser first-line (lamotrigine preferred; alternatives include lithium or quetiapine). Avoid SSRI monotherapy; consider antidepressant only as adjunct with mood-stabiliser cover. Monitoring: assess mood switching, sleep pattern, and suicidality at each review.",
-      "source_openr1_id": 111,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 18103,
+      "source_split": "train"
     },
     "c_041": {
       "plan": "Therapy: CBT adapted for older adults; reminiscence therapy. Medication: Continue/monitor sertraline 50 mg daily; SSRI with attention to drug interactions and side effects. Skills: behavioral activation, social engagement, and meaningful activity. Follow-up: depression severity, cognitive status, and medical comorbidities. Case anchors: Problem: late-life depression. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -310,8 +310,8 @@
     },
     "c_042": {
       "plan": "Therapy: CBTp (CBT for psychosis) and family intervention. Medication: Continue/monitor psychosis (stable, on medication); antipsychotic medication with metabolic monitoring. Skills: reality testing, early warning sign recognition, and social skills. Follow-up: positive/negative symptoms, medication side effects. Case anchors: Problem: psychosis (stable, on medication). Constraints/Meds: risperidone 2 mg nightly; codeine allergy.",
-      "source_openr1_id": 4304,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 4011,
+      "source_split": "train"
     },
     "c_043": {
       "plan": "Therapy: stress management and supportive counseling. Medication: Continue/monitor sertraline 50 mg daily; antidepressant if depression develops. Skills: respite planning, boundary setting, and self-care scheduling. Follow-up: burnout symptoms, depression screening, and respite utilization. Case anchors: Problem: caregiver burnout. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -320,13 +320,13 @@
     },
     "c_044": {
       "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: Continue/monitor sertraline 100 mg daily; low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilization and symptom distress. Case anchors: Problem: somatization disorder with health anxiety. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 222,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 14407,
+      "source_split": "train"
     },
     "c_045": {
       "plan": "Therapy: CBTp and family intervention; vocational rehabilitation. Medication: Continue/monitor risperidone 2 mg nightly; antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: schizophrenia (prodromal phase). Constraints/Meds: risperidone 2 mg nightly; codeine allergy.",
-      "source_openr1_id": 1052,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 5371,
+      "source_split": "train"
     },
     "c_046": {
       "plan": "Therapy: phase-oriented trauma therapy with grounding focus. Medication: Continue/monitor sertraline 100 mg daily; address comorbid PTSD/depression. Skills: grounding techniques, safety signals, and containment strategies. Follow-up: dissociation frequency and trauma processing progress. Case anchors: Problem: dissociative episodes (comorbid with PTSD). Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
@@ -335,17 +335,17 @@
     },
     "c_047": {
       "plan": "Therapy: CBT adapted for older adults; relaxation training. Medication: Continue/monitor sertraline 100 mg daily; SSRI with careful titration; avoid benzodiazepines. Skills: worry management, relaxation, and cognitive restructuring. Follow-up: anxiety severity, fall risk, and cognitive function. Case anchors: Problem: late-life anxiety with mild cognitive concerns. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 181,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 15665,
+      "source_split": "train"
     },
     "c_048": {
       "plan": "Therapy: CBT with mirror exposure and response prevention. Medication: Continue/monitor fluoxetine 20 mg daily; SSRI at higher doses (similar to OCD). Skills: reducing checking/camouflaging, cognitive restructuring. Follow-up: BDD severity and insight level. Case anchors: Problem: body dysmorphic disorder. Constraints/Meds: fluoxetine 20 mg daily; codeine allergy.",
-      "source_openr1_id": 315,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 13387,
+      "source_split": "train"
     },
     "c_049": {
       "plan": "Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: burnout syndrome with depressive features. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 167,
+      "source_openr1_id": 3899,
       "source_split": "train",
       "plan_components": [
         "exposure"
@@ -361,7 +361,7 @@
     },
     "c_051": {
       "plan": "Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: major depressive disorder. Constraints/Meds: sertraline 50 mg daily; penicillin allergy.",
-      "source_openr1_id": 23,
+      "source_openr1_id": 5766,
       "source_split": "train",
       "plan_components": [
         "cbt_cognitive_restructuring",
@@ -374,8 +374,8 @@
     },
     "c_052": {
       "plan": "Therapy: trauma-focused CBT or EMDR. Medication: Continue/monitor sertraline 50 mg daily; SSRI (e.g., sertraline) with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 4,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 12191,
+      "source_split": "train"
     },
     "c_053": {
       "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: Continue/monitor sertraline 50 mg daily; antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief disorder symptoms and functioning. Case anchors: Problem: complicated grief / prolonged grief. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -408,12 +408,12 @@
     },
     "c_056": {
       "plan": "Therapy: CBT with exposure hierarchy for social situations. Medication: Continue/monitor sertraline 100 mg daily; SSRI (e.g., sertraline) for moderate-severe anxiety. Skills: cognitive restructuring, gradual exposure, and relaxation techniques. Follow-up: avoidance behaviors and functional impairment. Case anchors: Problem: social anxiety disorder. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 61,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 1640,
+      "source_split": "train"
     },
     "c_057": {
       "plan": "Safety: assess risk and develop a safety plan if indicated. Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: behavioural activation (schedule small, achievable activities). Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: anger dysregulation in emotionally unstable personality structure. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 63,
+      "source_openr1_id": 5922,
       "source_split": "train",
       "plan_components": [
         "risk_safety",
@@ -435,8 +435,8 @@
     },
     "c_059": {
       "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: Continue/monitor sertraline 50 mg daily; SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: sertraline 50 mg daily; penicillin allergy.",
-      "source_openr1_id": 169,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 1880,
+      "source_split": "train"
     },
     "c_060": {
       "plan": "Therapy: DBT first-line (skills group plus individual sessions) or MBT where DBT is unavailable. Medication: symptom-targeted adjuncts only; do not rely on medication as primary treatment. Risk management: maintain collaborative safety plan and weekly review of self-harm urges and triggers.",
@@ -461,8 +461,8 @@
     },
     "c_063": {
       "plan": "Therapy: family-based therapy (FBT) or CBT-E for eating disorders. Medication: limited role; address comorbid depression/anxiety. Skills: meal planning, body image work, and cognitive flexibility. Follow-up: weight restoration, vital signs, and electrolytes. Case anchors: Problem: anorexia nervosa (in recovery). Constraints/Meds: codeine allergy.",
-      "source_openr1_id": 182,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 15352,
+      "source_split": "train"
     },
     "c_064": {
       "plan": "Therapy: CBT with behavioural activation for depression. Medication: SSRI first-line (for example sertraline) with routine side-effect monitoring. Monitoring: PHQ-9 tracking at each review and functional recovery goals. Safety: assess suicidal ideation at every contact and maintain a collaborative safety plan if risk escalates.",
@@ -471,8 +471,8 @@
     },
     "c_065": {
       "plan": "Therapy: psychoeducation and CBT-focused relapse prevention for bipolar depression. Medication: mood stabiliser first-line (lamotrigine preferred; alternatives include lithium or quetiapine). Avoid SSRI monotherapy; consider antidepressant only as adjunct with mood-stabiliser cover. Monitoring: assess mood switching, sleep pattern, and suicidality at each review.",
-      "source_openr1_id": 111,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 9015,
+      "source_split": "train"
     },
     "c_066": {
       "plan": "Therapy: CBT adapted for older adults; reminiscence therapy. Medication: Continue/monitor sertraline 50 mg daily; SSRI with attention to drug interactions and side effects. Skills: behavioral activation, social engagement, and meaningful activity. Follow-up: depression severity, cognitive status, and medical comorbidities. Case anchors: Problem: late-life depression. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -481,8 +481,8 @@
     },
     "c_067": {
       "plan": "Therapy: CBTp (CBT for psychosis) and family intervention. Medication: Continue/monitor psychosis (stable, on medication); antipsychotic medication with metabolic monitoring. Skills: reality testing, early warning sign recognition, and social skills. Follow-up: positive/negative symptoms, medication side effects. Case anchors: Problem: psychosis (stable, on medication). Constraints/Meds: risperidone 2 mg nightly; codeine allergy.",
-      "source_openr1_id": 4304,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 15368,
+      "source_split": "train"
     },
     "c_068": {
       "plan": "Therapy: stress management and supportive counseling. Medication: Continue/monitor sertraline 50 mg daily; antidepressant if depression develops. Skills: respite planning, boundary setting, and self-care scheduling. Follow-up: burnout symptoms, depression screening, and respite utilization. Case anchors: Problem: caregiver burnout. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -491,13 +491,13 @@
     },
     "c_069": {
       "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: Continue/monitor sertraline 100 mg daily; low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilization and symptom distress. Case anchors: Problem: somatization disorder with health anxiety. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 222,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 4677,
+      "source_split": "train"
     },
     "c_070": {
       "plan": "Therapy: CBTp and family intervention; vocational rehabilitation. Medication: Continue/monitor risperidone 2 mg nightly; antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: schizophrenia (prodromal phase). Constraints/Meds: risperidone 2 mg nightly; codeine allergy.",
-      "source_openr1_id": 1052,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 13322,
+      "source_split": "train"
     },
     "c_071": {
       "plan": "Therapy: phase-oriented trauma therapy with grounding focus. Medication: Continue/monitor sertraline 100 mg daily; address comorbid PTSD/depression. Skills: grounding techniques, safety signals, and containment strategies. Follow-up: dissociation frequency and trauma processing progress. Case anchors: Problem: dissociative episodes (comorbid with PTSD). Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
@@ -506,17 +506,17 @@
     },
     "c_072": {
       "plan": "Therapy: CBT adapted for older adults; relaxation training. Medication: Continue/monitor sertraline 100 mg daily; SSRI with careful titration; avoid benzodiazepines. Skills: worry management, relaxation, and cognitive restructuring. Follow-up: anxiety severity, fall risk, and cognitive function. Case anchors: Problem: late-life anxiety with mild cognitive concerns. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 181,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 8569,
+      "source_split": "train"
     },
     "c_073": {
       "plan": "Therapy: CBT with mirror exposure and response prevention. Medication: Continue/monitor fluoxetine 20 mg daily; SSRI at higher doses (similar to OCD). Skills: reducing checking/camouflaging, cognitive restructuring. Follow-up: BDD severity and insight level. Case anchors: Problem: body dysmorphic disorder. Constraints/Meds: fluoxetine 20 mg daily; codeine allergy.",
-      "source_openr1_id": 315,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 17843,
+      "source_split": "train"
     },
     "c_074": {
       "plan": "Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: burnout syndrome with depressive features. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 167,
+      "source_openr1_id": 1535,
       "source_split": "train",
       "plan_components": [
         "exposure"
@@ -532,7 +532,7 @@
     },
     "c_076": {
       "plan": "Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: major depressive disorder. Constraints/Meds: sertraline 50 mg daily; penicillin allergy.",
-      "source_openr1_id": 23,
+      "source_openr1_id": 4458,
       "source_split": "train",
       "plan_components": [
         "cbt_cognitive_restructuring",
@@ -545,8 +545,8 @@
     },
     "c_077": {
       "plan": "Therapy: trauma-focused CBT or EMDR. Medication: Continue/monitor sertraline 50 mg daily; SSRI (e.g., sertraline) with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 4,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 2148,
+      "source_split": "train"
     },
     "c_078": {
       "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: Continue/monitor sertraline 50 mg daily; antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief disorder symptoms and functioning. Case anchors: Problem: complicated grief / prolonged grief. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -579,12 +579,12 @@
     },
     "c_081": {
       "plan": "Therapy: CBT with exposure hierarchy for social situations. Medication: Continue/monitor sertraline 100 mg daily; SSRI (e.g., sertraline) for moderate-severe anxiety. Skills: cognitive restructuring, gradual exposure, and relaxation techniques. Follow-up: avoidance behaviors and functional impairment. Case anchors: Problem: social anxiety disorder. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 61,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 11407,
+      "source_split": "train"
     },
     "c_082": {
       "plan": "Safety: assess risk and develop a safety plan if indicated. Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: behavioural activation (schedule small, achievable activities). Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: anger dysregulation in emotionally unstable personality structure. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 63,
+      "source_openr1_id": 2450,
       "source_split": "train",
       "plan_components": [
         "risk_safety",
@@ -606,8 +606,8 @@
     },
     "c_084": {
       "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: Continue/monitor sertraline 50 mg daily; SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: sertraline 50 mg daily; penicillin allergy.",
-      "source_openr1_id": 169,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 13124,
+      "source_split": "train"
     },
     "c_085": {
       "plan": "Therapy: DBT first-line (skills group plus individual sessions) or MBT where DBT is unavailable. Medication: symptom-targeted adjuncts only; do not rely on medication as primary treatment. Risk management: maintain collaborative safety plan and weekly review of self-harm urges and triggers.",
@@ -632,8 +632,8 @@
     },
     "c_088": {
       "plan": "Therapy: family-based therapy (FBT) or CBT-E for eating disorders. Medication: limited role; address comorbid depression/anxiety. Skills: meal planning, body image work, and cognitive flexibility. Follow-up: weight restoration, vital signs, and electrolytes. Case anchors: Problem: anorexia nervosa (in recovery). Constraints/Meds: codeine allergy.",
-      "source_openr1_id": 182,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 5368,
+      "source_split": "train"
     },
     "c_089": {
       "plan": "Therapy: CBT with behavioural activation for depression. Medication: SSRI first-line (for example sertraline) with routine side-effect monitoring. Monitoring: PHQ-9 tracking at each review and functional recovery goals. Safety: assess suicidal ideation at every contact and maintain a collaborative safety plan if risk escalates.",
@@ -642,8 +642,8 @@
     },
     "c_090": {
       "plan": "Therapy: psychoeducation and CBT-focused relapse prevention for bipolar depression. Medication: mood stabiliser first-line (lamotrigine preferred; alternatives include lithium or quetiapine). Avoid SSRI monotherapy; consider antidepressant only as adjunct with mood-stabiliser cover. Monitoring: assess mood switching, sleep pattern, and suicidality at each review.",
-      "source_openr1_id": 111,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 2877,
+      "source_split": "train"
     },
     "c_091": {
       "plan": "Therapy: CBT adapted for older adults; reminiscence therapy. Medication: Continue/monitor sertraline 50 mg daily; SSRI with attention to drug interactions and side effects. Skills: behavioral activation, social engagement, and meaningful activity. Follow-up: depression severity, cognitive status, and medical comorbidities. Case anchors: Problem: late-life depression. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -652,8 +652,8 @@
     },
     "c_092": {
       "plan": "Therapy: CBTp (CBT for psychosis) and family intervention. Medication: Continue/monitor psychosis (stable, on medication); antipsychotic medication with metabolic monitoring. Skills: reality testing, early warning sign recognition, and social skills. Follow-up: positive/negative symptoms, medication side effects. Case anchors: Problem: psychosis (stable, on medication). Constraints/Meds: risperidone 2 mg nightly; codeine allergy.",
-      "source_openr1_id": 4304,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 12004,
+      "source_split": "train"
     },
     "c_093": {
       "plan": "Therapy: stress management and supportive counseling. Medication: Continue/monitor sertraline 50 mg daily; antidepressant if depression develops. Skills: respite planning, boundary setting, and self-care scheduling. Follow-up: burnout symptoms, depression screening, and respite utilization. Case anchors: Problem: caregiver burnout. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
@@ -662,13 +662,13 @@
     },
     "c_094": {
       "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: Continue/monitor sertraline 100 mg daily; low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilization and symptom distress. Case anchors: Problem: somatization disorder with health anxiety. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 222,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 18479,
+      "source_split": "train"
     },
     "c_095": {
       "plan": "Therapy: CBTp and family intervention; vocational rehabilitation. Medication: Continue/monitor risperidone 2 mg nightly; antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: schizophrenia (prodromal phase). Constraints/Meds: risperidone 2 mg nightly; codeine allergy.",
-      "source_openr1_id": 1052,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 14199,
+      "source_split": "train"
     },
     "c_096": {
       "plan": "Therapy: phase-oriented trauma therapy with grounding focus. Medication: Continue/monitor sertraline 100 mg daily; address comorbid PTSD/depression. Skills: grounding techniques, safety signals, and containment strategies. Follow-up: dissociation frequency and trauma processing progress. Case anchors: Problem: dissociative episodes (comorbid with PTSD). Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
@@ -677,17 +677,17 @@
     },
     "c_097": {
       "plan": "Therapy: CBT adapted for older adults; relaxation training. Medication: Continue/monitor sertraline 100 mg daily; SSRI with careful titration; avoid benzodiazepines. Skills: worry management, relaxation, and cognitive restructuring. Follow-up: anxiety severity, fall risk, and cognitive function. Case anchors: Problem: late-life anxiety with mild cognitive concerns. Constraints/Meds: sertraline 100 mg daily; codeine allergy.",
-      "source_openr1_id": 181,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 11105,
+      "source_split": "train"
     },
     "c_098": {
       "plan": "Therapy: CBT with mirror exposure and response prevention. Medication: Continue/monitor fluoxetine 20 mg daily; SSRI at higher doses (similar to OCD). Skills: reducing checking/camouflaging, cognitive restructuring. Follow-up: BDD severity and insight level. Case anchors: Problem: body dysmorphic disorder. Constraints/Meds: fluoxetine 20 mg daily; codeine allergy.",
-      "source_openr1_id": 315,
-      "source_split": "linked_fallback"
+      "source_openr1_id": 11371,
+      "source_split": "train"
     },
     "c_099": {
       "plan": "Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review/practise homework. Case anchors: Problem: burnout syndrome with depressive features. Constraints/Meds: sertraline 50 mg daily; codeine allergy.",
-      "source_openr1_id": 167,
+      "source_openr1_id": 14312,
       "source_split": "train",
       "plan_components": [
         "exposure"
