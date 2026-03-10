@@ -354,6 +354,7 @@ def _generate_multi_turn_study_b(
             case_entries.append(
                 {
                     "case_id": case_id,
+                    "persona_id": persona_id,
                     "turn_num": turn_num,
                     "variant": "multi_turn",
                     "conversation_history": conversation_history[:-1],
@@ -524,7 +525,7 @@ def run_study_b(
 
         # 2) Multi-turn cases (Turn-of-Flip): iterative generation with rolling context
         if do_multi_turn:
-            mt_path = Path(data_dir) / "study_b_multi_turn.json"
+            mt_path = Path(data_dir) / "study_b_multi_turn_test.json"
             if mt_path.exists():
                  multi_turn_cases = load_multi_turn_cases(str(mt_path))
             else:

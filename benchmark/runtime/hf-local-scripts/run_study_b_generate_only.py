@@ -85,6 +85,31 @@ def _parse_args() -> argparse.Namespace:
         help="Explicit cache path (defaults to results/<model-id>/study_b_generations.jsonl).",
 
     )
+    p.add_argument(
+
+        "--workers",
+
+        type=int,
+
+        default=None,
+
+        help=(
+            "Number of parallel generation workers. "
+            "Default is auto: 4 for LM Studio runners, 1 for non-LM Studio runners."
+        ),
+
+    )
+    p.add_argument(
+
+        "--progress-interval-seconds",
+
+        type=int,
+
+        default=10,
+
+        help="Heartbeat interval for progress logging while waiting for workers.",
+
+    )
 
     return p.parse_args()
 
@@ -129,6 +154,10 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "psyllm_gml_local": "psyllm-gml-local",
 
         "psyche_r1_local": "psyche-r1-local",
+        "psyllm_gml_vllm": "psyllm-gml-local",
+        "piaget_vllm": "piaget-8b-local",
+        "psyche_r1_vllm": "psyche-r1-local",
+        "psych_qwen_vllm": "psych-qwen-32b-local",
 
     }
 
@@ -286,6 +315,10 @@ def main() -> None:
 
         cache_out=cache_out,
 
+        workers=args.workers,
+
+        progress_interval_seconds=args.progress_interval_seconds,
+
     )
 
 
@@ -298,7 +331,7 @@ def main() -> None:
 
 if __name__ == "__main__":
 
-    main()
+    raise SystemExit(main())
 
 
 
@@ -460,4 +493,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -115,6 +115,17 @@ def _parse_args() -> argparse.Namespace:
         help="Heartbeat interval for progress logging while waiting for workers.",
 
     )
+    parser.add_argument(
+
+        "--quantization",
+
+        type=str,
+
+        default=None,
+
+        help="Optional quantization override for local HF models (for example: 4bit, 8bit, none).",
+
+    )
 
     return parser.parse_args()
 
@@ -147,6 +158,10 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "qwen3_lmstudio": "qwen3-lmstudio",
         "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
         "minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "psyllm_gml_vllm": "psyllm-gml-local",
+        "piaget_vllm": "piaget-8b-local",
+        "psyche_r1_vllm": "psyche-r1-local",
+        "psych_qwen_vllm": "psych-qwen-32b-local",
 
     }
 
@@ -252,7 +267,7 @@ def main() -> None:
 
     config = GenerationConfig(max_tokens=args.max_tokens)
 
-    runner = get_model_runner(args.model_id, config)
+    runner = get_model_runner(args.model_id, config, quantization=args.quantization)
 
     worker_count = resolve_worker_count(args.workers, runner, lmstudio_default=4, non_lm_default=1)
 
@@ -466,4 +481,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
