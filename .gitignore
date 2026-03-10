@@ -47,3 +47,5 @@ benchmark/runtime/data/persona_splits_report.md
 # Local one-off directories
 json-render-3d-test/
 models/
+
+.codex/
