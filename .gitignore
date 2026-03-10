@@ -45,3 +45,7 @@ benchmark/runtime/results/**/study_c_generations.jsonl
 json-render-3d-test/
 
 .codex/
+
+.agent/
+Assignment/Misc/
+benchmark/runtime/Misc/
