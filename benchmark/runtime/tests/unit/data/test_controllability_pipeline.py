@@ -385,6 +385,87 @@ def test_refreshed_gold_plans_keep_resolved_case_anchors():
 
 
 @pytest.mark.unit
+def test_collect_refs_from_controllability_dir_reads_all_split_shapes(tmp_path: Path):
+    build_module = _load_module("build_controllability_splits_collect_refs", BUILD_SPLITS_PATH)
+
+    ctrl_dir = tmp_path / "controllability_splits"
+    ctrl_dir.mkdir(parents=True)
+    (ctrl_dir / "study_a_controllability_test.json").write_text(
+        json.dumps({"samples": [{"metadata": {"source_split": "train", "source_openr1_ids": [1]}}]}),
+        encoding="utf-8",
+    )
+    (ctrl_dir / "study_a_bias_controllability_test.json").write_text(
+        json.dumps({"cases": [{"metadata": {"source_split": "test", "source_openr1_id": 2}}]}),
+        encoding="utf-8",
+    )
+    (ctrl_dir / "study_b_controllability_test.json").write_text(
+        json.dumps([{"metadata": {"source_split": "train", "source_openr1_ids": [3]}}]),
+        encoding="utf-8",
+    )
+    (ctrl_dir / "study_b_multi_turn_controllability_test.json").write_text(
+        json.dumps([{"metadata": {"source_split": "test", "source_openr1_ids": [4]}}]),
+        encoding="utf-8",
+    )
+    (ctrl_dir / "study_c_controllability_test.json").write_text(
+        json.dumps({"cases": [{"metadata": {"source_split": "train", "source_openr1_ids": [5]}}]}),
+        encoding="utf-8",
+    )
+
+    assert build_module._collect_refs_from_controllability_dir(ctrl_dir) == {
+        ("train", 1),
+        ("test", 2),
+        ("train", 3),
+        ("test", 4),
+        ("train", 5),
+    }
+
+
+@pytest.mark.unit
+def test_load_bias_catalogue_preserves_real_dimension_pairs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    build_module = _load_module("build_controllability_splits_bias_catalogue", BUILD_SPLITS_PATH)
+
+    bias_path = tmp_path / "frozen_splits" / "v5" / "adversarial_bias" / "biased_vignettes.json"
+    bias_path.parent.mkdir(parents=True)
+    bias_path.write_text(
+        json.dumps(
+            {
+                "cases": [
+                    {
+                        "bias_feature": "wheelchair_user",
+                        "bias_label": "functional complaint",
+                        "metadata": {
+                            "dimension": "disability",
+                            "dimension_family": "core_access",
+                        },
+                    },
+                    {
+                        "bias_feature": "female",
+                        "bias_label": "non-compliance",
+                        "metadata": {
+                            "dimension": "gender",
+                            "dimension_family": "core_demographic",
+                        },
+                    },
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(build_module, "DATA_ROOT", tmp_path)
+
+    catalogue = build_module._load_bias_catalogue()
+
+    assert {
+        (item["dimension"], item["dimension_family"], item["bias_feature"], item["bias_label"])
+        for item in catalogue
+    } == {
+        ("disability", "core_access", "wheelchair_user", "functional complaint"),
+        ("gender", "core_demographic", "female", "non-compliance"),
+    }
+
+
+@pytest.mark.unit
 def test_generate_gold_labels_smoke_writes_resolved_output(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     fake_datasets = types.ModuleType("datasets")
     fake_datasets.load_dataset = lambda *_args, **_kwargs: {}
@@ -421,8 +502,6 @@ def test_generate_gold_labels_smoke_writes_resolved_output(tmp_path: Path, monke
         encoding="utf-8",
     )
 
-    monkeypatch.setattr(gold_labels, "CTRL_DIR", ctrl_dir)
-    monkeypatch.setattr(gold_labels, "OUTPUT_PATH", ctrl_dir / "ctrl_gold_diagnosis_labels.json")
     monkeypatch.setattr(
         gold_labels,
         "load_dataset",
@@ -451,7 +530,7 @@ def test_generate_gold_labels_smoke_writes_resolved_output(tmp_path: Path, monke
 
     monkeypatch.setattr(gold_labels, "ScoringNLIModel", _FakeScoringNLI)
 
-    gold_labels.main()
+    gold_labels.main(["--ctrl-dir", str(ctrl_dir)])
 
     payload = _read_json(ctrl_dir / "ctrl_gold_diagnosis_labels.json")
     assert payload["labels"] == {
@@ -501,8 +580,6 @@ def test_generate_gold_plans_smoke_writes_resolved_output(tmp_path: Path, monkey
         encoding="utf-8",
     )
 
-    monkeypatch.setattr(gold_plans, "CTRL_DIR", ctrl_dir)
-    monkeypatch.setattr(gold_plans, "OUTPUT_PATH", ctrl_dir / "ctrl_target_plans.json")
     monkeypatch.setattr(
         gold_plans,
         "load_dataset",
@@ -550,7 +627,7 @@ def test_generate_gold_plans_smoke_writes_resolved_output(tmp_path: Path, monkey
         lambda premise, candidates, nli_model, max_keep=3: [],
     )
 
-    gold_plans.main()
+    gold_plans.main(["--ctrl-dir", str(ctrl_dir)])
 
     payload = _read_json(ctrl_dir / "ctrl_target_plans.json")
     assert payload["meta"]["n_cases"] == 2
