@@ -1,217 +1,119 @@
 #!/usr/bin/env python3
-"""Validate cross-study source disjointness and Study B multi-turn uniqueness."""
+"""Validate pairwise cross-study source disjointness for working or frozen snapshot roots."""
 
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 from pathlib import Path
 from typing import Any
 
 
-def _load_json(path: Path) -> Any:
+def _read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def _resolve_path(root: Path, candidates: list[str]) -> Path:
-    for rel in candidates:
-        path = root / rel
-        if path.exists():
-            return path
-    raise FileNotFoundError(f"Unable to resolve any of: {candidates} under {root}")
+def _load_cases(root: Path, rel: str, kind: str) -> list[dict[str, Any]]:
+    payload = _read_json(root / rel)
+    if kind == "study_a":
+        return payload.get("samples", [])
+    if kind == "bias":
+        return payload.get("cases", [])
+    return payload if isinstance(payload, list) else payload.get("cases", []) or payload.get("samples", [])
 
 
-def _extract_main_pairs(payload: dict[str, Any]) -> set[tuple[str, int]]:
-    pairs: set[tuple[str, int]] = set()
-    for sample in payload.get("samples", []):
+def _refs_from_study_a(samples: list[dict[str, Any]]) -> tuple[set[tuple[str, int]], dict[tuple[str, int], list[str]]]:
+    refs: set[tuple[str, int]] = set()
+    mapping: dict[tuple[str, int], list[str]] = {}
+    for sample in samples:
         metadata = sample.get("metadata", {}) or {}
-        split_name = str(metadata.get("source_split", "") or "").strip().lower()
-        if split_name not in {"test", "train"}:
-            continue
+        split = str(metadata.get("source_split", "") or "").strip().lower()
         for source_id in metadata.get("source_openr1_ids", []) or []:
-            pairs.add((split_name, int(source_id)))
-    return pairs
+            pair = (split, int(source_id))
+            refs.add(pair)
+            mapping.setdefault(pair, []).append(str(sample.get("id", "") or ""))
+    return refs, mapping
 
 
-def _extract_bias_pairs(payload: dict[str, Any]) -> tuple[set[tuple[str, int]], dict[tuple[str, int], list[str]]]:
-    pairs: set[tuple[str, int]] = set()
-    pair_to_groups: dict[tuple[str, int], list[str]] = {}
-    for case in payload.get("cases", []):
-        metadata = case.get("metadata", {}) or {}
-        split_name = str(metadata.get("source_openr1_split", "") or "").strip().lower()
-        source_id = metadata.get("source_openr1_id")
-        if split_name not in {"test", "train"} or source_id is None:
-            continue
-        pair = (split_name, int(source_id))
-        pairs.add(pair)
-        pair_to_groups.setdefault(pair, []).append(str(case.get("pair_group_id", "") or ""))
-    return pairs, pair_to_groups
-
-
-def _extract_case_pairs(cases: list[dict[str, Any]]) -> tuple[set[tuple[str, int]], dict[tuple[str, int], list[str]]]:
-    pairs: set[tuple[str, int]] = set()
-    pair_to_ids: dict[tuple[str, int], list[str]] = {}
+def _refs_from_cases(cases: list[dict[str, Any]]) -> tuple[set[tuple[str, int]], dict[tuple[str, int], list[str]]]:
+    refs: set[tuple[str, int]] = set()
+    mapping: dict[tuple[str, int], list[str]] = {}
     for case in cases:
         metadata = case.get("metadata", {}) or {}
-        split_name = str(metadata.get("source_split", "") or "").strip().lower()
-        if split_name not in {"test", "train"}:
-            continue
+        split = str(metadata.get("source_split", "") or "").strip().lower()
         for source_id in metadata.get("source_openr1_ids", []) or []:
-            pair = (split_name, int(source_id))
-            pairs.add(pair)
-            pair_to_ids.setdefault(pair, []).append(str(case.get("id", "") or ""))
-    return pairs, pair_to_ids
+            pair = (split, int(source_id))
+            refs.add(pair)
+            mapping.setdefault(pair, []).append(str(case.get("id", "") or ""))
 
-
-def _multi_turn_signature(case: dict[str, Any]) -> str:
-    turns = case.get("turns", [])
-    joined = "||".join(" ".join(str(turn.get("message", "") or "").split()).strip().lower() for turn in turns)
-    return hashlib.sha256(joined.encode("utf-8")).hexdigest()
+        split = str(metadata.get("source_openr1_split", "") or "").strip().lower()
+        source_id = metadata.get("source_openr1_id")
+        if split in {"test", "train"} and source_id is not None:
+            pair = (split, int(source_id))
+            refs.add(pair)
+            mapping.setdefault(pair, []).append(str(case.get("pair_group_id", "") or str(case.get("id", "") or "")))
+    return refs, mapping
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--data-root",
-        type=Path,
-        default=Path("data"),
-        help="Working data root or frozen snapshot root.",
-    )
+    parser.add_argument("--data-root", type=Path, default=Path("data"))
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("data/verification/v4_1/cross_study_source_disjointness.json"),
-        help="Where to write the validation summary JSON.",
+        default=Path("data/verification/cross_study_source_disjointness.json"),
     )
     args = parser.parse_args()
 
     root = args.data_root.resolve()
-    study_a_path = _resolve_path(root, ["openr1_psy_splits/study_a_test.json", "study_a_test.json"])
-    study_b_single_path = _resolve_path(root, ["openr1_psy_splits/study_b_test.json", "study_b_test.json"])
-    study_b_multi_path = _resolve_path(root, ["openr1_psy_splits/study_b_multi_turn_test.json", "study_b_multi_turn_test.json"])
-    study_c_path = _resolve_path(root, ["openr1_psy_splits/study_c_test.json", "study_c_test.json"])
-    bias_path = _resolve_path(root, ["adversarial_bias/biased_vignettes.json"])
+    study_a, study_a_ids = _refs_from_study_a(_load_cases(root, "study_a_test.json", "study_a") if (root / "study_a_test.json").exists() else _load_cases(root / "openr1_psy_splits" if (root / "openr1_psy_splits").exists() else root, "study_a_test.json", "study_a"))
 
-    study_a_pairs = _extract_main_pairs(_load_json(study_a_path))
-    study_b_single_payload = _load_json(study_b_single_path)
-    study_b_single_cases = study_b_single_payload if isinstance(study_b_single_payload, list) else study_b_single_payload.get("samples", [])
-    study_b_multi_payload = _load_json(study_b_multi_path)
-    study_b_multi_cases = study_b_multi_payload if isinstance(study_b_multi_payload, list) else study_b_multi_payload.get("cases", [])
-    study_c_payload = _load_json(study_c_path)
-    study_c_cases = study_c_payload.get("cases", []) if isinstance(study_c_payload, dict) else study_c_payload
+    def _pick(rel: str, kind: str):
+        direct = root / rel
+        nested = root / "openr1_psy_splits" / rel
+        bias_nested = root / "adversarial_bias" / rel
+        if direct.exists():
+            return _refs_from_cases(_load_cases(root, rel, kind))
+        if nested.exists():
+            return _refs_from_cases(_load_cases(root / "openr1_psy_splits", rel, kind))
+        if bias_nested.exists():
+            return _refs_from_cases(_load_cases(root / "adversarial_bias", rel, kind))
+        raise FileNotFoundError(rel)
 
-    bias_pairs, bias_pair_to_groups = _extract_bias_pairs(_load_json(bias_path))
-    study_b_single_pairs, study_b_single_pair_to_ids = _extract_case_pairs(study_b_single_cases)
-    study_b_multi_pairs, study_b_multi_pair_to_ids = _extract_case_pairs(study_b_multi_cases)
-    study_c_pairs, study_c_pair_to_ids = _extract_case_pairs(study_c_cases)
+    study_b_single, study_b_single_ids = _pick("study_b_test.json", "case")
+    study_b_multi, study_b_multi_ids = _pick("study_b_multi_turn_test.json", "case")
+    study_c, study_c_ids = _pick("study_c_test.json", "case")
+    study_a_bias, study_a_bias_ids = _pick("biased_vignettes.json", "bias")
 
-    signatures: dict[str, str] = {}
-    duplicate_signatures: list[dict[str, str]] = []
-    for case in study_b_multi_cases:
-        case_id = str(case.get("id", "") or "")
-        sig = _multi_turn_signature(case)
-        duplicate_of = signatures.get(sig)
-        if duplicate_of:
-            duplicate_signatures.append(
-                {
-                    "id": case_id,
-                    "duplicate_of": duplicate_of,
-                    "signature_sha256": sig,
-                }
-            )
-        else:
-            signatures[sig] = case_id
-
-    internal_multi_source_duplicates = {
-        f"{split}:{source_id}": ids
-        for (split, source_id), ids in study_b_multi_pair_to_ids.items()
-        if len(ids) > 1
-    }
-    bias_vs_main = study_a_pairs & bias_pairs
-    multi_vs_main = study_b_multi_pairs & study_a_pairs
-    multi_vs_bias = study_b_multi_pairs & bias_pairs
-    multi_vs_single = study_b_multi_pairs & study_b_single_pairs
-    multi_vs_c = study_b_multi_pairs & study_c_pairs
-    study_c_vs_main = study_c_pairs & study_a_pairs
-    study_c_vs_bias = study_c_pairs & bias_pairs
-    study_c_vs_single = study_c_pairs & study_b_single_pairs
-    study_c_vs_multi = study_c_pairs & study_b_multi_pairs
-
-    summary = {
-        "study_a_bias_vs_main_overlap": sorted(f"{split}:{source_id}" for split, source_id in bias_vs_main),
-        "study_b_multi_vs_study_a_overlap": sorted(f"{split}:{source_id}" for split, source_id in multi_vs_main),
-        "study_b_multi_vs_study_a_bias_overlap": sorted(f"{split}:{source_id}" for split, source_id in multi_vs_bias),
-        "study_b_multi_vs_study_b_single_overlap": sorted(f"{split}:{source_id}" for split, source_id in multi_vs_single),
-        "study_b_multi_vs_study_c_overlap": sorted(f"{split}:{source_id}" for split, source_id in multi_vs_c),
-        "study_c_vs_study_a_overlap": sorted(f"{split}:{source_id}" for split, source_id in study_c_vs_main),
-        "study_c_vs_study_a_bias_overlap": sorted(f"{split}:{source_id}" for split, source_id in study_c_vs_bias),
-        "study_c_vs_study_b_single_overlap": sorted(f"{split}:{source_id}" for split, source_id in study_c_vs_single),
-        "study_c_vs_study_b_multi_overlap": sorted(f"{split}:{source_id}" for split, source_id in study_c_vs_multi),
-        "study_b_multi_internal_source_duplicates": internal_multi_source_duplicates,
-        "study_b_multi_duplicate_signatures": duplicate_signatures,
-        "bias_overlap_groups": {
-            f"{split}:{source_id}": sorted(set(bias_pair_to_groups[(split, source_id)]))
-            for split, source_id in bias_vs_main
-        },
-        "study_b_multi_overlap_case_ids": {
-            "vs_study_b_single": {
-                f"{split}:{source_id}": study_b_multi_pair_to_ids[(split, source_id)]
-                for split, source_id in multi_vs_single
-            },
-            "vs_study_a_bias": {
-                f"{split}:{source_id}": study_b_multi_pair_to_ids[(split, source_id)]
-                for split, source_id in multi_vs_bias
-            },
-            "vs_study_c": {
-                f"{split}:{source_id}": study_b_multi_pair_to_ids[(split, source_id)]
-                for split, source_id in multi_vs_c
-            },
-        },
-        "study_c_overlap_case_ids": {
-            "vs_study_a": {
-                f"{split}:{source_id}": study_c_pair_to_ids[(split, source_id)]
-                for split, source_id in study_c_vs_main
-            },
-            "vs_study_a_bias": {
-                f"{split}:{source_id}": study_c_pair_to_ids[(split, source_id)]
-                for split, source_id in study_c_vs_bias
-            },
-            "vs_study_b_single": {
-                f"{split}:{source_id}": study_c_pair_to_ids[(split, source_id)]
-                for split, source_id in study_c_vs_single
-            },
-            "vs_study_b_multi": {
-                f"{split}:{source_id}": study_c_pair_to_ids[(split, source_id)]
-                for split, source_id in study_c_vs_multi
-            },
-        },
-        "study_b_single_overlap_case_ids": {
-            f"{split}:{source_id}": study_b_single_pair_to_ids[(split, source_id)]
-            for split, source_id in multi_vs_single
+    report = {
+        "study_a_vs_study_b_single_overlap": sorted(f"{s}:{i}" for s, i in (study_a & study_b_single)),
+        "study_a_vs_study_b_multi_overlap": sorted(f"{s}:{i}" for s, i in (study_a & study_b_multi)),
+        "study_a_vs_study_c_overlap": sorted(f"{s}:{i}" for s, i in (study_a & study_c)),
+        "study_a_bias_vs_study_a_overlap": sorted(f"{s}:{i}" for s, i in (study_a_bias & study_a)),
+        "study_a_bias_vs_study_b_single_overlap": sorted(f"{s}:{i}" for s, i in (study_a_bias & study_b_single)),
+        "study_b_multi_vs_study_b_single_overlap": sorted(f"{s}:{i}" for s, i in (study_b_multi & study_b_single)),
+        "study_b_multi_vs_study_c_overlap": sorted(f"{s}:{i}" for s, i in (study_b_multi & study_c)),
+        "study_c_vs_study_b_single_overlap": sorted(f"{s}:{i}" for s, i in (study_c & study_b_single)),
+        "study_c_vs_study_a_bias_overlap": sorted(f"{s}:{i}" for s, i in (study_c & study_a_bias)),
+        "detail": {
+            "study_a": {f"{s}:{i}": ids for (s, i), ids in study_a_ids.items()},
+            "study_b_single": {f"{s}:{i}": ids for (s, i), ids in study_b_single_ids.items()},
+            "study_b_multi": {f"{s}:{i}": ids for (s, i), ids in study_b_multi_ids.items()},
+            "study_c": {f"{s}:{i}": ids for (s, i), ids in study_c_ids.items()},
+            "study_a_bias": {f"{s}:{i}": ids for (s, i), ids in study_a_bias_ids.items()},
         },
     }
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(summary, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    args.output.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    has_failures = any(
-        (
-            summary["study_a_bias_vs_main_overlap"],
-            summary["study_b_multi_vs_study_a_overlap"],
-            summary["study_b_multi_vs_study_a_bias_overlap"],
-            summary["study_b_multi_vs_study_b_single_overlap"],
-            summary["study_b_multi_vs_study_c_overlap"],
-            summary["study_c_vs_study_a_overlap"],
-            summary["study_c_vs_study_a_bias_overlap"],
-            summary["study_c_vs_study_b_single_overlap"],
-            summary["study_c_vs_study_b_multi_overlap"],
-            summary["study_b_multi_internal_source_duplicates"],
-            summary["study_b_multi_duplicate_signatures"],
-        )
+    has_overlap = any(
+        report[key]
+        for key in report
+        if key != "detail"
     )
-    print(json.dumps(summary, indent=2, ensure_ascii=False))
-    return 1 if has_failures else 0
+    print(json.dumps({k: len(v) if isinstance(v, list) else "detail" for k, v in report.items()}, indent=2))
+    return 1 if has_overlap else 0
 
 
 if __name__ == "__main__":

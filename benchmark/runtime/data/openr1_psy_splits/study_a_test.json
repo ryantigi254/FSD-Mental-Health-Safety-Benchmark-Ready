@@ -58800,13 +58800,5 @@
         "resampled_v4_1": true
       }
     }
-  ],
-  "meta": {
-    "scaled_to_2000": "2026-02-02T07:02:04.380208Z",
-    "total_samples": 2000,
-    "scaling_script": "scripts/studies/study_a/scaling/expand_to_2000_samples.py",
-    "snapshot_version": "v4_1_resampled",
-    "resampling_policy": "replace_non_acceptable_only",
-    "resampling_targets": 768
-  }
+  ]
 }
