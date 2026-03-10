@@ -74,3 +74,5 @@ codex_logs/
 # Local PGFPlots test drafts
 benchmark/runtime/tests/unit/test_generate_pgfplots.py
 benchmark/runtime/tests/unit/test_generate_pgfplots_additional.py
+
+.codex/
