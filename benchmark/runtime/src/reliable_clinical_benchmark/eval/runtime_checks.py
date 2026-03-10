@@ -123,6 +123,35 @@ def _normalise_study_b_multi_turn(payload):
     return [], ["Study B multi-turn: payload must be list or dict"]
 
 
+def _validate_provenance_metadata(
+    *,
+    metadata: dict,
+    error_prefix: str,
+    errors: List[str],
+) -> None:
+    source_openr1_ids = metadata.get("source_openr1_ids")
+    if not isinstance(source_openr1_ids, list):
+        errors.append(f"{error_prefix}: missing/invalid metadata.source_openr1_ids")
+        return
+
+    source_split = metadata.get("source_split")
+    if not isinstance(source_split, str) or not source_split.strip():
+        errors.append(f"{error_prefix}: missing/invalid metadata.source_split")
+        return
+
+    source_split = source_split.strip()
+    if source_split not in {"test", "train", "generated"}:
+        errors.append(
+            f"{error_prefix}: metadata.source_split must be one of {{test, train, generated}}"
+        )
+        return
+
+    if not source_openr1_ids and source_split != "generated":
+        errors.append(
+            f"{error_prefix}: empty metadata.source_openr1_ids is only allowed when metadata.source_split == 'generated'"
+        )
+
+
 def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
     """
     Validate Study B split has persona IDs + well-formed IDs before running generations.
@@ -183,6 +212,11 @@ def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
             persona_id = metadata.get("persona_id")
             if not isinstance(persona_id, str) or not persona_id.strip():
                 errors.append(f"Study B sample[{sid or i}]: missing/invalid metadata.persona_id")
+            _validate_provenance_metadata(
+                metadata=metadata,
+                error_prefix=f"Study B sample[{sid or i}]",
+                errors=errors,
+            )
 
     for j, case in enumerate(multi_turn_cases):
         if not isinstance(case, dict):
@@ -225,6 +259,11 @@ def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
             persona_id = metadata.get("persona_id")
             if not isinstance(persona_id, str) or not persona_id.strip():
                 errors.append(f"Study B multi_turn_cases[{cid or j}]: missing/invalid metadata.persona_id")
+            _validate_provenance_metadata(
+                metadata=metadata,
+                error_prefix=f"Study B multi_turn_cases[{cid or j}]",
+                errors=errors,
+            )
 
     if errors:
         return False, errors
@@ -354,38 +393,6 @@ def check_model_availability(model_id: str) -> bool:
             logger.warning(
                 "LM Studio not accessible. Ensure LM Studio is running "
                 "and local server is enabled."
-            )
-            return False
-
-    elif model_id_lower in {
-        "ollama_minimax_m2_5_cloud",
-        "minimax_m2_5_cloud",
-        "minimax-m2.5-cloud",
-        "minimax-m2.5:cloud",
-    }:
-        # Check if Ollama OpenAI-compatible endpoint is accessible.
-        try:
-            import requests
-
-            api_base = (
-                os.getenv("OLLAMA_API_BASE")
-                or os.getenv("OLLAMA_BASE_URL")
-                or "http://localhost:11434"
-            ).rstrip("/")
-            if not api_base.endswith("/v1"):
-                api_base = f"{api_base}/v1"
-
-            headers = {}
-            api_key = os.getenv("OLLAMA_API_KEY")
-            if api_key:
-                headers["Authorization"] = f"Bearer {api_key}"
-
-            response = requests.get(f"{api_base}/models", headers=headers, timeout=3)
-            return response.status_code == 200
-        except Exception:
-            logger.warning(
-                "Ollama endpoint not accessible. Ensure `ollama serve` is running "
-                "or set OLLAMA_API_BASE/OLLAMA_BASE_URL for cloud endpoint access."
             )
             return False
 
