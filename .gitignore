@@ -76,3 +76,7 @@ benchmark/runtime/tests/unit/test_generate_pgfplots.py
 benchmark/runtime/tests/unit/test_generate_pgfplots_additional.py
 
 .codex/
+
+.agent/
+Assignment/Misc/
+benchmark/runtime/Misc/
