@@ -49,3 +49,7 @@ json-render-3d-test/
 models/
 
 .codex/
+
+.agent/
+Assignment/Misc/
+benchmark/runtime/Misc/
