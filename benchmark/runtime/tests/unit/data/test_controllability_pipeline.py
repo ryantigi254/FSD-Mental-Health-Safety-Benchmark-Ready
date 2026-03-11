@@ -653,3 +653,32 @@ def test_run_generation_auto_allows_ctrl_study_a_bias_gpt_oss_lmstudio():
     )
 
     assert proc.returncode == 0, proc.stderr or proc.stdout
+
+
+@pytest.mark.unit
+def test_metadata_refs_normalises_legacy_openr1_source_fields():
+    build_module = _load_module("build_controllability_splits_metadata_refs", BUILD_SPLITS_PATH)
+
+    metadata = {
+        "source": "openr1_test",
+        "original_id": "17",
+        "source_split": "openr1_test",
+        "source_openr1_ids": ["17", "17"],
+        "source_openr1_id": "17",
+    }
+
+    assert build_module._metadata_refs(metadata) == {("test", 17)}
+
+
+@pytest.mark.unit
+def test_build_source_metadata_populates_canonical_provenance_fields():
+    build_module = _load_module("build_controllability_splits_source_metadata", BUILD_SPLITS_PATH)
+
+    row = {"split": "openr1_train", "source_openr1_id": "42"}
+
+    assert build_module._build_source_metadata(row) == {
+        "source_openr1_id": 42,
+        "source_openr1_ids": [42],
+        "source_openr1_split": "train",
+        "source_split": "train",
+    }
