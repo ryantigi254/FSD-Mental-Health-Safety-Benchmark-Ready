@@ -21,9 +21,11 @@ These docs cover:
 - which prompt IDs were explicitly or effectively injected by study
 - the realised Study B pressure matrix in the frozen split
 
-They do not describe the arm-aware `v2` generation/evaluation path directly. That lives under:
+They do not describe the runnable arm-aware generation/evaluation path
+directly. That lives under:
 
 - `docs/studies/controllability/README.md`
 - `docs/studies/controllability/controllability_commands.md`
 
-Use the scaling docs for split construction provenance, and the study docs for the runnable `v1` / `v2` controllability workflows.
+Use the scaling docs for split construction provenance, and the study docs for
+the canonical `ctrl_study_*` controllability workflow.

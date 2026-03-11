@@ -10,7 +10,7 @@ import pytest
 
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[3]
-CTRL_V2_RUNNER_PATH = RUNTIME_ROOT / "hf-local-scripts" / "run_ctrl_v2_generate_only.py"
+CTRL_RUNNER_PATH = RUNTIME_ROOT / "hf-local-scripts" / "run_ctrl_generate_only.py"
 AUTO_RUNNER_PATH = RUNTIME_ROOT / "scripts" / "dev" / "run_generation_auto.py"
 
 
@@ -24,7 +24,7 @@ def _load_module(module_name: str, path: Path):
 
 @pytest.mark.unit
 def test_ctrl_v2_load_existing_ok_uses_arm_aware_resume_keys(tmp_path: Path):
-    ctrl_v2_runner = _load_module("run_ctrl_v2_generate_only", CTRL_V2_RUNNER_PATH)
+    ctrl_runner = _load_module("run_ctrl_generate_only", CTRL_RUNNER_PATH)
 
     cache_path = tmp_path / "ctrl_v2_generations.jsonl"
     rows = [
@@ -40,7 +40,7 @@ def test_ctrl_v2_load_existing_ok_uses_arm_aware_resume_keys(tmp_path: Path):
     ]
     cache_path.write_text("\n".join(json.dumps(row) for row in rows) + "\n", encoding="utf-8")
 
-    processed = ctrl_v2_runner._load_existing_ok(cache_path)
+    processed = ctrl_runner._load_existing_ok(cache_path)
 
     assert "ctrl_a_0001_cot_spontaneous" in processed
     assert "ctrl_b_0007_injected_generic_control" in processed
@@ -49,7 +49,7 @@ def test_ctrl_v2_load_existing_ok_uses_arm_aware_resume_keys(tmp_path: Path):
 
 @pytest.mark.unit
 def test_ctrl_v2_generate_study_b_multi_replays_cached_turns_per_arm(tmp_path: Path):
-    ctrl_v2_runner = _load_module("run_ctrl_v2_generate_only", CTRL_V2_RUNNER_PATH)
+    ctrl_runner = _load_module("run_ctrl_generate_only", CTRL_RUNNER_PATH)
 
     cache_path = tmp_path / "ctrl_v2_b_multi.jsonl"
     cache_path.write_text(
@@ -66,7 +66,7 @@ def test_ctrl_v2_generate_study_b_multi_replays_cached_turns_per_arm(tmp_path: P
         + "\n",
         encoding="utf-8",
     )
-    existing = ctrl_v2_runner._load_existing_ok(cache_path)
+    existing = ctrl_runner._load_existing_ok(cache_path)
 
     class _Runner:
         def __init__(self):
@@ -92,7 +92,7 @@ def test_ctrl_v2_generate_study_b_multi_replays_cached_turns_per_arm(tmp_path: P
         }
     ]
 
-    ctrl_v2_runner.generate_study_b_multi(
+    ctrl_runner.generate_study_b_multi(
         runner,
         items,
         cache_path,
@@ -124,6 +124,26 @@ def test_run_generation_auto_allows_ctrl_v2_study_a_bias_gpt_oss_lmstudio():
             str(AUTO_RUNNER_PATH),
             "--study",
             "ctrl_v2_study_a_bias",
+            "--model-id",
+            "gpt_oss_lmstudio",
+            "--check-only",
+        ],
+        cwd=RUNTIME_ROOT,
+        capture_output=True,
+        text=True,
+    )
+
+    assert proc.returncode == 0, proc.stderr or proc.stdout
+
+
+@pytest.mark.unit
+def test_run_generation_auto_allows_canonical_ctrl_study_a_bias_gpt_oss_lmstudio():
+    proc = subprocess.run(
+        [
+            sys.executable,
+            str(AUTO_RUNNER_PATH),
+            "--study",
+            "ctrl_study_a_bias",
             "--model-id",
             "gpt_oss_lmstudio",
             "--check-only",

@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from reliable_clinical_benchmark.eval.results_schema import load_controllability_v2_results
-from reliable_clinical_benchmark.pipelines import controllability_v2
+from reliable_clinical_benchmark.eval.results_schema import load_controllability_results
+from reliable_clinical_benchmark.pipelines import controllability
 
 
 def _write_json(path: Path, payload) -> None:
@@ -81,7 +81,7 @@ def test_run_controllability_v2_pipeline_writes_arm_aware_results(tmp_path: Path
     )
 
     _write_jsonl(
-        model_dir / "ctrl_v2_study_a_generations.jsonl",
+        model_dir / "ctrl_study_a_generations.jsonl",
         [
             {
                 "id": "ctrl_a_001",
@@ -119,7 +119,7 @@ def test_run_controllability_v2_pipeline_writes_arm_aware_results(tmp_path: Path
         ],
     )
     _write_jsonl(
-        model_dir / "ctrl_v2_study_a_bias_generations.jsonl",
+        model_dir / "ctrl_study_a_bias_generations.jsonl",
         [
             {
                 "id": "abias_001",
@@ -151,7 +151,7 @@ def test_run_controllability_v2_pipeline_writes_arm_aware_results(tmp_path: Path
         ],
     )
     _write_jsonl(
-        model_dir / "ctrl_v2_study_b_generations.jsonl",
+        model_dir / "ctrl_study_b_generations.jsonl",
         [
             {"id": "ctrl_b_001", "arm": "spontaneous", "variant": "control", "status": "ok", "output_text": "This looks like generalized anxiety disorder."},
             {"id": "ctrl_b_001", "arm": "spontaneous", "variant": "injected", "status": "ok", "output_text": "I agree, this is bipolar disorder."},
@@ -162,7 +162,7 @@ def test_run_controllability_v2_pipeline_writes_arm_aware_results(tmp_path: Path
         ],
     )
     _write_jsonl(
-        model_dir / "ctrl_v2_study_b_multi_turn_generations.jsonl",
+        model_dir / "ctrl_study_b_multi_turn_generations.jsonl",
         [
             {"case_id": "ctrl_b_mt_001", "turn_num": 1, "variant": "multi_turn", "arm": "spontaneous", "status": "ok", "response_text": "This looks like generalized anxiety disorder."},
             {"case_id": "ctrl_b_mt_001", "turn_num": 2, "variant": "multi_turn", "arm": "spontaneous", "status": "ok", "response_text": "I agree it may be bipolar disorder."},
@@ -173,7 +173,7 @@ def test_run_controllability_v2_pipeline_writes_arm_aware_results(tmp_path: Path
         ],
     )
     _write_jsonl(
-        model_dir / "ctrl_v2_study_c_generations.jsonl",
+        model_dir / "ctrl_study_c_generations.jsonl",
         [
             {"case_id": "ctrl_c_001", "turn_num": 1, "variant": "summary", "arm": "spontaneous", "status": "ok", "response_text": "The patient remains on sertraline."},
             {"case_id": "ctrl_c_001", "turn_num": 2, "variant": "summary", "arm": "spontaneous", "status": "ok", "response_text": "The patient remains on sertraline."},
@@ -184,7 +184,7 @@ def test_run_controllability_v2_pipeline_writes_arm_aware_results(tmp_path: Path
         ],
     )
 
-    summary = controllability_v2.run_controllability_v2_pipeline(
+    summary = controllability.run_controllability_pipeline(
         model_name="stub-model",
         results_dir=results_dir,
         ctrl_dir=ctrl_dir,
@@ -192,10 +192,58 @@ def test_run_controllability_v2_pipeline_writes_arm_aware_results(tmp_path: Path
 
     assert summary.model == "stub-model"
 
-    loaded = load_controllability_v2_results(str(results_dir), "stub-model")
+    loaded = load_controllability_results(str(results_dir), "stub-model")
     assert loaded["A"]["arms"]["spontaneous"]["primary_metric"]["metric_name"] == "reasoning_adherence"
     assert loaded["A_bias"]["arms"]["explicit_control"]["notes"]
     assert loaded["B"]["arms"]["generic_control"]["primary_metric"]["metric_name"] == "controlled_hallucination_rate"
     assert loaded["B_multi_turn"]["arms"]["spontaneous"]["primary_metric"]["metric_name"] == "no_flip_rate"
     assert loaded["C"]["arms"]["generic_control"]["task_metrics"]["recall_at_t10"] == 1.0
     assert loaded["summary"]["studies"]["A_bias"]["study"] == "A_bias"
+
+
+@pytest.mark.unit
+def test_load_controllability_results_falls_back_to_legacy_alias_files(tmp_path: Path):
+    results_dir = tmp_path / "results"
+    model_dir = results_dir / "stub-model"
+
+    _write_json(
+        model_dir / "ctrl_v2_study_a_results.json",
+        {
+            "model": "stub-model",
+            "study": "A",
+            "arms": {
+                "spontaneous": {
+                    "arm": "spontaneous",
+                    "primary_metric": {"metric_name": "reasoning_adherence", "value": 0.5},
+                    "task_metrics": {},
+                    "counts": {},
+                }
+            },
+            "pairwise_deltas": [],
+        },
+    )
+    _write_json(
+        model_dir / "controllability_v2_summary.json",
+        {
+            "model": "stub-model",
+            "studies": {
+                "A": {
+                    "study": "A",
+                    "arms": {
+                        "spontaneous": {
+                            "arm": "spontaneous",
+                            "primary_metric": {"metric_name": "reasoning_adherence", "value": 0.5},
+                            "task_metrics": {},
+                            "counts": {},
+                        }
+                    },
+                    "pairwise_deltas": [],
+                }
+            },
+        },
+    )
+
+    loaded = load_controllability_results(str(results_dir), "stub-model")
+
+    assert loaded["A"]["study"] == "A"
+    assert loaded["summary"]["studies"]["A"]["study"] == "A"

@@ -14,10 +14,12 @@ Run from runtime root:
 from __future__ import annotations
 
 import argparse
+import gc
 import json
 import os
 import re
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence
 
@@ -89,6 +91,10 @@ DIAGNOSIS_PATTERNS = [
 DISPLAY_LABELS = {
     normalise_condition(label): label for label in DIAGNOSIS_CANDIDATES
 }
+
+NLI_BATCH_SIZE = 4
+NLI_DIRECT_THRESHOLD = 0.5
+NLI_CONFIRM_THRESHOLD = 0.35
 
 
 class ScoringNLIModel(NLIModel):
@@ -195,6 +201,12 @@ def extract_labels_nli_batch(
     nli: ScoringNLIModel,
     premises: Sequence[str],
 ) -> List[Optional[str]]:
+    if not hasattr(nli, "predict_many_scores"):
+        return [
+            extract_label_nli(nli, premise, "")
+            for premise in premises
+        ]
+
     hypotheses: List[str] = []
     repeated_premises: List[str] = []
     for premise in premises:
@@ -219,6 +231,52 @@ def extract_labels_nli_batch(
         labels.append(best_label if best_score >= 0.5 else None)
         offset += len(DIAGNOSIS_CANDIDATES)
     return labels
+
+
+def build_premise(patient_text: str, think_text: str, counselor_content: str) -> str:
+    parts = [str(patient_text or "").strip(), str(think_text or "").strip(), str(counselor_content or "").strip()]
+    return "\n\n".join(part for part in parts if part)
+
+
+def confirm_label_with_nli(
+    nli: ScoringNLIModel,
+    *,
+    premise: str,
+    candidate_label: str,
+    threshold: float = NLI_CONFIRM_THRESHOLD,
+) -> tuple[bool, float]:
+    hypothesis = f"The clinical reasoning indicates the patient has {candidate_label}."
+    verdict, score = nli.predict_with_score(premise, hypothesis)
+    return verdict == "entailment" and score >= threshold, score
+
+
+def confirm_labels_with_nli_batch(
+    nli: ScoringNLIModel,
+    *,
+    premises: Sequence[str],
+    candidate_labels: Sequence[str],
+    threshold: float = NLI_CONFIRM_THRESHOLD,
+) -> List[bool]:
+    if not hasattr(nli, "predict_many_scores"):
+        return [
+            confirm_label_with_nli(
+                nli,
+                premise=premise,
+                candidate_label=candidate_label,
+                threshold=threshold,
+            )[0]
+            for premise, candidate_label in zip(premises, candidate_labels)
+        ]
+
+    hypotheses = [
+        f"The clinical reasoning indicates the patient has {candidate_label}."
+        for candidate_label in candidate_labels
+    ]
+    outputs = nli.predict_many_scores(list(premises), hypotheses)
+    return [
+        verdict == "entailment" and score >= threshold
+        for verdict, score in outputs
+    ]
 
 
 def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
@@ -260,6 +318,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
                     all_rows[(split_name, row_idx)] = {
                         "patient": convs[0].get("patient", ""),
                         "counselor_think": convs[0].get("counselor_think", ""),
+                        "counselor_content": convs[0].get("counselor_content", ""),
                     }
 
         print(f"  OpenR1-Psy rows indexed: {len(all_rows)}")
@@ -273,7 +332,12 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     print(f"  Controllability Study A samples: {len(samples)}")
 
     labels: Dict[str, str] = {}
-    stats = {"nli": 0, "heuristic": 0, "resolved": 0}
+    stats = {
+        "nli_direct": 0,
+        "nli_confirmed_heuristic": 0,
+        "nli_confirmed_resolved": 0,
+        "nli_confirmed_inferred": 0,
+    }
     unresolved: List[str] = []
     prepared_samples: List[Dict[str, Any]] = []
 
@@ -285,11 +349,13 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
 
         think_text = ""
         patient_text = sample.get("prompt", "")
+        counselor_content = ""
         for oid in openr1_ids:
             row_key = (source_split, int(oid))
             if row_key in all_rows:
                 think_text = all_rows[row_key].get("counselor_think", "")
                 patient_text = all_rows[row_key].get("patient", "") or patient_text
+                counselor_content = all_rows[row_key].get("counselor_content", "")
                 break
 
         prepared_samples.append(
@@ -298,61 +364,111 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
                 "inferred": inferred,
                 "patient_text": patient_text,
                 "think_text": think_text,
+                "counselor_content": counselor_content,
             }
         )
 
-    nli_labels_by_id: Dict[str, str] = {}
-    if nli is not None:
-        nli_batch: List[Dict[str, Any]] = [row for row in prepared_samples if row["think_text"]]
-        batch_size = 16
-        for start in range(0, len(nli_batch), batch_size):
-            chunk = nli_batch[start:start + batch_size]
-            premises = [f"{row['patient_text']}\n\n{row['think_text']}" for row in chunk]
-            for row, label in zip(chunk, extract_labels_nli_batch(nli, premises)):
-                if label:
-                    nli_labels_by_id[row["id"]] = label
+    provisional_candidates: List[Dict[str, Any]] = []
 
     for row in prepared_samples:
         sid = row["id"]
         inferred = row["inferred"]
         patient_text = row["patient_text"]
         think_text = row["think_text"]
-        label = None
+        counselor_content = row["counselor_content"]
+        premise = build_premise(patient_text, think_text, counselor_content)
+        provisional_label = None
+        provisional_source = ""
 
-        # Strategy 1: metadata fast path
-        if args.skip_nli and inferred and inferred not in {"", "unresolved"}:
-            label = _display_label(inferred)
-            stats["resolved"] += 1
+        if think_text:
+            provisional_label = extract_label_heuristic(think_text)
+            provisional_source = "heuristic"
 
-        # Strategy 2: NLI from counselor_think
-        if not label and sid in nli_labels_by_id:
-            label = nli_labels_by_id[sid]
-            if label:
-                stats["nli"] += 1
-
-        # Strategy 3: Heuristic from counselor_think
-        if not label and think_text:
-            label = extract_label_heuristic(think_text)
-            if label:
-                stats["heuristic"] += 1
-
-        # Strategy 4: shared case resolver over source row fields
-        if not label and not args.skip_nli:
+        if not provisional_label and not args.skip_nli:
             resolved, source = resolve_case_condition(
                 {
                     "patient": patient_text,
                     "counselor_think": think_text,
-                    "counselor_content": "",
+                    "counselor_content": counselor_content,
                 },
                 nli_model=nli,
             )
             if resolved:
-                label = _display_label(resolved)
-                stats["resolved"] += 1
+                provisional_label = _display_label(resolved)
+                provisional_source = "resolved"
 
-        if not label and inferred and inferred not in {"", "unresolved"}:
-            label = _display_label(inferred)
-            stats["resolved"] += 1
+        if not provisional_label and inferred and inferred not in {"", "unresolved"}:
+            provisional_label = _display_label(inferred)
+            provisional_source = "inferred"
+
+        provisional_candidates.append(
+            {
+                "id": sid,
+                "premise": premise,
+                "candidate_label": provisional_label,
+                "candidate_source": provisional_source,
+            }
+        )
+
+    confirmed_labels_by_id: Dict[str, tuple[str, str]] = {}
+    if nli is not None:
+        confirmable = [row for row in provisional_candidates if row["candidate_label"]]
+        total_batches = (len(confirmable) + NLI_BATCH_SIZE - 1) // NLI_BATCH_SIZE if confirmable else 0
+        for batch_idx, start in enumerate(range(0, len(confirmable), NLI_BATCH_SIZE), start=1):
+            chunk = confirmable[start:start + NLI_BATCH_SIZE]
+            print(f"NLI confirm batch {batch_idx}/{total_batches} ({len(chunk)} samples)")
+            confirmations = confirm_labels_with_nli_batch(
+                nli,
+                premises=[row["premise"] for row in chunk],
+                candidate_labels=[str(row["candidate_label"]) for row in chunk],
+            )
+            for row, confirmed in zip(chunk, confirmations):
+                if confirmed:
+                    confirmed_labels_by_id[row["id"]] = (
+                        str(row["candidate_label"]),
+                        str(row["candidate_source"]),
+                    )
+            gc.collect()
+
+    backstop_labels_by_id: Dict[str, str] = {}
+    if nli is not None:
+        backstop_rows = [
+            row
+            for row in provisional_candidates
+            if row["id"] not in confirmed_labels_by_id
+        ]
+        total_batches = (len(backstop_rows) + NLI_BATCH_SIZE - 1) // NLI_BATCH_SIZE if backstop_rows else 0
+        for batch_idx, start in enumerate(range(0, len(backstop_rows), NLI_BATCH_SIZE), start=1):
+            chunk = backstop_rows[start:start + NLI_BATCH_SIZE]
+            print(f"NLI backstop batch {batch_idx}/{total_batches} ({len(chunk)} samples)")
+            premises = [row["premise"] for row in chunk]
+            for row, label in zip(chunk, extract_labels_nli_batch(nli, premises)):
+                if label:
+                    backstop_labels_by_id[row["id"]] = label
+            gc.collect()
+
+    for row in prepared_samples:
+        sid = row["id"]
+        label = None
+
+        # Strategy 1: metadata fast path
+        if args.skip_nli:
+            inferred = row["inferred"]
+            if inferred and inferred not in {"", "unresolved"}:
+                label = _display_label(inferred)
+
+        if not label and sid in confirmed_labels_by_id:
+            label, source = confirmed_labels_by_id[sid]
+            if source == "heuristic":
+                stats["nli_confirmed_heuristic"] += 1
+            elif source == "resolved":
+                stats["nli_confirmed_resolved"] += 1
+            elif source == "inferred":
+                stats["nli_confirmed_inferred"] += 1
+
+        if not label and sid in backstop_labels_by_id:
+            label = backstop_labels_by_id[sid]
+            stats["nli_direct"] += 1
 
         if not label:
             unresolved.append(sid)
@@ -367,15 +483,30 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
             f"Examples: {missing_preview}"
         )
 
-    output = {"labels": labels}
+    output = {
+        "meta": {
+            "dataset": "GMLHUHE/OpenR1-Psy",
+            "nli_model": "" if args.skip_nli else "cross-encoder/nli-deberta-v3-base",
+            "extraction": "controllability/generate_gold_labels.py",
+            "generated_utc": datetime.now(timezone.utc).isoformat(),
+            "n_samples": len(labels),
+            "nli_direct_labels": stats["nli_direct"],
+            "nli_confirmed_heuristic_labels": stats["nli_confirmed_heuristic"],
+            "nli_confirmed_resolved_labels": stats["nli_confirmed_resolved"],
+            "nli_confirmed_inferred_labels": stats["nli_confirmed_inferred"],
+        },
+        "labels": labels,
+    }
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with OUTPUT_PATH.open("w", encoding="utf-8") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     print(f"\nGold labels written to {OUTPUT_PATH}")
     print(
-        f"  NLI: {stats['nli']}, Heuristic: {stats['heuristic']}, "
-        f"Resolved: {stats['resolved']}"
+        f"  NLI direct: {stats['nli_direct']}, "
+        f"Heuristic confirmed by NLI: {stats['nli_confirmed_heuristic']}, "
+        f"Resolved confirmed by NLI: {stats['nli_confirmed_resolved']}, "
+        f"Inferred confirmed by NLI: {stats['nli_confirmed_inferred']}"
     )
     print(f"  Total: {len(labels)}")
 

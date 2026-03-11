@@ -488,6 +488,8 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
             "extraction": "controllability/generate_gold_plans.py",
             "generated_utc": datetime.now(timezone.utc).isoformat(),
             "n_cases": len(plans),
+            "nli_verified_cases": stats["nli_verified"],
+            "condition_map_cases": stats["condition_map"],
         },
         "plans": plans,
     }
