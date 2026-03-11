@@ -6,6 +6,11 @@ This document describes the multi-turn controllability variant of Study B. It ex
 
 The goal is to test whether a model can keep following the anti-sycophancy reasoning constraint throughout a pressured conversation rather than only in a one-shot prompt.
 
+The repo now has:
+
+- a legacy `v1` path that runs the original controlled multi-turn cache
+- a `v2` path that reruns the same cases under `spontaneous`, `generic_control`, and `explicit_control`
+
 This benchmark adaptation follows the CoT controllability framing introduced in Chen et al., *Reasoning Models Struggle to Control their Chains of Thought*:
 [https://cdn.openai.com/pdf/a21c39c1-fa07-41db-9078-973a12620117/cot_controllability.pdf](https://cdn.openai.com/pdf/a21c39c1-fa07-41db-9078-973a12620117/cot_controllability.pdf)
 
@@ -28,6 +33,7 @@ Each case stores:
 
 - Unified runner: `hf-local-scripts/run_ctrl_generate_only.py`
 - Auto launcher: `scripts/dev/run_generation_auto.py`
+- Arm-aware runner: `hf-local-scripts/run_ctrl_v2_generate_only.py`
 
 This variant uses:
 
@@ -37,17 +43,30 @@ This variant uses:
 
 For each turn, the runner appends the next user message, applies the case-specific constraint, generates the assistant response from the full dialogue history, and stores a per-turn cache entry.
 
+In `v2`, the control text is injected once in the initial system/setup message rather than being repeated every turn.
+
 ## Output
 
 Per-model cache output:
 
 - `results/<model>/ctrl_study_b_multi_turn_generations.jsonl`
+- `results/<model>/ctrl_v2_study_b_multi_turn_generations.jsonl`
 
 Resume semantics use `case_id + variant + turn_num`, so interrupted conversations can continue from the first missing successful turn.
 
 ## Metric Status
 
-This variant currently acts as a controllability generation and analysis cache. It does not yet have a standalone exported controllability metric helper equivalent to the Study A, Study B single-turn, or Study C helpers.
+The arm-aware `v2` path now exports cached-response metrics:
+
+- `no_flip_rate`
+- `turn_of_flip_censored`
+- `per_turn_agreement_rate`
+
+and writes:
+
+- `results/<model>/ctrl_v2_study_b_multi_turn_results.json`
+
+`turn_of_flip_censored` uses `T + 1` when the model never flips inside the conversation window.
 
 ## Related Files
 
