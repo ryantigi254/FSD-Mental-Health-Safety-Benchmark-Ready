@@ -1,36 +1,94 @@
 # Study C Controllability Commands
 
-## Generation
+## Scope
+Study C controllability generation writes to `results/<model-folder>/ctrl_study_c_generations.jsonl`.
 
+## One-Time Setup
+
+### Windows (PC)
+```powershell
+cd "E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setup"
+```
+
+## Generation Commands (Automatic Cross-Platform Runner)
+
+### Windows (PC)
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio --env mh-llm-benchmark-env --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --env mh-llm-benchmark-env --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --env mh-llm-benchmark-env --workers 2
+```
+
+## Local HF Models (mh-llm-local-env)
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyllm_gml_local --env mh-llm-local-env
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id piaget_local --env mh-llm-local-env
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyche_r1_local --env mh-llm-local-env
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psych_qwen_local --env mh-llm-local-env --quantization 4bit
+```
+
+## vLLM (Local HF Models Only)
+
+- Client `--workers` should remain `1`.
+- Concurrency is controlled server-side via `--max-num-seqs` (recommended sweep: `2 -> 4 -> 8 -> 12`).
+
+### vLLM Server (per model)
+
+#### PsyLLM-8B (`psyllm_gml_vllm`, default port 8101)
+
+Windows (PC) / WSL:
 ```bash
-cd benchmark/runtime
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id deepseek_r1_lmstudio
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyllm_gml_vllm
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id piaget_vllm
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyche_r1_vllm
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psych_qwen_vllm
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyllm_gml_local
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id piaget_local
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyche_r1_local
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psych_qwen_local
+python -m vllm.entrypoints.openai.api_server --model "GMLHUHE/PsyLLM-8B" --download-dir "./models/vllm" --host 0.0.0.0 --port 8101 --gpu-memory-utilization 0.9 --max-num-seqs 4 --enforce-eager --max-model-len 24576
+```
+
+#### Piaget-8B (`piaget_vllm`, default port 8102)
+
+Windows (PC) / WSL:
+```bash
+python -m vllm.entrypoints.openai.api_server --model "gustavecortal/Piaget-8B" --download-dir "./models/vllm" --host 0.0.0.0 --port 8102 --gpu-memory-utilization 0.9 --max-num-seqs 4 --enforce-eager --max-model-len 24576
+```
+
+#### Psyche-R1 (`psyche_r1_vllm`, default port 8103)
+
+Windows (PC) / WSL:
+```bash
+python -m vllm.entrypoints.openai.api_server --model "MindIntLab/Psyche-R1" --download-dir "./models/vllm" --host 0.0.0.0 --port 8103 --gpu-memory-utilization 0.9 --max-num-seqs 4 --enforce-eager --max-model-len 24576
+```
+
+#### Psych_Qwen_32B (`psych_qwen_vllm`, default port 8104)
+
+Windows (PC) / WSL:
+```bash
+python -m vllm.entrypoints.openai.api_server --model "Compumacy/Psych_Qwen_32B" --download-dir "./models/vllm" --host 0.0.0.0 --port 8104 --gpu-memory-utilization 0.9 --max-num-seqs 4 --enforce-eager --max-model-len 24576 --quantization bitsandbytes --load-format bitsandbytes
+```
+
+### vLLM Generation Commands
+
+### Windows (PC)
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyllm_gml_vllm --env mh-llm-vllm-env
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id piaget_vllm --env mh-llm-vllm-env
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyche_r1_vllm --env mh-llm-vllm-env
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psych_qwen_vllm --env mh-llm-vllm-env
 ```
 
 ## Direct Runner
 
-```bash
-cd benchmark/runtime
-PYTHONPATH=src python hf-local-scripts/run_ctrl_generate_only.py \
-    --study ctrl_study_c \
-    --model-id qwq \
-    --max-cases 3 \
-    --max-tokens 8192
+```powershell
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_c --model-id qwq --max-cases 3 --max-tokens 8192 --workers 6
 ```
 
-## Output
+## Workers
 
-```text
-results/<model>/ctrl_study_c_generations.jsonl
+`ctrl_study_c` generation supports `--workers`. If not passed, default is auto:
+- `4` for LM Studio models (`qwen3_lmstudio`, `qwq`, `deepseek_r1_lmstudio`, `gpt_oss`)
+- `1` for vLLM and local HF models
+
+## Useful Checks
+
+```bash
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --check-only
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_c --model-id gpt_oss --workers 8 --max-cases 3
 ```

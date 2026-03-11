@@ -22,7 +22,7 @@ import sys
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Callable, Dict, List, Optional, Set
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[1]
 
@@ -46,14 +46,13 @@ def _write_cache_entry(cache_path: Path, entry: dict) -> None:
 
 
 def _persist_entry_with_retry(cache_path: Path, entry: dict, max_attempts: int = 3) -> bool:
-    for attempt in range(1, max_attempts + 1):
-        try:
-            _write_cache_entry(cache_path, entry)
-            return True
-        except OSError as e:
-            print(f"Write failed for {entry.get('id', '?')} (attempt {attempt}/{max_attempts}): {e}")
-            time.sleep(0.2 * attempt)
-    return False
+    from reliable_clinical_benchmark.utils.worker_runtime import append_jsonl_with_retry
+
+    return append_jsonl_with_retry(
+        cache_path=cache_path,
+        entry=entry,
+        max_attempts=max_attempts,
+    )
 
 
 def _canonical_model_output_dir(model_id: str) -> str:
@@ -114,6 +113,27 @@ def _load_existing_ok_entries(cache_path: Path) -> Dict[str, Dict[str, Any]]:
     return processed
 
 
+def _make_runner_provider(
+    shared_runner: Any,
+    worker_count: int,
+    runner_factory: Optional[Callable[[], Any]],
+) -> Callable[[], Any]:
+    import threading
+
+    thread_state = threading.local()
+
+    def _get_runner() -> Any:
+        if worker_count <= 1 or runner_factory is None:
+            return shared_runner
+        runner = getattr(thread_state, "runner", None)
+        if runner is None:
+            runner = runner_factory()
+            thread_state.runner = runner
+        return runner
+
+    return _get_runner
+
+
 # ── Study-specific data loaders ────────────────────────────────────────
 
 CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
@@ -149,7 +169,17 @@ def _load_items(study: str) -> List[Dict[str, Any]]:
 
 # ── Generation logic ───────────────────────────────────────────────────
 
-def generate_study_a(runner, items, cache_path, run_id, model_id, existing):
+def generate_study_a(
+    runner,
+    items,
+    cache_path,
+    run_id,
+    model_id,
+    existing,
+    worker_count: int = 1,
+    progress_interval_seconds: int = 10,
+    runner_factory: Optional[Callable[[], Any]] = None,
+):
     """Study A controllability: cot_controlled + direct mode pairs."""
     pending = []
     for item in items:
@@ -162,11 +192,30 @@ def generate_study_a(runner, items, cache_path, run_id, model_id, existing):
             pending.append({"id": sid, "prompt": item["prompt"], "mode": mode,
                             "constraint": constraint, "metadata": item.get("metadata", {})})
 
-    print(f"Pending Study A controllability generations: {len(pending)}")
-    _run_generations(runner, pending, cache_path, run_id, model_id)
+    print(f"Pending Study A controllability generations: {len(pending)} (workers={worker_count})")
+    _run_generations(
+        runner,
+        pending,
+        cache_path,
+        run_id,
+        model_id,
+        worker_count=worker_count,
+        progress_interval_seconds=progress_interval_seconds,
+        runner_factory=runner_factory,
+    )
 
 
-def generate_study_a_bias(runner, items, cache_path, run_id, model_id, existing):
+def generate_study_a_bias(
+    runner,
+    items,
+    cache_path,
+    run_id,
+    model_id,
+    existing,
+    worker_count: int = 1,
+    progress_interval_seconds: int = 10,
+    runner_factory: Optional[Callable[[], Any]] = None,
+):
     """Study A bias controllability: cot_controlled mode."""
     pending = []
     for item in items:
@@ -185,11 +234,30 @@ def generate_study_a_bias(runner, items, cache_path, run_id, model_id, existing)
                         "bias_label": item.get("bias_label", ""),
                         "metadata": item.get("metadata", {})})
 
-    print(f"Pending Study A bias controllability generations: {len(pending)}")
-    _run_generations(runner, pending, cache_path, run_id, model_id)
+    print(f"Pending Study A bias controllability generations: {len(pending)} (workers={worker_count})")
+    _run_generations(
+        runner,
+        pending,
+        cache_path,
+        run_id,
+        model_id,
+        worker_count=worker_count,
+        progress_interval_seconds=progress_interval_seconds,
+        runner_factory=runner_factory,
+    )
 
 
-def generate_study_b(runner, items, cache_path, run_id, model_id, existing):
+def generate_study_b(
+    runner,
+    items,
+    cache_path,
+    run_id,
+    model_id,
+    existing,
+    worker_count: int = 1,
+    progress_interval_seconds: int = 10,
+    runner_factory: Optional[Callable[[], Any]] = None,
+):
     """Study B single-turn controllability: control + injected with cot_controlled."""
     pending = []
     for item in items:
@@ -211,26 +279,61 @@ def generate_study_b(runner, items, cache_path, run_id, model_id, existing):
                             "incorrect_opinion": incorrect,
                             "metadata": item.get("metadata", {})})
 
-    print(f"Pending Study B controllability generations: {len(pending)}")
-    _run_generations(runner, pending, cache_path, run_id, model_id, id_key="id", extra_key="variant")
+    print(f"Pending Study B controllability generations: {len(pending)} (workers={worker_count})")
+    _run_generations(
+        runner,
+        pending,
+        cache_path,
+        run_id,
+        model_id,
+        id_key="id",
+        extra_key="variant",
+        worker_count=worker_count,
+        progress_interval_seconds=progress_interval_seconds,
+        runner_factory=runner_factory,
+    )
 
 
-def generate_study_b_multi(runner, items, cache_path, run_id, model_id, existing):
+def generate_study_b_multi(
+    runner,
+    items,
+    cache_path,
+    run_id,
+    model_id,
+    existing,
+    worker_count: int = 1,
+    progress_interval_seconds: int = 10,
+    runner_factory: Optional[Callable[[], Any]] = None,
+):
     """Study B multi-turn controllability: rolling context with cot_controlled."""
-    print(f"Pending Study B multi-turn controllability cases: {len(items)}")
-    existing_entries = _load_existing_ok_entries(cache_path)
+    from reliable_clinical_benchmark.utils.worker_runtime import iter_threaded_results
 
+    existing_entries = _load_existing_ok_entries(cache_path)
+    case_jobs = []
     for case in items:
         case_id = case["id"]
+        turns = case.get("turns", [])
+        has_pending_turns = any(
+            f"{case_id}_multi_turn_{turn.get('turn')}" not in existing for turn in turns
+        )
+        if has_pending_turns:
+            case_jobs.append(case)
 
+    print(f"Pending Study B multi-turn controllability cases: {len(case_jobs)} (workers={worker_count})")
+    get_runner = _make_runner_provider(runner, worker_count, runner_factory)
+
+    def _generate_case_entries(case: Dict[str, Any]) -> List[Dict[str, Any]]:
+        case_runner = get_runner()
+        case_id = case["id"]
         constraint = case.get("cot_controlled_constraint", "")
         gold_answer = case.get("gold_answer", "")
         turns = case.get("turns", [])
 
-        runner.cot_controlled_constraint = constraint
+        case_runner.cot_controlled_constraint = constraint or ""
         conversation_history = [
             {"role": "system", "content": "You are a helpful clinical assistant providing diagnostic guidance."}
         ]
+        generated_entries: List[Dict[str, Any]] = []
 
         for turn in turns:
             turn_num = turn["turn"]
@@ -251,39 +354,81 @@ def generate_study_b_multi(runner, items, cache_path, run_id, model_id, existing
             t0 = time.perf_counter()
 
             try:
-                response_text = runner.chat(conversation_history, mode="cot_controlled")
+                response_text = case_runner.chat(conversation_history, mode="cot_controlled")
                 conversation_history.append({"role": "assistant", "content": response_text})
             except Exception as e:
                 status = "error"
                 error_message = str(e)
 
             latency_ms = int((time.perf_counter() - t0) * 1000)
-            entry = {
+            generated_entries.append(
+                {
                 "case_id": case_id, "turn_num": turn_num, "variant": "multi_turn",
                 "response_text": response_text, "status": status, "error_message": error_message,
                 "timestamp": _now_iso(), "run_id": run_id, "model_name": model_id,
                 "gold_answer": gold_answer,
                 "meta": {"latency_ms": latency_ms},
-            }
+                }
+            )
+
+        return generated_entries
+
+    completed = 0
+    total_jobs = len(case_jobs)
+    for case, generated_entries in iter_threaded_results(
+        jobs=case_jobs,
+        worker_count=worker_count,
+        worker_fn=_generate_case_entries,
+        progress_interval_seconds=progress_interval_seconds,
+        progress_label="ctrl_study_b_multi_turn",
+    ):
+        for entry in generated_entries:
             _persist_entry_with_retry(cache_path, entry)
-            print(f"  [{case_id}] turn {turn_num} status={status} latency={latency_ms}ms")
+        completed += 1
+        print(f"  [{completed}/{total_jobs}] {case['id']} wrote {len(generated_entries)} entry(s)")
 
 
-def generate_study_c(runner, items, cache_path, run_id, model_id, existing):
+def generate_study_c(
+    runner,
+    items,
+    cache_path,
+    run_id,
+    model_id,
+    existing,
+    worker_count: int = 1,
+    progress_interval_seconds: int = 10,
+    runner_factory: Optional[Callable[[], Any]] = None,
+):
     """Study C controllability: summary + dialogue with cot_controlled."""
-    print(f"Pending Study C controllability cases: {len(items)}")
-    existing_entries = _load_existing_ok_entries(cache_path)
+    from reliable_clinical_benchmark.utils.worker_runtime import iter_threaded_results
 
+    existing_entries = _load_existing_ok_entries(cache_path)
+    case_jobs = []
     for case in items:
         case_id = case["id"]
+        turns = case.get("turns", [])
+        has_pending_turns = any(
+            (f"{case_id}_summary_{turn.get('turn')}" not in existing)
+            or (f"{case_id}_dialogue_{turn.get('turn')}" not in existing)
+            for turn in turns
+        )
+        if has_pending_turns:
+            case_jobs.append(case)
 
+    print(f"Pending Study C controllability cases: {len(case_jobs)} (workers={worker_count})")
+    get_runner = _make_runner_provider(runner, worker_count, runner_factory)
+
+    def _generate_case_entries(case: Dict[str, Any]) -> List[Dict[str, Any]]:
+        case_runner = get_runner()
+        case_id = case["id"]
         constraint = case.get("cot_controlled_constraint", "")
-        runner.cot_controlled_constraint = constraint
+        case_runner.cot_controlled_constraint = constraint or ""
         patient_summary = case.get("patient_summary", "")
         turns = case.get("turns", [])
 
         context_for_summary = patient_summary
         conversation_history: List[Dict[str, str]] = []
+        generated_entries: List[Dict[str, Any]] = []
 
         for turn in turns:
             turn_num = turn["turn"]
@@ -298,20 +443,21 @@ def generate_study_c(runner, items, cache_path, run_id, model_id, existing):
                 error_message = ""
                 t0 = time.perf_counter()
                 try:
-                    summary_text = runner.generate(summary_prompt, mode="cot_controlled_summary")
+                    summary_text = case_runner.generate(summary_prompt, mode="cot_controlled_summary")
                 except Exception as e:
                     status = "error"
                     error_message = str(e)
                 latency_ms = int((time.perf_counter() - t0) * 1000)
 
-                summary_entry = {
-                    "case_id": case_id, "turn_num": turn_num, "variant": "summary",
-                    "prompt": summary_prompt, "response_text": summary_text,
-                    "status": status, "error_message": error_message,
-                    "timestamp": _now_iso(), "run_id": run_id, "model_name": model_id,
-                    "meta": {"latency_ms": latency_ms},
-                }
-                _persist_entry_with_retry(cache_path, summary_entry)
+                generated_entries.append(
+                    {
+                        "case_id": case_id, "turn_num": turn_num, "variant": "summary",
+                        "prompt": summary_prompt, "response_text": summary_text,
+                        "status": status, "error_message": error_message,
+                        "timestamp": _now_iso(), "run_id": run_id, "model_name": model_id,
+                        "meta": {"latency_ms": latency_ms},
+                    }
+                )
             else:
                 summary_text = ""
 
@@ -324,35 +470,63 @@ def generate_study_c(runner, items, cache_path, run_id, model_id, existing):
                 error_message = ""
                 t0 = time.perf_counter()
                 try:
-                    response_text = runner.chat(conversation_history, mode="cot_controlled")
+                    response_text = case_runner.chat(conversation_history, mode="cot_controlled")
                     conversation_history.append({"role": "assistant", "content": response_text})
                 except Exception as e:
                     status = "error"
                     error_message = str(e)
                 latency_ms = int((time.perf_counter() - t0) * 1000)
 
-                dialogue_entry = {
-                    "case_id": case_id, "turn_num": turn_num, "variant": "dialogue",
-                    "response_text": response_text, "status": status, "error_message": error_message,
-                    "timestamp": _now_iso(), "run_id": run_id, "model_name": model_id,
-                    "meta": {"latency_ms": latency_ms},
-                }
-                _persist_entry_with_retry(cache_path, dialogue_entry)
+                generated_entries.append(
+                    {
+                        "case_id": case_id, "turn_num": turn_num, "variant": "dialogue",
+                        "response_text": response_text, "status": status, "error_message": error_message,
+                        "timestamp": _now_iso(), "run_id": run_id, "model_name": model_id,
+                        "meta": {"latency_ms": latency_ms},
+                    }
+                )
             else:
                 cached_entry = existing_entries.get(dialogue_key, {})
                 cached_response = str(cached_entry.get("response_text", "") or "")
                 if cached_response:
                     conversation_history.append({"role": "assistant", "content": cached_response})
-            print(f"  [{case_id}] turn {turn_num} summary={len(summary_text)}c dialogue={len(response_text)}c")
+        return generated_entries
+
+    completed = 0
+    total_jobs = len(case_jobs)
+    for case, generated_entries in iter_threaded_results(
+        jobs=case_jobs,
+        worker_count=worker_count,
+        worker_fn=_generate_case_entries,
+        progress_interval_seconds=progress_interval_seconds,
+        progress_label="ctrl_study_c",
+    ):
+        for entry in generated_entries:
+            _persist_entry_with_retry(cache_path, entry)
+        completed += 1
+        print(f"  [{completed}/{total_jobs}] {case['id']} wrote {len(generated_entries)} entry(s)")
 
 
-def _run_generations(runner, pending, cache_path, run_id, model_id, id_key="id", extra_key=None):
-    """Single-threaded generation loop for simple study variants."""
-    saved = 0
-    for job in pending:
-        constraint = job.get("constraint", "")
-        if constraint:
-            runner.cot_controlled_constraint = constraint
+def _run_generations(
+    runner,
+    pending,
+    cache_path,
+    run_id,
+    model_id,
+    id_key="id",
+    extra_key=None,
+    worker_count: int = 1,
+    progress_interval_seconds: int = 10,
+    runner_factory: Optional[Callable[[], Any]] = None,
+):
+    """Generation loop for single-turn controllability variants."""
+    from reliable_clinical_benchmark.utils.worker_runtime import iter_threaded_results
+
+    get_runner = _make_runner_provider(runner, worker_count, runner_factory)
+
+    def _generate_entry(job: Dict[str, Any]) -> Dict[str, Any]:
+        active_runner = get_runner()
+        active_runner.cot_controlled_constraint = job.get("constraint", "") or ""
 
         status = "ok"
         output_text = ""
@@ -360,7 +534,7 @@ def _run_generations(runner, pending, cache_path, run_id, model_id, id_key="id",
         t0 = time.perf_counter()
 
         try:
-            output_text = runner.generate(job["prompt"], mode=job.get("mode", "cot_controlled"))
+            output_text = active_runner.generate(job["prompt"], mode=job.get("mode", "cot_controlled"))
         except Exception as e:
             status = "error"
             error_message = str(e)
@@ -373,9 +547,9 @@ def _run_generations(runner, pending, cache_path, run_id, model_id, id_key="id",
             "timestamp": _now_iso(), "run_id": run_id, "model_name": model_id,
             "metadata": job.get("metadata", {}),
             "sampling": {
-                "temperature": runner.config.temperature,
-                "top_p": runner.config.top_p,
-                "max_tokens": runner.config.max_tokens,
+                "temperature": active_runner.config.temperature,
+                "top_p": active_runner.config.top_p,
+                "max_tokens": active_runner.config.max_tokens,
             },
             "meta": {"latency_ms": latency_ms},
         }
@@ -385,10 +559,23 @@ def _run_generations(runner, pending, cache_path, run_id, model_id, id_key="id",
         for extra in ("bias_feature", "bias_label", "gold_answer", "incorrect_opinion", "variant"):
             if extra in job:
                 entry[extra] = job[extra]
+        return entry
 
-        ok = _persist_entry_with_retry(cache_path, entry)
+    saved = 0
+    total_jobs = len(pending)
+    for _, entry in iter_threaded_results(
+        jobs=pending,
+        worker_count=worker_count,
+        worker_fn=_generate_entry,
+        progress_interval_seconds=progress_interval_seconds,
+        progress_label="ctrl_generate",
+    ):
+        _persist_entry_with_retry(cache_path, entry)
         saved += 1
-        print(f"  [{saved}/{len(pending)}] {job['id']} mode={job.get('mode','')} status={status} latency={latency_ms}ms")
+        print(
+            f"  [{saved}/{total_jobs}] {entry['id']} mode={entry.get('mode', '')} "
+            f"status={entry['status']} latency={entry['meta']['latency_ms']}ms"
+        )
 
 
 # ── CLI ────────────────────────────────────────────────────────────────
@@ -407,9 +594,33 @@ def parse_args():
     p.add_argument("--study", required=True, choices=list(STUDY_GENERATORS.keys()))
     p.add_argument("--model-id", required=True)
     p.add_argument("--max-cases", type=int, default=None)
-    p.add_argument("--max-tokens", type=int, default=8192)
+    p.add_argument(
+        "--max-tokens",
+        type=int,
+        default=None,
+        help=(
+            "Maximum completion tokens to request. "
+            "If omitted for LM Studio or vLLM models, the request leaves max_tokens "
+            "unset so the serving stack controls the effective limit."
+        ),
+    )
     p.add_argument("--output-dir", type=str, default=None)
     p.add_argument("--cache-out", type=str, default=None)
+    p.add_argument(
+        "--workers",
+        type=int,
+        default=None,
+        help=(
+            "Number of parallel generation workers. "
+            "Default is auto: 4 for LM Studio runners, 1 for vLLM and local HF runners."
+        ),
+    )
+    p.add_argument(
+        "--progress-interval-seconds",
+        type=int,
+        default=10,
+        help="Heartbeat interval for progress logging while waiting for workers.",
+    )
     return p.parse_args()
 
 
@@ -417,11 +628,41 @@ def main():
     _ensure_src_on_path()
     from reliable_clinical_benchmark.models.base import GenerationConfig
     from reliable_clinical_benchmark.models.factory import get_model_runner
+    from reliable_clinical_benchmark.utils.worker_runtime import resolve_worker_count
 
     args = parse_args()
 
-    config = GenerationConfig(max_tokens=args.max_tokens)
-    runner = get_model_runner(args.model_id, config)
+    lmstudio_model_ids = {
+        "qwen3_lmstudio",
+        "qwen3-lmstudio",
+        "qwen3-8b-lmstudio",
+        "qwq",
+        "qwq_lmstudio",
+        "qwq-lmstudio",
+        "qwq-32b-lmstudio",
+        "deepseek_r1_lmstudio",
+        "deepseek-r1-lmstudio",
+        "deepseek-r1-14b-lmstudio",
+        "gpt_oss_lmstudio",
+        "gpt_oss",
+        "gpt-oss-lmstudio",
+        "gpt-oss-20b",
+    }
+    vllm_model_ids = {
+        "psyllm_gml_vllm",
+        "piaget_vllm",
+        "psyche_r1_vllm",
+        "psych_qwen_vllm",
+    }
+    uses_server_side_token_limits = args.model_id.lower() in (lmstudio_model_ids | vllm_model_ids)
+    effective_max_tokens = (
+        args.max_tokens if args.max_tokens is not None else (None if uses_server_side_token_limits else 8192)
+    )
+
+    def _runner_factory():
+        return get_model_runner(args.model_id, GenerationConfig(max_tokens=effective_max_tokens))
+
+    runner = _runner_factory()
 
     items = _load_items(args.study)
     if args.max_cases:
@@ -441,9 +682,27 @@ def main():
     print(f"Existing OK entries: {len(existing)}")
     print(f"Output: {cache_path}")
 
+    worker_count = resolve_worker_count(
+        requested_workers=args.workers,
+        runner=runner,
+        lmstudio_default=4,
+        non_lm_default=1,
+    )
+    print(f"Effective workers: {worker_count}")
+
     run_id = datetime.utcnow().strftime("%Y%m%dT%H%M%S%fZ")
     generator = STUDY_GENERATORS[args.study]
-    generator(runner, items, cache_path, run_id, args.model_id, existing)
+    generator(
+        runner,
+        items,
+        cache_path,
+        run_id,
+        args.model_id,
+        existing,
+        worker_count=worker_count,
+        progress_interval_seconds=args.progress_interval_seconds,
+        runner_factory=_runner_factory,
+    )
 
     print(f"\nControllability generation complete. Saved to {cache_path}")
 

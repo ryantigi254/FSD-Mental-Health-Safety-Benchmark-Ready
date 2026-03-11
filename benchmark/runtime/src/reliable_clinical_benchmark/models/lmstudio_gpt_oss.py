@@ -116,7 +116,7 @@ class GPTOSSLMStudioRunner(ModelRunner):
             or GenerationConfig(
                 temperature=0.7,
                 top_p=0.9,
-                max_tokens=2048,
+                max_tokens=None,
             ),
         )
         self.api_base = api_base
