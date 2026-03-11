@@ -32,12 +32,10 @@ PYTHONPATH=src python scripts/studies/controllability/generate_gold_plans.py
 
 ## Unified Runner
 
-There are now two controllability paths in the repo:
+The canonical controllability path now uses the same-case three-arm design under
+the canonical `ctrl_study_*` study names.
 
-- `v1`: the original study-specific controlled runs under `ctrl_study_*`
-- `v2`: the same-case three-arm path under `ctrl_v2_study_*`
-
-Use `v2` for matched-arm controllability comparisons. Keep `v1` for backwards-compatible reporting and older caches.
+The older `ctrl_v2_study_*` names are compatibility aliases only.
 
 Per-study command-only docs:
 
@@ -62,23 +60,7 @@ Useful arguments:
 - `--max-tokens`
 - `--output-dir`
 - `--cache-out`
-
-The arm-aware `v2` generation path uses:
-
-```bash
-cd benchmark/runtime
-PYTHONPATH=src python hf-local-scripts/run_ctrl_v2_generate_only.py \
-    --study <ctrl_v2_study_name> \
-    --model-id <model_id>
-```
-
-`v2` studies:
-
-- `ctrl_v2_study_a`
-- `ctrl_v2_study_a_bias`
-- `ctrl_v2_study_b`
-- `ctrl_v2_study_b_multi_turn`
-- `ctrl_v2_study_c`
+- `--data-path` (especially useful for bias-case overrides)
 
 ## Threshold and Reporting Layer
 
@@ -96,21 +78,17 @@ The threshold contract is intentionally split:
 - stricter bands on the metric pages remain interpretation guidance
 - missing controllability-only targets are stored as provisional or derived and stay reporting-only until an uncontrolled frozen-split baseline confirms them
 
-Result files written by the controllability pipeline:
+Result files written by the canonical controllability pipeline:
 
 - `results/<model>/ctrl_study_a_results.json`
+- `results/<model>/ctrl_study_a_bias_results.json`
 - `results/<model>/ctrl_study_b_results.json`
+- `results/<model>/ctrl_study_b_multi_turn_results.json`
 - `results/<model>/ctrl_study_c_results.json`
 - `results/<model>/controllability_summary.json`
 
-Result files written by the arm-aware `v2` pipeline:
-
-- `results/<model>/ctrl_v2_study_a_results.json`
-- `results/<model>/ctrl_v2_study_a_bias_results.json`
-- `results/<model>/ctrl_v2_study_b_results.json`
-- `results/<model>/ctrl_v2_study_b_multi_turn_results.json`
-- `results/<model>/ctrl_v2_study_c_results.json`
-- `results/<model>/controllability_v2_summary.json`
+Compatibility aliases are still written under the old `ctrl_v2_study_*` result
+filenames plus `controllability_v2_summary.json`.
 
 Primary controllability metrics stay unchanged:
 
@@ -118,15 +96,15 @@ Primary controllability metrics stay unchanged:
 - Study B single-turn: `CHR`
 - Study C: `CER`
 
-Additional `v2` study-level handling:
+Additional study-level handling:
 
 - Study A Bias reports `silent_bias_rate`, `biased_outcome_rate`, and `feature_mention_rate`
 - Study A Bias `explicit_control` is a transparency-focused arm and should not be treated as directly comparable to the silent-bias headline comparison
-- Study B multi-turn now reports cached-response metrics (`no_flip_rate`, censored `turn_of_flip`, and `per_turn_agreement_rate`) in the `v2` evaluation path
+- Study B multi-turn reports cached-response metrics (`no_flip_rate`, censored `turn_of_flip`, and `per_turn_agreement_rate`)
 
 Notebook outputs:
 
-- legacy notebooks: `benchmark/runtime/notebooks/controlability/*_controllability_analysis.ipynb`
-- arm-aware notebooks: `benchmark/runtime/notebooks/controlability/*_controllability_v2_analysis.ipynb`
+- `benchmark/runtime/notebooks/controlability/*_controllability_analysis.ipynb`
+- `benchmark/runtime/notebooks/controlability/controllability_summary_analysis.ipynb`
 
 Study-level and benchmark-level controllability roll-ups are written as experimental summaries. They do not replace the base benchmark safety card.

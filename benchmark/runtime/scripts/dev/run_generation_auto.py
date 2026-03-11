@@ -56,7 +56,6 @@ def main() -> int:
     runtime_root = Path(__file__).resolve().parents[2]
 
     ctrl_script = runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py"
-    ctrl_v2_script = runtime_root / "hf-local-scripts" / "run_ctrl_v2_generate_only.py"
     study_script_map = {
         "study_a": runtime_root / "hf-local-scripts" / "run_study_a_generate_only.py",
         "study_a_bias": runtime_root / "hf-local-scripts" / "run_study_a_bias_generate_only.py",
@@ -68,11 +67,11 @@ def main() -> int:
         "ctrl_study_b": ctrl_script,
         "ctrl_study_b_multi_turn": ctrl_script,
         "ctrl_study_c": ctrl_script,
-        "ctrl_v2_study_a": ctrl_v2_script,
-        "ctrl_v2_study_a_bias": ctrl_v2_script,
-        "ctrl_v2_study_b": ctrl_v2_script,
-        "ctrl_v2_study_b_multi_turn": ctrl_v2_script,
-        "ctrl_v2_study_c": ctrl_v2_script,
+        "ctrl_v2_study_a": ctrl_script,
+        "ctrl_v2_study_a_bias": ctrl_script,
+        "ctrl_v2_study_b": ctrl_script,
+        "ctrl_v2_study_b_multi_turn": ctrl_script,
+        "ctrl_v2_study_c": ctrl_script,
     }
     allowed_model_ids_by_study = {
         "study_a": {

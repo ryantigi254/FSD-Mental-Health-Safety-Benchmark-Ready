@@ -1,10 +1,12 @@
 {
   "meta": {
     "dataset": "GMLHUHE/OpenR1-Psy",
-    "nli_model": "",
+    "nli_model": "cross-encoder/nli-deberta-v3-base",
     "extraction": "controllability/generate_gold_plans.py",
-    "generated_utc": "2026-03-10T15:19:13.621694+00:00",
-    "n_cases": 60
+    "generated_utc": "2026-03-11T01:01:07.520160+00:00",
+    "n_cases": 60,
+    "nli_verified_cases": 12,
+    "condition_map_cases": 48
   },
   "plans": {
     "ctrl_c_001": {
@@ -128,7 +130,7 @@
       "plan_component_evidence": {}
     },
     "ctrl_c_016": {
-      "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
+      "plan": "I should acknowledge their struggle and normalize their experience. I'll want to suggest something simple they can do immediately, like focusing on their breath or physical sensations, but frame it gently without jargon. Therapeutic approaches: Cognitive Behavioral Therapy (CBT) could help with reframing thoughts, but since I shouldn't name it, maybe guide them to explore how their body reacts and find ways to soothe it. Follow-up: monitor symptoms, medication effects if relevant, and review progress. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
       "source_openr1_id": 11442,
       "source_split": "train",
       "inferred_condition": "post-traumatic stress disorder",
@@ -144,7 +146,7 @@
       "plan_component_evidence": {}
     },
     "ctrl_c_018": {
-      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
+      "plan": "Check if they have a support system. Instead, suggest examining the validity of their worry and considering small steps towards exploring new opportunities while managing current stress. Encourage self-compassion and balancing health with practical needs. Follow-up: monitor symptoms, medication effects if relevant, and review progress. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
       "source_openr1_id": 9107,
       "source_split": "train",
       "inferred_condition": "insomnia",
@@ -152,7 +154,7 @@
       "plan_component_evidence": {}
     },
     "ctrl_c_019": {
-      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
+      "plan": "Instead, gently suggest examining those thoughts and how they might not reflect reality. Avoid any jargon, just compassionate support. I should incorporate elements from humanistic therapy to emphasize their inherent worth and strengths. Follow-up: monitor symptoms, medication effects if relevant, and review progress. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
       "source_openr1_id": 16931,
       "source_split": "train",
       "inferred_condition": "major depressive disorder",
@@ -200,12 +202,16 @@
       "plan_component_evidence": {}
     },
     "ctrl_c_025": {
-      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "plan": "Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Follow-up: monitor symptoms, medication effects if relevant, and review progress. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
       "source_openr1_id": 15959,
       "source_split": "train",
       "inferred_condition": "generalized anxiety disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_components": [
+        "cbt_cognitive_restructuring"
+      ],
+      "plan_component_evidence": {
+        "cbt_cognitive_restructuring": "The plan includes identifying and challenging unhelpful thoughts."
+      }
     },
     "ctrl_c_026": {
       "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
@@ -216,12 +222,18 @@
       "plan_component_evidence": {}
     },
     "ctrl_c_027": {
-      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "plan": "Skills: grounding/breathing to reduce acute distress. Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review progress. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
       "source_openr1_id": 10332,
       "source_split": "train",
       "inferred_condition": "generalized anxiety disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_components": [
+        "grounding_distress_tolerance",
+        "exposure"
+      ],
+      "plan_component_evidence": {
+        "grounding_distress_tolerance": "The plan includes distress tolerance skills.",
+        "exposure": "The plan includes exposure-based work for anxiety or avoidance."
+      }
     },
     "ctrl_c_028": {
       "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
@@ -240,28 +252,56 @@
       "plan_component_evidence": {}
     },
     "ctrl_c_030": {
-      "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: prolonged grief disorder; prolonged grief. Constraints/Meds: none noted.",
+      "plan": "Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: behavioural activation (schedule small, achievable activities). Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review progress. Case anchors: Problem: prolonged grief disorder; prolonged grief. Constraints/Meds: none noted.",
       "source_openr1_id": 9868,
       "source_split": "train",
       "inferred_condition": "prolonged grief disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_components": [
+        "cbt_cognitive_restructuring",
+        "behavioural_activation",
+        "exposure"
+      ],
+      "plan_component_evidence": {
+        "cbt_cognitive_restructuring": "The plan includes CBT-style cognitive restructuring (thought challenging).",
+        "behavioural_activation": "The plan includes behavioural activation (increasing meaningful activities).",
+        "exposure": "The plan includes exposure-based work for anxiety or avoidance."
+      }
     },
     "ctrl_c_031": {
-      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "plan": "Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review progress. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
       "source_openr1_id": 9870,
       "source_split": "train",
       "inferred_condition": "generalized anxiety disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_components": [
+        "cbt_cognitive_restructuring",
+        "exposure"
+      ],
+      "plan_component_evidence": {
+        "cbt_cognitive_restructuring": "The plan includes CBT-style cognitive restructuring (thought challenging).",
+        "exposure": "The plan includes exposure-based work for anxiety or avoidance."
+      }
     },
     "ctrl_c_032": {
-      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
+      "plan": "Safety: assess risk and develop a safety plan if indicated. Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: behavioural activation (schedule small, achievable activities). Skills: grounding/breathing to reduce acute distress. Therapy: graded exposure for avoidance triggers. Between-session: agree one small homework task to practise. Follow-up: monitor symptoms, medication effects if relevant, and review progress. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
       "source_openr1_id": 16381,
       "source_split": "train",
       "inferred_condition": "borderline personality disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_components": [
+        "risk_safety",
+        "cbt_cognitive_restructuring",
+        "behavioural_activation",
+        "grounding_distress_tolerance",
+        "exposure",
+        "homework_between_session"
+      ],
+      "plan_component_evidence": {
+        "risk_safety": "The plan includes safety planning or suicide risk assessment.",
+        "cbt_cognitive_restructuring": "The plan includes CBT-style cognitive restructuring (thought challenging).",
+        "behavioural_activation": "The plan includes behavioural activation (increasing meaningful activities).",
+        "grounding_distress_tolerance": "The plan includes grounding techniques or breathing exercises.",
+        "exposure": "The plan includes exposure-based work for anxiety or avoidance.",
+        "homework_between_session": "The plan includes homework or between-session practice."
+      }
     },
     "ctrl_c_033": {
       "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
@@ -320,12 +360,16 @@
       "plan_component_evidence": {}
     },
     "ctrl_c_040": {
-      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "plan": "Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review progress. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
       "source_openr1_id": 9036,
       "source_split": "train",
       "inferred_condition": "generalized anxiety disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_components": [
+        "exposure"
+      ],
+      "plan_component_evidence": {
+        "exposure": "The plan includes exposure-based work for anxiety or avoidance."
+      }
     },
     "ctrl_c_041": {
       "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
@@ -368,12 +412,18 @@
       "plan_component_evidence": {}
     },
     "ctrl_c_046": {
-      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
+      "plan": "Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: graded exposure for avoidance triggers. Follow-up: monitor symptoms, medication effects if relevant, and review progress. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
       "source_openr1_id": 18607,
       "source_split": "train",
       "inferred_condition": "major depressive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_components": [
+        "cbt_cognitive_restructuring",
+        "exposure"
+      ],
+      "plan_component_evidence": {
+        "cbt_cognitive_restructuring": "The plan includes CBT-style cognitive restructuring (thought challenging).",
+        "exposure": "The plan includes exposure-based work for anxiety or avoidance."
+      }
     },
     "ctrl_c_047": {
       "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
@@ -384,12 +434,26 @@
       "plan_component_evidence": {}
     },
     "ctrl_c_048": {
-      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: suicidal crisis; self-harm risk. Constraints/Meds: none noted.",
+      "plan": "Safety: assess risk and develop a safety plan if indicated. Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: behavioural activation (schedule small, achievable activities). Skills: grounding/breathing to reduce acute distress. Therapy: graded exposure for avoidance triggers. Between-session: agree one small homework task to practise. Follow-up: monitor symptoms, medication effects if relevant, and review progress. Case anchors: Problem: suicidal crisis; self-harm risk. Constraints/Meds: none noted.",
       "source_openr1_id": 17040,
       "source_split": "train",
       "inferred_condition": "suicidal crisis",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_components": [
+        "risk_safety",
+        "cbt_cognitive_restructuring",
+        "behavioural_activation",
+        "grounding_distress_tolerance",
+        "exposure",
+        "homework_between_session"
+      ],
+      "plan_component_evidence": {
+        "risk_safety": "The plan includes safety planning or suicide risk assessment.",
+        "cbt_cognitive_restructuring": "The plan includes CBT-style cognitive restructuring (thought challenging).",
+        "behavioural_activation": "The plan includes behavioural activation (increasing meaningful activities).",
+        "grounding_distress_tolerance": "The plan includes grounding techniques or breathing exercises.",
+        "exposure": "The plan includes exposure-based work for anxiety or avoidance.",
+        "homework_between_session": "The plan includes practising skills between sessions."
+      }
     },
     "ctrl_c_049": {
       "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
@@ -464,12 +528,22 @@
       "plan_component_evidence": {}
     },
     "ctrl_c_058": {
-      "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "plan": "Safety: assess risk and develop a safety plan if indicated. Therapy: CBT-style cognitive restructuring (identify and challenge unhelpful thoughts). Therapy: graded exposure for avoidance triggers. Medication: review current medication with prescriber if symptoms persist. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
       "source_openr1_id": 8679,
       "source_split": "train",
       "inferred_condition": "obsessive-compulsive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_components": [
+        "risk_safety",
+        "cbt_cognitive_restructuring",
+        "exposure",
+        "medication_review_gp"
+      ],
+      "plan_component_evidence": {
+        "risk_safety": "The plan includes safety planning or suicide risk assessment.",
+        "cbt_cognitive_restructuring": "The plan includes CBT-style cognitive restructuring (thought challenging).",
+        "exposure": "The plan includes exposure-based work for anxiety or avoidance.",
+        "medication_review_gp": "The plan recommends medication review or optimisation with a GP or psychiatrist."
+      }
     },
     "ctrl_c_059": {
       "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",

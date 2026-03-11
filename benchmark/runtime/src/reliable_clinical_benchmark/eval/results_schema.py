@@ -319,8 +319,19 @@ def load_controllability_results(results_dir: str, model_name: str) -> Dict[str,
     results_path = Path(results_dir) / model_name
     results = {}
 
-    for study in ("A", "B", "C"):
-        result_file = results_path / f"ctrl_study_{study.lower()}_results.json"
+    file_map = {
+        "A": "ctrl_study_a_results.json",
+        "A_bias": "ctrl_study_a_bias_results.json",
+        "B": "ctrl_study_b_results.json",
+        "B_multi_turn": "ctrl_study_b_multi_turn_results.json",
+        "C": "ctrl_study_c_results.json",
+    }
+
+    for study, filename in file_map.items():
+        result_file = results_path / filename
+        if not result_file.exists():
+            legacy_v2_file = results_path / filename.replace("ctrl_study_", "ctrl_v2_study_")
+            result_file = legacy_v2_file
         if result_file.exists():
             with open(result_file, "r", encoding="utf-8") as f:
                 results[study] = json.load(f)
@@ -328,6 +339,8 @@ def load_controllability_results(results_dir: str, model_name: str) -> Dict[str,
             results[study] = None
 
     summary_file = results_path / "controllability_summary.json"
+    if not summary_file.exists():
+        summary_file = results_path / "controllability_v2_summary.json"
     if summary_file.exists():
         with open(summary_file, "r", encoding="utf-8") as f:
             results["summary"] = json.load(f)
@@ -338,27 +351,9 @@ def load_controllability_results(results_dir: str, model_name: str) -> Dict[str,
 
 
 def load_controllability_v2_results(results_dir: str, model_name: str) -> Dict[str, Any]:
-    """Load controllability v2 result payloads for a model if present."""
+    """Compatibility alias for loading canonical arm-aware controllability results."""
 
-    results_path = Path(results_dir) / model_name
-    results = {}
-
-    for study in ("A", "A_bias", "B", "B_multi_turn", "C"):
-        result_file = results_path / f"ctrl_v2_study_{study.lower()}_results.json"
-        if result_file.exists():
-            with open(result_file, "r", encoding="utf-8") as f:
-                results[study] = json.load(f)
-        else:
-            results[study] = None
-
-    summary_file = results_path / "controllability_v2_summary.json"
-    if summary_file.exists():
-        with open(summary_file, "r", encoding="utf-8") as f:
-            results["summary"] = json.load(f)
-    else:
-        results["summary"] = None
-
-    return results
+    return load_controllability_results(results_dir, model_name)
 
 
 def compute_safety_score(results: Dict[str, Any]) -> float:

@@ -2,10 +2,12 @@
 
 ## Overview
 
-This document describes the controllability variants of Study A Bias. The repo now has:
+This document describes the canonical controllability path for Study A Bias.
+The study now runs the canonical adversarial bias cases under matched arms:
 
-- a legacy `v1` path that runs the original controlled bias split under explicit anti-bias prompting
-- a `v2` path that reruns the canonical adversarial bias cases under matched arms (`spontaneous`, `generic_control`, `explicit_control`)
+- `spontaneous`
+- `generic_control`
+- `explicit_control`
 
 Unlike the main Study A controllability split, this study focuses on **bias-aware reasoning under control**, not direct-vs-CoT pairing.
 
@@ -14,7 +16,7 @@ This benchmark adaptation follows the CoT controllability framing introduced in 
 
 ## Data
 
-- Split file: `data/controllability_splits/study_a_bias_controllability_test.json`
+- Legacy split file: `data/controllability_splits/study_a_bias_controllability_test.json`
 - Source build script: `scripts/preprocessing/build_controllability_splits.py`
 
 Each case stores:
@@ -27,7 +29,7 @@ Each case stores:
 
 For underrepresented conditions, the split builder also records a `condition_injection_note` in metadata so the controllability set documents where condition-aware scaling was deliberately introduced.
 
-For `v2`, the canonical bias cases come from:
+The canonical bias cases for the arm-aware run come from:
 
 - `data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json`
 
@@ -35,7 +37,9 @@ For `v2`, the canonical bias cases come from:
 
 - Unified runner: `hf-local-scripts/run_ctrl_generate_only.py`
 - Auto launcher: `scripts/dev/run_generation_auto.py`
-- Arm-aware runner: `hf-local-scripts/run_ctrl_v2_generate_only.py`
+
+The legacy `hf-local-scripts/run_ctrl_v2_generate_only.py` wrapper remains as a
+compatibility shim only.
 
 Study A Bias controllability generates one constrained reasoning output per item:
 
@@ -43,7 +47,7 @@ Study A Bias controllability generates one constrained reasoning output per item
 
 The runner appends a short diagnosis instruction to the stored prompt, injects the case-specific reasoning constraint, and writes the result to the standard cache layout.
 
-In `v2`, the three-arm path uses:
+The three-arm path uses:
 
 - `spontaneous`: plain `cot`
 - `generic_control`: neutral evidence-only control prompt
@@ -54,23 +58,27 @@ In `v2`, the three-arm path uses:
 Per-model cache output:
 
 - `results/<model>/ctrl_study_a_bias_generations.jsonl`
-- `results/<model>/ctrl_v2_study_a_bias_generations.jsonl`
 
-Resume semantics use `id + mode`, so successful controllability rows are not re-run on restart.
+Compatibility aliases may still write
+`results/<model>/ctrl_v2_study_a_bias_generations.jsonl` for older tooling.
+
+Resume semantics use `id + arm + mode`, so successful controllability rows are
+not re-run on restart.
 
 ## Metric Status
 
-The legacy `v1` variant remains generation-first.
+The canonical pipeline writes structured outputs:
 
-The arm-aware `v2` path now writes structured outputs:
-
-- `results/<model>/ctrl_v2_study_a_bias_results.json`
+- `results/<model>/ctrl_study_a_bias_results.json`
 
 Reported metrics:
 
 - `silent_bias_rate`
 - `biased_outcome_rate`
 - `feature_mention_rate`
+
+Compatibility aliases may still write
+`results/<model>/ctrl_v2_study_a_bias_results.json`.
 
 Interpretation rule:
 
