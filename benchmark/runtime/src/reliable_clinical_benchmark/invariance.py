@@ -406,6 +406,18 @@ _STUDY_SPECS: Dict[str, InvarianceStudySpec] = {
     ),
 }
 
+_STUDY_METRIC_NAMES: Dict[str, Tuple[str, ...]] = {
+    "study_a": ("faithfulness_gap", "step_f1", "acc_cot", "acc_early"),
+    "study_b": (
+        "sycophancy_probability",
+        "control_agreement_rate",
+        "injected_agreement_rate",
+        "turn_of_flip_proxy",
+    ),
+    "study_b_multi_turn": ("turn_of_flip",),
+    "study_c": ("entity_recall_t10", "knowledge_conflict_rate"),
+}
+
 _RECORD_LOADERS: Dict[str, Callable[[Path], List[ManifestRecord]]] = {
     "study_a": _study_a_records,
     "study_b": _study_b_records,
@@ -428,6 +440,13 @@ def study_cli_choices() -> Tuple[str, ...]:
     """Return canonical study names for CLI choice lists."""
 
     return tuple(_STUDY_SPECS.keys())
+
+
+def study_metric_names(study: str) -> Tuple[str, ...]:
+    """Return canonical metric names exposed by the study comparison helpers."""
+
+    spec = get_study_spec(study)
+    return _STUDY_METRIC_NAMES[spec.canonical_name]
 
 
 def load_manifest_records(study: str, root: Path) -> List[ManifestRecord]:
@@ -1143,6 +1162,33 @@ def _study_c_case_metrics(
     return metrics_by_id
 
 
+def compute_case_metrics(
+    *,
+    study: str,
+    cache_path: Path,
+    data_root: Path,
+    use_nli: bool = False,
+    nli_stride: int = 2,
+) -> Dict[str, Dict[str, float]]:
+    """Compute per-case study metrics for a cached generation file."""
+
+    spec = get_study_spec(study)
+    if spec.canonical_name == "study_a":
+        return _study_a_case_metrics(cache_path, data_root)
+    if spec.canonical_name == "study_b":
+        return _study_b_case_metrics(cache_path, data_root)
+    if spec.canonical_name == "study_b_multi_turn":
+        return _study_b_multi_turn_case_metrics(cache_path, data_root)
+    if spec.canonical_name == "study_c":
+        return _study_c_case_metrics(
+            cache_path,
+            data_root,
+            use_nli=use_nli,
+            nli_stride=nli_stride,
+        )
+    raise ValueError(f"Unsupported study '{study}'")
+
+
 def compare_invariance_runs(
     *,
     study: str,
@@ -1157,39 +1203,21 @@ def compare_invariance_runs(
     """Compare a base and variant cache using paired bootstrap deltas."""
 
     spec = get_study_spec(study)
-    if spec.canonical_name == "study_a":
-        base_metrics = _study_a_case_metrics(base_cache, data_root)
-        variant_metrics = _study_a_case_metrics(variant_cache, data_root)
-        metric_names = ["faithfulness_gap", "step_f1", "acc_cot", "acc_early"]
-    elif spec.canonical_name == "study_b":
-        base_metrics = _study_b_case_metrics(base_cache, data_root)
-        variant_metrics = _study_b_case_metrics(variant_cache, data_root)
-        metric_names = [
-            "sycophancy_probability",
-            "control_agreement_rate",
-            "injected_agreement_rate",
-            "turn_of_flip_proxy",
-        ]
-    elif spec.canonical_name == "study_b_multi_turn":
-        base_metrics = _study_b_multi_turn_case_metrics(base_cache, data_root)
-        variant_metrics = _study_b_multi_turn_case_metrics(variant_cache, data_root)
-        metric_names = ["turn_of_flip"]
-    elif spec.canonical_name == "study_c":
-        base_metrics = _study_c_case_metrics(
-            base_cache,
-            data_root,
-            use_nli=use_nli,
-            nli_stride=nli_stride,
-        )
-        variant_metrics = _study_c_case_metrics(
-            variant_cache,
-            data_root,
-            use_nli=use_nli,
-            nli_stride=nli_stride,
-        )
-        metric_names = ["entity_recall_t10", "knowledge_conflict_rate"]
-    else:
-        raise ValueError(f"Unsupported study '{study}'")
+    base_metrics = compute_case_metrics(
+        study=spec.canonical_name,
+        cache_path=base_cache,
+        data_root=data_root,
+        use_nli=use_nli,
+        nli_stride=nli_stride,
+    )
+    variant_metrics = compute_case_metrics(
+        study=spec.canonical_name,
+        cache_path=variant_cache,
+        data_root=data_root,
+        use_nli=use_nli,
+        nli_stride=nli_stride,
+    )
+    metric_names = list(study_metric_names(spec.canonical_name))
 
     output_metrics: Dict[str, Dict[str, float]] = {}
     for metric_name in metric_names:

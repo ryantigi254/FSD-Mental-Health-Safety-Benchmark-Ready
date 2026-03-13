@@ -86,6 +86,18 @@ And the auto launcher supports:
 - `study_b_multi_turn_invariance`
 - `study_c_invariance`
 
+## Analysis scripts and notebooks
+
+Analysis scripts:
+
+- `scripts/evaluation/summarize_invariance_results.py`
+- `scripts/evaluation/run_controllability_comparison.py`
+
+Dedicated notebooks:
+
+- `notebooks/invariance/invariance_analysis.ipynb`
+- `notebooks/invariance/controllability_analysis.ipynb`
+
 ## Relationship to controllability
 
 The next layer above invariance is controllability.
