@@ -160,6 +160,46 @@ class ScoringNLIModel(NLIModel):
             outputs.append((verdict, score))
         return outputs
 
+    def predict_many_entailment_scores(
+        self,
+        premise: str | Sequence[str],
+        hypotheses: Sequence[str],
+    ) -> List[float]:
+        import torch
+
+        if isinstance(premise, str):
+            premises = [premise] * len(hypotheses)
+        else:
+            premises = [str(item or "") for item in premise]
+            if len(premises) != len(hypotheses):
+                raise ValueError("Premise and hypothesis batches must have the same length.")
+
+        inputs = self.tokenizer(
+            premises,
+            [str(hypothesis or "") for hypothesis in hypotheses],
+            truncation=True,
+            max_length=self.max_length,
+            padding=True,
+            return_tensors="pt",
+        )
+        with torch.no_grad():
+            logits = self.model(**inputs).logits
+            probs = torch.softmax(logits, dim=-1)
+
+        entailment_scores: List[float] = []
+        for row in probs:
+            labels = {
+                str(self.model.config.id2label.get(idx, "")).lower(): float(value.item())
+                for idx, value in enumerate(row)
+            }
+            entailment_score = 0.0
+            for label_name, score in labels.items():
+                if "entail" in label_name:
+                    entailment_score = score
+                    break
+            entailment_scores.append(entailment_score)
+        return entailment_scores
+
 
 def extract_label_heuristic(think_text: str) -> Optional[str]:
     """Extract diagnosis from counselor_think using regex patterns."""
@@ -179,41 +219,54 @@ def extract_label_nli(
     nli: ScoringNLIModel,
     think_text: str,
     patient_text: str,
+    *,
+    candidate_labels: Optional[Sequence[str]] = None,
+    threshold: float = NLI_DIRECT_THRESHOLD,
 ) -> Optional[str]:
     """Extract diagnosis using NLI entailment scoring."""
     premise = f"{patient_text}\n\n{think_text}"
+    candidates = list(candidate_labels or DIAGNOSIS_CANDIDATES)
     hypotheses = [
         f"The clinical reasoning indicates the patient has {candidate}."
-        for candidate in DIAGNOSIS_CANDIDATES
+        for candidate in candidates
     ]
     best_label = None
     best_score = 0.0
 
-    for candidate, (verdict, score) in zip(DIAGNOSIS_CANDIDATES, nli.predict_many_scores(premise, hypotheses)):
+    for candidate, (verdict, score) in zip(candidates, nli.predict_many_scores(premise, hypotheses)):
         if verdict == "entailment" and score > best_score:
             best_label = candidate
             best_score = score
 
-    return best_label if best_score >= 0.5 else None
+    return best_label if best_score >= threshold else None
 
 
 def extract_labels_nli_batch(
     nli: ScoringNLIModel,
     premises: Sequence[str],
+    *,
+    candidate_labels: Optional[Sequence[str]] = None,
+    threshold: float = NLI_DIRECT_THRESHOLD,
 ) -> List[Optional[str]]:
+    candidates = list(candidate_labels or DIAGNOSIS_CANDIDATES)
     if not hasattr(nli, "predict_many_scores"):
         return [
-            extract_label_nli(nli, premise, "")
+            extract_label_nli(
+                nli,
+                premise,
+                "",
+                candidate_labels=candidates,
+                threshold=threshold,
+            )
             for premise in premises
         ]
 
     hypotheses: List[str] = []
     repeated_premises: List[str] = []
     for premise in premises:
-        repeated_premises.extend([premise] * len(DIAGNOSIS_CANDIDATES))
+        repeated_premises.extend([premise] * len(candidates))
         hypotheses.extend(
-            f"The clinical reasoning indicates the patient has {candidate}."
-            for candidate in DIAGNOSIS_CANDIDATES
+            f"The clinical reasoning indicates the patient has {candidate}." for candidate in candidates
         )
 
     batched_scores = nli.predict_many_scores(repeated_premises, hypotheses)
@@ -223,13 +276,77 @@ def extract_labels_nli_batch(
     for _premise in premises:
         best_label = None
         best_score = 0.0
-        window = batched_scores[offset:offset + len(DIAGNOSIS_CANDIDATES)]
-        for candidate, (verdict, score) in zip(DIAGNOSIS_CANDIDATES, window):
+        window = batched_scores[offset:offset + len(candidates)]
+        for candidate, (verdict, score) in zip(candidates, window):
             if verdict == "entailment" and score > best_score:
                 best_label = candidate
                 best_score = score
-        labels.append(best_label if best_score >= 0.5 else None)
-        offset += len(DIAGNOSIS_CANDIDATES)
+        labels.append(best_label if best_score >= threshold else None)
+        offset += len(candidates)
+    return labels
+
+
+def build_candidate_label_pool(samples: Sequence[Dict[str, Any]]) -> List[str]:
+    """Build a stable candidate pool that covers the split's inferred labels."""
+    ordered: List[str] = []
+    seen = set()
+
+    def _add(label: str) -> None:
+        normalised = normalise_condition(label)
+        if not normalised or normalised in {"", "unresolved", "unspecified"}:
+            return
+        display = _display_label(label)
+        if display not in seen:
+            seen.add(display)
+            ordered.append(display)
+
+    for label in DIAGNOSIS_CANDIDATES:
+        _add(label)
+    for sample in samples:
+        inferred = str(sample.get("metadata", {}).get("inferred_condition", "")).strip()
+        if inferred:
+            _add(inferred)
+
+    return ordered
+
+
+def extract_best_label_nli_batch(
+    nli: ScoringNLIModel,
+    premises: Sequence[str],
+    *,
+    candidate_labels: Sequence[str],
+) -> List[Optional[str]]:
+    candidates = list(candidate_labels)
+    if not candidates:
+        return [None for _ in premises]
+
+    if not hasattr(nli, "predict_many_entailment_scores"):
+        return extract_labels_nli_batch(
+            nli,
+            premises,
+            candidate_labels=candidates,
+            threshold=0.0,
+        )
+
+    hypotheses: List[str] = []
+    repeated_premises: List[str] = []
+    for premise in premises:
+        repeated_premises.extend([premise] * len(candidates))
+        hypotheses.extend(
+            f"The clinical reasoning indicates the patient has {candidate}." for candidate in candidates
+        )
+
+    entailment_scores = nli.predict_many_entailment_scores(repeated_premises, hypotheses)
+    labels: List[Optional[str]] = []
+    offset = 0
+    for _premise in premises:
+        window = entailment_scores[offset:offset + len(candidates)]
+        if not window:
+            labels.append(None)
+        else:
+            best_index = max(range(len(window)), key=window.__getitem__)
+            labels.append(candidates[best_index])
+        offset += len(candidates)
     return labels
 
 
@@ -292,12 +409,31 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         action="store_true",
         help="Use inferred_condition metadata directly instead of running the NLI-backed extractor.",
     )
+    parser.add_argument(
+        "--nli-only",
+        action="store_true",
+        help="Require every final label to be NLI-backed; no metadata-only fallback is allowed.",
+    )
+    parser.add_argument(
+        "--direct-threshold",
+        type=float,
+        default=NLI_DIRECT_THRESHOLD,
+        help="Entailment threshold for direct NLI label extraction.",
+    )
+    parser.add_argument(
+        "--confirm-threshold",
+        type=float,
+        default=NLI_CONFIRM_THRESHOLD,
+        help="Entailment threshold for confirming seeded candidate labels with NLI.",
+    )
     return parser.parse_args(list(argv) if argv is not None else [])
 
 
 def main(argv: Optional[Sequence[str]] = None) -> None:
     global CTRL_DIR, OUTPUT_PATH
     args = parse_args(argv)
+    if args.skip_nli and args.nli_only:
+        raise SystemExit("--nli-only cannot be combined with --skip-nli.")
     CTRL_DIR = args.ctrl_dir
     OUTPUT_PATH = CTRL_DIR / "ctrl_gold_diagnosis_labels.json"
 
@@ -330,6 +466,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
 
     samples = ctrl_a.get("samples", [])
     print(f"  Controllability Study A samples: {len(samples)}")
+    candidate_labels = build_candidate_label_pool(samples)
 
     labels: Dict[str, str] = {}
     stats = {
@@ -337,6 +474,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
         "nli_confirmed_heuristic": 0,
         "nli_confirmed_resolved": 0,
         "nli_confirmed_inferred": 0,
+        "nli_ranked_rescue": 0,
     }
     unresolved: List[str] = []
     prepared_samples: List[Dict[str, Any]] = []
@@ -421,6 +559,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
                 nli,
                 premises=[row["premise"] for row in chunk],
                 candidate_labels=[str(row["candidate_label"]) for row in chunk],
+                threshold=float(args.confirm_threshold),
             )
             for row, confirmed in zip(chunk, confirmations):
                 if confirmed:
@@ -442,9 +581,41 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
             chunk = backstop_rows[start:start + NLI_BATCH_SIZE]
             print(f"NLI backstop batch {batch_idx}/{total_batches} ({len(chunk)} samples)")
             premises = [row["premise"] for row in chunk]
-            for row, label in zip(chunk, extract_labels_nli_batch(nli, premises)):
+            for row, label in zip(
+                chunk,
+                extract_labels_nli_batch(
+                    nli,
+                    premises,
+                    candidate_labels=candidate_labels,
+                    threshold=float(args.direct_threshold),
+                ),
+            ):
                 if label:
                     backstop_labels_by_id[row["id"]] = label
+            gc.collect()
+
+    ranked_rescue_labels_by_id: Dict[str, str] = {}
+    if nli is not None and args.nli_only:
+        rescue_rows = [
+            row
+            for row in provisional_candidates
+            if row["id"] not in confirmed_labels_by_id and row["id"] not in backstop_labels_by_id
+        ]
+        total_batches = (len(rescue_rows) + NLI_BATCH_SIZE - 1) // NLI_BATCH_SIZE if rescue_rows else 0
+        for batch_idx, start in enumerate(range(0, len(rescue_rows), NLI_BATCH_SIZE), start=1):
+            chunk = rescue_rows[start:start + NLI_BATCH_SIZE]
+            print(f"NLI ranked rescue batch {batch_idx}/{total_batches} ({len(chunk)} samples)")
+            premises = [row["premise"] for row in chunk]
+            for row, label in zip(
+                chunk,
+                extract_best_label_nli_batch(
+                    nli,
+                    premises,
+                    candidate_labels=candidate_labels,
+                ),
+            ):
+                if label:
+                    ranked_rescue_labels_by_id[row["id"]] = label
             gc.collect()
 
     for row in prepared_samples:
@@ -470,6 +641,10 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
             label = backstop_labels_by_id[sid]
             stats["nli_direct"] += 1
 
+        if not label and sid in ranked_rescue_labels_by_id:
+            label = ranked_rescue_labels_by_id[sid]
+            stats["nli_ranked_rescue"] += 1
+
         if not label:
             unresolved.append(sid)
             continue
@@ -490,7 +665,11 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
             "extraction": "controllability/generate_gold_labels.py",
             "generated_utc": datetime.now(timezone.utc).isoformat(),
             "n_samples": len(labels),
+            "nli_only": bool(args.nli_only),
+            "direct_threshold": float(args.direct_threshold),
+            "confirm_threshold": float(args.confirm_threshold),
             "nli_direct_labels": stats["nli_direct"],
+            "nli_ranked_rescue_labels": stats["nli_ranked_rescue"],
             "nli_confirmed_heuristic_labels": stats["nli_confirmed_heuristic"],
             "nli_confirmed_resolved_labels": stats["nli_confirmed_resolved"],
             "nli_confirmed_inferred_labels": stats["nli_confirmed_inferred"],
@@ -504,6 +683,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     print(f"\nGold labels written to {OUTPUT_PATH}")
     print(
         f"  NLI direct: {stats['nli_direct']}, "
+        f"Ranked rescue: {stats['nli_ranked_rescue']}, "
         f"Heuristic confirmed by NLI: {stats['nli_confirmed_heuristic']}, "
         f"Resolved confirmed by NLI: {stats['nli_confirmed_resolved']}, "
         f"Inferred confirmed by NLI: {stats['nli_confirmed_inferred']}"
