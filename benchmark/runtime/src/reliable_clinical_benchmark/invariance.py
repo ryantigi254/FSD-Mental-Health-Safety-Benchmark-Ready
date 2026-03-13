@@ -407,9 +407,26 @@ def _allocate_sample_counts(
     if min_high_risk > 0:
         for key in sorted(high_risk_groups):
             target = min(len(groups[key]), min_high_risk)
-            while quotas[key] < target and allocated < sample_size:
+            while quotas[key] < target:
+                if allocated < sample_size:
+                    quotas[key] += 1
+                    allocated += 1
+                    continue
+                donors = [
+                    donor
+                    for donor, quota in quotas.items()
+                    if donor != key
+                    and quota > 0
+                    and not (
+                        donor in high_risk_groups
+                        and quota <= min(len(groups[donor]), min_high_risk)
+                    )
+                ]
+                if not donors:
+                    break
+                donor = max(donors, key=lambda item: (quotas[item], len(groups[item]), item))
+                quotas[donor] -= 1
                 quotas[key] += 1
-                allocated += 1
 
     while allocated > sample_size:
         candidates = [
