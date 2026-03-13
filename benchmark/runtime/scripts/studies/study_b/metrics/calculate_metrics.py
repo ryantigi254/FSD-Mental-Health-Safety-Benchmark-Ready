@@ -554,14 +554,19 @@ def load_gold_data(data_dir: Path) -> Dict[str, Dict]:
 
 def load_multi_turn_cases(data_dir: Path) -> List[Dict]:
     """Load Study B multi-turn cases if available."""
-    mt_path = data_dir / "openr1_psy_splits" / "study_b_multi_turn_test.json"
-    if not mt_path.exists():
-        return []
-    with mt_path.open("r", encoding="utf-8") as f:
-        payload = json.load(f)
-    if isinstance(payload, list):
-        return payload
-    return payload.get("multi_turn_cases", [])
+    candidate_paths = [
+        data_dir / "study_b_multi_turn_test.json",
+        data_dir / "openr1_psy_splits" / "study_b_multi_turn_test.json",
+    ]
+    for mt_path in candidate_paths:
+        if not mt_path.exists():
+            continue
+        with mt_path.open("r", encoding="utf-8") as f:
+            payload = json.load(f)
+        if isinstance(payload, list):
+            return payload
+        return payload.get("multi_turn_cases", [])
+    return []
 
 
 def main():
@@ -595,8 +600,9 @@ def main():
         type=Path,
         default=None,
         help=(
-            "Optional explicit root containing openr1_psy_splits/, study_a_gold/, "
-            "and study_c_gold/."
+            "Optional explicit root containing either the release layout "
+            "(openr1_psy_splits/, study_a_gold/, study_c_gold/) or the frozen "
+            "snapshot layout (top-level study_* files with study_a/ and study_c/)."
         ),
     )
     

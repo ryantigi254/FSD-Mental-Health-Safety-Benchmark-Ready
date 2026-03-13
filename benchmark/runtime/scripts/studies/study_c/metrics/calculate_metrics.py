@@ -418,8 +418,9 @@ def main():
         type=Path,
         default=None,
         help=(
-            "Optional explicit root containing openr1_psy_splits/, study_a_gold/, "
-            "and study_c_gold/."
+            "Optional explicit root containing either the release layout "
+            "(openr1_psy_splits/, study_a_gold/, study_c_gold/) or the frozen "
+            "snapshot layout (top-level study_* files with study_a/ and study_c/)."
         ),
     )
     parser.add_argument(
@@ -479,7 +480,7 @@ def main():
         
     # Load target plans
     target_plans = {}
-    target_plans_path = data_dir / "study_c_gold" / "target_plans.json"
+    target_plans_path = data_roots.study_c_gold_dir / "target_plans.json"
     if target_plans_path.exists():
         with open(target_plans_path, 'r', encoding='utf-8') as f:
             tp_data = json.load(f)

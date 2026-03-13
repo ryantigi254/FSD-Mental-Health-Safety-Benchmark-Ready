@@ -10,6 +10,10 @@ This folder is intentionally kept to two canonical files:
 - `METRICS_SUMMARY.md` (this file): contract and interpretation scope
 - `METRIC_CALCULATION_PIPELINE.md`: operational calculation pipeline and commands
 
+Supporting v5 invariance workflow:
+
+- `INVARIANCE_README.md`: deterministic sampling and paired-delta comparison on frozen v5
+
 ## Inputs and outputs
 
 Primary inputs:
@@ -25,6 +29,7 @@ Primary inputs:
   - `openr1_psy_splits/study_c_test.json`
   - `study_a_gold/gold_diagnosis_labels.json`
   - `study_c_gold/`
+- explicit `--data-root` may also point at the frozen snapshot layout used by `data/frozen_splits/v5`
 - `data/adversarial_bias/biased_vignettes.json` (canonical v3.2 Study A bias set)
 
 Primary outputs:
