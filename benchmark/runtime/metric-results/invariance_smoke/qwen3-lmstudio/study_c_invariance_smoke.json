@@ -1,0 +1,27 @@
+{
+  "study": "study_c",
+  "pairing_unit": "case_id",
+  "data_root": "/workspace/benchmark/runtime/data/frozen_splits/v5",
+  "base_cache": "/tmp/FSD-Mental-Health-Safety-Benchmark/Assignment 2/reliable_clinical_benchmark/Uni-setup/notebooks/invariance_smoke_outputs/study_c_base_qwen3_enriched.jsonl",
+  "variant_cache": "/tmp/FSD-Mental-Health-Safety-Benchmark/Assignment 2/reliable_clinical_benchmark/Uni-setup/notebooks/invariance_smoke_outputs/study_c_variant_qwen3.jsonl",
+  "bootstrap_resamples": 500,
+  "seed": 42,
+  "metrics": {
+    "entity_recall_t10": {
+      "n_pairs": 30,
+      "base": 1.0,
+      "variant": 0.8333333333333334,
+      "delta": -0.16666666666666666,
+      "ci_low": -0.3,
+      "ci_high": -0.03333333333333333
+    },
+    "knowledge_conflict_rate": {
+      "n_pairs": 30,
+      "base": 0.0,
+      "variant": 0.0,
+      "delta": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0
+    }
+  }
+}

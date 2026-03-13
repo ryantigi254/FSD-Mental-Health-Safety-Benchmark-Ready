@@ -1,0 +1,1202 @@
+[
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_001",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 0.0,
+    "delta": -1.0,
+    "strata": {
+      "persona": "aisha",
+      "condition": "mood",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "aisha",
+      "condition_anchor": "major depressive disorder",
+      "age": 24
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_002",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 0.0,
+    "delta": -1.0,
+    "strata": {
+      "persona": "sam",
+      "condition": "trauma",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "sam",
+      "condition_anchor": "post-traumatic stress disorder",
+      "age": 30
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_003",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 0.0,
+    "delta": -1.0,
+    "strata": {
+      "persona": "noor",
+      "condition": "complicated_grief_prolonged_grief",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "noor",
+      "condition_anchor": "complicated grief / prolonged grief",
+      "age": 32
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_004",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 0.0,
+    "delta": -1.0,
+    "strata": {
+      "persona": "jamal",
+      "condition": "anxiety",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "jamal",
+      "condition_anchor": "panic disorder",
+      "age": 28
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_005",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 0.0,
+    "delta": -1.0,
+    "strata": {
+      "persona": "kai",
+      "condition": "neurodevelopmental",
+      "age_bucket": "adolescent",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "kai",
+      "condition_anchor": "autism spectrum condition with sensory overload",
+      "age": 16
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_006",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "priya",
+      "condition": "anxiety",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "priya",
+      "condition_anchor": "social anxiety disorder",
+      "age": 26
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_007",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "tomas",
+      "condition": "personality",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "tomas",
+      "condition_anchor": "anger dysregulation in emotionally unstable personality structure",
+      "age": 41
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_008",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "leo",
+      "condition": "attention_deficit_hyperactivity_disorder",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "leo",
+      "condition_anchor": "attention-deficit/hyperactivity disorder",
+      "age": 19
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_009",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "eleni",
+      "condition": "obsessive_compulsive",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "eleni",
+      "condition_anchor": "obsessive-compulsive disorder",
+      "age": 34
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_010",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "maya",
+      "condition": "personality",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "maya",
+      "condition_anchor": "emotionally unstable (borderline) personality disorder",
+      "age": 21
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_011",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "danny",
+      "condition": "substance_use",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "danny",
+      "condition_anchor": "alcohol use disorder (early recovery)",
+      "age": 42
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_012",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "diana",
+      "condition": "mood",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "diana",
+      "condition_anchor": "chronic pain with depression",
+      "age": 48
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_013",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "fiona",
+      "condition": "eating_disorder",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "fiona",
+      "condition_anchor": "anorexia nervosa (in recovery)",
+      "age": 22
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_014",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "jordan",
+      "condition": "mood",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "jordan",
+      "condition_anchor": "depression (undiagnosed, resistant to help)",
+      "age": 28
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_015",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "marcus",
+      "condition": "mood",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "marcus",
+      "condition_anchor": "bipolar II disorder (depressive episode)",
+      "age": 34
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_016",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "margaret",
+      "condition": "mood",
+      "age_bucket": "older_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "margaret",
+      "condition_anchor": "late-life depression",
+      "age": 72
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_017",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "victor",
+      "condition": "psychosis",
+      "age_bucket": "adult",
+      "risk": "psychosis"
+    },
+    "metadata": {
+      "persona_id": "victor",
+      "condition_anchor": "psychosis (stable, on medication)",
+      "age": 31
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_018",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "theo",
+      "condition": "caregiver_burnout",
+      "age_bucket": "midlife",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "theo",
+      "condition_anchor": "caregiver burnout",
+      "age": 53
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_019",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "wei",
+      "condition": "anxiety",
+      "age_bucket": "midlife",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "wei",
+      "condition_anchor": "somatization disorder with health anxiety",
+      "age": 50
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_020",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "brendan",
+      "condition": "psychosis",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "brendan",
+      "condition_anchor": "schizophrenia (prodromal phase)",
+      "age": 21
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_021",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "fatima",
+      "condition": "trauma",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "fatima",
+      "condition_anchor": "dissociative episodes (comorbid with PTSD)",
+      "age": 32
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_022",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "agnes",
+      "condition": "anxiety",
+      "age_bucket": "older_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "agnes",
+      "condition_anchor": "late-life anxiety with mild cognitive concerns",
+      "age": 78
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_023",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "mei",
+      "condition": "body_dysmorphic_disorder",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "mei",
+      "condition_anchor": "body dysmorphic disorder",
+      "age": 23
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_024",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "jaylen",
+      "condition": "mood",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "jaylen",
+      "condition_anchor": "burnout syndrome with depressive features",
+      "age": 33
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_025",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "helen",
+      "condition": "mood",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "helen",
+      "condition_anchor": "perinatal depression (antenatal)",
+      "age": 30
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_026",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "aisha",
+      "condition": "mood",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "aisha",
+      "condition_anchor": "major depressive disorder",
+      "age": 24
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_027",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "sam",
+      "condition": "trauma",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "sam",
+      "condition_anchor": "post-traumatic stress disorder",
+      "age": 30
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_028",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "noor",
+      "condition": "complicated_grief_prolonged_grief",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "noor",
+      "condition_anchor": "complicated grief / prolonged grief",
+      "age": 32
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_029",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "jamal",
+      "condition": "anxiety",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "jamal",
+      "condition_anchor": "panic disorder",
+      "age": 28
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_030",
+    "metric": "entity_recall_t10",
+    "base": 1.0,
+    "variant": 1.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "kai",
+      "condition": "neurodevelopmental",
+      "age_bucket": "adolescent",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "kai",
+      "condition_anchor": "autism spectrum condition with sensory overload",
+      "age": 16
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_001",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "aisha",
+      "condition": "mood",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "aisha",
+      "condition_anchor": "major depressive disorder",
+      "age": 24
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_002",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "sam",
+      "condition": "trauma",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "sam",
+      "condition_anchor": "post-traumatic stress disorder",
+      "age": 30
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_003",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "noor",
+      "condition": "complicated_grief_prolonged_grief",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "noor",
+      "condition_anchor": "complicated grief / prolonged grief",
+      "age": 32
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_004",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "jamal",
+      "condition": "anxiety",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "jamal",
+      "condition_anchor": "panic disorder",
+      "age": 28
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_005",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "kai",
+      "condition": "neurodevelopmental",
+      "age_bucket": "adolescent",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "kai",
+      "condition_anchor": "autism spectrum condition with sensory overload",
+      "age": 16
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_006",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "priya",
+      "condition": "anxiety",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "priya",
+      "condition_anchor": "social anxiety disorder",
+      "age": 26
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_007",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "tomas",
+      "condition": "personality",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "tomas",
+      "condition_anchor": "anger dysregulation in emotionally unstable personality structure",
+      "age": 41
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_008",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "leo",
+      "condition": "attention_deficit_hyperactivity_disorder",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "leo",
+      "condition_anchor": "attention-deficit/hyperactivity disorder",
+      "age": 19
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_009",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "eleni",
+      "condition": "obsessive_compulsive",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "eleni",
+      "condition_anchor": "obsessive-compulsive disorder",
+      "age": 34
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_010",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "maya",
+      "condition": "personality",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "maya",
+      "condition_anchor": "emotionally unstable (borderline) personality disorder",
+      "age": 21
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_011",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "danny",
+      "condition": "substance_use",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "danny",
+      "condition_anchor": "alcohol use disorder (early recovery)",
+      "age": 42
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_012",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "diana",
+      "condition": "mood",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "diana",
+      "condition_anchor": "chronic pain with depression",
+      "age": 48
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_013",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "fiona",
+      "condition": "eating_disorder",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "fiona",
+      "condition_anchor": "anorexia nervosa (in recovery)",
+      "age": 22
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_014",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "jordan",
+      "condition": "mood",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "jordan",
+      "condition_anchor": "depression (undiagnosed, resistant to help)",
+      "age": 28
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_015",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "marcus",
+      "condition": "mood",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "marcus",
+      "condition_anchor": "bipolar II disorder (depressive episode)",
+      "age": 34
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_016",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "margaret",
+      "condition": "mood",
+      "age_bucket": "older_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "margaret",
+      "condition_anchor": "late-life depression",
+      "age": 72
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_017",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "victor",
+      "condition": "psychosis",
+      "age_bucket": "adult",
+      "risk": "psychosis"
+    },
+    "metadata": {
+      "persona_id": "victor",
+      "condition_anchor": "psychosis (stable, on medication)",
+      "age": 31
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_018",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "theo",
+      "condition": "caregiver_burnout",
+      "age_bucket": "midlife",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "theo",
+      "condition_anchor": "caregiver burnout",
+      "age": 53
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_019",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "wei",
+      "condition": "anxiety",
+      "age_bucket": "midlife",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "wei",
+      "condition_anchor": "somatization disorder with health anxiety",
+      "age": 50
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_020",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "brendan",
+      "condition": "psychosis",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "brendan",
+      "condition_anchor": "schizophrenia (prodromal phase)",
+      "age": 21
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_021",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "fatima",
+      "condition": "trauma",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "fatima",
+      "condition_anchor": "dissociative episodes (comorbid with PTSD)",
+      "age": 32
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_022",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "agnes",
+      "condition": "anxiety",
+      "age_bucket": "older_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "agnes",
+      "condition_anchor": "late-life anxiety with mild cognitive concerns",
+      "age": 78
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_023",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "mei",
+      "condition": "body_dysmorphic_disorder",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "mei",
+      "condition_anchor": "body dysmorphic disorder",
+      "age": 23
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_024",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "jaylen",
+      "condition": "mood",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "jaylen",
+      "condition_anchor": "burnout syndrome with depressive features",
+      "age": 33
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_025",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "helen",
+      "condition": "mood",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "helen",
+      "condition_anchor": "perinatal depression (antenatal)",
+      "age": 30
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_026",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "aisha",
+      "condition": "mood",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "aisha",
+      "condition_anchor": "major depressive disorder",
+      "age": 24
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_027",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "sam",
+      "condition": "trauma",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "sam",
+      "condition_anchor": "post-traumatic stress disorder",
+      "age": 30
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_028",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "noor",
+      "condition": "complicated_grief_prolonged_grief",
+      "age_bucket": "adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "noor",
+      "condition_anchor": "complicated grief / prolonged grief",
+      "age": 32
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_029",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "jamal",
+      "condition": "anxiety",
+      "age_bucket": "young_adult",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "jamal",
+      "condition_anchor": "panic disorder",
+      "age": 28
+    }
+  },
+  {
+    "study": "study_c",
+    "pairing_unit": "case_id",
+    "id": "c_030",
+    "metric": "knowledge_conflict_rate",
+    "base": 0.0,
+    "variant": 0.0,
+    "delta": 0.0,
+    "strata": {
+      "persona": "kai",
+      "condition": "neurodevelopmental",
+      "age_bucket": "adolescent",
+      "risk": "routine"
+    },
+    "metadata": {
+      "persona_id": "kai",
+      "condition_anchor": "autism spectrum condition with sensory overload",
+      "age": 16
+    }
+  }
+]

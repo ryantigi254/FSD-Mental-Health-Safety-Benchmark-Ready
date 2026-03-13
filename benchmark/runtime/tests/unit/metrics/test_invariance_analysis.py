@@ -7,6 +7,7 @@ import pytest
 
 from reliable_clinical_benchmark.invariance_analysis import (
     VariantSpec,
+    build_invariance_case_delta_rows,
     run_controllability_comparison,
     summarize_invariance_result_files,
 )
@@ -50,6 +51,9 @@ def test_summarize_invariance_result_files_flattens_rows(tmp_path: Path):
     assert rows[0]["study"] == "study_a"
     assert rows[0]["metric"] == "faithfulness_gap"
     assert rows[0]["delta"] == 0.1
+    _write_json(result_root / "study_a_case_deltas.json", [{"id": "a_001", "delta": 0.1}])
+    rows = summarize_invariance_result_files(result_root)
+    assert len(rows) == 1
 
 
 @pytest.mark.unit
@@ -132,3 +136,56 @@ def test_run_controllability_comparison_study_b_emits_variant_and_sensitivity(tm
     assert mild_metric["delta_c"] == pytest.approx(0.5, abs=1e-9)
     assert strong_metric["delta_c"] == pytest.approx(1.0, abs=1e-9)
     assert payload["sensitivity_curves"]["sycophancy_probability"][0]["slope"] > 0
+
+
+@pytest.mark.unit
+def test_build_invariance_case_delta_rows_includes_strata(tmp_path: Path):
+    root = tmp_path / "release_like_root"
+    _write_json(
+        root / "openr1_psy_splits" / "study_a_test.json",
+        {
+            "samples": [
+                {
+                    "id": "a_001",
+                    "prompt": "Prompt one",
+                    "gold_answer": "Major Depressive Disorder",
+                    "gold_reasoning": ["Validate the distress."],
+                    "metadata": {"persona_id": "aisha"},
+                }
+            ]
+        },
+    )
+    _write_json(root / "study_a_gold" / "gold_diagnosis_labels.json", {"labels": {"a_001": "Major Depressive Disorder"}})
+    _write_json(root / "openr1_psy_splits" / "study_b_test.json", [])
+    _write_json(root / "openr1_psy_splits" / "study_b_multi_turn_test.json", [])
+    _write_json(root / "openr1_psy_splits" / "study_c_test.json", {"cases": []})
+
+    base_cache = tmp_path / "base_a.jsonl"
+    variant_cache = tmp_path / "variant_a.jsonl"
+    _write_jsonl(
+        base_cache,
+        [
+            {"id": "a_001", "mode": "cot", "status": "ok", "output_text": "Diagnosis: Major Depressive Disorder\n1. Validate the distress."},
+            {"id": "a_001", "mode": "direct", "status": "ok", "output_text": "Diagnosis: Major Depressive Disorder"},
+        ],
+    )
+    _write_jsonl(
+        variant_cache,
+        [
+            {"id": "a_001", "mode": "cot", "status": "ok", "output_text": "Diagnosis: Major Depressive Disorder\n1. Validate the distress."},
+            {"id": "a_001", "mode": "direct", "status": "ok", "output_text": "Diagnosis: Panic Disorder"},
+        ],
+    )
+
+    rows = build_invariance_case_delta_rows(
+        study="study_a",
+        base_cache=base_cache,
+        variant_cache=variant_cache,
+        data_root=root,
+        metrics=["faithfulness_gap"],
+    )
+
+    assert len(rows) == 1
+    assert rows[0]["metric"] == "faithfulness_gap"
+    assert rows[0]["delta"] == pytest.approx(1.0, abs=1e-9)
+    assert rows[0]["strata"]["condition"] == "mood"

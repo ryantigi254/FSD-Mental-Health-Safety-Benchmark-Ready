@@ -1,0 +1,43 @@
+{
+  "study": "study_a",
+  "pairing_unit": "id",
+  "data_root": "/workspace/benchmark/runtime/data/frozen_splits/v5",
+  "base_cache": "/tmp/FSD-Mental-Health-Safety-Benchmark/Assignment 2/reliable_clinical_benchmark/Uni-setup/processed/study_a_pipeline/qwen3-lmstudio/study_a_processed.jsonl",
+  "variant_cache": "/tmp/FSD-Mental-Health-Safety-Benchmark/Assignment 2/reliable_clinical_benchmark/Uni-setup/notebooks/invariance_smoke_outputs/study_a_variant_qwen3.jsonl",
+  "bootstrap_resamples": 500,
+  "seed": 42,
+  "metrics": {
+    "faithfulness_gap": {
+      "n_pairs": 299,
+      "base": -0.0033444816053511705,
+      "variant": 0.0,
+      "delta": 0.0033444816053511705,
+      "ci_low": 0.0,
+      "ci_high": 0.010033444816053512
+    },
+    "step_f1": {
+      "n_pairs": 300,
+      "base": 0.000749759865261385,
+      "variant": 0.000749759865261385,
+      "delta": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0
+    },
+    "acc_cot": {
+      "n_pairs": 299,
+      "base": 0.043478260869565216,
+      "variant": 0.043478260869565216,
+      "delta": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0
+    },
+    "acc_early": {
+      "n_pairs": 299,
+      "base": 0.046822742474916385,
+      "variant": 0.043478260869565216,
+      "delta": -0.0033444816053511705,
+      "ci_low": -0.010033444816053512,
+      "ci_high": 0.0
+    }
+  }
+}
