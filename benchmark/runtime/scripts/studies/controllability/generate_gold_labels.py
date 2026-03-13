@@ -31,6 +31,10 @@ from reliable_clinical_benchmark.utils.condition_resolution import (
     normalise_condition,
     resolve_case_condition,
 )
+from reliable_clinical_benchmark.utils.weak_supervision_probe import (
+    DEFAULT_BACKBONE_MODELS,
+    run_probe_labeler,
+)
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
@@ -426,6 +430,48 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         default=NLI_CONFIRM_THRESHOLD,
         help="Entailment threshold for confirming seeded candidate labels with NLI.",
     )
+    parser.add_argument(
+        "--backend",
+        choices=("nli", "probe"),
+        default="nli",
+        help="Gold-label backend. 'probe' uses a weakly supervised frozen-encoder probe over split metadata labels.",
+    )
+    parser.add_argument(
+        "--primary-model",
+        type=str,
+        default=DEFAULT_BACKBONE_MODELS["biomedbert"],
+        help="Primary encoder backbone for --backend=probe.",
+    )
+    parser.add_argument(
+        "--secondary-model",
+        type=str,
+        default="",
+        help="Optional secondary encoder backbone for agreement-gated probe generation.",
+    )
+    parser.add_argument(
+        "--tertiary-model",
+        type=str,
+        default="",
+        help="Optional tertiary encoder backbone for unanimity-gated probe generation.",
+    )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=12,
+        help="Batch size for encoder embedding in --backend=probe.",
+    )
+    parser.add_argument(
+        "--max-length",
+        type=int,
+        default=256,
+        help="Tokenizer max length for --backend=probe.",
+    )
+    parser.add_argument(
+        "--output-name",
+        type=str,
+        default="ctrl_gold_diagnosis_labels.json",
+        help="Output filename written inside --ctrl-dir.",
+    )
     return parser.parse_args(list(argv) if argv is not None else [])
 
 
@@ -435,7 +481,67 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     if args.skip_nli and args.nli_only:
         raise SystemExit("--nli-only cannot be combined with --skip-nli.")
     CTRL_DIR = args.ctrl_dir
-    OUTPUT_PATH = CTRL_DIR / "ctrl_gold_diagnosis_labels.json"
+    OUTPUT_PATH = CTRL_DIR / args.output_name
+
+    # Load controllability Study A split
+    ctrl_a_path = CTRL_DIR / "study_a_controllability_test.json"
+    with ctrl_a_path.open("r", encoding="utf-8") as f:
+        ctrl_a = json.load(f)
+
+    samples = ctrl_a.get("samples", [])
+    print(f"  Controllability Study A samples: {len(samples)}")
+
+    if args.backend == "probe":
+        texts = [str(sample.get("prompt", "")) for sample in samples]
+        labels_inferred = [
+            _display_label(sample.get("metadata", {}).get("inferred_condition", "unresolved"))
+            for sample in samples
+        ]
+        secondary_model = str(args.secondary_model or "").strip() or None
+        tertiary_model = str(args.tertiary_model or "").strip() or None
+        result = run_probe_labeler(
+            texts=texts,
+            labels=labels_inferred,
+            primary_model_name=str(args.primary_model),
+            secondary_model_name=secondary_model,
+            tertiary_model_name=tertiary_model,
+            batch_size=int(args.batch_size),
+            max_length=int(args.max_length),
+            n_splits=3,
+            fallback_to_primary_on_disagreement=True,
+        )
+        labels = {
+            str(sample["id"]): str(label)
+            for sample, label in zip(samples, result.predictions)
+            if str(label).strip()
+        }
+        output = {
+            "meta": {
+                "dataset": "controllability/study_a_split_metadata",
+                "backend": "probe",
+                "extraction": "controllability/generate_gold_labels.py",
+                "generated_utc": datetime.now(timezone.utc).isoformat(),
+                "n_samples": len(labels),
+                "primary_model": str(args.primary_model),
+                "secondary_model": secondary_model or "",
+                "tertiary_model": tertiary_model or "",
+                "probe_meta": result.meta,
+            },
+            "labels": labels,
+        }
+        OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with OUTPUT_PATH.open("w", encoding="utf-8") as f:
+            json.dump(output, f, indent=2, ensure_ascii=False)
+        agreement_count = int(sum(result.agreement_flags or [])) if result.agreement_flags else 0
+        print(f"\nGold labels written to {OUTPUT_PATH}")
+        print(
+            f"  Probe primary: {args.primary_model}, "
+            f"secondary: {secondary_model or 'none'}, "
+            f"tertiary: {tertiary_model or 'none'}, "
+            f"agreement: {agreement_count}/{len(samples)}"
+        )
+        print(f"  Total: {len(labels)}")
+        return
 
     nli = None
     all_rows: Dict[tuple[str, int], Dict[str, str]] = {}
@@ -459,13 +565,6 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
 
         print(f"  OpenR1-Psy rows indexed: {len(all_rows)}")
 
-    # Load controllability Study A split
-    ctrl_a_path = CTRL_DIR / "study_a_controllability_test.json"
-    with ctrl_a_path.open("r", encoding="utf-8") as f:
-        ctrl_a = json.load(f)
-
-    samples = ctrl_a.get("samples", [])
-    print(f"  Controllability Study A samples: {len(samples)}")
     candidate_labels = build_candidate_label_pool(samples)
 
     labels: Dict[str, str] = {}
@@ -661,6 +760,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     output = {
         "meta": {
             "dataset": "GMLHUHE/OpenR1-Psy",
+            "backend": "nli",
             "nli_model": "" if args.skip_nli else "cross-encoder/nli-deberta-v3-base",
             "extraction": "controllability/generate_gold_labels.py",
             "generated_utc": datetime.now(timezone.utc).isoformat(),

@@ -34,6 +34,10 @@ from reliable_clinical_benchmark.utils.plan_components import (
     nli_filter_candidates,
     render_plan_from_components,
 )
+from reliable_clinical_benchmark.utils.weak_supervision_probe import (
+    DEFAULT_BACKBONE_MODELS,
+    run_probe_labeler,
+)
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
@@ -370,6 +374,48 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         action="store_true",
         help="Require every final plan to come from NLI-backed evidence; disable condition-map fallback.",
     )
+    parser.add_argument(
+        "--backend",
+        choices=("nli", "probe"),
+        default="nli",
+        help="Gold-plan backend. 'probe' predicts inferred_condition with a weakly supervised encoder probe, then renders the condition map.",
+    )
+    parser.add_argument(
+        "--primary-model",
+        type=str,
+        default=DEFAULT_BACKBONE_MODELS["biomedbert"],
+        help="Primary encoder backbone for --backend=probe.",
+    )
+    parser.add_argument(
+        "--secondary-model",
+        type=str,
+        default="",
+        help="Optional secondary encoder backbone for agreement-gated probe generation.",
+    )
+    parser.add_argument(
+        "--tertiary-model",
+        type=str,
+        default="",
+        help="Optional tertiary encoder backbone for unanimity-gated probe generation.",
+    )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=12,
+        help="Batch size for encoder embedding in --backend=probe.",
+    )
+    parser.add_argument(
+        "--max-length",
+        type=int,
+        default=256,
+        help="Tokenizer max length for --backend=probe.",
+    )
+    parser.add_argument(
+        "--output-name",
+        type=str,
+        default="ctrl_target_plans.json",
+        help="Output filename written inside --ctrl-dir.",
+    )
     return parser.parse_args(list(argv) if argv is not None else [])
 
 
@@ -379,7 +425,87 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     if args.skip_nli and args.nli_only:
         raise SystemExit("--nli-only cannot be combined with --skip-nli.")
     CTRL_DIR = args.ctrl_dir
-    OUTPUT_PATH = CTRL_DIR / "ctrl_target_plans.json"
+    OUTPUT_PATH = CTRL_DIR / args.output_name
+
+    # Load controllability Study C split
+    ctrl_c_path = CTRL_DIR / "study_c_controllability_test.json"
+    with ctrl_c_path.open("r", encoding="utf-8") as f:
+        ctrl_c = json.load(f)
+
+    cases = ctrl_c.get("cases", [])
+    print(f"  Controllability Study C cases: {len(cases)}")
+
+    if args.backend == "probe":
+        texts = [
+            "\n".join(
+                [
+                    str(case.get("patient_summary", "")).strip(),
+                    *[str(entity or "").strip() for entity in case.get("critical_entities", [])],
+                ]
+            ).strip()
+            for case in cases
+        ]
+        labels_inferred = [
+            str(case.get("metadata", {}).get("inferred_condition", "unspecified")).strip()
+            for case in cases
+        ]
+        secondary_model = str(args.secondary_model or "").strip() or None
+        tertiary_model = str(args.tertiary_model or "").strip() or None
+        result = run_probe_labeler(
+            texts=texts,
+            labels=labels_inferred,
+            primary_model_name=str(args.primary_model),
+            secondary_model_name=secondary_model,
+            tertiary_model_name=tertiary_model,
+            batch_size=int(args.batch_size),
+            max_length=int(args.max_length),
+            n_splits=3,
+            fallback_to_primary_on_disagreement=True,
+        )
+
+        plans: Dict[str, Dict[str, Any]] = {}
+        for case, predicted_condition in zip(cases, result.predictions):
+            cid = case["id"]
+            patient_summary = case.get("patient_summary", "")
+            critical_entities = case.get("critical_entities", [])
+            plan_text = get_treatment_plan(predicted_condition, patient_summary, critical_entities)
+            plan_text = _enrich_plan_for_alignment(plan_text, critical_entities)
+            plans[cid] = {
+                "plan": plan_text,
+                "source_openr1_id": (case.get("metadata", {}).get("source_openr1_ids", []) or [None])[0],
+                "source_split": case.get("metadata", {}).get("source_split", ""),
+                "inferred_condition": predicted_condition,
+                "plan_components": [],
+                "plan_component_evidence": {},
+            }
+
+        output = {
+            "meta": {
+                "dataset": "controllability/study_c_split_metadata",
+                "backend": "probe",
+                "extraction": "controllability/generate_gold_plans.py",
+                "generated_utc": datetime.now(timezone.utc).isoformat(),
+                "n_cases": len(plans),
+                "primary_model": str(args.primary_model),
+                "secondary_model": secondary_model or "",
+                "tertiary_model": tertiary_model or "",
+                "probe_meta": result.meta,
+            },
+            "plans": plans,
+        }
+        OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with OUTPUT_PATH.open("w", encoding="utf-8") as f:
+            json.dump(output, f, indent=2, ensure_ascii=False)
+        agreement_count = int(sum(result.agreement_flags or [])) if result.agreement_flags else 0
+        print(f"\nGold plans written to {OUTPUT_PATH}")
+        print(
+            f"  Probe primary: {args.primary_model}, "
+            f"secondary: {secondary_model or 'none'}, "
+            f"tertiary: {tertiary_model or 'none'}, "
+            f"agreement: {agreement_count}/{len(cases)}"
+        )
+        print(f"  Total: {len(plans)}")
+        return
 
     all_rows: Dict[tuple[str, int], Dict[str, Any]] = {}
     nli = None
@@ -399,14 +525,6 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
                         "counselor_think": _collect_full_counselor_think(convs),
                         "counselor_content": convs[0].get("counselor_content", ""),
                     }
-
-    # Load controllability Study C split
-    ctrl_c_path = CTRL_DIR / "study_c_controllability_test.json"
-    with ctrl_c_path.open("r", encoding="utf-8") as f:
-        ctrl_c = json.load(f)
-
-    cases = ctrl_c.get("cases", [])
-    print(f"  Controllability Study C cases: {len(cases)}")
 
     plans: Dict[str, Dict[str, Any]] = {}
     stats = {"nli_verified": 0, "condition_map": 0}
@@ -494,6 +612,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     output = {
         "meta": {
             "dataset": "GMLHUHE/OpenR1-Psy",
+            "backend": "nli",
             "nli_model": "" if args.skip_nli else "cross-encoder/nli-deberta-v3-base",
             "extraction": "controllability/generate_gold_plans.py",
             "generated_utc": datetime.now(timezone.utc).isoformat(),
