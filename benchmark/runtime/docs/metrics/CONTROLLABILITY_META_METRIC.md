@@ -144,23 +144,32 @@ Implemented now:
 - frozen `v5` invariance sampled split root
 - dedicated invariance generation runners
 - paired invariance comparison with fail-closed pairing
+- deterministic variant-construction scripts:
+  - `scripts/invariance/control_paraphrases.py`
+  - `scripts/invariance/pressure_variants.py`
+  - `scripts/invariance/reorder_turns.py`
+- automated variant validation:
+  - `scripts/review/run_rubric.py`
 - `scripts/evaluation/run_controllability_comparison.py`
 - `scripts/evaluation/summarize_invariance_results.py`
+- `scripts/evaluation/export_invariance_case_deltas.py`
+- `scripts/evaluation/export_failure_cards.py`
 - shared analysis notebooks:
   - `notebooks/invariance/invariance_analysis.ipynb`
   - `notebooks/invariance/controllability_analysis.ipynb`
+- per-study granular notebooks:
+  - `notebooks/invariance/study_a_granular_analysis.ipynb`
+  - `notebooks/invariance/study_b_granular_analysis.ipynb`
+  - `notebooks/invariance/study_c_granular_analysis.ipynb`
+- example archived-small-scale outputs under:
+  - `metric-results/invariance_smoke/`
+  - `metric-results/controllability/`
+  - `metric-results/failure_cards/`
 
 Not yet implemented:
 
-- canonical variant-construction scripts for:
-  - control-signal variants
-  - semantic-invariance paraphrases
-  - schedule / turn-order perturbations
-- automated rubric pass over generated variants before full generation runs
-- per-study granular notebooks such as:
-  - `study_a_granular_analysis.ipynb`
-  - `study_b_granular_analysis.ipynb`
-  - `study_c_granular_analysis.ipynb`
-- model failure-card reporting layer with taxonomy labels and exemplar export
+- live model-generation matrix over the new variant roots in this runtime environment
+- richer control-signal families beyond the initial deterministic templates
+- exemplar extraction and case-study narrative export inside the failure-card layer
 
 So the next engineering task is not new sampling; it is building the controllability layer **on top of** the invariance stack that now exists.

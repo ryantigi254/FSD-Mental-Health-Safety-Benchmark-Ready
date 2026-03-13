@@ -92,11 +92,23 @@ Analysis scripts:
 
 - `scripts/evaluation/summarize_invariance_results.py`
 - `scripts/evaluation/run_controllability_comparison.py`
+- `scripts/evaluation/export_invariance_case_deltas.py`
+- `scripts/evaluation/export_failure_cards.py`
 
 Dedicated notebooks:
 
 - `notebooks/invariance/invariance_analysis.ipynb`
 - `notebooks/invariance/controllability_analysis.ipynb`
+- `notebooks/invariance/study_a_granular_analysis.ipynb`
+- `notebooks/invariance/study_b_granular_analysis.ipynb`
+- `notebooks/invariance/study_c_granular_analysis.ipynb`
+
+Variant-construction and validation scripts:
+
+- `scripts/invariance/control_paraphrases.py`
+- `scripts/invariance/pressure_variants.py`
+- `scripts/invariance/reorder_turns.py`
+- `scripts/review/run_rubric.py`
 
 ## Relationship to controllability
 

@@ -13,6 +13,7 @@ import numpy as np
 from reliable_clinical_benchmark.invariance import (
     compute_case_metrics,
     get_study_spec,
+    load_manifest_records,
     study_metric_names,
 )
 
@@ -86,11 +87,16 @@ def flatten_invariance_results(payloads: Iterable[Mapping[str, Any]]) -> List[Di
 def scan_invariance_result_files(root: Path) -> List[Path]:
     """Find invariance comparison JSON files under a result root."""
 
-    matches = sorted(
-        path
-        for path in root.rglob("*.json")
-        if "invariance" in path.name and path.is_file()
-    )
+    matches = []
+    for path in sorted(root.rglob("*.json")):
+        if "invariance" not in path.name or not path.is_file():
+            continue
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if isinstance(payload, dict) and isinstance(payload.get("metrics"), dict):
+            matches.append(path)
     return matches
 
 
@@ -99,6 +105,63 @@ def summarize_invariance_result_files(root: Path) -> List[Dict[str, Any]]:
 
     payloads = [json.loads(path.read_text(encoding="utf-8")) for path in scan_invariance_result_files(root)]
     return flatten_invariance_results(payloads)
+
+
+def build_invariance_case_delta_rows(
+    *,
+    study: str,
+    base_cache: Path,
+    variant_cache: Path,
+    data_root: Path,
+    metrics: Optional[Sequence[str]] = None,
+    use_nli: bool = False,
+    nli_stride: int = 2,
+) -> List[Dict[str, Any]]:
+    """Build per-case base/variant/delta rows for invariance analysis notebooks."""
+
+    spec = get_study_spec(study)
+    metric_names = list(metrics or study_metric_names(spec.canonical_name))
+    strata_records = {record.id: record for record in load_manifest_records(spec.canonical_name, data_root)}
+    base_case_metrics = compute_case_metrics(
+        study=spec.canonical_name,
+        cache_path=base_cache,
+        data_root=data_root,
+        use_nli=use_nli,
+        nli_stride=nli_stride,
+    )
+    variant_case_metrics = compute_case_metrics(
+        study=spec.canonical_name,
+        cache_path=variant_cache,
+        data_root=data_root,
+        use_nli=use_nli,
+        nli_stride=nli_stride,
+    )
+
+    rows: List[Dict[str, Any]] = []
+    for metric_name in metric_names:
+        shared_ids = sorted(
+            row_id
+            for row_id in base_case_metrics
+            if metric_name in base_case_metrics[row_id]
+            and row_id in variant_case_metrics
+            and metric_name in variant_case_metrics[row_id]
+        )
+        for row_id in shared_ids:
+            record = strata_records.get(row_id)
+            rows.append(
+                {
+                    "study": spec.canonical_name,
+                    "pairing_unit": spec.pairing_unit,
+                    "id": row_id,
+                    "metric": metric_name,
+                    "base": float(base_case_metrics[row_id][metric_name]),
+                    "variant": float(variant_case_metrics[row_id][metric_name]),
+                    "delta": float(variant_case_metrics[row_id][metric_name] - base_case_metrics[row_id][metric_name]),
+                    "strata": record.strata if record else {},
+                    "metadata": record.metadata if record else {},
+                }
+            )
+    return rows
 
 
 def run_controllability_comparison(

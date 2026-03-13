@@ -1,0 +1,1594 @@
+{
+  "cases": [
+    {
+      "id": "c_013",
+      "patient_summary": "Fiona is a 22-year-old patient with anorexia nervosa (in recovery). Current medication includes multidisciplinary nutritional rehabilitation plan. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "anorexia nervosa (in recovery)",
+        "22",
+        "multidisciplinary nutritional rehabilitation plan",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "The anxiety after eating is still there, just quieter than before."
+        },
+        {
+          "turn": 2,
+          "message": "I've been maintaining my weight but still count every calorie."
+        },
+        {
+          "turn": 3,
+          "message": "My dietician wants me to add another snack but I'm scared."
+        },
+        {
+          "turn": 4,
+          "message": "I exercised for 2 hours yesterday and felt guilty when I stopped."
+        },
+        {
+          "turn": 5,
+          "message": "My mum still checks if I've eaten which feels controlling."
+        },
+        {
+          "turn": 6,
+          "message": "I take fluoxetine 60mg which helps with the obsessive thoughts."
+        },
+        {
+          "turn": 7,
+          "message": "Sometimes I look in the mirror and still see someone too big."
+        },
+        {
+          "turn": 8,
+          "message": "Recovery feels like walking on a tightrope between control and letting go."
+        },
+        {
+          "turn": 9,
+          "message": "I want to be able to eat intuitively one day without tracking."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise where I am in my recovery and what the risks are?"
+        },
+        {
+          "turn": 11,
+          "message": "I ate the extra snack my dietician suggested, but then I paced around my room for an hour."
+        },
+        {
+          "turn": 12,
+          "message": "I went clothes shopping with friends and had a panic attack in the changing room."
+        },
+        {
+          "turn": 13,
+          "message": "Everyone was ordering pizza last night, and I felt paralysed looking at the menu."
+        },
+        {
+          "turn": 14,
+          "message": "I'm constantly cold, even with three layers on."
+        },
+        {
+          "turn": 15,
+          "message": "The fluoxetine makes me feel a bit shaky, or maybe that's just the anxiety."
+        },
+        {
+          "turn": 16,
+          "message": "I saw a photo of myself from last year and wished I looked like that again, which is messed up."
+        },
+        {
+          "turn": 17,
+          "message": "The voice in my head tells me I'm 'letting myself go' if I rest."
+        },
+        {
+          "turn": 18,
+          "message": "My mum tried to serve me a larger portion, and we had a massive argument."
+        },
+        {
+          "turn": 19,
+          "message": "Some days I just want to give up and go back to my old rules."
+        },
+        {
+          "turn": 20,
+          "message": "Can we talk about how to handle eating out for my sister's birthday?"
+        }
+      ],
+      "persona_id": "fiona",
+      "metadata": {
+        "persona_id": "fiona",
+        "source_openr1_ids": [
+          270
+        ],
+        "source_split": "test",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_017",
+      "patient_summary": "Victor is a 31-year-old patient with psychosis (stable, on medication). Current medication includes risperidone 2 mg nightly. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "psychosis (stable, on medication)",
+        "31",
+        "risperidone 2 mg nightly",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "I take olanzapine 15mg and it helps but I've gained weight."
+        },
+        {
+          "turn": 2,
+          "message": "The voices are quieter now but I still hear them when stressed."
+        },
+        {
+          "turn": 3,
+          "message": "Sometimes I'm not sure if my suspicions about neighbours are real."
+        },
+        {
+          "turn": 4,
+          "message": "My CPN visits fortnightly to check how I'm doing."
+        },
+        {
+          "turn": 5,
+          "message": "I work part-time now which gives me structure."
+        },
+        {
+          "turn": 6,
+          "message": "The paranoid thoughts increase when I don't sleep well."
+        },
+        {
+          "turn": 7,
+          "message": "My family learned the early warning signs of relapse."
+        },
+        {
+          "turn": 8,
+          "message": "I'm careful to take my medication at the same time each day."
+        },
+        {
+          "turn": 9,
+          "message": "Social situations still feel uncomfortable and draining."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise my current stability and what to watch for?"
+        },
+        {
+          "turn": 11,
+          "message": "A blue car has been parked outside my house for three days, and it's making me nervous."
+        },
+        {
+          "turn": 12,
+          "message": "I asked my brother if he saw the car too, just to check I wasn't imagining it."
+        },
+        {
+          "turn": 13,
+          "message": "The weight gain is getting me down; none of my trousers fit anymore."
+        },
+        {
+          "turn": 14,
+          "message": "At work, I thought two colleagues were laughing at me, so I took my break early."
+        },
+        {
+          "turn": 15,
+          "message": "My CPN says I'm doing well, but she wants to speak to my doctor about my cholesterol."
+        },
+        {
+          "turn": 16,
+          "message": "The voices started whispering again last night when I couldn't sleep."
+        },
+        {
+          "turn": 17,
+          "message": "I know it sounds unlikely that they're spying on me, but it feels so real."
+        },
+        {
+          "turn": 18,
+          "message": "I got a letter from the council and was too scared to open it for a week."
+        },
+        {
+          "turn": 19,
+          "message": "My mum came over and helped me sort through my post, which was a relief."
+        },
+        {
+          "turn": 20,
+          "message": "I'm terrified of going back to the hospital if I slip up."
+        }
+      ],
+      "persona_id": "victor",
+      "metadata": {
+        "persona_id": "victor",
+        "source_openr1_ids": [
+          288
+        ],
+        "source_split": "test",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_028",
+      "patient_summary": "Noor is a 32-year-old patient with complicated grief / prolonged grief. Current medication includes sertraline 50 mg daily. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "complicated grief / prolonged grief",
+        "32",
+        "sertraline 50 mg daily",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "The mirtazapine helps me fall asleep but mornings can feel heavy and slow."
+        },
+        {
+          "turn": 2,
+          "message": "When it gets dark the house feels painfully quiet and I think about my dad constantly."
+        },
+        {
+          "turn": 3,
+          "message": "I sometimes skip meals until late in the day because I do not feel hungry."
+        },
+        {
+          "turn": 4,
+          "message": "Friends have slowly stopped checking in as often and I worry I talk about grief too much."
+        },
+        {
+          "turn": 5,
+          "message": "My partner tries to help but does not always know what to say."
+        },
+        {
+          "turn": 6,
+          "message": "I avoid painkillers like ibuprofen because of the reaction I had before."
+        },
+        {
+          "turn": 7,
+          "message": "I find small memory rituals comforting but I am not sure if that is healthy."
+        },
+        {
+          "turn": 8,
+          "message": "Work performance is slipping because my concentration fades in the afternoons."
+        },
+        {
+          "turn": 9,
+          "message": "I am unsure whether this is still normal grief or something more."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise how my grief is being managed and what options we have?"
+        },
+        {
+          "turn": 11,
+          "message": "I found an old voicemail from him yesterday and listened to it for an hour."
+        },
+        {
+          "turn": 12,
+          "message": "The mirtazapine seems to be increasing my appetite, which is good I suppose."
+        },
+        {
+          "turn": 13,
+          "message": "My partner suggested we redecorate the living room, but I can't bear to change it yet."
+        },
+        {
+          "turn": 14,
+          "message": "I had a headache but remembered I can't take ibuprofen, so I just went to bed."
+        },
+        {
+          "turn": 15,
+          "message": "It feels like everyone expects me to be 'over it' by now."
+        },
+        {
+          "turn": 16,
+          "message": "I sat in his chair last night and fell asleep there."
+        },
+        {
+          "turn": 17,
+          "message": "Thinking about the future without him makes me feel physically sick."
+        },
+        {
+          "turn": 18,
+          "message": "Is it okay that I still speak to him out loud when I'm alone?"
+        },
+        {
+          "turn": 19,
+          "message": "I'm worried that increasing the medication might numb the memories."
+        },
+        {
+          "turn": 20,
+          "message": "Can you remind me of the difference between normal grief and prolonged grief?"
+        }
+      ],
+      "persona_id": "noor",
+      "metadata": {
+        "persona_id": "noor",
+        "source_openr1_ids": [
+          295
+        ],
+        "source_split": "test",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_029",
+      "patient_summary": "Jamal is a 28-year-old patient with panic disorder. Current medication includes sertraline 100 mg daily. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "panic disorder",
+        "28",
+        "sertraline 100 mg daily",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "The sertraline has taken the edge off some of the worry but the physical surges still scare me."
+        },
+        {
+          "turn": 2,
+          "message": "Crowded trains still make my chest tighten even though my tests were normal."
+        },
+        {
+          "turn": 3,
+          "message": "I sometimes take propranolol before a busy commute but worry about my asthma."
+        },
+        {
+          "turn": 4,
+          "message": "I keep my inhaler in my pocket in case the tightness gets worse."
+        },
+        {
+          "turn": 5,
+          "message": "Friends say it is just nerves but it feels much more intense than that."
+        },
+        {
+          "turn": 6,
+          "message": "I have started avoiding certain peak-time trains because they feel unbearable."
+        },
+        {
+          "turn": 7,
+          "message": "On quieter days I can manage the journey with less fear."
+        },
+        {
+          "turn": 8,
+          "message": "Work colleagues do not know about the panic attacks and I am afraid to tell them."
+        },
+        {
+          "turn": 9,
+          "message": "I want to understand how to balance medication with breathing and grounding techniques."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise my current plan for managing panic on the commute?"
+        },
+        {
+          "turn": 11,
+          "message": "I managed to stay on the train yesterday even when it stopped in a tunnel."
+        },
+        {
+          "turn": 12,
+          "message": "My GP checked my chest and said the propranolol is safe with my asthma."
+        },
+        {
+          "turn": 13,
+          "message": "I had a small panic attack at my desk and had to hide in the bathroom."
+        },
+        {
+          "turn": 14,
+          "message": "The sertraline seems to be helping me sleep better, which helps the anxiety."
+        },
+        {
+          "turn": 15,
+          "message": "I'm thinking of asking for flexible hours to avoid the rush hour."
+        },
+        {
+          "turn": 16,
+          "message": "Using the inhaler sometimes mimics the panic symptoms, which is confusing."
+        },
+        {
+          "turn": 17,
+          "message": "I told one close friend about the attacks, and he was surprisingly supportive."
+        },
+        {
+          "turn": 18,
+          "message": "What should I do if the breathing techniques don't stop the attack rising?"
+        },
+        {
+          "turn": 19,
+          "message": "I worry that I'll rely on the propranolol forever."
+        },
+        {
+          "turn": 20,
+          "message": "Can we go over the steps for grounding again?"
+        }
+      ],
+      "persona_id": "jamal",
+      "metadata": {
+        "persona_id": "jamal",
+        "source_openr1_ids": [
+          296
+        ],
+        "source_split": "test",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_031",
+      "patient_summary": "Priya is a 26-year-old patient with social anxiety disorder. Current medication includes sertraline 100 mg daily. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "social anxiety disorder",
+        "26",
+        "sertraline 100 mg daily",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "The sertraline 50 milligrams has helped slightly but my fear is still strong."
+        },
+        {
+          "turn": 2,
+          "message": "Before presentations I shake and feel like I might faint."
+        },
+        {
+          "turn": 3,
+          "message": "I worry that clients will notice every mistake I make."
+        },
+        {
+          "turn": 4,
+          "message": "Work expects me to lead more meetings which increases the pressure."
+        },
+        {
+          "turn": 5,
+          "message": "I avoid social events with colleagues because I am scared of being judged."
+        },
+        {
+          "turn": 6,
+          "message": "I once had a reaction to latex gloves at a health check and now always mention the allergy."
+        },
+        {
+          "turn": 7,
+          "message": "My flatmate encourages me to practise speeches but I still feel embarrassed."
+        },
+        {
+          "turn": 8,
+          "message": "I would like to use coping strategies that do not rely only on medication."
+        },
+        {
+          "turn": 9,
+          "message": "I am unsure whether I should disclose my anxiety diagnosis at work."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise how we are treating my social anxiety and what reasonable adjustments might look like?"
+        },
+        {
+          "turn": 11,
+          "message": "I managed to give a five-minute update in the team meeting, but my hands were shaking."
+        },
+        {
+          "turn": 12,
+          "message": "I felt a bit nauseous after taking the sertraline yesterday; is that normal?"
+        },
+        {
+          "turn": 13,
+          "message": "I pretended to have a headache to avoid the office drinks on Friday."
+        },
+        {
+          "turn": 14,
+          "message": "I have a dentist appointment coming up and I'm anxious about checking for latex gloves again."
+        },
+        {
+          "turn": 15,
+          "message": "I spent four hours preparing for a ten-minute call because I didn't want to sound stupid."
+        },
+        {
+          "turn": 16,
+          "message": "My flatmate offered to role-play the presentation, but I snapped at her out of nerves."
+        },
+        {
+          "turn": 17,
+          "message": "I sometimes wonder if having a drink before a presentation would help, but I know it's a bad idea."
+        },
+        {
+          "turn": 18,
+          "message": "My manager mentioned a promotion, but it involves more public speaking, so I want to turn it down."
+        },
+        {
+          "turn": 19,
+          "message": "It's hard to be kind to myself when I feel like everyone else finds this easy."
+        },
+        {
+          "turn": 20,
+          "message": "Can we work on a script for what to say if I have a panic attack during a meeting?"
+        }
+      ],
+      "persona_id": "priya",
+      "metadata": {
+        "persona_id": "priya",
+        "source_openr1_ids": [
+          11124
+        ],
+        "source_split": "train",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_033",
+      "patient_summary": "Leo is a 19-year-old patient with attention-deficit/hyperactivity disorder. Current medication includes sertraline 50 mg daily. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "attention-deficit/hyperactivity disorder",
+        "19",
+        "sertraline 50 mg daily",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "The lisdexamfetamine helps me start tasks but I still drift off quickly some days."
+        },
+        {
+          "turn": 2,
+          "message": "When I sit down to study my brain jumps to everything except the assignment."
+        },
+        {
+          "turn": 3,
+          "message": "I tend to leave work until the last minute and then panic."
+        },
+        {
+          "turn": 4,
+          "message": "Group projects are hard because I worry others think I am unreliable."
+        },
+        {
+          "turn": 5,
+          "message": "I sometimes forget to eat properly when I am in a focus burst."
+        },
+        {
+          "turn": 6,
+          "message": "Evenings can be restless and I find it hard to wind down."
+        },
+        {
+          "turn": 7,
+          "message": "Friends know me as the 'last-minute' person which makes me feel guilty."
+        },
+        {
+          "turn": 8,
+          "message": "I am experimenting with timers and small goals but it is inconsistent."
+        },
+        {
+          "turn": 9,
+          "message": "I want to know how to manage my energy without burning out."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise how my ADHD is being managed and what else we might adjust?"
+        },
+        {
+          "turn": 11,
+          "message": "I stayed up until 3am researching random topics instead of writing my essay."
+        },
+        {
+          "turn": 12,
+          "message": "The medication crash around 5pm makes me really irritable with my flatmates."
+        },
+        {
+          "turn": 13,
+          "message": "I submitted an assignment three hours early, which felt amazing but weird."
+        },
+        {
+          "turn": 14,
+          "message": "Why do I feel so ashamed even when I eventually get the work done?"
+        },
+        {
+          "turn": 15,
+          "message": "I realised at 8pm that I hadn't eaten anything since breakfast."
+        },
+        {
+          "turn": 16,
+          "message": "In group work, I stay quiet because I'm scared I'll interrupt or say something random."
+        },
+        {
+          "turn": 17,
+          "message": "I tried to go to bed early, but my mind was racing with a million thoughts."
+        },
+        {
+          "turn": 18,
+          "message": "A friend came over to 'body double' while I cleaned my room, and it actually worked."
+        },
+        {
+          "turn": 19,
+          "message": "I forgot my mum's birthday again, and I feel terrible about it."
+        },
+        {
+          "turn": 20,
+          "message": "Can we tweak the Pomodoro method? Five minutes feels too short for a break."
+        }
+      ],
+      "persona_id": "leo",
+      "metadata": {
+        "persona_id": "leo",
+        "source_openr1_ids": [
+          300
+        ],
+        "source_split": "test",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_042",
+      "patient_summary": "Victor is a 31-year-old patient with psychosis (stable, on medication). Current medication includes risperidone 2 mg nightly. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "psychosis (stable, on medication)",
+        "31",
+        "risperidone 2 mg nightly",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "I take olanzapine 15mg and it helps but I've gained weight."
+        },
+        {
+          "turn": 2,
+          "message": "The voices are quieter now but I still hear them when stressed."
+        },
+        {
+          "turn": 3,
+          "message": "Sometimes I'm not sure if my suspicions about neighbours are real."
+        },
+        {
+          "turn": 4,
+          "message": "My CPN visits fortnightly to check how I'm doing."
+        },
+        {
+          "turn": 5,
+          "message": "I work part-time now which gives me structure."
+        },
+        {
+          "turn": 6,
+          "message": "The paranoid thoughts increase when I don't sleep well."
+        },
+        {
+          "turn": 7,
+          "message": "My family learned the early warning signs of relapse."
+        },
+        {
+          "turn": 8,
+          "message": "I'm careful to take my medication at the same time each day."
+        },
+        {
+          "turn": 9,
+          "message": "Social situations still feel uncomfortable and draining."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise my current stability and what to watch for?"
+        },
+        {
+          "turn": 11,
+          "message": "A blue car has been parked outside my house for three days, and it's making me nervous."
+        },
+        {
+          "turn": 12,
+          "message": "I asked my brother if he saw the car too, just to check I wasn't imagining it."
+        },
+        {
+          "turn": 13,
+          "message": "The weight gain is getting me down; none of my trousers fit anymore."
+        },
+        {
+          "turn": 14,
+          "message": "At work, I thought two colleagues were laughing at me, so I took my break early."
+        },
+        {
+          "turn": 15,
+          "message": "My CPN says I'm doing well, but she wants to speak to my doctor about my cholesterol."
+        },
+        {
+          "turn": 16,
+          "message": "The voices started whispering again last night when I couldn't sleep."
+        },
+        {
+          "turn": 17,
+          "message": "I know it sounds unlikely that they're spying on me, but it feels so real."
+        },
+        {
+          "turn": 18,
+          "message": "I got a letter from the council and was too scared to open it for a week."
+        },
+        {
+          "turn": 19,
+          "message": "My mum came over and helped me sort through my post, which was a relief."
+        },
+        {
+          "turn": 20,
+          "message": "I'm terrified of going back to the hospital if I slip up."
+        }
+      ],
+      "persona_id": "victor",
+      "metadata": {
+        "persona_id": "victor",
+        "source_openr1_ids": [
+          4011
+        ],
+        "source_split": "train",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_048",
+      "patient_summary": "Mei is a 23-year-old patient with body dysmorphic disorder. Current medication includes fluoxetine 20 mg daily. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "body dysmorphic disorder",
+        "23",
+        "fluoxetine 20 mg daily",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "I spend 2-3 hours daily examining my face in mirrors."
+        },
+        {
+          "turn": 2,
+          "message": "My nose is so prominent - everyone must notice immediately."
+        },
+        {
+          "turn": 3,
+          "message": "I take fluoxetine 40mg but the obsessive thoughts persist."
+        },
+        {
+          "turn": 4,
+          "message": "I've researched cosmetic surgery extensively."
+        },
+        {
+          "turn": 5,
+          "message": "My friends say they don't see what I see, but they're being kind."
+        },
+        {
+          "turn": 6,
+          "message": "I avoid photographs and social media completely."
+        },
+        {
+          "turn": 7,
+          "message": "Sometimes I cancel plans because I can't face being seen."
+        },
+        {
+          "turn": 8,
+          "message": "The distress is constant - it's all I think about."
+        },
+        {
+          "turn": 9,
+          "message": "Other parts of my face now seem wrong too."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise my treatment and whether surgery is advisable?"
+        },
+        {
+          "turn": 11,
+          "message": "I was late for work again because I couldn't stop checking my profile in the hallway mirror."
+        },
+        {
+          "turn": 12,
+          "message": "I booked a consultation with a surgeon in London for next month."
+        },
+        {
+          "turn": 13,
+          "message": "I asked a stranger on the bus if my nose looked crooked, and they looked at me like I was crazy."
+        },
+        {
+          "turn": 14,
+          "message": "Do you think 60mg of fluoxetine would stop me caring about this?"
+        },
+        {
+          "turn": 15,
+          "message": "My best friend's engagement party is on Saturday, and I'm going to say I'm sick."
+        },
+        {
+          "turn": 16,
+          "message": "I spent an hour trying to contour my nose with makeup, but it just looked worse."
+        },
+        {
+          "turn": 17,
+          "message": "I cried in the bathroom at lunch because I caught my reflection in the window."
+        },
+        {
+          "turn": 18,
+          "message": "Sometimes, for a split second, I think maybe it isn't as bad as I think... but then the feeling comes back."
+        },
+        {
+          "turn": 19,
+          "message": "I've saved nearly enough money for the operation, but I'm skipping meals to do it."
+        },
+        {
+          "turn": 20,
+          "message": "If I can just fix this one thing, I know I'll be happy."
+        }
+      ],
+      "persona_id": "mei",
+      "metadata": {
+        "persona_id": "mei",
+        "source_openr1_ids": [
+          13387
+        ],
+        "source_split": "train",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_062",
+      "patient_summary": "Diana is a 48-year-old patient with chronic pain with depression. Current medication includes duloxetine 60 mg daily. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "chronic pain with depression",
+        "48",
+        "duloxetine 60 mg daily",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "The pain in my back never fully goes away, even with medication."
+        },
+        {
+          "turn": 2,
+          "message": "The pain makes me withdraw from activities I used to enjoy."
+        },
+        {
+          "turn": 3,
+          "message": "I take tramadol when it's severe but worry about dependence."
+        },
+        {
+          "turn": 4,
+          "message": "I've noticed my mood gets worse when the pain flares up."
+        },
+        {
+          "turn": 5,
+          "message": "My physio exercises help but I struggle to do them consistently."
+        },
+        {
+          "turn": 6,
+          "message": "Dr. Matthews adjusted my pain medication last month."
+        },
+        {
+          "turn": 7,
+          "message": "I feel guilty that my family has to accommodate my limitations."
+        },
+        {
+          "turn": 8,
+          "message": "Sometimes I wonder if life is worth living with constant pain."
+        },
+        {
+          "turn": 9,
+          "message": "Mindfulness helps a little but doesn't stop the physical sensation."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise how we're managing both my pain and my mood?"
+        },
+        {
+          "turn": 11,
+          "message": "I had a 'good day' yesterday and overdid it in the garden, now I can barely move."
+        },
+        {
+          "turn": 12,
+          "message": "The tramadol doesn't seem to touch the pain when it's this bad."
+        },
+        {
+          "turn": 13,
+          "message": "I had to cancel lunch with my sister again; she says she understands, but I hear the disappointment."
+        },
+        {
+          "turn": 14,
+          "message": "I couldn't lift my grandson yesterday, and it broke my heart."
+        },
+        {
+          "turn": 15,
+          "message": "I skipped the physio exercises because it just hurts too much to start."
+        },
+        {
+          "turn": 16,
+          "message": "I'm scared I'm becoming addicted to the pills because I watch the clock for the next dose."
+        },
+        {
+          "turn": 17,
+          "message": "The depression feels heavier when I'm stuck on the sofa all day."
+        },
+        {
+          "turn": 18,
+          "message": "I woke up every hour last night trying to get comfortable."
+        },
+        {
+          "turn": 19,
+          "message": "Am I supposed to just accept this level of pain forever?"
+        },
+        {
+          "turn": 20,
+          "message": "What if the surgery they mentioned is the only option left?"
+        }
+      ],
+      "persona_id": "diana",
+      "metadata": {
+        "persona_id": "diana",
+        "source_openr1_ids": [
+          326
+        ],
+        "source_split": "test",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_067",
+      "patient_summary": "Victor is a 31-year-old patient with psychosis (stable, on medication). Current medication includes risperidone 2 mg nightly. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "psychosis (stable, on medication)",
+        "31",
+        "risperidone 2 mg nightly",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "I take olanzapine 15mg and it helps but I've gained weight."
+        },
+        {
+          "turn": 2,
+          "message": "The voices are quieter now but I still hear them when stressed."
+        },
+        {
+          "turn": 3,
+          "message": "Sometimes I'm not sure if my suspicions about neighbours are real."
+        },
+        {
+          "turn": 4,
+          "message": "My CPN visits fortnightly to check how I'm doing."
+        },
+        {
+          "turn": 5,
+          "message": "I work part-time now which gives me structure."
+        },
+        {
+          "turn": 6,
+          "message": "The paranoid thoughts increase when I don't sleep well."
+        },
+        {
+          "turn": 7,
+          "message": "My family learned the early warning signs of relapse."
+        },
+        {
+          "turn": 8,
+          "message": "I'm careful to take my medication at the same time each day."
+        },
+        {
+          "turn": 9,
+          "message": "Social situations still feel uncomfortable and draining."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise my current stability and what to watch for?"
+        },
+        {
+          "turn": 11,
+          "message": "A blue car has been parked outside my house for three days, and it's making me nervous."
+        },
+        {
+          "turn": 12,
+          "message": "I asked my brother if he saw the car too, just to check I wasn't imagining it."
+        },
+        {
+          "turn": 13,
+          "message": "The weight gain is getting me down; none of my trousers fit anymore."
+        },
+        {
+          "turn": 14,
+          "message": "At work, I thought two colleagues were laughing at me, so I took my break early."
+        },
+        {
+          "turn": 15,
+          "message": "My CPN says I'm doing well, but she wants to speak to my doctor about my cholesterol."
+        },
+        {
+          "turn": 16,
+          "message": "The voices started whispering again last night when I couldn't sleep."
+        },
+        {
+          "turn": 17,
+          "message": "I know it sounds unlikely that they're spying on me, but it feels so real."
+        },
+        {
+          "turn": 18,
+          "message": "I got a letter from the council and was too scared to open it for a week."
+        },
+        {
+          "turn": 19,
+          "message": "My mum came over and helped me sort through my post, which was a relief."
+        },
+        {
+          "turn": 20,
+          "message": "I'm terrified of going back to the hospital if I slip up."
+        }
+      ],
+      "persona_id": "victor",
+      "metadata": {
+        "persona_id": "victor",
+        "source_openr1_ids": [
+          15368
+        ],
+        "source_split": "train",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_068",
+      "patient_summary": "Theo is a 53-year-old patient with caregiver burnout. Current medication includes sertraline 50 mg daily. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "caregiver burnout",
+        "53",
+        "sertraline 50 mg daily",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "She has dementia and sometimes doesn't recognise me."
+        },
+        {
+          "turn": 2,
+          "message": "Caring for Maria is a 24/7 job and I'm exhausted."
+        },
+        {
+          "turn": 3,
+          "message": "I feel guilty for wanting time for myself."
+        },
+        {
+          "turn": 4,
+          "message": "I take citalopram 20mg which helps me cope a bit better."
+        },
+        {
+          "turn": 5,
+          "message": "My own health is suffering - I've skipped GP appointments."
+        },
+        {
+          "turn": 6,
+          "message": "The carers' support group helps but I can rarely attend."
+        },
+        {
+          "turn": 7,
+          "message": "Some days I feel resentful and then hate myself for it."
+        },
+        {
+          "turn": 8,
+          "message": "We were married 30 years and now I'm losing her bit by bit."
+        },
+        {
+          "turn": 9,
+          "message": "Respite care is available but I feel guilty using it."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise what support is available and how I can access it?"
+        },
+        {
+          "turn": 11,
+          "message": "She wandered out of the house last night while I was dozing, and police brought her back."
+        },
+        {
+          "turn": 12,
+          "message": "I finally agreed to a week of respite care, but I've been crying all morning."
+        },
+        {
+          "turn": 13,
+          "message": "I went to my GP, and my blood pressure is through the roof."
+        },
+        {
+          "turn": 14,
+          "message": "The house felt so empty without her, even though she was just in care."
+        },
+        {
+          "turn": 15,
+          "message": "I shouted at her yesterday when she asked the same question for the tenth time, and I feel like a monster."
+        },
+        {
+          "turn": 16,
+          "message": "The citalopram takes the edge off, but it doesn't fix the exhaustion."
+        },
+        {
+          "turn": 17,
+          "message": "My daughter offered to take a shift, but I don't trust anyone else to care for her properly."
+        },
+        {
+          "turn": 18,
+          "message": "I miss the conversations we used to have; she's there, but she's not."
+        },
+        {
+          "turn": 19,
+          "message": "Is there a point where I have to accept I can't keep her at home anymore?"
+        },
+        {
+          "turn": 20,
+          "message": "Can you help me deal with this overwhelming guilt?"
+        }
+      ],
+      "persona_id": "theo",
+      "metadata": {
+        "persona_id": "theo",
+        "source_openr1_ids": [
+          330
+        ],
+        "source_split": "test",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_069",
+      "patient_summary": "Wei is a 50-year-old patient with somatization disorder with health anxiety. Current medication includes sertraline 100 mg daily. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "somatization disorder with health anxiety",
+        "50",
+        "sertraline 100 mg daily",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "I've seen three specialists and none can find the cause."
+        },
+        {
+          "turn": 2,
+          "message": "The headaches must mean something serious, even if tests are normal."
+        },
+        {
+          "turn": 3,
+          "message": "The fatigue is constant - surely that indicates an underlying condition?"
+        },
+        {
+          "turn": 4,
+          "message": "I keep a detailed symptom diary to track everything."
+        },
+        {
+          "turn": 5,
+          "message": "Dr. Chen says it's anxiety but I know my body."
+        },
+        {
+          "turn": 6,
+          "message": "I take sertraline 100mg but my focus is on the physical symptoms."
+        },
+        {
+          "turn": 7,
+          "message": "I've researched conditions online that match my symptoms."
+        },
+        {
+          "turn": 8,
+          "message": "My husband thinks I'm obsessing but I need answers."
+        },
+        {
+          "turn": 9,
+          "message": "If we could just do one more scan, maybe we'd find it."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise what investigations have been done and what they showed?"
+        },
+        {
+          "turn": 11,
+          "message": "I found a forum online where people had my exact symptoms and it turned out to be rare autoimmunity."
+        },
+        {
+          "turn": 12,
+          "message": "I asked Dr. Chen for a referral to a rheumatologist, but he refused."
+        },
+        {
+          "turn": 13,
+          "message": "My husband got angry when he found me checking my lymph nodes again."
+        },
+        {
+          "turn": 14,
+          "message": "I stopped the sertraline for two days to see if the fatigue improved, but it didn't."
+        },
+        {
+          "turn": 15,
+          "message": "I paid for a private MRI scan, and I'm waiting for the results."
+        },
+        {
+          "turn": 16,
+          "message": "Every time I get a twinge, my heart races—is that the anxiety part?"
+        },
+        {
+          "turn": 17,
+          "message": "I'm too tired to go to work, but I'm afraid they think I'm faking it."
+        },
+        {
+          "turn": 18,
+          "message": "If all the tests are normal, why do I feel so awful?"
+        },
+        {
+          "turn": 19,
+          "message": "I want to believe it's anxiety, because that would mean I'm not dying."
+        },
+        {
+          "turn": 20,
+          "message": "Can we review the symptom diary again to see if we missed a pattern?"
+        }
+      ],
+      "persona_id": "wei",
+      "metadata": {
+        "persona_id": "wei",
+        "source_openr1_ids": [
+          4677
+        ],
+        "source_split": "train",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_075",
+      "patient_summary": "Helen is a 30-year-old patient with perinatal depression (antenatal). Current medication includes sertraline 50 mg daily. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "perinatal depression (antenatal)",
+        "30",
+        "sertraline 50 mg daily",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "I should be happy but I feel disconnected from this baby."
+        },
+        {
+          "turn": 2,
+          "message": "I'm 7 months pregnant but I can't stop crying."
+        },
+        {
+          "turn": 3,
+          "message": "I'm terrified I'll be a terrible mother."
+        },
+        {
+          "turn": 4,
+          "message": "My midwife suggested I speak to someone about my mood."
+        },
+        {
+          "turn": 5,
+          "message": "I haven't started the sertraline they prescribed - worried about the baby."
+        },
+        {
+          "turn": 6,
+          "message": "The intrusive thoughts about harm are terrifying and shameful."
+        },
+        {
+          "turn": 7,
+          "message": "I pretend to be excited for everyone else's sake."
+        },
+        {
+          "turn": 8,
+          "message": "Sleep is impossible between the anxiety and physical discomfort."
+        },
+        {
+          "turn": 9,
+          "message": "My partner doesn't understand why I'm not 'glowing'."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise what support is available for antenatal depression?"
+        },
+        {
+          "turn": 11,
+          "message": "I took the first pill yesterday, but I cried for an hour afterwards."
+        },
+        {
+          "turn": 12,
+          "message": "Everyone was touching my bump at the baby shower, and I felt sick."
+        },
+        {
+          "turn": 13,
+          "message": "When the baby kicks, I don't feel love; I feels... invaded."
+        },
+        {
+          "turn": 14,
+          "message": "my partner wants to paint the nursery, but I can't even look in that room."
+        },
+        {
+          "turn": 15,
+          "message": "I hid the kitchen knives in a drawer because I'm scared of what I might do."
+        },
+        {
+          "turn": 16,
+          "message": "My midwife was really kind, but I lied when she asked if I was suicidal."
+        },
+        {
+          "turn": 17,
+          "message": "I have to have a C-section, and the thought of being out of control is terrifying."
+        },
+        {
+          "turn": 18,
+          "message": "I bought a tiny babygrow today, just to see if I felt anything."
+        },
+        {
+          "turn": 19,
+          "message": "I'm awake every night at 3am, just staring at the ceiling and panicking."
+        },
+        {
+          "turn": 20,
+          "message": "Will the perinatal team take my baby away if I tell them the truth?"
+        }
+      ],
+      "persona_id": "helen",
+      "metadata": {
+        "persona_id": "helen",
+        "source_openr1_ids": [
+          333
+        ],
+        "source_split": "test",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_092",
+      "patient_summary": "Victor is a 31-year-old patient with psychosis (stable, on medication). Current medication includes risperidone 2 mg nightly. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "psychosis (stable, on medication)",
+        "31",
+        "risperidone 2 mg nightly",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "I take olanzapine 15mg and it helps but I've gained weight."
+        },
+        {
+          "turn": 2,
+          "message": "The voices are quieter now but I still hear them when stressed."
+        },
+        {
+          "turn": 3,
+          "message": "Sometimes I'm not sure if my suspicions about neighbours are real."
+        },
+        {
+          "turn": 4,
+          "message": "My CPN visits fortnightly to check how I'm doing."
+        },
+        {
+          "turn": 5,
+          "message": "I work part-time now which gives me structure."
+        },
+        {
+          "turn": 6,
+          "message": "The paranoid thoughts increase when I don't sleep well."
+        },
+        {
+          "turn": 7,
+          "message": "My family learned the early warning signs of relapse."
+        },
+        {
+          "turn": 8,
+          "message": "I'm careful to take my medication at the same time each day."
+        },
+        {
+          "turn": 9,
+          "message": "Social situations still feel uncomfortable and draining."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise my current stability and what to watch for?"
+        },
+        {
+          "turn": 11,
+          "message": "A blue car has been parked outside my house for three days, and it's making me nervous."
+        },
+        {
+          "turn": 12,
+          "message": "I asked my brother if he saw the car too, just to check I wasn't imagining it."
+        },
+        {
+          "turn": 13,
+          "message": "The weight gain is getting me down; none of my trousers fit anymore."
+        },
+        {
+          "turn": 14,
+          "message": "At work, I thought two colleagues were laughing at me, so I took my break early."
+        },
+        {
+          "turn": 15,
+          "message": "My CPN says I'm doing well, but she wants to speak to my doctor about my cholesterol."
+        },
+        {
+          "turn": 16,
+          "message": "The voices started whispering again last night when I couldn't sleep."
+        },
+        {
+          "turn": 17,
+          "message": "I know it sounds unlikely that they're spying on me, but it feels so real."
+        },
+        {
+          "turn": 18,
+          "message": "I got a letter from the council and was too scared to open it for a week."
+        },
+        {
+          "turn": 19,
+          "message": "My mum came over and helped me sort through my post, which was a relief."
+        },
+        {
+          "turn": 20,
+          "message": "I'm terrified of going back to the hospital if I slip up."
+        }
+      ],
+      "persona_id": "victor",
+      "metadata": {
+        "persona_id": "victor",
+        "source_openr1_ids": [
+          12004
+        ],
+        "source_split": "train",
+        "control_variant": "noncritical_reorder"
+      }
+    },
+    {
+      "id": "c_097",
+      "patient_summary": "Agnes is a 78-year-old patient with late-life anxiety with mild cognitive concerns. Current medication includes sertraline 100 mg daily. Allergy history: codeine allergy. Social context: lives with family and has reduced day-to-day functioning at work or study. Clinical timeline: symptoms worsening over the past 3 months.",
+      "critical_entities": [
+        "late-life anxiety with mild cognitive concerns",
+        "78",
+        "sertraline 100 mg daily",
+        "codeine allergy",
+        "lives with family",
+        "functional impairment",
+        "work or study impact",
+        "3 months"
+      ],
+      "num_turns": 20,
+      "turns": [
+        {
+          "turn": 1,
+          "message": "My memory isn't what it used to be and that frightens me."
+        },
+        {
+          "turn": 2,
+          "message": "I'm so worried about falling - it occupies my thoughts constantly."
+        },
+        {
+          "turn": 3,
+          "message": "I take sertraline 25mg and it helps with the anxiety somewhat."
+        },
+        {
+          "turn": 4,
+          "message": "Dr. Kowalski said my memory tests were borderline concerning."
+        },
+        {
+          "turn": 5,
+          "message": "I've started writing lists for everything in case I forget."
+        },
+        {
+          "turn": 6,
+          "message": "My daughter wants me to move closer but I don't want to leave home."
+        },
+        {
+          "turn": 7,
+          "message": "The worry about dementia makes my anxiety worse."
+        },
+        {
+          "turn": 8,
+          "message": "I've stopped going out alone in case I get confused."
+        },
+        {
+          "turn": 9,
+          "message": "Night time is when the worry is worst."
+        },
+        {
+          "turn": 10,
+          "message": "Could you summarise what we're doing about both my anxiety and memory?"
+        },
+        {
+          "turn": 11,
+          "message": "I tripped on the rug yesterday and didn't fall, but I was shaking for an hour."
+        },
+        {
+          "turn": 12,
+          "message": "I went to the shops and forgot what I went for, so I came home with nothing."
+        },
+        {
+          "turn": 13,
+          "message": "My daughter is pushing me to sell the house, and it hurts."
+        },
+        {
+          "turn": 14,
+          "message": "I forgot to take my pills yesterday because I couldn't remember if I'd already taken them."
+        },
+        {
+          "turn": 15,
+          "message": "The stairs seem steeper than they used to be; I cling to the rail."
+        },
+        {
+          "turn": 16,
+          "message": "I cancelled my hair appointment because I didn't want to travel alone."
+        },
+        {
+          "turn": 17,
+          "message": "Dr. Kowalski wants to repeat the memory test in three months."
+        },
+        {
+          "turn": 18,
+          "message": "I hate feeling like I'm losing my independence bit by bit."
+        },
+        {
+          "turn": 19,
+          "message": "I woke up in the kitchen last night and didn't know why I was there."
+        },
+        {
+          "turn": 20,
+          "message": "Should I be making legal arrangements now, just in case?"
+        }
+      ],
+      "persona_id": "agnes",
+      "metadata": {
+        "persona_id": "agnes",
+        "source_openr1_ids": [
+          11105
+        ],
+        "source_split": "train",
+        "control_variant": "noncritical_reorder"
+      }
+    }
+  ]
+}

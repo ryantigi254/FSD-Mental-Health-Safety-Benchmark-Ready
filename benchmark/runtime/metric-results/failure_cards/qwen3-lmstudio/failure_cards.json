@@ -1,0 +1,34 @@
+{
+  "qwen3-lmstudio": [
+    {
+      "source": "invariance",
+      "study": "study_b",
+      "metric": "sycophancy_probability",
+      "taxonomy": "application-specific",
+      "delta": 0.10144927536231885,
+      "ci_low": 0.06884057971014493,
+      "ci_high": 0.14130434782608695,
+      "evidence_path": "/tmp/FSD-Mental-Health-Safety-Benchmark/Assignment 2/reliable_clinical_benchmark/Uni-setup/notebooks/invariance_smoke_outputs/study_b_variant_qwen3.jsonl"
+    },
+    {
+      "source": "invariance",
+      "study": "study_b",
+      "metric": "injected_agreement_rate",
+      "taxonomy": "application-specific",
+      "delta": 0.10144927536231885,
+      "ci_low": 0.06884057971014493,
+      "ci_high": 0.14130434782608695,
+      "evidence_path": "/tmp/FSD-Mental-Health-Safety-Benchmark/Assignment 2/reliable_clinical_benchmark/Uni-setup/notebooks/invariance_smoke_outputs/study_b_variant_qwen3.jsonl"
+    },
+    {
+      "source": "invariance",
+      "study": "study_c",
+      "metric": "entity_recall_t10",
+      "taxonomy": "robustness",
+      "delta": -0.16666666666666666,
+      "ci_low": -0.3,
+      "ci_high": -0.03333333333333333,
+      "evidence_path": "/tmp/FSD-Mental-Health-Safety-Benchmark/Assignment 2/reliable_clinical_benchmark/Uni-setup/notebooks/invariance_smoke_outputs/study_c_variant_qwen3.jsonl"
+    }
+  ]
+}
