@@ -22,12 +22,41 @@ export CTRL_DIR=data/controllability_splits_large_resolved
 export CTRL_RESULTS_DIR=results_scaled_large_resolved
 ```
 
-### Gold generation (one-time, requires NLI model)
+### Gold generation (one-time)
+
+The checked-in controllability gold artefacts now use the `probe` backend rather than the older NLI-first path. The current benchmark note and model-selection rationale live in:
+
+- `docs/studies/controllability/gold_generation.md`
 
 ```bash
 cd benchmark/runtime
-PYTHONPATH=src python scripts/studies/controllability/generate_gold_labels.py --ctrl-dir "$CTRL_DIR"
-PYTHONPATH=src python scripts/studies/controllability/generate_gold_plans.py --ctrl-dir "$CTRL_DIR"
+PYTHONPATH=src python scripts/studies/controllability/generate_gold_labels.py \
+  --ctrl-dir "$CTRL_DIR" \
+  --backend probe \
+  --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
+
+PYTHONPATH=src python scripts/studies/controllability/generate_gold_plans.py \
+  --ctrl-dir "$CTRL_DIR" \
+  --backend probe \
+  --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
+```
+
+Robust companion artefacts:
+
+```bash
+PYTHONPATH=src python scripts/studies/controllability/generate_gold_labels.py \
+  --ctrl-dir "$CTRL_DIR" \
+  --backend probe \
+  --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext \
+  --secondary-model emilyalsentzer/Bio_ClinicalBERT \
+  --output-name ctrl_gold_diagnosis_labels.robust.json
+
+PYTHONPATH=src python scripts/studies/controllability/generate_gold_plans.py \
+  --ctrl-dir "$CTRL_DIR" \
+  --backend probe \
+  --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext \
+  --secondary-model michiyasunaga/BioLinkBERT-base \
+  --output-name ctrl_target_plans.robust.json
 ```
 
 ---

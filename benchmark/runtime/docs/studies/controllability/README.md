@@ -20,15 +20,25 @@ The benchmark-specific controllability framing in this folder is adapted from:
 
 ```bash
 cd benchmark/runtime
-PYTHONPATH=src python scripts/studies/controllability/generate_gold_labels.py
+PYTHONPATH=src python scripts/studies/controllability/generate_gold_labels.py \
+    --ctrl-dir data/controllability_splits \
+    --backend probe \
+    --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
 ```
 
 1. Generate controllability gold plans:
 
 ```bash
 cd benchmark/runtime
-PYTHONPATH=src python scripts/studies/controllability/generate_gold_plans.py
+PYTHONPATH=src python scripts/studies/controllability/generate_gold_plans.py \
+    --ctrl-dir data/controllability_splits \
+    --backend probe \
+    --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
 ```
+
+The canonical gold-generation note, including the benchmark evidence behind the model choice, lives in:
+
+- `docs/studies/controllability/gold_generation.md`
 
 ## Unified Runner
 

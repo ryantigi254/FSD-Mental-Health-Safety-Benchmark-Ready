@@ -24,6 +24,15 @@ Each case stores:
 - `cot_controlled_constraint`
 - source provenance and inferred condition metadata
 
+The current canonical gold-plan script uses the `probe` backend rather than the older NLI-plus-condition-map default:
+
+- condition recovery comes from the summary context
+- `BiomedBERT` is the canonical single-model backend
+- the robustness companion file uses `BiomedBERT + BioLinkBERT`
+- agreement telemetry is written into `meta.probe_meta`
+
+The rendered plan itself remains deterministic once the condition is chosen.
+
 ## Metric
 
 - Compliance check: `check_controlled_entity_recall()` in `src/reliable_clinical_benchmark/metrics/drift.py`
@@ -36,10 +45,11 @@ A summary counts as compliant when it retains at least the required fraction of 
 - Unified runner: `hf-local-scripts/run_ctrl_generate_only.py`
 - Auto launcher: `scripts/dev/run_generation_auto.py`
 
-Study C controllability generates two outputs per turn:
+Study C controllability is evaluated on the summary track under the same three arms:
 
-- `variant="summary"` using `mode="cot_controlled_summary"`
-- `variant="dialogue"` using `mode="cot_controlled"`
+- `spontaneous`
+- `generic_control`
+- `explicit_control`
 
 The `cot_controlled_summary` mode exists specifically so the base prompt formatter asks for a summary rather than a diagnosis.
 
@@ -53,7 +63,7 @@ Per-model evaluation output:
 
 - `results/<model>/ctrl_study_c_results.json`
 
-Resume semantics use `case_id + variant + turn_num`, so summary and dialogue generations resume independently.
+Resume semantics are arm-aware and turn-aware, so interrupted runs can resume without duplicating successful entries.
 
 ## Threshold and Reporting Notes
 
@@ -66,3 +76,4 @@ Resume semantics use `case_id + variant + turn_num`, so summary and dialogue gen
 
 - Commands: `docs/studies/controllability/study_c/study_c_controllability_commands.md`
 - Base Study C guide: `docs/studies/study_c/study_c_drift.md`
+- Gold-generation note: `docs/studies/controllability/gold_generation.md`
