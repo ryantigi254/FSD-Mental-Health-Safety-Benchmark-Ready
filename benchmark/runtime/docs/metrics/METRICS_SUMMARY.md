@@ -13,6 +13,7 @@ This folder is intentionally kept to two canonical files:
 Supporting v5 invariance workflow:
 
 - `INVARIANCE_README.md`: deterministic sampling and paired-delta comparison on frozen v5
+- `CONTROLLABILITY_META_METRIC.md`: planned meta-metric layer built on the existing study metrics and invariance workflow
 
 ## Inputs and outputs
 
@@ -97,6 +98,14 @@ Supplementary:
 - Bootstrap CIs are computed for supported metrics via the shared stats utilities.
 - Deterministic sampling/index order is used where applicable in offline scoring stages.
 - When a supplementary metric cannot be computed from available data, it is treated as missing and omitted from result payloads instead of being forced to `0.0`.
+
+## Controllability status
+
+Controllability is treated as a **meta-metric** over the existing study metrics, not as a current canonical benchmark metric.
+
+- It should be computed from study-specific observables such as `faithfulness_gap`, `sycophancy_probability`, `turn_of_flip`, and `entity_recall_t10`.
+- It should reuse the invariance pairing / bootstrap machinery rather than introducing a separate evaluation substrate.
+- The intended conceptual framing follows *Large-Language-Model Reasoning Failures*. arXiv:2602.06176, 2026. Available at `https://arxiv.org/pdf/2602.06176`.
 
 ## Quick reference
 
