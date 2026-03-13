@@ -8,7 +8,7 @@
 - Gold diagnosis labels and target plans are probe-backed, weakly supervised artefacts.
 - Robust `.robust.json` files are diagnostic appendices and are not release-gating inputs.
 - Gate status: `ready`
-- Review status: `review blockers present`
-- Package release status: `blocked`
+- Review status: `all studies acceptable`
+- Package release status: `ready`
 
 The package remains blocked unless every study is fully `ACCEPTABLE` and every stage-2 gate passes.

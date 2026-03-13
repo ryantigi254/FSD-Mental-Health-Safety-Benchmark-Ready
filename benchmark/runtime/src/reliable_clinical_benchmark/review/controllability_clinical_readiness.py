@@ -15,10 +15,11 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[3]
 DATA_ROOT = ROOT / "data"
 DOCS_ROOT = ROOT / "docs"
+REVIEW_SCRIPT_ROOT = ROOT / "scripts" / "studies" / "controllability_review"
 
 DEFAULT_CTRL_DIR = DATA_ROOT / "controllability_splits_large_resolved"
 DEFAULT_SMALL_CTRL_DIR = DATA_ROOT / "controllability_splits"
-DEFAULT_RULES_PATH = DATA_ROOT / "verification" / "v4" / "rubric_rules_v2.json"
+DEFAULT_RULES_PATH = REVIEW_SCRIPT_ROOT / "rubric_rules_ctrl_study_a_c4_v2.json"
 DEFAULT_VERIFICATION_DIR = DATA_ROOT / "verification" / "controllability_v0.1_large_resolved"
 DEFAULT_PACKAGE_DIR = (
     DOCS_ROOT / "reports" / "clinician_package" / "controllability_v0.1_large_resolved"
@@ -56,6 +57,14 @@ def load_json(path: Path) -> Any:
 def write_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
+def serialise_path(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return str(resolved.relative_to(ROOT))
+    except ValueError:
+        return str(resolved)
 
 
 def normalise_items(payload: Any, preferred_keys: tuple[str, ...]) -> list[dict[str, Any]]:
@@ -329,8 +338,8 @@ def run_stage2_gates(
     return {
         "generated_at_utc": now_iso(),
         "version": "controllability_v0.1_large_resolved_stage2",
-        "ctrl_dir": str(ctrl_dir.resolve()),
-        "small_ctrl_dir": str(small_ctrl_dir.resolve()),
+        "ctrl_dir": serialise_path(ctrl_dir),
+        "small_ctrl_dir": serialise_path(small_ctrl_dir),
         "expected_counts": expected,
         "overall_passed": overall_passed,
         "release_status": "ready" if overall_passed else "blocked",
@@ -372,8 +381,8 @@ def _package_readme(
             "# Controllability Clinician-Readiness Package",
             "",
             f"- Release line: `controllability_v0.1_large_resolved`",
-            f"- Scope: large resolved controllability suite only at `{ctrl_dir}`",
-            f"- Verification root: `{verification_dir}`",
+            f"- Scope: large resolved controllability suite only at `{serialise_path(ctrl_dir)}`",
+            f"- Verification root: `{serialise_path(verification_dir)}`",
             f"- Review mode: deterministic review-first, no auto-repair or resampling",
             "- This package is separate from the base-study clinician-ready v0.3 line.",
             "- Gold diagnosis labels and target plans are probe-backed, weakly supervised artefacts.",
@@ -400,8 +409,8 @@ def write_package_manifest(
         "generated_at_utc": now_iso(),
         "version": version,
         "release_status": release_status,
-        "ctrl_dir": str(ctrl_dir.resolve()),
-        "verification_dir": str(verification_dir.resolve()),
+        "ctrl_dir": serialise_path(ctrl_dir),
+        "verification_dir": serialise_path(verification_dir),
         "files": [
             {
                 "file": path.name,

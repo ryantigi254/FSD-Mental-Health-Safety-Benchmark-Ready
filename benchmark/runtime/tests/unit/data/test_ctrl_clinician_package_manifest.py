@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import importlib.util
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -428,3 +429,68 @@ def test_preflight_blocked_semantics_and_outputs(tmp_path: Path, monkeypatch: py
     assert report["review_blockers"]
     assert (package_dir / "README.md").exists()
     assert (package_dir / "manifest.json").exists()
+
+
+@pytest.mark.unit
+def test_preflight_normalises_repo_relative_paths(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo_root = tmp_path / "repo"
+    runtime_root = repo_root / "benchmark" / "runtime"
+    runtime_root.mkdir(parents=True)
+    ctrl_dir = runtime_root / "ctrl"
+    verification_dir = runtime_root / "verification"
+    package_dir = runtime_root / "package"
+    _write_ctrl_fixture(ctrl_dir)
+    _write_review_outputs(verification_dir, blocked=False, gate_passed=True)
+
+    relative_ctrl = ctrl_dir.relative_to(repo_root)
+    relative_verification = verification_dir.relative_to(repo_root)
+    relative_package = package_dir.relative_to(repo_root)
+
+    module = _load_script_module(
+        "run_ctrl_sendoff_preflight_relative_paths",
+        "scripts/studies/controllability_review/run_ctrl_sendoff_preflight.py",
+    )
+
+    captured_commands: list[list[str]] = []
+
+    def _fake_run(cmd: list[str], cwd: Path) -> dict[str, object]:
+        captured_commands.append(cmd)
+        return {
+            "command": " ".join(cmd),
+            "exit_code": 0,
+            "stdout": "ok",
+            "stderr": "",
+            "passed": True,
+        }
+
+    monkeypatch.setattr(module, "_run", _fake_run)
+
+    original_cwd = Path.cwd()
+    try:
+        os.chdir(repo_root)
+        exit_code = module.main(
+            [
+                "--ctrl-dir",
+                str(relative_ctrl),
+                "--verification-dir",
+                str(relative_verification),
+                "--package-dir",
+                str(relative_package),
+            ]
+        )
+    finally:
+        os.chdir(original_cwd)
+
+    assert exit_code == 0
+    assert captured_commands
+    for command in captured_commands[:3]:
+        assert str(ctrl_dir.resolve()) in command
+        assert str(verification_dir.resolve()) in command
+    assert str(module.DEFAULT_RULES_PATH.resolve()) in captured_commands[0]
+    report = json.loads((package_dir / "sendoff_preflight_report.json").read_text(encoding="utf-8"))
+    assert report["release_status"] == "ready"
+    assert report["ctrl_dir"] == str(ctrl_dir.resolve())
+    assert report["verification_dir"] == str(verification_dir.resolve())
+    assert report["package_dir"] == str(package_dir.resolve())
