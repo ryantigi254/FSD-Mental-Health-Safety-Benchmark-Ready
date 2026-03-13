@@ -17,6 +17,7 @@ if str(SRC_DIR) not in sys.path:
 from reliable_clinical_benchmark.invariance import (
     DEFAULT_V5_ROOT,
     compare_invariance_runs,
+    study_cli_choices,
 )
 
 
@@ -25,7 +26,7 @@ def main() -> int:
     parser.add_argument(
         "--study",
         required=True,
-        choices=["study_a", "study_b", "study_b_multi_turn", "study_c"],
+        choices=list(study_cli_choices()),
         help="Study to compare.",
     )
     parser.add_argument("--base-cache", type=Path, required=True, help="Baseline cache JSONL path.")
@@ -57,16 +58,20 @@ def main() -> int:
     parser.add_argument("--out", type=Path, required=True, help="Output JSON path.")
     args = parser.parse_args()
 
-    comparison = compare_invariance_runs(
-        study=args.study,
-        base_cache=args.base_cache.resolve(),
-        variant_cache=args.variant_cache.resolve(),
-        data_root=args.data_root.resolve(),
-        n_resamples=args.bootstrap_resamples,
-        seed=args.seed,
-        use_nli=args.use_nli,
-        nli_stride=args.nli_stride,
-    )
+    try:
+        comparison = compare_invariance_runs(
+            study=args.study,
+            base_cache=args.base_cache.resolve(),
+            variant_cache=args.variant_cache.resolve(),
+            data_root=args.data_root.resolve(),
+            n_resamples=args.bootstrap_resamples,
+            seed=args.seed,
+            use_nli=args.use_nli,
+            nli_stride=args.nli_stride,
+        )
+    except ValueError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(comparison, indent=2) + "\n", encoding="utf-8")

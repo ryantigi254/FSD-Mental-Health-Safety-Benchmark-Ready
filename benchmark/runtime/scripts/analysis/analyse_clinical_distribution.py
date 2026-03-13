@@ -14,7 +14,11 @@ SRC_DIR = RUNTIME_ROOT / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from reliable_clinical_benchmark.invariance import DEFAULT_V5_ROOT, analyse_distribution
+from reliable_clinical_benchmark.invariance import (
+    DEFAULT_V5_ROOT,
+    analyse_distribution,
+    study_cli_choices,
+)
 
 
 def main() -> int:
@@ -22,7 +26,7 @@ def main() -> int:
     parser.add_argument(
         "--study",
         required=True,
-        choices=["study_a", "study_b", "study_b_multi_turn", "study_c"],
+        choices=list(study_cli_choices()),
         help="Study to summarise.",
     )
     parser.add_argument(

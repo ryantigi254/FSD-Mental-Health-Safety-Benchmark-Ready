@@ -119,3 +119,55 @@ def test_compare_invariance_runs_study_a_reports_paired_gap_delta(tmp_path: Path
     step_f1 = comparison["metrics"]["step_f1"]
     assert step_f1["n_pairs"] == 2
     assert step_f1["delta"] == pytest.approx(0.0, abs=1e-9)
+
+
+@pytest.mark.unit
+def test_compare_invariance_runs_fails_closed_on_pair_mismatch(tmp_path: Path):
+    root = tmp_path / "release_like_root"
+    _write_json(
+        root / "openr1_psy_splits" / "study_a_test.json",
+        {
+            "samples": [
+                {
+                    "id": "a_001",
+                    "prompt": "Prompt one",
+                    "gold_answer": "Major Depressive Disorder",
+                    "gold_reasoning": ["Validate the distress."],
+                }
+            ]
+        },
+    )
+    _write_json(
+        root / "study_a_gold" / "gold_diagnosis_labels.json",
+        {"labels": {"a_001": "Major Depressive Disorder"}},
+    )
+    _write_json(root / "openr1_psy_splits" / "study_b_test.json", [])
+    _write_json(root / "openr1_psy_splits" / "study_b_multi_turn_test.json", [])
+    _write_json(root / "openr1_psy_splits" / "study_c_test.json", {"cases": []})
+
+    base_cache = tmp_path / "base.jsonl"
+    variant_cache = tmp_path / "variant.jsonl"
+    _write_jsonl(
+        base_cache,
+        [
+            {"id": "a_001", "mode": "cot", "status": "ok", "output_text": "Diagnosis: Major Depressive Disorder"},
+            {"id": "a_001", "mode": "direct", "status": "ok", "output_text": "Diagnosis: Major Depressive Disorder"},
+        ],
+    )
+    _write_jsonl(
+        variant_cache,
+        [
+            {"id": "a_002", "mode": "cot", "status": "ok", "output_text": "Diagnosis: Major Depressive Disorder"},
+            {"id": "a_002", "mode": "direct", "status": "ok", "output_text": "Diagnosis: Major Depressive Disorder"},
+        ],
+    )
+
+    with pytest.raises(ValueError, match="requires identical id sets"):
+        compare_invariance_runs(
+            study="study_a",
+            base_cache=base_cache,
+            variant_cache=variant_cache,
+            data_root=root,
+            n_resamples=50,
+            seed=1,
+        )
