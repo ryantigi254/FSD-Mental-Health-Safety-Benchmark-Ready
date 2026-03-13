@@ -31,7 +31,7 @@ from typing import Any, Callable, Dict, Iterable, List, Optional, Set
 
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[1]
-CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
+DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
 DEFAULT_BIAS_DATA_PATH = (
     RUNTIME_ROOT / "data" / "frozen_splits" / "v4_1_resampled" / "adversarial_bias" / "biased_vignettes.json"
 )
@@ -78,11 +78,11 @@ EXPLICIT_BIAS_PROMPT = (
     "Explain whether it is clinically relevant before your final answer."
 )
 
-STUDY_FILE_MAP = {
-    "ctrl_study_a": CTRL_DIR / "study_a_controllability_test.json",
-    "ctrl_study_b": CTRL_DIR / "study_b_controllability_test.json",
-    "ctrl_study_b_multi_turn": CTRL_DIR / "study_b_multi_turn_controllability_test.json",
-    "ctrl_study_c": CTRL_DIR / "study_c_controllability_test.json",
+STUDY_FILE_NAMES = {
+    "ctrl_study_a": "study_a_controllability_test.json",
+    "ctrl_study_b": "study_b_controllability_test.json",
+    "ctrl_study_b_multi_turn": "study_b_multi_turn_controllability_test.json",
+    "ctrl_study_c": "study_c_controllability_test.json",
 }
 
 CACHE_NAME_MAP = {
@@ -223,11 +223,15 @@ def _normalise_items(payload: Any) -> List[Dict[str, Any]]:
     raise TypeError(f"Unsupported payload type: {type(payload)!r}")
 
 
-def _load_items(study: str, data_path: Optional[Path]) -> List[Dict[str, Any]]:
+def _resolve_study_data_path(study: str, ctrl_dir: Path) -> Path:
+    return ctrl_dir / STUDY_FILE_NAMES[study]
+
+
+def _load_items(study: str, data_path: Optional[Path], ctrl_dir: Path) -> List[Dict[str, Any]]:
     if study == "ctrl_study_a_bias":
         path = data_path or DEFAULT_BIAS_DATA_PATH
     else:
-        path = data_path or STUDY_FILE_MAP[study]
+        path = data_path or _resolve_study_data_path(study, ctrl_dir)
     with path.open("r", encoding="utf-8") as handle:
         return _normalise_items(json.load(handle))
 
@@ -720,6 +724,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--cache-out", type=str, default=None)
     parser.add_argument("--data-path", type=str, default=None)
     parser.add_argument(
+        "--ctrl-dir",
+        type=str,
+        default=None,
+        help=(
+            "Directory containing controllability split files. "
+            "Defaults to benchmark/runtime/data/controllability_splits."
+        ),
+    )
+    parser.add_argument(
         "--workers",
         type=int,
         default=None,
@@ -745,6 +758,7 @@ def main() -> int:
 
     args = parse_args()
     study = _normalise_study_name(args.study)
+    ctrl_dir = Path(args.ctrl_dir) if args.ctrl_dir else DEFAULT_CTRL_DIR
 
     lmstudio_model_ids = {
         "qwen3_lmstudio",
@@ -777,10 +791,15 @@ def main() -> int:
         return get_model_runner(args.model_id, GenerationConfig(max_tokens=effective_max_tokens))
 
     runner = _runner_factory()
-    items = _load_items(study, Path(args.data_path) if args.data_path else None)
+    items = _load_items(
+        study,
+        Path(args.data_path) if args.data_path else None,
+        ctrl_dir,
+    )
     if args.max_cases:
         items = items[: args.max_cases]
     print(f"Study: {study}, Model: {args.model_id}, Items: {len(items)}")
+    print(f"Ctrl dir: {ctrl_dir}")
 
     output_dir = Path(args.output_dir) if args.output_dir else RUNTIME_ROOT / "results"
     if args.cache_out:
