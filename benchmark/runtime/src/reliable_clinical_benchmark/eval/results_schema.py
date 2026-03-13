@@ -203,6 +203,91 @@ class ControllabilityBenchmarkResultSchema:
         return result
 
 
+@dataclass
+class ControllabilityV2ArmResultSchema:
+    """Arm-aware controllability result block for one study arm."""
+
+    arm: str
+    primary_metric: Dict[str, Any]
+    task_metrics: Dict[str, Any]
+    counts: Dict[str, Any]
+    notes: Optional[list] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = asdict(self)
+        return {k: v for k, v in result.items() if v is not None}
+
+
+@dataclass
+class ControllabilityV2ArmDeltaSchema:
+    """Pairwise delta block between two controllability arms."""
+
+    from_arm: str
+    to_arm: str
+    n_pairs: int
+    metrics: Dict[str, Any]
+    notes: Optional[list] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = asdict(self)
+        return {k: v for k, v in result.items() if v is not None}
+
+
+@dataclass
+class ControllabilityV2StudyResultSchema:
+    """Structured arm-aware controllability result payload for one study."""
+
+    model: str
+    study: str
+    arms: Dict[str, ControllabilityV2ArmResultSchema]
+    pairwise_deltas: list
+    source_cache: Optional[str] = None
+    generated_at: Optional[str] = None
+    exclusions: Optional[Dict[str, Any]] = None
+    notes: Optional[list] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = {
+            "model": self.model,
+            "study": self.study,
+            "arms": {
+                arm_name: arm_result.to_dict() if hasattr(arm_result, "to_dict") else arm_result
+                for arm_name, arm_result in self.arms.items()
+            },
+            "pairwise_deltas": [
+                entry.to_dict() if hasattr(entry, "to_dict") else entry
+                for entry in self.pairwise_deltas
+            ],
+        }
+        if self.source_cache is not None:
+            result["source_cache"] = self.source_cache
+        if self.generated_at is not None:
+            result["generated_at"] = self.generated_at
+        if self.exclusions is not None:
+            result["exclusions"] = self.exclusions
+        if self.notes is not None:
+            result["notes"] = self.notes
+        return result
+
+
+@dataclass
+class ControllabilityV2BenchmarkResultSchema:
+    """Top-level v2 controllability summary across arm-aware studies."""
+
+    model: str
+    studies: Dict[str, Dict[str, Any]]
+    generated_at: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = {
+            "model": self.model,
+            "studies": self.studies,
+        }
+        if self.generated_at is not None:
+            result["generated_at"] = self.generated_at
+        return result
+
+
 def load_study_results(results_dir: str, model_name: str) -> Dict[str, Any]:
     """
     Load all study results for a model.
@@ -234,8 +319,19 @@ def load_controllability_results(results_dir: str, model_name: str) -> Dict[str,
     results_path = Path(results_dir) / model_name
     results = {}
 
-    for study in ("A", "B", "C"):
-        result_file = results_path / f"ctrl_study_{study.lower()}_results.json"
+    file_map = {
+        "A": "ctrl_study_a_results.json",
+        "A_bias": "ctrl_study_a_bias_results.json",
+        "B": "ctrl_study_b_results.json",
+        "B_multi_turn": "ctrl_study_b_multi_turn_results.json",
+        "C": "ctrl_study_c_results.json",
+    }
+
+    for study, filename in file_map.items():
+        result_file = results_path / filename
+        if not result_file.exists():
+            legacy_v2_file = results_path / filename.replace("ctrl_study_", "ctrl_v2_study_")
+            result_file = legacy_v2_file
         if result_file.exists():
             with open(result_file, "r", encoding="utf-8") as f:
                 results[study] = json.load(f)
@@ -243,6 +339,8 @@ def load_controllability_results(results_dir: str, model_name: str) -> Dict[str,
             results[study] = None
 
     summary_file = results_path / "controllability_summary.json"
+    if not summary_file.exists():
+        summary_file = results_path / "controllability_v2_summary.json"
     if summary_file.exists():
         with open(summary_file, "r", encoding="utf-8") as f:
             results["summary"] = json.load(f)
@@ -250,6 +348,12 @@ def load_controllability_results(results_dir: str, model_name: str) -> Dict[str,
         results["summary"] = None
 
     return results
+
+
+def load_controllability_v2_results(results_dir: str, model_name: str) -> Dict[str, Any]:
+    """Compatibility alias for loading canonical arm-aware controllability results."""
+
+    return load_controllability_results(results_dir, model_name)
 
 
 def compute_safety_score(results: Dict[str, Any]) -> float:

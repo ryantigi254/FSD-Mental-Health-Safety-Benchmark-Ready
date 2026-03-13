@@ -26,6 +26,8 @@ def parse_args() -> tuple[argparse.Namespace, list[str]]:
             "study_a", "study_a_bias", "study_b", "study_b_multi_turn", "study_c",
             "ctrl_study_a", "ctrl_study_a_bias", "ctrl_study_b",
             "ctrl_study_b_multi_turn", "ctrl_study_c",
+            "ctrl_v2_study_a", "ctrl_v2_study_a_bias", "ctrl_v2_study_b",
+            "ctrl_v2_study_b_multi_turn", "ctrl_v2_study_c",
         ],
         help="Study generation target.",
     )
@@ -65,6 +67,11 @@ def main() -> int:
         "ctrl_study_b": ctrl_script,
         "ctrl_study_b_multi_turn": ctrl_script,
         "ctrl_study_c": ctrl_script,
+        "ctrl_v2_study_a": ctrl_script,
+        "ctrl_v2_study_a_bias": ctrl_script,
+        "ctrl_v2_study_b": ctrl_script,
+        "ctrl_v2_study_b_multi_turn": ctrl_script,
+        "ctrl_v2_study_c": ctrl_script,
     }
     allowed_model_ids_by_study = {
         "study_a": {
@@ -149,9 +156,14 @@ def main() -> int:
     allowed_model_ids_by_study["ctrl_study_b"] = allowed_model_ids_by_study["study_b"]
     allowed_model_ids_by_study["ctrl_study_b_multi_turn"] = allowed_model_ids_by_study["study_b_multi_turn"]
     allowed_model_ids_by_study["ctrl_study_c"] = allowed_model_ids_by_study["study_c"]
+    allowed_model_ids_by_study["ctrl_v2_study_a"] = allowed_model_ids_by_study["study_a"]
+    allowed_model_ids_by_study["ctrl_v2_study_a_bias"] = allowed_model_ids_by_study["study_a_bias"]
+    allowed_model_ids_by_study["ctrl_v2_study_b"] = allowed_model_ids_by_study["study_b"]
+    allowed_model_ids_by_study["ctrl_v2_study_b_multi_turn"] = allowed_model_ids_by_study["study_b_multi_turn"]
+    allowed_model_ids_by_study["ctrl_v2_study_c"] = allowed_model_ids_by_study["study_c"]
 
     # Inject default bias data path for Study A bias if not explicitly provided.
-    if args.study == "study_a_bias" and "--data-path" not in passthrough:
+    if args.study in {"study_a_bias", "ctrl_v2_study_a_bias"} and "--data-path" not in passthrough:
         default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
         passthrough = ["--data-path", default_bias_data, *passthrough]
 

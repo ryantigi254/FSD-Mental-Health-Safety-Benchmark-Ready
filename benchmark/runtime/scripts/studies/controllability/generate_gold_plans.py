@@ -365,12 +365,19 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         action="store_true",
         help="Build plans from condition maps and case anchors without loading the NLI verifier.",
     )
+    parser.add_argument(
+        "--nli-only",
+        action="store_true",
+        help="Require every final plan to come from NLI-backed evidence; disable condition-map fallback.",
+    )
     return parser.parse_args(list(argv) if argv is not None else [])
 
 
 def main(argv: Optional[Sequence[str]] = None) -> None:
     global CTRL_DIR, OUTPUT_PATH
     args = parse_args(argv)
+    if args.skip_nli and args.nli_only:
+        raise SystemExit("--nli-only cannot be combined with --skip-nli.")
     CTRL_DIR = args.ctrl_dir
     OUTPUT_PATH = CTRL_DIR / "ctrl_target_plans.json"
 
@@ -457,6 +464,9 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
                 plan_component_evidence = evidence
 
         if not plan_text:
+            if args.nli_only:
+                unresolved.append(cid)
+                continue
             if condition in {"", "unresolved"}:
                 unresolved.append(cid)
                 continue
@@ -488,6 +498,9 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
             "extraction": "controllability/generate_gold_plans.py",
             "generated_utc": datetime.now(timezone.utc).isoformat(),
             "n_cases": len(plans),
+            "nli_only": bool(args.nli_only),
+            "nli_verified_cases": stats["nli_verified"],
+            "condition_map_cases": stats["condition_map"],
         },
         "plans": plans,
     }
