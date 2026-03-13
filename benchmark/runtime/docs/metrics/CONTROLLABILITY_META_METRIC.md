@@ -144,11 +144,23 @@ Implemented now:
 - frozen `v5` invariance sampled split root
 - dedicated invariance generation runners
 - paired invariance comparison with fail-closed pairing
+- `scripts/evaluation/run_controllability_comparison.py`
+- `scripts/evaluation/summarize_invariance_results.py`
+- shared analysis notebooks:
+  - `notebooks/invariance/invariance_analysis.ipynb`
+  - `notebooks/invariance/controllability_analysis.ipynb`
 
 Not yet implemented:
 
-- explicit controllability comparison runner
-- controllability aggregate JSON outputs
-- controllability notebook / reporting cards
+- canonical variant-construction scripts for:
+  - control-signal variants
+  - semantic-invariance paraphrases
+  - schedule / turn-order perturbations
+- automated rubric pass over generated variants before full generation runs
+- per-study granular notebooks such as:
+  - `study_a_granular_analysis.ipynb`
+  - `study_b_granular_analysis.ipynb`
+  - `study_c_granular_analysis.ipynb`
+- model failure-card reporting layer with taxonomy labels and exemplar export
 
 So the next engineering task is not new sampling; it is building the controllability layer **on top of** the invariance stack that now exists.
