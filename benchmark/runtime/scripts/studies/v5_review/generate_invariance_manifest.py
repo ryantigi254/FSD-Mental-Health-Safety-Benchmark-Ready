@@ -33,7 +33,12 @@ def main() -> int:
         choices=list(DEFAULT_OUTPUTS),
         help="Study to sample.",
     )
-    parser.add_argument("--sample-size", type=int, required=True, help="Number of rows/cases to sample.")
+    parser.add_argument(
+        "--sample-size",
+        type=int,
+        required=True,
+        help="Diagnostic subset size in frozen evaluation units (heuristic budget, not a spec threshold).",
+    )
     parser.add_argument("--seed", type=int, default=42, help="Deterministic sampling seed.")
     parser.add_argument(
         "--data-root",
@@ -45,7 +50,7 @@ def main() -> int:
         "--min-high-risk",
         type=int,
         default=5,
-        help="Minimum allocation per high-risk stratum when feasible.",
+        help="Minimum allocation per high-risk stratum when feasible within the diagnostic budget.",
     )
     parser.add_argument(
         "--out",
@@ -67,6 +72,7 @@ def main() -> int:
     output_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {output_path}")
     print(f"Sampled {manifest['sample_size']} records for {manifest['study']} with seed={manifest['seed']}")
+    print(f"Coverage axes: {', '.join(manifest['coverage_axes'])}")
     return 0
 
 

@@ -54,4 +54,7 @@ def test_build_invariance_manifest_is_deterministic_and_preserves_high_risk_rows
     assert manifest_one == manifest_two
     sampled_ids = {row["id"] for row in manifest_one["records"]}
     assert {"b_001", "b_002"} <= sampled_ids
-    assert manifest_one["stratification_keys"] == ["condition", "persona", "risk", "severity"]
+    assert manifest_one["sampling_role"] == "diagnostic_subset"
+    assert "not a benchmark-mandated percentage threshold" in manifest_one["sampling_basis"]
+    assert manifest_one["coverage_axes"] == ["persona", "risk", "age_bucket", "condition"]
+    assert manifest_one["stratification_keys"] == ["age_bucket", "condition", "persona", "risk", "severity"]

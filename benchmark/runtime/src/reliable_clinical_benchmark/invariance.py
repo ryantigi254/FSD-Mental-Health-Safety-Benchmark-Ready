@@ -249,10 +249,12 @@ def _study_b_records(root: Path) -> List[ManifestRecord]:
         label = _canonical_text(row.get("gold_answer"))
         risk_bucket = _risk_bucket([row.get("prompt", ""), label, row.get("incorrect_opinion", "")])
         severity_bucket = _severity_bucket(risk_bucket, label)
+        age_bucket = _age_bucket(metadata.get("age"))
         records.append(
             ManifestRecord(
                 id=sample_id,
                 strata={
+                    "age_bucket": age_bucket,
                     "persona": _slugify(str(metadata.get("persona_id", "") or "unknown")),
                     "condition": _condition_bucket(label),
                     "severity": severity_bucket,
@@ -261,7 +263,7 @@ def _study_b_records(root: Path) -> List[ManifestRecord]:
                 metadata={
                     "persona_id": str(metadata.get("persona_id", "") or ""),
                     "gold_label": label,
-                    "age_bucket": _age_bucket(metadata.get("age")),
+                    "age_bucket": age_bucket,
                 },
             )
         )
@@ -279,10 +281,12 @@ def _study_b_multi_turn_records(root: Path) -> List[ManifestRecord]:
         pressure_schedule = str(row.get("pressure_schedule") or metadata.get("pressure_schedule") or "unknown")
         pressure_style = str(row.get("pressure_style") or metadata.get("pressure_style") or "unknown")
         risk_bucket = _risk_bucket([label, row.get("incorrect_opinion", "")])
+        age_bucket = _age_bucket(metadata.get("age"))
         records.append(
             ManifestRecord(
                 id=sample_id,
                 strata={
+                    "age_bucket": age_bucket,
                     "persona": _slugify(str(metadata.get("persona_id", "") or "unknown")),
                     "condition": _condition_bucket(label),
                     "schedule": _slugify(pressure_schedule),
@@ -294,6 +298,7 @@ def _study_b_multi_turn_records(root: Path) -> List[ManifestRecord]:
                     "pressure_schedule": pressure_schedule,
                     "pressure_style": pressure_style,
                     "gold_label": label,
+                    "age_bucket": age_bucket,
                 },
             )
         )
@@ -495,6 +500,12 @@ def build_invariance_manifest(
         "study_b_multi_turn": ["pressure_schedule_shift", "pressure_tone", "pressure_intensity"],
         "study_c": ["summary_wording", "non_critical_turn_reorder", "patient_rephrasing"],
     }
+    coverage_axes = {
+        "study_a": ["condition", "risk", "severity"],
+        "study_b": ["persona", "risk", "age_bucket", "condition"],
+        "study_b_multi_turn": ["persona", "risk", "age_bucket", "schedule", "style"],
+        "study_c": ["condition", "risk", "age_bucket", "persona"],
+    }
     study_key = {
         "a": "study_a",
         "study_a": "study_a",
@@ -513,6 +524,12 @@ def build_invariance_manifest(
         "sample_size": sample_size,
         "data_root": str(root),
         "sampling_unit": "conversation" if study_key in {"study_b_multi_turn", "study_c"} else "row",
+        "sampling_role": "diagnostic_subset",
+        "sampling_basis": (
+            "Heuristic first-pass robustness budget over the frozen clinician-ready split; "
+            "not a benchmark-mandated percentage threshold."
+        ),
+        "coverage_axes": coverage_axes[study_key],
         "stratification_keys": strata_keys,
         "variant_defaults": variant_defaults[study_key],
         "records": [

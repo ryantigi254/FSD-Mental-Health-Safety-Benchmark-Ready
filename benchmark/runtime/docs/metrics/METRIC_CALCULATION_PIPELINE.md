@@ -77,6 +77,11 @@ PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/evaluation/run_invariance_compa
   --out metric-results/<model>/study_a_invariance_lexical.json
 ```
 
+Operational note:
+
+- Treat invariance as a secondary diagnostic layer over the frozen split, not as a replacement for full benchmark runs.
+- Suggested subset percentages are heuristic budgeting guidance only; the stronger constraint is metric-aligned sampling units plus coverage over the relevant persona / risk / age / condition axes.
+
 ## 4. Study A bias metric contract
 
 Metric script:
