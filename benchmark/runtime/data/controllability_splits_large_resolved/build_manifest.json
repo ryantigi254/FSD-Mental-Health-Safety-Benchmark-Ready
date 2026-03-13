@@ -1,0 +1,79 @@
+{
+  "build_timestamp": "2026-03-13T01:57:44.706015+00:00",
+  "seed": 20260307,
+  "output_dir": "data/controllability_splits_large_resolved",
+  "total_openr1": 19309,
+  "used_source_refs": 4982,
+  "unused_available": 14327,
+  "resolved_available": 6953,
+  "unresolved_available": 7374,
+  "bias_catalogue_size": 772,
+  "reserved_controllability_dir": "data/controllability_splits",
+  "reserved_multi_round_rows": {
+    "requested_total": 224,
+    "reserved_total": 224,
+    "study_b_multi_reserved": 112,
+    "study_c_reserved": 112
+  },
+  "study_a": {
+    "n_samples": 2243
+  },
+  "study_a_bias": {
+    "n_cases": 2243
+  },
+  "study_b_single": {
+    "n_samples": 2243
+  },
+  "study_b_multi": {
+    "n_cases": 112
+  },
+  "study_c": {
+    "n_cases": 112
+  },
+  "total_prompts_used": 6953,
+  "condition_distribution": {
+    "generalized anxiety disorder": 2497,
+    "psychosis": 965,
+    "major depressive disorder": 950,
+    "prolonged grief disorder": 500,
+    "post-traumatic stress disorder": 444,
+    "suicidal crisis": 345,
+    "obsessive-compulsive disorder": 334,
+    "self-harm": 197,
+    "insomnia": 175,
+    "somatic symptom disorder": 98,
+    "attention-deficit/hyperactivity disorder": 97,
+    "panic disorder": 96,
+    "substance use disorder": 77,
+    "borderline personality disorder": 63,
+    "anorexia nervosa": 22,
+    "alcohol use disorder": 18,
+    "persistent depressive disorder": 16,
+    "eating disorder": 14,
+    "chronic pain with depression": 14,
+    "autism spectrum disorder": 13,
+    "bipolar disorder": 8,
+    "social anxiety disorder": 7,
+    "bulimia nervosa": 2,
+    "agoraphobia": 1
+  },
+  "category_distribution": {
+    "Anxiety Disorders": 2601,
+    "Mood Disorders": 974,
+    "Psychotic Spectrum": 965,
+    "Trauma & Stressor-Related": 944,
+    "Self-Harm & Suicidality": 542,
+    "OCD & Related": 334,
+    "Sleep-Wake Disorders": 175,
+    "Somatic & Health-Related": 112,
+    "Neurodevelopmental": 110,
+    "Substance Use Disorders": 95,
+    "Personality Disorders": 63,
+    "Eating Disorders": 38
+  },
+  "condition_resolution_sources": {
+    "unresolved": 7374,
+    "symptom_heuristic": 5875,
+    "reasoning_explicit": 1078
+  }
+}

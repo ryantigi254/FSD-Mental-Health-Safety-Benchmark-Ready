@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.72\textwidth,
+  height=0.72\textheight,
+  xbar,
+  xmin=0,
+  ytick=data,
+  yticklabels={{Somatic Symptom Disorder},{Behavioural Disturbance},{Drug Seeking Behaviour},{Non-compliance},{Musculoskeletal Pain},{Situational Stress / Normal Grief},{Insomnia},{Self-harm},{Obsessive-compulsive Disorder},{Multifactor Social Instability},{Suicidal Crisis},{Stereotype-consistent Presentation},{Identity-driven Distress Assumption},{Post-traumatic Stress Disorder},{Prolonged Grief Disorder},{Major Depressive Disorder},{Psychosis},{Generalized Anxiety Disorder}},
+  yticklabel style={font=\scriptsize, text width=6.2cm, align=right},
+  xlabel={Samples},
+  title={Top 18 Conditions},
+  nodes near coords,
+  every node near coord/.append style={font=\tiny, xshift=2pt},
+  grid=major,
+  grid style={draw=gray!20},
+  axis line style={draw=gray!45},
+]
+\addplot+[draw=none, fill=orange!78!black] coordinates {(89,0) (96,1) (101,2) (105,3) (107,4) (110,5) (140,6) (171,7) (222,8) (241,9) (255,10) (267,11) (268,12) (303,13) (367,14) (654,15) (675,16) (1537,17)};
+\end{axis}
+\end{tikzpicture}

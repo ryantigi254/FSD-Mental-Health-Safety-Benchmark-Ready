@@ -21,6 +21,9 @@ The aim is not to claim full clinician adjudication of OpenR1-Psy. The aim is to
 - Current canonical release: `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/`
 - Release pointer: `benchmark/runtime/data/releases/LATEST.md`
 - Clinician package outputs: `benchmark/runtime/docs/reports/clinician_package/v0.3/`
+- Controllability candidate snapshot: `benchmark/runtime/data/controllability_splits_large_resolved/`
+- Controllability verification outputs: `benchmark/runtime/data/verification/controllability_v0.1_large_resolved/`
+- Controllability clinician package outputs: `benchmark/runtime/docs/reports/clinician_package/controllability_v0.1_large_resolved/`
 
 ## Process Line Covered
 
@@ -31,6 +34,23 @@ The aim is not to claim full clinician adjudication of OpenR1-Psy. The aim is to
    - Study B and Study C validator hardening
    - frozen snapshot and release manifest discipline
    - deterministic clinician package with preflight gates
+4. Controllability clinician-readiness hardening:
+   - large resolved controllability suite only
+   - deterministic five-study review outputs
+   - controllability-specific stage-2 gates
+   - review-first blocked release policy with no auto-repair
+
+## Controllability Release Line
+
+The controllability line is not a copy of the old base-study `v0.3` packaging path. It has its own review, gates, package, and preflight entrypoints:
+
+- `scripts/studies/controllability_review/run_ctrl_cross_study_review.py`
+- `scripts/studies/controllability_review/run_ctrl_stage2_gates.py`
+- `scripts/studies/controllability_review/build_ctrl_clinician_package.py`
+- `scripts/studies/controllability_review/run_ctrl_sendoff_preflight.py`
+
+This line only certifies `benchmark/runtime/data/controllability_splits_large_resolved/`.
+It treats the probe-backed gold diagnosis labels and target plans as weakly supervised artefacts and blocks release on any `NEEDS_REVIEW` or `REJECT`.
 
 ## Branch Evidence Basis
 
