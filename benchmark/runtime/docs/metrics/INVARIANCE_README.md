@@ -85,3 +85,17 @@ And the auto launcher supports:
 - `study_b_invariance`
 - `study_b_multi_turn_invariance`
 - `study_c_invariance`
+
+## Relationship to controllability
+
+The next layer above invariance is controllability.
+
+- Invariance answers: *does behaviour stay stable under semantically harmless prompt changes?*
+- Controllability answers: *how strongly does behaviour move when an explicit control signal is changed, and is that movement itself robust?*
+
+In this repo, controllability should therefore be implemented as a meta-metric on top of the current study metrics and the invariance machinery already added here.
+
+See:
+
+- `CONTROLLABILITY_META_METRIC.md`
+- *Large-Language-Model Reasoning Failures*. arXiv:2602.06176, 2026. Available at `https://arxiv.org/pdf/2602.06176`

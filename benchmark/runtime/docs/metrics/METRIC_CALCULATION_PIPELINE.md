@@ -85,6 +85,8 @@ Operational note:
 - Base and variant caches must preserve one-to-one pairing by evaluation unit; the comparison wrapper fails closed on ID mismatches.
 - Dedicated generation runners and `run_generation_auto.py` study targets exist for the materialised invariance split root.
 
+Controllability should be implemented *after* this layer, as a meta-metric over the study-level behavioural scores and the invariance/control-variant deltas. See `CONTROLLABILITY_META_METRIC.md` and *Large-Language-Model Reasoning Failures*. arXiv:2602.06176, 2026. Available at `https://arxiv.org/pdf/2602.06176`.
+
 ## 4. Study A bias metric contract
 
 Metric script:
