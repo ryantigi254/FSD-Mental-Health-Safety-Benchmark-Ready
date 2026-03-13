@@ -99,6 +99,14 @@ def _load_json_payload(path: Path):
         return None, str(exc)
 
 
+def _resolve_split_path(data_path: Path, filename: str) -> Path:
+    direct = data_path / filename
+    if direct.exists():
+        return direct
+    nested = data_path / "openr1_psy_splits" / filename
+    return nested
+
+
 def _normalise_study_b_single_turn(payload):
     if isinstance(payload, list):
         return payload, []
@@ -163,8 +171,8 @@ def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
         Tuple of (is_valid, list_of_errors)
     """
     data_path = Path(data_dir)
-    study_b_path = data_path / "openr1_psy_splits" / "study_b_test.json"
-    study_b_mt_path = data_path / "openr1_psy_splits" / "study_b_multi_turn_test.json"
+    study_b_path = _resolve_split_path(data_path, "study_b_test.json")
+    study_b_mt_path = _resolve_split_path(data_path, "study_b_multi_turn_test.json")
     if not study_b_path.exists():
         return False, [f"Study B split not found: {study_b_path}"]
     if not study_b_mt_path.exists():
@@ -281,7 +289,7 @@ def validate_study_c_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
         Tuple of (is_valid, list_of_errors)
     """
     data_path = Path(data_dir)
-    study_c_path = data_path / "openr1_psy_splits" / "study_c_test.json"
+    study_c_path = _resolve_split_path(data_path, "study_c_test.json")
     if not study_c_path.exists():
         return False, [f"Study C split not found: {study_c_path}"]
 
