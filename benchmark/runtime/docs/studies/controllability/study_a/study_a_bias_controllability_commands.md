@@ -3,6 +3,23 @@
 ## Scope
 Study A bias controllability generation writes to `results/<model-folder>/ctrl_study_a_bias_generations.jsonl`.
 
+## Scaled Suite Overrides
+
+Use these overrides for the large resolved suite so you do not mix caches with the
+small-scale run:
+
+```bash
+cd benchmark/runtime
+export CTRL_DIR=data/controllability_splits_large_resolved
+export CTRL_RESULTS_DIR=results_scaled_large_resolved
+```
+
+Example:
+
+```bash
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
+```
+
 ## One-Time Setup
 
 ### Windows (PC)
@@ -77,7 +94,7 @@ python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id p
 ## Direct Runner
 
 ```powershell
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --max-cases 5 --max-tokens 8192 --workers 6
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --max-cases 5 --max-tokens 8192 --workers 6
 ```
 
 ## Workers
