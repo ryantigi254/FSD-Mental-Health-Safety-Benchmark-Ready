@@ -1,0 +1,147 @@
+{
+  "generated_at_utc": "2026-03-13T05:06:20.196322+00:00",
+  "version": "controllability_v0.1_large_resolved_stage2",
+  "ctrl_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large_resolved",
+  "small_ctrl_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits",
+  "expected_counts": {
+    "study_a": 2243,
+    "study_a_bias": 2243,
+    "study_b_single": 2243,
+    "study_b_multi": 112,
+    "study_c": 112
+  },
+  "overall_passed": true,
+  "release_status": "ready",
+  "gates": [
+    {
+      "name": "study_a_row_count",
+      "passed": true,
+      "details": {
+        "actual": 2243,
+        "expected": 2243
+      }
+    },
+    {
+      "name": "study_a_duplicate_ids",
+      "passed": true,
+      "details": {
+        "duplicate_ids": [],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "name": "study_a_bias_row_count",
+      "passed": true,
+      "details": {
+        "actual": 2243,
+        "expected": 2243
+      }
+    },
+    {
+      "name": "study_a_bias_duplicate_ids",
+      "passed": true,
+      "details": {
+        "duplicate_ids": [],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "name": "study_b_single_row_count",
+      "passed": true,
+      "details": {
+        "actual": 2243,
+        "expected": 2243
+      }
+    },
+    {
+      "name": "study_b_single_duplicate_ids",
+      "passed": true,
+      "details": {
+        "duplicate_ids": [],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "name": "study_b_multi_row_count",
+      "passed": true,
+      "details": {
+        "actual": 112,
+        "expected": 112
+      }
+    },
+    {
+      "name": "study_b_multi_duplicate_ids",
+      "passed": true,
+      "details": {
+        "duplicate_ids": [],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "name": "study_c_row_count",
+      "passed": true,
+      "details": {
+        "actual": 112,
+        "expected": 112
+      }
+    },
+    {
+      "name": "study_c_duplicate_ids",
+      "passed": true,
+      "details": {
+        "duplicate_ids": [],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "name": "study_a_gold_label_coverage",
+      "passed": true,
+      "details": {
+        "missing_ids": [],
+        "missing_count": 0
+      }
+    },
+    {
+      "name": "study_c_target_plan_coverage",
+      "passed": true,
+      "details": {
+        "missing_ids": [],
+        "missing_count": 0
+      }
+    },
+    {
+      "name": "source_ref_disjointness_vs_small_suite",
+      "passed": true,
+      "details": {
+        "overlap_count": 0,
+        "overlap_examples": []
+      }
+    },
+    {
+      "name": "study_b_multi_turn_structure",
+      "passed": true,
+      "details": {
+        "invalid_count": 0,
+        "invalid_examples": []
+      }
+    },
+    {
+      "name": "study_a_bias_metadata_contract",
+      "passed": true,
+      "details": {
+        "invalid_count": 0,
+        "invalid_examples": []
+      }
+    },
+    {
+      "name": "probe_gold_provenance_declared",
+      "passed": true,
+      "details": {
+        "label_backend_probe": true,
+        "plan_backend_probe": true,
+        "label_probe_meta_present": true,
+        "plan_probe_meta_present": true
+      }
+    }
+  ]
+}

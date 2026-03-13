@@ -1,0 +1,1006 @@
+{
+  "profile": "controllability",
+  "profile_label": "Controllability Splits — Scaled Large Resolved",
+  "suite_label": "Scaled Large Resolved",
+  "study_labels": {
+    "A": "Study A Bias",
+    "B": "Study B Multi-turn",
+    "C": "Study C",
+    "D": "Study A",
+    "E": "Study B"
+  },
+  "radar": {
+    "exclude_categories": [
+      "Bias / Adversarial",
+      "Other",
+      "Unclassified"
+    ],
+    "max_value": 100,
+    "tick_step": 20,
+    "tick_label_mode": "fraction",
+    "manual_tick_labels": true,
+    "tick_label_angle": -8
+  },
+  "readme_notes": [
+    "Study A Bias contributes adversarial labels rather than gold clinical diagnoses, so category charts include a dedicated `Bias / Adversarial` bucket.",
+    "Severity is marked as `Unknown` where the controllability suite does not expose a defensible clinical-severity mapping."
+  ],
+  "omit_figures": [
+    "fig3_therapeutic_modalities"
+  ],
+  "total_samples": 6953,
+  "per_study": {
+    "A": 2243,
+    "B": 112,
+    "C": 112,
+    "D": 2243,
+    "E": 2243
+  },
+  "diagnostic_categories": {
+    "Bias / Adversarial": {
+      "total": 2243,
+      "pct": 32.26,
+      "per_study": {
+        "A": 2243,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "Anxiety Disorders": {
+      "total": 1603,
+      "pct": 23.05,
+      "per_study": {
+        "A": 0,
+        "B": 29,
+        "C": 24,
+        "D": 615,
+        "E": 935
+      }
+    },
+    "Unclassified": {
+      "total": 1102,
+      "pct": 15.85,
+      "per_study": {
+        "A": 0,
+        "B": 30,
+        "C": 32,
+        "D": 659,
+        "E": 381
+      }
+    },
+    "Trauma & Stressor-Related": {
+      "total": 670,
+      "pct": 9.64,
+      "per_study": {
+        "A": 0,
+        "B": 14,
+        "C": 19,
+        "D": 315,
+        "E": 322
+      }
+    },
+    "Mood Disorders": {
+      "total": 664,
+      "pct": 9.55,
+      "per_study": {
+        "A": 0,
+        "B": 25,
+        "C": 21,
+        "D": 293,
+        "E": 325
+      }
+    },
+    "OCD & Related": {
+      "total": 222,
+      "pct": 3.19,
+      "per_study": {
+        "A": 0,
+        "B": 6,
+        "C": 4,
+        "D": 93,
+        "E": 119
+      }
+    },
+    "Sleep-Wake Disorders": {
+      "total": 140,
+      "pct": 2.01,
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 8,
+        "D": 83,
+        "E": 46
+      }
+    },
+    "Somatic & Health-Related": {
+      "total": 93,
+      "pct": 1.34,
+      "per_study": {
+        "A": 0,
+        "B": 2,
+        "C": 1,
+        "D": 52,
+        "E": 38
+      }
+    },
+    "Neurodevelopmental": {
+      "total": 81,
+      "pct": 1.16,
+      "per_study": {
+        "A": 0,
+        "B": 2,
+        "C": 3,
+        "D": 42,
+        "E": 34
+      }
+    },
+    "Substance Use Disorders": {
+      "total": 74,
+      "pct": 1.06,
+      "per_study": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 55,
+        "E": 18
+      }
+    },
+    "Personality Disorders": {
+      "total": 48,
+      "pct": 0.69,
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 32,
+        "E": 16
+      }
+    },
+    "Eating Disorders": {
+      "total": 13,
+      "pct": 0.19,
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 4,
+        "E": 9
+      }
+    }
+  },
+  "specific_conditions": {
+    "generalized anxiety disorder": {
+      "total": 1537,
+      "category": "Anxiety Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 28,
+        "C": 23,
+        "D": 583,
+        "E": 903
+      }
+    },
+    "psychosis": {
+      "total": 675,
+      "category": "Unclassified",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 0,
+        "B": 12,
+        "C": 14,
+        "D": 395,
+        "E": 254
+      }
+    },
+    "major depressive disorder": {
+      "total": 654,
+      "category": "Mood Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 24,
+        "C": 21,
+        "D": 288,
+        "E": 321
+      }
+    },
+    "prolonged grief disorder": {
+      "total": 367,
+      "category": "Trauma & Stressor-Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 9,
+        "C": 9,
+        "D": 176,
+        "E": 173
+      }
+    },
+    "post-traumatic stress disorder": {
+      "total": 303,
+      "category": "Trauma & Stressor-Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 5,
+        "C": 10,
+        "D": 139,
+        "E": 149
+      }
+    },
+    "identity-driven distress assumption": {
+      "total": 268,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 268,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "stereotype-consistent presentation": {
+      "total": 267,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 267,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "suicidal crisis": {
+      "total": 255,
+      "category": "Unclassified",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 0,
+        "B": 11,
+        "C": 14,
+        "D": 146,
+        "E": 84
+      }
+    },
+    "multifactor social instability": {
+      "total": 241,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 241,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "obsessive-compulsive disorder": {
+      "total": 222,
+      "category": "OCD & Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 6,
+        "C": 4,
+        "D": 93,
+        "E": 119
+      }
+    },
+    "self-harm": {
+      "total": 171,
+      "category": "Unclassified",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 0,
+        "B": 7,
+        "C": 4,
+        "D": 118,
+        "E": 42
+      }
+    },
+    "insomnia": {
+      "total": 140,
+      "category": "Sleep-Wake Disorders",
+      "severity": "Mild",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 8,
+        "D": 83,
+        "E": 46
+      }
+    },
+    "situational stress / normal grief": {
+      "total": 110,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 110,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "musculoskeletal pain": {
+      "total": 107,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 107,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "non-compliance": {
+      "total": 105,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 105,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "drug seeking behaviour": {
+      "total": 101,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 101,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "behavioural disturbance": {
+      "total": 96,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 96,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "somatic symptom disorder": {
+      "total": 89,
+      "category": "Somatic & Health-Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 2,
+        "C": 1,
+        "D": 51,
+        "E": 35
+      }
+    },
+    "complex psychosocial stress": {
+      "total": 84,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 84,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "attention-deficit/hyperactivity disorder": {
+      "total": 76,
+      "category": "Neurodevelopmental",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 2,
+        "C": 3,
+        "D": 41,
+        "E": 30
+      }
+    },
+    "low acuity anxiety": {
+      "total": 74,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 74,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "low-risk social distress": {
+      "total": 73,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 73,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "administrative issue": {
+      "total": 73,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 73,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "intoxication / behavioural disturbance": {
+      "total": 72,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 72,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "secondary gain seeking": {
+      "total": 70,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 70,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "behavioural dysregulation": {
+      "total": 69,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 69,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "substance use disorder": {
+      "total": 67,
+      "category": "Substance Use Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 51,
+        "E": 16
+      }
+    },
+    "non-urgent distress": {
+      "total": 64,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 64,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "social stress reaction": {
+      "total": 60,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 60,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "panic disorder": {
+      "total": 60,
+      "category": "Anxiety Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 31,
+        "E": 28
+      }
+    },
+    "poor adherence": {
+      "total": 50,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 50,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "substance misuse only": {
+      "total": 48,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 48,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "borderline personality disorder": {
+      "total": 48,
+      "category": "Personality Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 32,
+        "E": 16
+      }
+    },
+    "lifestyle related": {
+      "total": 41,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 41,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "substance-related presentation": {
+      "total": 30,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 30,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "medication side-effect only": {
+      "total": 30,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 30,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "language-related misunderstanding": {
+      "total": 22,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 22,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "non-specific adaptation stress": {
+      "total": 22,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 22,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "polypharmacy confusion": {
+      "total": 21,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 21,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "service misuse": {
+      "total": 17,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 17,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "alcohol use disorder": {
+      "total": 7,
+      "category": "Substance Use Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 4,
+        "E": 2
+      }
+    },
+    "anorexia nervosa": {
+      "total": 7,
+      "category": "Eating Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 4,
+        "E": 3
+      }
+    },
+    "persistent depressive disorder": {
+      "total": 6,
+      "category": "Mood Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 1,
+        "E": 4
+      }
+    },
+    "eating disorder": {
+      "total": 6,
+      "category": "Eating Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 6
+      }
+    },
+    "autism spectrum disorder": {
+      "total": 5,
+      "category": "Neurodevelopmental",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1,
+        "E": 4
+      }
+    },
+    "social anxiety disorder": {
+      "total": 5,
+      "category": "Anxiety Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1,
+        "E": 4
+      }
+    },
+    "communication issue": {
+      "total": 4,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 4,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "bipolar disorder": {
+      "total": 4,
+      "category": "Mood Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 4,
+        "E": 0
+      }
+    },
+    "chronic pain with depression": {
+      "total": 4,
+      "category": "Somatic & Health-Related",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1,
+        "E": 3
+      }
+    },
+    "somatic amplification": {
+      "total": 3,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 3,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "medication non-adherence": {
+      "total": 3,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 3,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "functional complaint": {
+      "total": 3,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 3,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "medication-seeking behaviour": {
+      "total": 3,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 3,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "malingering suspicion": {
+      "total": 3,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 3,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "attention seeking": {
+      "total": 2,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 2,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "non-specific stress": {
+      "total": 2,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 2,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "primary psychiatric exaggeration": {
+      "total": 2,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 2,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "baseline disability behaviour": {
+      "total": 1,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 1,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "personality disorder": {
+      "total": 1,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 1,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "anxiety only": {
+      "total": 1,
+      "category": "Bias / Adversarial",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 1,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "agoraphobia": {
+      "total": 1,
+      "category": "Anxiety Disorders",
+      "severity": "Mild",
+      "per_study": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      }
+    },
+    "bulimia nervosa": {
+      "total": 1,
+      "category": "Unclassified",
+      "severity": "Unknown",
+      "per_study": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 1
+      }
+    }
+  },
+  "severity": {
+    "Unknown": {
+      "total": 3345,
+      "pct": 48.11,
+      "per_study": {
+        "A": 2243,
+        "B": 30,
+        "C": 32,
+        "D": 659,
+        "E": 381
+      }
+    },
+    "Moderate": {
+      "total": 3330,
+      "pct": 47.89,
+      "per_study": {
+        "A": 0,
+        "B": 77,
+        "C": 72,
+        "D": 1405,
+        "E": 1776
+      }
+    },
+    "Mild": {
+      "total": 141,
+      "pct": 2.03,
+      "per_study": {
+        "A": 0,
+        "B": 4,
+        "C": 8,
+        "D": 83,
+        "E": 46
+      }
+    },
+    "Severe": {
+      "total": 137,
+      "pct": 1.97,
+      "per_study": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 96,
+        "E": 40
+      }
+    }
+  },
+  "therapeutic_modalities": {},
+  "unique_conditions_per_study": {
+    "A": 38,
+    "B": 14,
+    "C": 12,
+    "D": 21,
+    "E": 22
+  },
+  "total_unique_conditions": 62,
+  "radar_series": [
+    {
+      "key": "A",
+      "label": "Study A Bias",
+      "style": "study_a_bias_dotted"
+    },
+    {
+      "key": "overall",
+      "label": "Overall",
+      "style": "overall"
+    },
+    {
+      "key": "E",
+      "label": "Study B",
+      "style": "study_b_controllability"
+    },
+    {
+      "key": "B",
+      "label": "Study B Multi-turn",
+      "style": "study_b_multiturn_controllability"
+    },
+    {
+      "key": "C",
+      "label": "Study C",
+      "style": "study_c"
+    },
+    {
+      "key": "D",
+      "label": "Study A",
+      "style": "study_a"
+    }
+  ]
+}
