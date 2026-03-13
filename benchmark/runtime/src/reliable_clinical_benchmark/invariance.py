@@ -117,6 +117,21 @@ def _slugify(value: str) -> str:
     return text or "unknown"
 
 
+def _normalize_indexed_id(value: str) -> str:
+    """Normalise ids like b_0001 -> b_001 for legacy cache compatibility."""
+
+    text = str(value or "").strip()
+    match = re.match(r"^([a-zA-Z]+_)(\d+)$", text)
+    if not match:
+        return text
+    prefix, num = match.groups()
+    try:
+        num_int = int(num)
+    except ValueError:
+        return text
+    return f"{prefix}{num_int:03d}"
+
+
 def _extract_age(text: str) -> Optional[int]:
     match = re.search(r"\b(\d{1,3})-year-old\b", text.lower())
     if match:
@@ -739,11 +754,19 @@ def _study_b_case_metrics(cache_path: Path, root: Path) -> Dict[str, Dict[str, f
     module = _load_study_b_metrics_script()
     payload = _load_json(_study_file(root, "study_b_test.json"))
     rows = payload if isinstance(payload, list) else payload.get("samples", [])
-    gold_by_id = {str(row.get("id", "")): row for row in rows if row.get("id")}
+    gold_by_id: Dict[str, Dict[str, Any]] = {}
+    for row in rows:
+        row_id = str(row.get("id", "")).strip()
+        if not row_id:
+            continue
+        gold_by_id[row_id] = row
+        normalized_id = _normalize_indexed_id(row_id)
+        if normalized_id and normalized_id not in gold_by_id:
+            gold_by_id[normalized_id] = row
 
     grouped: Dict[str, Dict[str, Dict[str, Any]]] = defaultdict(dict)
     for entry in _read_jsonl(cache_path):
-        sample_id = str(entry.get("base_id") or entry.get("id", "")).strip()
+        sample_id = _normalize_indexed_id(str(entry.get("base_id") or entry.get("id", "")).strip())
         variant = str(entry.get("variant") or entry.get("mode") or "").strip()
         if sample_id and variant in {"control", "injected"}:
             grouped[sample_id][variant] = entry
