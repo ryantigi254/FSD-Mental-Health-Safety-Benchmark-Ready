@@ -4,6 +4,17 @@ This folder records the final process that moved the benchmark from the pre-scal
 
 The aim is not to claim full clinician adjudication of OpenR1-Psy. The aim is to make this benchmark line reproducible, auditable, and operationally clean for clinician-facing review.
 
+## Why This Work Exists
+
+The clinician-readiness line exists because upstream OpenR1-Psy validation and downstream benchmark fitness are not the same thing.
+
+- OpenR1-Psy was validated for counselling-quality training use, not for direct reuse as a reference-standard layer in a safety benchmark.
+- This benchmark uses the derived artefacts more aggressively: labels, target plans, pressure probes, and reference reasoning traces can all directly change metric outcomes.
+- Some of those artefacts are LLM-generated or probe-backed rather than fully clinician-authored, so they need an explicit downstream defensibility layer before release.
+- The audit found concrete benchmark-facing failures that upstream validation would not be expected to catch: safety-critical label and plan corrections, mapping incoherence, schema gaps, and rubric false positives.
+
+So the clinical-readiness claim here is deliberately narrow: preserve comparability with OpenR1-Psy, add an auditable downstream verification layer, and avoid overclaiming full clinician adjudication.
+
 ## Canonical Documents
 
 - Detailed process report (LaTeX): [`tex/CLINICIAN_READINESS_PROCESS_REPORT.tex`](tex/CLINICIAN_READINESS_PROCESS_REPORT.tex)
