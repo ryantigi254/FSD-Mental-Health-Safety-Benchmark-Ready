@@ -1,0 +1,25 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[paperwidth=12in,paperheight=9in,margin=0.35in]{geometry}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{polar}
+\renewcommand{\familydefault}{\rmdefault}
+\pagestyle{empty}
+\begin{document}
+\begin{center}
+{\Large\bfseries Clinical Benchmark Overview (PGFPlots Radar)}\\[1pt]
+\end{center}
+\vspace{-0.68cm}
+
+\begin{center}
+\resizebox{0.79\textwidth}{!}{\input{clinical_overview_radar}}
+\end{center}
+\vspace{1pt}
+
+\noindent{\small Figure: Radar profile of the top diagnostic categories that rank highly in Overall and Study A/B/C, plotted with a square-root radial scale, top-side emphasis, and decimal ring labels.}
+\end{document}

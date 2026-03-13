@@ -1,0 +1,707 @@
+{
+  "total_samples": 337,
+  "per_study": {
+    "A": 150,
+    "B": 172,
+    "C": 15
+  },
+  "diagnostic_categories": {
+    "Anxiety Disorders": {
+      "total": 87,
+      "pct": 25.82,
+      "per_study": {
+        "A": 47,
+        "B": 37,
+        "C": 3
+      }
+    },
+    "Trauma & Stressor-Related": {
+      "total": 85,
+      "pct": 25.22,
+      "per_study": {
+        "A": 66,
+        "B": 18,
+        "C": 1
+      }
+    },
+    "Mood Disorders": {
+      "total": 61,
+      "pct": 18.1,
+      "per_study": {
+        "A": 24,
+        "B": 36,
+        "C": 1
+      }
+    },
+    "Psychotic Spectrum": {
+      "total": 21,
+      "pct": 6.23,
+      "per_study": {
+        "A": 2,
+        "B": 15,
+        "C": 4
+      }
+    },
+    "Personality Disorders": {
+      "total": 15,
+      "pct": 4.45,
+      "per_study": {
+        "A": 0,
+        "B": 15,
+        "C": 0
+      }
+    },
+    "Other": {
+      "total": 11,
+      "pct": 3.26,
+      "per_study": {
+        "A": 1,
+        "B": 9,
+        "C": 1
+      }
+    },
+    "OCD & Related": {
+      "total": 11,
+      "pct": 3.26,
+      "per_study": {
+        "A": 1,
+        "B": 9,
+        "C": 1
+      }
+    },
+    "Eating Disorders": {
+      "total": 10,
+      "pct": 2.97,
+      "per_study": {
+        "A": 6,
+        "B": 3,
+        "C": 1
+      }
+    },
+    "Somatic & Health-Related": {
+      "total": 10,
+      "pct": 2.97,
+      "per_study": {
+        "A": 0,
+        "B": 8,
+        "C": 2
+      }
+    },
+    "Self-Harm & Suicidality": {
+      "total": 10,
+      "pct": 2.97,
+      "per_study": {
+        "A": 0,
+        "B": 10,
+        "C": 0
+      }
+    },
+    "Neurodevelopmental": {
+      "total": 8,
+      "pct": 2.37,
+      "per_study": {
+        "A": 1,
+        "B": 6,
+        "C": 1
+      }
+    },
+    "Sleep-Wake Disorders": {
+      "total": 4,
+      "pct": 1.19,
+      "per_study": {
+        "A": 1,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "Substance Use Disorders": {
+      "total": 4,
+      "pct": 1.19,
+      "per_study": {
+        "A": 1,
+        "B": 3,
+        "C": 0
+      }
+    }
+  },
+  "specific_conditions": {
+    "adjustment disorder": {
+      "total": 68,
+      "category": "Trauma & Stressor-Related",
+      "severity": "Mild",
+      "per_study": {
+        "A": 63,
+        "B": 5,
+        "C": 0
+      }
+    },
+    "generalized anxiety disorder": {
+      "total": 52,
+      "category": "Anxiety Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 47,
+        "B": 5,
+        "C": 0
+      }
+    },
+    "major depressive disorder": {
+      "total": 35,
+      "category": "Mood Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 23,
+        "B": 12,
+        "C": 0
+      }
+    },
+    "emotionally unstable (borderline) personality disorder": {
+      "total": 11,
+      "category": "Personality Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 11,
+        "C": 0
+      }
+    },
+    "bipolar disorder": {
+      "total": 9,
+      "category": "Mood Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 1,
+        "B": 8,
+        "C": 0
+      }
+    },
+    "psychosis (stable, on medication)": {
+      "total": 9,
+      "category": "Psychotic Spectrum",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 5,
+        "C": 4
+      }
+    },
+    "panic disorder": {
+      "total": 8,
+      "category": "Anxiety Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 7,
+        "C": 1
+      }
+    },
+    "late-life depression": {
+      "total": 7,
+      "category": "Mood Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 7,
+        "C": 0
+      }
+    },
+    "eating disorder": {
+      "total": 6,
+      "category": "Eating Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 6,
+        "B": 0,
+        "C": 0
+      }
+    },
+    "post-traumatic stress disorder": {
+      "total": 6,
+      "category": "Trauma & Stressor-Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 2,
+        "B": 4,
+        "C": 0
+      }
+    },
+    "social anxiety disorder": {
+      "total": 6,
+      "category": "Anxiety Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 5,
+        "C": 1
+      }
+    },
+    "schizophrenia (prodromal phase)": {
+      "total": 6,
+      "category": "Psychotic Spectrum",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 6,
+        "C": 0
+      }
+    },
+    "attention-deficit/hyperactivity disorder": {
+      "total": 5,
+      "category": "Neurodevelopmental",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 1,
+        "B": 3,
+        "C": 1
+      }
+    },
+    "self-harm (active urges)": {
+      "total": 5,
+      "category": "Self-Harm & Suicidality",
+      "severity": "Critical",
+      "per_study": {
+        "A": 0,
+        "B": 5,
+        "C": 0
+      }
+    },
+    "suicidal crisis (active, high risk)": {
+      "total": 5,
+      "category": "Self-Harm & Suicidality",
+      "severity": "Critical",
+      "per_study": {
+        "A": 0,
+        "B": 5,
+        "C": 0
+      }
+    },
+    "obsessive-compulsive disorder": {
+      "total": 4,
+      "category": "OCD & Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 1,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "anorexia nervosa (in recovery)": {
+      "total": 4,
+      "category": "Eating Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 1
+      }
+    },
+    "caregiver burnout": {
+      "total": 4,
+      "category": "Other",
+      "severity": "Mild",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 1
+      }
+    },
+    "complicated grief / prolonged grief": {
+      "total": 4,
+      "category": "Trauma & Stressor-Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 1
+      }
+    },
+    "schizophrenia": {
+      "total": 4,
+      "category": "Psychotic Spectrum",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 4,
+        "C": 0
+      }
+    },
+    "gender dysphoria with social anxiety": {
+      "total": 4,
+      "category": "Anxiety Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 4,
+        "C": 0
+      }
+    },
+    "chronic pain with depression": {
+      "total": 4,
+      "category": "Somatic & Health-Related",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 1
+      }
+    },
+    "perinatal depression (antenatal)": {
+      "total": 4,
+      "category": "Mood Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 1
+      }
+    },
+    "body dysmorphic disorder": {
+      "total": 4,
+      "category": "OCD & Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 1
+      }
+    },
+    "somatization disorder with health anxiety": {
+      "total": 3,
+      "category": "Somatic & Health-Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 2,
+        "C": 1
+      }
+    },
+    "specific phobia (flying)": {
+      "total": 3,
+      "category": "Anxiety Disorders",
+      "severity": "Mild",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "alcohol use disorder (early recovery)": {
+      "total": 3,
+      "category": "Substance Use Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "autism spectrum condition with sensory overload": {
+      "total": 3,
+      "category": "Neurodevelopmental",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "depression (undiagnosed, resistant to help)": {
+      "total": 3,
+      "category": "Mood Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "agoraphobia with panic disorder": {
+      "total": 3,
+      "category": "Anxiety Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "burnout syndrome with depressive features": {
+      "total": 3,
+      "category": "Mood Disorders",
+      "severity": "Mild",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "health anxiety with tangential thinking": {
+      "total": 3,
+      "category": "Somatic & Health-Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "generalised anxiety disorder": {
+      "total": 3,
+      "category": "Anxiety Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "late-life anxiety with mild cognitive concerns": {
+      "total": 3,
+      "category": "Anxiety Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 2,
+        "C": 1
+      }
+    },
+    "work-related stress": {
+      "total": 3,
+      "category": "Other",
+      "severity": "Mild",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "insomnia": {
+      "total": 3,
+      "category": "Sleep-Wake Disorders",
+      "severity": "Mild",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "anger dysregulation in emotionally unstable personality structure": {
+      "total": 3,
+      "category": "Personality Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "adjustment disorder (relationship distress)": {
+      "total": 3,
+      "category": "Trauma & Stressor-Related",
+      "severity": "Mild",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "perinatal anxiety (postnatal)": {
+      "total": 3,
+      "category": "Anxiety Disorders",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "dissociative episodes (comorbid with ptsd)": {
+      "total": 3,
+      "category": "Trauma & Stressor-Related",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "body image concerns": {
+      "total": 3,
+      "category": "Other",
+      "severity": "Mild",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "obsessive-compulsive disorder (contamination subtype)": {
+      "total": 3,
+      "category": "OCD & Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 0,
+        "B": 3,
+        "C": 0
+      }
+    },
+    "exam anxiety": {
+      "total": 2,
+      "category": "Anxiety Disorders",
+      "severity": "Mild",
+      "per_study": {
+        "A": 0,
+        "B": 2,
+        "C": 0
+      }
+    },
+    "no diagnosis": {
+      "total": 1,
+      "category": "Other",
+      "severity": "Mild",
+      "per_study": {
+        "A": 1,
+        "B": 0,
+        "C": 0
+      }
+    },
+    "sleep disorder": {
+      "total": 1,
+      "category": "Sleep-Wake Disorders",
+      "severity": "Mild",
+      "per_study": {
+        "A": 1,
+        "B": 0,
+        "C": 0
+      }
+    },
+    "substance use disorder": {
+      "total": 1,
+      "category": "Substance Use Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 1,
+        "B": 0,
+        "C": 0
+      }
+    },
+    "evaluate for psychotic features — possible psychotic prodrome": {
+      "total": 1,
+      "category": "Psychotic Spectrum",
+      "severity": "Severe",
+      "per_study": {
+        "A": 1,
+        "B": 0,
+        "C": 0
+      }
+    },
+    "evaluate for psychotic features — auditory hallucination": {
+      "total": 1,
+      "category": "Psychotic Spectrum",
+      "severity": "Severe",
+      "per_study": {
+        "A": 1,
+        "B": 0,
+        "C": 0
+      }
+    },
+    "complicated grief disorder": {
+      "total": 1,
+      "category": "Trauma & Stressor-Related",
+      "severity": "Moderate",
+      "per_study": {
+        "A": 1,
+        "B": 0,
+        "C": 0
+      }
+    },
+    "borderline personality disorder": {
+      "total": 1,
+      "category": "Personality Disorders",
+      "severity": "Severe",
+      "per_study": {
+        "A": 0,
+        "B": 1,
+        "C": 0
+      }
+    }
+  },
+  "severity": {
+    "Moderate": {
+      "total": 173,
+      "pct": 51.34,
+      "per_study": {
+        "A": 81,
+        "B": 84,
+        "C": 8
+      }
+    },
+    "Mild": {
+      "total": 94,
+      "pct": 27.89,
+      "per_study": {
+        "A": 65,
+        "B": 28,
+        "C": 1
+      }
+    },
+    "Severe": {
+      "total": 60,
+      "pct": 17.8,
+      "per_study": {
+        "A": 4,
+        "B": 50,
+        "C": 6
+      }
+    },
+    "Critical": {
+      "total": 10,
+      "pct": 2.97,
+      "per_study": {
+        "A": 0,
+        "B": 10,
+        "C": 0
+      }
+    }
+  },
+  "therapeutic_modalities": {
+    "CBT": {
+      "mentions": 109,
+      "pct_of_study_a": 72.67
+    },
+    "Humanistic / Person-Centred": {
+      "mentions": 100,
+      "pct_of_study_a": 66.67
+    },
+    "Mindfulness-Based": {
+      "mentions": 12,
+      "pct_of_study_a": 8.0
+    },
+    "Psychodynamic": {
+      "mentions": 8,
+      "pct_of_study_a": 5.33
+    },
+    "Motivational Interviewing": {
+      "mentions": 2,
+      "pct_of_study_a": 1.33
+    },
+    "Solution-Focused": {
+      "mentions": 2,
+      "pct_of_study_a": 1.33
+    },
+    "Trauma-Informed": {
+      "mentions": 1,
+      "pct_of_study_a": 0.67
+    },
+    "ACT": {
+      "mentions": 1,
+      "pct_of_study_a": 0.67
+    }
+  },
+  "unique_conditions_per_study": {
+    "A": 14,
+    "B": 43,
+    "C": 12
+  },
+  "total_unique_conditions": 50
+}

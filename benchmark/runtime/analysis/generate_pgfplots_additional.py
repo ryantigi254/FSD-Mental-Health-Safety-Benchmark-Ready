@@ -11,6 +11,7 @@ Outputs in analysis/figures/pgfplots/<figure-slug>/
 from __future__ import annotations
 
 import json
+import argparse
 import re
 from pathlib import Path
 
@@ -521,8 +522,30 @@ def build_fig4(analysis: dict) -> tuple[str, str, str, bool]:
     )
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Generate the standalone PGFPlots bundle from a distribution analysis JSON file.")
+    parser.add_argument(
+        "--analysis-json",
+        type=Path,
+        default=BASE / "distribution_analysis.json",
+        help="Analysis JSON payload to render.",
+    )
+    parser.add_argument(
+        "--out-dir",
+        type=Path,
+        default=OUT,
+        help="Directory in which to write the PGFPlots figure bundle.",
+    )
+    return parser.parse_args()
+
+
 def main() -> None:
-    with open(BASE / "distribution_analysis.json", encoding="utf-8") as f:
+    args = parse_args()
+    global OUT
+    OUT = args.out_dir.resolve()
+    OUT.mkdir(parents=True, exist_ok=True)
+
+    with open(args.analysis_json.resolve(), encoding="utf-8") as f:
         analysis = json.load(f)
 
     specs = build_output_specs(analysis)
