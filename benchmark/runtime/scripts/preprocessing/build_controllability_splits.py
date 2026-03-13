@@ -1029,6 +1029,18 @@ def build_all_splits(config: BuildConfig | None = None) -> Dict[str, Any]:
     rng.shuffle(multi_round_pool)
     print(f"  Multi-round pool (≥3 rounds): {len(multi_round_pool)}")
 
+    reserved_multi_round_needed = config.study_b_multi_n + config.study_c_n
+    reserved_multi_round_rows = multi_round_pool[:reserved_multi_round_needed]
+    reserved_multi_round_refs = {
+        (row["split"], row["source_openr1_id"]) for row in reserved_multi_round_rows
+    }
+    reserved_b_multi_rows = reserved_multi_round_rows[:config.study_b_multi_n]
+    reserved_c_rows = reserved_multi_round_rows[config.study_b_multi_n:config.study_b_multi_n + config.study_c_n]
+    print(
+        "  Reserved multi-round rows: "
+        f"Study B multi-turn={len(reserved_b_multi_rows)}, Study C={len(reserved_c_rows)}"
+    )
+
     # Ensure output dir
     config.output_dir.mkdir(parents=True, exist_ok=True)
     bias_catalogue = _load_bias_catalogue()
@@ -1044,11 +1056,23 @@ def build_all_splits(config: BuildConfig | None = None) -> Dict[str, Any]:
         "unresolved_available": len(unresolved_rows),
         "bias_catalogue_size": len(bias_catalogue),
         "reserved_controllability_dir": str(config.exclude_existing_controllability_dir) if config.exclude_existing_controllability_dir else None,
+        "reserved_multi_round_rows": {
+            "requested_total": reserved_multi_round_needed,
+            "reserved_total": len(reserved_multi_round_rows),
+            "study_b_multi_reserved": len(reserved_b_multi_rows),
+            "study_c_reserved": len(reserved_c_rows),
+        },
     }
 
     # ── Study A Controllability ──────────────────────────────────────
     print("\n=== Building Study A Controllability ===")
-    study_a_samples = _sample_balanced(underrep_pool, standard_pool, config.study_a_n, rng, fraction_underrep=0.4)
+    study_a_samples = _sample_balanced(
+        [r for r in underrep_pool if (r["split"], r["source_openr1_id"]) not in reserved_multi_round_refs],
+        [r for r in standard_pool if (r["split"], r["source_openr1_id"]) not in reserved_multi_round_refs],
+        config.study_a_n,
+        rng,
+        fraction_underrep=0.4,
+    )
     study_a_used_refs: Set[Tuple[str, int]] = set()
 
     study_a_data = {"samples": []}
@@ -1079,7 +1103,9 @@ def build_all_splits(config: BuildConfig | None = None) -> Dict[str, Any]:
     bias_pool = [
         r
         for r in resolved_rows
-        if (r["split"], r["source_openr1_id"]) not in study_a_used_refs and r["patient"].strip()
+        if (r["split"], r["source_openr1_id"]) not in study_a_used_refs
+        and (r["split"], r["source_openr1_id"]) not in reserved_multi_round_refs
+        and r["patient"].strip()
     ]
     rng.shuffle(bias_pool)
     bias_samples = bias_pool[:config.study_a_bias_n]
@@ -1129,7 +1155,12 @@ def build_all_splits(config: BuildConfig | None = None) -> Dict[str, Any]:
     # ── Study B Single-Turn Controllability ──────────────────────────
     print("\n=== Building Study B Single-Turn Controllability ===")
     all_used_refs = study_a_used_refs | bias_used_refs
-    b_pool = [r for r in resolved_rows if (r["split"], r["source_openr1_id"]) not in all_used_refs]
+    b_pool = [
+        r
+        for r in resolved_rows
+        if (r["split"], r["source_openr1_id"]) not in all_used_refs
+        and (r["split"], r["source_openr1_id"]) not in reserved_multi_round_refs
+    ]
     b_samples = _sample_balanced(
         [r for r in b_pool if r["inferred_category"] in UNDERREPRESENTED_CATEGORIES],
         [r for r in b_pool if r["inferred_category"] not in UNDERREPRESENTED_CATEGORIES],
@@ -1179,9 +1210,11 @@ def build_all_splits(config: BuildConfig | None = None) -> Dict[str, Any]:
     # ── Study B Multi-Turn Controllability ───────────────────────────
     print("\n=== Building Study B Multi-Turn Controllability ===")
     all_used_refs = all_used_refs | b_used_refs
-    mt_pool = [r for r in multi_round_pool if (r["split"], r["source_openr1_id"]) not in all_used_refs]
-    rng.shuffle(mt_pool)
-    mt_samples = mt_pool[:config.study_b_multi_n]
+    mt_samples = [
+        row
+        for row in reserved_b_multi_rows
+        if (row["split"], row["source_openr1_id"]) not in all_used_refs
+    ][:config.study_b_multi_n]
 
     study_b_mt_data: List[Dict[str, Any]] = []
     for i, row in enumerate(mt_samples, 1):
@@ -1228,9 +1261,11 @@ def build_all_splits(config: BuildConfig | None = None) -> Dict[str, Any]:
 
     # ── Study C Controllability ──────────────────────────────────────
     print("\n=== Building Study C Controllability ===")
-    c_pool = [r for r in multi_round_pool if (r["split"], r["source_openr1_id"]) not in all_used_refs]
-    rng.shuffle(c_pool)
-    c_samples = c_pool[:config.study_c_n]
+    c_samples = [
+        row
+        for row in reserved_c_rows
+        if (row["split"], row["source_openr1_id"]) not in all_used_refs
+    ][:config.study_c_n]
 
     study_c_data = {"cases": []}
     for i, row in enumerate(c_samples, 1):
