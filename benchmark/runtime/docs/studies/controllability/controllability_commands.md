@@ -23,7 +23,7 @@ PYTHONPATH=src python scripts/studies/controllability/generate_gold_plans.py
 
 ## Generation Commands
 
-All controllability generation uses a single unified script:
+Canonical controllability generation uses a single unified script:
 
 ```
 hf-local-scripts/run_ctrl_generate_only.py --study <STUDY> --model-id <MODEL>
@@ -37,11 +37,14 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py \
     --study ctrl_study_a --model-id qwq
 ```
 
+The old `ctrl_v2_study_*` names are compatibility aliases only.
+
 ---
 
 ## Study A Controllability (Reasoning Adherence)
 
-Generates paired `cot_controlled` + `direct` responses for Δ_Reasoning comparison.
+Generates the same controllability cases under `spontaneous`,
+`generic_control`, and `explicit_control`.
 
 ```bash
 # LM Studio models
@@ -69,7 +72,7 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --
 
 ## Study A Bias Controllability (Bias-Aware RA)
 
-Generates `cot_controlled` responses with explicit bias acknowledgement constraint.
+Generates matched-arm bias runs on the canonical adversarial bias cases.
 
 ```bash
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwq
@@ -83,7 +86,7 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bi
 
 ## Study B Single-Turn Controllability (CHR)
 
-Generates `control` + `injected` pairs under `cot_controlled` mode.
+Generates `control` + `injected` pairs for each arm.
 
 ```bash
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwq
@@ -97,7 +100,7 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --
 
 ## Study B Multi-Turn Controllability (Pressure Resistance)
 
-Generates 20-turn rolling-context conversations under `cot_controlled` mode.
+Generates 20-turn rolling-context conversations for each arm.
 
 ```bash
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq
@@ -111,7 +114,7 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_mu
 
 ## Study C Controllability (Controlled Entity Recall)
 
-Generates summary + dialogue pairs per turn under `cot_controlled` mode.
+Generates summary-only outputs per turn for each arm.
 
 ```bash
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq
@@ -173,3 +176,36 @@ from reliable_clinical_benchmark.metrics import calculate_controlled_entity_reca
 # result = calculate_controlled_entity_recall(summaries, entities_per_sample)
 "
 ```
+
+---
+
+## Evaluation
+
+```bash
+cd benchmark/runtime
+PYTHONPATH=src python scripts/evaluation/run_controllability_pipeline.py \
+    --model <results_model_dir>
+```
+
+## Canonical Outputs
+
+- `results/<model>/ctrl_study_a_generations.jsonl`
+- `results/<model>/ctrl_study_a_bias_generations.jsonl`
+- `results/<model>/ctrl_study_b_generations.jsonl`
+- `results/<model>/ctrl_study_b_multi_turn_generations.jsonl`
+- `results/<model>/ctrl_study_c_generations.jsonl`
+- `results/<model>/ctrl_study_a_results.json`
+- `results/<model>/ctrl_study_a_bias_results.json`
+- `results/<model>/ctrl_study_b_results.json`
+- `results/<model>/ctrl_study_b_multi_turn_results.json`
+- `results/<model>/ctrl_study_c_results.json`
+- `results/<model>/controllability_summary.json`
+
+Compatibility aliases are also written under the old `ctrl_v2_study_*` and
+`controllability_v2_summary.json` filenames.
+
+## Notes
+
+- `ctrl_study_a_bias` uses the canonical adversarial bias cases for all three arms.
+- `ctrl_study_b_multi_turn` injects the control text once at conversation start.
+- `ctrl_study_c` applies the arm to summaries only.

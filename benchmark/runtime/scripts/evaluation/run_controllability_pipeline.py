@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run controllability evaluation and write structured result JSON files."""
+"""Run canonical controllability evaluation and write structured result JSON files."""
 # pylint: disable=import-error,wrong-import-position
 
 from __future__ import annotations
@@ -57,7 +57,7 @@ def main() -> int:
         use_nli=not args.skip_nli,
     )
     print(f"Model: {summary.model}")
-    print(f"Benchmark control score: {summary.benchmark_control.score}")
+    print(f"Studies written: {', '.join(sorted(summary.studies.keys()))}")
     print(f"Wrote controllability outputs under: {Path(args.results_dir) / args.model}")
     return 0
 
