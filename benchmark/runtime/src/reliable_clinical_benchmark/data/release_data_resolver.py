@@ -23,6 +23,7 @@ class MetricDataRoots:
     study_c_gold_dir: Path
     source: str
     release_name: Optional[str] = None
+    layout: str = "release"
 
 
 def _resolve_explicit_root(runtime_root: Path, explicit_root: Path) -> Path:
@@ -72,30 +73,53 @@ def _resolve_latest_release_root(data_dir: Path) -> tuple[Path, str]:
     )
 
 
-def _validate_root_layout(root: Path, source: str) -> None:
+def _resolve_layout_dirs(root: Path) -> tuple[Path, Path, Path, str] | None:
+    release_layout = (
+        root / "openr1_psy_splits",
+        root / "study_a_gold",
+        root / "study_c_gold",
+        "release",
+    )
+    if all(path.is_dir() for path in release_layout[:3]):
+        return release_layout
+
+    frozen_study_a_dir = root / "study_a"
+    frozen_study_c_dir = root / "study_c"
+    if frozen_study_a_dir.is_dir() and frozen_study_c_dir.is_dir():
+        required_root_files = [
+            root / "study_a_test.json",
+            root / "study_b_test.json",
+            root / "study_b_multi_turn_test.json",
+            root / "study_c_test.json",
+            frozen_study_a_dir / "gold_diagnosis_labels.json",
+        ]
+        if all(path.is_file() for path in required_root_files):
+            return root, frozen_study_a_dir, frozen_study_c_dir, "frozen_snapshot"
+
+    return None
+
+
+def _validate_root_layout(root: Path, source: str) -> tuple[Path, Path, Path, str]:
     if not root.exists() or not root.is_dir():
         raise FileNotFoundError(
             f"Resolved data root does not exist for {source}: {root}"
         )
 
-    required_dirs = [
-        root / "openr1_psy_splits",
-        root / "study_a_gold",
-        root / "study_c_gold",
-    ]
-    missing_dirs = [str(path) for path in required_dirs if not path.is_dir()]
-    if missing_dirs:
+    layout_dirs = _resolve_layout_dirs(root)
+    if layout_dirs is None:
         raise FileNotFoundError(
-            f"Invalid data root for {source}. Missing required directories: "
-            f"{', '.join(missing_dirs)}"
+            f"Invalid data root for {source}. Expected either a release layout with "
+            f"openr1_psy_splits/study_a_gold/study_c_gold or a frozen snapshot layout "
+            f"with top-level study_* files plus study_a/ and study_c/ subdirectories: {root}"
         )
 
+    openr1_splits_dir, study_a_gold_dir, study_c_gold_dir, layout = layout_dirs
     required_files = [
-        root / "openr1_psy_splits" / "study_a_test.json",
-        root / "openr1_psy_splits" / "study_b_test.json",
-        root / "openr1_psy_splits" / "study_b_multi_turn_test.json",
-        root / "openr1_psy_splits" / "study_c_test.json",
-        root / "study_a_gold" / "gold_diagnosis_labels.json",
+        openr1_splits_dir / "study_a_test.json",
+        openr1_splits_dir / "study_b_test.json",
+        openr1_splits_dir / "study_b_multi_turn_test.json",
+        openr1_splits_dir / "study_c_test.json",
+        study_a_gold_dir / "gold_diagnosis_labels.json",
     ]
     missing_files = [str(path) for path in required_files if not path.is_file()]
     if missing_files:
@@ -103,6 +127,7 @@ def _validate_root_layout(root: Path, source: str) -> None:
             f"Invalid data root for {source}. Missing required files: "
             f"{', '.join(missing_files)}"
         )
+    return openr1_splits_dir, study_a_gold_dir, study_c_gold_dir, layout
 
 
 def resolve_metric_data_roots(
@@ -147,14 +172,17 @@ def resolve_metric_data_roots(
             f"Expected one of: {', '.join(DATA_SOURCE_CHOICES)}"
         )
 
-    _validate_root_layout(resolved_root, source)
+    openr1_splits_dir, study_a_gold_dir, study_c_gold_dir, layout = _validate_root_layout(
+        resolved_root, source
+    )
 
     return MetricDataRoots(
         root=resolved_root,
-        openr1_splits_dir=resolved_root / "openr1_psy_splits",
-        study_a_gold_dir=resolved_root / "study_a_gold",
-        study_c_gold_dir=resolved_root / "study_c_gold",
+        openr1_splits_dir=openr1_splits_dir,
+        study_a_gold_dir=study_a_gold_dir,
+        study_c_gold_dir=study_c_gold_dir,
         source=source,
         release_name=release_name,
+        layout=layout,
     )
 

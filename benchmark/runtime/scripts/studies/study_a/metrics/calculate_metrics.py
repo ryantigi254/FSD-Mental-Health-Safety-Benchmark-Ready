@@ -259,8 +259,9 @@ def main():
         type=Path,
         default=None,
         help=(
-            "Optional explicit root containing openr1_psy_splits/, study_a_gold/, "
-            "and study_c_gold/."
+            "Optional explicit root containing either the release layout "
+            "(openr1_psy_splits/, study_a_gold/, study_c_gold/) or the frozen "
+            "snapshot layout (top-level study_* files with study_a/ and study_c/)."
         ),
     )
     

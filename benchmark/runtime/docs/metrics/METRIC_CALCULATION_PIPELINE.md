@@ -27,7 +27,7 @@ Outputs:
 2. Resolve dataset root:
    - default: `--data-source latest_release`
    - legacy mode: `--data-source working_data`
-   - explicit override: `--data-root <root-containing-openr1_psy_splits-study_a_gold-study_c_gold>`
+   - explicit override: `--data-root <release-root-or-frozen-v5-root>`
 3. Run metric scripts by study.
 4. Persist metric JSON artefacts under `metric-results/`.
 5. Use downstream analysis notebooks/reports from `metric-results/` outputs.
@@ -57,6 +57,24 @@ PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/studies/study_a/metrics/calcula
 # Use explicit data root (release directory or custom root with required subfolders)
 PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/studies/study_b/metrics/calculate_metrics.py \
   --data-root data/releases/clinician_readiness_v4_2026-02-22
+
+# Use the frozen v5 snapshot directly
+PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/studies/study_c/metrics/calculate_metrics.py \
+  --data-root data/frozen_splits/v5
+```
+
+## 3.1 Invariance workflow on frozen v5
+
+The clinician-ready invariance tooling sits alongside the canonical metric pipeline and keeps the metric definitions unchanged:
+
+```bash
+PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/analysis/analyse_clinical_distribution.py --study study_a
+PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/studies/v5_review/generate_invariance_manifest.py --study study_a --sample-size 150
+PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/evaluation/run_invariance_comparison.py \
+  --study study_a \
+  --base-cache results/<model>/study_a_generations.jsonl \
+  --variant-cache results/<model>/study_a_invariance_lexical.jsonl \
+  --out metric-results/<model>/study_a_invariance_lexical.json
 ```
 
 ## 4. Study A bias metric contract
