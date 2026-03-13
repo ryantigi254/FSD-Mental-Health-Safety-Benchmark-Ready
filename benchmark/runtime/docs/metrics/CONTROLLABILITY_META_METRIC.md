@@ -106,7 +106,9 @@ In practice, the next implementation step is:
 Recommended next additions:
 
 - `scripts/evaluation/run_controllability_comparison.py`
-- `notebooks/controllability_analysis.ipynb`
+- `scripts/evaluation/summarize_invariance_results.py`
+- `notebooks/invariance/controllability_analysis.ipynb`
+- `notebooks/invariance/invariance_analysis.ipynb`
 - `metric-results/{model-id}/controllability/...`
 
 The comparison script should mirror `run_invariance_comparison.py`, but compute:
