@@ -46,6 +46,18 @@ class ManifestRecord:
     metadata: Dict[str, Any]
 
 
+@dataclass(frozen=True)
+class InvarianceStudySpec:
+    """Configuration for an invariance study."""
+
+    canonical_name: str
+    aliases: Tuple[str, ...]
+    sampling_unit: str
+    coverage_axes: Tuple[str, ...]
+    variant_defaults: Tuple[str, ...]
+    pairing_unit: str
+
+
 def _load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -336,34 +348,93 @@ def _study_c_records(root: Path) -> List[ManifestRecord]:
     return records
 
 
+_STUDY_SPECS: Dict[str, InvarianceStudySpec] = {
+    "study_a": InvarianceStudySpec(
+        canonical_name="study_a",
+        aliases=("a", "study_a"),
+        sampling_unit="row",
+        coverage_axes=("condition", "risk", "severity"),
+        variant_defaults=("paraphrase_lexical", "paraphrase_syntax", "surface_formatting"),
+        pairing_unit="id",
+    ),
+    "study_b": InvarianceStudySpec(
+        canonical_name="study_b",
+        aliases=("b", "study_b"),
+        sampling_unit="row",
+        coverage_axes=("persona", "risk", "age_bucket", "condition"),
+        variant_defaults=("incorrect_opinion_rewording", "opinion_intensity", "assertion_vs_question"),
+        pairing_unit="id",
+    ),
+    "study_b_multi_turn": InvarianceStudySpec(
+        canonical_name="study_b_multi_turn",
+        aliases=("b_multi", "study_b_multi", "study_b_multi_turn"),
+        sampling_unit="conversation",
+        coverage_axes=("persona", "risk", "age_bucket", "schedule", "style"),
+        variant_defaults=("pressure_schedule_shift", "pressure_tone", "pressure_intensity"),
+        pairing_unit="case_id",
+    ),
+    "study_c": InvarianceStudySpec(
+        canonical_name="study_c",
+        aliases=("c", "study_c"),
+        sampling_unit="conversation",
+        coverage_axes=("condition", "risk", "age_bucket", "persona"),
+        variant_defaults=("summary_wording", "non_critical_turn_reorder", "patient_rephrasing"),
+        pairing_unit="case_id",
+    ),
+}
+
+_RECORD_LOADERS: Dict[str, Callable[[Path], List[ManifestRecord]]] = {
+    "study_a": _study_a_records,
+    "study_b": _study_b_records,
+    "study_b_multi_turn": _study_b_multi_turn_records,
+    "study_c": _study_c_records,
+}
+
+
+def get_study_spec(study: str) -> InvarianceStudySpec:
+    """Resolve a study alias to its canonical invariance spec."""
+
+    normalized = study.lower().strip()
+    for spec in _STUDY_SPECS.values():
+        if normalized in spec.aliases:
+            return spec
+    raise ValueError(f"Unsupported study '{study}'")
+
+
+def study_cli_choices() -> Tuple[str, ...]:
+    """Return canonical study names for CLI choice lists."""
+
+    return tuple(_STUDY_SPECS.keys())
+
+
 def load_manifest_records(study: str, root: Path) -> List[ManifestRecord]:
     """Load records for invariance manifest generation."""
 
-    normalized = study.lower().strip()
-    if normalized in {"a", "study_a"}:
-        return _study_a_records(root)
-    if normalized in {"b", "study_b"}:
-        return _study_b_records(root)
-    if normalized in {"b_multi", "study_b_multi", "study_b_multi_turn"}:
-        return _study_b_multi_turn_records(root)
-    if normalized in {"c", "study_c"}:
-        return _study_c_records(root)
-    raise ValueError(f"Unsupported study '{study}'")
+    spec = get_study_spec(study)
+    return _RECORD_LOADERS[spec.canonical_name](root)
+
+
+def _summarise_axis_counts(records: Sequence[ManifestRecord], axes: Sequence[str]) -> Dict[str, Dict[str, int]]:
+    summary: Dict[str, Counter[str]] = defaultdict(Counter)
+    for record in records:
+        for axis in axes:
+            value = record.strata.get(axis)
+            if value is not None:
+                summary[axis][value] += 1
+    return {axis: dict(summary[axis].most_common()) for axis in axes}
 
 
 def analyse_distribution(study: str, root: Path) -> Dict[str, Any]:
     """Summarise the available sampling strata for a study."""
 
+    spec = get_study_spec(study)
     records = load_manifest_records(study, root)
-    summary: Dict[str, Counter[str]] = defaultdict(Counter)
-    for record in records:
-        for key, value in record.strata.items():
-            summary[key][value] += 1
     return {
-        "study": study,
+        "study": spec.canonical_name,
         "data_root": str(root),
         "n_records": len(records),
-        "strata": {key: dict(counter.most_common()) for key, counter in summary.items()},
+        "coverage_axes": list(spec.coverage_axes),
+        "strata": _summarise_axis_counts(records, list(spec.coverage_axes)),
     }
 
 
@@ -466,6 +537,7 @@ def build_invariance_manifest(
 ) -> Dict[str, Any]:
     """Create a deterministic sampling manifest for invariance experiments."""
 
+    spec = get_study_spec(study)
     records = load_manifest_records(study, root)
     if sample_size <= 0:
         raise ValueError("sample_size must be > 0")
@@ -474,7 +546,10 @@ def build_invariance_manifest(
             f"sample_size={sample_size} exceeds available records ({len(records)}) for {study}"
         )
 
-    strata_keys = sorted(records[0].strata.keys()) if records else []
+    extra_axes = sorted(
+        key for key in (records[0].strata.keys() if records else []) if key not in spec.coverage_axes
+    )
+    strata_keys = list(spec.coverage_axes) + extra_axes
     grouped: Dict[Tuple[str, ...], List[ManifestRecord]] = defaultdict(list)
     for record in records:
         grouped[tuple(record.strata[key] for key in strata_keys)].append(record)
@@ -494,44 +569,22 @@ def build_invariance_manifest(
             f"Deterministic allocation bug for {study}: expected {sample_size} records, got {len(sampled)}"
         )
 
-    variant_defaults = {
-        "study_a": ["paraphrase_lexical", "paraphrase_syntax", "surface_formatting"],
-        "study_b": ["incorrect_opinion_rewording", "opinion_intensity", "assertion_vs_question"],
-        "study_b_multi_turn": ["pressure_schedule_shift", "pressure_tone", "pressure_intensity"],
-        "study_c": ["summary_wording", "non_critical_turn_reorder", "patient_rephrasing"],
-    }
-    coverage_axes = {
-        "study_a": ["condition", "risk", "severity"],
-        "study_b": ["persona", "risk", "age_bucket", "condition"],
-        "study_b_multi_turn": ["persona", "risk", "age_bucket", "schedule", "style"],
-        "study_c": ["condition", "risk", "age_bucket", "persona"],
-    }
-    study_key = {
-        "a": "study_a",
-        "study_a": "study_a",
-        "b": "study_b",
-        "study_b": "study_b",
-        "b_multi": "study_b_multi_turn",
-        "study_b_multi": "study_b_multi_turn",
-        "study_b_multi_turn": "study_b_multi_turn",
-        "c": "study_c",
-        "study_c": "study_c",
-    }[study.lower().strip()]
-
     manifest = {
-        "study": study_key,
+        "study": spec.canonical_name,
         "seed": seed,
         "sample_size": sample_size,
         "data_root": str(root),
-        "sampling_unit": "conversation" if study_key in {"study_b_multi_turn", "study_c"} else "row",
+        "sampling_unit": spec.sampling_unit,
         "sampling_role": "diagnostic_subset",
         "sampling_basis": (
             "Heuristic first-pass robustness budget over the frozen clinician-ready split; "
             "not a benchmark-mandated percentage threshold."
         ),
-        "coverage_axes": coverage_axes[study_key],
+        "coverage_axes": list(spec.coverage_axes),
         "stratification_keys": strata_keys,
-        "variant_defaults": variant_defaults[study_key],
+        "variant_defaults": list(spec.variant_defaults),
+        "available_counts": _summarise_axis_counts(records, list(spec.coverage_axes)),
+        "selected_counts": _summarise_axis_counts(sampled, list(spec.coverage_axes)),
         "records": [
             {
                 "id": record.id,
@@ -602,6 +655,37 @@ def _load_study_c_metrics_script():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def _ensure_matching_pairs(
+    base_values: Mapping[str, float],
+    variant_values: Mapping[str, float],
+    *,
+    metric_name: str,
+    pairing_unit: str,
+) -> None:
+    base_ids = set(base_values)
+    variant_ids = set(variant_values)
+    if base_ids == variant_ids:
+        return
+
+    missing_in_variant = sorted(base_ids - variant_ids)
+    missing_in_base = sorted(variant_ids - base_ids)
+    details: List[str] = []
+    if missing_in_variant:
+        details.append(
+            f"missing in variant ({pairing_unit}): {missing_in_variant[:5]}"
+            f"{'...' if len(missing_in_variant) > 5 else ''}"
+        )
+    if missing_in_base:
+        details.append(
+            f"missing in base ({pairing_unit}): {missing_in_base[:5]}"
+            f"{'...' if len(missing_in_base) > 5 else ''}"
+        )
+    raise ValueError(
+        f"Paired comparison for metric '{metric_name}' requires identical {pairing_unit} sets; "
+        + "; ".join(details)
+    )
 
 
 def _study_a_case_metrics(cache_path: Path, root: Path) -> Dict[str, Dict[str, float]]:
@@ -861,13 +945,12 @@ def compare_invariance_runs(
 ) -> Dict[str, Any]:
     """Compare a base and variant cache using paired bootstrap deltas."""
 
-    normalized = study.lower().strip()
-    if normalized in {"a", "study_a"}:
+    spec = get_study_spec(study)
+    if spec.canonical_name == "study_a":
         base_metrics = _study_a_case_metrics(base_cache, data_root)
         variant_metrics = _study_a_case_metrics(variant_cache, data_root)
         metric_names = ["faithfulness_gap", "step_f1", "acc_cot", "acc_early"]
-        pairing_unit = "id"
-    elif normalized in {"b", "study_b"}:
+    elif spec.canonical_name == "study_b":
         base_metrics = _study_b_case_metrics(base_cache, data_root)
         variant_metrics = _study_b_case_metrics(variant_cache, data_root)
         metric_names = [
@@ -876,13 +959,11 @@ def compare_invariance_runs(
             "injected_agreement_rate",
             "turn_of_flip_proxy",
         ]
-        pairing_unit = "id"
-    elif normalized in {"b_multi", "study_b_multi", "study_b_multi_turn"}:
+    elif spec.canonical_name == "study_b_multi_turn":
         base_metrics = _study_b_multi_turn_case_metrics(base_cache, data_root)
         variant_metrics = _study_b_multi_turn_case_metrics(variant_cache, data_root)
         metric_names = ["turn_of_flip"]
-        pairing_unit = "case_id"
-    elif normalized in {"c", "study_c"}:
+    elif spec.canonical_name == "study_c":
         base_metrics = _study_c_case_metrics(
             base_cache,
             data_root,
@@ -896,7 +977,6 @@ def compare_invariance_runs(
             nli_stride=nli_stride,
         )
         metric_names = ["entity_recall_t10", "knowledge_conflict_rate"]
-        pairing_unit = "case_id"
     else:
         raise ValueError(f"Unsupported study '{study}'")
 
@@ -912,6 +992,12 @@ def compare_invariance_runs(
             for row_id, metrics in variant_metrics.items()
             if metric_name in metrics
         }
+        _ensure_matching_pairs(
+            base_values,
+            variant_values,
+            metric_name=metric_name,
+            pairing_unit=spec.pairing_unit,
+        )
         output_metrics[metric_name] = paired_bootstrap_delta(
             base_values,
             variant_values,
@@ -920,8 +1006,8 @@ def compare_invariance_runs(
         )
 
     return {
-        "study": normalized,
-        "pairing_unit": pairing_unit,
+        "study": spec.canonical_name,
+        "pairing_unit": spec.pairing_unit,
         "data_root": str(data_root),
         "base_cache": str(base_cache),
         "variant_cache": str(variant_cache),

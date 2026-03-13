@@ -57,4 +57,6 @@ def test_build_invariance_manifest_is_deterministic_and_preserves_high_risk_rows
     assert manifest_one["sampling_role"] == "diagnostic_subset"
     assert "not a benchmark-mandated percentage threshold" in manifest_one["sampling_basis"]
     assert manifest_one["coverage_axes"] == ["persona", "risk", "age_bucket", "condition"]
-    assert manifest_one["stratification_keys"] == ["age_bucket", "condition", "persona", "risk", "severity"]
+    assert manifest_one["stratification_keys"] == ["persona", "risk", "age_bucket", "condition", "severity"]
+    assert "older_adult" in manifest_one["available_counts"]["age_bucket"]
+    assert sum(manifest_one["selected_counts"]["risk"].values()) == 3

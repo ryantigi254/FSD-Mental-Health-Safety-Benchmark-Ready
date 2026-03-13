@@ -34,6 +34,17 @@ It is a diagnostic stress-test layer. It does not replace the canonical full-run
 - Variant caches: `results/{model-id}/study_*_invariance_*.jsonl`
 - Comparison outputs: `metric-results/{model-id}/...` or an explicit `--out` path
 
+Manifest metadata includes:
+
+- `coverage_axes`: the primary balancing axes for that study
+- `available_counts` / `selected_counts`: quick coverage summaries
+- `sampling_role=diagnostic_subset`: explicit marker that this is an add-on diagnostic layer
+
+## Pairing contract
+
+- Base and variant runs must contain the same paired evaluation units for the metric being compared.
+- The comparison wrapper now fails closed on mismatched IDs / case IDs instead of silently intersecting the two caches.
+
 ## Explicit data-root support
 
 The metric scripts now accept either:
