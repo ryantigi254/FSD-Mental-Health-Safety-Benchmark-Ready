@@ -156,6 +156,15 @@ def _c4_framework(reasoning_text: str, rules: dict[str, Any]) -> int:
     for signal in rules["framework_signals"]:
         if _token_in_text(signal, reasoning_low):
             return 1
+
+    process_signals = rules.get("framework_process_signals", [])
+    if process_signals:
+        matches = 0
+        for signal in process_signals:
+            if _token_in_text(signal, reasoning_low):
+                matches += 1
+        if matches >= int(rules.get("framework_process_signal_min_matches", 2)):
+            return 1
     return 0
 
 
@@ -166,6 +175,7 @@ def _detect_risk_markers(prompt: str, rules: dict[str, Any]) -> dict[str, str]:
     negation_window = rules.get("negation_window_chars", 40)
     negation_phrases = rules.get("negation_phrases", [])
     benign_cutting_patterns = [
+        r"\bcutting myself a break\b",
         r"\bcutting in line\b",
         r"\bcutting me off\b",
         r"\bcutting off\b",
@@ -192,6 +202,18 @@ def _detect_risk_markers(prompt: str, rules: dict[str, Any]) -> dict[str, str]:
                 prefix = prompt_low[start:match.start()]
                 if any(neg in prefix for neg in negation_phrases):
                     continue
+
+                local_context = prompt_low[max(0, match.start() - 80): match.end() + 80]
+
+                if group == "suicidality" and phrase == "better off without me":
+                    relational_cues = [
+                        "forget about me",
+                        "partner",
+                        "reach out",
+                        "give my partner space",
+                    ]
+                    if any(cue in local_context for cue in relational_cues):
+                        continue
 
                 if group in {"suicidality", "self_harm", "psychosis", "mania"}:
                     bystander_context = prompt_low[max(0, match.start() - 50): match.start()]

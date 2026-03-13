@@ -64,12 +64,14 @@ _readiness = _load_module(
 
 DEFAULT_CTRL_DIR = _readiness.DEFAULT_CTRL_DIR
 DEFAULT_PACKAGE_DIR = _readiness.DEFAULT_PACKAGE_DIR
+DEFAULT_RULES_PATH = _readiness.DEFAULT_RULES_PATH
 DEFAULT_VERIFICATION_DIR = _readiness.DEFAULT_VERIFICATION_DIR
 EXPECTED_CTRL_COUNTS = _readiness.EXPECTED_CTRL_COUNTS
 REVIEW_FILENAMES = _readiness.REVIEW_FILENAMES
 build_clinician_package = _readiness.build_clinician_package
 review_blockers = _readiness.review_blockers
 review_summary_rows = _readiness.review_summary_rows
+serialise_path = _readiness.serialise_path
 verify_package_manifest = _readiness.verify_package_manifest
 write_json = _readiness.write_json
 
@@ -103,8 +105,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=None,
         help="Preflight report path. Defaults to <package-dir>/sendoff_preflight_report.json.",
     )
-    parser.add_argument("--rules", type=Path, default=ROOT / "data" / "verification" / "v4" / "rubric_rules_v2.json")
+    parser.add_argument("--rules", type=Path, default=DEFAULT_RULES_PATH)
     return parser.parse_args(argv)
+
+
+def _resolve_cli_path(path: Path | None) -> Path | None:
+    if path is None:
+        return None
+    if path.is_absolute():
+        return path.resolve()
+    return (Path.cwd() / path).resolve()
 
 
 def _required_review_files(verification_dir: Path) -> list[Path]:
@@ -122,6 +132,11 @@ def _required_review_files(verification_dir: Path) -> list[Path]:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
+    args.ctrl_dir = _resolve_cli_path(args.ctrl_dir)
+    args.verification_dir = _resolve_cli_path(args.verification_dir)
+    args.package_dir = _resolve_cli_path(args.package_dir)
+    args.output = _resolve_cli_path(args.output)
+    args.rules = _resolve_cli_path(args.rules)
     output_path = args.output or (args.package_dir / "sendoff_preflight_report.json")
     output_path.parent.mkdir(parents=True, exist_ok=True)
     args.verification_dir.mkdir(parents=True, exist_ok=True)
@@ -199,9 +214,9 @@ def main(argv: list[str] | None = None) -> int:
     preflight_payload = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "version": "controllability_v0.1_large_resolved_preflight",
-        "ctrl_dir": str(args.ctrl_dir.resolve()),
-        "verification_dir": str(args.verification_dir.resolve()),
-        "package_dir": str(args.package_dir.resolve()),
+        "ctrl_dir": serialise_path(args.ctrl_dir),
+        "verification_dir": serialise_path(args.verification_dir),
+        "package_dir": serialise_path(args.package_dir),
         "overall_passed": overall_passed,
         "release_status": "ready" if overall_passed else "blocked",
         "missing_artifacts": missing_artifacts,

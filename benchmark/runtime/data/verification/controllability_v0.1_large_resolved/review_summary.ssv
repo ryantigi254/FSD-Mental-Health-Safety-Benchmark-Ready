@@ -1,5 +1,5 @@
 study;expected_rows;actual_rows;acceptable;needs_review;reject;review_scope;counts_match;duplicate_item_ids;notes
-study_a;2243;2243;1906;328;9;study_a_full_rubric;1;0;
+study_a;2243;2243;2243;0;0;study_a_full_rubric;1;0;
 study_a_bias;2243;2243;2243;0;0;study_a_bias_mapped;1;0;
 study_b_single;2243;2243;2243;0;0;study_b_mapped;1;0;
 study_b_multi;112;112;112;0;0;study_b_mapped;1;0;
