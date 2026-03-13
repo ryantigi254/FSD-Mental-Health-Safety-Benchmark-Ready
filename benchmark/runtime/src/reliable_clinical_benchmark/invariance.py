@@ -796,7 +796,11 @@ def materialize_invariance_split_root(
             }
             study_c_dir = output_root / "study_c"
             study_c_dir.mkdir(parents=True, exist_ok=True)
-            for target in (study_c_dir / "study_c_target_plans.json", output_root / "study_c_target_plans.json"):
+            for target in (
+                study_c_dir / "target_plans.json",
+                study_c_dir / "study_c_target_plans.json",
+                output_root / "study_c_target_plans.json",
+            ):
                 target.write_text(json.dumps(filtered_plans, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
             for target in (study_c_dir / "entity_evidence_map.json", output_root / "entity_evidence_map.json"):
                 target.write_text(json.dumps(filtered_case_evidence, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

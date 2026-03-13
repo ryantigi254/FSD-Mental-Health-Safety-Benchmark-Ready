@@ -101,4 +101,5 @@ def test_materialize_invariance_split_root_builds_frozen_layout(tmp_path: Path):
     assert (output_root / "study_b_multi_turn.json").exists()
     assert (output_root / "study_c_test.json").exists()
     assert (output_root / "study_a" / "gold_diagnosis_labels.json").exists()
+    assert (output_root / "study_c" / "target_plans.json").exists()
     assert (output_root / "study_c" / "study_c_target_plans.json").exists()

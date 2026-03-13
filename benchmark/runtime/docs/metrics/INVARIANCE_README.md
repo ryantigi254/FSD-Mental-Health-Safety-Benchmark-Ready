@@ -68,7 +68,8 @@ The generated root is a valid frozen-snapshot-style `data-root`, containing:
 - `study_b_multi_turn_test.json`
 - `study_c_test.json`
 - `study_a/gold_diagnosis_labels.json`
-- `study_c/study_c_target_plans.json`
+- `study_c/target_plans.json`
+- `study_c/study_c_target_plans.json` (legacy compatibility alias)
 
 ## Generation commands
 

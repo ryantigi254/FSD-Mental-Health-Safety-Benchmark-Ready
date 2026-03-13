@@ -86,6 +86,11 @@ def _resolve_layout_dirs(root: Path) -> tuple[Path, Path, Path, str] | None:
     frozen_study_a_dir = root / "study_a"
     frozen_study_c_dir = root / "study_c"
     if frozen_study_a_dir.is_dir() and frozen_study_c_dir.is_dir():
+        study_c_target_plan_candidates = [
+            frozen_study_c_dir / "target_plans.json",
+            frozen_study_c_dir / "study_c_target_plans.json",
+            root / "study_c_target_plans.json",
+        ]
         required_root_files = [
             root / "study_a_test.json",
             root / "study_b_test.json",
@@ -93,7 +98,9 @@ def _resolve_layout_dirs(root: Path) -> tuple[Path, Path, Path, str] | None:
             root / "study_c_test.json",
             frozen_study_a_dir / "gold_diagnosis_labels.json",
         ]
-        if all(path.is_file() for path in required_root_files):
+        if all(path.is_file() for path in required_root_files) and any(
+            path.is_file() for path in study_c_target_plan_candidates
+        ):
             return root, frozen_study_a_dir, frozen_study_c_dir, "frozen_snapshot"
 
     return None
@@ -185,4 +192,3 @@ def resolve_metric_data_roots(
         release_name=release_name,
         layout=layout,
     )
-

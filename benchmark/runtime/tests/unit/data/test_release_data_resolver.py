@@ -47,6 +47,7 @@ def _build_minimal_frozen_metric_root(root: Path) -> None:
         "study_b_multi_turn_test.json",
         "study_c_test.json",
         "study_a/gold_diagnosis_labels.json",
+        "study_c/study_c_target_plans.json",
     ):
         path = root / rel_path
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -134,3 +135,22 @@ def test_resolve_metric_data_roots_accepts_frozen_snapshot_override(tmp_path: Pa
     assert resolved.study_a_gold_dir == (explicit_root / "study_a").resolve()
     assert resolved.study_c_gold_dir == (explicit_root / "study_c").resolve()
     assert resolved.layout == "frozen_snapshot"
+
+
+@pytest.mark.unit
+def test_resolve_metric_data_roots_rejects_frozen_snapshot_without_study_c_target_plans(tmp_path: Path):
+    runtime_root = tmp_path / "runtime"
+    explicit_root = runtime_root / "frozen_v5"
+    _build_minimal_frozen_metric_root(explicit_root)
+    (explicit_root / "study_c" / "study_c_target_plans.json").unlink()
+
+    releases_dir = runtime_root / "data" / "releases"
+    releases_dir.mkdir(parents=True)
+    (releases_dir / "LATEST.md").write_text("invalid latest pointer", encoding="utf-8")
+
+    with pytest.raises(FileNotFoundError, match="Expected either a release layout"):
+        resolve_metric_data_roots(
+            runtime_root,
+            data_source="latest_release",
+            data_root=Path("frozen_v5"),
+        )
