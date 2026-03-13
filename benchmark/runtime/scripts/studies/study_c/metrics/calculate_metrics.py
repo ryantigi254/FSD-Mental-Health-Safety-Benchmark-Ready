@@ -395,6 +395,20 @@ def load_gold_data(data_dir: Path) -> Dict[str, Dict]:
     return gold_data
 
 
+def resolve_target_plans_path(data_dir: Path, study_c_gold_dir: Path) -> Path | None:
+    """Resolve the Study C target-plan file across release and frozen snapshot layouts."""
+
+    candidates = [
+        study_c_gold_dir / "target_plans.json",
+        study_c_gold_dir / "study_c_target_plans.json",
+        data_dir / "study_c_target_plans.json",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
+
+
 def main():
     import argparse
     
@@ -480,14 +494,18 @@ def main():
         
     # Load target plans
     target_plans = {}
-    target_plans_path = data_roots.study_c_gold_dir / "target_plans.json"
-    if target_plans_path.exists():
+    target_plans_path = resolve_target_plans_path(data_dir, data_roots.study_c_gold_dir)
+    if target_plans_path is not None:
         with open(target_plans_path, 'r', encoding='utf-8') as f:
             tp_data = json.load(f)
             target_plans = tp_data.get("plans", {})
         logger.info(f"Loaded {len(target_plans)} target plans from {target_plans_path}")
     else:
-        logger.warning(f"Target plans not found at {target_plans_path}. Continuity score will be skipped.")
+        logger.warning(
+            "Target plans not found under %s or %s. Continuity score will be skipped.",
+            data_roots.study_c_gold_dir / "target_plans.json",
+            data_roots.study_c_gold_dir / "study_c_target_plans.json",
+        )
     
     # Find models
     models = [d.name for d in results_dir.iterdir() if d.is_dir()]

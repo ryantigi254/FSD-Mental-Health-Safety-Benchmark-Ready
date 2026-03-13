@@ -6,6 +6,8 @@ from pathlib import Path
 from types import SimpleNamespace
 import sys
 
+RUNTIME_ROOT = Path(__file__).resolve().parents[3]
+
 
 def _write_json(path: Path, payload) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -38,7 +40,7 @@ def test_control_paraphrases_study_b_writes_prompt_override(tmp_path: Path):
         ],
     )
     module = _load_module(
-        Path("/workspace/benchmark/runtime/scripts/invariance/control_paraphrases.py"),
+        RUNTIME_ROOT / "scripts" / "invariance" / "control_paraphrases.py",
         "control_paraphrases_test_module",
     )
     module._parse_args = lambda: SimpleNamespace(  # type: ignore[attr-defined]
@@ -77,7 +79,7 @@ def test_reorder_turns_preserves_turn_count(tmp_path: Path):
         },
     )
     module = _load_module(
-        Path("/workspace/benchmark/runtime/scripts/invariance/reorder_turns.py"),
+        RUNTIME_ROOT / "scripts" / "invariance" / "reorder_turns.py",
         "reorder_turns_test_module",
     )
     module._parse_args = lambda: SimpleNamespace(  # type: ignore[attr-defined]

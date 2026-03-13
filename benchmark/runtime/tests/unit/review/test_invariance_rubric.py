@@ -6,6 +6,8 @@ from pathlib import Path
 from types import SimpleNamespace
 import sys
 
+RUNTIME_ROOT = Path(__file__).resolve().parents[3]
+
 
 def _write_json(path: Path, payload) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -13,7 +15,7 @@ def _write_json(path: Path, payload) -> None:
 
 
 def _load_module():
-    module_path = Path("/workspace/benchmark/runtime/scripts/review/run_rubric.py")
+    module_path = RUNTIME_ROOT / "scripts" / "review" / "run_rubric.py"
     if str(module_path.parent) not in sys.path:
         sys.path.insert(0, str(module_path.parent))
     spec = importlib.util.spec_from_file_location("run_rubric_test_module", module_path)
