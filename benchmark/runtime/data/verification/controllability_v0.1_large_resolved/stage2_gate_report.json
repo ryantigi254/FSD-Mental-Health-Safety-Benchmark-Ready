@@ -1,8 +1,8 @@
 {
-  "generated_at_utc": "2026-03-13T05:06:20.196322+00:00",
+  "generated_at_utc": "2026-03-13T21:35:23.939303+00:00",
   "version": "controllability_v0.1_large_resolved_stage2",
-  "ctrl_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large_resolved",
-  "small_ctrl_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits",
+  "ctrl_dir": "data/controllability_splits_large_resolved",
+  "small_ctrl_dir": "data/controllability_splits",
   "expected_counts": {
     "study_a": 2243,
     "study_a_bias": 2243,

@@ -1,14 +1,14 @@
 {
-  "generated_at_utc": "2026-03-13T05:06:23.861122+00:00",
+  "generated_at_utc": "2026-03-13T21:35:27.883908+00:00",
   "version": "controllability_v0.1_large_resolved",
-  "release_status": "blocked",
-  "ctrl_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large_resolved",
-  "verification_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/verification/controllability_v0.1_large_resolved",
+  "release_status": "ready",
+  "ctrl_dir": "data/controllability_splits_large_resolved",
+  "verification_dir": "data/verification/controllability_v0.1_large_resolved",
   "files": [
     {
       "file": "README.md",
-      "sha256": "ec306b8051dd242232040215acd6bae3ea8978438088121c23186a063794c6d8",
-      "size_bytes": 805
+      "sha256": "577d9a556ca962943a5194b034b0af3b450f5324eaa74477f12f1d06ad217fad",
+      "size_bytes": 802
     },
     {
       "file": "ctrl_build_manifest.json",
@@ -17,67 +17,67 @@
     },
     {
       "file": "ctrl_gold_diagnosis_meta.json",
-      "sha256": "13fa36d00334ba0bd3d5ee6b64473e68930c862dfbc13744485d19ab9d8aec59",
+      "sha256": "e60dff6e0df8d7f069961b122baa63b1d78a3979b99cff4cf9440fc31eab7014",
       "size_bytes": 1597
     },
     {
       "file": "ctrl_gold_diagnosis_robust_meta.json",
-      "sha256": "adef265c0f70280aabe3f07843c58a44abcf9c924f9bf720df06852f97f31c94",
+      "sha256": "c8b652f6b81d0c9f756f22d7e4fc452882aaa26f091f06952f412aeee93ecc24",
       "size_bytes": 2733
     },
     {
       "file": "ctrl_target_plans_meta.json",
-      "sha256": "0b6e27686e13d128590cac627d208bcdc481a0efd74f2e26c12a857dd49dd846",
+      "sha256": "eb7964763bcd0ba5b64f1c9f198ac62256acfea35cc957926e582b460bd3fa78",
       "size_bytes": 1242
     },
     {
       "file": "ctrl_target_plans_robust_meta.json",
-      "sha256": "81704a8cd98bc11a68606e85d4bdf3b56af4f49ca65fabd8faad019975078bf4",
+      "sha256": "bd051ff0784c60477b63d1d275890b4ff5d985705cfd3ea1d7dfbed716864bd3",
       "size_bytes": 2013
     },
     {
       "file": "review_summary.ssv",
-      "sha256": "cd78a44e6dc8bc4a9e3502092820af473988048cccc41f1500895e099f45ab5c",
-      "size_bytes": 379
+      "sha256": "a99ea5c82da52662df59a135847514da13291e2d631fe9915cdd8306b30731a6",
+      "size_bytes": 377
     },
     {
       "file": "run_metadata.json",
-      "sha256": "c16be382b473f30700aa912c963b0949eac56687373494bcfc1d8687e493164a",
-      "size_bytes": 1516
+      "sha256": "f312e3390808cdbc2c303c97bd7c5270d8267c0e1eea4fb036e87c0d85284ac9",
+      "size_bytes": 1540
     },
     {
       "file": "sendoff_preflight_report.json",
-      "sha256": "7fe9e064712d87c9d2f75f9d8772675bfcbc0bf8a176546a0565cb7e85236bee",
-      "size_bytes": 4498
+      "sha256": "44ea803a0f2009049ea9646427cc1f4d148732d38bd08d657f6f0e210c54236a",
+      "size_bytes": 4839
     },
     {
       "file": "stage2_gate_report.json",
-      "sha256": "b8c836e7078966ea8fe1af1bf2572871d06d2aa3045a99d078330c35134c4225",
-      "size_bytes": 3261
+      "sha256": "47b3774f68cb393515f53ed2fdf9656faf00e8babdf9e86f65c3ed5ac6a1bea9",
+      "size_bytes": 3109
     },
     {
       "file": "study_a_bias_verdicts.ssv",
-      "sha256": "7d2adba4d87c622be139301dfb800ee81d6c32bd13940d0ad180064e48eaa6ec",
+      "sha256": "0c808b1e5cfd925ab1a674477b1a809a71589ff475a303e7467d77d5878ef5ea",
       "size_bytes": 268354
     },
     {
       "file": "study_a_reference_verdicts.ssv",
-      "sha256": "179811e429b350c64422e1420c34544d5edce69a677d1fa426bef0a974b84d47",
-      "size_bytes": 311293
+      "sha256": "51bba5dd7720123944b4ec738db85d2de24288b1ab91a1f900e71e4842a7a936",
+      "size_bytes": 303904
     },
     {
       "file": "study_b_multi_verdicts.ssv",
-      "sha256": "0b446a1b56a9b0a1a6904328f25058cb4b6a5ae872f727359b63dc940d173ccc",
+      "sha256": "ac973835c84cf895fecc4828e6411f22d34501bec70ce71a4d667ec8798a97ff",
       "size_bytes": 12725
     },
     {
       "file": "study_b_single_verdicts.ssv",
-      "sha256": "804776e5299416e71125edd58e6c093db5d4b0e228f55520345e63729805674d",
+      "sha256": "c626af0115b8eed75882d04f5dac8e780d18da217b5f489792938a69fb6f02be",
       "size_bytes": 234603
     },
     {
       "file": "study_c_verdicts.ssv",
-      "sha256": "c7eb5ef1a7d41f978123cbe932b490377a8d3a03acecf4cb22955560d9d55ac0",
+      "sha256": "52142703b07668a835dbe03bae2216bbe4855ddaef1eaf7913e57e7de997c2b8",
       "size_bytes": 11113
     }
   ]
