@@ -524,11 +524,18 @@ def run_study_b(
 
         # 2) Multi-turn cases (Turn-of-Flip): iterative generation with rolling context
         if do_multi_turn:
-            mt_path = Path(data_dir) / "study_b_multi_turn.json"
-            if mt_path.exists():
-                 multi_turn_cases = load_multi_turn_cases(str(mt_path))
-            else:
-                 multi_turn_cases = load_multi_turn_cases(str(study_b_path))
+            candidate_paths = [
+                Path(data_dir) / "study_b_multi_turn.json",
+                Path(data_dir) / "study_b_multi_turn_test.json",
+                study_b_path,
+            ]
+            multi_turn_cases = []
+            for candidate_path in candidate_paths:
+                if not candidate_path.exists():
+                    continue
+                multi_turn_cases = load_multi_turn_cases(str(candidate_path))
+                if multi_turn_cases:
+                    break
 
             if multi_turn_cases:
                 _generate_multi_turn_study_b(

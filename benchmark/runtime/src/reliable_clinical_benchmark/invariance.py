@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections import Counter, defaultdict
 from dataclasses import dataclass
+from datetime import datetime, timezone
 import importlib.util
 import json
 import math
@@ -34,6 +35,13 @@ HIGH_RISK_BUCKETS = {
     "suicidal",
     "psychosis",
     "mania",
+}
+
+DEFAULT_INVARIANCE_SAMPLE_SIZES: Dict[str, int] = {
+    "study_a": 150,
+    "study_b": 160,
+    "study_b_multi_turn": 12,
+    "study_c": 15,
 }
 
 
@@ -610,6 +618,186 @@ def build_invariance_manifest(
         ],
     }
     return manifest
+
+
+def _manifest_filename(study_name: str) -> str:
+    return f"{study_name}_manifest.json"
+
+
+def _read_manifest(path: Path) -> Dict[str, Any]:
+    payload = _load_json(path)
+    if not isinstance(payload, dict):
+        raise ValueError(f"Manifest must be a JSON object: {path}")
+    return payload
+
+
+def _selected_ids(manifest: Mapping[str, Any]) -> List[str]:
+    records = manifest.get("records", [])
+    ids = [str(record.get("id", "")).strip() for record in records if str(record.get("id", "")).strip()]
+    if len(ids) != len(set(ids)):
+        raise ValueError(f"Manifest contains duplicate ids: {manifest.get('study')}")
+    return ids
+
+
+def _filter_study_a_gold_mapping(mapping_payload: Mapping[str, Any], selected_ids: Sequence[str]) -> Dict[str, Any]:
+    id_set = set(selected_ids)
+    filtered_mapping = {
+        key: value
+        for key, value in (mapping_payload.get("mapping", {}) or {}).items()
+        if key in id_set
+    }
+    meta = {key: value for key, value in mapping_payload.items() if key != "mapping"}
+    meta["mapping"] = filtered_mapping
+    return meta
+
+
+def materialize_invariance_split_root(
+    *,
+    source_root: Path,
+    output_root: Path,
+    manifest_dir: Path,
+    studies: Optional[Sequence[str]] = None,
+) -> Dict[str, Any]:
+    """Materialise sampled invariance manifests into a frozen-root layout."""
+
+    selected_specs = [get_study_spec(study) for study in (studies or study_cli_choices())]
+    output_root.mkdir(parents=True, exist_ok=True)
+    materialized: Dict[str, Dict[str, Any]] = {}
+
+    study_a_source = _load_json(_study_file(source_root, "study_a_test.json"))
+    study_a_rows = study_a_source.get("samples", []) if isinstance(study_a_source, dict) else study_a_source
+    study_a_by_id = {str(row.get("id", "")).strip(): row for row in study_a_rows if str(row.get("id", "")).strip()}
+    study_a_labels = _load_json(_study_a_labels_path(source_root)) if _study_a_labels_path(source_root) else {"labels": {}}
+    study_a_metadata_path = _study_a_metadata_path(source_root)
+    study_a_metadata = _load_json(study_a_metadata_path) if study_a_metadata_path else {}
+    study_a_mapping_path = source_root / "study_a" / "gold_labels_mapping.json"
+    if not study_a_mapping_path.exists():
+        study_a_mapping_path = source_root / "gold_labels_mapping.json"
+    study_a_mapping = _load_json(study_a_mapping_path) if study_a_mapping_path.exists() else {"mapping": {}}
+
+    study_b_source = _load_json(_study_file(source_root, "study_b_test.json"))
+    study_b_rows = study_b_source if isinstance(study_b_source, list) else study_b_source.get("samples", [])
+    study_b_by_id = {str(row.get("id", "")).strip(): row for row in study_b_rows if str(row.get("id", "")).strip()}
+
+    study_b_mt_source = _load_json(_study_file(source_root, "study_b_multi_turn_test.json"))
+    study_b_mt_rows = study_b_mt_source if isinstance(study_b_mt_source, list) else study_b_mt_source.get("multi_turn_cases", [])
+    study_b_mt_by_id = {str(row.get("id", "")).strip(): row for row in study_b_mt_rows if str(row.get("id", "")).strip()}
+
+    study_c_source = _load_json(_study_file(source_root, "study_c_test.json"))
+    study_c_rows = study_c_source.get("cases", []) if isinstance(study_c_source, dict) else study_c_source
+    study_c_by_id = {str(row.get("id", "")).strip(): row for row in study_c_rows if str(row.get("id", "")).strip()}
+
+    study_c_target_plans_path = source_root / "study_c" / "study_c_target_plans.json"
+    if not study_c_target_plans_path.exists():
+        study_c_target_plans_path = source_root / "study_c_target_plans.json"
+    study_c_target_plans = _load_json(study_c_target_plans_path) if study_c_target_plans_path.exists() else {"plans": {}}
+
+    study_c_entity_map_path = source_root / "study_c" / "entity_evidence_map.json"
+    if not study_c_entity_map_path.exists():
+        study_c_entity_map_path = source_root / "entity_evidence_map.json"
+    study_c_entity_map = _load_json(study_c_entity_map_path) if study_c_entity_map_path.exists() else {"case_evidence": {}}
+
+    for spec in selected_specs:
+        manifest_path = manifest_dir / _manifest_filename(spec.canonical_name)
+        manifest = _read_manifest(manifest_path)
+        ids = _selected_ids(manifest)
+        id_set = set(ids)
+
+        if spec.canonical_name == "study_a":
+            selected_rows = [study_a_by_id[row_id] for row_id in ids]
+            (output_root / "study_a_test.json").write_text(
+                json.dumps({"samples": selected_rows}, indent=2, ensure_ascii=False) + "\n",
+                encoding="utf-8",
+            )
+            filtered_labels = {
+                "labels": {
+                    row_id: (study_a_labels.get("labels", {}) or {}).get(row_id)
+                    for row_id in ids
+                    if row_id in (study_a_labels.get("labels", {}) or {})
+                }
+            }
+            filtered_metadata = {
+                row_id: value
+                for row_id, value in (study_a_metadata or {}).items()
+                if row_id in id_set
+            }
+            study_a_dir = output_root / "study_a"
+            study_a_dir.mkdir(parents=True, exist_ok=True)
+            for target in (study_a_dir / "gold_diagnosis_labels.json", output_root / "gold_diagnosis_labels.json"):
+                target.write_text(json.dumps(filtered_labels, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            for target in (study_a_dir / "gold_diagnosis_metadata.json", output_root / "gold_diagnosis_metadata.json"):
+                target.write_text(json.dumps(filtered_metadata, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            filtered_mapping = _filter_study_a_gold_mapping(study_a_mapping, ids)
+            for target in (study_a_dir / "gold_labels_mapping.json", output_root / "gold_labels_mapping.json"):
+                target.write_text(json.dumps(filtered_mapping, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            materialized[spec.canonical_name] = {"n_rows": len(selected_rows), "path": "study_a_test.json"}
+            continue
+
+        if spec.canonical_name == "study_b":
+            selected_rows = [study_b_by_id[row_id] for row_id in ids]
+            (output_root / "study_b_test.json").write_text(
+                json.dumps(selected_rows, indent=2, ensure_ascii=False) + "\n",
+                encoding="utf-8",
+            )
+            materialized[spec.canonical_name] = {"n_rows": len(selected_rows), "path": "study_b_test.json"}
+            continue
+
+        if spec.canonical_name == "study_b_multi_turn":
+            selected_rows = [study_b_mt_by_id[row_id] for row_id in ids]
+            for target in (output_root / "study_b_multi_turn_test.json", output_root / "study_b_multi_turn.json"):
+                target.write_text(json.dumps(selected_rows, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            materialized[spec.canonical_name] = {
+                "n_rows": len(selected_rows),
+                "path": "study_b_multi_turn_test.json",
+            }
+            continue
+
+        if spec.canonical_name == "study_c":
+            selected_rows = [study_c_by_id[row_id] for row_id in ids]
+            (output_root / "study_c_test.json").write_text(
+                json.dumps({"cases": selected_rows}, indent=2, ensure_ascii=False) + "\n",
+                encoding="utf-8",
+            )
+            filtered_plans = {
+                "meta": study_c_target_plans.get("meta", {}),
+                "plans": {
+                    row_id: value
+                    for row_id, value in (study_c_target_plans.get("plans", {}) or {}).items()
+                    if row_id in id_set
+                },
+            }
+            filtered_case_evidence = {
+                "meta": study_c_entity_map.get("meta", {}),
+                "global_synonyms": study_c_entity_map.get("global_synonyms", {}),
+                "case_evidence": {
+                    row_id: value
+                    for row_id, value in (study_c_entity_map.get("case_evidence", {}) or {}).items()
+                    if row_id in id_set
+                },
+            }
+            study_c_dir = output_root / "study_c"
+            study_c_dir.mkdir(parents=True, exist_ok=True)
+            for target in (study_c_dir / "study_c_target_plans.json", output_root / "study_c_target_plans.json"):
+                target.write_text(json.dumps(filtered_plans, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            for target in (study_c_dir / "entity_evidence_map.json", output_root / "entity_evidence_map.json"):
+                target.write_text(json.dumps(filtered_case_evidence, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            materialized[spec.canonical_name] = {"n_rows": len(selected_rows), "path": "study_c_test.json"}
+            continue
+
+        raise ValueError(f"Unsupported study spec during materialisation: {spec.canonical_name}")
+
+    summary = {
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "source_root": str(source_root),
+        "manifest_dir": str(manifest_dir),
+        "layout": "frozen_snapshot",
+        "studies": materialized,
+    }
+    (output_root / "manifest.json").write_text(
+        json.dumps(summary, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    return summary
 
 
 def paired_bootstrap_delta(

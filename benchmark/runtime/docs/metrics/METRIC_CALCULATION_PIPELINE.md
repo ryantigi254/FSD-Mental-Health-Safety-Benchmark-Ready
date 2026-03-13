@@ -70,6 +70,7 @@ The clinician-ready invariance tooling sits alongside the canonical metric pipel
 ```bash
 PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/analysis/analyse_clinical_distribution.py --study study_a
 PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/studies/v5_review/generate_invariance_manifest.py --study study_a --sample-size 150
+PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py
 PYTHONNOUSERSITE=1 PYTHONPATH=src python scripts/evaluation/run_invariance_comparison.py \
   --study study_a \
   --base-cache results/<model>/study_a_generations.jsonl \
@@ -82,6 +83,7 @@ Operational note:
 - Treat invariance as a secondary diagnostic layer over the frozen split, not as a replacement for full benchmark runs.
 - Suggested subset percentages are heuristic budgeting guidance only; the stronger constraint is metric-aligned sampling units plus coverage over the relevant persona / risk / age / condition axes.
 - Base and variant caches must preserve one-to-one pairing by evaluation unit; the comparison wrapper fails closed on ID mismatches.
+- Dedicated generation runners and `run_generation_auto.py` study targets exist for the materialised invariance split root.
 
 ## 4. Study A bias metric contract
 

@@ -33,6 +33,7 @@ It is a diagnostic stress-test layer. It does not replace the canonical full-run
 - Sampling manifests: `data/frozen_splits/v5_invariance_samples/`
 - Variant caches: `results/{model-id}/study_*_invariance_*.jsonl`
 - Comparison outputs: `metric-results/{model-id}/...` or an explicit `--out` path
+- Materialised sampled split root: `data/frozen_splits/v5_invariance_samples/`
 
 Manifest metadata includes:
 
@@ -53,3 +54,34 @@ The metric scripts now accept either:
 - the frozen snapshot layout used by `data/frozen_splits/v5` (top-level `study_*` files with `study_a/` and `study_c/` subdirectories).
 
 That keeps the existing metric contract intact whilst allowing invariance runs directly against the frozen v5 snapshot.
+
+## Building the sampled split root
+
+Use the all-in-one builder to regenerate both manifests and sampled split files:
+
+- `PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py`
+
+The generated root is a valid frozen-snapshot-style `data-root`, containing:
+
+- `study_a_test.json`
+- `study_b_test.json`
+- `study_b_multi_turn_test.json`
+- `study_c_test.json`
+- `study_a/gold_diagnosis_labels.json`
+- `study_c/study_c_target_plans.json`
+
+## Generation commands
+
+Dedicated generation runners now mirror the normal study entrypoints:
+
+- `hf-local-scripts/run_study_a_invariance_generate_only.py`
+- `hf-local-scripts/run_study_b_invariance_generate_only.py`
+- `hf-local-scripts/run_study_b_multi_turn_invariance_generate_only.py`
+- `hf-local-scripts/run_study_c_invariance_generate_only.py`
+
+And the auto launcher supports:
+
+- `study_a_invariance`
+- `study_b_invariance`
+- `study_b_multi_turn_invariance`
+- `study_c_invariance`
