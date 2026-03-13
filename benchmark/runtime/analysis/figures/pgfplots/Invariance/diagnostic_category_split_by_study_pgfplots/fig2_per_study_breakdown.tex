@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.88\textwidth,
+  height=0.55\textwidth,
+  xbar stacked,
+  xmin=0,
+  ytick=data,
+  yticklabels={{Anxiety Disorders},{Trauma \& Stressor-Related},{Mood Disorders},{Psychotic Spectrum},{Personality Disorders},{Other},{OCD \& Related},{Eating Disorders},{Somatic \& Health-Related},{Self-Harm \& Suicidality},{Neurodevelopmental},{Sleep-Wake Disorders},{Substance Use Disorders}},
+  y dir=reverse,
+  yticklabel style={font=\scriptsize, text width=4.4cm, align=right},
+  xlabel={Samples},
+  legend style={at={(0.5,1.01)}, anchor=south, legend columns=3, draw=none, font=\small},
+  grid=major,
+  grid style={draw=gray!20},
+  axis line style={draw=gray!45},
+]
+\addplot+[draw=none, fill=blue!70] coordinates {(47,0) (66,1) (24,2) (2,3) (0,4) (1,5) (1,6) (6,7) (0,8) (0,9) (1,10) (1,11) (1,12)};
+\addlegendentry{Study A}
+\addplot+[draw=none, fill=orange!85] coordinates {(37,0) (18,1) (36,2) (15,3) (15,4) (9,5) (9,6) (3,7) (8,8) (10,9) (6,10) (3,11) (3,12)};
+\addlegendentry{Study B}
+\addplot+[draw=none, fill=teal!80!black] coordinates {(3,0) (1,1) (1,2) (4,3) (0,4) (1,5) (1,6) (1,7) (2,8) (0,9) (1,10) (0,11) (0,12)};
+\addlegendentry{Study C}
+\end{axis}
+\end{tikzpicture}

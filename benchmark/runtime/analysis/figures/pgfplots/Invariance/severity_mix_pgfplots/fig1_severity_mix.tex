@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+\definecolor{severityCritical}{HTML}{9B2226}
+\definecolor{severitySevere}{HTML}{E10600}
+\definecolor{severityModerate}{HTML}{F07B83}
+\definecolor{severityMild}{HTML}{F6C1C4}
+\path[fill=severityCritical, draw=white, line width=1.1pt] (0,0) -- (90.0000:2.35) arc (90.0000:79.3175:2.35) -- (79.3175:1.35) arc (79.3175:90.0000:1.35) -- cycle;
+\path[fill=severitySevere, draw=white, line width=1.1pt] (0,0) -- (79.3175:2.35) arc (79.3175:15.2226:2.35) -- (15.2226:1.35) arc (15.2226:79.3175:1.35) -- cycle;
+\path[fill=severityModerate, draw=white, line width=1.1pt] (0,0) -- (15.2226:2.35) arc (15.2226:-169.5846:2.35) -- (-169.5846:1.35) arc (-169.5846:15.2226:1.35) -- cycle;
+\path[fill=severityMild, draw=white, line width=1.1pt] (0,0) -- (-169.5846:2.35) arc (-169.5846:-270.0000:2.35) -- (-270.0000:1.35) arc (-270.0000:-169.5846:1.35) -- cycle;
+\fill[white] (0,0) circle (1.15);
+\draw[white, line width=1.0pt] (0,0) circle (1.15);
+\node[font=\small\bfseries, align=center, text=black, anchor=east] at (84.6588:3.30) {Critical\\10 (3.0\%)};
+\node[font=\small\bfseries, align=center, text=black, anchor=west] at (47.2700:3.05) {Severe\\60 (17.8\%)};
+\node[font=\small\bfseries, align=center, text=black, anchor=west] at (-77.1810:3.05) {Moderate\\173 (51.3\%)};
+\node[font=\small\bfseries, align=center, text=black, anchor=east] at (-219.7923:3.05) {Mild\\94 (27.9\%)};
+\node[font=\large\bfseries] at (0,3.7) {Severity Mix};
+\node[font=\normalsize\bfseries, align=center] at (0,0) {Severity\\N=337};
+\end{tikzpicture}

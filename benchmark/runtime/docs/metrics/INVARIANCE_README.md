@@ -120,6 +120,22 @@ The next layer above invariance is controllability.
 
 In this repo, controllability should therefore be implemented as a meta-metric on top of the current study metrics and the invariance machinery already added here.
 
+## Distribution figures
+
+The sampled `v5` invariance root can also be rendered through the same PGFPlots figure templates used by the main `Overall` clinical coverage bundle.
+
+Generate the invariance distribution snapshot:
+
+- `cd benchmark/runtime`
+- `python3 analysis/analyse_clinical_distribution.py --data-root data/frozen_splits/v5_invariance_samples --out-dir analysis/invariance --skip-figures`
+
+Render the PGFPlots figure bundle:
+
+- `python3 analysis/generate_pgfplots.py --analysis-json analysis/invariance/distribution_analysis.json --out-dir analysis/figures/pgfplots/Invariance`
+- `python3 analysis/generate_pgfplots_additional.py --analysis-json analysis/invariance/distribution_analysis.json --out-dir analysis/figures/pgfplots/Invariance`
+
+That produces an `Invariance` sibling folder under `analysis/figures/pgfplots/` with the same figure family names as the main `Overall` set, but driven by the invariance sampled split composition instead of the full benchmark release.
+
 See:
 
 - `CONTROLLABILITY_META_METRIC.md`

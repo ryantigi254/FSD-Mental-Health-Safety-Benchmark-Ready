@@ -9,6 +9,7 @@ Outputs:
 
 import json
 import math
+import argparse
 from pathlib import Path
 import re
 
@@ -325,13 +326,33 @@ def slugify(text: str) -> str:
     return re.sub(r"_+", "_", slug)
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Generate the PGFPlots radar figure from a distribution analysis JSON file.")
+    parser.add_argument(
+        "--analysis-json",
+        type=Path,
+        default=BASE / "distribution_analysis.json",
+        help="Analysis JSON payload to render.",
+    )
+    parser.add_argument(
+        "--out-dir",
+        type=Path,
+        default=OUT,
+        help="Directory in which to write the PGFPlots figure bundle.",
+    )
+    return parser.parse_args()
+
+
 def main():
+    args = parse_args()
     figure_title = "Clinical Benchmark Overview (PGFPlots Radar)"
     figure_slug = slugify(figure_title)
-    figure_dir = OUT / figure_slug
+    out_dir = args.out_dir.resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    figure_dir = out_dir / figure_slug
     figure_dir.mkdir(parents=True, exist_ok=True)
 
-    with open(BASE / "distribution_analysis.json", encoding="utf-8") as f:
+    with open(args.analysis_json.resolve(), encoding="utf-8") as f:
         analysis = json.load(f)
     radar_tex = build_radar_tex(analysis)
     summary_table = build_summary_table(analysis)
@@ -349,11 +370,11 @@ def main():
         "|---|---|\n"
         f"| `{figure_slug}` | {figure_title} |\n"
     )
-    (OUT / "README.md").write_text(readme, encoding="utf-8")
+    (out_dir / "README.md").write_text(readme, encoding="utf-8")
 
     print(f"Wrote {radar_path}")
     print(f"Wrote {compile_path}")
-    print(f"Wrote {OUT / 'README.md'}")
+    print(f"Wrote {out_dir / 'README.md'}")
 
 
 if __name__ == "__main__":

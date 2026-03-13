@@ -12,6 +12,7 @@ Outputs:
   analysis/figures/fig3_therapeutic_modalities.pdf
 """
 
+import argparse
 import json
 import re
 import sys
@@ -27,10 +28,20 @@ import numpy as np
 
 # ── Paths ────────────────────────────────────────────────────────────────────
 BASE = Path(__file__).resolve().parent.parent
-DATA = BASE / "data" / "frozen_splits" / "v4_1_resampled"
-OUT  = Path(__file__).resolve().parent
-FIG  = OUT / "figures"
+DEFAULT_DATA = BASE / "data" / "frozen_splits" / "v4_1_resampled"
+DEFAULT_OUT = Path(__file__).resolve().parent
+DATA = DEFAULT_DATA
+OUT = DEFAULT_OUT
+FIG = OUT / "figures"
 FIG.mkdir(parents=True, exist_ok=True)
+
+
+def configure_paths(*, data_root: Path | None = None, out_dir: Path | None = None) -> None:
+    global DATA, OUT, FIG
+    DATA = (data_root or DEFAULT_DATA).resolve()
+    OUT = (out_dir or DEFAULT_OUT).resolve()
+    FIG = OUT / "figures"
+    FIG.mkdir(parents=True, exist_ok=True)
 
 # ── DSM-5 Chapter Category Mapping ──────────────────────────────────────────
 CONDITION_TO_CATEGORY = {
@@ -370,6 +381,29 @@ def load_study_b():
     return results
 
 
+def load_study_b_multi_turn():
+    """Optional Study B multi-turn cases, folded into Study B for overview plots."""
+    multi_turn_path = DATA / "study_b_multi_turn_test.json"
+    if not multi_turn_path.exists():
+        return []
+
+    with open(multi_turn_path) as f:
+        raw = json.load(f)
+
+    cases = raw if isinstance(raw, list) else raw.get("multi_turn_cases", [])
+    results = []
+    for case in cases:
+        results.append({
+            "id": case["id"],
+            "study": "B",
+            "condition": case.get("gold_answer", "Unknown").lower().strip(),
+            "reasoning": "",
+            "prompt": case.get("turns", [{}])[0].get("patient", "") if case.get("turns") else "",
+            "gold_answer": case.get("gold_answer", ""),
+        })
+    return results
+
+
 def load_study_c():
     """Study C: longitudinal drift, 100 multi-turn cases."""
     with open(DATA / "study_c_test.json") as f:
@@ -443,12 +477,20 @@ def normalise_condition_name(cond: str) -> str:
 def run_analysis():
     print("Loading data...")
     study_a = load_study_a()
-    study_b = load_study_b()
+    study_b_single = load_study_b()
+    study_b_multi_turn = load_study_b_multi_turn()
+    study_b = study_b_single + study_b_multi_turn
     study_c = load_study_c()
     all_samples = study_a + study_b + study_c
 
     print(f"  Study A: {len(study_a)} samples")
-    print(f"  Study B: {len(study_b)} samples")
+    if study_b_multi_turn:
+        print(
+            f"  Study B: {len(study_b)} samples "
+            f"({len(study_b_single)} single-turn + {len(study_b_multi_turn)} multi-turn)"
+        )
+    else:
+        print(f"  Study B: {len(study_b)} samples")
     print(f"  Study C: {len(study_c)} cases")
     print(f"  Total:   {len(all_samples)}")
 
@@ -962,11 +1004,37 @@ def print_summary(analysis):
 # MAIN
 # ═══════════════════════════════════════════════════════════════════════════════
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Analyse clinical distribution for a frozen split root.")
+    parser.add_argument(
+        "--data-root",
+        type=Path,
+        default=DEFAULT_DATA,
+        help="Frozen split root to analyse.",
+    )
+    parser.add_argument(
+        "--out-dir",
+        type=Path,
+        default=DEFAULT_OUT,
+        help="Directory for distribution_analysis.json and optional matplotlib figures.",
+    )
+    parser.add_argument(
+        "--skip-figures",
+        action="store_true",
+        help="Only write distribution_analysis.json and console summary.",
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
+    args = parse_args()
+    configure_paths(data_root=args.data_root, out_dir=args.out_dir)
     analysis, study_a = run_analysis()
     print_summary(analysis)
 
-    print("\nGenerating figures...")
-    plot_single_overview_radar(analysis)
-
-    print(f"\nDone. All outputs in {OUT}/")
+    if not args.skip_figures:
+        print("\nGenerating figures...")
+        plot_single_overview_radar(analysis)
+        print(f"\nDone. All outputs in {OUT}/")
+    else:
+        print(f"\nDone. Analysis written to {OUT}/")

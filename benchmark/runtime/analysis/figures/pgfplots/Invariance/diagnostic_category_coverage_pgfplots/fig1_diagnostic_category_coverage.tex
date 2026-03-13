@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.78\textwidth,
+  height=0.56\textwidth,
+  xbar,
+  xmin=0,
+  ytick=data,
+  yticklabels={{Anxiety Disorders},{Trauma \& Stressor-Related},{Mood Disorders},{Psychotic Spectrum},{Personality Disorders},{Other},{OCD \& Related},{Eating Disorders},{Somatic \& Health-Related},{Self-Harm \& Suicidality},{Neurodevelopmental},{Sleep-Wake Disorders},{Substance Use Disorders}},
+  yticklabel style={font=\scriptsize, text width=4.0cm, align=right},
+  xlabel={Samples},
+  title={DSM-5 Category Coverage},
+  nodes near coords,
+  every node near coord/.append style={font=\scriptsize, xshift=2pt},
+  grid=major,
+  grid style={draw=gray!20},
+  axis line style={draw=gray!45},
+]
+\addplot+[draw=none, fill=blue!62!black] coordinates {(87,0) (85,1) (61,2) (21,3) (15,4) (11,5) (11,6) (10,7) (10,8) (10,9) (8,10) (4,11) (4,12)};
+\end{axis}
+\end{tikzpicture}
