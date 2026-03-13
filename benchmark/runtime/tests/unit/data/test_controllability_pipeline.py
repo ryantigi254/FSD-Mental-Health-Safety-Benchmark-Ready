@@ -5,6 +5,7 @@ import json
 import subprocess
 import sys
 import types
+from dataclasses import dataclass
 from pathlib import Path
 
 import pytest
@@ -58,6 +59,14 @@ def _conversation_row(post_id: int, *, patient: str = "", counselor_think: str =
             }
         ],
     }
+
+
+@dataclass(frozen=True)
+class _FakeProbeResult:
+    predictions: list[str]
+    confidences: list[float]
+    agreement_flags: list[bool] | None
+    meta: dict
 
 
 @pytest.mark.unit
@@ -695,6 +704,71 @@ def test_generate_gold_labels_nli_only_uses_ranked_rescue_when_thresholds_fail(t
 
 
 @pytest.mark.unit
+def test_generate_gold_labels_probe_backend_writes_primary_and_agreement_meta(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    fake_datasets = types.ModuleType("datasets")
+    fake_datasets.load_dataset = lambda *_args, **_kwargs: {}
+    monkeypatch.setitem(sys.modules, "datasets", fake_datasets)
+
+    gold_labels = _load_module("generate_gold_labels_test_probe", GOLD_LABELS_PATH)
+
+    ctrl_dir = tmp_path / "controllability_splits"
+    ctrl_dir.mkdir(parents=True)
+    (ctrl_dir / "study_a_controllability_test.json").write_text(
+        json.dumps(
+            {
+                "samples": [
+                    {
+                        "id": "ctrl_a_0001",
+                        "prompt": "I feel persistently low and cannot enjoy anything.",
+                        "metadata": {"inferred_condition": "major depressive disorder"},
+                    },
+                    {
+                        "id": "ctrl_a_0002",
+                        "prompt": "I have not been able to sleep for weeks.",
+                        "metadata": {"inferred_condition": "insomnia"},
+                    },
+                ]
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(
+        gold_labels,
+        "run_probe_labeler",
+        lambda **kwargs: _FakeProbeResult(
+            predictions=["Major Depressive Disorder", "Insomnia"],
+            confidences=[0.71, 0.66],
+            agreement_flags=[True, False],
+            meta={"agreement_rate": 0.5, "rare_label_fallbacks": 0},
+        ),
+    )
+
+    gold_labels.main(
+        [
+            "--ctrl-dir",
+            str(ctrl_dir),
+            "--backend",
+            "probe",
+            "--primary-model",
+            "primary/model",
+            "--secondary-model",
+            "secondary/model",
+        ]
+    )
+
+    payload = _read_json(ctrl_dir / "ctrl_gold_diagnosis_labels.json")
+    assert payload["meta"]["backend"] == "probe"
+    assert payload["meta"]["primary_model"] == "primary/model"
+    assert payload["meta"]["secondary_model"] == "secondary/model"
+    assert payload["labels"] == {
+        "ctrl_a_0001": "Major Depressive Disorder",
+        "ctrl_a_0002": "Insomnia",
+    }
+
+
+@pytest.mark.unit
 def test_generate_gold_plans_smoke_writes_resolved_output(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     fake_datasets = types.ModuleType("datasets")
     fake_datasets.load_dataset = lambda *_args, **_kwargs: {}
@@ -854,6 +928,76 @@ def test_generate_gold_plans_nli_only_fails_without_nli_evidence(tmp_path: Path,
 
     with pytest.raises(SystemExit, match="Unable to build 1 controllability plans"):
         gold_plans.main(["--ctrl-dir", str(ctrl_dir), "--nli-only"])
+
+
+@pytest.mark.unit
+def test_generate_gold_plans_probe_backend_renders_condition_map_from_probe_predictions(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    fake_datasets = types.ModuleType("datasets")
+    fake_datasets.load_dataset = lambda *_args, **_kwargs: {}
+    monkeypatch.setitem(sys.modules, "datasets", fake_datasets)
+
+    gold_plans = _load_module("generate_gold_plans_test_probe", GOLD_PLANS_PATH)
+
+    ctrl_dir = tmp_path / "controllability_splits"
+    ctrl_dir.mkdir(parents=True)
+    (ctrl_dir / "study_c_controllability_test.json").write_text(
+        json.dumps(
+            {
+                "cases": [
+                    {
+                        "id": "ctrl_c_001",
+                        "patient_summary": "Ava avoids travelling alone and feels constantly tense.",
+                        "critical_entities": ["generalized anxiety disorder"],
+                        "metadata": {"inferred_condition": "generalized anxiety disorder"},
+                    },
+                    {
+                        "id": "ctrl_c_002",
+                        "patient_summary": "Noah cannot fall asleep until very late.",
+                        "critical_entities": ["insomnia"],
+                        "metadata": {"inferred_condition": "insomnia"},
+                    },
+                ]
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(
+        gold_plans,
+        "run_probe_labeler",
+        lambda **kwargs: _FakeProbeResult(
+            predictions=["generalized anxiety disorder", "insomnia"],
+            confidences=[0.62, 0.58],
+            agreement_flags=[True, True],
+            meta={"agreement_rate": 1.0, "rare_label_fallbacks": 0},
+        ),
+    )
+
+    gold_plans.main(
+        [
+            "--ctrl-dir",
+            str(ctrl_dir),
+            "--backend",
+            "probe",
+            "--primary-model",
+            "primary/model",
+            "--secondary-model",
+            "secondary/model",
+        ]
+    )
+
+    payload = _read_json(ctrl_dir / "ctrl_target_plans.json")
+    assert payload["meta"]["backend"] == "probe"
+    assert payload["meta"]["primary_model"] == "primary/model"
+    assert payload["meta"]["secondary_model"] == "secondary/model"
+    assert payload["plans"]["ctrl_c_001"]["inferred_condition"] == "generalized anxiety disorder"
+    assert payload["plans"]["ctrl_c_001"]["plan"].startswith(
+        "Therapy: CBT focusing on worry management and uncertainty tolerance."
+    )
+    assert payload["plans"]["ctrl_c_002"]["plan"].startswith("Therapy: CBT-I (CBT for insomnia).")
 
 
 @pytest.mark.unit

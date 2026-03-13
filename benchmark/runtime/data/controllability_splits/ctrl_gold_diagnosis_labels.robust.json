@@ -3,10 +3,10 @@
     "dataset": "controllability/study_a_split_metadata",
     "backend": "probe",
     "extraction": "controllability/generate_gold_labels.py",
-    "generated_utc": "2026-03-13T02:55:08.459940+00:00",
+    "generated_utc": "2026-03-13T02:59:38.656847+00:00",
     "n_samples": 300,
     "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
-    "secondary_model": "",
+    "secondary_model": "emilyalsentzer/Bio_ClinicalBERT",
     "tertiary_model": "",
     "probe_meta": {
       "n_splits": 3,
@@ -35,6 +35,37 @@
         "Social Anxiety Disorder": 1
       },
       "rare_label_fallbacks": 5,
+      "secondary_model_name": "emilyalsentzer/Bio_ClinicalBERT",
+      "secondary_probe": {
+        "n_splits": 3,
+        "frequent_labels": [
+          "Alcohol Use Disorder",
+          "Anorexia Nervosa",
+          "Attention-Deficit/Hyperactivity Disorder",
+          "Borderline Personality Disorder",
+          "Generalized Anxiety Disorder",
+          "Insomnia",
+          "Major Depressive Disorder",
+          "Obsessive-Compulsive Disorder",
+          "Panic Disorder",
+          "Post-Traumatic Stress Disorder",
+          "Prolonged Grief Disorder",
+          "Psychosis",
+          "Self-Harm",
+          "Somatic Symptom Disorder",
+          "Substance Use Disorder",
+          "Suicidal Crisis"
+        ],
+        "rare_labels": {
+          "Autism Spectrum Disorder": 1,
+          "Chronic Pain With Depression": 2,
+          "Bipolar Disorder": 1,
+          "Social Anxiety Disorder": 1
+        },
+        "rare_label_fallbacks": 5
+      },
+      "agreement_count": 176,
+      "agreement_rate": 0.5866666666666667,
       "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
       "fallback_to_primary_on_disagreement": true,
       "weak_supervision_source": "split_metadata_inferred_condition"
