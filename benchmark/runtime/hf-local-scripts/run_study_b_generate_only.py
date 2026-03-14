@@ -189,7 +189,7 @@ def main() -> None:
     output_dir = Path(args.output_dir) if args.output_dir else (runtime_root / "results")
 
     # Preflight: ensure persona IDs + IDs are valid before generating.
-    ok, errors = validate_study_b_schema(str(base_data_dir.parent))
+    ok, errors = validate_study_b_schema(str(base_data_dir))
     if not ok:
         raise SystemExit("Study B split validation failed:\n- " + "\n- ".join(errors[:30]))
 

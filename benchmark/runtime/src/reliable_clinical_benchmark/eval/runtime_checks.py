@@ -9,6 +9,20 @@ import json
 logger = logging.getLogger(__name__)
 
 
+def _split_path_candidates(data_path: Path, filename: str) -> list[Path]:
+    return [
+        data_path / "openr1_psy_splits" / filename,
+        data_path / filename,
+    ]
+
+
+def _resolve_split_path(data_path: Path, filename: str) -> Path:
+    for candidate in _split_path_candidates(data_path, filename):
+        if candidate.exists():
+            return candidate
+    return _split_path_candidates(data_path, filename)[0]
+
+
 def validate_data_files(data_dir: str = "data") -> Tuple[bool, List[str]]:
     """
     Validate that required data files exist.
@@ -22,17 +36,18 @@ def validate_data_files(data_dir: str = "data") -> Tuple[bool, List[str]]:
     data_path = Path(data_dir)
     missing = []
 
-    required_files = [
-        "openr1_psy_splits/study_a_test.json",
-        "openr1_psy_splits/study_b_test.json",
-        "openr1_psy_splits/study_c_test.json",
-        "adversarial_bias/biased_vignettes.json",
+    required_split_files = [
+        "study_a_test.json",
+        "study_b_test.json",
+        "study_c_test.json",
     ]
+    for filename in required_split_files:
+        if not any(candidate.exists() for candidate in _split_path_candidates(data_path, filename)):
+            missing.append(str(_resolve_split_path(data_path, filename)))
 
-    for rel_path in required_files:
-        full_path = data_path / rel_path
-        if not full_path.exists():
-            missing.append(str(full_path))
+    bias_path = data_path / "adversarial_bias" / "biased_vignettes.json"
+    if not bias_path.exists():
+        missing.append(str(bias_path))
 
     if missing:
         logger.warning(f"Missing data files: {missing}")
@@ -134,8 +149,8 @@ def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
         Tuple of (is_valid, list_of_errors)
     """
     data_path = Path(data_dir)
-    study_b_path = data_path / "openr1_psy_splits" / "study_b_test.json"
-    study_b_mt_path = data_path / "openr1_psy_splits" / "study_b_multi_turn_test.json"
+    study_b_path = _resolve_split_path(data_path, "study_b_test.json")
+    study_b_mt_path = _resolve_split_path(data_path, "study_b_multi_turn_test.json")
     if not study_b_path.exists():
         return False, [f"Study B split not found: {study_b_path}"]
     if not study_b_mt_path.exists():
@@ -242,7 +257,7 @@ def validate_study_c_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
         Tuple of (is_valid, list_of_errors)
     """
     data_path = Path(data_dir)
-    study_c_path = data_path / "openr1_psy_splits" / "study_c_test.json"
+    study_c_path = _resolve_split_path(data_path, "study_c_test.json")
     if not study_c_path.exists():
         return False, [f"Study C split not found: {study_c_path}"]
 
