@@ -1,6 +1,9 @@
 # Invariance Evaluation (v5 frozen splits)
 
-This note covers the clinician-ready invariance workflow built on the frozen `v5` snapshot at `data/frozen_splits/v5`.
+This note covers the clinician-ready invariance workflow built on the frozen
+`v5` snapshot at `data/frozen_splits/v5`, plus the secondary
+controllability-backed invariance sample built from
+`data/controllability_splits_large_resolved`.
 
 It is a diagnostic stress-test layer. It does not replace the canonical full-run benchmark metrics.
 
@@ -31,6 +34,8 @@ It is a diagnostic stress-test layer. It does not replace the canonical full-run
 ## Output locations
 
 - Sampling manifests: `data/frozen_splits/v5_invariance_samples/`
+- Controllability-backed manifests:
+  `data/controllability_splits_large_resolved_invariance_samples/`
 - Variant caches: `results/{model-id}/study_*_invariance_*.jsonl`
 - Comparison outputs: `metric-results/{model-id}/...` or an explicit `--out` path
 - Materialised sampled split root: `data/frozen_splits/v5_invariance_samples/`
@@ -71,6 +76,18 @@ The generated root is a valid frozen-snapshot-style `data-root`, containing:
 - `study_c/target_plans.json`
 - `study_c/study_c_target_plans.json` (legacy compatibility alias)
 
+For the controllability-backed invariance sample, run:
+
+- `PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py --sample-profile controllability --data-root data/controllability_splits_large_resolved --output-root data/controllability_splits_large_resolved_invariance_samples`
+
+The controllability profile intentionally uses a slightly smaller diagnostic
+budget than the main `v5` profile:
+
+- Study A: `140`
+- Study B: `150`
+- Study B multi-turn: `10`
+- Study C: `12`
+
 ## Generation commands
 
 Dedicated generation runners now mirror the normal study entrypoints:
@@ -86,6 +103,15 @@ And the auto launcher supports:
 - `study_b_invariance`
 - `study_b_multi_turn_invariance`
 - `study_c_invariance`
+
+Dedicated study-command notes now live under:
+
+- `docs/studies/invariance/README.md`
+- `docs/studies/invariance/invariance_commands.md`
+- `docs/studies/invariance/study_a/`
+- `docs/studies/invariance/study_b/`
+- `docs/studies/invariance/study_c/`
+- `docs/invariance_scaling/README.md`
 
 ## Analysis scripts and notebooks
 

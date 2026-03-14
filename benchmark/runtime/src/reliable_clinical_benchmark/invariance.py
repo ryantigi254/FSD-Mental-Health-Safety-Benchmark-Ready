@@ -29,6 +29,11 @@ from reliable_clinical_benchmark.metrics.faithfulness import (
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_V5_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v5"
+DEFAULT_V5_INVARIANCE_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v5_invariance_samples"
+DEFAULT_CONTROLLABILITY_ROOT = RUNTIME_ROOT / "data" / "controllability_splits_large_resolved"
+DEFAULT_CONTROLLABILITY_INVARIANCE_ROOT = (
+    RUNTIME_ROOT / "data" / "controllability_splits_large_resolved_invariance_samples"
+)
 HIGH_RISK_BUCKETS = {
     "critical",
     "self_harm",
@@ -37,12 +42,22 @@ HIGH_RISK_BUCKETS = {
     "mania",
 }
 
-DEFAULT_INVARIANCE_SAMPLE_SIZES: Dict[str, int] = {
-    "study_a": 150,
-    "study_b": 160,
-    "study_b_multi_turn": 12,
-    "study_c": 15,
+DEFAULT_INVARIANCE_SAMPLE_SIZE_PROFILES: Dict[str, Dict[str, int]] = {
+    "v5": {
+        "study_a": 150,
+        "study_b": 160,
+        "study_b_multi_turn": 12,
+        "study_c": 15,
+    },
+    "controllability": {
+        "study_a": 140,
+        "study_b": 150,
+        "study_b_multi_turn": 10,
+        "study_c": 12,
+    },
 }
+DEFAULT_INVARIANCE_SAMPLE_SIZES = DEFAULT_INVARIANCE_SAMPLE_SIZE_PROFILES["v5"]
+DEFAULT_CONTROLLABILITY_INVARIANCE_SAMPLE_SIZES = DEFAULT_INVARIANCE_SAMPLE_SIZE_PROFILES["controllability"]
 
 
 @dataclass(frozen=True)
@@ -81,15 +96,63 @@ def _read_jsonl(path: Path) -> List[Dict[str, Any]]:
     return rows
 
 
-def _study_file(root: Path, filename: str) -> Path:
-    candidates = [
-        root / filename,
-        root / "openr1_psy_splits" / filename,
-    ]
+def infer_invariance_source_profile(root: Path) -> str:
+    """Infer the source profile from the available split layout."""
+
+    if any(
+        (root / candidate).exists()
+        for candidate in (
+            "study_a_controllability_test.json",
+            "study_b_controllability_test.json",
+            "study_b_multi_turn_controllability_test.json",
+            "study_c_controllability_test.json",
+            "ctrl_gold_diagnosis_labels.json",
+            "ctrl_target_plans.json",
+        )
+    ):
+        return "controllability"
+    return "v5"
+
+
+def default_invariance_output_root(profile: str) -> Path:
+    """Return the canonical materialised output root for a sample profile."""
+
+    if profile == "controllability":
+        return DEFAULT_CONTROLLABILITY_INVARIANCE_ROOT
+    return DEFAULT_V5_INVARIANCE_ROOT
+
+
+def resolve_invariance_sample_profile(requested_profile: str, root: Path) -> str:
+    """Resolve `auto` to the profile implied by the source root."""
+
+    normalized = requested_profile.strip().lower()
+    if normalized == "auto":
+        return infer_invariance_source_profile(root)
+    if normalized not in DEFAULT_INVARIANCE_SAMPLE_SIZE_PROFILES:
+        raise ValueError(
+            f"Unsupported invariance sample profile '{requested_profile}'. "
+            f"Expected one of: auto, {', '.join(sorted(DEFAULT_INVARIANCE_SAMPLE_SIZE_PROFILES))}"
+        )
+    return normalized
+
+
+def default_invariance_sample_sizes(profile: str) -> Dict[str, int]:
+    """Return a copy of the default study budgets for a named sample profile."""
+
+    return dict(DEFAULT_INVARIANCE_SAMPLE_SIZE_PROFILES[profile])
+
+
+def _study_file(root: Path, *filenames: str) -> Path:
+    candidates: List[Path] = []
+    for filename in filenames:
+        candidates.append(root / filename)
+        if filename.endswith(".json") and "controllability" not in filename:
+            candidates.append(root / "openr1_psy_splits" / filename)
     for candidate in candidates:
         if candidate.exists():
             return candidate
-    raise FileNotFoundError(f"Unable to resolve study file '{filename}' from {root}")
+    joined = ", ".join(filenames)
+    raise FileNotFoundError(f"Unable to resolve study file from {{{joined}}} in {root}")
 
 
 def _study_a_metadata_path(root: Path) -> Optional[Path]:
@@ -106,6 +169,7 @@ def _study_a_metadata_path(root: Path) -> Optional[Path]:
 
 def _study_a_labels_path(root: Path) -> Optional[Path]:
     candidates = [
+        root / "ctrl_gold_diagnosis_labels.json",
         root / "study_a" / "gold_diagnosis_labels.json",
         root / "study_a_gold" / "gold_diagnosis_labels.json",
         root / "gold_diagnosis_labels.json",
@@ -234,7 +298,7 @@ def _severity_bucket(risk_bucket: str, label: str) -> str:
 
 
 def _study_a_records(root: Path) -> List[ManifestRecord]:
-    study_path = _study_file(root, "study_a_test.json")
+    study_path = _study_file(root, "study_a_test.json", "study_a_controllability_test.json")
     labels_path = _study_a_labels_path(root)
     metadata_path = _study_a_metadata_path(root)
     rows = load_study_a_data(
@@ -275,7 +339,7 @@ def _study_a_records(root: Path) -> List[ManifestRecord]:
 
 
 def _study_b_records(root: Path) -> List[ManifestRecord]:
-    payload = _load_json(_study_file(root, "study_b_test.json"))
+    payload = _load_json(_study_file(root, "study_b_test.json", "study_b_controllability_test.json"))
     rows = payload if isinstance(payload, list) else payload.get("samples", [])
     records: List[ManifestRecord] = []
     for row in rows:
@@ -306,7 +370,9 @@ def _study_b_records(root: Path) -> List[ManifestRecord]:
 
 
 def _study_b_multi_turn_records(root: Path) -> List[ManifestRecord]:
-    payload = _load_json(_study_file(root, "study_b_multi_turn_test.json"))
+    payload = _load_json(
+        _study_file(root, "study_b_multi_turn_test.json", "study_b_multi_turn_controllability_test.json")
+    )
     rows = payload if isinstance(payload, list) else payload.get("multi_turn_cases", [])
     records: List[ManifestRecord] = []
     for row in rows:
@@ -341,7 +407,7 @@ def _study_b_multi_turn_records(root: Path) -> List[ManifestRecord]:
 
 
 def _study_c_records(root: Path) -> List[ManifestRecord]:
-    payload = _load_json(_study_file(root, "study_c_test.json"))
+    payload = _load_json(_study_file(root, "study_c_test.json", "study_c_controllability_test.json"))
     rows = payload.get("cases", []) if isinstance(payload, dict) else payload
     records: List[ManifestRecord] = []
     for row in rows:
@@ -616,6 +682,7 @@ def build_invariance_manifest(
         "seed": seed,
         "sample_size": sample_size,
         "data_root": str(root),
+        "source_profile": infer_invariance_source_profile(root),
         "sampling_unit": spec.sampling_unit,
         "sampling_role": "diagnostic_subset",
         "sampling_basis": (
@@ -682,8 +749,9 @@ def materialize_invariance_split_root(
     selected_specs = [get_study_spec(study) for study in (studies or study_cli_choices())]
     output_root.mkdir(parents=True, exist_ok=True)
     materialized: Dict[str, Dict[str, Any]] = {}
+    source_profile = infer_invariance_source_profile(source_root)
 
-    study_a_source = _load_json(_study_file(source_root, "study_a_test.json"))
+    study_a_source = _load_json(_study_file(source_root, "study_a_test.json", "study_a_controllability_test.json"))
     study_a_rows = study_a_source.get("samples", []) if isinstance(study_a_source, dict) else study_a_source
     study_a_by_id = {str(row.get("id", "")).strip(): row for row in study_a_rows if str(row.get("id", "")).strip()}
     study_a_labels = _load_json(_study_a_labels_path(source_root)) if _study_a_labels_path(source_root) else {"labels": {}}
@@ -694,21 +762,26 @@ def materialize_invariance_split_root(
         study_a_mapping_path = source_root / "gold_labels_mapping.json"
     study_a_mapping = _load_json(study_a_mapping_path) if study_a_mapping_path.exists() else {"mapping": {}}
 
-    study_b_source = _load_json(_study_file(source_root, "study_b_test.json"))
+    study_b_source = _load_json(_study_file(source_root, "study_b_test.json", "study_b_controllability_test.json"))
     study_b_rows = study_b_source if isinstance(study_b_source, list) else study_b_source.get("samples", [])
     study_b_by_id = {str(row.get("id", "")).strip(): row for row in study_b_rows if str(row.get("id", "")).strip()}
 
-    study_b_mt_source = _load_json(_study_file(source_root, "study_b_multi_turn_test.json"))
+    study_b_mt_source = _load_json(
+        _study_file(source_root, "study_b_multi_turn_test.json", "study_b_multi_turn_controllability_test.json")
+    )
     study_b_mt_rows = study_b_mt_source if isinstance(study_b_mt_source, list) else study_b_mt_source.get("multi_turn_cases", [])
     study_b_mt_by_id = {str(row.get("id", "")).strip(): row for row in study_b_mt_rows if str(row.get("id", "")).strip()}
 
-    study_c_source = _load_json(_study_file(source_root, "study_c_test.json"))
+    study_c_source = _load_json(_study_file(source_root, "study_c_test.json", "study_c_controllability_test.json"))
     study_c_rows = study_c_source.get("cases", []) if isinstance(study_c_source, dict) else study_c_source
     study_c_by_id = {str(row.get("id", "")).strip(): row for row in study_c_rows if str(row.get("id", "")).strip()}
 
-    study_c_target_plans_path = source_root / "study_c" / "study_c_target_plans.json"
-    if not study_c_target_plans_path.exists():
-        study_c_target_plans_path = source_root / "study_c_target_plans.json"
+    study_c_target_plan_candidates = [
+        source_root / "study_c" / "study_c_target_plans.json",
+        source_root / "study_c_target_plans.json",
+        source_root / "ctrl_target_plans.json",
+    ]
+    study_c_target_plans_path = next((path for path in study_c_target_plan_candidates if path.exists()), study_c_target_plan_candidates[-1])
     study_c_target_plans = _load_json(study_c_target_plans_path) if study_c_target_plans_path.exists() else {"plans": {}}
 
     study_c_entity_map_path = source_root / "study_c" / "entity_evidence_map.json"
@@ -812,6 +885,7 @@ def materialize_invariance_split_root(
     summary = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "source_root": str(source_root),
+        "source_profile": source_profile,
         "manifest_dir": str(manifest_dir),
         "layout": "frozen_snapshot",
         "studies": materialized,

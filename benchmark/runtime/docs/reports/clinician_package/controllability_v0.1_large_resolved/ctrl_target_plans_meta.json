@@ -1,0 +1,37 @@
+{
+  "source_file": "ctrl_target_plans.json",
+  "generated_at_utc": "2026-03-13T21:35:27.883258+00:00",
+  "meta": {
+    "dataset": "controllability/study_c_split_metadata",
+    "backend": "probe",
+    "extraction": "controllability/generate_gold_plans.py",
+    "generated_utc": "2026-03-13T03:59:58.778502+00:00",
+    "n_cases": 112,
+    "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
+    "secondary_model": "",
+    "tertiary_model": "",
+    "probe_meta": {
+      "n_splits": 3,
+      "frequent_labels": [
+        "attention-deficit/hyperactivity disorder",
+        "generalized anxiety disorder",
+        "insomnia",
+        "major depressive disorder",
+        "obsessive-compulsive disorder",
+        "post-traumatic stress disorder",
+        "prolonged grief disorder",
+        "psychosis",
+        "self-harm",
+        "suicidal crisis"
+      ],
+      "rare_labels": {
+        "somatic symptom disorder": 1,
+        "panic disorder": 1
+      },
+      "rare_label_fallbacks": 2,
+      "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
+      "fallback_to_primary_on_disagreement": true,
+      "weak_supervision_source": "split_metadata_inferred_condition"
+    }
+  }
+}
