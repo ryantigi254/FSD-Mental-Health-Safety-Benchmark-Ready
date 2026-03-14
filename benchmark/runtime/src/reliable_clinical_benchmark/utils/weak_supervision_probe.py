@@ -139,6 +139,7 @@ def run_probe_labeler(
     max_length: int = 256,
     n_splits: int = 3,
     fallback_to_primary_on_disagreement: bool = True,
+    weak_supervision_source: str = "split_metadata_inferred_condition",
 ) -> ProbeResult:
     if len(texts) != len(labels):
         raise ValueError("texts and labels must have the same length")
@@ -189,7 +190,7 @@ def run_probe_labeler(
 
     primary_meta["primary_model_name"] = primary_model_name
     primary_meta["fallback_to_primary_on_disagreement"] = bool(fallback_to_primary_on_disagreement)
-    primary_meta["weak_supervision_source"] = "split_metadata_inferred_condition"
+    primary_meta["weak_supervision_source"] = str(weak_supervision_source)
 
     return ProbeResult(
         predictions=final_predictions,

@@ -12,13 +12,17 @@ import re
 from pathlib import Path
 import sys
 from typing import Dict, Optional
+from datetime import datetime, UTC
 
 import os
 sys.path.insert(0, os.path.abspath("src"))
 
-from datasets import load_dataset
 from reliable_clinical_benchmark.data.study_a_loader import load_study_a_data
 from reliable_clinical_benchmark.utils.nli import NLIModel
+from reliable_clinical_benchmark.utils.weak_supervision_probe import (
+    DEFAULT_BACKBONE_MODELS,
+    run_probe_labeler,
+)
 
 class ScoringNLIModel(NLIModel):
     """Local wrapper to get confidence scores for diagnosis ranking."""
@@ -270,7 +274,13 @@ def build_gold_labels_from_openr1(*, use_nli: bool = True) -> Dict[str, str]:
     
     print("Loading OpenR1-Psy (test + train)...")
     cache_dir = Path("Misc") / "datasets" / "openr1_psy"
-    from datasets import load_dataset, concatenate_datasets
+    try:
+        from datasets import concatenate_datasets, load_dataset
+    except ModuleNotFoundError as exc:
+        raise ModuleNotFoundError(
+            "The Study A NLI backend requires the optional `datasets` package. "
+            "Install it or use `--backend probe`."
+        ) from exc
     ds_test = load_dataset("GMLHUHE/OpenR1-Psy", split="test", cache_dir=str(cache_dir))
     ds_train = load_dataset("GMLHUHE/OpenR1-Psy", split="train", cache_dir=str(cache_dir))
     
@@ -566,6 +576,78 @@ def build_gold_labels_from_openr1(*, use_nli: bool = True) -> Dict[str, str]:
     return labels
 
 
+def _load_study_a_weak_labels(labels_path: Path) -> Dict[str, str]:
+    payload = json.loads(labels_path.read_text(encoding="utf-8"))
+    labels = payload.get("labels", {})
+    if not isinstance(labels, dict):
+        raise ValueError(f"Weak labels file does not expose a labels mapping: {labels_path}")
+    return {str(key): str(value or "") for key, value in labels.items()}
+
+
+def build_gold_labels_with_probe(
+    *,
+    study_a_path: Path,
+    weak_labels_path: Path,
+    primary_model_name: str,
+    secondary_model_name: str | None = None,
+    tertiary_model_name: str | None = None,
+    batch_size: int = 12,
+    max_length: int = 256,
+) -> Dict[str, object]:
+    print(f"Loading Study A split from {study_a_path}...")
+    vignettes = load_study_a_data(str(study_a_path))
+    weak_labels = _load_study_a_weak_labels(weak_labels_path)
+
+    texts = []
+    labels = []
+    sample_ids = []
+    missing = []
+    for vignette in vignettes:
+        sample_id = str(vignette.get("id", "") or "")
+        if sample_id not in weak_labels or not weak_labels[sample_id]:
+            missing.append(sample_id)
+            continue
+        sample_ids.append(sample_id)
+        texts.append(str(vignette.get("prompt", "") or ""))
+        labels.append(weak_labels[sample_id])
+
+    if missing:
+        preview = ", ".join(missing[:10])
+        raise ValueError(
+            f"Weak labels missing or empty for {len(missing)} Study A items. Examples: {preview}"
+        )
+
+    print(f"Study A probe labelling samples: {len(sample_ids)}")
+    result = run_probe_labeler(
+        texts=texts,
+        labels=labels,
+        primary_model_name=primary_model_name,
+        secondary_model_name=secondary_model_name,
+        tertiary_model_name=tertiary_model_name,
+        batch_size=batch_size,
+        max_length=max_length,
+        weak_supervision_source=str(weak_labels_path),
+    )
+
+    return {
+        "labels": {
+            sample_id: prediction
+            for sample_id, prediction in zip(sample_ids, result.predictions)
+        },
+        "meta": {
+            "backend": "probe",
+            "dataset": "study_a_split",
+            "extraction": "populate_from_openr1.py",
+            "updated_utc": datetime.now(UTC).isoformat(),
+            "primary_model": primary_model_name,
+            "secondary_model": secondary_model_name or "",
+            "tertiary_model": tertiary_model_name or "",
+            "weak_labels_path": str(weak_labels_path),
+            "probe_meta": result.meta,
+        },
+    }
+
+
 def main() -> int:
     """Extract and populate gold diagnosis labels."""
     import argparse
@@ -581,51 +663,134 @@ def main() -> int:
         action="store_true",
         help="Disable NLI scoring and use heuristic extraction only.",
     )
+    p.add_argument(
+        "--backend",
+        choices=("nli", "probe"),
+        default="nli",
+        help="Gold-label backend: original NLI/heuristic path or the probe-backed weak-supervision path.",
+    )
+    p.add_argument(
+        "--study-a-path",
+        type=Path,
+        default=Path("data/openr1_psy_splits/study_a_test.json"),
+        help="Path to the Study A split JSON to label.",
+    )
+    p.add_argument(
+        "--out",
+        type=Path,
+        default=Path("data/study_a_gold/gold_diagnosis_labels.json"),
+        help="Output path for the gold diagnosis labels JSON.",
+    )
+    p.add_argument(
+        "--weak-labels",
+        type=Path,
+        default=None,
+        help="Weak supervision labels JSON used by --backend probe. Defaults to the output file if it already exists.",
+    )
+    p.add_argument(
+        "--primary-model",
+        type=str,
+        default=DEFAULT_BACKBONE_MODELS["biomedbert"],
+        help="Primary frozen-encoder backbone for --backend probe.",
+    )
+    p.add_argument(
+        "--secondary-model",
+        type=str,
+        default=None,
+        help="Optional secondary backbone for agreement telemetry in --backend probe.",
+    )
+    p.add_argument(
+        "--tertiary-model",
+        type=str,
+        default=None,
+        help="Optional tertiary backbone for agreement telemetry in --backend probe.",
+    )
+    p.add_argument(
+        "--batch-size",
+        type=int,
+        default=12,
+        help="Encoder batch size for --backend probe.",
+    )
+    p.add_argument(
+        "--max-length",
+        type=int,
+        default=256,
+        help="Tokenizer max length for --backend probe.",
+    )
     args = p.parse_args()
-    
-    labels = build_gold_labels_from_openr1(use_nli=not args.no_nli)
-    
-    output_path = Path("data/study_a_gold/gold_diagnosis_labels.json")
+
+    output_path = Path(args.out)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
+    if args.backend == "probe":
+        weak_labels_path = Path(args.weak_labels) if args.weak_labels else output_path
+        if not weak_labels_path.exists():
+            raise SystemExit(
+                f"Weak labels file not found for probe backend: {weak_labels_path}"
+            )
+        payload = build_gold_labels_with_probe(
+            study_a_path=Path(args.study_a_path),
+            weak_labels_path=weak_labels_path,
+            primary_model_name=args.primary_model,
+            secondary_model_name=args.secondary_model,
+            tertiary_model_name=args.tertiary_model,
+            batch_size=args.batch_size,
+            max_length=args.max_length,
+        )
+        output_path.write_text(
+            json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        agreement_count = payload["meta"]["probe_meta"].get("agreement_count", 0)
+        total = len(payload["labels"])
+        print(f"\nGold labels written to {output_path}")
+        print(
+            "  "
+            f"Probe primary: {args.primary_model}, "
+            f"secondary: {args.secondary_model or 'none'}, "
+            f"tertiary: {args.tertiary_model or 'none'}, "
+            f"agreement: {agreement_count}/{total}"
+        )
+        print(f"  Total: {total}")
+        return 0
+
+    labels = build_gold_labels_from_openr1(use_nli=not args.no_nli)
+
     # Load existing file to preserve structure
     existing_data = {"labels": {}}
     if output_path.exists():
         with output_path.open("r", encoding="utf-8") as f:
             existing_data = json.load(f)
-    
+
     # Update labels
     existing_labels = existing_data.get("labels", {})
     updated_count = 0
-    
+
     for sid, new_label in labels.items():
         if not new_label:
-            # Keep existing label if new one is empty
             if sid not in existing_labels:
                 existing_labels[sid] = ""
             continue
-        
+
         existing_label = existing_labels.get(sid, "")
-        
+
         if args.force:
-            # Always overwrite if --force
             if existing_label != new_label:
                 existing_labels[sid] = new_label
                 updated_count += 1
         else:
-            # Only update if empty or missing
             if not existing_label or existing_label == "":
                 existing_labels[sid] = new_label
                 updated_count += 1
             elif sid not in existing_labels:
                 existing_labels[sid] = new_label
                 updated_count += 1
-    
+
     existing_data["labels"] = existing_labels
-    
+
     with output_path.open("w", encoding="utf-8") as f:
         json.dump(existing_data, f, indent=2, ensure_ascii=False)
-    
+
     print(f"\nUpdated {updated_count} labels in {output_path}")
     print(f"Total labeled: {sum(1 for v in existing_labels.values() if v)} / {len(existing_labels)}")
     
