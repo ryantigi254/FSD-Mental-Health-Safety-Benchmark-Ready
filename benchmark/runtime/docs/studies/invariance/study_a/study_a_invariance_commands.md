@@ -22,6 +22,36 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py \
   --output-dir "$INVARIANCE_RESULTS_DIR"
 ```
 
+## Variant matrix
+
+Study A concrete variants on the same sampled root:
+
+- `lexical`
+- `surface`
+- `syntax`
+- `instruction`
+
+Build them with:
+
+```bash
+cd benchmark/runtime
+PYTHONPATH=src python scripts/invariance/build_variant_family_matrix.py \
+  --base-root "$INVARIANCE_DATA_DIR" \
+  --output-root data/invariance_variants \
+  --study study_a
+```
+
+Run one family without resampling:
+
+```bash
+PYTHONPATH=src python scripts/dev/run_generation_auto.py \
+  --study study_a_invariance \
+  --model-id qwq \
+  --data-dir data/invariance_variants/study_a/lexical \
+  --output-dir "$INVARIANCE_RESULTS_DIR" \
+  --variant-tag lexical
+```
+
 ## Controllability-backed sampled root
 
 ```bash

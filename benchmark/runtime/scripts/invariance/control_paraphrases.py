@@ -98,6 +98,16 @@ def _study_c_summary_transform(summary: str, variant: str) -> str:
     raise ValueError(f"Unsupported Study C summary variant '{variant}'")
 
 
+def _study_c_rephrase_turns(turns: list[dict], rng: random.Random) -> list[dict]:
+    rephrased_turns = []
+    for turn in turns:
+        updated = dict(turn)
+        if rng.random() < 0.35:
+            updated["message"] = _patient_turn_rephrase(str(updated.get("message", "")))
+        rephrased_turns.append(updated)
+    return rephrased_turns
+
+
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build prompt-level paraphrase/control variant roots.")
     parser.add_argument("--study", required=True, choices=["study_a", "study_b", "study_c"])
@@ -133,15 +143,15 @@ def main() -> int:
             continue
 
         if args.study == "study_c":
-            row["patient_summary"] = _study_c_summary_transform(str(row.get("patient_summary", "")), args.variant)
-            turns = row.get("turns", [])
-            rephrased_turns = []
-            for turn in turns:
-                if rng.random() < 0.35:
-                    turn = dict(turn)
-                    turn["message"] = _patient_turn_rephrase(str(turn.get("message", "")))
-                rephrased_turns.append(turn)
-            row["turns"] = rephrased_turns
+            if args.variant in {"summary_short", "summary_long"}:
+                row["patient_summary"] = _study_c_summary_transform(
+                    str(row.get("patient_summary", "")),
+                    args.variant,
+                )
+            elif args.variant == "patient_turn_rephrase":
+                row["turns"] = _study_c_rephrase_turns(row.get("turns", []), rng)
+            else:
+                raise ValueError(f"Unsupported Study C variant '{args.variant}'")
             row.setdefault("metadata", {})["invariance_variant"] = args.variant
             changed_ids.append(str(row.get("id", "")))
             continue

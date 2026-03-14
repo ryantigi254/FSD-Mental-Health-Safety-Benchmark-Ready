@@ -63,6 +63,40 @@ PYTHONPATH=src python scripts/studies/v5_review/generate_invariance_manifest.py 
 
 ---
 
+## Build variant roots from the fixed sample
+
+Apply variant families to the same sampled root rather than resampling per
+family.
+
+### Build the full controllability-backed variant matrix
+
+```bash
+cd benchmark/runtime
+PYTHONPATH=src python scripts/invariance/build_variant_family_matrix.py \
+  --base-root data/controllability_splits_large_resolved_invariance_samples \
+  --output-root data/invariance_variants/controllability
+```
+
+### Build a selected study or variant only
+
+```bash
+cd benchmark/runtime
+PYTHONPATH=src python scripts/invariance/build_variant_family_matrix.py \
+  --base-root data/controllability_splits_large_resolved_invariance_samples \
+  --output-root data/invariance_variants/controllability \
+  --study study_c \
+  --variant patient_turn_rephrase
+```
+
+Concrete variant menu:
+
+- Study A: `lexical`, `surface`, `syntax`, `instruction`
+- Study B single-turn: `paraphrase`, `mild`, `moderate`, `strong`, `question`, `cultural`
+- Study B multi-turn: `schedule_earlier`, `schedule_later`, `tone_gentle`, `tone_direct`, `tone_confrontational`, `pressure_milder`, `pressure_stronger`
+- Study C: `summary_short`, `summary_long`, `patient_turn_rephrase`, `noncritical_reorder`
+
+---
+
 ## Generation commands
 
 Set the sampled root and output directory first.
@@ -125,6 +159,25 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py \
 
 The same pattern works for the other supported model IDs.
 
+### Variant-root runs
+
+Point `--data-dir` at a specific variant root and pass `--variant-tag` so the
+default cache filename stays unique:
+
+```bash
+cd benchmark/runtime
+PYTHONPATH=src python scripts/dev/run_generation_auto.py \
+  --study study_b_invariance \
+  --model-id qwq \
+  --data-dir data/invariance_variants/controllability/study_b/cultural \
+  --output-dir results_invariance_controllability \
+  --variant-tag cultural
+```
+
+That produces a cache like:
+
+- `results_invariance_controllability/<model>/study_b_invariance_cultural_generations.jsonl`
+
 Per-study command notes:
 
 - `docs/studies/invariance/study_a/study_a_invariance_commands.md`
@@ -186,9 +239,11 @@ PYTHONPATH=src python scripts/evaluation/export_invariance_case_deltas.py \
 
 - The materialised sampled roots always use the canonical invariance layout,
   even when the source root is controllability-specific.
+- Variant roots keep that same layout and only change the prompt or turn
+  surface for the selected family.
 - Cache filenames stay the same across profiles, so keep the output dirs
   separate if you want to compare `v5` and controllability-backed runs side by
-  side.
+  side. Use `--variant-tag` when multiple families share one output dir.
 - The `controllability` profile is meant to reuse the invariance machinery on
   the control-conditioned suite, not to replace the main frozen `v5`
   invariance diagnostic.

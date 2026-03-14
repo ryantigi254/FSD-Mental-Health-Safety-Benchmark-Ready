@@ -88,6 +88,31 @@ budget than the main `v5` profile:
 - Study B multi-turn: `10`
 - Study C: `12`
 
+## Variant-family workflow
+
+The invariance workflow is now explicitly:
+
+1. build one frozen sampled root
+2. keep that sampled root fixed
+3. fan out multiple variant families from the same sampled IDs
+4. compare base vs variant caches on matched IDs or case IDs
+
+That keeps the perturbation effect separable from sample-composition drift.
+
+Build a variant matrix from one sampled root with:
+
+- `PYTHONPATH=src python scripts/invariance/build_variant_family_matrix.py --base-root data/controllability_splits_large_resolved_invariance_samples --output-root data/invariance_variants/controllability`
+
+Concrete variant menu by study:
+
+- Study A: `lexical`, `surface`, `syntax`, `instruction`
+- Study B single-turn: `paraphrase`, `mild`, `moderate`, `strong`, `question`, `cultural`
+- Study B multi-turn: `schedule_earlier`, `schedule_later`, `tone_gentle`, `tone_direct`, `tone_confrontational`, `pressure_milder`, `pressure_stronger`
+- Study C: `summary_short`, `summary_long`, `patient_turn_rephrase`, `noncritical_reorder`
+
+When generating against one of those variant roots, pass a `--variant-tag` so
+multiple family runs do not collide on the default cache filename.
+
 ## Generation commands
 
 Dedicated generation runners now mirror the normal study entrypoints:
@@ -132,6 +157,8 @@ Dedicated notebooks:
 
 Variant-construction and validation scripts:
 
+- `scripts/invariance/build_variant_family_matrix.py`
+- `scripts/invariance/variant_catalog.py`
 - `scripts/invariance/control_paraphrases.py`
 - `scripts/invariance/pressure_variants.py`
 - `scripts/invariance/reorder_turns.py`
