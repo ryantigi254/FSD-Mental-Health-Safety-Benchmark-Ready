@@ -1,0 +1,58 @@
+% Auto-generated PGFPlots radar figure. Do not edit by hand.
+\begin{tikzpicture}
+  \definecolor{studyApurple}{HTML}{4B1D9A}
+  \begin{polaraxis}[
+    width=0.72\linewidth,
+    height=0.72\linewidth,
+    at={(0,0.48cm)},
+    ymin=0, ymax=110,
+    ytick={33.166,46.904,57.446,66.332,74.162,81.240,87.750,93.808,99.499,104.881,110.000},
+    yticklabels={{0.1},{0.2},{0.3},{0.4},{0.5},{0.6},{0.7},{0.8},{0.9},{1.0},{1.1}},
+    xtick=data,
+    xticklabels={{},{},{},{},{},{},{},{},{}},
+    clip=false,
+    tick label style={font=\large\bfseries, text=gray!68!black},
+    yticklabel style={font=\large\bfseries, text=gray!68!black},
+    xticklabel style={font=\footnotesize\mdseries, align=center, text width=2.2cm, text=gray!78!black},
+    grid=both,
+    major grid style={draw=gray!25},
+    minor grid style={draw=gray!12},
+    axis line style={draw=gray!45},
+    legend style={
+      at={(axis description cs:0.5,-0.13)},
+      anchor=north,
+      legend columns=4,
+      font=\small\bfseries,
+      draw=gray!35,
+      fill=white
+    },
+  ]
+    \addplot+[line width=1.6pt, line join=round, color=studyApurple, mark=*, mark size=2.1pt, fill=studyApurple!45!white, fill opacity=0.05] coordinates {(-90.00,104.881) (-50.00,0.000) (-10.00,0.000) (30.00,0.000) (70.00,0.000) (110.00,0.000) (150.00,0.000) (190.00,0.000) (230.00,0.000) (270.00,104.881)};
+    \addlegendentry{Study A}
+    \addplot+[line width=1.6pt, line join=round, color=red!88!black, mark=*, mark size=1.5pt, fill=red!72!white, fill opacity=0.16] coordinates {(-90.00,58.630) (-50.00,72.631) (-10.00,47.363) (30.00,37.346) (70.00,19.857) (110.00,15.570) (150.00,29.013) (190.00,40.232) (230.00,63.039) (270.00,58.630)};
+    \addlegendentry{Overall}
+    \addplot+[line width=1.6pt, line join=round, color=orange!96!black, mark=*, mark size=1.5pt, fill=orange!78!white, fill opacity=0.14] coordinates {(-90.00,0.000) (-50.00,72.149) (-10.00,67.368) (30.00,60.225) (70.00,0.000) (110.00,31.783) (150.00,0.000) (190.00,79.711) (230.00,77.131) (270.00,0.000)};
+    \addlegendentry{Study B}
+    \addplot+[line width=1.6pt, line join=round, color=teal!88!black, mark=*, mark size=1.5pt, fill=teal!76!white, fill opacity=0.14] coordinates {(-90.00,0.000) (-50.00,86.235) (-10.00,73.798) (30.00,0.000) (70.00,81.844) (110.00,0.000) (150.00,0.000) (190.00,67.368) (230.00,60.977) (270.00,0.000)};
+    \addlegendentry{Study C}
+    % Manual axis labels + leader lines for readability on a square-root radial scale.
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=north] (label0) at (axis cs:-90.00,122.10) {Bias / Adversarial};
+    \draw[gray!50, line width=0.35pt] (axis cs:-90.00,110) -- (label0.north);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=west] (label1) at (axis cs:-50.00,122.10) {Anxiety\\Disorders};
+    \draw[gray!50, line width=0.35pt] (axis cs:-50.00,110) -- (label1.west);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=west] (label2) at (axis cs:-10.00,122.10) {Trauma /\\Stressor-Related};
+    \draw[gray!50, line width=0.35pt] (axis cs:-10.00,110) -- (label2.west);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=west] (label3) at (axis cs:30.00,113.30) {OCD\\Related};
+    \draw[gray!50, line width=0.35pt] (axis cs:30.00,110) -- (label3.west);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=south] (label4) at (axis cs:70.00,113.30) {Sleep-Wake\\Disorders};
+    \draw[gray!50, line width=0.35pt] (axis cs:70.00,110) -- (label4.south);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=south] (label5) at (axis cs:110.00,113.30) {Somatic /\\Health-Related};
+    \draw[gray!50, line width=0.35pt] (axis cs:110.00,110) -- (label5.south);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=east] (label6) at (axis cs:150.00,113.30) {Neurodevelop-\\mental};
+    \draw[gray!50, line width=0.35pt] (axis cs:150.00,110) -- (label6.east);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=east] (label7) at (axis cs:190.00,122.10) {Mood\\Disorders};
+    \draw[gray!50, line width=0.35pt] (axis cs:190.00,110) -- (label7.east);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=east] (label8) at (axis cs:230.00,122.10) {Unclassified};
+    \draw[gray!50, line width=0.35pt] (axis cs:230.00,110) -- (label8.east);
+  \end{polaraxis}
+\end{tikzpicture}

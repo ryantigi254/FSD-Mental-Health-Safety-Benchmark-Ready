@@ -41,6 +41,12 @@ benchmark/runtime/data/verification/
 benchmark/runtime/data/DATASET_TURN_ANALYSIS_REPORT.md
 benchmark/runtime/data/persona_splits_report.md
 benchmark/runtime/analysis/
+!benchmark/runtime/analysis/
+!benchmark/runtime/analysis/figures/
+!benchmark/runtime/analysis/figures/pgfplots/
+!benchmark/runtime/analysis/figures/pgfplots/controlability figures/
+!benchmark/runtime/analysis/figures/pgfplots/controlability figures/**
+benchmark/runtime/analysis/figures/pgfplots/controlability figures/**/*.aux
 benchmark/runtime/results/
 codex_logs/
 benchmark/runtime/tests/unit/test_generate_pgfplots.py
