@@ -1,0 +1,28 @@
+{
+  "study": "study_c",
+  "variant_tag": "summary_short",
+  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v5_invariance_samples",
+  "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/v5/study_c/summary_short",
+  "seed": 42,
+  "changed_ids": [
+    "c_013",
+    "c_017",
+    "c_028",
+    "c_029",
+    "c_031",
+    "c_033",
+    "c_042",
+    "c_048",
+    "c_062",
+    "c_067",
+    "c_068",
+    "c_069",
+    "c_075",
+    "c_092",
+    "c_097"
+  ],
+  "n_changed": 15,
+  "notes": {
+    "variant_family": "control_paraphrases"
+  }
+}
