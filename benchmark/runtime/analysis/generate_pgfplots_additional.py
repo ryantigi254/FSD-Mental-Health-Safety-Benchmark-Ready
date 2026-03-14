@@ -10,14 +10,15 @@ Outputs in analysis/figures/pgfplots/<figure-slug>/
 
 from __future__ import annotations
 
-import json
 import argparse
+import json
 import re
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
 OUT = BASE / "figures" / "pgfplots"
 OUT.mkdir(parents=True, exist_ok=True)
+DEFAULT_ANALYSIS_JSON = BASE / "distribution_analysis.json"
 
 
 def esc_tex(s: str) -> str:
@@ -44,6 +45,14 @@ def normalise_condition_name(cond: str) -> str:
         else:
             out.append(w.capitalize())
     return " ".join(out)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Generate additional PGFPlots figures from an analysis JSON.")
+    parser.add_argument("--analysis-json", type=Path, default=DEFAULT_ANALYSIS_JSON)
+    parser.add_argument("--output-root", type=Path, default=OUT)
+    parser.add_argument("--title-prefix", default="")
+    return parser.parse_args()
 
 
 def write_figure(figure_title: str, body_tex: str, compile_name: str, caption: str, *, landscape: bool = False, margin: str = "1.2cm") -> tuple[Path, Path]:
@@ -218,12 +227,22 @@ def build_fig1_standalone_specs(analysis: dict) -> list[tuple[str, str, str, str
 
 
 def build_output_specs(analysis: dict) -> list[tuple[str, str, str, str]]:
-    return [
-        build_fig2(analysis),
-        build_fig3(analysis),
-        build_fig4(analysis),
-        *build_fig1_standalone_specs(analysis),
-    ]
+    omit = set(analysis.get("omit_figures", []))
+    specs: list[tuple[str, str, str, str]] = []
+    fig_map = {
+        "fig2_per_study_breakdown": build_fig2,
+        "fig3_therapeutic_modalities": build_fig3,
+        "fig4_all_conditions_by_category": build_fig4,
+    }
+    for name, builder in fig_map.items():
+        if name == "fig3_therapeutic_modalities" and not analysis.get("therapeutic_modalities"):
+            continue
+        if name not in omit:
+            specs.append(builder(analysis))
+    for spec in build_fig1_standalone_specs(analysis):
+        if spec[2] not in omit:
+            specs.append(spec)
+    return specs
 
 
 def build_fig1(analysis: dict) -> tuple[str, str, str, bool]:
@@ -320,10 +339,18 @@ def build_fig2(analysis: dict) -> tuple[str, str, str, bool]:
     cats = analysis["diagnostic_categories"]
     cat_names = list(cats.keys())
     cat_labels = ",".join("{" + esc_tex(c) + "}" for c in cat_names)
-
-    coords_a = " ".join(f"({cats[c]['per_study'].get('A', 0)},{i})" for i, c in enumerate(cat_names))
-    coords_b = " ".join(f"({cats[c]['per_study'].get('B', 0)},{i})" for i, c in enumerate(cat_names))
-    coords_c = " ".join(f"({cats[c]['per_study'].get('C', 0)},{i})" for i, c in enumerate(cat_names))
+    study_labels = analysis.get("study_labels", {})
+    study_keys = list(analysis.get("per_study", {}).keys())
+    palette = ["purple!78!black", "red!78!black", "orange!90!black", "teal!80!black", "blue!65!black", "gray!65"]
+    legend_columns = min(3, max(1, len(study_keys)))
+    plot_lines = []
+    for index, study_key in enumerate(study_keys):
+        coords = " ".join(
+            f"({cats[c]['per_study'].get(study_key, 0)},{i})" for i, c in enumerate(cat_names)
+        )
+        fill = palette[index % len(palette)]
+        plot_lines.append(rf"\addplot+[draw=none, fill={fill}] coordinates {{{coords}}};")
+        plot_lines.append(rf"\addlegendentry{{{esc_tex(study_labels.get(study_key, study_key))}}}")
 
     body = rf"""\begin{{tikzpicture}}
 \begin{{axis}}[
@@ -336,17 +363,12 @@ def build_fig2(analysis: dict) -> tuple[str, str, str, bool]:
   y dir=reverse,
   yticklabel style={{font=\scriptsize, text width=4.4cm, align=right}},
   xlabel={{Samples}},
-  legend style={{at={{(0.5,1.01)}}, anchor=south, legend columns=3, draw=none, font=\small}},
+  legend style={{at={{(0.5,1.01)}}, anchor=south, legend columns={legend_columns}, draw=none, font=\small}},
   grid=major,
   grid style={{draw=gray!20}},
   axis line style={{draw=gray!45}},
 ]
-\addplot+[draw=none, fill=blue!70] coordinates {{{coords_a}}};
-\addlegendentry{{Study A}}
-\addplot+[draw=none, fill=orange!85] coordinates {{{coords_b}}};
-\addlegendentry{{Study B}}
-\addplot+[draw=none, fill=teal!80!black] coordinates {{{coords_c}}};
-\addlegendentry{{Study C}}
+{chr(10).join(plot_lines)}
 \end{{axis}}
 \end{{tikzpicture}}
 """
@@ -522,36 +544,21 @@ def build_fig4(analysis: dict) -> tuple[str, str, str, bool]:
     )
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate the standalone PGFPlots bundle from a distribution analysis JSON file.")
-    parser.add_argument(
-        "--analysis-json",
-        type=Path,
-        default=BASE / "distribution_analysis.json",
-        help="Analysis JSON payload to render.",
-    )
-    parser.add_argument(
-        "--out-dir",
-        type=Path,
-        default=OUT,
-        help="Directory in which to write the PGFPlots figure bundle.",
-    )
-    return parser.parse_args()
-
-
 def main() -> None:
-    args = parse_args()
     global OUT
-    OUT = args.out_dir.resolve()
+    args = parse_args()
+    OUT = args.output_root
     OUT.mkdir(parents=True, exist_ok=True)
 
-    with open(args.analysis_json.resolve(), encoding="utf-8") as f:
+    with open(args.analysis_json, encoding="utf-8") as f:
         analysis = json.load(f)
 
     specs = build_output_specs(analysis)
 
     rows = []
     for title, body, compile_name, caption in specs:
+        if args.title_prefix:
+            title = f"{args.title_prefix} — {title}"
         landscape = compile_name in {"fig4_all_conditions_by_category", "fig1_top_conditions"}
         body_path, compile_path = write_figure(
             title,
@@ -565,6 +572,36 @@ def main() -> None:
         print(f"Wrote {body_path}")
         print(f"Wrote {compile_path}")
 
+    existing_entries: dict[str, tuple[str, str]] = {}
+    readme_path = OUT / "README.md"
+    if readme_path.exists():
+        for line in readme_path.read_text(encoding="utf-8").splitlines():
+            if not line.startswith("| `"):
+                continue
+            parts = [part.strip() for part in line.strip().split("|")[1:-1]]
+            if len(parts) != 3:
+                continue
+            folder = parts[0].strip("`")
+            figure = parts[1]
+            wrapper = parts[2]
+            existing_entries[folder] = (figure, wrapper)
+
+    for folder, title, wrapper in rows:
+        existing_entries[folder] = (title, f"`{wrapper}`")
+
+    # Preserve existing radar folder entry if present.
+    for radar_folder in [
+        "clinical_benchmark_overview_pgfplots_radar",
+        "controllability_split_overview_pgfplots_radar",
+        "controllability_splits_small_scale_pgfplots_radar",
+        "controllability_splits_scaled_large_resolved_pgfplots_radar",
+    ]:
+        if (OUT / radar_folder).exists() and radar_folder not in existing_entries:
+            existing_entries[radar_folder] = (
+                radar_folder.replace("_", " ").title(),
+                "`_compile_clinical_overview_radar.tex`",
+            )
+
     readme_lines = [
         "# PGFPlots Figures",
         "",
@@ -573,18 +610,12 @@ def main() -> None:
         "| Folder | Figure | Compile Wrapper |",
         "|---|---|---|",
     ]
-    for folder, title, wrapper in sorted(rows):
-        readme_lines.append(f"| `{folder}` | {title} | `{wrapper}` |")
+    for folder in sorted(existing_entries):
+        title, wrapper = existing_entries[folder]
+        readme_lines.append(f"| `{folder}` | {title} | {wrapper} |")
 
-    # Preserve existing radar folder entry if present.
-    radar_folder = "clinical_benchmark_overview_pgfplots_radar"
-    if (OUT / radar_folder).exists() and not any(r[0] == radar_folder for r in rows):
-        readme_lines.append(
-            f"| `{radar_folder}` | Clinical Benchmark Overview (PGFPlots Radar) | `_compile_clinical_overview_radar.tex` |"
-        )
-
-    (OUT / "README.md").write_text("\n".join(readme_lines) + "\n", encoding="utf-8")
-    print(f"Wrote {OUT / 'README.md'}")
+    readme_path.write_text("\n".join(readme_lines) + "\n", encoding="utf-8")
+    print(f"Wrote {readme_path}")
 
 
 if __name__ == "__main__":
