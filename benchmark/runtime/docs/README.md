@@ -12,10 +12,14 @@ This directory contains comprehensive documentation for the mental health LLM be
 - **`metrics/`** - Metrics documentation
   - `METRICS_SUMMARY.md` - Metrics contracts, scope notes, and quick reference
   - `METRIC_CALCULATION_PIPELINE.md` - Detailed metric calculation pipeline
+  - `INVARIANCE_README.md` - Invariance workflow, sampled roots, and comparison path
+  - `CONTROLLABILITY_META_METRIC.md` - Controllability layer built on top of invariance
 
 - **`studies/`** - Study-specific documentation
   - `studies_summary.md` - **Benchmark Overview** - High-level summary of all studies, models, and workflow
   - See `testing/TESTING_GUIDE.md` - Comprehensive testing guide for all studies
+  - `controllability/` - Controllability generation, gold-generation, and study notes
+  - `invariance/` - Invariance sampling, generation commands, and study notes
   - `study_a/` - Study A documentation
     - `study_a_faithfulness.md` - Study A (Faithfulness) overview
     - `study_a_bias.md` - Silent Bias Rate (R_SB) evaluation: setup, commands, and workflow
@@ -42,6 +46,8 @@ This directory contains comprehensive documentation for the mental health LLM be
 - **`scaling/`** - Scaling documentation
   - `scaling_summary.md` - High-level scaling index for study and metric scaling
   - `metrics/metrics_summary.md` - Scaling-track metrics summary and verification pointers
+- **`controllability_scaling/`** - Controllability split-construction and frozen-suite provenance
+- **`invariance_scaling/`** - Invariance sampling-profile and sampled-root provenance
 - **`clinical_readiness/`** - Clinician-readiness process and release-line documentation
   - `README.md` - Entry point for v0.3 clinician-readiness documentation
   - `tex/CLINICIAN_READINESS_PROCESS_REPORT.tex` - Final process write-up (small-scope -> scaling -> clinician line)
@@ -74,6 +80,10 @@ This directory contains comprehensive documentation for the mental health LLM be
 - [Environment Setup](environment/ENVIRONMENT.md)
 - [Evaluation Protocol](evaluation/EVALUATION_PROTOCOL.md)
 - [Scaling Overview](scaling/scaling_summary.md)
+- [Controllability Study Guides](studies/controllability/README.md)
+- [Invariance Study Guides](studies/invariance/README.md)
+- [Controllability Scaling Notes](controllability_scaling/README.md)
+- [Invariance Scaling Notes](invariance_scaling/README.md)
 - [Clinician-Readiness Overview](clinical_readiness/clinical_readiness_summary.md)
 
 ## File Locations

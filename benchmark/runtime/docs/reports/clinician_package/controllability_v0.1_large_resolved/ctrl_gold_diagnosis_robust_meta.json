@@ -1,0 +1,80 @@
+{
+  "source_file": "ctrl_gold_diagnosis_labels.robust.json",
+  "generated_at_utc": "2026-03-13T21:35:27.882981+00:00",
+  "meta": {
+    "dataset": "controllability/study_a_split_metadata",
+    "backend": "probe",
+    "extraction": "controllability/generate_gold_labels.py",
+    "generated_utc": "2026-03-13T03:49:52.349228+00:00",
+    "n_samples": 2243,
+    "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
+    "secondary_model": "emilyalsentzer/Bio_ClinicalBERT",
+    "tertiary_model": "",
+    "probe_meta": {
+      "n_splits": 3,
+      "frequent_labels": [
+        "Alcohol Use Disorder",
+        "Anorexia Nervosa",
+        "Attention-Deficit/Hyperactivity Disorder",
+        "Autism Spectrum Disorder",
+        "Bipolar Disorder",
+        "Borderline Personality Disorder",
+        "Chronic Pain With Depression",
+        "Eating Disorder",
+        "Generalized Anxiety Disorder",
+        "Insomnia",
+        "Major Depressive Disorder",
+        "Obsessive-Compulsive Disorder",
+        "Panic Disorder",
+        "Persistent Depressive Disorder",
+        "Post-Traumatic Stress Disorder",
+        "Prolonged Grief Disorder",
+        "Psychosis",
+        "Self-Harm",
+        "Somatic Symptom Disorder",
+        "Substance Use Disorder",
+        "Suicidal Crisis"
+      ],
+      "rare_labels": {
+        "Social Anxiety Disorder": 1
+      },
+      "rare_label_fallbacks": 1,
+      "secondary_model_name": "emilyalsentzer/Bio_ClinicalBERT",
+      "secondary_probe": {
+        "n_splits": 3,
+        "frequent_labels": [
+          "Alcohol Use Disorder",
+          "Anorexia Nervosa",
+          "Attention-Deficit/Hyperactivity Disorder",
+          "Autism Spectrum Disorder",
+          "Bipolar Disorder",
+          "Borderline Personality Disorder",
+          "Chronic Pain With Depression",
+          "Eating Disorder",
+          "Generalized Anxiety Disorder",
+          "Insomnia",
+          "Major Depressive Disorder",
+          "Obsessive-Compulsive Disorder",
+          "Panic Disorder",
+          "Persistent Depressive Disorder",
+          "Post-Traumatic Stress Disorder",
+          "Prolonged Grief Disorder",
+          "Psychosis",
+          "Self-Harm",
+          "Somatic Symptom Disorder",
+          "Substance Use Disorder",
+          "Suicidal Crisis"
+        ],
+        "rare_labels": {
+          "Social Anxiety Disorder": 1
+        },
+        "rare_label_fallbacks": 1
+      },
+      "agreement_count": 1255,
+      "agreement_rate": 0.5595185020062416,
+      "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
+      "fallback_to_primary_on_disagreement": true,
+      "weak_supervision_source": "split_metadata_inferred_condition"
+    }
+  }
+}

@@ -142,6 +142,7 @@ Use that paper's distinction between **application-specific** and **robustness**
 Implemented now:
 
 - frozen `v5` invariance sampled split root
+- controllability-backed invariance sampled split root
 - dedicated invariance generation runners
 - paired invariance comparison with fail-closed pairing
 - deterministic variant-construction scripts:
@@ -172,4 +173,7 @@ Not yet implemented:
 - richer control-signal families beyond the initial deterministic templates
 - exemplar extraction and case-study narrative export inside the failure-card layer
 
-So the next engineering task is not new sampling; it is building the controllability layer **on top of** the invariance stack that now exists.
+The next engineering task remains building the controllability layer **on top
+of** the invariance stack that now exists. That stack now covers both the main
+frozen `v5` invariance sample and a smaller controllability-backed invariance
+sample for control-conditioned follow-up checks.

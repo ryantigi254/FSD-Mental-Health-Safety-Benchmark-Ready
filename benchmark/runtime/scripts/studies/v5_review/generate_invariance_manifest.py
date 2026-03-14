@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate deterministic v5 invariance sampling manifests."""
+"""Generate deterministic invariance sampling manifests."""
 
 from __future__ import annotations
 
@@ -17,17 +17,11 @@ if str(SRC_DIR) not in sys.path:
 from reliable_clinical_benchmark.invariance import (
     DEFAULT_V5_ROOT,
     build_invariance_manifest,
+    default_invariance_output_root,
+    default_invariance_sample_sizes,
+    resolve_invariance_sample_profile,
     study_cli_choices,
 )
-
-
-DEFAULT_OUTPUTS = {
-    "study_a": RUNTIME_ROOT / "data" / "frozen_splits" / "v5_invariance_samples" / "study_a_manifest.json",
-    "study_b": RUNTIME_ROOT / "data" / "frozen_splits" / "v5_invariance_samples" / "study_b_manifest.json",
-    "study_b_multi_turn": RUNTIME_ROOT / "data" / "frozen_splits" / "v5_invariance_samples" / "study_b_multi_turn_manifest.json",
-    "study_c": RUNTIME_ROOT / "data" / "frozen_splits" / "v5_invariance_samples" / "study_c_manifest.json",
-}
-
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Create deterministic invariance sampling manifests.")
@@ -40,8 +34,14 @@ def main() -> int:
     parser.add_argument(
         "--sample-size",
         type=int,
-        required=True,
-        help="Diagnostic subset size in frozen evaluation units (heuristic budget, not a spec threshold).",
+        default=None,
+        help="Diagnostic subset size in evaluation units. Defaults from the selected profile.",
+    )
+    parser.add_argument(
+        "--sample-profile",
+        choices=("auto", "v5", "controllability"),
+        default="auto",
+        help="Default sample-budget profile. `auto` infers from --data-root.",
     )
     parser.add_argument("--seed", type=int, default=42, help="Deterministic sampling seed.")
     parser.add_argument(
@@ -63,15 +63,18 @@ def main() -> int:
         help="Output manifest path.",
     )
     args = parser.parse_args()
+    resolved_profile = resolve_invariance_sample_profile(args.sample_profile, args.data_root.resolve())
+    sample_size = args.sample_size or default_invariance_sample_sizes(resolved_profile)[args.study]
 
     manifest = build_invariance_manifest(
         args.study,
         root=args.data_root.resolve(),
-        sample_size=args.sample_size,
+        sample_size=sample_size,
         seed=args.seed,
         min_high_risk=args.min_high_risk,
     )
-    output_path = args.out or DEFAULT_OUTPUTS[args.study]
+    default_output_dir = default_invariance_output_root(resolved_profile)
+    output_path = args.out or (default_output_dir / f"{args.study}_manifest.json")
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {output_path}")
