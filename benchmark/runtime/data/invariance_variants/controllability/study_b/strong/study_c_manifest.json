@@ -1,0 +1,280 @@
+{
+  "study": "study_c",
+  "seed": 42,
+  "sample_size": 12,
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large_resolved",
+  "source_profile": "controllability",
+  "sampling_unit": "conversation",
+  "sampling_role": "diagnostic_subset",
+  "sampling_basis": "Heuristic first-pass robustness budget over the frozen clinician-ready split; not a benchmark-mandated percentage threshold.",
+  "coverage_axes": [
+    "condition",
+    "risk",
+    "age_bucket",
+    "persona"
+  ],
+  "stratification_keys": [
+    "condition",
+    "risk",
+    "age_bucket",
+    "persona"
+  ],
+  "variant_defaults": [
+    "summary_wording",
+    "non_critical_turn_reorder",
+    "patient_rephrasing"
+  ],
+  "available_counts": {
+    "condition": {
+      "anxiety": 24,
+      "mood": 21,
+      "suicidality": 14,
+      "psychosis": 14,
+      "trauma": 10,
+      "prolonged_grief_disorder": 9,
+      "insomnia": 8,
+      "obsessive_compulsive": 4,
+      "self_harm": 4,
+      "attention_deficit_hyperactivity_disorder": 3,
+      "somatic": 1
+    },
+    "risk": {
+      "routine": 80,
+      "critical": 14,
+      "psychosis": 14,
+      "self_harm": 4
+    },
+    "age_bucket": {
+      "young_adult": 51,
+      "adult": 43,
+      "older_adult": 8,
+      "adolescent": 5,
+      "midlife": 5
+    },
+    "persona": {
+      "jamal": 5,
+      "kai": 5,
+      "chloe": 5,
+      "danny": 5,
+      "diana": 5,
+      "fiona": 5,
+      "grace": 5,
+      "jordan": 5,
+      "leo": 4,
+      "marcus": 4,
+      "margaret": 4,
+      "maya": 4,
+      "noor": 4,
+      "olivia": 4,
+      "priya": 4,
+      "rashid": 4,
+      "sam": 4,
+      "tomas": 4,
+      "victor": 4,
+      "zara": 4,
+      "zoe": 4,
+      "agnes": 4,
+      "derek": 4,
+      "rowan": 4,
+      "eleni": 4,
+      "aisha": 4
+    }
+  },
+  "selected_counts": {
+    "condition": {
+      "psychosis": 11,
+      "suicidality": 1
+    },
+    "risk": {
+      "psychosis": 11,
+      "critical": 1
+    },
+    "age_bucket": {
+      "adult": 6,
+      "young_adult": 3,
+      "older_adult": 2,
+      "midlife": 1
+    },
+    "persona": {
+      "chloe": 2,
+      "margaret": 2,
+      "aisha": 2,
+      "diana": 1,
+      "rashid": 1,
+      "tomas": 1,
+      "noor": 1,
+      "danny": 1,
+      "grace": 1
+    }
+  },
+  "records": [
+    {
+      "id": "ctrl_c_003",
+      "strata": {
+        "persona": "chloe",
+        "condition": "psychosis",
+        "age_bucket": "adult",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "condition_anchor": "psychosis",
+        "age": 30
+      }
+    },
+    {
+      "id": "ctrl_c_005",
+      "strata": {
+        "persona": "diana",
+        "condition": "psychosis",
+        "age_bucket": "midlife",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "condition_anchor": "psychosis",
+        "age": 52
+      }
+    },
+    {
+      "id": "ctrl_c_011",
+      "strata": {
+        "persona": "margaret",
+        "condition": "psychosis",
+        "age_bucket": "older_adult",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "margaret",
+        "condition_anchor": "psychosis",
+        "age": 72
+      }
+    },
+    {
+      "id": "ctrl_c_016",
+      "strata": {
+        "persona": "rashid",
+        "condition": "psychosis",
+        "age_bucket": "adult",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "rashid",
+        "condition_anchor": "psychosis",
+        "age": 42
+      }
+    },
+    {
+      "id": "ctrl_c_018",
+      "strata": {
+        "persona": "tomas",
+        "condition": "psychosis",
+        "age_bucket": "adult",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "tomas",
+        "condition_anchor": "psychosis",
+        "age": 44
+      }
+    },
+    {
+      "id": "ctrl_c_026",
+      "strata": {
+        "persona": "aisha",
+        "condition": "psychosis",
+        "age_bucket": "young_adult",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "condition_anchor": "psychosis",
+        "age": 24
+      }
+    },
+    {
+      "id": "ctrl_c_039",
+      "strata": {
+        "persona": "noor",
+        "condition": "suicidality",
+        "age_bucket": "adult",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "noor",
+        "condition_anchor": "suicidal crisis",
+        "age": 31
+      }
+    },
+    {
+      "id": "ctrl_c_055",
+      "strata": {
+        "persona": "chloe",
+        "condition": "psychosis",
+        "age_bucket": "adult",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "condition_anchor": "psychosis",
+        "age": 30
+      }
+    },
+    {
+      "id": "ctrl_c_063",
+      "strata": {
+        "persona": "margaret",
+        "condition": "psychosis",
+        "age_bucket": "older_adult",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "margaret",
+        "condition_anchor": "psychosis",
+        "age": 72
+      }
+    },
+    {
+      "id": "ctrl_c_078",
+      "strata": {
+        "persona": "aisha",
+        "condition": "psychosis",
+        "age_bucket": "young_adult",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "condition_anchor": "psychosis",
+        "age": 24
+      }
+    },
+    {
+      "id": "ctrl_c_108",
+      "strata": {
+        "persona": "danny",
+        "condition": "psychosis",
+        "age_bucket": "adult",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "danny",
+        "condition_anchor": "psychosis",
+        "age": 40
+      }
+    },
+    {
+      "id": "ctrl_c_111",
+      "strata": {
+        "persona": "grace",
+        "condition": "psychosis",
+        "age_bucket": "young_adult",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "grace",
+        "condition_anchor": "psychosis",
+        "age": 28
+      }
+    }
+  ]
+}
