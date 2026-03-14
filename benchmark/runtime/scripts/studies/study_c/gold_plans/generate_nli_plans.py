@@ -14,7 +14,7 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, UTC
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -28,6 +28,10 @@ from reliable_clinical_benchmark.utils.plan_components import (
     extract_recommendation_candidates,
     nli_filter_candidates,
     render_plan_from_components,
+)
+from reliable_clinical_benchmark.utils.weak_supervision_probe import (
+    DEFAULT_BACKBONE_MODELS,
+    run_probe_labeler,
 )
 
 # Standard condition -> treatment mappings for gold plans
@@ -424,6 +428,122 @@ def _enrich_plan_for_alignment(plan_text: str, critical_entities: List[str]) -> 
     return text
 
 
+def _extract_condition_from_plan_entry(entry: Dict[str, Any], case: Dict[str, Any]) -> str:
+    plan_text = str(entry.get("plan", "") or "")
+    match = re.search(r"Case anchors:\s*Problem:\s*(.+?)\.\s*Constraints/Meds:", plan_text, flags=re.IGNORECASE)
+    if match:
+        return str(match.group(1)).strip()
+
+    for raw in case.get("critical_entities", []) or []:
+        text = str(raw or "").strip()
+        lower = text.lower()
+        if any(
+            marker in lower
+            for marker in _DIAGNOSIS_MARKERS
+        ):
+            return text
+
+    return ""
+
+
+def _build_probe_plans(
+    *,
+    cases: List[Dict[str, Any]],
+    weak_plans_path: Path,
+    primary_model_name: str,
+    secondary_model_name: str | None = None,
+    tertiary_model_name: str | None = None,
+    batch_size: int = 12,
+    max_length: int = 256,
+) -> Dict[str, Any]:
+    payload = json.loads(weak_plans_path.read_text(encoding="utf-8"))
+    weak_plans = payload.get("plans", {})
+    if not isinstance(weak_plans, dict):
+        raise ValueError(f"Weak plans file does not expose a plans mapping: {weak_plans_path}")
+
+    texts: List[str] = []
+    labels: List[str] = []
+    case_ids: List[str] = []
+    case_lookup: Dict[str, Dict[str, Any]] = {}
+    missing: List[str] = []
+    for case in cases:
+        case_id = str(case.get("id", "") or "")
+        entry = weak_plans.get(case_id)
+        if not isinstance(entry, dict):
+            missing.append(case_id)
+            continue
+        condition = _extract_condition_from_plan_entry(entry, case)
+        if not condition:
+            missing.append(case_id)
+            continue
+        text = f"{case.get('patient_summary', '')}\nCritical entities: {'; '.join(case.get('critical_entities', []) or [])}".strip()
+        texts.append(text)
+        labels.append(condition)
+        case_ids.append(case_id)
+        case_lookup[case_id] = case
+
+    if missing:
+        preview = ", ".join(missing[:10])
+        raise ValueError(
+            f"Weak plans missing or unparsable for {len(missing)} Study C cases. Examples: {preview}"
+        )
+
+    result = run_probe_labeler(
+        texts=texts,
+        labels=labels,
+        primary_model_name=primary_model_name,
+        secondary_model_name=secondary_model_name,
+        tertiary_model_name=tertiary_model_name,
+        batch_size=batch_size,
+        max_length=max_length,
+        weak_supervision_source=str(weak_plans_path),
+    )
+
+    plans: Dict[str, Any] = {}
+    for case_id, predicted_condition in zip(case_ids, result.predictions):
+        case = case_lookup[case_id]
+        critical_entities = list(case.get("critical_entities", []) or [])
+        plan_text = get_treatment_plan(predicted_condition, str(case.get("patient_summary", "") or ""), critical_entities)
+        plan_text = _enrich_plan_for_alignment(plan_text, critical_entities)
+        meta = case.get("metadata", {}) or {}
+        source_ids = meta.get("source_openr1_ids") or []
+        source_id = None
+        if source_ids:
+            try:
+                source_id = int(source_ids[0])
+            except Exception:
+                source_id = None
+        source_split = str(meta.get("source_split", "") or "").strip().lower() or None
+        plans[case_id] = {
+            "plan": plan_text,
+            "source_openr1_id": source_id,
+            "source_split": source_split,
+            "plan_components": [],
+            "plan_component_evidence": {},
+        }
+
+    return {
+        "meta": {
+            "dataset": "study_c_split",
+            "split": "frozen",
+            "extraction": "generate_nli_plans.py",
+            "notes": "Probe-backed Study C gold plans generated from weak supervision over the existing target plans file and rendered through the deterministic condition-to-plan map.",
+            "updated_utc": datetime.now(UTC).isoformat(),
+            "script": "scripts/studies/study_c/gold_plans/generate_nli_plans.py",
+            "backend": "probe",
+            "primary_model": primary_model_name,
+            "secondary_model": secondary_model_name or "",
+            "tertiary_model": tertiary_model_name or "",
+            "weak_plans_path": str(weak_plans_path),
+            "probe_meta": result.meta,
+            "source_split_counts": {
+                "total": len(plans),
+            },
+        },
+        "plans": plans,
+    }
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description="Generate Study C gold plans (NLI-verified components for linked cases)")
     p.add_argument(
@@ -455,6 +575,48 @@ def main() -> int:
         action="store_true",
         help="Overwrite existing plans even if non-empty",
     )
+    p.add_argument(
+        "--backend",
+        choices=("nli", "probe"),
+        default="nli",
+        help="Gold-plan backend: original NLI/component path or the probe-backed weak-supervision path.",
+    )
+    p.add_argument(
+        "--weak-plans",
+        type=str,
+        default=None,
+        help="Weak supervision target_plans JSON used by --backend probe. Defaults to the output file if it already exists.",
+    )
+    p.add_argument(
+        "--primary-model",
+        type=str,
+        default=DEFAULT_BACKBONE_MODELS["biomedbert"],
+        help="Primary frozen-encoder backbone for --backend probe.",
+    )
+    p.add_argument(
+        "--secondary-model",
+        type=str,
+        default=None,
+        help="Optional secondary backbone for agreement telemetry in --backend probe.",
+    )
+    p.add_argument(
+        "--tertiary-model",
+        type=str,
+        default=None,
+        help="Optional tertiary backbone for agreement telemetry in --backend probe.",
+    )
+    p.add_argument(
+        "--batch-size",
+        type=int,
+        default=12,
+        help="Encoder batch size for --backend probe.",
+    )
+    p.add_argument(
+        "--max-length",
+        type=int,
+        default=256,
+        help="Tokenizer max length for --backend probe.",
+    )
     args = p.parse_args()
 
     study_c_path = Path(args.data_dir) / "study_c_test.json"
@@ -467,6 +629,33 @@ def main() -> int:
     # Load cases
     cases = load_study_c_cases(study_c_path)
     print(f"Loaded {len(cases)} Study C cases")
+
+    if args.backend == "probe":
+        weak_plans_path = Path(args.weak_plans) if args.weak_plans else out_path
+        if not weak_plans_path.exists():
+            raise SystemExit(f"Weak plans file not found for probe backend: {weak_plans_path}")
+        payload = _build_probe_plans(
+            cases=cases,
+            weak_plans_path=weak_plans_path,
+            primary_model_name=args.primary_model,
+            secondary_model_name=args.secondary_model,
+            tertiary_model_name=args.tertiary_model,
+            batch_size=args.batch_size,
+            max_length=args.max_length,
+        )
+        out_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        agreement_count = payload["meta"]["probe_meta"].get("agreement_count", 0)
+        total = len(payload["plans"])
+        print(f"\nGold plans written to {out_path}")
+        print(
+            "  "
+            f"Probe primary: {args.primary_model}, "
+            f"secondary: {args.secondary_model or 'none'}, "
+            f"tertiary: {args.tertiary_model or 'none'}, "
+            f"agreement: {agreement_count}/{total}"
+        )
+        print(f"  Total: {total}")
+        return 0
 
     # Load existing plans if present
     existing: Dict[str, Any] = {"meta": {}, "plans": {}}
@@ -652,7 +841,7 @@ def main() -> int:
         "split": "mixed",
         "extraction": "generate_nli_plans.py",
         "notes": "Gold target plans for Study C. Linked cases use NLI-verified plan component classification over OpenR1-Psy counselor_think; unlinked cases are generated from patient_summary + critical_entities.",
-        "updated_utc": datetime.utcnow().isoformat() + "Z",
+        "updated_utc": datetime.now(UTC).isoformat(),
         "script": "scripts/studies/study_c/gold_plans/generate_nli_plans.py",
         "nli_model": "cross-encoder/nli-deberta-v3-base",
         "revision": args.revision,
