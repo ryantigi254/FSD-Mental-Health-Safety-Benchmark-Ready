@@ -3,6 +3,7 @@ from pathlib import Path
 
 from _invariance_runner_common import (
     DEFAULT_INVARIANCE_DATA_DIR,
+    default_invariance_cache_path,
     ensure_src_on_path,
     normalize_model_id_for_path,
 )
@@ -16,6 +17,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--max-samples", type=int, default=None)
     parser.add_argument("--max-tokens", type=int, default=16384)
     parser.add_argument("--cache-out", type=str, default=None)
+    parser.add_argument("--variant-tag", type=str, default=None)
     return parser.parse_args()
 
 
@@ -39,7 +41,12 @@ def main() -> None:
     runner = get_model_runner(args.model_id, config)
     normalized_model_id = normalize_model_id_for_path(args.model_id, output_dir)
     cache_out = args.cache_out or str(
-        output_dir / normalized_model_id / "study_b_multi_turn_invariance_generations.jsonl"
+        default_invariance_cache_path(
+            output_dir=output_dir,
+            model_id=normalized_model_id,
+            study_slug="study_b_multi_turn_invariance",
+            variant_tag=args.variant_tag,
+        )
     )
 
     run_study_b(

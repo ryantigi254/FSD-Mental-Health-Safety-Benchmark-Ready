@@ -25,11 +25,12 @@ Study C invariance pairs on conversation `case_id`.
 
 ## Variant focus
 
-The default variants are:
+Study C can now fan out these concrete variants from one fixed sampled root:
 
-- `summary_wording`
-- `non_critical_turn_reorder`
-- `patient_rephrasing`
+- `summary_short`
+- `summary_long`
+- `patient_turn_rephrase`
+- `noncritical_reorder`
 
 ## Related files
 
