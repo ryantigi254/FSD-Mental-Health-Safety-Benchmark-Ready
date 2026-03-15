@@ -31,3 +31,11 @@ def test_variant_bundle_root_resolves_to_study_specific_child(tmp_path: Path) ->
     resolved = module._resolve_data_dir("study_a_invariance", str(bundle_root))
 
     assert resolved == child_root
+
+
+def test_relative_output_dir_resolves_under_runtime_root() -> None:
+    module = _load_module("run_invariance_generate_only_output_dir_test_module", SCRIPT_PATH)
+
+    resolved = module._resolve_output_dir("results_invariance_v5")
+
+    assert resolved == module.RUNTIME_ROOT / "results_invariance_v5"

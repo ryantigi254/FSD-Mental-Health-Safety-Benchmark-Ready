@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+import re
 
 
 DEFAULT_INVARIANCE_DATA_DIR = "data/frozen_splits/v5_invariance_samples"
@@ -51,3 +52,24 @@ def normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
             return candidate
 
     return model_id.replace("_", "-").lower()
+
+
+def normalize_variant_tag(variant_tag: str | None) -> str | None:
+    if not variant_tag:
+        return None
+    slug = re.sub(r"[^a-z0-9]+", "_", variant_tag.strip().lower()).strip("_")
+    return slug or None
+
+
+def default_invariance_cache_path(
+    *,
+    output_dir: Path,
+    model_id: str,
+    study_slug: str,
+    variant_tag: str | None = None,
+) -> Path:
+    normalized_variant = normalize_variant_tag(variant_tag)
+    filename = f"{study_slug}_generations.jsonl"
+    if normalized_variant:
+        filename = f"{study_slug}_{normalized_variant}_generations.jsonl"
+    return output_dir / model_id / filename

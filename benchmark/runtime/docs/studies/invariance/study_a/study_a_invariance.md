@@ -40,11 +40,12 @@ The goal is to compare:
 
 ## Variant focus
 
-The default Study A invariance variants are:
+Study A can now fan out these concrete variants from one fixed sampled root:
 
-- `paraphrase_lexical`
-- `paraphrase_syntax`
-- `surface_formatting`
+- `lexical`
+- `surface`
+- `syntax`
+- `instruction`
 
 ## Outputs
 

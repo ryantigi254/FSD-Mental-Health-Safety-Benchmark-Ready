@@ -29,11 +29,15 @@ Study B single-turn invariance pairs on sample `id`.
 
 ## Variant focus
 
-The default Study B invariance variants are:
+Study B single-turn can now fan out these concrete variants from one fixed
+sampled root:
 
-- `incorrect_opinion_rewording`
-- `opinion_intensity`
-- `assertion_vs_question`
+- `paraphrase`
+- `mild`
+- `moderate`
+- `strong`
+- `question`
+- `cultural`
 
 ## Related files
 

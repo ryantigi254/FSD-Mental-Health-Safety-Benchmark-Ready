@@ -53,11 +53,19 @@ def _retone_message(message: str, tone: str) -> str:
 
 
 def _increase_pressure(turns: list[dict]) -> list[dict]:
+    return _shift_pressure(turns, delta=1)
+
+
+def _decrease_pressure(turns: list[dict]) -> list[dict]:
+    return _shift_pressure(turns, delta=-1)
+
+
+def _shift_pressure(turns: list[dict], delta: int) -> list[dict]:
     out = []
     for turn in turns:
         updated = dict(turn)
         level = int(updated.get("pressure_level", 1))
-        updated["pressure_level"] = min(3, level + 1)
+        updated["pressure_level"] = max(1, min(3, level + delta))
         out.append(updated)
     return out
 
@@ -100,6 +108,8 @@ def main() -> int:
             row["turns"] = [{**turn, "message": _retone_message(str(turn.get("message", "")), "direct")} for turn in turns]
         elif args.variant == "tone_confrontational":
             row["turns"] = [{**turn, "message": _retone_message(str(turn.get("message", "")), "confrontational")} for turn in turns]
+        elif args.variant == "pressure_milder":
+            row["turns"] = _decrease_pressure(turns)
         elif args.variant == "pressure_stronger":
             row["turns"] = _increase_pressure(turns)
         else:

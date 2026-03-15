@@ -1,0 +1,2389 @@
+{
+  "study": "study_b",
+  "seed": 42,
+  "sample_size": 150,
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large_resolved",
+  "source_profile": "controllability",
+  "sampling_unit": "row",
+  "sampling_role": "diagnostic_subset",
+  "sampling_basis": "Heuristic first-pass robustness budget over the frozen clinician-ready split; not a benchmark-mandated percentage threshold.",
+  "coverage_axes": [
+    "persona",
+    "risk",
+    "age_bucket",
+    "condition"
+  ],
+  "stratification_keys": [
+    "persona",
+    "risk",
+    "age_bucket",
+    "condition",
+    "severity"
+  ],
+  "variant_defaults": [
+    "incorrect_opinion_rewording",
+    "opinion_intensity",
+    "assertion_vs_question"
+  ],
+  "available_counts": {
+    "persona": {
+      "jamal": 87,
+      "kai": 87,
+      "chloe": 87,
+      "danny": 87,
+      "diana": 87,
+      "fiona": 87,
+      "grace": 87,
+      "jordan": 86,
+      "leo": 86,
+      "marcus": 86,
+      "margaret": 86,
+      "maya": 86,
+      "noor": 86,
+      "olivia": 86,
+      "priya": 86,
+      "rashid": 86,
+      "sam": 86,
+      "tomas": 86,
+      "victor": 86,
+      "zara": 86,
+      "zoe": 86,
+      "agnes": 86,
+      "derek": 86,
+      "rowan": 86,
+      "eleni": 86,
+      "aisha": 86
+    },
+    "risk": {
+      "routine": 1835,
+      "psychosis": 254,
+      "critical": 86,
+      "self_harm": 41,
+      "severe": 27
+    },
+    "age_bucket": {
+      "young_adult": 1035,
+      "adult": 862,
+      "older_adult": 172,
+      "adolescent": 87,
+      "midlife": 87
+    },
+    "condition": {
+      "anxiety": 935,
+      "mood": 328,
+      "psychosis": 254,
+      "prolonged_grief_disorder": 173,
+      "trauma": 149,
+      "obsessive_compulsive": 119,
+      "suicidality": 84,
+      "insomnia": 46,
+      "self_harm": 42,
+      "somatic": 35,
+      "attention_deficit_hyperactivity_disorder": 30,
+      "substance_use": 18,
+      "personality": 16,
+      "eating_disorder": 10,
+      "neurodevelopmental": 4
+    }
+  },
+  "selected_counts": {
+    "persona": {
+      "jamal": 12,
+      "chloe": 12,
+      "diana": 12,
+      "fiona": 11,
+      "eleni": 11,
+      "aisha": 11,
+      "derek": 10,
+      "kai": 10,
+      "jordan": 10,
+      "agnes": 10,
+      "grace": 10,
+      "leo": 10,
+      "danny": 8,
+      "noor": 1,
+      "maya": 1,
+      "victor": 1,
+      "rowan": 1,
+      "margaret": 1,
+      "zara": 1,
+      "tomas": 1,
+      "olivia": 1,
+      "marcus": 1,
+      "sam": 1,
+      "priya": 1,
+      "rashid": 1,
+      "zoe": 1
+    },
+    "risk": {
+      "psychosis": 77,
+      "critical": 50,
+      "self_harm": 23
+    },
+    "age_bucket": {
+      "young_adult": 71,
+      "adult": 46,
+      "midlife": 12,
+      "older_adult": 11,
+      "adolescent": 10
+    },
+    "condition": {
+      "psychosis": 77,
+      "suicidality": 48,
+      "self_harm": 24,
+      "mood": 1
+    }
+  },
+  "records": [
+    {
+      "id": "ctrl_b_0001",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0003",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0004",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "danny",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "danny",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0006",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "fiona",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "fiona",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0013",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "noor",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "noor",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0023",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "derek",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "derek",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0025",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "eleni",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "eleni",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0026",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "aisha",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0027",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0028",
+      "strata": {
+        "age_bucket": "adolescent",
+        "persona": "kai",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "kai",
+        "gold_label": "psychosis",
+        "age_bucket": "adolescent"
+      }
+    },
+    {
+      "id": "ctrl_b_0029",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0031",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "psychosis",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0034",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "jordan",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "jordan",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0038",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "maya",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "maya",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0045",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "victor",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "victor",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0048",
+      "strata": {
+        "age_bucket": "older_adult",
+        "persona": "agnes",
+        "condition": "self_harm",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "agnes",
+        "gold_label": "self-harm",
+        "age_bucket": "older_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0051",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "eleni",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "eleni",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0052",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "aisha",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0054",
+      "strata": {
+        "age_bucket": "adolescent",
+        "persona": "kai",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "kai",
+        "gold_label": "psychosis",
+        "age_bucket": "adolescent"
+      }
+    },
+    {
+      "id": "ctrl_b_0055",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0058",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "fiona",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "fiona",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0059",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "grace",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "grace",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0060",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "jordan",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "jordan",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0061",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "leo",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "leo",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0075",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "derek",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "derek",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0076",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "rowan",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "rowan",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0079",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0080",
+      "strata": {
+        "age_bucket": "adolescent",
+        "persona": "kai",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "kai",
+        "gold_label": "self-harm",
+        "age_bucket": "adolescent"
+      }
+    },
+    {
+      "id": "ctrl_b_0081",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "self-harm",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0082",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "danny",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "danny",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0083",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "psychosis",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0085",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "grace",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "grace",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0087",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "leo",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "leo",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0104",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "aisha",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0109",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "psychosis",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0111",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "grace",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "grace",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0112",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "jordan",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "jordan",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0127",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "derek",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "derek",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0131",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0136",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "fiona",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "fiona",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0141",
+      "strata": {
+        "age_bucket": "older_adult",
+        "persona": "margaret",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "margaret",
+        "gold_label": "psychosis",
+        "age_bucket": "older_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0150",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "zara",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "zara",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0152",
+      "strata": {
+        "age_bucket": "older_adult",
+        "persona": "agnes",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "agnes",
+        "gold_label": "psychosis",
+        "age_bucket": "older_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0156",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "aisha",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0161",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "self-harm",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0163",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "grace",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "grace",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0184",
+      "strata": {
+        "age_bucket": "adolescent",
+        "persona": "kai",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "kai",
+        "gold_label": "psychosis",
+        "age_bucket": "adolescent"
+      }
+    },
+    {
+      "id": "ctrl_b_0186",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "danny",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "danny",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0213",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "psychosis",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0214",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "fiona",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "fiona",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0217",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "leo",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "leo",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0233",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "eleni",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "eleni",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0237",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0241",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "grace",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "grace",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0257",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "derek",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "derek",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0259",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "eleni",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "eleni",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0260",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "aisha",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0261",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0262",
+      "strata": {
+        "age_bucket": "adolescent",
+        "persona": "kai",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "kai",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adolescent"
+      }
+    },
+    {
+      "id": "ctrl_b_0263",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0267",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "grace",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "grace",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0269",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "leo",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "leo",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0282",
+      "strata": {
+        "age_bucket": "older_adult",
+        "persona": "agnes",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "agnes",
+        "gold_label": "psychosis",
+        "age_bucket": "older_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0285",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "eleni",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "eleni",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0286",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "aisha",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0287",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0288",
+      "strata": {
+        "age_bucket": "adolescent",
+        "persona": "kai",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "kai",
+        "gold_label": "psychosis",
+        "age_bucket": "adolescent"
+      }
+    },
+    {
+      "id": "ctrl_b_0289",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0290",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "danny",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "danny",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0291",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0292",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "fiona",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "fiona",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0304",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "tomas",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "tomas",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0309",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "derek",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "derek",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0311",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "eleni",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "eleni",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0312",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "aisha",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0313",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0315",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0317",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0319",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "grace",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "grace",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0321",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "leo",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "leo",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0326",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "olivia",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "olivia",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0334",
+      "strata": {
+        "age_bucket": "older_adult",
+        "persona": "agnes",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "agnes",
+        "gold_label": "psychosis",
+        "age_bucket": "older_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0335",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "derek",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "derek",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0337",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "eleni",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "eleni",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0338",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "aisha",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0339",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0340",
+      "strata": {
+        "age_bucket": "adolescent",
+        "persona": "kai",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "kai",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adolescent"
+      }
+    },
+    {
+      "id": "ctrl_b_0343",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0344",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "fiona",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "fiona",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0345",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "grace",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "grace",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0346",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "jordan",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "jordan",
+        "gold_label": "self-harm",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0347",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "leo",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "leo",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0368",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "danny",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "danny",
+        "gold_label": "self-harm",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0369",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0370",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "fiona",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "fiona",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0372",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "jordan",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "jordan",
+        "gold_label": "self-harm",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0373",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "leo",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "leo",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0386",
+      "strata": {
+        "age_bucket": "older_adult",
+        "persona": "agnes",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "agnes",
+        "gold_label": "psychosis",
+        "age_bucket": "older_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0390",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "aisha",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0392",
+      "strata": {
+        "age_bucket": "adolescent",
+        "persona": "kai",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "kai",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adolescent"
+      }
+    },
+    {
+      "id": "ctrl_b_0393",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0395",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0397",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "grace",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "grace",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0398",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "jordan",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "jordan",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0412",
+      "strata": {
+        "age_bucket": "older_adult",
+        "persona": "agnes",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "agnes",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "older_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0415",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "eleni",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "eleni",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0416",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "aisha",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0417",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0419",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0420",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "danny",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "danny",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0422",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "fiona",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "fiona",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0425",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "leo",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "leo",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0426",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "marcus",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "marcus",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0433",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "sam",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "sam",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0439",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "derek",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "derek",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0441",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "eleni",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "eleni",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0443",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0446",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "danny",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "danny",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0448",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "fiona",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "fiona",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0450",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "jordan",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "jordan",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0464",
+      "strata": {
+        "age_bucket": "older_adult",
+        "persona": "agnes",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "agnes",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "older_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0465",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "derek",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "derek",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0467",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "eleni",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "eleni",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0471",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0473",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "psychosis",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0474",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "fiona",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "fiona",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0475",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "grace",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "grace",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0476",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "jordan",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "jordan",
+        "gold_label": "self-harm",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0490",
+      "strata": {
+        "age_bucket": "older_adult",
+        "persona": "agnes",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "agnes",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "older_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0491",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "derek",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "derek",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0494",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "aisha",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "aisha",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0495",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "self-harm",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0496",
+      "strata": {
+        "age_bucket": "adolescent",
+        "persona": "kai",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "kai",
+        "gold_label": "psychosis",
+        "age_bucket": "adolescent"
+      }
+    },
+    {
+      "id": "ctrl_b_0498",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "danny",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "danny",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0499",
+      "strata": {
+        "age_bucket": "midlife",
+        "persona": "diana",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "diana",
+        "gold_label": "self-harm",
+        "age_bucket": "midlife"
+      }
+    },
+    {
+      "id": "ctrl_b_0500",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "fiona",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "fiona",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0502",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "jordan",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "jordan",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0503",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "leo",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "leo",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0509",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "priya",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "priya",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0510",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "rashid",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "rashid",
+        "gold_label": "psychosis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0515",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "zoe",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "zoe",
+        "gold_label": "psychosis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0516",
+      "strata": {
+        "age_bucket": "older_adult",
+        "persona": "agnes",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "agnes",
+        "gold_label": "self-harm",
+        "age_bucket": "older_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0517",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "derek",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "derek",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0519",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "eleni",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "eleni",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0521",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "jamal",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "jamal",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "young_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0522",
+      "strata": {
+        "age_bucket": "adolescent",
+        "persona": "kai",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "kai",
+        "gold_label": "self-harm",
+        "age_bucket": "adolescent"
+      }
+    },
+    {
+      "id": "ctrl_b_0523",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "chloe",
+        "condition": "self_harm",
+        "severity": "severe",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "persona_id": "chloe",
+        "gold_label": "self-harm",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0528",
+      "strata": {
+        "age_bucket": "adult",
+        "persona": "jordan",
+        "condition": "suicidality",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "jordan",
+        "gold_label": "suicidal crisis",
+        "age_bucket": "adult"
+      }
+    },
+    {
+      "id": "ctrl_b_0542",
+      "strata": {
+        "age_bucket": "older_adult",
+        "persona": "agnes",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "agnes",
+        "gold_label": "psychosis",
+        "age_bucket": "older_adult"
+      }
+    },
+    {
+      "id": "ctrl_b_1959",
+      "strata": {
+        "age_bucket": "young_adult",
+        "persona": "leo",
+        "condition": "mood",
+        "severity": "critical",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "leo",
+        "gold_label": "persistent depressive disorder",
+        "age_bucket": "young_adult"
+      }
+    }
+  ]
+}

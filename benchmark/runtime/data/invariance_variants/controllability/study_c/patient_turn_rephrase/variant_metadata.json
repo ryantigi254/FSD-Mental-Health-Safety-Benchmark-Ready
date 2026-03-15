@@ -1,0 +1,25 @@
+{
+  "study": "study_c",
+  "variant_tag": "patient_turn_rephrase",
+  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large_resolved_invariance_samples",
+  "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_c/patient_turn_rephrase",
+  "seed": 42,
+  "changed_ids": [
+    "ctrl_c_003",
+    "ctrl_c_005",
+    "ctrl_c_011",
+    "ctrl_c_016",
+    "ctrl_c_018",
+    "ctrl_c_026",
+    "ctrl_c_039",
+    "ctrl_c_055",
+    "ctrl_c_063",
+    "ctrl_c_078",
+    "ctrl_c_108",
+    "ctrl_c_111"
+  ],
+  "n_changed": 12,
+  "notes": {
+    "variant_family": "control_paraphrases"
+  }
+}
