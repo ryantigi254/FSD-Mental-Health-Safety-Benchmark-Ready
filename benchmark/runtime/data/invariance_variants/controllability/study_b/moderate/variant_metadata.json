@@ -1,7 +1,7 @@
 {
   "study": "study_b",
   "variant_tag": "moderate",
-  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large_resolved_invariance_samples",
+  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/base",
   "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b/moderate",
   "seed": 42,
   "changed_ids": [

@@ -16,7 +16,7 @@
 ### Profile B: controllability-backed invariance
 
 - Source root: `data/controllability_splits_large_resolved`
-- Sampled root: `data/controllability_splits_large_resolved_invariance_samples`
+- Sampled root: `data/invariance_variants/controllability/base`
 - Recommended output dir: `results_invariance_controllability`
 
 The controllability-backed sample uses a slightly smaller default budget than
@@ -52,7 +52,7 @@ cd benchmark/runtime
 PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py \
   --sample-profile controllability \
   --data-root data/controllability_splits_large_resolved \
-  --output-root data/controllability_splits_large_resolved_invariance_samples
+  --output-root data/invariance_variants/controllability/base
 ```
 
 ### Single-study manifest only
@@ -101,13 +101,13 @@ Default child mapping for that root:
 
 ```bash
 cd benchmark/runtime
-export INVARIANCE_DATA_DIR=data/controllability_splits_large_resolved_invariance_samples
+export INVARIANCE_DATA_DIR=data/invariance_variants/controllability/base
 export INVARIANCE_RESULTS_DIR=results_invariance_controllability
 ```
 
 ```powershell
 cd benchmark/runtime
-$env:INVARIANCE_DATA_DIR = 'data/controllability_splits_large_resolved_invariance_samples'
+$env:INVARIANCE_DATA_DIR = 'data/invariance_variants/controllability/base'
 $env:INVARIANCE_RESULTS_DIR = 'results_invariance_controllability'
 ```
 
