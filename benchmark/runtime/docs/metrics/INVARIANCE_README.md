@@ -90,12 +90,9 @@ budget than the main `v5` profile:
 
 ## Generation commands
 
-Dedicated generation runners now mirror the normal study entrypoints:
+The canonical direct runner is:
 
-- `hf-local-scripts/run_study_a_invariance_generate_only.py`
-- `hf-local-scripts/run_study_b_invariance_generate_only.py`
-- `hf-local-scripts/run_study_b_multi_turn_invariance_generate_only.py`
-- `hf-local-scripts/run_study_c_invariance_generate_only.py`
+- `hf-local-scripts/run_invariance_generate_only.py`
 
 And the auto launcher supports:
 

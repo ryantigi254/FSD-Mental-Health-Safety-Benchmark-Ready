@@ -4,6 +4,7 @@ This folder contains the invariance docs for Study A:
 
 - `study_a_invariance.md`
 - `study_a_invariance_commands.md`
+- `study_a_bias_invariance_commands.md`
 
 Background references:
 

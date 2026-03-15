@@ -3,6 +3,7 @@
 import json
 import re
 import shutil
+import threading
 import time
 from datetime import datetime
 from pathlib import Path
@@ -696,6 +697,18 @@ def run_study_c(
         )
         lmstudio_mode = is_lmstudio_runner(model)
         logger.info("Study C effective workers: %d", worker_count)
+        persist_lock = threading.Lock()
+
+        def _persist_generated_entry(entry: Dict[str, Any]) -> None:
+            with persist_lock:
+                write_ok = append_jsonl_with_retry(cache_path, entry, log=logger)
+            if not write_ok:
+                logger.error(
+                    "Failed to persist Study C row for %s turn %s variant %s",
+                    entry.get("case_id"),
+                    entry.get("turn_num"),
+                    entry.get("variant"),
+                )
 
         def _case_has_pending_rows(case: Any) -> bool:
             for turn in case.turns:
@@ -775,6 +788,7 @@ def run_study_c(
                             "meta": {"latency_ms": latency_ms},
                         }
                     )
+                    _persist_generated_entry(generated_entries[-1])
 
                 conversation_history.append({"role": "user", "content": turn.message})
                 if existing.get(case.id, {}).get(turn.turn, {}).get("dialogue"):
@@ -891,9 +905,10 @@ def run_study_c(
                             "meta": {"latency_ms": latency_ms},
                         }
                     )
+                    _persist_generated_entry(generated_entries[-1])
             return generated_entries
 
-        for _, case_entries in iter_threaded_results(
+        for _ in iter_threaded_results(
             jobs=case_jobs,
             worker_count=worker_count,
             worker_fn=_generate_case_entries,
@@ -901,15 +916,7 @@ def run_study_c(
             progress_label="study_c",
             log=logger,
         ):
-            for entry in case_entries:
-                write_ok = append_jsonl_with_retry(cache_path, entry, log=logger)
-                if not write_ok:
-                    logger.error(
-                        "Failed to persist Study C row for %s turn %s variant %s",
-                        entry.get("case_id"),
-                        entry.get("turn_num"),
-                        entry.get("variant"),
-                    )
+            pass
 
         logger.info("Study C generation-only complete; skipping metrics.")
         return DriftResult(
