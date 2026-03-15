@@ -54,3 +54,7 @@ That note covers:
 - building the sampled roots
 - generation commands for all four invariance studies
 - running the paired comparison scripts afterward
+
+Canonical direct runner:
+
+- `hf-local-scripts/run_invariance_generate_only.py`

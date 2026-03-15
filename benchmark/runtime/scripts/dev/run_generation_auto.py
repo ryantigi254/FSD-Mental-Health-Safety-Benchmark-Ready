@@ -26,6 +26,12 @@ BASE_MODEL_IDS = {
     "psyche_r1_vllm",
     "psych_qwen_vllm",
 }
+INVARIANCE_STUDIES = {
+    "study_a_invariance",
+    "study_b_invariance",
+    "study_b_multi_turn_invariance",
+    "study_c_invariance",
+}
 
 
 def parse_args() -> tuple[argparse.Namespace, list[str]]:
@@ -38,6 +44,7 @@ def parse_args() -> tuple[argparse.Namespace, list[str]]:
         choices=[
             "study_a",
             "study_a_bias",
+            "study_a_bias_invariance",
             "study_b",
             "study_b_multi_turn",
             "study_c",
@@ -63,6 +70,15 @@ def parse_args() -> tuple[argparse.Namespace, list[str]]:
     return args, passthrough
 
 
+def _consume_flag_value(tokens: list[str], index: int, default: str) -> tuple[str, int]:
+    next_index = index + 1
+    if next_index < len(tokens):
+        candidate = tokens[next_index]
+        if candidate and not candidate.startswith("-"):
+            return candidate, next_index + 1
+    return default, next_index
+
+
 def main() -> int:
     args, passthrough = parse_args()
     runtime_root = Path(__file__).resolve().parents[2]
@@ -70,29 +86,60 @@ def main() -> int:
     study_script_map = {
         "study_a": runtime_root / "hf-local-scripts" / "run_study_a_generate_only.py",
         "study_a_bias": runtime_root / "hf-local-scripts" / "run_study_a_bias_generate_only.py",
+        "study_a_bias_invariance": runtime_root / "hf-local-scripts" / "run_study_a_bias_generate_only.py",
         "study_b": runtime_root / "hf-local-scripts" / "run_study_b_generate_only.py",
         "study_b_multi_turn": runtime_root / "hf-local-scripts" / "run_study_b_multi_turn_generate_only.py",
         "study_c": runtime_root / "hf-local-scripts" / "run_study_c_generate_only.py",
-        "study_a_invariance": runtime_root / "hf-local-scripts" / "run_study_a_invariance_generate_only.py",
-        "study_b_invariance": runtime_root / "hf-local-scripts" / "run_study_b_invariance_generate_only.py",
-        "study_b_multi_turn_invariance": runtime_root / "hf-local-scripts" / "run_study_b_multi_turn_invariance_generate_only.py",
-        "study_c_invariance": runtime_root / "hf-local-scripts" / "run_study_c_invariance_generate_only.py",
+        "study_a_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
+        "study_b_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
+        "study_b_multi_turn_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
+        "study_c_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
     }
     allowed_model_ids_by_study = {
         "study_a": BASE_MODEL_IDS - {"psyllm"},
         "study_a_bias": (BASE_MODEL_IDS - {"gpt_oss"}) | {"gpt_oss_lmstudio"},
+        "study_a_bias_invariance": (BASE_MODEL_IDS - {"gpt_oss"}) | {"gpt_oss_lmstudio"},
         "study_b": BASE_MODEL_IDS,
         "study_b_multi_turn": BASE_MODEL_IDS,
         "study_c": BASE_MODEL_IDS,
-        "study_a_invariance": BASE_MODEL_IDS - {"psyllm"},
-        "study_b_invariance": BASE_MODEL_IDS,
-        "study_b_multi_turn_invariance": BASE_MODEL_IDS,
-        "study_c_invariance": BASE_MODEL_IDS,
+        "study_a_invariance": (BASE_MODEL_IDS - {"psyllm"}) | {"gpt_oss_lmstudio"},
+        "study_b_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
+        "study_b_multi_turn_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
+        "study_c_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
     }
 
-    if args.study == "study_a_bias" and "--data-path" not in passthrough:
-        default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
-        passthrough = ["--data-path", default_bias_data, *passthrough]
+    if args.study in {"study_a_bias", "study_a_bias_invariance"}:
+        if args.study == "study_a_bias_invariance":
+            default_bias_data = "data/frozen_splits/v5/adversarial_bias/biased_vignettes.json"
+            default_output_dir = "results_invariance_v5"
+            default_study_name = "study_a_bias_invariance"
+        else:
+            default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
+            default_output_dir = "results_invariance_v5"
+            default_study_name = "study_a_bias"
+
+        out: list[str] = []
+        i = 0
+        while i < len(passthrough):
+            if passthrough[i] == "--data-path":
+                out.append("--data-path")
+                value, i = _consume_flag_value(passthrough, i, default_bias_data)
+                out.append(value)
+                continue
+            if passthrough[i] == "--output-dir":
+                out.append("--output-dir")
+                value, i = _consume_flag_value(passthrough, i, default_output_dir)
+                out.append(value)
+                continue
+            out.append(passthrough[i])
+            i += 1
+        if "--data-path" not in out:
+            out = ["--data-path", default_bias_data, *out]
+        if "--output-dir" not in out:
+            out = [*out, "--output-dir", default_output_dir]
+        if "--study-name" not in out:
+            out = ["--study-name", default_study_name, *out]
+        passthrough = out
 
     target_script = study_script_map[args.study]
     if not target_script.exists():
@@ -106,8 +153,11 @@ def main() -> int:
         )
         return 2
 
-    command = ["conda", "run", "-n", args.env, "python"] if args.env else [sys.executable]
-    command.extend([str(target_script), "--model-id", args.model_id])
+    command = ["conda", "run", "--no-capture-output", "-n", args.env, "python"] if args.env else [sys.executable]
+    command.append(str(target_script))
+    if args.study in INVARIANCE_STUDIES:
+        command.extend(["--study", args.study])
+    command.extend(["--model-id", args.model_id])
     command.extend(passthrough)
 
     print(f"runtime root: {runtime_root}")

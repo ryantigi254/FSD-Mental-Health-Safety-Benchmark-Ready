@@ -1,4 +1,4 @@
-# Invariance Study — Generation Commands
+# Invariance Study Generation Commands
 
 > Commands for building sampled invariance roots and running the dedicated
 > invariance generation targets.
@@ -7,10 +7,10 @@
 
 ## Profiles
 
-### Profile A: frozen `v5`
+### Profile A: frozen `v5` variants
 
 - Source root: `data/frozen_splits/v5`
-- Sampled root: `data/frozen_splits/v5_invariance_samples`
+- Variant bundle root: `data/frozen_splits/v5_invariance_variants`
 - Recommended output dir: `results_invariance_v5`
 
 ### Profile B: controllability-backed invariance
@@ -41,6 +41,9 @@ PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py \
   --output-root data/frozen_splits/v5_invariance_samples
 ```
 
+If you are running the prepared variant packs instead, use the per-study child
+directories under `data/frozen_splits/v5_invariance_variants/`.
+
 ### Controllability-backed invariance sample
 
 ```bash
@@ -65,14 +68,25 @@ PYTHONPATH=src python scripts/studies/v5_review/generate_invariance_manifest.py 
 
 ## Generation commands
 
-Set the sampled root and output directory first.
+Set the study-specific root and output directory first.
 
-### `v5`
+### `v5` variant pack
+
+Set the bundle root once. The invariance runner now resolves the right child
+folder automatically for each study.
 
 ```bash
 cd benchmark/runtime
-export INVARIANCE_DATA_DIR=data/frozen_splits/v5_invariance_samples
+export INVARIANCE_VARIANTS_ROOT=data/frozen_splits/v5_invariance_variants
+export INVARIANCE_DATA_DIR="$INVARIANCE_VARIANTS_ROOT"
 export INVARIANCE_RESULTS_DIR=results_invariance_v5
+```
+
+```powershell
+cd benchmark/runtime
+$env:INVARIANCE_VARIANTS_ROOT = 'data/frozen_splits/v5_invariance_variants'
+$env:INVARIANCE_DATA_DIR = $env:INVARIANCE_VARIANTS_ROOT
+$env:INVARIANCE_RESULTS_DIR = 'results_invariance_v5'
 ```
 
 ### Controllability-backed invariance
@@ -83,51 +97,49 @@ export INVARIANCE_DATA_DIR=data/controllability_splits_large_resolved_invariance
 export INVARIANCE_RESULTS_DIR=results_invariance_controllability
 ```
 
+```powershell
+cd benchmark/runtime
+$env:INVARIANCE_DATA_DIR = 'data/controllability_splits_large_resolved_invariance_samples'
+$env:INVARIANCE_RESULTS_DIR = 'results_invariance_controllability'
+```
+
 ### Study A invariance
 
-```bash
-PYTHONPATH=src python scripts/dev/run_generation_auto.py \
-  --study study_a_invariance \
-  --model-id qwq \
-  --data-dir "$INVARIANCE_DATA_DIR" \
-  --output-dir "$INVARIANCE_RESULTS_DIR"
+```powershell
+python scripts/dev/run_generation_auto.py --study study_a_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir $env:INVARIANCE_DATA_DIR --output-dir $env:INVARIANCE_RESULTS_DIR --workers 2
+```
+
+### Study A bias invariance
+
+```powershell
+$env:BIAS_INVARIANCE_DATA_PATH = 'data/frozen_splits/v5/adversarial_bias/biased_vignettes.json'
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-path $env:BIAS_INVARIANCE_DATA_PATH --output-dir $env:INVARIANCE_RESULTS_DIR --workers 2
 ```
 
 ### Study B invariance
 
-```bash
-PYTHONPATH=src python scripts/dev/run_generation_auto.py \
-  --study study_b_invariance \
-  --model-id qwq \
-  --data-dir "$INVARIANCE_DATA_DIR" \
-  --output-dir "$INVARIANCE_RESULTS_DIR"
+```powershell
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir $env:INVARIANCE_DATA_DIR --output-dir $env:INVARIANCE_RESULTS_DIR --workers 2
 ```
 
 ### Study B multi-turn invariance
 
-```bash
-PYTHONPATH=src python scripts/dev/run_generation_auto.py \
-  --study study_b_multi_turn_invariance \
-  --model-id qwq \
-  --data-dir "$INVARIANCE_DATA_DIR" \
-  --output-dir "$INVARIANCE_RESULTS_DIR"
+```powershell
+python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir $env:INVARIANCE_DATA_DIR --output-dir $env:INVARIANCE_RESULTS_DIR --workers 2
 ```
 
 ### Study C invariance
 
-```bash
-PYTHONPATH=src python scripts/dev/run_generation_auto.py \
-  --study study_c_invariance \
-  --model-id qwq \
-  --data-dir "$INVARIANCE_DATA_DIR" \
-  --output-dir "$INVARIANCE_RESULTS_DIR"
+```powershell
+python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir $env:INVARIANCE_DATA_DIR --output-dir $env:INVARIANCE_RESULTS_DIR --workers 2
 ```
 
-The same pattern works for the other supported model IDs.
+The same pattern works for other supported model IDs; set `$env:INVARIANCE_DATA_DIR` to the top-level bundle root and `$env:INVARIANCE_RESULTS_DIR` to the output root.
 
 Per-study command notes:
 
 - `docs/studies/invariance/study_a/study_a_invariance_commands.md`
+- `docs/studies/invariance/study_a/study_a_bias_invariance_commands.md`
 - `docs/studies/invariance/study_b/study_b_invariance_commands.md`
 - `docs/studies/invariance/study_b/study_b_multi_turn_invariance_commands.md`
 - `docs/studies/invariance/study_c/study_c_invariance_commands.md`
@@ -136,20 +148,15 @@ Per-study command notes:
 
 ## Direct runner usage
 
-```bash
-cd benchmark/runtime
-PYTHONPATH=src python hf-local-scripts/run_study_a_invariance_generate_only.py \
-  --model-id qwq \
-  --data-dir "$INVARIANCE_DATA_DIR" \
-  --output-dir "$INVARIANCE_RESULTS_DIR" \
-  --max-samples 5
+```powershell
+python hf-local-scripts/run_invariance_generate_only.py --study study_a_invariance --model-id gpt_oss_lmstudio --data-dir $env:INVARIANCE_DATA_DIR --output-dir $env:INVARIANCE_RESULTS_DIR --max-samples 5 --workers 2
 ```
 
-The other runners follow the same shape:
+The same runner also supports:
 
-- `hf-local-scripts/run_study_b_invariance_generate_only.py`
-- `hf-local-scripts/run_study_b_multi_turn_invariance_generate_only.py`
-- `hf-local-scripts/run_study_c_invariance_generate_only.py`
+- `--study study_b_invariance`
+- `--study study_b_multi_turn_invariance`
+- `--study study_c_invariance`
 
 ---
 
