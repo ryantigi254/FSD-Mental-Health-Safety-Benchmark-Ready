@@ -13,6 +13,15 @@ The controllability-backed path exists so we can run the same invariance
 comparison machinery over the control-conditioned suite as well as the main
 frozen benchmark split.
 
+The intended workflow is:
+
+1. build one frozen sampled root
+2. fan out multiple variant families from that same root
+3. run base and variant generations against matched IDs
+
+Do not resample separately for each family unless you are deliberately running
+a second replication track.
+
 ## Study Folders
 
 - `study_a/`
@@ -28,8 +37,9 @@ frozen benchmark split.
 ## Shared prerequisites
 
 1. Build the sampled invariance root you want to use.
-2. Point the generation runner at that sampled root with `--data-dir`.
-3. Keep outputs for each sampled root separate.
+2. Build one or more variant roots from that sampled root.
+3. Point the generation runner at the chosen base or variant root with `--data-dir`.
+4. Use `--variant-tag` or a separate output directory for each family run.
 
 Recommended output directories:
 
@@ -52,6 +62,7 @@ Per-study notes live in:
 That note covers:
 
 - building the sampled roots
+- fanning out the variant-family matrix from a fixed sample
 - generation commands for all four invariance studies
 - running the paired comparison scripts afterward
 

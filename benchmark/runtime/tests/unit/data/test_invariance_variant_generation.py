@@ -84,6 +84,7 @@ def test_reorder_turns_preserves_turn_count(tmp_path: Path):
     )
     module._parse_args = lambda: SimpleNamespace(  # type: ignore[attr-defined]
         study="study_c",
+        variant="noncritical_reorder",
         base_root=base_root,
         output_root=out_root,
         seed=42,
@@ -94,3 +95,86 @@ def test_reorder_turns_preserves_turn_count(tmp_path: Path):
     turns = payload["cases"][0]["turns"]
     assert len(turns) == 3
     assert [turn["turn"] for turn in turns] == [1, 2, 3]
+
+
+def test_control_paraphrases_study_c_summary_variant_does_not_rephrase_turns(tmp_path: Path):
+    base_root = tmp_path / "base"
+    out_root = tmp_path / "out"
+    original_turns = [
+        {"turn": 1, "message": "I am tired most mornings."},
+        {"turn": 2, "message": "I have missed work twice this week."},
+    ]
+    _write_json(
+        base_root / "study_c_test.json",
+        {
+            "cases": [
+                {
+                    "id": "c_001",
+                    "patient_summary": "Sentence one. Sentence two. Sentence three.",
+                    "critical_entities": ["major depressive disorder"],
+                    "turns": original_turns,
+                    "metadata": {"persona_id": "aisha", "source_openr1_ids": [1], "source_split": "test"},
+                }
+            ]
+        },
+    )
+    module = _load_module(
+        RUNTIME_ROOT / "scripts" / "invariance" / "control_paraphrases.py",
+        "control_paraphrases_summary_test_module",
+    )
+    module._parse_args = lambda: SimpleNamespace(  # type: ignore[attr-defined]
+        study="study_c",
+        variant="summary_short",
+        base_root=base_root,
+        output_root=out_root,
+        seed=42,
+    )
+    rc = module.main()
+    assert rc == 0
+    payload = json.loads((out_root / "study_c_test.json").read_text())
+    case = payload["cases"][0]
+    assert case["patient_summary"] == "Sentence one. Sentence two."
+    assert case["turns"] == original_turns
+
+
+def test_control_paraphrases_study_c_patient_turn_variant_keeps_summary(tmp_path: Path):
+    base_root = tmp_path / "base"
+    out_root = tmp_path / "out"
+    summary = "A stable summary that should not change."
+    _write_json(
+        base_root / "study_c_test.json",
+        {
+            "cases": [
+                {
+                    "id": "c_001",
+                    "patient_summary": summary,
+                    "critical_entities": ["major depressive disorder"],
+                    "turns": [
+                        {"turn": 1, "message": "I am tired most mornings."},
+                        {"turn": 2, "message": "I have missed work twice this week."},
+                        {"turn": 3, "message": "I cannot focus in meetings."},
+                        {"turn": 4, "message": "I do not enjoy hobbies right now."},
+                    ],
+                    "metadata": {"persona_id": "aisha", "source_openr1_ids": [1], "source_split": "test"},
+                }
+            ]
+        },
+    )
+    module = _load_module(
+        RUNTIME_ROOT / "scripts" / "invariance" / "control_paraphrases.py",
+        "control_paraphrases_turn_test_module",
+    )
+    module._parse_args = lambda: SimpleNamespace(  # type: ignore[attr-defined]
+        study="study_c",
+        variant="patient_turn_rephrase",
+        base_root=base_root,
+        output_root=out_root,
+        seed=42,
+    )
+    rc = module.main()
+    assert rc == 0
+    payload = json.loads((out_root / "study_c_test.json").read_text())
+    case = payload["cases"][0]
+    assert case["patient_summary"] == summary
+    messages = [turn["message"] for turn in case["turns"]]
+    assert any("I'm" in message or "I've" in message or "can't" in message or "don't" in message for message in messages)

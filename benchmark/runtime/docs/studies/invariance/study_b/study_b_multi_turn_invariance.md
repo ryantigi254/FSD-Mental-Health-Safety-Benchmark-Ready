@@ -25,11 +25,15 @@ Study B multi-turn invariance pairs on conversation `case_id`.
 
 ## Variant focus
 
-The default variants are:
+The concrete multi-turn variants are:
 
-- `pressure_schedule_shift`
-- `pressure_tone`
-- `pressure_intensity`
+- `schedule_earlier`
+- `schedule_later`
+- `tone_gentle`
+- `tone_direct`
+- `tone_confrontational`
+- `pressure_milder`
+- `pressure_stronger`
 
 ## Related files
 

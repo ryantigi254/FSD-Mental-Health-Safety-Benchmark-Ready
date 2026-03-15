@@ -67,7 +67,12 @@ def _resolve_data_dir(study: str, data_dir: str | None) -> Path:
 
 
 def _resolve_output_dir(output_dir: str | None) -> Path:
-    return Path(output_dir) if output_dir else (RUNTIME_ROOT / "results")
+    if output_dir is None:
+        return RUNTIME_ROOT / "results"
+    candidate = Path(output_dir)
+    if candidate.is_absolute():
+        return candidate
+    return RUNTIME_ROOT / candidate
 
 
 def _resolve_cache_out(study: str, cache_out: str | None, output_dir: Path, model_dir: str) -> str:

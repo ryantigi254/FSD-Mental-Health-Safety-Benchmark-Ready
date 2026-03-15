@@ -37,6 +37,7 @@ def _reorder_noncritical_turns(turns: list[dict], critical_entities: list[str]) 
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build deterministic turn reorder variants for Study C.")
     parser.add_argument("--study", required=True, choices=["study_c"])
+    parser.add_argument("--variant", default="noncritical_reorder", choices=["noncritical_reorder"])
     parser.add_argument("--base-root", type=Path, default=Path("benchmark/runtime/data/frozen_splits/v5_invariance_samples"))
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--seed", type=int, default=42)
@@ -52,13 +53,13 @@ def main() -> int:
     for row in rows:
         critical_entities = [str(value) for value in row.get("critical_entities", [])]
         row["turns"] = _reorder_noncritical_turns(row.get("turns", []), critical_entities)
-        row.setdefault("metadata", {})["control_variant"] = "noncritical_reorder"
+        row.setdefault("metadata", {})["control_variant"] = args.variant
         changed_ids.append(str(row.get("id", "")))
 
     write_rows(args.output_root, args.study, payload, rows)
     metadata = build_variant_metadata(
         study=args.study,
-        variant_tag="noncritical_reorder",
+        variant_tag=args.variant,
         source_root=args.base_root.resolve(),
         output_root=args.output_root.resolve(),
         changed_ids=changed_ids,

@@ -1,0 +1,25 @@
+{
+  "study": "study_b_multi_turn",
+  "variant_tag": "tone_direct",
+  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v5_invariance_samples",
+  "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/v5/study_b_multi_turn/tone_direct",
+  "seed": 42,
+  "changed_ids": [
+    "b_mt_0001",
+    "b_mt_0002",
+    "b_mt_0003",
+    "b_mt_0004",
+    "b_mt_0005",
+    "b_mt_0006",
+    "b_mt_0007",
+    "b_mt_0008",
+    "b_mt_0009",
+    "b_mt_0010",
+    "b_mt_0012",
+    "b_mt_0095"
+  ],
+  "n_changed": 12,
+  "notes": {
+    "variant_family": "pressure_variants"
+  }
+}
