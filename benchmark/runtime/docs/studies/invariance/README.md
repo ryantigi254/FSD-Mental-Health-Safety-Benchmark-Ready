@@ -43,8 +43,9 @@ a second replication track.
 
 Recommended output directories:
 
-- `results_invariance_v5/`
-- `results_invariance_controllability/`
+- `results_invariance/`
+- `results_invariance/base/` for `data/invariance_variants/controllability/base`
+- `results_invariance/variant-family/` for `data/invariance_variants/controllability/study_*/*`
 
 ## Canonical command note
 
@@ -64,6 +65,7 @@ That note covers:
 - building the sampled roots
 - fanning out the variant-family matrix from a fixed sample
 - generation commands for all four invariance studies
+- the automatic `base` and `variant-family` save roots under `results_invariance/`
 - running the paired comparison scripts afterward
 
 Canonical direct runner:

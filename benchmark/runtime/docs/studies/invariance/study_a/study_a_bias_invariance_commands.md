@@ -1,69 +1,59 @@
 # Study A Bias Invariance Commands
 
-## Scope
-Study A bias invariance generation writes to
-`results/<model-folder>/study_a_bias_invariance_generations.jsonl`.
+Use `--data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json`
+and `--output-dir results_invariance`.
 
-The default sampled budget is `150` cases. This path does not use the full
-2000-case bias run unless you explicitly raise `--max-cases`.
+`study_a_bias_invariance` defaults to `150` cases unless you override
+`--max-cases`.
 
-## Canonical Paths
+## Base Runs
 
-These commands use the frozen `v5` bias file directly so this target stays
-separate from the ordinary Study A bias run:
+This target always uses the frozen bias file directly rather than a
+`data/invariance_variants/...` root.
 
-- `--data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json`
-- `--output-dir results_invariance_v5`
-
-## Generation Commands (Automatic Cross-Platform Runner)
-
-### Windows (PC)
-```powershell
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5 --workers 6
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwq --env mh-llm-benchmark-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5 --workers 6
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5 --workers 4
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5 --workers 2
-```
-
-## Local HF Models (`mh-llm-local-env`)
+### LM Studio
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyllm_gml_local --env mh-llm-local-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id piaget_local --env mh-llm-local-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyche_r1_local --env mh-llm-local-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psych_qwen_local --env mh-llm-local-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5 --quantization 4bit
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwq --env mh-llm-benchmark-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 4
 ```
 
-## vLLM (Local HF Models Only)
+### Local HF
 
-### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyllm_gml_vllm --env mh-llm-vllm-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id piaget_vllm --env mh-llm-vllm-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyche_r1_vllm --env mh-llm-vllm-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psych_qwen_vllm --env mh-llm-vllm-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyllm_gml_local --env mh-llm-local-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id piaget_local --env mh-llm-local-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyche_r1_local --env mh-llm-local-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psych_qwen_local --env mh-llm-local-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance --quantization 4bit
 ```
+
+### vLLM
+
+```powershell
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyllm_gml_vllm --env mh-llm-vllm-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id piaget_vllm --env mh-llm-vllm-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyche_r1_vllm --env mh-llm-vllm-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psych_qwen_vllm --env mh-llm-vllm-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance
+```
+
+## Variant-Family Runs
+
+Not applicable for `study_a_bias_invariance`.
+
+This target does not read from `data/invariance_variants/controllability/...`
+family folders. It always uses the fixed frozen bias file above.
 
 ## Direct Runner
 
 ```powershell
-python hf-local-scripts/run_study_a_bias_generate_only.py --study-name study_a_bias_invariance --model-id gpt_oss_lmstudio --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5 --max-cases 5 --max-tokens 32000 --workers 2
+python hf-local-scripts/run_study_a_bias_generate_only.py --study-name study_a_bias_invariance --model-id gpt_oss --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance --max-cases 5 --max-tokens 32000 --workers 2
 ```
 
-## Workers
-
-`study_a_bias_invariance` generation supports `--workers`. If not passed,
-default is auto:
-
-- `4` for LM Studio models
-- `1` for vLLM and local HF models
-
-`--max-cases` defaults to `150` for `study_a_bias_invariance`. Pass a different
-value only if you want a larger or smaller sampled slice.
-
-## Useful Checks
+## Checks
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5 --check-only
-python hf-local-scripts/run_study_a_bias_generate_only.py --study-name study_a_bias_invariance --model-id gpt_oss_lmstudio --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5 --workers 2 --max-cases 5
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance --check-only
+python hf-local-scripts/run_study_a_bias_generate_only.py --study-name study_a_bias_invariance --model-id gpt_oss --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 2 --max-cases 5
 ```
