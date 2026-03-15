@@ -3,22 +3,12 @@
 ## Scope
 Study A bias controllability generation writes to `results/<model-folder>/ctrl_study_a_bias_generations.jsonl`.
 
-## Scaled Suite Overrides
+## Canonical Scaled Paths
 
-Use these overrides for the large resolved suite so you do not mix caches with the
-small-scale run:
+These commands use the large resolved suite directly:
 
-```bash
-cd benchmark/runtime
-export CTRL_DIR=data/controllability_splits_large_resolved
-export CTRL_RESULTS_DIR=results_scaled_large_resolved
-```
-
-Example:
-
-```bash
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
-```
+- `--ctrl-dir data/controllability_splits_large_resolved`
+- `--output-dir results_scaled_large_resolved`
 
 ## One-Time Setup
 
@@ -31,19 +21,19 @@ cd "E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setu
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --env mh-llm-benchmark-env --workers 6
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwq --env mh-llm-benchmark-env --workers 6
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --workers 4
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwq --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --workers 2
 ```
 
 ## Local HF Models (mh-llm-local-env)
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyllm_gml_local --env mh-llm-local-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id piaget_local --env mh-llm-local-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyche_r1_local --env mh-llm-local-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psych_qwen_local --env mh-llm-local-env --quantization 4bit
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyllm_gml_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id piaget_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyche_r1_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psych_qwen_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --quantization 4bit
 ```
 
 ## vLLM (Local HF Models Only)
@@ -85,10 +75,10 @@ python -m vllm.entrypoints.openai.api_server --model "Compumacy/Psych_Qwen_32B" 
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyllm_gml_vllm --env mh-llm-vllm-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id piaget_vllm --env mh-llm-vllm-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyche_r1_vllm --env mh-llm-vllm-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psych_qwen_vllm --env mh-llm-vllm-env
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyllm_gml_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id piaget_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyche_r1_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psych_qwen_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
 ```
 
 ## Direct Runner
@@ -106,6 +96,6 @@ python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --mo
 ## Useful Checks
 
 ```bash
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id gpt_oss_lmstudio --check-only
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id gpt_oss_lmstudio --workers 8 --max-cases 5
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --check-only
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id gpt_oss_lmstudio --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --workers 8 --max-cases 5
 ```

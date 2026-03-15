@@ -33,6 +33,20 @@ def test_variant_bundle_root_resolves_to_study_specific_child(tmp_path: Path) ->
     assert resolved == child_root
 
 
+def test_v5_variant_tree_root_resolves_to_default_child(tmp_path: Path) -> None:
+    module = _load_module("run_invariance_generate_only_v5_tree_test_module", SCRIPT_PATH)
+
+    bundle_root = tmp_path / "v5"
+    child_root = bundle_root / "study_b" / "mild"
+    child_root.mkdir(parents=True)
+    (bundle_root / "variant_matrix_manifest.json").write_text("{}", encoding="utf-8")
+    (child_root / "study_b_test.json").write_text("[]", encoding="utf-8")
+
+    resolved = module._resolve_data_dir("study_b_invariance", str(bundle_root))
+
+    assert resolved == child_root
+
+
 def test_relative_output_dir_resolves_under_runtime_root() -> None:
     module = _load_module("run_invariance_generate_only_output_dir_test_module", SCRIPT_PATH)
 
