@@ -42,7 +42,33 @@ def test_study_a_bias_invariance_launcher_injects_invariance_defaults(monkeypatc
     assert "run_study_a_bias_generate_only.py" in captured.out
     assert "--study-name study_a_bias_invariance" in captured.out
     assert "--data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json" in captured.out
-    assert "--output-dir results_invariance_v5" in captured.out
+    assert "--output-dir results_invariance" in captured.out
+
+
+def test_study_a_bias_invariance_launcher_accepts_gpt_oss_alias(monkeypatch, capsys) -> None:
+    module = _load_module("run_generation_auto_gpt_oss_bias_test_module", AUTO_SCRIPT_PATH)
+
+    monkeypatch.setattr(
+        module.sys,
+        "argv",
+        [
+            "run_generation_auto.py",
+            "--study",
+            "study_a_bias_invariance",
+            "--model-id",
+            "gpt_oss",
+            "--env",
+            "mh-llm-benchmark-env",
+            "--check-only",
+        ],
+    )
+
+    exit_code = module.main()
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert "--model-id gpt_oss" in captured.out
+    assert "--study-name study_a_bias_invariance" in captured.out
 
 
 def test_study_a_bias_invariance_uses_dedicated_cache_name() -> None:
@@ -55,8 +81,8 @@ def test_study_a_bias_invariance_uses_dedicated_cache_name() -> None:
     )
     assert module._default_max_cases("study_a_bias") is None
     assert module._default_max_cases("study_a_bias_invariance") == 150
-    assert module._resolve_output_dir(module.Path("E:/repo/benchmark/runtime"), "results_invariance_v5") == (
-        module.Path("E:/repo/benchmark/runtime") / "results_invariance_v5"
+    assert module._resolve_output_dir(module.Path("E:/repo/benchmark/runtime"), "results_invariance") == (
+        module.Path("E:/repo/benchmark/runtime") / "results_invariance"
     )
 
 
@@ -76,7 +102,7 @@ def test_study_a_bias_invariance_launcher_handles_missing_data_path_value(monkey
             "mh-llm-benchmark-env",
             "--data-path",
             "--output-dir",
-            "results_invariance_v5",
+            "results_invariance",
             "--workers",
             "2",
             "--check-only",
@@ -88,6 +114,6 @@ def test_study_a_bias_invariance_launcher_handles_missing_data_path_value(monkey
 
     assert exit_code == 0
     assert "--data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json" in captured.out
-    assert "--output-dir results_invariance_v5" in captured.out
+    assert "--output-dir results_invariance" in captured.out
     assert "--workers 2" in captured.out
-    assert "biased_vignettes.json results_invariance_v5 --workers" not in captured.out
+    assert "biased_vignettes.json results_invariance --workers" not in captured.out

@@ -6,6 +6,7 @@ from _invariance_runner_common import (
     default_invariance_cache_path,
     ensure_src_on_path,
     normalize_model_id_for_path,
+    resolve_invariance_output_dir,
 )
 
 
@@ -34,7 +35,7 @@ def main() -> None:
 
     args = _parse_args()
     base_data_dir = Path(args.data_dir) if args.data_dir else (runtime_root / DEFAULT_INVARIANCE_DATA_DIR)
-    output_dir = Path(args.output_dir) if args.output_dir else (runtime_root / "results")
+    output_dir = resolve_invariance_output_dir(runtime_root, args.output_dir, base_data_dir)
 
     study_a_path = base_data_dir / "study_a_test.json"
     if not study_a_path.exists():

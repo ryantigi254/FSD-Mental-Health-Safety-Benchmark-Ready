@@ -97,8 +97,8 @@ def main() -> int:
     }
     allowed_model_ids_by_study = {
         "study_a": BASE_MODEL_IDS - {"psyllm"},
-        "study_a_bias": (BASE_MODEL_IDS - {"gpt_oss"}) | {"gpt_oss_lmstudio"},
-        "study_a_bias_invariance": (BASE_MODEL_IDS - {"gpt_oss"}) | {"gpt_oss_lmstudio"},
+        "study_a_bias": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
+        "study_a_bias_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
         "study_b": BASE_MODEL_IDS,
         "study_b_multi_turn": BASE_MODEL_IDS,
         "study_c": BASE_MODEL_IDS,
@@ -111,11 +111,11 @@ def main() -> int:
     if args.study in {"study_a_bias", "study_a_bias_invariance"}:
         if args.study == "study_a_bias_invariance":
             default_bias_data = "data/frozen_splits/v5/adversarial_bias/biased_vignettes.json"
-            default_output_dir = "results_invariance_v5"
+            default_output_dir = "results_invariance"
             default_study_name = "study_a_bias_invariance"
         else:
             default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
-            default_output_dir = "results_invariance_v5"
+            default_output_dir = "results_invariance"
             default_study_name = "study_a_bias"
 
         out: list[str] = []
