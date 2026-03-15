@@ -69,26 +69,12 @@ PYTHONPATH=src python scripts/studies/v5_review/generate_invariance_manifest.py 
 
 ## Generation commands
 
-Set the study-specific root and output directory first.
+Use the canonical paths directly in the commands.
 
 ### `v5` variant pack
 
-Set the bundle root once. The invariance runner now resolves the right child
-folder automatically for each study.
-
-```bash
-cd benchmark/runtime
-export INVARIANCE_VARIANTS_ROOT=data/invariance_variants/v5
-export INVARIANCE_DATA_DIR="$INVARIANCE_VARIANTS_ROOT"
-export INVARIANCE_RESULTS_DIR=results_invariance_v5
-```
-
-```powershell
-cd benchmark/runtime
-$env:INVARIANCE_VARIANTS_ROOT = 'data/invariance_variants/v5'
-$env:INVARIANCE_DATA_DIR = $env:INVARIANCE_VARIANTS_ROOT
-$env:INVARIANCE_RESULTS_DIR = 'results_invariance_v5'
-```
+- `--data-dir data/invariance_variants/v5`
+- `--output-dir results_invariance_v5`
 
 Default child mapping for that root:
 
@@ -99,54 +85,42 @@ Default child mapping for that root:
 
 ### Controllability-backed invariance
 
-```bash
-cd benchmark/runtime
-export INVARIANCE_DATA_DIR=data/invariance_variants/controllability/base
-export INVARIANCE_RESULTS_DIR=results_invariance_controllability
-```
-
-```powershell
-cd benchmark/runtime
-$env:INVARIANCE_DATA_DIR = 'data/invariance_variants/controllability/base'
-$env:INVARIANCE_RESULTS_DIR = 'results_invariance_controllability'
-```
+- `--data-dir data/invariance_variants/controllability/base`
+- `--output-dir results_invariance_controllability`
 
 ### Study A invariance
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_a_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir $env:INVARIANCE_DATA_DIR --output-dir $env:INVARIANCE_RESULTS_DIR --workers 2
+python scripts/dev/run_generation_auto.py --study study_a_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance_variants/v5 --output-dir results_invariance_v5 --workers 2
 ```
 
 ### Study A bias invariance
 
 ```powershell
-$env:BIAS_INVARIANCE_DATA_PATH = 'data/frozen_splits/v5/adversarial_bias/biased_vignettes.json'
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-path $env:BIAS_INVARIANCE_DATA_PATH --output-dir $env:INVARIANCE_RESULTS_DIR --workers 2
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-path data/frozen_splits/v5/adversarial_bias/biased_vignettes.json --output-dir results_invariance_v5 --workers 2
 ```
 
 ### Study B invariance
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir $env:INVARIANCE_DATA_DIR --output-dir $env:INVARIANCE_RESULTS_DIR --workers 2
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance_variants/v5 --output-dir results_invariance_v5 --workers 2
 ```
 
 ### Study B multi-turn invariance
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir $env:INVARIANCE_DATA_DIR --output-dir $env:INVARIANCE_RESULTS_DIR --workers 2
+python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance_variants/v5 --output-dir results_invariance_v5 --workers 2
 ```
 
 ### Study C invariance
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir $env:INVARIANCE_DATA_DIR --output-dir $env:INVARIANCE_RESULTS_DIR --workers 2
+python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance_variants/v5 --output-dir results_invariance_v5 --workers 2
 ```
 
-The same pattern works for other supported model IDs; set `$env:INVARIANCE_DATA_DIR` to the top-level bundle root and `$env:INVARIANCE_RESULTS_DIR` to the output root.
-
 To switch those same commands to the controllability-backed invariance sample,
-replace the env block with the controllability-backed one above and keep the
-same study commands.
+swap in `--data-dir data/invariance_variants/controllability/base` and
+`--output-dir results_invariance_controllability`.
 
 Per-study command notes:
 
@@ -161,7 +135,7 @@ Per-study command notes:
 ## Direct runner usage
 
 ```powershell
-python hf-local-scripts/run_invariance_generate_only.py --study study_a_invariance --model-id gpt_oss_lmstudio --data-dir $env:INVARIANCE_DATA_DIR --output-dir $env:INVARIANCE_RESULTS_DIR --max-samples 5 --workers 2
+python hf-local-scripts/run_invariance_generate_only.py --study study_a_invariance --model-id gpt_oss_lmstudio --data-dir data/invariance_variants/v5 --output-dir results_invariance_v5 --max-samples 5 --workers 2
 ```
 
 The same runner also supports:
@@ -180,9 +154,9 @@ After generation, compare a base cache with a variant cache:
 cd benchmark/runtime
 PYTHONPATH=src python scripts/evaluation/run_invariance_comparison.py \
   --study study_b \
-  --data-root "$INVARIANCE_DATA_DIR" \
-  --base-cache "$INVARIANCE_RESULTS_DIR/qwq/study_b_generations.jsonl" \
-  --variant-cache "$INVARIANCE_RESULTS_DIR/qwq/study_b_invariance_generations.jsonl" \
+  --data-root data/invariance_variants/v5 \
+  --base-cache results_invariance_v5/qwq/study_b_generations.jsonl \
+  --variant-cache results_invariance_v5/qwq/study_b_invariance_generations.jsonl \
   --variant-name controllability_sample \
   --out metric-results/qwq/study_b_invariance_from_controllability.json
 ```
@@ -193,9 +167,9 @@ Export per-case deltas if needed:
 cd benchmark/runtime
 PYTHONPATH=src python scripts/evaluation/export_invariance_case_deltas.py \
   --study study_b \
-  --data-root "$INVARIANCE_DATA_DIR" \
-  --base-cache "$INVARIANCE_RESULTS_DIR/qwq/study_b_generations.jsonl" \
-  --variant-cache "$INVARIANCE_RESULTS_DIR/qwq/study_b_invariance_generations.jsonl" \
+  --data-root data/invariance_variants/v5 \
+  --base-cache results_invariance_v5/qwq/study_b_generations.jsonl \
+  --variant-cache results_invariance_v5/qwq/study_b_invariance_generations.jsonl \
   --out metric-results/qwq/study_b_invariance_case_deltas.jsonl
 ```
 
