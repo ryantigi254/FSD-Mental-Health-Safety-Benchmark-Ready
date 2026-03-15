@@ -1,8 +1,8 @@
 {
   "study": "study_a",
   "variant_tag": "syntax",
-  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/base",
-  "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_a/syntax",
+  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/base",
+  "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_a/syntax",
   "seed": 42,
   "changed_ids": [
     "ctrl_a_0004",

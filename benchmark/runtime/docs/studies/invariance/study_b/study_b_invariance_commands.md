@@ -36,39 +36,39 @@ python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id 
 ### LM Studio
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-dir data/invariance_variants/controllability/base --output-dir results_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-dir data/controllability_splits_large/base --output-dir results_invariance --workers 2
 ```
 
 ## Variant-Family Runs
 
-Use `data/invariance_variants/controllability/study_b` to run every Study B
+Use `data/controllability_splits_large/study_b` to run every Study B
 variant-family child in one go.
 
 ### LM Studio
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance --workers 2
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance --workers 6
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwq --env mh-llm-benchmark-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance --workers 6
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwq --env mh-llm-benchmark-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance --workers 4
 ```
 
 ### Local HF
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psyllm_gml_local --env mh-llm-local-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id piaget_local --env mh-llm-local-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psyche_r1_local --env mh-llm-local-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psych_qwen_local --env mh-llm-local-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance --quantization 4bit
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psyllm_gml_local --env mh-llm-local-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id piaget_local --env mh-llm-local-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psyche_r1_local --env mh-llm-local-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psych_qwen_local --env mh-llm-local-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance --quantization 4bit
 ```
 
 ### vLLM
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psyllm_gml_vllm --env mh-llm-vllm-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id piaget_vllm --env mh-llm-vllm-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psyche_r1_vllm --env mh-llm-vllm-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psych_qwen_vllm --env mh-llm-vllm-env --data-dir data/invariance_variants/controllability/study_b --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psyllm_gml_vllm --env mh-llm-vllm-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id piaget_vllm --env mh-llm-vllm-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psyche_r1_vllm --env mh-llm-vllm-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psych_qwen_vllm --env mh-llm-vllm-env --data-dir data/controllability_splits_large/study_b --output-dir results_invariance
 ```
 
 ## Direct Runner

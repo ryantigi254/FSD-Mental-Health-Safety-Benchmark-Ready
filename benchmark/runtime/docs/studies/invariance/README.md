@@ -44,8 +44,8 @@ a second replication track.
 Recommended output directories:
 
 - `results_invariance/`
-- `results_invariance/base/` for `data/invariance_variants/controllability/base`
-- `results_invariance/variant-family/` for `data/invariance_variants/controllability/study_*/*`
+- `results_invariance/base/` for `data/controllability_splits_large/base`
+- `results_invariance/variant-family/` for `data/controllability_splits_large/study_*/*`
 
 ## Canonical command note
 

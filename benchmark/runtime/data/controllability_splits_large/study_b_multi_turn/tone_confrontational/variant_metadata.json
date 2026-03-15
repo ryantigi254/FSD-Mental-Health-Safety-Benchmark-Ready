@@ -1,8 +1,8 @@
 {
   "study": "study_b_multi_turn",
   "variant_tag": "tone_confrontational",
-  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/base",
-  "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b_multi_turn/tone_confrontational",
+  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/base",
+  "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b_multi_turn/tone_confrontational",
   "seed": 42,
   "changed_ids": [
     "ctrl_b_mt_0003",

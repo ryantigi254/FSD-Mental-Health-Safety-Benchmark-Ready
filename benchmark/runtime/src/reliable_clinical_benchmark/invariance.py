@@ -32,7 +32,7 @@ DEFAULT_V5_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v5"
 DEFAULT_V5_INVARIANCE_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v5_invariance_samples"
 DEFAULT_CONTROLLABILITY_ROOT = RUNTIME_ROOT / "data" / "controllability_splits_large_resolved"
 DEFAULT_CONTROLLABILITY_INVARIANCE_ROOT = (
-    RUNTIME_ROOT / "data" / "invariance_variants" / "controllability" / "base"
+    RUNTIME_ROOT / "data" / "controllability_splits_large" / "base"
 )
 HIGH_RISK_BUCKETS = {
     "critical",

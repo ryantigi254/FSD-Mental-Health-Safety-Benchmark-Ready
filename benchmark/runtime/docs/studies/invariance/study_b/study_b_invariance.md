@@ -20,7 +20,7 @@ the runner still reads `study_b_test.json`.
 ## Sampled roots and default budgets
 
 - `data/frozen_splits/v5_invariance_samples` with default budget `160`
-- `data/invariance_variants/controllability/base` with default
+- `data/controllability_splits_large/base` with default
   budget `150`
 
 ## Pairing unit
