@@ -14,11 +14,11 @@ Use these overrides so the same commands can target either invariance root.
 
 ```powershell
 cd benchmark/runtime
-$env:INVARIANCE_DATA_DIR = 'data/frozen_splits/v5_invariance_variants'
+$env:INVARIANCE_DATA_DIR = 'data/invariance_variants/v5'
 $env:INVARIANCE_RESULTS_DIR = 'results_invariance_v5'
 ```
 
-The runner auto-selects the Study B multi-turn child variant from that bundle root.
+The runner auto-selects `study_b_multi_turn/schedule_earlier` from that bundle root.
 
 ### Controllability-backed sampled root
 
@@ -27,6 +27,8 @@ cd benchmark/runtime
 $env:INVARIANCE_DATA_DIR = 'data/controllability_splits_large_resolved_invariance_samples'
 $env:INVARIANCE_RESULTS_DIR = 'results_invariance_controllability'
 ```
+
+Use the same generation command below after switching this env block.
 
 ## Generation (automatic runner)
 

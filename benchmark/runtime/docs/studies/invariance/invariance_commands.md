@@ -9,8 +9,8 @@
 
 ### Profile A: frozen `v5` variants
 
-- Source root: `data/frozen_splits/v5`
-- Variant bundle root: `data/frozen_splits/v5_invariance_variants`
+- Build source root: `data/frozen_splits/v5`
+- Prepared variant root: `data/invariance_variants/v5`
 - Recommended output dir: `results_invariance_v5`
 
 ### Profile B: controllability-backed invariance
@@ -41,8 +41,9 @@ PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py \
   --output-root data/frozen_splits/v5_invariance_samples
 ```
 
-If you are running the prepared variant packs instead, use the per-study child
-directories under `data/frozen_splits/v5_invariance_variants/`.
+If you are running the prepared variant pack instead, use
+`data/invariance_variants/v5`. The invariance runner now resolves the default
+child automatically for each study.
 
 ### Controllability-backed invariance sample
 
@@ -77,17 +78,24 @@ folder automatically for each study.
 
 ```bash
 cd benchmark/runtime
-export INVARIANCE_VARIANTS_ROOT=data/frozen_splits/v5_invariance_variants
+export INVARIANCE_VARIANTS_ROOT=data/invariance_variants/v5
 export INVARIANCE_DATA_DIR="$INVARIANCE_VARIANTS_ROOT"
 export INVARIANCE_RESULTS_DIR=results_invariance_v5
 ```
 
 ```powershell
 cd benchmark/runtime
-$env:INVARIANCE_VARIANTS_ROOT = 'data/frozen_splits/v5_invariance_variants'
+$env:INVARIANCE_VARIANTS_ROOT = 'data/invariance_variants/v5'
 $env:INVARIANCE_DATA_DIR = $env:INVARIANCE_VARIANTS_ROOT
 $env:INVARIANCE_RESULTS_DIR = 'results_invariance_v5'
 ```
+
+Default child mapping for that root:
+
+- Study A invariance: `study_a/lexical`
+- Study B invariance: `study_b/mild`
+- Study B multi-turn invariance: `study_b_multi_turn/schedule_earlier`
+- Study C invariance: `study_c/noncritical_reorder`
 
 ### Controllability-backed invariance
 
@@ -135,6 +143,10 @@ python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id 
 ```
 
 The same pattern works for other supported model IDs; set `$env:INVARIANCE_DATA_DIR` to the top-level bundle root and `$env:INVARIANCE_RESULTS_DIR` to the output root.
+
+To switch those same commands to the controllability-backed invariance sample,
+replace the env block with the controllability-backed one above and keep the
+same study commands.
 
 Per-study command notes:
 

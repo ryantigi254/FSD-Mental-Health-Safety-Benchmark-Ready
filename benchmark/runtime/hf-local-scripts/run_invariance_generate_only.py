@@ -38,6 +38,12 @@ VARIANT_BUNDLE_CHILDREN = {
     "study_b_multi_turn_invariance": "study_b_multi_turn_schedule_earlier",
     "study_c_invariance": "study_c_noncritical_reorder",
 }
+V5_TREE_CHILDREN = {
+    "study_a_invariance": Path("study_a") / "lexical",
+    "study_b_invariance": Path("study_b") / "mild",
+    "study_b_multi_turn_invariance": Path("study_b_multi_turn") / "schedule_earlier",
+    "study_c_invariance": Path("study_c") / "noncritical_reorder",
+}
 
 
 def _parse_args() -> argparse.Namespace:
@@ -61,6 +67,10 @@ def _resolve_data_dir(study: str, data_dir: str | None) -> Path:
         return base_data_dir
     if base_data_dir.name == "v5_invariance_variants":
         candidate = base_data_dir / VARIANT_BUNDLE_CHILDREN[study]
+        if candidate.exists():
+            return candidate
+    if base_data_dir.name == "v5" and (base_data_dir / "variant_matrix_manifest.json").exists():
+        candidate = base_data_dir / V5_TREE_CHILDREN[study]
         if candidate.exists():
             return candidate
     return base_data_dir
