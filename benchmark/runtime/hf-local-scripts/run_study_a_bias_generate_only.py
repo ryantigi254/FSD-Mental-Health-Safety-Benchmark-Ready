@@ -13,6 +13,7 @@ from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from pathlib import Path
 
 from datetime import datetime
+from typing import Optional
 
 
 
@@ -259,6 +260,24 @@ def _is_valid_generation_output(output_text: str) -> bool:
     return bool((output_text or "").strip())
 
 
+def _default_cache_name(study_name: str) -> str:
+    cache_name_map = {
+        "study_a_bias": "study_a_bias_generations.jsonl",
+        "study_a_bias_invariance": "study_a_bias_invariance_generations.jsonl",
+    }
+    return cache_name_map[study_name]
+
+
+def _default_max_cases(study_name: str) -> Optional[int]:
+    default_max_cases_map = {
+        "study_a_bias": None,
+        # Match the Study A v5 invariance sample budget when no dedicated bias
+        # invariance split file exists yet.
+        "study_a_bias_invariance": 150,
+    }
+    return default_max_cases_map[study_name]
+
+
 
 
 
@@ -291,6 +310,26 @@ def format_bias_prompt(vignette: str) -> str:
 def _parse_args() -> argparse.Namespace:
 
     p = argparse.ArgumentParser(description="Study A bias generation-only runner (no evaluation.py).")
+
+    p.add_argument(
+
+        "--study-name",
+
+        type=str,
+
+        default="study_a_bias",
+
+        choices=("study_a_bias", "study_a_bias_invariance"),
+
+        help=(
+
+            "Logical study name for cache naming. "
+
+            "Use 'study_a_bias_invariance' for frozen-v5 invariance runs."
+
+        ),
+
+    )
 
     p.add_argument(
 
@@ -352,7 +391,15 @@ def _parse_args() -> argparse.Namespace:
 
     )
 
-    p.add_argument("--max-cases", type=int, default=None, help="Limit bias cases.")
+    p.add_argument(
+        "--max-cases",
+        type=int,
+        default=None,
+        help=(
+            "Limit bias cases. Defaults to 150 for `study_a_bias_invariance` "
+            "and no limit for `study_a_bias`."
+        ),
+    )
 
     p.add_argument(
 
@@ -392,7 +439,13 @@ def _parse_args() -> argparse.Namespace:
 
         default=None,
 
-        help="Explicit cache path (defaults to results/<canonical-model>/study_a_bias_generations.jsonl).",
+        help=(
+
+            "Explicit cache path (defaults to results/<canonical-model>/"
+
+            "<study-name>_generations.jsonl)."
+
+        ),
 
     )
 
@@ -574,11 +627,15 @@ def main() -> None:
 
     
 
-    if args.max_cases:
+    max_cases = args.max_cases
+    if max_cases is None:
+        max_cases = _default_max_cases(args.study_name)
 
-        adversarial_cases = adversarial_cases[:args.max_cases]
+    if max_cases:
 
-        print(f"Limited to {args.max_cases} cases")
+        adversarial_cases = adversarial_cases[:max_cases]
+
+        print(f"Limited to {max_cases} cases")
 
 
 
@@ -597,14 +654,13 @@ def main() -> None:
     cache_out = args.cache_out
 
     if cache_out is None:
-
-        # Save to results/{canonical-model}/study_a_bias_generations.jsonl
+        # Save to results/{canonical-model}/{study-name}_generations.jsonl
 
         model_output_dir = output_dir / _canonical_model_output_dir(args.model_id)
 
         model_output_dir.mkdir(parents=True, exist_ok=True)
 
-        cache_out = str(model_output_dir / "study_a_bias_generations.jsonl")
+        cache_out = str(model_output_dir / _default_cache_name(args.study_name))
 
 
 

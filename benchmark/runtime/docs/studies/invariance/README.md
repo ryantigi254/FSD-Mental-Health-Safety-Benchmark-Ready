@@ -65,3 +65,7 @@ That note covers:
 - fanning out the variant-family matrix from a fixed sample
 - generation commands for all four invariance studies
 - running the paired comparison scripts afterward
+
+Canonical direct runner:
+
+- `hf-local-scripts/run_invariance_generate_only.py`
