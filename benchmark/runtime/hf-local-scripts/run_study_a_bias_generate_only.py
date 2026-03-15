@@ -278,6 +278,15 @@ def _default_max_cases(study_name: str) -> Optional[int]:
     return default_max_cases_map[study_name]
 
 
+def _resolve_output_dir(runtime_root: Path, output_dir: Optional[str]) -> Path:
+    if output_dir is None:
+        return runtime_root / "results"
+    candidate = Path(output_dir)
+    if candidate.is_absolute():
+        return candidate
+    return runtime_root / candidate
+
+
 
 
 
@@ -641,13 +650,7 @@ def main() -> None:
 
     # Default to results directory so generation outputs align with Study A model outputs.
 
-    if args.output_dir:
-
-        output_dir = Path(args.output_dir)
-
-    else:
-
-        output_dir = runtime_root / "results"
+    output_dir = _resolve_output_dir(runtime_root, args.output_dir)
 
 
 

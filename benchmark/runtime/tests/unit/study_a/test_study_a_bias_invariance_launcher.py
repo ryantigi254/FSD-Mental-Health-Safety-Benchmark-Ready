@@ -55,6 +55,9 @@ def test_study_a_bias_invariance_uses_dedicated_cache_name() -> None:
     )
     assert module._default_max_cases("study_a_bias") is None
     assert module._default_max_cases("study_a_bias_invariance") == 150
+    assert module._resolve_output_dir(module.Path("E:/repo/benchmark/runtime"), "results_invariance_v5") == (
+        module.Path("E:/repo/benchmark/runtime") / "results_invariance_v5"
+    )
 
 
 def test_study_a_bias_invariance_launcher_handles_missing_data_path_value(monkeypatch, capsys) -> None:
