@@ -16,7 +16,7 @@
 ### Profile B: controllability-backed invariance
 
 - Source root: `data/controllability_splits_large_resolved`
-- Sampled root: `data/controllability_splits_large_resolved_invariance_samples`
+- Sampled root: `data/invariance_variants/controllability/base`
 - Recommended output dir: `results_invariance_controllability`
 
 The controllability-backed sample uses a slightly smaller default budget than
@@ -51,7 +51,7 @@ cd benchmark/runtime
 PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py \
   --sample-profile controllability \
   --data-root data/controllability_splits_large_resolved \
-  --output-root data/controllability_splits_large_resolved_invariance_samples
+  --output-root data/invariance_variants/controllability/base
 ```
 
 ### Single-study manifest only
@@ -76,7 +76,7 @@ family.
 ```bash
 cd benchmark/runtime
 PYTHONPATH=src python scripts/invariance/build_variant_family_matrix.py \
-  --base-root data/controllability_splits_large_resolved_invariance_samples \
+  --base-root data/invariance_variants/controllability/base \
   --output-root data/invariance_variants/controllability
 ```
 
@@ -85,7 +85,7 @@ PYTHONPATH=src python scripts/invariance/build_variant_family_matrix.py \
 ```bash
 cd benchmark/runtime
 PYTHONPATH=src python scripts/invariance/build_variant_family_matrix.py \
-  --base-root data/controllability_splits_large_resolved_invariance_samples \
+  --base-root data/invariance_variants/controllability/base \
   --output-root data/invariance_variants/controllability \
   --study study_c \
   --variant patient_turn_rephrase
@@ -127,13 +127,13 @@ $env:INVARIANCE_RESULTS_DIR = 'results_invariance_v5'
 
 ```bash
 cd benchmark/runtime
-export INVARIANCE_DATA_DIR=data/controllability_splits_large_resolved_invariance_samples
+export INVARIANCE_DATA_DIR=data/invariance_variants/controllability/base
 export INVARIANCE_RESULTS_DIR=results_invariance_controllability
 ```
 
 ```powershell
 cd benchmark/runtime
-$env:INVARIANCE_DATA_DIR = 'data/controllability_splits_large_resolved_invariance_samples'
+$env:INVARIANCE_DATA_DIR = 'data/invariance_variants/controllability/base'
 $env:INVARIANCE_RESULTS_DIR = 'results_invariance_controllability'
 ```
 
