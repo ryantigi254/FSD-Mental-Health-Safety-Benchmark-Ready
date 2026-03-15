@@ -35,7 +35,7 @@ It is a diagnostic stress-test layer. It does not replace the canonical full-run
 
 - Sampling manifests: `data/frozen_splits/v5_invariance_samples/`
 - Controllability-backed manifests:
-  `data/invariance_variants/controllability/base/`
+  `data/controllability_splits_large/base/`
 - Variant caches: `results/{model-id}/study_*_invariance_*.jsonl`
 - Comparison outputs: `metric-results/{model-id}/...` or an explicit `--out` path
 - Materialised sampled split root: `data/frozen_splits/v5_invariance_samples/`
@@ -78,7 +78,7 @@ The generated root is a valid frozen-snapshot-style `data-root`, containing:
 
 For the controllability-backed invariance sample, run:
 
-- `PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py --sample-profile controllability --data-root data/controllability_splits_large_resolved --output-root data/invariance_variants/controllability/base`
+- `PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py --sample-profile controllability --data-root data/controllability_splits_large_resolved --output-root data/controllability_splits_large/base`
 
 The controllability profile intentionally uses a slightly smaller diagnostic
 budget than the main `v5` profile:
@@ -101,7 +101,7 @@ That keeps the perturbation effect separable from sample-composition drift.
 
 Build a variant matrix from one sampled root with:
 
-- `PYTHONPATH=src python scripts/invariance/build_variant_family_matrix.py --base-root data/invariance_variants/controllability/base --output-root data/invariance_variants/controllability`
+- `PYTHONPATH=src python scripts/invariance/build_variant_family_matrix.py --base-root data/controllability_splits_large/base --output-root data/controllability_splits_large`
 
 Concrete variant menu by study:
 

@@ -1,8 +1,8 @@
 {
   "workflow": "fixed_sample_variant_matrix",
   "sampling_policy": "sample_once_then_fan_out_variants",
-  "base_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/base",
-  "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability",
+  "base_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/base",
+  "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large",
   "seed": 42,
   "studies": {
     "study_a": {
@@ -12,28 +12,28 @@
           "family": "lexical_paraphrase",
           "description": "Swap low-risk lexical choices while keeping the clinical content fixed.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_a/lexical"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_a/lexical"
         },
         {
           "variant": "surface",
           "family": "surface_formatting",
           "description": "Alter punctuation and surface formatting without changing the task semantics.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_a/surface"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_a/surface"
         },
         {
           "variant": "syntax",
           "family": "syntax_reordering",
           "description": "Reorder clause structure while preserving the same diagnostic content.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_a/syntax"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_a/syntax"
         },
         {
           "variant": "instruction",
           "family": "instruction_wrapper",
           "description": "Add a benign instruction wrapper before the unchanged case prompt.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_a/instruction"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_a/instruction"
         }
       ]
     },
@@ -44,42 +44,42 @@
           "family": "incorrect_opinion_rewording",
           "description": "Rephrase the injected incorrect opinion in neutral wording.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b/paraphrase"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b/paraphrase"
         },
         {
           "variant": "mild",
           "family": "opinion_intensity",
           "description": "Use a mild injected disagreement cue.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b/mild"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b/mild"
         },
         {
           "variant": "moderate",
           "family": "opinion_intensity",
           "description": "Use a moderate injected disagreement cue.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b/moderate"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b/moderate"
         },
         {
           "variant": "strong",
           "family": "opinion_intensity",
           "description": "Use a strong injected disagreement cue.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b/strong"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b/strong"
         },
         {
           "variant": "question",
           "family": "assertion_vs_question",
           "description": "Turn the injected belief into a question instead of an assertion.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b/question"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b/question"
         },
         {
           "variant": "cultural",
           "family": "cultural_framing",
           "description": "Wrap the same incorrect opinion in a cultural framing cue.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b/cultural"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b/cultural"
         }
       ]
     },
@@ -90,49 +90,49 @@
           "family": "pressure_schedule",
           "description": "Move the pressure spike earlier in the same conversation.",
           "script": "pressure_variants.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b_multi_turn/schedule_earlier"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b_multi_turn/schedule_earlier"
         },
         {
           "variant": "schedule_later",
           "family": "pressure_schedule",
           "description": "Move the pressure spike later in the same conversation.",
           "script": "pressure_variants.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b_multi_turn/schedule_later"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b_multi_turn/schedule_later"
         },
         {
           "variant": "tone_gentle",
           "family": "pressure_tone",
           "description": "Retone pressure turns to a gentler register.",
           "script": "pressure_variants.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b_multi_turn/tone_gentle"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b_multi_turn/tone_gentle"
         },
         {
           "variant": "tone_direct",
           "family": "pressure_tone",
           "description": "Retone pressure turns to a direct register.",
           "script": "pressure_variants.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b_multi_turn/tone_direct"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b_multi_turn/tone_direct"
         },
         {
           "variant": "tone_confrontational",
           "family": "pressure_tone",
           "description": "Retone pressure turns to a confrontational register.",
           "script": "pressure_variants.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b_multi_turn/tone_confrontational"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b_multi_turn/tone_confrontational"
         },
         {
           "variant": "pressure_milder",
           "family": "pressure_intensity",
           "description": "Reduce pressure intensity while keeping turn order fixed.",
           "script": "pressure_variants.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b_multi_turn/pressure_milder"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b_multi_turn/pressure_milder"
         },
         {
           "variant": "pressure_stronger",
           "family": "pressure_intensity",
           "description": "Increase pressure intensity while keeping turn order fixed.",
           "script": "pressure_variants.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_b_multi_turn/pressure_stronger"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_b_multi_turn/pressure_stronger"
         }
       ]
     },
@@ -143,28 +143,28 @@
           "family": "summary_wording",
           "description": "Shorten the patient summary while preserving anchor facts.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_c/summary_short"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_c/summary_short"
         },
         {
           "variant": "summary_long",
           "family": "summary_wording",
           "description": "Lengthen the patient summary with a harmless anchor reminder.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_c/summary_long"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_c/summary_long"
         },
         {
           "variant": "patient_turn_rephrase",
           "family": "patient_rephrasing",
           "description": "Lightly rephrase a subset of patient turns without changing content.",
           "script": "control_paraphrases.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_c/patient_turn_rephrase"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_c/patient_turn_rephrase"
         },
         {
           "variant": "noncritical_reorder",
           "family": "noncritical_turn_reorder",
           "description": "Swap only non-critical turns while preserving anchor turns and numbering.",
           "script": "reorder_turns.py",
-          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/study_c/noncritical_reorder"
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/study_c/noncritical_reorder"
         }
       ]
     }

@@ -1,8 +1,8 @@
 {
-  "created_at_utc": "2026-03-15T19:51:43.673320+00:00",
+  "created_at_utc": "2026-03-15T21:37:45.997817+00:00",
   "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large_resolved",
   "source_profile": "controllability",
-  "manifest_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/controllability/base",
+  "manifest_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/base",
   "layout": "frozen_snapshot",
   "studies": {
     "study_a": {

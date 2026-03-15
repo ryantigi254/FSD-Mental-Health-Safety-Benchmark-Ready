@@ -20,7 +20,7 @@ output layout. The difference is the source root and the default study budgets.
 
 - Source root: `data/controllability_splits_large_resolved`
 - Materialised sampled root:
-  `data/invariance_variants/controllability/base`
+  `data/controllability_splits_large/base`
 
 ## Default budgets
 
@@ -61,7 +61,7 @@ cd benchmark/runtime
 PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py \
   --sample-profile controllability \
   --data-root data/controllability_splits_large_resolved \
-  --output-root data/invariance_variants/controllability/base
+  --output-root data/controllability_splits_large/base
 ```
 
 Generate a single manifest only:
