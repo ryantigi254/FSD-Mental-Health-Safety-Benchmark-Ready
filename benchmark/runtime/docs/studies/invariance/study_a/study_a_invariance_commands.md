@@ -52,7 +52,7 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py \
 
 ```powershell
 cd benchmark/runtime
-$env:INVARIANCE_DATA_DIR = 'data/controllability_splits_large_resolved_invariance_samples'
+$env:INVARIANCE_DATA_DIR = 'data/invariance_variants/controllability/base'
 $env:INVARIANCE_RESULTS_DIR = 'results_invariance_controllability'
 ```
 

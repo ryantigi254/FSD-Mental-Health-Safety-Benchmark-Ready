@@ -24,7 +24,7 @@ The runner auto-selects the Study B child variant from that bundle root.
 
 ```powershell
 cd benchmark/runtime
-$env:INVARIANCE_DATA_DIR = 'data/controllability_splits_large_resolved_invariance_samples'
+$env:INVARIANCE_DATA_DIR = 'data/invariance_variants/controllability/base'
 $env:INVARIANCE_RESULTS_DIR = 'results_invariance_controllability'
 ```
 
@@ -66,7 +66,7 @@ Build them with:
 ```bash
 cd benchmark/runtime
 PYTHONPATH=src python scripts/invariance/build_variant_family_matrix.py \
-  --base-root data/controllability_splits_large_resolved_invariance_samples \
+  --base-root data/invariance_variants/controllability/base \
   --output-root data/invariance_variants/controllability \
   --study study_b
 ```

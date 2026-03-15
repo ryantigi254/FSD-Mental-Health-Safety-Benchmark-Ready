@@ -22,7 +22,7 @@ so the runner still reads `study_a_test.json` plus the normal gold-label files.
 ## Sampled roots
 
 - `data/frozen_splits/v5_invariance_samples`
-- `data/controllability_splits_large_resolved_invariance_samples`
+- `data/invariance_variants/controllability/base`
 
 Default budgets:
 
