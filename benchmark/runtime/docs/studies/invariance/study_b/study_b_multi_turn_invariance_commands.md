@@ -24,7 +24,7 @@ The runner auto-selects `study_b_multi_turn/schedule_earlier` from that bundle r
 
 ```powershell
 cd benchmark/runtime
-$env:INVARIANCE_DATA_DIR = 'data/controllability_splits_large_resolved_invariance_samples'
+$env:INVARIANCE_DATA_DIR = 'data/invariance_variants/controllability/base'
 $env:INVARIANCE_RESULTS_DIR = 'results_invariance_controllability'
 ```
 
