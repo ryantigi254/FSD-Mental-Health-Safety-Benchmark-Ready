@@ -14,7 +14,7 @@ sampled case set and the prompt variant applied to each case.
 Two source profiles are supported:
 
 - `v5`: `data/frozen_splits/v5`
-- `controllability`: `data/controllability_splits_large_resolved`
+- `controllability`: `data/invariance_variants/variant_family`
 
 Both are materialised into the same canonical sampled layout before generation,
 so the runner still reads `study_a_test.json` plus the normal gold-label files.
@@ -22,7 +22,7 @@ so the runner still reads `study_a_test.json` plus the normal gold-label files.
 ## Sampled roots
 
 - `data/frozen_splits/v5_invariance_samples`
-- `data/controllability_splits_large/base`
+- `data/invariance_variants/variant_family/base`
 
 Default budgets:
 

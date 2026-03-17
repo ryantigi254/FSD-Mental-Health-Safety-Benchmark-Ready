@@ -5,14 +5,14 @@
 ### Base Runs
 
 - `data/invariance_variants/v5`
-- `data/controllability_splits_large/base`
+- `data/invariance_variants/variant_family/base`
 
 ### Variant-Family Runs
 
-- `data/controllability_splits_large/study_a`
-- `data/controllability_splits_large/study_b`
-- `data/controllability_splits_large/study_b_multi_turn`
-- `data/controllability_splits_large/study_c`
+- `data/invariance_variants/variant_family/study_a`
+- `data/invariance_variants/variant_family/study_b`
+- `data/invariance_variants/variant_family/study_b_multi_turn`
+- `data/invariance_variants/variant_family/study_c`
 
 Use `--output-dir results_invariance` throughout.
 

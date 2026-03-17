@@ -12,7 +12,7 @@ run.
 ## Source roots
 
 - `v5`: `data/frozen_splits/v5`
-- `controllability`: `data/controllability_splits_large_resolved`
+- `controllability`: `data/invariance_variants/variant_family`
 
 Both are materialised into the canonical sampled layout before generation, so
 the runner still reads `study_b_test.json`.
@@ -20,7 +20,7 @@ the runner still reads `study_b_test.json`.
 ## Sampled roots and default budgets
 
 - `data/frozen_splits/v5_invariance_samples` with default budget `160`
-- `data/controllability_splits_large/base` with default
+- `data/invariance_variants/variant_family/base` with default
   budget `150`
 
 ## Pairing unit

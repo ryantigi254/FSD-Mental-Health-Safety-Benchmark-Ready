@@ -7,7 +7,7 @@ Two source profiles are now supported:
 
 - `v5`: sampled from `data/frozen_splits/v5`
 - `controllability`: sampled from
-  `data/controllability_splits_large_resolved`
+  `data/invariance_variants/variant_family`
 
 The controllability-backed path exists so we can run the same invariance
 comparison machinery over the control-conditioned suite as well as the main
@@ -44,8 +44,8 @@ a second replication track.
 Recommended output directories:
 
 - `results_invariance/`
-- `results_invariance/base/` for `data/controllability_splits_large/base`
-- `results_invariance/variant-family/` for `data/controllability_splits_large/study_*/*`
+- `results_invariance/base/` for `data/invariance_variants/variant_family/base`
+- `results_invariance/variant-family/` for `data/invariance_variants/variant_family/study_*/*`
 
 ## Canonical command note
 

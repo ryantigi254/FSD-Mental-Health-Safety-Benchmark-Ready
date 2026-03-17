@@ -9,7 +9,7 @@ conversation outcome more than they should.
 ## Source roots
 
 - `v5`: `data/frozen_splits/v5`
-- `controllability`: `data/controllability_splits_large_resolved`
+- `controllability`: `data/invariance_variants/variant_family`
 
 The sampled output root is always normalised back to the canonical layout, so
 the runner still reads `study_b_multi_turn_test.json`.
