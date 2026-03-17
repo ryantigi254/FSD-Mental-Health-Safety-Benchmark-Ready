@@ -42,7 +42,7 @@ python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --mode
 
 Not applicable for `study_a_bias_invariance`.
 
-This target does not read from `data/controllability_splits_large/...`
+This target does not read from `data/invariance_variants/variant_family/...`
 family folders. It always uses the fixed frozen bias file above.
 
 ## Direct Runner
