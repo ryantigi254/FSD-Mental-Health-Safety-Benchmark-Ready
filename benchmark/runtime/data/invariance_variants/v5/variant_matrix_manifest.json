@@ -167,6 +167,10 @@
           "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance_variants/v5/study_c/noncritical_reorder"
         }
       ]
+    },
+    "study_a_bias": {
+      "variants": [],
+      "note": "No variant families. Base invariance only (150 cases sampled from v5 frozen bias)."
     }
   }
 }

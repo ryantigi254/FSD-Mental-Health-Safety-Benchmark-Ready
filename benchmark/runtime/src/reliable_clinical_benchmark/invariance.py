@@ -45,12 +45,14 @@ HIGH_RISK_BUCKETS = {
 DEFAULT_INVARIANCE_SAMPLE_SIZE_PROFILES: Dict[str, Dict[str, int]] = {
     "v5": {
         "study_a": 150,
+        "study_a_bias": 150,
         "study_b": 160,
         "study_b_multi_turn": 12,
         "study_c": 15,
     },
     "controllability": {
         "study_a": 140,
+        "study_a_bias": 140,
         "study_b": 150,
         "study_b_multi_turn": 10,
         "study_c": 12,
@@ -103,6 +105,7 @@ def infer_invariance_source_profile(root: Path) -> str:
         (root / candidate).exists()
         for candidate in (
             "study_a_controllability_test.json",
+            "study_a_bias_controllability_test.json",
             "study_b_controllability_test.json",
             "study_b_multi_turn_controllability_test.json",
             "study_c_controllability_test.json",
@@ -437,6 +440,55 @@ def _study_c_records(root: Path) -> List[ManifestRecord]:
     return records
 
 
+def _study_a_bias_records(root: Path) -> List[ManifestRecord]:
+    """Load records from the adversarial bias vignettes for invariance sampling."""
+
+    # v5 layout: adversarial_bias/biased_vignettes.json
+    # controllability layout: study_a_bias_controllability_test.json
+    bias_candidates = [
+        root / "adversarial_bias" / "biased_vignettes.json",
+        root / "study_a_bias_controllability_test.json",
+    ]
+    bias_path = next((p for p in bias_candidates if p.exists()), None)
+    if bias_path is None:
+        raise FileNotFoundError(
+            f"No bias vignettes found under {root}. "
+            f"Checked: {', '.join(str(p) for p in bias_candidates)}"
+        )
+    payload = _load_json(bias_path)
+    rows = payload.get("cases", []) if isinstance(payload, dict) else payload
+
+    records: List[ManifestRecord] = []
+    for row in rows:
+        sample_id = str(row.get("id", "")).strip()
+        if not sample_id:
+            continue
+        metadata = row.get("metadata", {}) or {}
+        bias_feature = str(row.get("bias_feature", "") or "")
+        bias_label = str(row.get("bias_label", "") or "")
+        dimension_family = str(metadata.get("dimension_family", "") or "unknown")
+        dimension = str(metadata.get("dimension", "") or "unknown")
+        risk_bucket = _risk_bucket([row.get("prompt", ""), bias_label])
+        records.append(
+            ManifestRecord(
+                id=sample_id,
+                strata={
+                    "dimension_family": _slugify(dimension_family),
+                    "dimension": _slugify(dimension),
+                    "risk": risk_bucket,
+                },
+                metadata={
+                    "bias_feature": bias_feature,
+                    "bias_label": bias_label,
+                    "dimension_family": dimension_family,
+                    "dimension": dimension,
+                    "persona_id": str(metadata.get("persona_id", "") or ""),
+                },
+            )
+        )
+    return records
+
+
 _STUDY_SPECS: Dict[str, InvarianceStudySpec] = {
     "study_a": InvarianceStudySpec(
         canonical_name="study_a",
@@ -470,6 +522,14 @@ _STUDY_SPECS: Dict[str, InvarianceStudySpec] = {
         variant_defaults=("summary_wording", "non_critical_turn_reorder", "patient_rephrasing"),
         pairing_unit="case_id",
     ),
+    "study_a_bias": InvarianceStudySpec(
+        canonical_name="study_a_bias",
+        aliases=("bias", "a_bias", "study_a_bias"),
+        sampling_unit="row",
+        coverage_axes=("dimension_family", "dimension", "risk"),
+        variant_defaults=(),
+        pairing_unit="id",
+    ),
 }
 
 _STUDY_METRIC_NAMES: Dict[str, Tuple[str, ...]] = {
@@ -482,6 +542,7 @@ _STUDY_METRIC_NAMES: Dict[str, Tuple[str, ...]] = {
     ),
     "study_b_multi_turn": ("turn_of_flip",),
     "study_c": ("entity_recall_t10", "knowledge_conflict_rate"),
+    "study_a_bias": ("silent_bias_rate",),
 }
 
 _RECORD_LOADERS: Dict[str, Callable[[Path], List[ManifestRecord]]] = {
@@ -489,6 +550,7 @@ _RECORD_LOADERS: Dict[str, Callable[[Path], List[ManifestRecord]]] = {
     "study_b": _study_b_records,
     "study_b_multi_turn": _study_b_multi_turn_records,
     "study_c": _study_c_records,
+    "study_a_bias": _study_a_bias_records,
 }
 
 
@@ -789,6 +851,27 @@ def materialize_invariance_split_root(
         study_c_entity_map_path = source_root / "entity_evidence_map.json"
     study_c_entity_map = _load_json(study_c_entity_map_path) if study_c_entity_map_path.exists() else {"case_evidence": {}}
 
+    # Study A Bias source
+    study_a_bias_candidates = [
+        source_root / "adversarial_bias" / "biased_vignettes.json",
+        source_root / "study_a_bias_controllability_test.json",
+    ]
+    study_a_bias_path = next((p for p in study_a_bias_candidates if p.exists()), None)
+    if study_a_bias_path is not None:
+        study_a_bias_source = _load_json(study_a_bias_path)
+        study_a_bias_rows = (
+            study_a_bias_source.get("cases", [])
+            if isinstance(study_a_bias_source, dict)
+            else study_a_bias_source
+        )
+        study_a_bias_by_id = {
+            str(row.get("id", "")).strip(): row
+            for row in study_a_bias_rows
+            if str(row.get("id", "")).strip()
+        }
+    else:
+        study_a_bias_by_id = {}
+
     for spec in selected_specs:
         manifest_path = manifest_dir / _manifest_filename(spec.canonical_name)
         manifest = _read_manifest(manifest_path)
@@ -878,6 +961,24 @@ def materialize_invariance_split_root(
             for target in (study_c_dir / "entity_evidence_map.json", output_root / "entity_evidence_map.json"):
                 target.write_text(json.dumps(filtered_case_evidence, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
             materialized[spec.canonical_name] = {"n_rows": len(selected_rows), "path": "study_c_test.json"}
+            continue
+
+        if spec.canonical_name == "study_a_bias":
+            if not study_a_bias_by_id:
+                raise FileNotFoundError(
+                    f"No bias vignettes found under {source_root} for study_a_bias materialisation."
+                )
+            selected_rows = [study_a_bias_by_id[row_id] for row_id in ids]
+            bias_dir = output_root / "adversarial_bias"
+            bias_dir.mkdir(parents=True, exist_ok=True)
+            (bias_dir / "biased_vignettes.json").write_text(
+                json.dumps({"cases": selected_rows}, indent=2, ensure_ascii=False) + "\n",
+                encoding="utf-8",
+            )
+            materialized[spec.canonical_name] = {
+                "n_rows": len(selected_rows),
+                "path": "adversarial_bias/biased_vignettes.json",
+            }
             continue
 
         raise ValueError(f"Unsupported study spec during materialisation: {spec.canonical_name}")

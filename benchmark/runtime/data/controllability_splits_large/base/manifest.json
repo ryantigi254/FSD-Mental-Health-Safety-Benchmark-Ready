@@ -1,25 +1,13 @@
 {
-  "created_at_utc": "2026-03-15T21:37:45.997817+00:00",
-  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large_resolved",
+  "created_at_utc": "2026-03-17T01:32:24.302634+00:00",
+  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large",
   "source_profile": "controllability",
   "manifest_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large/base",
   "layout": "frozen_snapshot",
   "studies": {
-    "study_a": {
+    "study_a_bias": {
       "n_rows": 140,
-      "path": "study_a_test.json"
-    },
-    "study_b": {
-      "n_rows": 150,
-      "path": "study_b_test.json"
-    },
-    "study_b_multi_turn": {
-      "n_rows": 10,
-      "path": "study_b_multi_turn_test.json"
-    },
-    "study_c": {
-      "n_rows": 12,
-      "path": "study_c_test.json"
+      "path": "adversarial_bias/biased_vignettes.json"
     }
   }
 }
