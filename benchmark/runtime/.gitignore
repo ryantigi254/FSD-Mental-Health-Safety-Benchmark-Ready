@@ -62,6 +62,9 @@ data/frozen_splits/*_gold_postupdate_*/
 !data/releases/clinician_readiness_v0.2_2026-02-15/**
 !data/releases/clinician_readiness_v0.3_2026-02-16/
 !data/releases/clinician_readiness_v0.3_2026-02-16/**
+!data/invariance_variants/
+!data/invariance_variants/variant_family/
+!data/invariance_variants/variant_family/**
 walkthrough.md
 implementation_plan.md
 
