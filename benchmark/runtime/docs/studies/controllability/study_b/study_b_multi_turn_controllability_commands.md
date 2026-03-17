@@ -7,7 +7,7 @@ Study B multi-turn controllability generation writes to `results/<model-folder>/
 
 These commands use the large resolved suite directly:
 
-- `--ctrl-dir data/controllability_splits_large_resolved`
+- `--ctrl-dir data/controllability_splits_large`
 - `--output-dir results_scaled_large_resolved`
 
 ## One-Time Setup
@@ -21,19 +21,19 @@ cd "E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setu
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --workers 6
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --workers 6
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --workers 4
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id gpt_oss --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id gpt_oss --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved --workers 2
 ```
 
 ## Local HF Models (mh-llm-local-env)
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyllm_gml_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id piaget_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyche_r1_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psych_qwen_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --quantization 4bit
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyllm_gml_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id piaget_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyche_r1_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psych_qwen_local --env mh-llm-local-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved --quantization 4bit
 ```
 
 ## vLLM (Local HF Models Only)
@@ -75,16 +75,16 @@ python -m vllm.entrypoints.openai.api_server --model "Compumacy/Psych_Qwen_32B" 
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyllm_gml_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id piaget_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyche_r1_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psych_qwen_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyllm_gml_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id piaget_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyche_r1_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psych_qwen_vllm --env mh-llm-vllm-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
 ```
 
 ## Direct Runner
 
 ```powershell
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --max-cases 3 --max-tokens 8192 --workers 6
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved --max-cases 3 --max-tokens 8192 --workers 6
 ```
 
 ## Workers
@@ -96,6 +96,6 @@ python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_b_multi_tur
 ## Useful Checks
 
 ```bash
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id gpt_oss --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --check-only
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_b_multi_turn --model-id gpt_oss --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --workers 8 --max-cases 3
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id gpt_oss --env mh-llm-benchmark-env --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved --check-only
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_b_multi_turn --model-id gpt_oss --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved --workers 8 --max-cases 3
 ```

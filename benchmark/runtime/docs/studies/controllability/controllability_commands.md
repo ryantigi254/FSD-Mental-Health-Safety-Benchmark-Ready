@@ -8,16 +8,16 @@
 ## Prerequisites
 
 1. Small suite (existing): `data/controllability_splits/`
-2. Large resolved suite (scaled): `data/controllability_splits_large_resolved/`
+2. Large resolved suite (scaled): `data/controllability_splits_large/`
 3. Gold labels generated in the suite you want to evaluate:
-   - `data/controllability_splits_large_resolved/ctrl_gold_diagnosis_labels.json`
+   - `data/controllability_splits_large/ctrl_gold_diagnosis_labels.json`
 4. Gold plans generated in the suite you want to evaluate:
-   - `data/controllability_splits_large_resolved/ctrl_target_plans.json`
+   - `data/controllability_splits_large/ctrl_target_plans.json`
 
 For the scaled run, keep outputs separate from the small suite. The command
 examples below pass the canonical paths directly:
 
-- `--ctrl-dir data/controllability_splits_large_resolved`
+- `--ctrl-dir data/controllability_splits_large`
 - `--output-dir results_scaled_large_resolved`
 
 ### Gold generation (one-time)
@@ -29,12 +29,12 @@ The checked-in controllability gold artefacts now use the `probe` backend rather
 ```bash
 cd benchmark/runtime
 PYTHONPATH=src python scripts/studies/controllability/generate_gold_labels.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
+  --ctrl-dir data/controllability_splits_large \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
 
 PYTHONPATH=src python scripts/studies/controllability/generate_gold_plans.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
+  --ctrl-dir data/controllability_splits_large \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
 ```
@@ -43,14 +43,14 @@ Robust companion artefacts:
 
 ```bash
 PYTHONPATH=src python scripts/studies/controllability/generate_gold_labels.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
+  --ctrl-dir data/controllability_splits_large \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext \
   --secondary-model emilyalsentzer/Bio_ClinicalBERT \
   --output-name ctrl_gold_diagnosis_labels.robust.json
 
 PYTHONPATH=src python scripts/studies/controllability/generate_gold_plans.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
+  --ctrl-dir data/controllability_splits_large \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext \
   --secondary-model michiyasunaga/BioLinkBERT-base \
@@ -74,7 +74,7 @@ cd benchmark/runtime
 PYTHONPATH=src python scripts/dev/run_generation_auto.py \
     --study ctrl_study_a \
     --model-id qwq \
-    --ctrl-dir data/controllability_splits_large_resolved \
+    --ctrl-dir data/controllability_splits_large \
     --output-dir results_scaled_large_resolved
 ```
 
@@ -89,22 +89,22 @@ Generates the same controllability cases under `spontaneous`,
 
 ```bash
 # LM Studio models
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id qwq --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id qwen3_lmstudio --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id deepseek_r1_lmstudio --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id gpt_oss --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id qwq --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id qwen3_lmstudio --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id deepseek_r1_lmstudio --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id gpt_oss --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
 
 # vLLM models
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyllm_gml_vllm --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id piaget_vllm --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyche_r1_vllm --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psych_qwen_vllm --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyllm_gml_vllm --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id piaget_vllm --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyche_r1_vllm --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psych_qwen_vllm --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
 
 # Local HF models
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyllm_gml_local --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id piaget_local --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyche_r1_local --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psych_qwen_local --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyllm_gml_local --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id piaget_local --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyche_r1_local --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psych_qwen_local --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
 ```
 
 **Output**: `results/<model>/ctrl_study_a_generations.jsonl`
@@ -116,8 +116,8 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --
 Generates matched-arm bias runs on the canonical adversarial bias cases.
 
 ```bash
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwq --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwq --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
 # ... (same model set as ctrl_study_a)
 ```
 
@@ -130,8 +130,8 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bi
 Generates `control` + `injected` pairs for each arm.
 
 ```bash
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwq --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwen3_lmstudio --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwq --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwen3_lmstudio --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
 # ... (same model set)
 ```
 
@@ -144,8 +144,8 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --
 Generates 20-turn rolling-context conversations for each arm.
 
 ```bash
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
 # ... (same model set)
 ```
 
@@ -158,8 +158,8 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_mu
 Generates summary-only outputs per turn for each arm.
 
 ```bash
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
-PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio --ctrl-dir data/controllability_splits_large --output-dir results_scaled_large_resolved
 # ... (same model set)
 ```
 
@@ -174,7 +174,7 @@ cd benchmark/runtime
 PYTHONPATH=src python hf-local-scripts/run_ctrl_generate_only.py \
     --study ctrl_study_a \
     --model-id qwq \
-    --ctrl-dir data/controllability_splits_large_resolved \
+    --ctrl-dir data/controllability_splits_large \
     --output-dir results_scaled_large_resolved \
     --max-cases 5 \
     --max-tokens 8192
@@ -186,7 +186,7 @@ PYTHONPATH=src python hf-local-scripts/run_ctrl_generate_only.py \
 |----------|-------------|
 | `--study` | One of: `ctrl_study_a`, `ctrl_study_a_bias`, `ctrl_study_b`, `ctrl_study_b_multi_turn`, `ctrl_study_c` |
 | `--model-id` | Model identifier (same as base studies) |
-| `--ctrl-dir` | Controllability split directory (use `data/controllability_splits_large_resolved` for the scaled suite) |
+| `--ctrl-dir` | Controllability split directory (use `data/controllability_splits_large` for the scaled suite) |
 | `--max-cases` | Limit number of cases (for piloting) |
 | `--max-tokens` | Max tokens per generation (default: 8192) |
 | `--output-dir` | Override output directory (recommend `results_scaled_large_resolved/` for scaled runs) |
@@ -229,7 +229,7 @@ from reliable_clinical_benchmark.metrics import calculate_controlled_entity_reca
 cd benchmark/runtime
 PYTHONPATH=src python scripts/evaluation/run_controllability_pipeline.py \
     --model <results_model_dir> \
-    --ctrl-dir data/controllability_splits_large_resolved \
+    --ctrl-dir data/controllability_splits_large \
     --results-dir results_scaled_large_resolved
 ```
 

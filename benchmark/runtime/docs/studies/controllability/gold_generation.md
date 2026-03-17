@@ -14,10 +14,10 @@ Canonical checked-in outputs:
 - `data/controllability_splits/ctrl_gold_diagnosis_labels.robust.json`
 - `data/controllability_splits/ctrl_target_plans.json`
 - `data/controllability_splits/ctrl_target_plans.robust.json`
-- `data/controllability_splits_large_resolved/ctrl_gold_diagnosis_labels.json`
-- `data/controllability_splits_large_resolved/ctrl_gold_diagnosis_labels.robust.json`
-- `data/controllability_splits_large_resolved/ctrl_target_plans.json`
-- `data/controllability_splits_large_resolved/ctrl_target_plans.robust.json`
+- `data/controllability_splits_large/ctrl_gold_diagnosis_labels.json`
+- `data/controllability_splits_large/ctrl_gold_diagnosis_labels.robust.json`
+- `data/controllability_splits_large/ctrl_target_plans.json`
+- `data/controllability_splits_large/ctrl_target_plans.robust.json`
 
 ## Why The NLI-First Path Was Replaced
 
@@ -194,24 +194,24 @@ Large resolved controllability suite:
 
 ```bash
 python3 scripts/studies/controllability/generate_gold_labels.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
+  --ctrl-dir data/controllability_splits_large \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
 
 python3 scripts/studies/controllability/generate_gold_labels.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
+  --ctrl-dir data/controllability_splits_large \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext \
   --secondary-model emilyalsentzer/Bio_ClinicalBERT \
   --output-name ctrl_gold_diagnosis_labels.robust.json
 
 python3 scripts/studies/controllability/generate_gold_plans.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
+  --ctrl-dir data/controllability_splits_large \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
 
 python3 scripts/studies/controllability/generate_gold_plans.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
+  --ctrl-dir data/controllability_splits_large \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext \
   --secondary-model michiyasunaga/BioLinkBERT-base \

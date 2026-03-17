@@ -1,7 +1,7 @@
 {
   "mode": "batch",
   "suite": "controllability_v0.1_large_resolved",
-  "ctrl_dir": "/private/tmp/clinical-readiness-controlability-wt/benchmark/runtime/data/controllability_splits_large_resolved",
+  "ctrl_dir": "/private/tmp/clinical-readiness-controlability-wt/benchmark/runtime/data/controllability_splits_large",
   "rule_file": "/private/tmp/clinical-readiness-controlability-wt/benchmark/runtime/scripts/studies/controllability_review/rubric_rules_ctrl_study_a_c4_v2.json",
   "rule_version": "ctrl_c4_v2",
   "matching_mode": "word_boundary",
