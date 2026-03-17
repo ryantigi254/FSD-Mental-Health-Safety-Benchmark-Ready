@@ -3,7 +3,7 @@
 This note covers the clinician-ready invariance workflow built on the frozen
 `v5` snapshot at `data/frozen_splits/v5`, plus the secondary
 controllability-backed invariance sample built from
-`data/controllability_splits_large_resolved`.
+`data/controllability_splits_large`.
 
 It is a diagnostic stress-test layer. It does not replace the canonical full-run benchmark metrics.
 
@@ -78,7 +78,7 @@ The generated root is a valid frozen-snapshot-style `data-root`, containing:
 
 For the controllability-backed invariance sample, run:
 
-- `PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py --sample-profile controllability --data-root data/controllability_splits_large_resolved --output-root data/controllability_splits_large/base`
+- `PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py --sample-profile controllability --data-root data/controllability_splits_large --output-root data/controllability_splits_large/base`
 
 The controllability profile intentionally uses a slightly smaller diagnostic
 budget than the main `v5` profile:

@@ -18,7 +18,7 @@ output layout. The difference is the source root and the default study budgets.
 
 ### `controllability`
 
-- Source root: `data/controllability_splits_large_resolved`
+- Source root: `data/controllability_splits_large`
 - Materialised sampled root:
   `data/controllability_splits_large/base`
 
@@ -60,7 +60,7 @@ Build the controllability-backed invariance sample:
 cd benchmark/runtime
 PYTHONPATH=src python scripts/studies/v5_review/build_invariance_splits.py \
   --sample-profile controllability \
-  --data-root data/controllability_splits_large_resolved \
+  --data-root data/controllability_splits_large \
   --output-root data/controllability_splits_large/base
 ```
 
@@ -71,7 +71,7 @@ cd benchmark/runtime
 PYTHONPATH=src python scripts/studies/v5_review/generate_invariance_manifest.py \
   --study study_b \
   --sample-profile controllability \
-  --data-root data/controllability_splits_large_resolved
+  --data-root data/controllability_splits_large
 ```
 
 ## Output layout

@@ -6,7 +6,7 @@ invariance layer.
 It covers two source profiles:
 
 - the canonical frozen `v5` benchmark split under `data/frozen_splits/v5`
-- the controllability suite under `data/controllability_splits_large_resolved`
+- the controllability suite under `data/controllability_splits_large`
 
 ## Top-Level Overview
 

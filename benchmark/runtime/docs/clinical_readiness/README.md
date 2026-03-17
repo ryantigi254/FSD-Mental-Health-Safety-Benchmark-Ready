@@ -32,7 +32,7 @@ So the clinical-readiness claim here is deliberately narrow: preserve comparabil
 - Current canonical release: `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/`
 - Release pointer: `benchmark/runtime/data/releases/LATEST.md`
 - Clinician package outputs: `benchmark/runtime/docs/reports/clinician_package/v0.3/`
-- Controllability candidate snapshot: `benchmark/runtime/data/controllability_splits_large_resolved/`
+- Controllability candidate snapshot: `benchmark/runtime/data/controllability_splits_large/`
 - Controllability verification outputs: `benchmark/runtime/data/verification/controllability_v0.1_large_resolved/`
 - Controllability clinician package outputs: `benchmark/runtime/docs/reports/clinician_package/controllability_v0.1_large_resolved/`
 
@@ -60,7 +60,7 @@ The controllability line is not a copy of the old base-study `v0.3` packaging pa
 - `scripts/studies/controllability_review/build_ctrl_clinician_package.py`
 - `scripts/studies/controllability_review/run_ctrl_sendoff_preflight.py`
 
-This line only certifies `benchmark/runtime/data/controllability_splits_large_resolved/`.
+This line only certifies `benchmark/runtime/data/controllability_splits_large/`.
 It treats the probe-backed gold diagnosis labels and target plans as weakly supervised artefacts and blocks release on any `NEEDS_REVIEW` or `REJECT`.
 
 ## Branch Evidence Basis

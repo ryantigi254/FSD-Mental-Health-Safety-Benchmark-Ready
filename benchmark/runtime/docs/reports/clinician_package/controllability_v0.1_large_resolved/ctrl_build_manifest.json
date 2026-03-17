@@ -1,7 +1,7 @@
 {
   "build_timestamp": "2026-03-13T01:57:44.706015+00:00",
   "seed": 20260307,
-  "output_dir": "data/controllability_splits_large_resolved",
+  "output_dir": "data/controllability_splits_large",
   "total_openr1": 19309,
   "used_source_refs": 4982,
   "unused_available": 14327,

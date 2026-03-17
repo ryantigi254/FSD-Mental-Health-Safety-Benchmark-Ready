@@ -30,7 +30,7 @@ from reliable_clinical_benchmark.metrics.faithfulness import (
 RUNTIME_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_V5_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v5"
 DEFAULT_V5_INVARIANCE_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v5_invariance_samples"
-DEFAULT_CONTROLLABILITY_ROOT = RUNTIME_ROOT / "data" / "controllability_splits_large_resolved"
+DEFAULT_CONTROLLABILITY_ROOT = RUNTIME_ROOT / "data" / "controllability_splits_large"
 DEFAULT_CONTROLLABILITY_INVARIANCE_ROOT = (
     RUNTIME_ROOT / "data" / "controllability_splits_large" / "base"
 )
