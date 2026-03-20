@@ -2,6 +2,8 @@
 
 ## Scope
 Study C controllability generation writes to `results/<model-folder>/ctrl_study_c_generations.jsonl`.
+Canonical Study C generation is arm-aware. Each case is evaluated across
+`spontaneous`, `generic_control`, and `explicit_control`.
 
 ## Scaled Suite Overrides
 
@@ -16,8 +18,13 @@ export CTRL_RESULTS_DIR=results_scaled_large_resolved
 
 Example:
 
-```bash
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
+```powershell
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id qwq `
+  --study ctrl_study_c `
+  --ctrl-dir "$CTRL_DIR" `
+  --output-dir "$CTRL_RESULTS_DIR" `
+  --workers 6
 ```
 
 ## One-Time Setup
@@ -27,23 +34,44 @@ python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --
 cd "E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setup"
 ```
 
-## Generation Commands (Automatic Cross-Platform Runner)
+## Generation Commands (Direct Runner)
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio --env mh-llm-benchmark-env --workers 6
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --env mh-llm-benchmark-env --workers 6
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --workers 4
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --env mh-llm-benchmark-env --workers 2
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id qwen3_lmstudio `
+  --study ctrl_study_c `
+  --workers 6
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id qwq `
+  --study ctrl_study_c `
+  --workers 6
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id deepseek_r1_lmstudio `
+  --study ctrl_study_c `
+  --workers 4
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id gpt_oss `
+  --study ctrl_study_c `
+  --workers 2
 ```
 
 ## Local HF Models (mh-llm-local-env)
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyllm_gml_local --env mh-llm-local-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id piaget_local --env mh-llm-local-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyche_r1_local --env mh-llm-local-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psych_qwen_local --env mh-llm-local-env --quantization 4bit
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id psyllm_gml_local `
+  --study ctrl_study_c
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id piaget_local `
+  --study ctrl_study_c
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id psyche_r1_local `
+  --study ctrl_study_c
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id psych_qwen_local `
+  --study ctrl_study_c `
+  --quantization 4bit
 ```
 
 ## vLLM (Local HF Models Only)
@@ -85,17 +113,28 @@ python -m vllm.entrypoints.openai.api_server --model "Compumacy/Psych_Qwen_32B" 
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyllm_gml_vllm --env mh-llm-vllm-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id piaget_vllm --env mh-llm-vllm-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyche_r1_vllm --env mh-llm-vllm-env
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psych_qwen_vllm --env mh-llm-vllm-env
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id psyllm_gml_vllm `
+  --study ctrl_study_c
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id piaget_vllm `
+  --study ctrl_study_c
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id psyche_r1_vllm `
+  --study ctrl_study_c
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id psych_qwen_vllm `
+  --study ctrl_study_c
 ```
 
 ## Direct Runner
 
 ```powershell
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_c --model-id qwq --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --max-cases 3 --max-tokens 8192 --workers 6
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_c --model-id qwq --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --max-cases 3 --workers 6
 ```
+
+`--max-tokens` is optional. For LM Studio and vLLM models, omitting it lets the
+serving stack control the effective completion limit.
 
 ## Workers
 
@@ -106,6 +145,5 @@ python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_c --model-i
 ## Useful Checks
 
 ```bash
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --check-only
 python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_c --model-id gpt_oss --workers 8 --max-cases 3
 ```
