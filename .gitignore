@@ -52,8 +52,14 @@ json-render-3d-test/
 models/
 scripts/
 codex_logs/
+state/
+tasks/
 
 # Local PGFPlots test drafts
 benchmark/runtime/tests/unit/test_generate_pgfplots*.py
 
 .codex/
+
+.agent/
+Assignment/Misc/
+benchmark/runtime/Misc/

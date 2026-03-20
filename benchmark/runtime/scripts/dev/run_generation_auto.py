@@ -14,6 +14,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+V5_FROZEN_SPLITS_DIR = "data/frozen_splits/v5"
+V5_BIAS_DATA_PATH = "data/frozen_splits/v5/adversarial_bias/biased_vignettes.json"
+
 
 def parse_args() -> tuple[argparse.Namespace, list[str]]:
     parser = argparse.ArgumentParser(
@@ -42,6 +45,10 @@ def parse_args() -> tuple[argparse.Namespace, list[str]]:
     )
     args, passthrough = parser.parse_known_args()
     return args, passthrough
+
+
+def _has_cli_flag(passthrough: list[str], flag_name: str) -> bool:
+    return any(arg == flag_name or arg.startswith(f"{flag_name}=") for arg in passthrough)
 
 
 def main() -> int:
@@ -134,12 +141,11 @@ def main() -> int:
         },
     }
 
-    # Inject default bias data path for Study A bias if not explicitly provided.
-    # This ensures the adversarial bias generations use the v4.1 resampled frozen split
-    # without requiring callers to pass --data-path manually.
-    if args.study == "study_a_bias" and "--data-path" not in passthrough:
-        default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
-        passthrough = ["--data-path", default_bias_data, *passthrough]
+    # Default every study launcher to the frozen v5 snapshot unless the caller overrides it.
+    if args.study == "study_a_bias" and not _has_cli_flag(passthrough, "--data-path"):
+        passthrough = ["--data-path", V5_BIAS_DATA_PATH, *passthrough]
+    elif args.study != "study_a_bias" and not _has_cli_flag(passthrough, "--data-dir"):
+        passthrough = ["--data-dir", V5_FROZEN_SPLITS_DIR, *passthrough]
 
     target_script = study_script_map[args.study]
     if not target_script.exists():

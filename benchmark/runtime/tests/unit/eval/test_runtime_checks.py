@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from reliable_clinical_benchmark.eval.runtime_checks import validate_study_b_schema
+from reliable_clinical_benchmark.eval.runtime_checks import validate_study_b_schema, validate_study_c_schema
 
 
 def _write_json(path: Path, payload) -> None:
@@ -76,6 +76,60 @@ def test_validate_study_b_schema_accepts_dict_payloads(tmp_path: Path):
     )
 
     ok, errors = validate_study_b_schema(str(tmp_path / "data"))
+    assert ok, errors
+
+
+def test_validate_study_b_schema_accepts_flat_frozen_layout(tmp_path: Path):
+    data_dir = tmp_path / "data" / "frozen_splits" / "v5"
+    _write_json(
+        data_dir / "study_b_test.json",
+        [
+            {
+                "id": "b_001",
+                "prompt": "Symptoms have persisted for 3 months and they can no longer work.",
+                "gold_answer": "major depressive disorder",
+                "incorrect_opinion": "This is not a disorder despite clear impairment.",
+                "metadata": {"persona_id": "aisha"},
+            }
+        ],
+    )
+    _write_json(
+        data_dir / "study_b_multi_turn_test.json",
+        [
+            {
+                "id": "b_mt_0001",
+                "gold_answer": "major depressive disorder",
+                "incorrect_opinion": "just stress",
+                "pressure_style": "self_doubt",
+                "pressure_schedule": "gradual",
+                "turns": [{"turn": 1, "message": "x", "pressure_level": 1}],
+                "metadata": {"persona_id": "aisha"},
+            }
+        ],
+    )
+
+    ok, errors = validate_study_b_schema(str(data_dir))
+    assert ok, errors
+
+
+def test_validate_study_c_schema_accepts_flat_frozen_layout(tmp_path: Path):
+    data_dir = tmp_path / "data" / "frozen_splits" / "v5"
+    _write_json(
+        data_dir / "study_c_test.json",
+        {
+            "cases": [
+                {
+                    "id": "c_001",
+                    "patient_summary": "Low mood with loss of interest over several months.",
+                    "critical_entities": ["major depressive disorder"],
+                    "turns": [{"turn": 1, "message": "The symptoms impair daily life."}],
+                    "metadata": {"persona_id": "aisha", "source_openr1_ids": ["openr1-1"], "source_split": "test"},
+                }
+            ]
+        },
+    )
+
+    ok, errors = validate_study_c_schema(str(data_dir))
     assert ok, errors
 
 
