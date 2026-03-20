@@ -47,6 +47,11 @@
       "style": "study_c"
     }
   ],
+  "radar": {
+    "max_value": 70,
+    "manual_tick_labels": true,
+    "tick_label_mode": "fraction"
+  },
   "readme_notes": [
     "Study A Bias uses adversarial bias labels rather than gold clinical diagnoses, so it is shown under a dedicated `Bias / Adversarial` category."
   ],

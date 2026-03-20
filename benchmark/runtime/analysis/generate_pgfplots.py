@@ -389,7 +389,7 @@ def build_radar_tex(analysis: dict) -> str:
         )
         plot_commands.append(rf"\addlegendentry{{{esc_tex(series['label'])}}}")
 
-    legend_columns = min(3, max(1, len(series_values)))
+    legend_columns = min(6, max(1, len(series_values)))
 
     return rf"""% Auto-generated PGFPlots radar figure. Do not edit by hand.
 \begin{{tikzpicture}}
