@@ -52,7 +52,9 @@ Study A bias uses a synthetic adversarial bias evaluation set (`benchmark/runtim
 - **DeepSeek‑R1‑14B** (reasoning baseline) – `deepseek-ai/DeepSeek-R1-Distill-Qwen-14B`
 - **Piaget‑8B** (local HF runner) – `gustavecortal/Piaget-8B`
 - **Psyche‑R1** (psychological reasoning) – `MindIntLab/Psyche-R1`
-- **Psych_Qwen_32B** (large psych model) – local weights, typically run **4-bit quantised** on 24GB VRAM
+- **Psych_Qwen_32B** (large psych model) – [`Compumacy/Psych_Qwen_32B`](https://huggingface.co/Compumacy/Psych_Qwen_32B); local weights in this benchmark are derived from the published model card and files, and are typically run **4-bit quantised** on constrained local hardware
+
+For `Psych_Qwen_32B`, model provenance, base-model lineage, intended use, and published usage guidance are taken from the upstream Hugging Face model card unless stated otherwise.
 
 ## Benchmark Results (Summary)
 
@@ -116,6 +118,7 @@ Study A bias uses a synthetic adversarial bias evaluation set (`benchmark/runtim
 - **Piaget‑8B** model card: https://huggingface.co/gustavecortal/Piaget-8B
 - **Psyche‑R1** model card: https://huggingface.co/MindIntLab/Psyche-R1
 - **Psych_Qwen_32B** model card: https://huggingface.co/Compumacy/Psych_Qwen_32B
+- **Psych_Qwen_32B** implementation note: the upstream model card describes the model as a psychology/psychiatry-focused Qwen-family fine-tune built on `unsloth/Qwen3-32B` and trained on `Daemontatox/Psy-Data-books`; see the model card for the authoritative published description and limitations
 
 ### Datasets
 
