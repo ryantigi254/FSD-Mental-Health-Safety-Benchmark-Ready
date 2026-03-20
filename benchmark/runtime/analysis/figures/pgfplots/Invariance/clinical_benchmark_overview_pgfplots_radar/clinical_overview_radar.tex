@@ -5,9 +5,9 @@
     width=0.72\linewidth,
     height=0.72\linewidth,
     at={(0,0.48cm)},
-    ymin=0, ymax=110,
-    ytick={33.166,46.904,57.446,66.332,74.162,81.240,87.750,93.808,99.499,104.881,110.000},
-    yticklabels={{0.1},{0.2},{0.3},{0.4},{0.5},{0.6},{0.7},{0.8},{0.9},{1.0},{1.1}},
+    ymin=0, ymax=70,
+    ytick={26.458,37.417,45.826,52.915,59.161,64.807,70.000},
+    yticklabels={},
     xtick=data,
     xticklabels={{},{},{},{},{},{},{},{},{},{},{},{},{},{}},
     clip=false,
@@ -21,53 +21,59 @@
     legend style={
       at={(axis description cs:0.5,-0.13)},
       anchor=north,
-      legend columns=3,
+      legend columns=6,
       font=\small\bfseries,
       draw=gray!35,
       fill=white
     },
   ]
-    \addplot+[line width=1.6pt, line join=round, color=red!88!black, mark=*, mark size=1.5pt, fill=red!72!white, fill opacity=0.16] coordinates {(-90.00,58.207) (-64.29,44.329) (-38.57,55.114) (-12.86,24.249) (12.86,26.556) (38.57,25.308) (64.29,19.588) (90.00,12.681) (115.71,12.578) (141.43,25.308) (167.14,24.842) (192.86,20.047) (218.57,28.748) (244.29,43.817) (270.00,58.207)};
+    \addplot+[line width=1.6pt, line join=round, color=red!88!black, mark=*, mark size=1.5pt, fill=red!72!white, fill opacity=0.16] coordinates {(-90.00,46.433) (-64.29,35.363) (-38.57,43.966) (-12.86,20.526) (12.86,23.368) (38.57,22.268) (64.29,16.869) (90.00,10.758) (115.71,10.655) (141.43,22.268) (167.14,21.802) (192.86,16.859) (218.57,24.342) (244.29,34.954) (270.00,46.433)};
 \addlegendentry{Overall}
-\addplot+[line width=1.6pt, line join=round, color=studyApurple, mark=*, mark size=2.1pt, fill=studyApurple!45!white, fill opacity=0.05] coordinates {(-90.00,0.000) (-64.29,58.708) (-38.57,62.291) (-12.86,0.000) (12.86,11.749) (38.57,0.000) (64.29,11.058) (90.00,11.141) (115.71,11.058) (141.43,0.000) (167.14,40.091) (192.86,9.828) (218.57,14.265) (244.29,69.570) (270.00,0.000)};
+\addplot+[line width=1.6pt, line join=round, color=studyApurple, mark=*, mark size=2.1pt, fill=studyApurple!45!white, fill opacity=0.05] coordinates {(-90.00,0.000) (-64.29,46.833) (-38.57,49.691) (-12.86,0.000) (12.86,10.017) (38.57,0.000) (64.29,9.325) (90.00,9.409) (115.71,9.325) (141.43,0.000) (167.14,35.848) (192.86,8.096) (218.57,11.816) (244.29,55.498) (270.00,0.000)};
 \addlegendentry{Study A}
-\addplot+[line width=1.5pt, line join=round, dash pattern=on 2pt off 1.6pt, color=studyApurple, mark=square*, mark size=1.7pt, fill=studyApurple!55!white, fill opacity=0.05] coordinates {(-90.00,104.881) (-64.29,0.000) (-38.57,0.000) (-12.86,0.000) (12.86,0.000) (38.57,0.000) (64.29,0.000) (90.00,0.000) (115.71,0.000) (141.43,0.000) (167.14,0.000) (192.86,0.000) (218.57,0.000) (244.29,0.000) (270.00,104.881)};
+\addplot+[line width=1.5pt, line join=round, dash pattern=on 2pt off 1.6pt, color=studyApurple, mark=square*, mark size=1.7pt, fill=studyApurple!55!white, fill opacity=0.05] coordinates {(-90.00,70.000) (-64.29,0.000) (-38.57,0.000) (-12.86,0.000) (12.86,0.000) (38.57,0.000) (64.29,0.000) (90.00,0.000) (115.71,0.000) (141.43,0.000) (167.14,0.000) (192.86,0.000) (218.57,0.000) (244.29,0.000) (270.00,70.000)};
 \addlegendentry{Study A Bias}
-\addplot+[line width=1.6pt, line join=round, color=orange!88!black, mark=triangle*, mark size=1.8pt, fill=orange!74!white, fill opacity=0.12] coordinates {(-90.00,0.000) (-64.29,46.165) (-38.57,69.643) (-12.86,49.896) (12.86,51.755) (38.57,57.506) (64.29,34.340) (90.00,21.611) (115.71,21.376) (141.43,48.481) (167.14,23.322) (192.86,35.545) (218.57,43.026) (244.29,35.178) (270.00,0.000)};
+\addplot+[line width=1.6pt, line join=round, color=orange!88!black, mark=triangle*, mark size=1.8pt, fill=orange!74!white, fill opacity=0.12] coordinates {(-90.00,0.000) (-64.29,36.827) (-38.57,55.556) (-12.86,40.195) (12.86,46.723) (38.57,52.202) (64.29,30.231) (90.00,18.706) (115.71,18.471) (141.43,43.737) (167.14,20.417) (192.86,30.513) (218.57,35.410) (244.29,28.062) (270.00,0.000)};
 \addlegendentry{Study B}
-\addplot+[line width=1.5pt, line join=round, dash pattern=on 3pt off 1.3pt, color=orange!70!black, mark=diamond*, mark size=1.7pt, fill=orange!60!white, fill opacity=0.10] coordinates {(-90.00,0.000) (-64.29,74.162) (-38.57,89.909) (-12.86,0.000) (12.86,0.000) (38.57,0.000) (64.29,0.000) (90.00,0.000) (115.71,0.000) (141.43,0.000) (167.14,0.000) (192.86,0.000) (218.57,63.575) (244.29,0.000) (270.00,0.000)};
+\addplot+[line width=1.5pt, line join=round, dash pattern=on 3pt off 1.3pt, color=orange!70!black, mark=diamond*, mark size=1.7pt, fill=orange!60!white, fill opacity=0.10] coordinates {(-90.00,0.000) (-64.29,59.161) (-38.57,65.800) (-12.86,0.000) (12.86,0.000) (38.57,0.000) (64.29,0.000) (90.00,0.000) (115.71,0.000) (141.43,0.000) (167.14,0.000) (192.86,0.000) (218.57,50.716) (244.29,0.000) (270.00,0.000)};
 \addlegendentry{Study B multi-turn}
-\addplot+[line width=1.6pt, line join=round, color=teal!88!black, mark=*, mark size=1.5pt, fill=teal!76!white, fill opacity=0.14] coordinates {(-90.00,0.000) (-64.29,46.904) (-38.57,37.853) (-12.86,0.000) (12.86,58.938) (38.57,0.000) (64.29,52.022) (90.00,0.000) (115.71,0.000) (141.43,95.809) (167.14,58.938) (192.86,39.726) (218.57,80.417) (244.29,27.080) (270.00,0.000)};
+\addplot+[line width=1.6pt, line join=round, color=teal!88!black, mark=*, mark size=1.5pt, fill=teal!76!white, fill opacity=0.14] coordinates {(-90.00,0.000) (-64.29,37.417) (-38.57,32.075) (-12.86,0.000) (12.86,52.572) (38.57,0.000) (64.29,45.848) (90.00,0.000) (115.71,0.000) (141.43,65.800) (167.14,52.572) (192.86,33.896) (218.57,64.151) (244.29,21.602) (270.00,0.000)};
 \addlegendentry{Study C}
     % Manual axis labels + leader lines for readability on a square-root radial scale.
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=north] (label0) at (axis cs:-90.00,122.10) {Bias /\\Adversarial};
-    \draw[gray!50, line width=0.35pt] (axis cs:-90.00,110) -- (label0.north);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=north] (label1) at (axis cs:-64.29,122.10) {Anxiety\\Disorders};
-    \draw[gray!50, line width=0.35pt] (axis cs:-64.29,110) -- (label1.north);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=west] (label2) at (axis cs:-38.57,122.10) {Mood\\Disorders};
-    \draw[gray!50, line width=0.35pt] (axis cs:-38.57,110) -- (label2.west);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=west] (label3) at (axis cs:-12.86,122.10) {Personality\\Disorders};
-    \draw[gray!50, line width=0.35pt] (axis cs:-12.86,110) -- (label3.west);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=west] (label4) at (axis cs:12.86,113.30) {Other};
-    \draw[gray!50, line width=0.35pt] (axis cs:12.86,110) -- (label4.west);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=west] (label5) at (axis cs:38.57,113.30) {Self-Harm /\\Suicidality};
-    \draw[gray!50, line width=0.35pt] (axis cs:38.57,110) -- (label5.west);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=south] (label6) at (axis cs:64.29,113.30) {Neurodevelop-\\mental};
-    \draw[gray!50, line width=0.35pt] (axis cs:64.29,110) -- (label6.south);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=south] (label7) at (axis cs:90.00,113.30) {Substance Use Disorders};
-    \draw[gray!50, line width=0.35pt] (axis cs:90.00,110) -- (label7.south);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=south] (label8) at (axis cs:115.71,113.30) {Sleep-Wake\\Disorders};
-    \draw[gray!50, line width=0.35pt] (axis cs:115.71,110) -- (label8.south);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=east] (label9) at (axis cs:141.43,113.30) {Somatic /\\Health-Related};
-    \draw[gray!50, line width=0.35pt] (axis cs:141.43,110) -- (label9.east);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=east] (label10) at (axis cs:167.14,113.30) {Eating\\Disorders};
-    \draw[gray!50, line width=0.35pt] (axis cs:167.14,110) -- (label10.east);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=east] (label11) at (axis cs:192.86,122.10) {OCD\\Related};
-    \draw[gray!50, line width=0.35pt] (axis cs:192.86,110) -- (label11.east);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=east] (label12) at (axis cs:218.57,122.10) {Psychotic\\Spectrum};
-    \draw[gray!50, line width=0.35pt] (axis cs:218.57,110) -- (label12.east);
-    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=north] (label13) at (axis cs:244.29,122.10) {Trauma /\\Stressor-Related};
-    \draw[gray!50, line width=0.35pt] (axis cs:244.29,110) -- (label13.north);
-    
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=north] (label0) at (axis cs:-90.00,77.70) {Bias /\\Adversarial};
+    \draw[gray!50, line width=0.35pt] (axis cs:-90.00,70) -- (label0.north);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=north] (label1) at (axis cs:-64.29,77.70) {Anxiety\\Disorders};
+    \draw[gray!50, line width=0.35pt] (axis cs:-64.29,70) -- (label1.north);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=west] (label2) at (axis cs:-38.57,77.70) {Mood\\Disorders};
+    \draw[gray!50, line width=0.35pt] (axis cs:-38.57,70) -- (label2.west);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=west] (label3) at (axis cs:-12.86,77.70) {Personality\\Disorders};
+    \draw[gray!50, line width=0.35pt] (axis cs:-12.86,70) -- (label3.west);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=west] (label4) at (axis cs:12.86,72.10) {Other};
+    \draw[gray!50, line width=0.35pt] (axis cs:12.86,70) -- (label4.west);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=west] (label5) at (axis cs:38.57,72.10) {Self-Harm /\\Suicidality};
+    \draw[gray!50, line width=0.35pt] (axis cs:38.57,70) -- (label5.west);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=south] (label6) at (axis cs:64.29,72.10) {Neurodevelop-\\mental};
+    \draw[gray!50, line width=0.35pt] (axis cs:64.29,70) -- (label6.south);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=south] (label7) at (axis cs:90.00,72.10) {Substance Use Disorders};
+    \draw[gray!50, line width=0.35pt] (axis cs:90.00,70) -- (label7.south);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=south] (label8) at (axis cs:115.71,72.10) {Sleep-Wake\\Disorders};
+    \draw[gray!50, line width=0.35pt] (axis cs:115.71,70) -- (label8.south);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=east] (label9) at (axis cs:141.43,72.10) {Somatic /\\Health-Related};
+    \draw[gray!50, line width=0.35pt] (axis cs:141.43,70) -- (label9.east);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=east] (label10) at (axis cs:167.14,72.10) {Eating\\Disorders};
+    \draw[gray!50, line width=0.35pt] (axis cs:167.14,70) -- (label10.east);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=east] (label11) at (axis cs:192.86,77.70) {OCD\\Related};
+    \draw[gray!50, line width=0.35pt] (axis cs:192.86,70) -- (label11.east);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=east] (label12) at (axis cs:218.57,77.70) {Psychotic\\Spectrum};
+    \draw[gray!50, line width=0.35pt] (axis cs:218.57,70) -- (label12.east);
+    \node[font=\Large\bfseries, align=center, text=gray!88!black, text width=3.5cm, anchor=north] (label13) at (axis cs:244.29,77.70) {Trauma /\\Stressor-Related};
+    \draw[gray!50, line width=0.35pt] (axis cs:244.29,70) -- (label13.north);
+    \node[font=\large\bfseries, text=gray!68!black, fill=white, fill opacity=0.9, text opacity=1, inner xsep=1.5pt, inner ysep=0.6pt] at (axis cs:-8.00,26.458) {0.1};
+\node[font=\large\bfseries, text=gray!68!black, fill=white, fill opacity=0.9, text opacity=1, inner xsep=1.5pt, inner ysep=0.6pt] at (axis cs:-8.00,37.417) {0.2};
+\node[font=\large\bfseries, text=gray!68!black, fill=white, fill opacity=0.9, text opacity=1, inner xsep=1.5pt, inner ysep=0.6pt] at (axis cs:-8.00,45.826) {0.3};
+\node[font=\large\bfseries, text=gray!68!black, fill=white, fill opacity=0.9, text opacity=1, inner xsep=1.5pt, inner ysep=0.6pt] at (axis cs:-8.00,52.915) {0.4};
+\node[font=\large\bfseries, text=gray!68!black, fill=white, fill opacity=0.9, text opacity=1, inner xsep=1.5pt, inner ysep=0.6pt] at (axis cs:-8.00,59.161) {0.5};
+\node[font=\large\bfseries, text=gray!68!black, fill=white, fill opacity=0.9, text opacity=1, inner xsep=1.5pt, inner ysep=0.6pt] at (axis cs:-8.00,64.807) {0.6};
+\node[font=\large\bfseries, text=gray!68!black, fill=white, fill opacity=0.9, text opacity=1, inner xsep=1.5pt, inner ysep=0.6pt] at (axis cs:-8.00,70.000) {0.7};
   \end{polaraxis}
 \end{tikzpicture}
