@@ -1,7 +1,8 @@
 # Controllability Study — Generation Commands
 
 > Commands for running controlled-CoT generation across all studies.
-> Uses `mode='cot_controlled'` with study-specific constraint injection.
+> Canonical controllability generation is arm-aware and runs the same case
+> under `spontaneous`, `generic_control`, and `explicit_control` conditions.
 
 ---
 
@@ -81,6 +82,13 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py \
 ```
 
 The old `ctrl_v2_study_*` names are compatibility aliases only.
+
+Canonical LM Studio model IDs used throughout these commands:
+
+- `qwen3_lmstudio`
+- `qwq`
+- `deepseek_r1_lmstudio`
+- `gpt_oss`
 
 ---
 
@@ -190,7 +198,7 @@ PYTHONPATH=src python hf-local-scripts/run_ctrl_generate_only.py \
 | `--model-id` | Model identifier (same as base studies) |
 | `--ctrl-dir` | Controllability split directory (use `data/controllability_splits_large_resolved` for the scaled suite) |
 | `--max-cases` | Limit number of cases (for piloting) |
-| `--max-tokens` | Max tokens per generation (default: 8192) |
+| `--max-tokens` | Max tokens per generation (optional; LM Studio and vLLM can use server-side defaults when omitted) |
 | `--output-dir` | Override output directory (recommend `results_scaled_large_resolved/` for scaled runs) |
 | `--cache-out` | Explicit cache path |
 

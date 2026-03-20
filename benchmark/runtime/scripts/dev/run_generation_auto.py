@@ -93,6 +93,7 @@ def main() -> int:
             "qwen3_lmstudio",
             "qwq",
             "deepseek_r1_lmstudio",
+            "gpt_oss",
             "gpt_oss_lmstudio",
             "psyllm_gml_local",
             "piaget_local",
@@ -163,8 +164,8 @@ def main() -> int:
     allowed_model_ids_by_study["ctrl_v2_study_c"] = allowed_model_ids_by_study["study_c"]
 
     # Inject default bias data path for Study A bias if not explicitly provided.
-    if args.study in {"study_a_bias", "ctrl_v2_study_a_bias"} and "--data-path" not in passthrough:
-        default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
+    if args.study in {"study_a_bias", "ctrl_study_a_bias", "ctrl_v2_study_a_bias"} and "--data-path" not in passthrough:
+        default_bias_data = "data/controllability_splits/study_a_bias_controllability_test.json"
         passthrough = ["--data-path", default_bias_data, *passthrough]
 
     # Controllability scripts need --study passed through.
