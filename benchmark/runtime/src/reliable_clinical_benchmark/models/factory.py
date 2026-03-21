@@ -43,6 +43,7 @@ from .lmstudio_qwq import QwQLMStudioRunner
 from .lmstudio_gpt_oss import GPTOSSLMStudioRunner
 
 from .lmstudio_qwen3 import Qwen3LMStudioRunner
+from .ollama_cloud import OllamaCloudRunner
 
 
 
@@ -177,8 +178,14 @@ def get_model_runner(
         return PsychQwen32BRunner(config=config)
 
     elif model_id_lower in ("psych_qwen_local", "psych-qwen-32b-local", "psych-qwen-local-hf"):
-
         return PsychQwen32BLocalRunner(model_name=_resolve_local_model_path("Psych_Qwen_32B"), config=config)
+    elif model_id_lower in (
+        "ollama_minimax_m2_5_cloud",
+        "minimax_m2_5_cloud",
+        "minimax-m2.5-cloud",
+        "minimax-m2.5:cloud",
+    ):
+        return OllamaCloudRunner(model_name="minimax-m2.5:cloud", config=config)
 
     else:
 
@@ -187,8 +194,7 @@ def get_model_runner(
             f"Unknown model ID: {model_id}. "
 
             f"Supported models: psyllm, qwq, deepseek_r1, gpt_oss, qwen3, "
-
-            f"piaget, psyche_r1, psych_qwen"
+            f"ollama_minimax_m2_5_cloud, piaget, psyche_r1, psych_qwen"
 
         )
 
@@ -218,6 +224,7 @@ from .psych_qwen_local import PsychQwen32BLocalRunner
 from .lmstudio_qwq import QwQLMStudioRunner
 from .lmstudio_gpt_oss import GPTOSSLMStudioRunner
 from .lmstudio_qwen3 import Qwen3LMStudioRunner
+from .ollama_cloud import OllamaCloudRunner
 from .vllm_runner import VLLMRunner
 
 logger = logging.getLogger(__name__)
@@ -236,7 +243,7 @@ def _resolve_local_model_path(model_name: str) -> str:
 
 
 def get_model_runner(
-    model_id: str, config: Optional[GenerationConfig] = None, quantization: Optional[str] = None
+    model_id: str, config: Optional[GenerationConfig] = None
 ) -> ModelRunner:
     """
     Get a model runner instance by model ID.
@@ -244,7 +251,6 @@ def get_model_runner(
     Args:
         model_id: Model identifier ('psyllm', 'qwq', 'deepseek_r1', 'gpt_oss', 'qwen3')
         config: Optional generation configuration
-        quantization: Optional quantization parameter
 
     Returns:
         ModelRunner instance
@@ -287,7 +293,14 @@ def get_model_runner(
     elif model_id_lower in ("psych_qwen", "psych_qwen_32b", "psych-qwen-32b"):
         return PsychQwen32BRunner(config=config)
     elif model_id_lower in ("psych_qwen_local", "psych-qwen-32b-local", "psych-qwen-local-hf"):
-        return PsychQwen32BLocalRunner(model_name=_resolve_local_model_path("Psych_Qwen_32B"), config=config, quantization=quantization)
+        return PsychQwen32BLocalRunner(model_name=_resolve_local_model_path("Psych_Qwen_32B"), config=config)
+    elif model_id_lower in (
+        "ollama_minimax_m2_5_cloud",
+        "minimax_m2_5_cloud",
+        "minimax-m2.5-cloud",
+        "minimax-m2.5:cloud",
+    ):
+        return OllamaCloudRunner(model_name="minimax-m2.5:cloud", config=config)
     elif model_id_lower in ("psyllm_gml_vllm", "psyllm-gml-vllm", "psyllm-vllm"):
         return VLLMRunner(model_name="GMLHUHE/PsyLLM-8B", port=8101, config=config)
     elif model_id_lower in ("piaget_vllm", "piaget-vllm", "piaget-8b-vllm"):
@@ -300,6 +313,5 @@ def get_model_runner(
         raise ValueError(
             f"Unknown model ID: {model_id}. "
             f"Supported models: psyllm, qwq, deepseek_r1, gpt_oss, qwen3, "
-            f"piaget, psyche_r1, psych_qwen"
+            f"ollama_minimax_m2_5_cloud, piaget, psyche_r1, psych_qwen"
         )
-

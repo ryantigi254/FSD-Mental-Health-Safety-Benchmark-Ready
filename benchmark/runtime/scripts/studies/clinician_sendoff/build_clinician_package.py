@@ -39,6 +39,8 @@ SINGLE_TURN_OPTIONAL_METADATA_KEYS = [
     "age",
     "source",
     "original_id",
+    "source_split",
+    "source_openr1_ids",
     "matched_condition",
     "source_type",
     "condition",
@@ -54,6 +56,10 @@ MULTI_TURN_OPTIONAL_METADATA_KEYS = [
     "condition_phrase",
     "source",
     "original_id",
+    "source_split",
+    "source_openr1_ids",
+    "matched_condition",
+    "source_type",
 ]
 
 

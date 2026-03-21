@@ -16,7 +16,7 @@ from __future__ import annotations
 import json
 import random
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, Iterable, Iterator, List, Tuple
 
 
 
@@ -24,6 +24,224 @@ from typing import Any, Dict, List
 def ensure_parent(path: Path) -> None:
     """Ensure parent directory exists."""
     path.parent.mkdir(parents=True, exist_ok=True)
+
+
+def _canonical_source_split(value: Any) -> str:
+    text = str(value or "").strip().lower()
+    if text in {"test", "openr1_test"}:
+        return "test"
+    if text in {"train", "openr1_train"}:
+        return "train"
+    if text == "generated":
+        return "generated"
+    return ""
+
+
+def _coerce_source_ref(split: Any, source_id: Any) -> Tuple[str, int] | None:
+    source_split = _canonical_source_split(split)
+    if source_split not in {"test", "train"}:
+        return None
+    try:
+        numeric_id = int(source_id)
+    except Exception:
+        return None
+    return source_split, numeric_id
+
+
+def _metadata_source_refs(metadata: dict[str, Any]) -> list[Tuple[str, int]]:
+    refs: list[Tuple[str, int]] = []
+    source_ids = metadata.get("source_openr1_ids")
+    if isinstance(source_ids, list):
+        split = metadata.get("source_split") or metadata.get("source_openr1_split")
+        for value in source_ids:
+            ref = _coerce_source_ref(split, value)
+            if ref is not None:
+                refs.append(ref)
+
+    ref = _coerce_source_ref(
+        metadata.get("source_split") or metadata.get("source_openr1_split"),
+        metadata.get("source_openr1_id"),
+    )
+    if ref is not None:
+        refs.append(ref)
+
+    ref = _coerce_source_ref(metadata.get("source"), metadata.get("original_id"))
+    if ref is not None:
+        refs.append(ref)
+
+    # Preserve order while removing duplicates.
+    seen: set[Tuple[str, int]] = set()
+    deduped: list[Tuple[str, int]] = []
+    for item in refs:
+        if item in seen:
+            continue
+        seen.add(item)
+        deduped.append(item)
+    return deduped
+
+
+def _collect_reserved_refs(*items_groups: Iterable[dict[str, Any]]) -> set[Tuple[str, int]]:
+    reserved: set[Tuple[str, int]] = set()
+    for items in items_groups:
+        for item in items:
+            metadata = item.get("metadata") or {}
+            if isinstance(metadata, dict):
+                reserved.update(_metadata_source_refs(metadata))
+    return reserved
+
+
+def _load_openr1_source_pool() -> list[Tuple[str, int]]:
+    from datasets import load_dataset
+
+    refs: list[Tuple[str, int]] = []
+    for split in ("test", "train"):
+        ds = load_dataset("GMLHUHE/OpenR1-Psy", split=split)
+        for row in ds:
+            ref = _coerce_source_ref(split, row.get("post_id"))
+            if ref is not None:
+                refs.append(ref)
+    return sorted(set(refs), key=lambda item: (item[0], item[1]))
+
+
+def _available_source_refs(reserved: set[Tuple[str, int]]) -> Iterator[Tuple[str, int]]:
+    for ref in _load_openr1_source_pool():
+        if ref in reserved:
+            continue
+        reserved.add(ref)
+        yield ref
+
+
+def _normalise_study_b_single_turn_provenance(samples: list[dict[str, Any]]) -> None:
+    for item in samples:
+        metadata = item.get("metadata")
+        if not isinstance(metadata, dict):
+            continue
+        refs = _metadata_source_refs(metadata)
+        if refs:
+            split, source_id = refs[0]
+            metadata["source_openr1_ids"] = [source_id]
+            metadata["source_split"] = split
+        else:
+            metadata["source_openr1_ids"] = []
+            metadata["source_split"] = "generated"
+
+
+def _assign_bias_provenance(
+    cases: list[dict[str, Any]],
+    ref_iter: Iterator[Tuple[str, int]],
+) -> None:
+    assigned_by_group: dict[str, Tuple[str, int]] = {}
+    for case in cases:
+        pair_group_id = str(case.get("pair_group_id") or case.get("id") or "").strip()
+        if not pair_group_id:
+            raise ValueError("Study A bias case missing pair_group_id/id for provenance assignment")
+        ref = assigned_by_group.get(pair_group_id)
+        if ref is None:
+            ref = next(ref_iter)
+            assigned_by_group[pair_group_id] = ref
+        split, source_id = ref
+        metadata = case.setdefault("metadata", {})
+        metadata["source_openr1_split"] = split
+        metadata["source_openr1_id"] = source_id
+        metadata["source_split"] = split
+        metadata["source_openr1_ids"] = [source_id]
+
+
+def _assign_case_level_provenance(
+    cases: list[dict[str, Any]],
+    ref_iter: Iterator[Tuple[str, int]],
+) -> None:
+    for case in cases:
+        split, source_id = next(ref_iter)
+        metadata = case.setdefault("metadata", {})
+        metadata["source_split"] = split
+        metadata["source_openr1_ids"] = [source_id]
+
+
+def _read_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _write_json(path: Path, payload: Any) -> None:
+    ensure_parent(path)
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def harmonize_cross_study_provenance(
+    data_root: Path = Path("data"),
+    *,
+    bias_path: Path | None = None,
+    study_a_path: Path | None = None,
+    study_b_path: Path | None = None,
+    study_b_multi_turn_path: Path | None = None,
+    study_c_path: Path | None = None,
+) -> dict[str, Any]:
+    study_a_path = study_a_path or (data_root / "openr1_psy_splits" / "study_a_test.json")
+    study_b_path = study_b_path or (data_root / "openr1_psy_splits" / "study_b_test.json")
+    study_b_multi_turn_path = study_b_multi_turn_path or (data_root / "openr1_psy_splits" / "study_b_multi_turn_test.json")
+    study_c_path = study_c_path or (data_root / "openr1_psy_splits" / "study_c_test.json")
+    bias_path = bias_path or (data_root / "adversarial_bias" / "biased_vignettes.json")
+
+    study_a_payload = _read_json(study_a_path)
+    study_b_payload = _read_json(study_b_path)
+    study_b_multi_turn_payload = _read_json(study_b_multi_turn_path)
+    study_c_payload = _read_json(study_c_path)
+    bias_payload = _read_json(bias_path)
+
+    study_a_samples = list(study_a_payload.get("samples", []))
+    study_b_samples = list(study_b_payload if isinstance(study_b_payload, list) else study_b_payload.get("samples", []))
+    study_b_multi_turn_cases = list(
+        study_b_multi_turn_payload
+        if isinstance(study_b_multi_turn_payload, list)
+        else study_b_multi_turn_payload.get("multi_turn_cases", study_b_multi_turn_payload.get("cases", []))
+    )
+    study_c_cases = list(study_c_payload.get("cases", []))
+    bias_cases = list(bias_payload.get("cases", []))
+
+    _normalise_study_b_single_turn_provenance(study_b_samples)
+
+    reserved = _collect_reserved_refs(study_a_samples, study_b_samples)
+    ref_iter = _available_source_refs(reserved)
+
+    _assign_bias_provenance(bias_cases, ref_iter)
+    _assign_case_level_provenance(study_b_multi_turn_cases, ref_iter)
+    _assign_case_level_provenance(study_c_cases, ref_iter)
+
+    if isinstance(study_b_payload, list):
+        study_b_out: Any = study_b_samples
+    else:
+        study_b_out = dict(study_b_payload)
+        study_b_out["samples"] = study_b_samples
+
+    if isinstance(study_b_multi_turn_payload, list):
+        study_b_multi_turn_out: Any = study_b_multi_turn_cases
+    else:
+        study_b_multi_turn_out = dict(study_b_multi_turn_payload)
+        if "multi_turn_cases" in study_b_multi_turn_out:
+            study_b_multi_turn_out["multi_turn_cases"] = study_b_multi_turn_cases
+        else:
+            study_b_multi_turn_out["cases"] = study_b_multi_turn_cases
+
+    study_c_out = dict(study_c_payload)
+    study_c_out["cases"] = study_c_cases
+    bias_out = dict(bias_payload)
+    bias_out["cases"] = bias_cases
+
+    _write_json(study_b_path, study_b_out)
+    _write_json(study_b_multi_turn_path, study_b_multi_turn_out)
+    _write_json(study_c_path, study_c_out)
+    _write_json(bias_path, bias_out)
+
+    def _unique_refs(items: list[dict[str, Any]]) -> set[Tuple[str, int]]:
+        return _collect_reserved_refs(items)
+
+    return {
+        "study_a_refs": len(_unique_refs(study_a_samples)),
+        "study_b_refs": len(_unique_refs(study_b_samples)),
+        "study_a_bias_refs": len(_unique_refs(bias_cases)),
+        "study_b_multi_turn_refs": len(_unique_refs(study_b_multi_turn_cases)),
+        "study_c_refs": len(_unique_refs(study_c_cases)),
+    }
 
 
 def normalise_diagnosis(label: str) -> str:
@@ -2845,6 +3063,11 @@ def main() -> None:
 
     # Study C
     build_study_c_split()
+
+    stats = harmonize_cross_study_provenance()
+    print("\n=== Cross-study provenance refresh ===")
+    for key, value in stats.items():
+        print(f"{key}: {value}")
 
     # Validation summary
     validate_persona_splits()

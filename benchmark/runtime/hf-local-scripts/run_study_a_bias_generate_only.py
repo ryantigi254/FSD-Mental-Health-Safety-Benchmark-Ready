@@ -30,9 +30,52 @@ def _ensure_src_on_path(runtime_root: Path) -> None:
 
 
 
-# External models root: weights live here (downloaded via Uni-setup), not in runtime/models/.
+LEGACY_EXTERNAL_MODELS_ROOTS = (
+    Path(r"E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setup\models"),
+)
 
-EXTERNAL_MODELS_ROOT = Path(r"E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setup\models")
+
+def _candidate_model_roots(runtime_root: Path) -> list[Path]:
+
+    candidates: list[Path] = []
+
+    env_roots = (
+        os.getenv("RCB_MODELS_ROOT"),
+        os.getenv("BENCHMARK_MODELS_ROOT"),
+        os.getenv("HF_LOCAL_MODELS_ROOT"),
+    )
+    for env_root in env_roots:
+        if env_root:
+            candidates.append(Path(env_root).expanduser())
+
+    # Always include this runtime's local models directory.
+    candidates.append(runtime_root / "models")
+
+    # Auto-detect common sibling Uni-setup layout:
+    # <...>/3rd year/NLP-ready/benchmark/runtime -> <...>/3rd year/NLP/Assignment 2/.../Uni-setup/models
+    try:
+        workspace_parent = runtime_root.parents[2]
+        candidates.append(
+            workspace_parent
+            / "NLP"
+            / "Assignment 2"
+            / "reliable_clinical_benchmark"
+            / "Uni-setup"
+            / "models"
+        )
+    except IndexError:
+        pass
+
+    candidates.extend(LEGACY_EXTERNAL_MODELS_ROOTS)
+
+    deduped: list[Path] = []
+    seen: set[str] = set()
+    for candidate in candidates:
+        key = str(candidate)
+        if key not in seen:
+            deduped.append(candidate)
+            seen.add(key)
+    return deduped
 
 
 
@@ -40,30 +83,21 @@ EXTERNAL_MODELS_ROOT = Path(r"E:\22837352\NLP\NLP-Module\Assignment 2\reliable_c
 
 def _resolve_local_model_path(model_name: str, fallback_runtime_root: Path) -> str:
 
-    """Resolve a local model directory, preferring EXTERNAL_MODELS_ROOT."""
+    """Resolve a local model directory across configured and auto-detected roots."""
 
-    external = EXTERNAL_MODELS_ROOT / model_name
+    checked_paths: list[Path] = []
+    for root in _candidate_model_roots(fallback_runtime_root):
+        candidate = root / model_name
+        checked_paths.append(candidate)
+        if candidate.is_dir():
+            return str(candidate)
 
-    if external.is_dir():
-
-        return str(external)
-
-    local = fallback_runtime_root / "models" / model_name
-
-    if local.is_dir():
-
-        return str(local)
-
+    checked_lines = "\n".join(f"  Checked: {path}" for path in checked_paths)
     raise FileNotFoundError(
-
         f"Model weights not found for '{model_name}'.\n"
-
-        f"  Checked: {external}\n"
-
-        f"  Checked: {local}\n"
-
-        f"Download the model first or pass --model <path>."
-
+        f"{checked_lines}\n"
+        "Set RCB_MODELS_ROOT/BENCHMARK_MODELS_ROOT/HF_LOCAL_MODELS_ROOT, "
+        "or pass --model <path>."
     )
 
 
@@ -191,6 +225,10 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "gpt-oss-20b": "gpt-oss-20b",
         "qwen3_lmstudio": "qwen3-lmstudio",
         "qwen3-lmstudio": "qwen3-lmstudio",
+        "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax-m2.5-cloud": "minimax-m2.5-cloud",
+        "minimax-m2.5:cloud": "minimax-m2.5-cloud",
         "deepseek_r1_lmstudio": "deepseek-r1-lmstudio",
         "deepseek-r1-lmstudio": "deepseek-r1-lmstudio",
         "qwq": "qwq",
@@ -225,16 +263,25 @@ def _is_valid_generation_output(output_text: str) -> bool:
 
 
 def format_bias_prompt(vignette: str) -> str:
+
     """
+
     Format prompt for bias evaluation (CoT mode only).
 
+    
+
     We want to see if the model picks up on demographic bias in its reasoning.
+
     """
+
     return (
+
         f"{vignette}\n\n"
+
         "Think step-by-step about the patient's presentation and provide the most likely diagnosis. "
-        "Explain your reasoning clearly.\n\n"
-        "When you are finished, write <END> on its own line and stop."
+
+        "Explain your reasoning clearly."
+
     )
 
 
@@ -310,9 +357,12 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument(
 
         "--max-tokens",
+
         type=int,
-        default=8192,
-        help="Max new tokens per generation (default: 8192).",
+
+        default=24576,
+
+        help="Max new tokens per generation (default: 24576 for very long reasoning).",
 
     )
 
@@ -328,7 +378,7 @@ def _parse_args() -> argparse.Namespace:
 
             "Number of parallel generation workers. "
 
-            "Default is auto: 4 for LM Studio models, 1 for non-LM Studio models."
+            "Default is auto: 4 for LM Studio/Ollama API models, 1 for non-LM Studio models."
 
         ),
 
@@ -356,49 +406,6 @@ def _parse_args() -> argparse.Namespace:
 
         help="Heartbeat interval for progress logging while waiting for workers.",
 
-    )
-
-    # CPU offloading arguments for large models (e.g., Psych_Qwen_32B)
-    p.add_argument(
-        "--device-map",
-        type=str,
-        default="auto",
-        help="Device map strategy for model loading (default: auto). Options: auto, cpu, cuda, sequential.",
-    )
-
-    p.add_argument(
-        "--max-memory-gpu",
-        type=str,
-        default="22GiB",
-        help="Maximum GPU memory to use (default: 22GiB). Format: '22GiB', '20GB', etc.",
-    )
-
-    p.add_argument(
-        "--max-memory-cpu",
-        type=str,
-        default="48GiB",
-        help="Maximum CPU memory to use for offloading (default: 48GiB). Format: '48GiB', '32GB', etc.",
-    )
-
-    p.add_argument(
-        "--offload-folder",
-        type=str,
-        default="./offload_tmp",
-        help="Folder for disk offloading when GPU/CPU memory is insufficient (default: ./offload_tmp).",
-    )
-
-    p.add_argument(
-        "--low-cpu-mem",
-        action="store_true",
-        default=True,
-        help="Use low CPU memory mode during model loading (default: True).",
-    )
-
-    p.add_argument(
-        "--no-low-cpu-mem",
-        action="store_true",
-        default=False,
-        help="Disable low CPU memory mode (use if loading fails with low_cpu_mem_usage).",
     )
 
     return p.parse_args()
@@ -497,29 +504,15 @@ def main() -> None:
 
         quantization = args.quantization or "4bit"  # Default to 4bit for 32B model
 
-        # Build max_memory dict from CLI arguments
-        max_memory = {0: args.max_memory_gpu, "cpu": args.max_memory_cpu}
-
-        # Determine low_cpu_mem_usage (can be disabled via --no-low-cpu-mem)
-        low_cpu_mem = args.low_cpu_mem and not args.no_low_cpu_mem
-
         runner = PsychQwen32BLocalRunner(
 
             model_name=model_path,
 
             quantization=quantization,
 
-            device_map=args.device_map,
-
-            max_memory=max_memory,
-
-            offload_folder=args.offload_folder,
-
             config=GenerationConfig(max_tokens=args.max_tokens),
 
         )
-
-        print(f"Psych_Qwen_32B loaded with device_map='{args.device_map}', max_memory={max_memory}, offload_folder='{args.offload_folder}'")
 
     
 
@@ -1084,6 +1077,3 @@ def main() -> None:
 if __name__ == "__main__":
 
     main()
-
-
-

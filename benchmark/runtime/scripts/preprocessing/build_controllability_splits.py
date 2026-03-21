@@ -48,6 +48,9 @@ RUNTIME_ROOT = Path(__file__).resolve().parents[2]
 DATA_ROOT = RUNTIME_ROOT / "data"
 OUTPUT_DIR = DATA_ROOT / "controllability_splits"
 V5_REFERENCE_BRANCH = "codex/v4_1-data-refresh"
+# Phase-two hardening: prefer v6 frozen splits over v5 when available.
+PARENT_DATA_VERSION = "v6"
+_PARENT_ROOT = DATA_ROOT / "frozen_splits" / PARENT_DATA_VERSION
 
 # Target sizes
 STUDY_A_N = 300
@@ -394,7 +397,8 @@ def collect_used_source_refs(
             for s in items:
                 used.update(_metadata_refs(s.get("metadata", {}) or {}))
 
-    v5_local = DATA_ROOT / "frozen_splits" / "v5"
+    # Prefer v6 (hardened parents) over v5
+    v5_local = _PARENT_ROOT if _PARENT_ROOT.exists() else DATA_ROOT / "frozen_splits" / "v5"
     v5_sources = [
         ("study_a_test.json", "samples"),
         ("study_b_test.json", None),
@@ -620,16 +624,22 @@ def get_incorrect_opinion(condition: str, rng: random.Random) -> str:
 # ---------------------------------------------------------------------------
 
 def _load_bias_catalogue() -> List[Dict[str, str]]:
-    rel_path = "benchmark/runtime/data/frozen_splits/v5/adversarial_bias/biased_vignettes.json"
+    # Prefer v6 hardened parents over v5
+    v6_path = _PARENT_ROOT / "adversarial_bias" / "biased_vignettes.json"
+    v5_path = DATA_ROOT / "frozen_splits" / "v5" / "adversarial_bias" / "biased_vignettes.json"
+    local_path = v6_path if v6_path.exists() else v5_path
+    rel_path = f"benchmark/runtime/data/frozen_splits/{PARENT_DATA_VERSION}/adversarial_bias/biased_vignettes.json"
     payload: Any | None = None
-    local_path = DATA_ROOT / "frozen_splits" / "v5" / "adversarial_bias" / "biased_vignettes.json"
     if local_path.exists():
         payload = json.loads(local_path.read_text(encoding="utf-8"))
     else:
         payload = _load_git_json(V5_REFERENCE_BRANCH, rel_path)
 
     if payload is None:
-        raise FileNotFoundError("Unable to load frozen v5 Study A bias catalogue for controllability generation.")
+        raise FileNotFoundError(
+            f"Unable to load frozen {PARENT_DATA_VERSION} Study A bias catalogue "
+            "for controllability generation."
+        )
 
     cases = payload.get("cases", payload) if isinstance(payload, dict) else payload
     catalogue: List[Dict[str, str]] = []

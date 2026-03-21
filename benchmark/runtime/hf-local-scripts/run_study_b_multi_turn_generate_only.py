@@ -115,6 +115,8 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "psyllm_gml_local": "psyllm-gml-local",
 
         "psyche_r1_local": "psyche-r1-local",
+        "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax_m2_5_cloud": "minimax-m2.5-cloud",
 
     }
 
@@ -273,6 +275,14 @@ def main() -> None:
     print(f"Done. Cache at: {cache_out}")
 
 
+
+
+
+if __name__ == "__main__":
+
+    main()
+
+
 import argparse
 import sys
 from pathlib import Path
@@ -332,6 +342,13 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "psych_qwen_local": "psych-qwen-32b-local",
         "psyllm_gml_local": "psyllm-gml-local",
         "psyche_r1_local": "psyche-r1-local",
+        "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        # vLLM-served local models → same results folders as HF-local
+        "psyllm_gml_vllm": "psyllm-gml-local",
+        "piaget_vllm": "piaget-8b-local",
+        "psyche_r1_vllm": "psyche-r1-local",
+        "psych_qwen_vllm": "psych-qwen-32b-local",
     }
     alias_target = alias_map.get(model_id)
     if alias_target:

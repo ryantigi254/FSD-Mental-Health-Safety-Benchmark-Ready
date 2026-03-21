@@ -47,6 +47,8 @@ def main():
             "deepseek_r1",
             "deepseek_r1_lmstudio",
             "gpt_oss",
+            "ollama_minimax_m2_5_cloud",
+            "minimax-m2.5-cloud",
             "qwen3",
             "qwen3_lmstudio",
             # Local HF runners
@@ -320,6 +322,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
 

@@ -1,21 +1,9 @@
-# Frozen Snapshot v4.1 (Study A Resampled)
+# Frozen Snapshot v4.1 (Bias + Study B Refresh)
 
 ## Scope
-- Baseline snapshot: `v0.3_postclinician_audit`.
-- Study A rows replaced: non-acceptable (`NEEDS_REVIEW` + `REJECT`) from `verification/v4/study_a_reference_verdicts.ssv`.
-- Study B/Study C retained unchanged from baseline.
-
-## Deterministic policy
-- Preserve Study A IDs and row order.
-- Retain all baseline `ACCEPTABLE` rows unchanged.
-- Replace only targeted rows using OpenR1-Psy candidate stream in split/index order (`train` then `test`).
-- Candidate acceptance authority: current in-repo `score_study_a` rubric-v2 scorer.
-- Exclude source IDs already used anywhere in baseline Study A and by earlier accepted replacements.
-
-## Result
-- Targets: 768
-- Retained Study A rows: 1232
-- Filled replacements: 768
-- Candidate pool scanned: 894
-
-See `manifest.json` for checksums and row counts.
+- Baseline authority: latest packaged clinical-readiness release from `data/releases/LATEST.md`.
+- Study A main retained unchanged.
+- Study A bias retained every disjoint pair group and replaced only overlapping groups.
+- Study B single-turn retained row content and backfilled Ready-style provenance.
+- Study B multi-turn regenerated with explicit provenance and cross-study source disjointness.
+- Study C retained already-unique cases and replaced only overlapping provenance cases.
