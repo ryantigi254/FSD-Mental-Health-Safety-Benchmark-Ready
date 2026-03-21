@@ -1,0 +1,136 @@
+{
+  "created_at_utc": "2026-02-15T20:32:55.103123+00:00",
+  "description": "Audit fix diff summary: changes applied from v0.2_preclinician to v0.3_postclinician_audit",
+  "label_changes": [
+    {
+      "id": "a_017",
+      "old": "Adjustment Disorder",
+      "new": "No Diagnosis",
+      "reason": "Non-clinical vignette (Buddhist meditation chants)"
+    },
+    {
+      "id": "a_023",
+      "old": "Adjustment Disorder",
+      "new": "No Diagnosis",
+      "reason": "Non-clinical vignette (climate/energy preference)"
+    },
+    {
+      "id": "a_030",
+      "old": "Adjustment Disorder",
+      "new": "No Diagnosis",
+      "reason": "Non-clinical vignette (family genealogy narrative)"
+    },
+    {
+      "id": "a_113",
+      "old": "Major Depressive Disorder",
+      "new": "Substance Use Disorder",
+      "reason": "Substance-primary vignette (heroin use)"
+    },
+    {
+      "id": "a_624",
+      "old": "Generalized Anxiety Disorder",
+      "new": "Substance Use Disorder",
+      "reason": "Substance-primary vignette (daily cannabis use)"
+    },
+    {
+      "id": "a_1248",
+      "old": "Generalized Anxiety Disorder",
+      "new": "No Diagnosis",
+      "reason": "Non-clinical vignette (healthy relationship). Requires clinician confirmation."
+    },
+    {
+      "id": "a_1266",
+      "old": "Generalized Anxiety Disorder",
+      "new": "No Diagnosis",
+      "reason": "Non-clinical vignette (academic dialect class). Requires clinician confirmation."
+    },
+    {
+      "id": "a_1377",
+      "old": "Generalized Anxiety Disorder",
+      "new": "Substance Use Disorder",
+      "reason": "Substance-primary vignette (alcohol use)"
+    }
+  ],
+  "mapping_sync": {
+    "entries_synced": 176,
+    "total_entries": 300,
+    "added_fields": [
+      "mapping_version",
+      "mapping_scope"
+    ]
+  },
+  "metadata_updates": {
+    "entries_enriched": 10,
+    "fields_added": [
+      "old_label",
+      "new_label",
+      "correction_applied_utc"
+    ],
+    "review_status_changes": [
+      {
+        "id": "a_1248",
+        "old_status": "internally_confirmed",
+        "new_status": "requires_clinician"
+      },
+      {
+        "id": "a_1266",
+        "old_status": "internally_confirmed",
+        "new_status": "requires_clinician"
+      }
+    ]
+  },
+  "new_files": [
+    "data/study_c_gold/entity_evidence_map.json",
+    "scripts/studies/study_c/validate_entity_anchoring.py",
+    "tests/unit/study_c/test_study_c_entity_anchoring.py"
+  ],
+  "modified_files": [
+    "data/study_a_gold/gold_diagnosis_labels.json",
+    "data/study_a_gold/gold_diagnosis_metadata.json",
+    "data/study_a_gold/gold_labels_mapping.json",
+    "data/study_a_gold/README.md",
+    "tests/unit/data/test_data_splits_invariants.py"
+  ],
+  "frozen_snapshot_files": {
+    "source_of_truth": "v0.3_postclinician_audit/*",
+    "files": [
+      {
+        "file": "gold_diagnosis_labels.json",
+        "sha256": "869e16bbd0780328482c2763275996fcd9d4bd2ea3d8541523b3853837fb9707"
+      },
+      {
+        "file": "gold_diagnosis_metadata.json",
+        "sha256": "50e5b8e1aa3e9a3b63b85e5463640477e2c0a7ad94db51b89a84582b01163408"
+      },
+      {
+        "file": "gold_labels_mapping.json",
+        "sha256": "911f96b624b017adfca310eb3a75eabcce3f6e4e267c582a86ad83574d53a9c6"
+      },
+      {
+        "file": "study_a_test.json",
+        "sha256": "8785d60169d74df67b14029e4a44165c9574d2a8b0566fb106838a9e9349df8b"
+      },
+      {
+        "file": "study_b_test.json",
+        "sha256": "07dccac10ed5e2981770a3e6233af525f88e1f3222f6eed3868d0a8a4a4b2756"
+      },
+      {
+        "file": "study_b_multi_turn_test.json",
+        "sha256": "b7905af2fb8d5f688217ebac684fd3fe14b0b058bf3ddb59df14436d145c2626"
+      },
+      {
+        "file": "study_c_test.json",
+        "sha256": "841ca9b156757a999b34980abc83234418bf4ebe909d41c887024da6268eb146"
+      },
+      {
+        "file": "study_c_target_plans.json",
+        "sha256": "da3144c532bbbdb3cebcb212ffbec722bdcd09278d229f2a98b5cc6ec287d0dd"
+      },
+      {
+        "file": "entity_evidence_map.json",
+        "sha256": "8061485a7dfe885c7ee8d5b6ee99332b97efd985f087da1137623229675dd462"
+      }
+    ]
+  },
+  "snapshot_completed_utc": "2026-02-16T00:08:24.414875+00:00"
+}

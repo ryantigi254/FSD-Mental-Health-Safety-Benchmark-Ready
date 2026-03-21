@@ -1,0 +1,16 @@
+{
+  "root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/v4_1/benchmark/runtime/data/frozen_splits/v6",
+  "ok": true,
+  "error_count": 0,
+  "errors": [],
+  "study_b_multi_turn_provenance_counts": {
+    "source": 668,
+    "source_anchored_continuation": 209,
+    "retrieved_composed": 1523
+  },
+  "study_c_provenance_counts": {
+    "source": 586,
+    "retrieved_composed": 1189,
+    "source_anchored_continuation": 225
+  }
+}
