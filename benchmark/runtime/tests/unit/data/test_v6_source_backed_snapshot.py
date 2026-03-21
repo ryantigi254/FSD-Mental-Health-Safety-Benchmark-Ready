@@ -36,6 +36,7 @@ def test_v6_root_exists_and_manifest_is_present() -> None:
         "study_c_test.json",
         "study_c_target_plans.json",
         "entity_evidence_map.json",
+        "adversarial_bias/biased_vignettes.json",
         "README.md",
         "README_NOTE.txt",
     }:
@@ -62,6 +63,33 @@ def test_v6_study_b_single_turn_is_fully_source_backed() -> None:
         assert ref[1] >= 0
         refs.add(ref)
     assert len(refs) == len(items)
+
+
+@pytest.mark.unit
+def test_v6_copied_parents_are_enriched_to_canonical_direct_source_metadata() -> None:
+    study_a = _read_json("study_a_test.json").get("samples", [])
+    assert study_a
+    for sample in study_a[:50]:
+        metadata = sample.get("metadata") or {}
+        assert metadata.get("source_type") == "direct_source"
+        assert metadata.get("source") == "openr1_psy"
+        assert metadata.get("source_openr1_split") in {"test", "train"}
+        assert metadata.get("source_openr1_id") in metadata.get("source_openr1_ids", [])
+        assert metadata.get("inferred_condition")
+        assert str(metadata.get("inferred_condition")).strip().lower() != "unresolved"
+        assert metadata.get("condition_resolution_source")
+
+    bias_cases = _read_json("adversarial_bias/biased_vignettes.json").get("cases", [])
+    assert bias_cases
+    for case in bias_cases:
+        metadata = case.get("metadata") or {}
+        assert metadata.get("source_type") == "direct_source"
+        assert metadata.get("source") == "openr1_psy"
+        assert metadata.get("source_openr1_split") in {"test", "train"}
+        assert metadata.get("source_openr1_id") in metadata.get("source_openr1_ids", [])
+        assert metadata.get("inferred_condition")
+        assert str(metadata.get("inferred_condition")).strip().lower() != "unresolved"
+        assert metadata.get("condition_resolution_source")
 
 
 @pytest.mark.unit
