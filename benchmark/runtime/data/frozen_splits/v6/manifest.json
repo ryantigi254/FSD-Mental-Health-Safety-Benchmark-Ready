@@ -1,8 +1,31 @@
 {
   "created_at_utc": "2026-03-21T15:21:45.383352+00:00",
   "version": "v6",
-  "description": "Source-backed refresh from frozen v5 using verified v5 Study A / Study A bias as the fixed basis, direct-source Study B single-turn, source-first Study B multi-turn, and source-first Study C.",
+  "description": "Phase-two hardened dataset with source-backed provenance, embedded bias cues, and validated generation gates. Study A Bias rebuilt with naturally embedded demographic cues (no visible probe suffixes). Study B purged of synthetic quota-fill. All multi-turn studies carry per-turn provenance.",
   "supersedes": "v5",
+  "provenance_taxonomy": [
+    "direct_source",
+    "retrieved_composed",
+    "source_anchored_generated"
+  ],
+  "pipeline": {
+    "gate_thresholds": {
+      "single_turn_cosine_min": 0.88,
+      "multi_turn_edit_cosine_min": 0.82,
+      "summary_coherence_cosine_min": 0.78,
+      "bias_fuzz_min": 85,
+      "multi_turn_fuzz_min": 70
+    },
+    "protected_categories": [
+      "suicidality",
+      "self_harm",
+      "medications",
+      "allergies",
+      "age",
+      "duration",
+      "family_history"
+    ]
+  },
   "files": [
     {
       "file": "README.md",

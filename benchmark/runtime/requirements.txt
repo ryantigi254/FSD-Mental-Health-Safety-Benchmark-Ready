@@ -12,6 +12,8 @@ spacy==3.7.5
 scispacy==0.5.4
 # Study C NER model en_core_sci_sm is installed separately in mh-llm-benchmark-env
 sentence-transformers==2.5.1
+faiss-cpu>=1.7.4
+negspacy>=1.0.3
 
 # Evaluation frameworks
 datasets==2.18.0
