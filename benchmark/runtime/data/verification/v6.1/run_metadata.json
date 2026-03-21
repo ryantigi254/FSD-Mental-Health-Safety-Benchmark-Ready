@@ -3,7 +3,7 @@
   "rule_file": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/v4_1/benchmark/runtime/data/verification/v4/rubric_rules_v2.json",
   "rule_version": "v2",
   "matching_mode": "word_boundary",
-  "last_run_utc": "2026-03-21T17:33:07.992139+00:00",
+  "last_run_utc": "2026-03-21T21:54:36.856956+00:00",
   "summary": {
     "study_a": {
       "actual_rows": 2000,
