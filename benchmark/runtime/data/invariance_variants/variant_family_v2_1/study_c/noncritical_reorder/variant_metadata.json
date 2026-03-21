@@ -1,0 +1,25 @@
+{
+  "study": "study_c",
+  "variant_tag": "noncritical_reorder",
+  "source_root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/invariance_variants/variant_family/base_v2_1",
+  "output_root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/invariance_variants/variant_family_v2_1/study_c/noncritical_reorder",
+  "seed": 42,
+  "changed_ids": [
+    "ctrl_c_001",
+    "ctrl_c_011",
+    "ctrl_c_012",
+    "ctrl_c_022",
+    "ctrl_c_023",
+    "ctrl_c_033",
+    "ctrl_c_034",
+    "ctrl_c_044",
+    "ctrl_c_045",
+    "ctrl_c_055",
+    "ctrl_c_056",
+    "ctrl_c_066"
+  ],
+  "n_changed": 12,
+  "notes": {
+    "variant_family": "reorder_turns"
+  }
+}
