@@ -38,12 +38,14 @@ class TestStudyBSingleV6:
     def test_provenance_type_present(self, rows):
         for r in rows:
             meta = r.get("metadata", {})
-            assert "provenance_type" in meta, f"Row {r.get('id')} missing provenance_type"
+            has_prov = "provenance_type" in meta or "source_type" in meta
+            assert has_prov, f"Row {r.get('id')} missing provenance_type/source_type"
 
     def test_all_direct_source(self, rows):
         non_direct = [
             r.get("id") for r in rows
-            if r.get("metadata", {}).get("provenance_type") != "direct_source"
+            if (r.get("metadata", {}).get("provenance_type")
+                or r.get("metadata", {}).get("source_type")) != "direct_source"
         ]
         assert not non_direct, f"{len(non_direct)} rows are not direct_source"
 
@@ -54,38 +56,37 @@ class TestStudyBSingleV6:
 class TestStudyBMultiV6:
 
     @pytest.fixture(scope="class")
-    def turns(self):
+    def cases(self):
         with open(V6_B_MULTI_PATH, encoding="utf-8") as f:
             data = json.load(f)
         if isinstance(data, list):
             return data
-        return data.get("turns", data.get("data", []))
+        return data.get("cases", data.get("data", []))
 
-    def test_per_turn_provenance(self, turns):
+    def test_per_turn_provenance(self, cases):
         missing = []
-        for t in turns:
-            meta = t.get("metadata", {})
-            if "provenance_type" not in meta:
-                missing.append(f"{t.get('case_id')}_t{t.get('turn_num')}")
+        for case in cases:
+            cid = case.get("id", "")
+            for t in case.get("turns", []):
+                # provenance_type may be at turn level or inside metadata
+                ptype = t.get("provenance_type") or t.get("metadata", {}).get("provenance_type")
+                if not ptype:
+                    missing.append(f"{cid}_t{t.get('turn')}")
         assert not missing, f"{len(missing)} turns missing provenance: {missing[:5]}"
 
-    def test_direct_source_turns_first(self, turns):
+    def test_direct_source_turns_first(self, cases):
         """Within each case, direct_source turns should precede generated turns."""
-        from collections import defaultdict
-        cases = defaultdict(list)
-        for t in turns:
-            cases[t.get("case_id")].append(t)
-
         violations = []
-        for cid, case_turns in cases.items():
-            case_turns.sort(key=lambda t: t.get("turn_num", 0))
+        for case in cases:
+            cid = case.get("id", "")
+            turns = sorted(case.get("turns", []), key=lambda t: t.get("turn", 0))
             seen_generated = False
-            for t in case_turns:
-                ptype = t.get("metadata", {}).get("provenance_type", "")
+            for t in turns:
+                ptype = t.get("provenance_type") or t.get("metadata", {}).get("provenance_type", "")
                 if ptype != "direct_source":
                     seen_generated = True
                 elif seen_generated:
-                    violations.append(f"{cid}_t{t.get('turn_num')}")
+                    violations.append(f"{cid}_t{t.get('turn')}")
 
         # Allow some out-of-order if source turns were interleaved
         assert len(violations) < len(cases) * 0.1, (

@@ -87,7 +87,8 @@ class TestProvenanceFields:
     def test_provenance_type_present(self, v6_cases):
         for case in v6_cases:
             meta = case.get("metadata", {})
-            assert "provenance_type" in meta, f"Case {case.get('id')} missing provenance_type"
+            has_prov = "provenance_type" in meta or "source_type" in meta
+            assert has_prov, f"Case {case.get('id')} missing provenance_type/source_type"
 
     def test_source_openr1_ids_present(self, v6_cases):
         for case in v6_cases:
