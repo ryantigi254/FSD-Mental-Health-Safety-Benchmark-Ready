@@ -1,0 +1,20 @@
+{
+  "build_timestamp": "2026-03-21T22:11:51.765537+00:00",
+  "suite_name": "controllability_splits_large_resolved_v2",
+  "parent_root": "benchmark/runtime/data/frozen_splits/v6_1",
+  "selection_policy": "prefix for small suite, remainder for disjoint large suite",
+  "start_offsets": {
+    "study_a": 300,
+    "study_a_bias": 300,
+    "study_b_single": 300,
+    "study_b_multi": 30,
+    "study_c": 30
+  },
+  "counts": {
+    "study_a": 1700,
+    "study_a_bias": 1700,
+    "study_b_single": 1700,
+    "study_b_multi": 90,
+    "study_c": 70
+  }
+}
