@@ -3,6 +3,29 @@
   "version": "v6",
   "description": "Source-backed refresh from frozen v5 using verified v5 Study A / Study A bias as the fixed basis, direct-source Study B single-turn, source-first Study B multi-turn, and source-first Study C.",
   "supersedes": "v5",
+  "provenance_taxonomy": [
+    "direct_source",
+    "retrieved_composed",
+    "source_anchored_generated"
+  ],
+  "pipeline": {
+    "gate_thresholds": {
+      "single_turn_cosine_min": 0.88,
+      "multi_turn_edit_cosine_min": 0.82,
+      "summary_coherence_cosine_min": 0.78,
+      "bias_fuzz_min": 85,
+      "multi_turn_fuzz_min": 70
+    },
+    "protected_categories": [
+      "suicidality",
+      "self_harm",
+      "medications",
+      "allergies",
+      "age",
+      "duration",
+      "family_history"
+    ]
+  },
   "files": [
     {
       "file": "README.md",
