@@ -1,0 +1,6 @@
+study;expected_rows;actual_rows;acceptable;needs_review;reject;review_scope;counts_match;duplicate_item_ids;notes
+study_a;2000;2000;2000;0;0;study_a_full_rubric;1;0;
+study_b_single;2000;2000;2000;0;0;study_b_mapped;1;0;
+study_b_multi;120;120;120;0;0;study_b_mapped;1;0;
+study_c;100;100;100;0;0;study_c_mapped;1;0;
+study_a_replacements;;0;0;;;study_a_full_rubric;;;
