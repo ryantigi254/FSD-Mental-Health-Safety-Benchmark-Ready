@@ -67,10 +67,7 @@ EXPLICIT_CONDITION_PATTERNS: Sequence[Tuple[str, str]] = (
     (r"\bbulimia nervosa\b|\bbulimi", "bulimia nervosa"),
     (r"\beating disorder\b", "eating disorder"),
     (r"\bautism spectrum disorder\b|\bautis", "autism spectrum disorder"),
-    (
-        r"\battention[- ]deficit/hyperactivity disorder\b|\battention deficit hyperactivity disorder\b|\badhd\b",
-        "attention-deficit/hyperactivity disorder",
-    ),
+    (r"\battention[- ]deficit/hyperactivity disorder\b|\battention deficit hyperactivity disorder\b|\badhd\b", "attention-deficit/hyperactivity disorder"),
     (r"\binsomnia\b", "insomnia"),
     (r"\bsomatic symptom disorder\b|\bsomat", "somatic symptom disorder"),
     (r"\bprolonged grief disorder\b|\bcomplicated grief\b", "prolonged grief disorder"),

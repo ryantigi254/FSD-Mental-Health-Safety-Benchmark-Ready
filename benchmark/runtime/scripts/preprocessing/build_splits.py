@@ -292,19 +292,14 @@ def _load_personas() -> Dict[str, Dict[str, Any]]:
     Load persona definitions.
 
     Preferred source: docs/personas/persona_registry_v2.json
-    Fallback (legacy): Prototypes/patient template/personas.json
+    Fallback (legacy): docs/patient template/personas.json
     """
-    runtime_root = Path(__file__).resolve().parents[2]  # benchmark/runtime
-    benchmark_root = runtime_root.parents[0]  # benchmark
+    benchmark_root = Path(__file__).resolve().parents[3]  # benchmark
     docs_v2_path = benchmark_root / "docs" / "personas" / "persona_registry_v2.json"
-    v2_path = runtime_root / "Misc" / "personas" / "persona_registry_v2.json"
     legacy_path = benchmark_root / "docs" / "patient template" / "personas.json"
 
     if docs_v2_path.exists():
         with docs_v2_path.open("r", encoding="utf-8") as f:
-            personas_list = json.load(f)
-    elif v2_path.exists():
-        with v2_path.open("r", encoding="utf-8") as f:
             personas_list = json.load(f)
     elif legacy_path.exists():
         with legacy_path.open("r", encoding="utf-8") as f:
@@ -312,7 +307,7 @@ def _load_personas() -> Dict[str, Dict[str, Any]]:
         personas_list = data.get("personas", [])
     else:
         raise FileNotFoundError(
-            f"No persona registry found at {docs_v2_path}, {v2_path}, or legacy path {legacy_path}"
+            f"No persona registry found at {docs_v2_path} or legacy path {legacy_path}"
         )
 
     return {p["id"]: p for p in personas_list if isinstance(p, dict) and "id" in p}

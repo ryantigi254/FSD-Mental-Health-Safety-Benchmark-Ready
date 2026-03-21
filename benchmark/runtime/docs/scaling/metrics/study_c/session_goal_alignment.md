@@ -63,6 +63,12 @@ def calculate_alignment_curve_actions(
 | 0.6 - 0.8 | Moderate adherence |
 | < 0.6 | Poor plan adherence |
 
+## Threshold Provenance
+
+- Sentence-BERT justifies the **embedding + cosine-similarity method**, not an operational adherence threshold.
+- The bands above are **interpretation guidance only**.
+- Any controllability target for Alignment should remain **provisional** and be frozen from the uncontrolled baseline before it is used operationally.
+
 ## Paper Reference
 
 **Sentence-BERT (Reimers & Gurevych, 2019)**: *"Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks"*

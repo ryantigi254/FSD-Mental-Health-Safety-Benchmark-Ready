@@ -87,7 +87,7 @@ def chat_completion(
     model: str,
     messages: List[Dict[str, str]],
     temperature: float,
-    max_tokens: int,
+    max_tokens: Optional[int],
     top_p: float,
     timeout: Optional[Union[int, Tuple[int, Optional[int]]]] = None,
     api_key: Optional[str] = None,
@@ -106,7 +106,8 @@ def chat_completion(
         model: Model name/identifier as recognised by LM Studio
         messages: List of message dicts with "role" and "content" keys
         temperature: Sampling temperature (0.0-2.0)
-        max_tokens: Maximum tokens to generate
+        max_tokens: Maximum tokens to generate. If None, omit the field and
+            let LM Studio apply its own server/model default.
         top_p: Nucleus sampling parameter
         timeout: Request timeout in seconds. If None, no timeout (default: None).
                  Can be a tuple (connect_timeout, read_timeout) for fine-grained control.
@@ -136,10 +137,11 @@ def chat_completion(
         "model": model,
         "messages": messages,
         "temperature": temperature,
-        "max_tokens": max_tokens,
         "top_p": top_p,
         "tool_choice": "none",
     }
+    if max_tokens is not None:
+        payload["max_tokens"] = max_tokens
 
     # Use tuple timeout: (connect_timeout, read_timeout)
     # Connect timeout: 30s to fail fast if server is down

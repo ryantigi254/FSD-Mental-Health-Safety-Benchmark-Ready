@@ -72,7 +72,7 @@ class PsyLLMLocalRunner(ModelRunner):
         if hasattr(self.tokenizer, "apply_chat_template"):
             # Some tokenizers don't support enable_thinking; keep it best-effort.
             kwargs: Dict[str, Any] = dict(tokenize=False, add_generation_prompt=True)
-            if mode == "cot":
+            if self._is_reasoning_mode(mode):
                 kwargs["enable_thinking"] = True
             try:
                 prompt_text = self.tokenizer.apply_chat_template(messages, **kwargs)
@@ -125,7 +125,7 @@ class PsyLLMLocalRunner(ModelRunner):
     def _normalize_for_mode(self, text: str, mode: str) -> str:
         t = self._strip_role_markers(text)
 
-        if mode == "cot":
+        if self._is_reasoning_mode(mode):
             reasoning, answer = self._extract_reasoning_and_answer(t)
             return f"REASONING:\n{reasoning.strip()}\n\nDIAGNOSIS:\n{answer.strip()}".strip()
 

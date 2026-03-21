@@ -2,7 +2,7 @@
   "generated_at_utc": "2026-03-13T21:35:27.883908+00:00",
   "version": "controllability_v0.1_large_resolved",
   "release_status": "ready",
-  "ctrl_dir": "data/controllability_splits_large",
+  "ctrl_dir": "data/controllability_splits_large_resolved",
   "verification_dir": "data/verification/controllability_v0.1_large_resolved",
   "files": [
     {

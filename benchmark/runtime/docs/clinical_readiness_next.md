@@ -5,11 +5,11 @@ This note marks the handoff point after controllability scaling and before the c
 ## What Controllability Scaling Has Guaranteed
 
 - The controllability splits were rebuilt from unused OpenR1-Psy rows with the stronger shared condition-resolution path, rather than the earlier weaker fallback-heavy path.
-- The rebuilt controllability splits are study-specific and frozen under `data/controllability_splits/`, with the clinician-readiness candidate snapshot now fixed to `data/controllability_splits_large/`.
+- The rebuilt controllability splits are study-specific and frozen under `data/controllability_splits/`, with the clinician-readiness candidate snapshot now fixed to `data/controllability_splits_large_resolved/`.
 - Study A controllability gold diagnosis labels are now regenerated with the probe-backed classifier path in `scripts/studies/controllability/generate_gold_labels.py`, with `BiomedBERT` as the canonical primary model and `BiomedBERT + BioClinicalBERT` as the recorded robustness pair.
 - Study C controllability target plans are now regenerated with the probe-backed condition-recovery path in `scripts/studies/controllability/generate_gold_plans.py`, with `BiomedBERT` as the canonical primary model and `BiomedBERT + BioLinkBERT` as the recorded robustness pair.
 - The generation path for controllability variants is now explicit and separable from the base studies through `hf-local-scripts/run_ctrl_generate_only.py` and `scripts/dev/run_generation_auto.py`.
-- The large resolved controllability suite now lives under `data/controllability_splits_large/`, replacing the earlier `data/controllability_splits/scaled/` artefacts.
+- The large resolved controllability suite now lives under `data/controllability_splits_large_resolved/`, replacing the earlier `data/controllability_splits/scaled/` artefacts.
 - The docs now describe the controllability variants per study and cite the CoT controllability reference paper:
   [https://cdn.openai.com/pdf/a21c39c1-fa07-41db-9078-973a12620117/cot_controllability.pdf](https://cdn.openai.com/pdf/a21c39c1-fa07-41db-9078-973a12620117/cot_controllability.pdf)
 
@@ -24,17 +24,17 @@ This note marks the handoff point after controllability scaling and before the c
 
 The controllability clinician-readiness path is now separate from the base-study `v0.3` sendoff stack.
 
-- Candidate snapshot: `data/controllability_splits_large/`
+- Candidate snapshot: `data/controllability_splits_large_resolved/`
 - Verification outputs: `data/verification/controllability_v0.1_large_resolved/`
 - Clinician package: `docs/reports/clinician_package/controllability_v0.1_large_resolved/`
 - Policy: deterministic review first, no auto-resample step, release blocked on any `NEEDS_REVIEW` or `REJECT`
 
 Operational order:
 
-1. `python scripts/studies/controllability_review/run_ctrl_cross_study_review.py --ctrl-dir data/controllability_splits_large --out-dir data/verification/controllability_v0.1_large_resolved --clean`
-2. `python scripts/studies/controllability_review/run_ctrl_stage2_gates.py --ctrl-dir data/controllability_splits_large --verification-dir data/verification/controllability_v0.1_large_resolved`
-3. `python scripts/studies/controllability_review/build_ctrl_clinician_package.py --ctrl-dir data/controllability_splits_large --verification-dir data/verification/controllability_v0.1_large_resolved --output-dir docs/reports/clinician_package/controllability_v0.1_large_resolved`
-4. `python scripts/studies/controllability_review/run_ctrl_sendoff_preflight.py --ctrl-dir data/controllability_splits_large --verification-dir data/verification/controllability_v0.1_large_resolved --package-dir docs/reports/clinician_package/controllability_v0.1_large_resolved`
+1. `python scripts/studies/controllability_review/run_ctrl_cross_study_review.py --ctrl-dir data/controllability_splits_large_resolved --out-dir data/verification/controllability_v0.1_large_resolved --clean`
+2. `python scripts/studies/controllability_review/run_ctrl_stage2_gates.py --ctrl-dir data/controllability_splits_large_resolved --verification-dir data/verification/controllability_v0.1_large_resolved`
+3. `python scripts/studies/controllability_review/build_ctrl_clinician_package.py --ctrl-dir data/controllability_splits_large_resolved --verification-dir data/verification/controllability_v0.1_large_resolved --output-dir docs/reports/clinician_package/controllability_v0.1_large_resolved`
+4. `python scripts/studies/controllability_review/run_ctrl_sendoff_preflight.py --ctrl-dir data/controllability_splits_large_resolved --verification-dir data/verification/controllability_v0.1_large_resolved --package-dir docs/reports/clinician_package/controllability_v0.1_large_resolved`
 
 ## Source-of-Truth Artefacts
 
@@ -49,8 +49,8 @@ Operational order:
 - Rebuilt controllability splits: `data/controllability_splits/study_c_controllability_test.json`
 - Study A controllability gold labels: `data/controllability_splits/ctrl_gold_diagnosis_labels.json`
 - Study C controllability gold plans: `data/controllability_splits/ctrl_target_plans.json`
-- Large resolved Study A controllability gold labels: `data/controllability_splits_large/ctrl_gold_diagnosis_labels.json`
-- Large resolved Study C controllability gold plans: `data/controllability_splits_large/ctrl_target_plans.json`
+- Large resolved Study A controllability gold labels: `data/controllability_splits_large_resolved/ctrl_gold_diagnosis_labels.json`
+- Large resolved Study C controllability gold plans: `data/controllability_splits_large_resolved/ctrl_target_plans.json`
 - Controllability cross-study review runner: `scripts/studies/controllability_review/run_ctrl_cross_study_review.py`
 - Controllability stage-2 gates: `scripts/studies/controllability_review/run_ctrl_stage2_gates.py`
 - Controllability clinician package builder: `scripts/studies/controllability_review/build_ctrl_clinician_package.py`

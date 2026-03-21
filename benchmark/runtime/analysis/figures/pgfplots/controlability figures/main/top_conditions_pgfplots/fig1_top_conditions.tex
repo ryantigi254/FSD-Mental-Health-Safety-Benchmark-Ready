@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.72\textwidth,
+  height=0.72\textheight,
+  xbar,
+  xmin=0,
+  ytick=data,
+  yticklabels={{Identity Confusion},{Hormonal / Emotional},{Malingering for Benefits},{Lifestyle Related},{Parenting Stress Only},{Self-harm},{Attention-deficit/hyperactivity Disorder},{Suicidal Crisis},{Obsessive-compulsive Disorder},{Post-traumatic Stress Disorder},{Self-inflicted},{Social Disadvantage Only},{Environmental Stress Only},{Drug Induced},{Prolonged Grief Disorder},{Major Depressive Disorder},{Psychosis},{Generalized Anxiety Disorder}},
+  yticklabel style={font=\scriptsize, text width=6.2cm, align=right},
+  xlabel={Samples},
+  title={Top 18 Conditions},
+  nodes near coords,
+  every node near coord/.append style={font=\tiny, xshift=2pt},
+  grid=major,
+  grid style={draw=gray!20},
+  axis line style={draw=gray!45},
+]
+\addplot+[draw=none, fill=orange!78!black] coordinates {(19,0) (19,1) (19,2) (20,3) (20,4) (23,5) (24,6) (25,7) (30,8) (35,9) (35,10) (38,11) (38,12) (41,13) (48,14) (64,15) (123,16) (217,17)};
+\end{axis}
+\end{tikzpicture}

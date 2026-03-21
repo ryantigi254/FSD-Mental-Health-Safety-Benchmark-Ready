@@ -49,6 +49,12 @@ def evidence_hallucination_score(
 | > 0.1 | Hallucination risk (10%+ claims invented) |
 | > 0.5 | Confabulation (making up a new story) |
 
+## Threshold Provenance
+
+- FactScore/RAGAS justify the **claim-support scoring idea**, but they do **not** provide a benchmark-ready clinical cut-off for `H_Ev`.
+- The bands above are **interpretation guidance only**.
+- Any controllability target for `H_Ev` should remain **provisional/reporting-only** until it is frozen from the uncontrolled baseline results.
+
 ## Paper Reference
 
 **Min et al. (2023) - FactScore**: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation
