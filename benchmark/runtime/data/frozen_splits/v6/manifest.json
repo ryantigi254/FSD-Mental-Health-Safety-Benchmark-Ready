@@ -1,0 +1,123 @@
+{
+  "created_at_utc": "2026-03-21T14:52:58.143995+00:00",
+  "version": "v6",
+  "description": "Source-backed refresh from frozen v5 using verified v5 Study A / Study A bias as the fixed basis, direct-source Study B single-turn, source-first Study B multi-turn, and source-first Study C.",
+  "supersedes": "v5",
+  "files": [
+    {
+      "file": "README.md",
+      "sha256": "6d55c7a33ffae777e5dec1f5bd1d0cc566e95dc7cac02778c541f0cf79211d3f",
+      "row_count": null
+    },
+    {
+      "file": "README_NOTE.txt",
+      "sha256": "231c7699639074af16262edde7bf70084a70cfe01280594407d655e8e9dda578",
+      "row_count": null
+    },
+    {
+      "file": "adversarial_bias/BIAS_DIMENSIONS.md",
+      "sha256": "b043ceb05381e0b3211a68d8f6a4244c0600061eba2ad9d88b90a8d349f9f2c5",
+      "row_count": null
+    },
+    {
+      "file": "adversarial_bias/README.md",
+      "sha256": "416cb9eae900593a3e602eff01f8a5f8907c03920b2ff4fdf3b2fb322a4ff8ff",
+      "row_count": null
+    },
+    {
+      "file": "adversarial_bias/biased_vignettes.json",
+      "sha256": "fda699a92be257e828a54ac503909624d75bcdcba21e3cb138da2d9e65fd672c",
+      "row_count": 2000
+    },
+    {
+      "file": "adversarial_bias/biased_vignettes_legacy_2016.json",
+      "sha256": "d5344ffb4d0c54091e00617914f3ed0a2b521b3bd8df1f8c2af7c01a980c6bd4",
+      "row_count": 2016
+    },
+    {
+      "file": "audit_fix_diff_summary.json",
+      "sha256": "9589f25d1e44b09ea72b409ee44201b40bb4192bad259880c546a7d7b38fe711",
+      "row_count": 9
+    },
+    {
+      "file": "entity_evidence_map.json",
+      "sha256": "98d479cd2a1b852f8e283b01679e76f44942e92c037d20839f29231a8354991f",
+      "row_count": 2
+    },
+    {
+      "file": "gold_diagnosis_labels.json",
+      "sha256": "2eedaea53664864582f1a095be2ffb2e5436d9dfef2e71f7ae0b0502146a6285",
+      "row_count": 2
+    },
+    {
+      "file": "gold_diagnosis_metadata.json",
+      "sha256": "952eb2700b1abc76463edcb9c5bfc4382b935dc6aa31b4b3e410b357b101d6e9",
+      "row_count": 27
+    },
+    {
+      "file": "gold_labels_mapping.json",
+      "sha256": "fa2c3ee6a8c192afa00a609965817d4acaa51f867daac68504c5d37d81fa60a5",
+      "row_count": 4
+    },
+    {
+      "file": "study_a/gold_diagnosis_labels.json",
+      "sha256": "2eedaea53664864582f1a095be2ffb2e5436d9dfef2e71f7ae0b0502146a6285",
+      "row_count": 2
+    },
+    {
+      "file": "study_a/gold_diagnosis_metadata.json",
+      "sha256": "952eb2700b1abc76463edcb9c5bfc4382b935dc6aa31b4b3e410b357b101d6e9",
+      "row_count": 27
+    },
+    {
+      "file": "study_a/gold_labels_mapping.json",
+      "sha256": "fa2c3ee6a8c192afa00a609965817d4acaa51f867daac68504c5d37d81fa60a5",
+      "row_count": 4
+    },
+    {
+      "file": "study_a/study_a_test.json",
+      "sha256": "c667cd5a04b93119003fb035fe6a85f674aac2acecf9e2dce92315d9691daec7",
+      "row_count": 2000
+    },
+    {
+      "file": "study_a_test.json",
+      "sha256": "c667cd5a04b93119003fb035fe6a85f674aac2acecf9e2dce92315d9691daec7",
+      "row_count": 2000
+    },
+    {
+      "file": "study_b_multi_turn_test.json",
+      "sha256": "692fa96cd1bfbf8a7d154d187dafcd041911859ed4e72f941efbc7fcbbef2eb2",
+      "row_count": 120
+    },
+    {
+      "file": "study_b_test.json",
+      "sha256": "b440241e4f1df2817ef07fcca816cfd7b72336cc7886f67eb3cca24fca7c05ec",
+      "row_count": 2000
+    },
+    {
+      "file": "study_c/entity_evidence_map.json",
+      "sha256": "98d479cd2a1b852f8e283b01679e76f44942e92c037d20839f29231a8354991f",
+      "row_count": 2
+    },
+    {
+      "file": "study_c/study_c_target_plans.json",
+      "sha256": "38b571230ddb0d2c1b383a65679fb37c04c95dabbb55aff38a1a9ab6960ad86e",
+      "row_count": 100
+    },
+    {
+      "file": "study_c/study_c_test.json",
+      "sha256": "92b31974673ec6c702b7f86b6a673601f5343f5755a96df0442348601b2f8466",
+      "row_count": 100
+    },
+    {
+      "file": "study_c_target_plans.json",
+      "sha256": "38b571230ddb0d2c1b383a65679fb37c04c95dabbb55aff38a1a9ab6960ad86e",
+      "row_count": 100
+    },
+    {
+      "file": "study_c_test.json",
+      "sha256": "92b31974673ec6c702b7f86b6a673601f5343f5755a96df0442348601b2f8466",
+      "row_count": 100
+    }
+  ]
+}
