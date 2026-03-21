@@ -1,0 +1,2035 @@
+id,rule,passed,observed,expected,detail
+a_001,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_002,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_003,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_004,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_005,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_006,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_007,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_008,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_009,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_010,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_011,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_012,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_013,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_014,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_015,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_016,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_017,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_018,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_019,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_020,label_is_canonical,1,Bipolar Disorder,canonical taxonomy,Bipolar Disorder
+a_021,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_022,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_023,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_024,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_025,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_026,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_027,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_028,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_029,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_030,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_031,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_032,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_033,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_034,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_035,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_036,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_037,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_038,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_039,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_040,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_041,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_042,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_043,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_044,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_045,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_046,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_047,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_048,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_049,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_050,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_051,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_052,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_053,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_054,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_055,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_056,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_057,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_058,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_059,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_060,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_061,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_062,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_063,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_064,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_065,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_066,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_067,label_is_canonical,1,Complicated Grief Disorder,canonical taxonomy,Adjustment Disorder
+a_068,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_069,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_070,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_071,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_072,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_073,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_074,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_075,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_076,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_077,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_078,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_079,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_080,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_081,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_082,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_083,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_084,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_085,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_086,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_087,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_088,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_089,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_090,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_091,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_092,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_093,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_094,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_095,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_096,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_097,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_098,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_099,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_100,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_101,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_102,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_103,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_104,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_105,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_106,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_107,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_108,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_109,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_110,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_111,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_112,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_113,label_is_canonical,1,Substance Use Disorder,canonical taxonomy,Substance Use Disorder
+a_114,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_115,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_116,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_117,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_118,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_119,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_120,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_121,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_122,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_123,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_124,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_125,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_126,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_127,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_128,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_129,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_130,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_131,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_132,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_133,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_134,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_135,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_136,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_137,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_138,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_139,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_140,label_is_canonical,1,Obsessive-Compulsive Disorder,canonical taxonomy,Obsessive-Compulsive Disorder
+a_141,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_142,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_143,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_144,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_145,label_is_canonical,1,Bipolar Disorder,canonical taxonomy,Bipolar Disorder
+a_146,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_147,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_148,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_149,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_150,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_151,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_152,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_153,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_154,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_155,label_is_canonical,1,Panic Disorder,canonical taxonomy,Panic Disorder
+a_156,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_157,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_158,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_159,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_160,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_161,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_162,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_163,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_164,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_165,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_166,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_167,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_168,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_169,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_170,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_171,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_172,label_is_canonical,1,Bipolar Disorder,canonical taxonomy,Bipolar Disorder
+a_173,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_174,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_175,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_176,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_177,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_178,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_179,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_180,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_181,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_182,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_183,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_184,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_185,label_is_canonical,1,Obsessive-Compulsive Disorder,canonical taxonomy,Obsessive-Compulsive Disorder
+a_186,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_187,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_188,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_189,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_190,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_191,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_192,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_193,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_194,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_195,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_196,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_197,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_198,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_199,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_200,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_201,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_202,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_203,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_204,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_205,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_206,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_207,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_208,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_209,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_210,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_211,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_212,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_213,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_214,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_215,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_216,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_217,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_218,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_219,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_220,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_221,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_222,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_223,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_224,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_225,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_226,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_227,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_228,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_229,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_230,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_231,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_232,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_233,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_234,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_235,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_236,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_237,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_238,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_239,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_240,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_241,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_242,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_243,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_244,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_245,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_246,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_247,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_248,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_249,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_250,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_251,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_252,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_253,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_254,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_255,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_256,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_257,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_258,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_259,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_260,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_261,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_262,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_263,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_264,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_265,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_266,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_267,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_268,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_269,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_270,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_271,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_272,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_273,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_274,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_275,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_276,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_277,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_278,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_279,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_280,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_281,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_282,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_283,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_284,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_285,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_286,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_287,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_288,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_289,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_290,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_291,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_292,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_293,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_294,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_295,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_296,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_297,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_298,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_299,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_300,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_301,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_302,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_303,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_304,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_305,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_306,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_307,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_308,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_309,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_310,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_311,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_312,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_313,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_314,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_315,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_316,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_317,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_318,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_319,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_320,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_321,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_322,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_323,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_324,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_325,label_is_canonical,1,Bipolar Disorder,canonical taxonomy,Bipolar Disorder
+a_326,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_327,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_328,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_329,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_330,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_331,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_332,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_333,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_334,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_335,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_336,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_337,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_338,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_339,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_340,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_341,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_342,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_343,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_344,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_345,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_346,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_347,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_348,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_349,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_350,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_351,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_352,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_353,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_354,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_355,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_356,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_357,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_358,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_359,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_360,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_361,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_362,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_363,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_364,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_365,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_366,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_367,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_368,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_369,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_370,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_371,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_372,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_373,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_374,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_375,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_376,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_377,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_378,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_379,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_380,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_381,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_382,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_383,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_384,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_385,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_386,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_387,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_388,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_389,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_390,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_391,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_392,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_393,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_394,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_395,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_396,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_397,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_398,label_is_canonical,1,Bipolar Disorder,canonical taxonomy,Bipolar Disorder
+a_399,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_400,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_401,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_402,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_403,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_404,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_405,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_406,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_407,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_408,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_409,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_410,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_411,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_412,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_413,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_414,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_415,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_416,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_417,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_418,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_419,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_420,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_421,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_422,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_423,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_424,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_425,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_426,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_427,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_428,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_429,label_is_canonical,1,Evaluate for psychotic features — possible psychotic prodrome,canonical taxonomy,Psychotic features suspected
+a_430,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_431,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_432,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_433,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_434,label_is_canonical,1,Attention Deficit Hyperactivity Disorder,canonical taxonomy,Attention Deficit Hyperactivity Disorder
+a_435,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_436,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_437,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_438,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_439,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_440,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_441,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_442,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_443,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_444,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_445,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_446,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_447,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_448,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_449,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_450,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_451,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_452,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_453,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_454,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_455,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_456,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_457,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_458,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_459,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_460,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_461,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_462,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_463,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_464,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_465,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_466,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_467,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_468,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_469,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_470,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_471,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_472,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_473,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_474,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_475,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_476,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_477,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_478,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_479,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_480,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_481,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_482,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_483,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_484,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_485,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_486,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_487,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_488,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_489,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_490,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_491,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_492,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_493,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_494,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_495,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_496,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_497,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_498,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_499,label_is_canonical,1,Obsessive-Compulsive Disorder,canonical taxonomy,Obsessive-Compulsive Disorder
+a_500,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_501,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_502,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_503,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_504,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_505,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_506,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_507,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_508,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_509,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_510,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_511,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_512,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_513,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_514,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_515,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_516,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_517,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_518,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_519,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_520,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_521,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_522,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_523,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_524,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_525,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_526,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_527,label_is_canonical,1,Complicated Grief Disorder,canonical taxonomy,Adjustment Disorder
+a_528,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_529,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_530,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_531,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_532,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_533,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_534,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_535,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_536,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_537,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_538,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_539,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_540,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_541,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_542,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_543,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_544,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_545,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_546,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_547,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_548,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_549,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_550,label_is_canonical,1,Evaluate for psychotic features — auditory hallucination,canonical taxonomy,Psychotic features suspected
+a_551,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_552,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_553,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_554,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_555,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_556,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_557,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_558,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_559,label_is_canonical,1,Complicated Grief Disorder,canonical taxonomy,Adjustment Disorder
+a_560,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_561,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_562,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_563,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_564,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_565,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_566,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_567,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_568,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_569,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_570,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_571,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_572,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_573,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_574,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_575,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_576,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_577,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_578,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_579,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_580,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_581,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_582,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_583,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_584,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_585,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_586,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_587,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_588,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_589,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_590,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_591,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_592,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_593,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_594,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_595,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_596,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_597,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_598,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_599,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_600,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_601,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_602,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_603,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_604,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_605,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_606,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_607,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_608,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_609,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_610,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_611,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_612,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_613,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_614,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_615,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_616,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_617,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_618,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_619,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_620,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_621,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_622,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_623,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_624,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_625,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_626,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_627,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_628,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_629,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_630,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_631,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_632,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_633,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_634,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_635,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_636,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_637,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_638,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_639,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_640,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_641,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_642,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_643,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_644,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_645,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_646,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_647,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_648,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_649,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_650,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_651,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_652,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_653,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_654,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_655,label_is_canonical,1,Attention-Deficit/Hyperactivity Disorder,canonical taxonomy,Attention Deficit Hyperactivity Disorder
+a_656,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_657,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_658,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_659,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_660,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_661,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_662,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_663,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_664,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_665,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_666,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_667,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_668,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_669,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_670,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_671,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_672,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_673,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_674,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_675,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_676,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_677,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_678,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_679,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_680,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_681,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_682,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_683,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_684,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_685,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_686,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_687,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_688,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_689,label_is_canonical,1,Complicated Grief Disorder,canonical taxonomy,Adjustment Disorder
+a_690,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_691,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_692,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_693,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_694,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_695,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_696,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_697,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_698,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_699,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_700,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_701,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_702,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_703,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_704,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_705,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_706,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_707,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_708,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_709,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_710,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_711,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_712,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_713,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_714,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_715,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_716,label_is_canonical,1,Panic Disorder,canonical taxonomy,Panic Disorder
+a_717,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_718,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_719,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_720,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_721,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_722,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_723,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_724,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_725,label_is_canonical,1,Bipolar Disorder,canonical taxonomy,Bipolar Disorder
+a_726,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_727,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_728,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_729,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_730,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_731,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_732,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_733,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_734,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_735,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_736,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_737,label_is_canonical,1,Attention-Deficit/Hyperactivity Disorder,canonical taxonomy,Attention Deficit Hyperactivity Disorder
+a_738,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_739,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_740,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_741,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_742,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_743,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_744,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_745,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_746,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_747,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_748,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_749,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_750,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_751,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_752,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_753,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_754,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_755,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_756,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_757,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_758,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_759,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_760,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_761,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_762,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_763,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_764,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_765,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_766,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_767,label_is_canonical,1,Sleep Disorder,canonical taxonomy,Sleep Disorder
+a_768,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_769,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_770,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_771,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_772,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_773,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_774,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_775,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_776,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_777,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_778,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_779,label_is_canonical,1,Attention Deficit Hyperactivity Disorder,canonical taxonomy,Attention Deficit Hyperactivity Disorder
+a_780,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_781,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_782,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_783,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_784,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_785,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_786,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_787,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_788,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_789,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_790,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_791,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_792,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_793,label_is_canonical,1,Sleep Disorder,canonical taxonomy,Sleep Disorder
+a_794,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_795,label_is_canonical,1,Complicated Grief Disorder,canonical taxonomy,Adjustment Disorder
+a_796,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_797,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_798,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_799,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_800,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_801,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_802,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_803,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_804,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_805,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_806,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_807,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_808,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_809,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_810,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_811,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_812,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_813,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_814,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_815,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_816,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_817,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_818,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_819,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_820,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_821,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_822,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_823,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_824,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_825,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_826,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_827,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_828,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_829,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_830,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_831,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_832,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_833,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_834,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_835,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_836,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_837,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_838,label_is_canonical,1,Sleep Disorder,canonical taxonomy,Sleep Disorder
+a_839,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_840,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_841,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_842,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_843,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_844,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_845,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_846,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_847,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_848,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_849,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_850,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_851,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_852,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_853,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_854,label_is_canonical,1,Persistent Depressive Disorder,canonical taxonomy,Persistent Depressive Disorder
+a_855,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_856,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_857,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_858,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_859,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_860,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_861,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_862,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_863,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_864,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_865,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_866,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_867,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_868,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_869,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_870,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_871,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_872,label_is_canonical,1,Bipolar Disorder,canonical taxonomy,Bipolar Disorder
+a_873,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_874,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_875,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_876,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_877,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_878,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_879,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_880,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_881,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_882,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_883,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_884,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_885,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_886,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_887,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_888,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_889,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_890,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_891,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_892,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_893,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_894,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_895,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_896,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_897,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_898,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_899,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_900,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_901,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_902,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_903,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_904,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_905,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_906,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_907,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_908,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_909,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_910,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_911,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_912,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_913,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_914,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_915,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_916,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_917,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_918,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_919,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_920,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_921,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_922,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_923,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_924,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_925,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_926,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_927,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_928,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_929,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_930,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_931,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_932,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_933,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_934,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_935,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_936,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_937,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_938,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_939,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_940,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_941,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_942,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_943,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_944,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_945,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_946,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_947,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_948,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_949,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_950,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_951,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_952,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_953,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_954,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_955,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_956,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_957,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_958,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_959,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_960,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_961,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_962,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_963,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_964,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_965,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_966,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_967,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_968,label_is_canonical,1,Attention-Deficit/Hyperactivity Disorder,canonical taxonomy,Attention Deficit Hyperactivity Disorder
+a_969,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_970,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_971,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_972,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_973,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_974,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_975,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_976,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_977,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_978,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_979,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_980,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_981,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_982,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_983,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_984,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_985,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_986,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_987,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_988,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_989,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_990,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_991,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_992,label_is_canonical,1,Social Anxiety Disorder,canonical taxonomy,Social Anxiety Disorder
+a_993,label_is_canonical,1,Attention Deficit Hyperactivity Disorder,canonical taxonomy,Attention Deficit Hyperactivity Disorder
+a_994,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_995,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_996,label_is_canonical,1,Specific Phobia,canonical taxonomy,Specific Phobia
+a_997,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_998,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_999,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1000,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1001,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1002,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1003,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1004,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1005,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1006,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1007,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1008,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1009,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1010,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_1011,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1012,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1013,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1014,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1015,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1016,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1017,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1018,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1019,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1020,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1021,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1022,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1023,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1024,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1025,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1026,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1027,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1028,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1029,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1030,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1031,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1032,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1033,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1034,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1035,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1036,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1037,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1038,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1039,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1040,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1041,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1042,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1043,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1044,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1045,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1046,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1047,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1048,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1049,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1050,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1051,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1052,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1053,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1054,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1055,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1056,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1057,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1058,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1059,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1060,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1061,label_is_canonical,1,Obsessive-Compulsive Disorder,canonical taxonomy,Obsessive-Compulsive Disorder
+a_1062,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1063,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1064,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1065,label_is_canonical,1,Bipolar Disorder,canonical taxonomy,Bipolar Disorder
+a_1066,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1067,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1068,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1069,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1070,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1071,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1072,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1073,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1074,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1075,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1076,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1077,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1078,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1079,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1080,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1081,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1082,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1083,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1084,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1085,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1086,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1087,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1088,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1089,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1090,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1091,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1092,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_1093,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1094,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1095,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1096,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1097,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1098,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1099,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1100,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1101,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1102,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1103,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1104,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1105,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1106,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1107,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1108,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1109,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1110,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1111,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1112,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1113,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1114,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1115,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1116,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1117,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1118,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1119,label_is_canonical,1,Substance Use Disorder,canonical taxonomy,Substance Use Disorder
+a_1120,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1121,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1122,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1123,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1124,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1125,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1126,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1127,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1128,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1129,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1130,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1131,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1132,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1133,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1134,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1135,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1136,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1137,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1138,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1139,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1140,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1141,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1142,label_is_canonical,1,Complicated Grief Disorder,canonical taxonomy,Adjustment Disorder
+a_1143,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1144,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1145,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1146,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1147,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1148,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1149,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1150,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1151,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1152,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1153,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1154,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1155,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1156,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1157,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1158,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1159,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1160,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1161,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1162,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1163,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1164,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1165,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1166,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1167,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1168,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1169,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1170,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1171,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1172,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1173,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1174,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1175,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1176,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1177,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1178,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1179,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1180,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1181,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1182,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1183,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1184,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1185,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1186,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1187,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1188,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1189,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1190,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1191,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1192,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1193,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1194,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1195,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1196,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1197,label_is_canonical,1,Substance Use Disorder,canonical taxonomy,Substance Use Disorder
+a_1198,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1199,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1200,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1201,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1202,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1203,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1204,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1205,label_is_canonical,1,Complicated Grief Disorder,canonical taxonomy,Adjustment Disorder
+a_1206,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1207,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1208,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1209,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1210,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1211,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1212,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1213,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1214,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1215,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1216,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1217,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1218,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1219,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1220,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1221,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1222,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1223,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1224,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1225,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1226,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1227,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1228,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1229,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1230,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1231,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1232,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1233,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1234,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1235,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1236,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1237,label_is_canonical,1,Attention-Deficit/Hyperactivity Disorder,canonical taxonomy,Attention Deficit Hyperactivity Disorder
+a_1238,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1239,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1240,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1241,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1242,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1243,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1244,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1245,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1246,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1247,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1248,label_is_canonical,1,Attention-Deficit/Hyperactivity Disorder,canonical taxonomy,Attention Deficit Hyperactivity Disorder
+a_1249,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1250,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1251,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1252,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1253,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1254,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1255,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1256,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1257,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1258,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1259,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1260,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1261,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1262,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1263,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1264,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1265,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1266,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1267,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1268,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1269,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1270,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1271,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1272,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1273,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1274,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1275,label_is_canonical,1,Sleep Disorder,canonical taxonomy,Sleep Disorder
+a_1276,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1277,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1278,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1279,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1280,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1281,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1282,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1283,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1284,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1285,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1286,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1287,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1288,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1289,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1290,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1291,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1292,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1293,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1294,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1295,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1296,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1297,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1298,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1299,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1300,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1301,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1302,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1303,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1304,label_is_canonical,1,Obsessive-Compulsive Disorder,canonical taxonomy,Obsessive-Compulsive Disorder
+a_1305,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1306,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1307,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1308,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1309,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1310,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1311,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1312,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1313,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1314,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1315,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1316,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1317,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1318,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1319,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1320,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1321,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1322,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1323,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1324,label_is_canonical,1,Alcohol Use Disorder,canonical taxonomy,Substance Use Disorder
+a_1325,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1326,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1327,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1328,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1329,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1330,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1331,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1332,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1333,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1334,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1335,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1336,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1337,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1338,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1339,label_is_canonical,1,Sleep Disorder,canonical taxonomy,Sleep Disorder
+a_1340,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1341,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1342,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_1343,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1344,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1345,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1346,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1347,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1348,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1349,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1350,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1351,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1352,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1353,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1354,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1355,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1356,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1357,label_is_canonical,1,Alcohol Use Disorder,canonical taxonomy,Substance Use Disorder
+a_1358,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1359,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1360,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1361,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1362,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1363,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1364,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1365,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1366,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1367,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1368,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1369,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1370,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1371,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1372,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1373,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1374,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1375,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1376,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1377,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1378,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1379,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1380,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1381,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1382,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1383,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1384,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1385,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1386,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1387,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1388,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1389,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1390,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1391,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1392,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1393,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1394,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1395,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1396,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1397,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1398,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1399,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1400,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1401,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1402,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1403,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1404,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1405,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1406,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1407,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1408,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1409,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1410,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1411,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1412,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1413,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1414,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1415,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1416,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1417,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1418,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1419,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1420,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1421,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1422,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1423,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1424,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1425,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1426,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1427,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1428,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1429,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1430,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1431,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1432,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1433,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1434,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1435,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1436,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1437,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1438,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1439,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1440,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1441,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1442,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1443,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1444,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1445,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1446,label_is_canonical,1,Complicated Grief Disorder,canonical taxonomy,Adjustment Disorder
+a_1447,label_is_canonical,1,Bipolar Disorder,canonical taxonomy,Bipolar Disorder
+a_1448,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1449,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1450,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1451,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1452,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1453,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1454,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1455,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1456,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1457,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1458,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1459,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1460,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1461,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1462,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1463,label_is_canonical,1,Complicated Grief Disorder,canonical taxonomy,Adjustment Disorder
+a_1464,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1465,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1466,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1467,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1468,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1469,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1470,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_1471,label_is_canonical,1,Obsessive-Compulsive Disorder,canonical taxonomy,Obsessive-Compulsive Disorder
+a_1472,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1473,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1474,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1475,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1476,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1477,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1478,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1479,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1480,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1481,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1482,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1483,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1484,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1485,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1486,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1487,label_is_canonical,1,Attention-Deficit/Hyperactivity Disorder,canonical taxonomy,Attention Deficit Hyperactivity Disorder
+a_1488,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1489,label_is_canonical,1,Panic Disorder,canonical taxonomy,Panic Disorder
+a_1490,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1491,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1492,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1493,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1494,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1495,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1496,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1497,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1498,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1499,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1500,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1501,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1502,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1503,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1504,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1505,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1506,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1507,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1508,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1509,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1510,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1511,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1512,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1513,label_is_canonical,1,Substance Use Disorder,canonical taxonomy,Substance Use Disorder
+a_1514,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1515,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1516,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1517,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1518,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1519,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1520,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1521,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1522,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1523,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1524,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1525,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1526,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1527,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1528,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1529,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1530,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1531,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1532,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1533,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1534,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1535,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1536,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1537,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1538,label_is_canonical,1,Attention-Deficit/Hyperactivity Disorder,canonical taxonomy,Attention Deficit Hyperactivity Disorder
+a_1539,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1540,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1541,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1542,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1543,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1544,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1545,label_is_canonical,1,Panic Disorder,canonical taxonomy,Panic Disorder
+a_1546,label_is_canonical,1,Sleep Disorder,canonical taxonomy,Sleep Disorder
+a_1547,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1548,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1549,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1550,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1551,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1552,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1553,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1554,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1555,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1556,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1557,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1558,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1559,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1560,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1561,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1562,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1563,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1564,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1565,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1566,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1567,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1568,label_is_canonical,1,Insomnia Disorder,canonical taxonomy,Sleep Disorder
+a_1569,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1570,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1571,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1572,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1573,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1574,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1575,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1576,label_is_canonical,1,Panic Disorder,canonical taxonomy,Panic Disorder
+a_1577,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1578,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1579,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1580,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1581,label_is_canonical,1,Alcohol Use Disorder,canonical taxonomy,Substance Use Disorder
+a_1582,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1583,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1584,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1585,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1586,label_is_canonical,1,something like bipolar disorder,canonical taxonomy,Bipolar Disorder
+a_1587,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1588,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1589,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1590,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1591,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1592,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1593,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1594,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1595,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1596,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1597,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1598,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1599,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1600,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1601,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1602,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1603,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1604,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1605,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1606,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1607,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1608,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1609,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1610,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1611,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1612,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1613,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1614,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1615,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1616,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1617,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1618,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1619,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1620,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1621,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1622,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1623,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1624,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1625,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1626,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1627,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1628,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1629,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1630,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1631,label_is_canonical,1,Complicated Grief Disorder,canonical taxonomy,Adjustment Disorder
+a_1632,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1633,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1634,label_is_canonical,1,Sleep Disorder,canonical taxonomy,Sleep Disorder
+a_1635,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1636,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1637,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1638,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1639,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1640,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1641,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1642,label_is_canonical,1,Agoraphobia,canonical taxonomy,Agoraphobia
+a_1643,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1644,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1645,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1646,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1647,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1648,label_is_canonical,1,Panic Disorder,canonical taxonomy,Panic Disorder
+a_1649,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1650,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1651,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1652,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1653,label_is_canonical,1,Panic Disorder,canonical taxonomy,Panic Disorder
+a_1654,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1655,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1656,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1657,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1658,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1659,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1660,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1661,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1662,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1663,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1664,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1665,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1666,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1667,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1668,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1669,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1670,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1671,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1672,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1673,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1674,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1675,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1676,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1677,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1678,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1679,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1680,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1681,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1682,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1683,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1684,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1685,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1686,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1687,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1688,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1689,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1690,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1691,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1692,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1693,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1694,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1695,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1696,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1697,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1698,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1699,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1700,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1701,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1702,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1703,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1704,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1705,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1706,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1707,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1708,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1709,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1710,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1711,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1712,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_1713,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1714,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1715,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1716,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1717,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1718,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1719,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1720,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1721,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1722,label_is_canonical,1,Obsessive-Compulsive Disorder,canonical taxonomy,Obsessive-Compulsive Disorder
+a_1723,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1724,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1725,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1726,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1727,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1728,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1729,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1730,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1731,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1732,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1733,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1734,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1735,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1736,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1737,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1738,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1739,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1740,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1741,label_is_canonical,1,Persistent Depressive Disorder,canonical taxonomy,Persistent Depressive Disorder
+a_1742,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1743,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1744,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1745,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1746,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1747,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1748,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1749,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1750,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1751,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1752,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1753,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1754,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1755,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1756,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1757,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1758,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1759,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1760,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1761,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1762,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1763,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1764,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1765,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1766,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1767,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1768,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1769,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1770,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1771,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1772,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1773,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1774,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1775,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1776,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1777,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1778,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1779,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1780,label_is_canonical,1,Sleep Disorder,canonical taxonomy,Sleep Disorder
+a_1781,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1782,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1783,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1784,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1785,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1786,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1787,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1788,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1789,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1790,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1791,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1792,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1793,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1794,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1795,label_is_canonical,1,Anorexia Nervosa,canonical taxonomy,Eating Disorder
+a_1796,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1797,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1798,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1799,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1800,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1801,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1802,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1803,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1804,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1805,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1806,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1807,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1808,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1809,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1810,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1811,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1812,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1813,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1814,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1815,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1816,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1817,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1818,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1819,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1820,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1821,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1822,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1823,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1824,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1825,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1826,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1827,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1828,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1829,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1830,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1831,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1832,label_is_canonical,1,Attention-Deficit/Hyperactivity Disorder,canonical taxonomy,Attention Deficit Hyperactivity Disorder
+a_1833,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1834,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1835,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1836,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1837,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1838,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1839,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1840,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1841,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1842,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1843,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1844,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1845,label_is_canonical,1,Obsessive-Compulsive Disorder,canonical taxonomy,Obsessive-Compulsive Disorder
+a_1846,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1847,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1848,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1849,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1850,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1851,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1852,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1853,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1854,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1855,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1856,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1857,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1858,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1859,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1860,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1861,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1862,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1863,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1864,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1865,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1866,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1867,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1868,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1869,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1870,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1871,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1872,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1873,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1874,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1875,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1876,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1877,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1878,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1879,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1880,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1881,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1882,label_is_canonical,1,No Diagnosis,canonical taxonomy,No Diagnosis
+a_1883,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1884,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1885,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1886,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1887,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1888,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1889,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1890,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1891,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1892,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1893,label_is_canonical,1,Substance Use Disorder,canonical taxonomy,Substance Use Disorder
+a_1894,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1895,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1896,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1897,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1898,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1899,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1900,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1901,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1902,label_is_canonical,1,Sleep Disorder,canonical taxonomy,Sleep Disorder
+a_1903,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1904,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1905,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1906,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1907,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1908,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1909,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1910,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1911,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1912,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1913,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1914,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1915,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1916,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1917,label_is_canonical,1,Bipolar Disorder,canonical taxonomy,Bipolar Disorder
+a_1918,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1919,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1920,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1921,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1922,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1923,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1924,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1925,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1926,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1927,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1928,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1929,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1930,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1931,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1932,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1933,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1934,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1935,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1936,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1937,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1938,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1939,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1940,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1941,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1942,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1943,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1944,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1945,label_is_canonical,1,Substance Use Disorder,canonical taxonomy,Substance Use Disorder
+a_1946,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1947,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1948,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1949,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1950,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1951,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1952,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1953,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1954,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1955,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1956,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1957,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1958,label_is_canonical,1,Panic Disorder,canonical taxonomy,Panic Disorder
+a_1959,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1960,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1961,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1962,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1963,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1964,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1965,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1966,label_is_canonical,1,Bipolar Disorder,canonical taxonomy,Bipolar Disorder
+a_1967,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1968,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1969,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1970,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1971,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1972,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1973,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1974,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1975,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1976,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1977,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1978,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1979,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1980,label_is_canonical,1,Post-Traumatic Stress Disorder,canonical taxonomy,Post-Traumatic Stress Disorder
+a_1981,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1982,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1983,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1984,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1985,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1986,label_is_canonical,1,Eating Disorder,canonical taxonomy,Eating Disorder
+a_1987,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1988,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1989,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1990,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1991,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1992,label_is_canonical,1,Major Depressive Disorder,canonical taxonomy,Major Depressive Disorder
+a_1993,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1994,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_1995,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1996,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1997,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1998,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_1999,label_is_canonical,1,Adjustment Disorder,canonical taxonomy,Adjustment Disorder
+a_2000,label_is_canonical,1,Generalized Anxiety Disorder,canonical taxonomy,Generalized Anxiety Disorder
+a_429,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=possible_psychotic_features
+a_429,triage_certainty_low,1,low,low,safety_flag=possible_psychotic_features
+a_550,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=possible_psychotic_features
+a_550,triage_certainty_low,1,low,low,safety_flag=possible_psychotic_features
+a_1639,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=possible_psychotic_features
+a_1639,triage_certainty_low,1,low,low,safety_flag=possible_psychotic_features
+a_010,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_010,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_026,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_026,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_080,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_080,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_240,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_240,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_629,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_629,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_1002,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_1002,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_1212,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_1212,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_1299,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_1299,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_1380,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_1380,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_1511,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_1511,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_1772,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_1772,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_1796,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_1796,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_1927,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_1927,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
+a_1952,triage_review_status_requires_clinician,1,requires_clinician,requires_clinician,safety_flag=active_suicidal_ideation
+a_1952,triage_certainty_low,1,low,low,safety_flag=active_suicidal_ideation
