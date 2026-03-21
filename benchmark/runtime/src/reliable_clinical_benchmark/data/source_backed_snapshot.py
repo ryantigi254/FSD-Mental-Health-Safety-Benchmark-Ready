@@ -239,6 +239,118 @@ def collect_reserved_refs(v5_root: Path) -> set[Tuple[str, int]]:
     return _collect_refs_from_cases(study_a_samples) | _collect_refs_from_cases(bias_cases)
 
 
+def _normalise_primary_ref(metadata: Dict[str, Any]) -> Optional[Tuple[str, int]]:
+    refs = _metadata_source_refs(metadata)
+    if not refs:
+        return None
+    split, source_id = refs[0]
+    return split, int(source_id)
+
+
+def _enrich_direct_source_metadata(
+    metadata: Dict[str, Any],
+    *,
+    source_lookup: Dict[Tuple[str, int], Dict[str, Any]],
+) -> Dict[str, Any]:
+    updated = dict(metadata or {})
+    ref = _normalise_primary_ref(updated)
+    if ref is None:
+        return updated
+
+    split, source_id = ref
+    updated["source_openr1_split"] = split
+    updated["source_split"] = split
+    updated["source_openr1_id"] = source_id
+    updated["source_openr1_ids"] = [source_id]
+    updated.setdefault("source_type", "direct_source")
+    updated.setdefault("source", "openr1_psy")
+
+    source_row = source_lookup.get(ref)
+    if source_row is None:
+        updated.setdefault("original_id", source_id)
+        return updated
+
+    updated["original_id"] = int(source_row.get("post_id", source_id))
+    condition = str(source_row.get("inferred_condition", "") or "").strip()
+    if condition and condition.lower() != "unresolved":
+        updated["inferred_condition"] = normalise_condition(condition)
+        updated["condition_resolution_source"] = source_row.get(
+            "condition_resolution_source",
+            "source_row",
+        )
+    return updated
+
+
+def _resolve_bias_case_condition(
+    case: Dict[str, Any],
+    *,
+    source_lookup: Dict[Tuple[str, int], Dict[str, Any]],
+) -> Tuple[str, str]:
+    metadata = case.get("metadata") or {}
+    ref = _normalise_primary_ref(metadata)
+    if ref is not None:
+        source_row = source_lookup.get(ref)
+        if source_row is not None:
+            condition = str(source_row.get("inferred_condition", "") or "").strip()
+            if condition and condition.lower() != "unresolved":
+                return normalise_condition(condition), str(
+                    source_row.get("condition_resolution_source", "source_row")
+                )
+
+    prompt = str(case.get("prompt", "") or "")
+    patient_text = prompt.split("\nBias probe profile:", 1)[0].strip()
+    bias_label = str(case.get("bias_label", "") or "").strip()
+    condition, resolution_source = resolve_case_condition(
+        {
+            "patient": patient_text,
+            "counselor_content": bias_label,
+        }
+    )
+    if condition:
+        return normalise_condition(condition), f"bias_case_{resolution_source}"
+    if bias_label:
+        return normalise_condition(bias_label), "bias_label_fallback"
+    return "unspecified presentation", "bias_unresolved_fallback"
+
+
+def _enrich_copied_v5_roots(
+    *,
+    output_root: Path,
+    source_lookup: Dict[Tuple[str, int], Dict[str, Any]],
+) -> None:
+    study_a_path = output_root / "study_a_test.json"
+    study_a_payload = _read_json(study_a_path)
+    for sample in study_a_payload.get("samples", []):
+        metadata = _enrich_direct_source_metadata(
+            sample.get("metadata") or {},
+            source_lookup=source_lookup,
+        )
+        if str(metadata.get("inferred_condition", "") or "").strip().lower() in {"", "unresolved"}:
+            gold_answer = str(sample.get("gold_answer", "") or "").strip()
+            if gold_answer:
+                metadata["inferred_condition"] = normalise_condition(gold_answer)
+                metadata["condition_resolution_source"] = "study_a_gold_answer_fallback"
+        sample["metadata"] = metadata
+    _write_json(study_a_path, study_a_payload)
+
+    bias_path = output_root / "adversarial_bias" / "biased_vignettes.json"
+    bias_payload = _read_json(bias_path)
+    for case in bias_payload.get("cases", []):
+        metadata = _enrich_direct_source_metadata(
+            case.get("metadata") or {},
+            source_lookup=source_lookup,
+        )
+        if str(metadata.get("inferred_condition", "") or "").strip().lower() in {"", "unresolved"}:
+            condition, resolution_source = _resolve_bias_case_condition(
+                case,
+                source_lookup=source_lookup,
+            )
+            metadata["inferred_condition"] = condition
+            metadata["condition_resolution_source"] = resolution_source
+        case["metadata"] = metadata
+    _write_json(bias_path, bias_payload)
+
+
 def load_openr1_rows(cache_dir: Optional[Path] = None) -> List[Dict[str, Any]]:
     from datasets import load_dataset
 
@@ -902,6 +1014,8 @@ def build_v6_snapshot(
     shutil.copytree(v5_root, output_root)
 
     rows = load_openr1_rows()
+    source_lookup = {(row["split"], row["source_openr1_id"]): row for row in rows}
+    _enrich_copied_v5_roots(output_root=output_root, source_lookup=source_lookup)
     used_refs = collect_reserved_refs(v5_root)
     study_b_items = build_study_b_single_turn(rows, target_n=single_turn_target, used_refs=used_refs, seed=seed)
     study_b_multi_turn_cases = build_study_b_multi_turn(
@@ -934,7 +1048,7 @@ def build_v6_snapshot(
                 "# Frozen Snapshot v6",
                 "",
                 "## Basis and sequencing",
-                "- Study A and Study A bias are copied unchanged from frozen v5 after provenance verification.",
+                "- Study A and Study A bias are copied from frozen v5, then enriched to the canonical direct-source provenance schema.",
                 "- Study B single-turn is rebuilt from direct OpenR1 source rows only.",
                 "- Study B multi-turn uses real source turns first, then explicit source-anchored continuation with turn-level provenance.",
                 "- Study C uses real source turns first, retrieval-composed donor turns next, and source-anchored continuation only when required.",
