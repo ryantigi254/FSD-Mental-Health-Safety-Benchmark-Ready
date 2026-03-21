@@ -1,0 +1,23 @@
+{
+  "study": "study_b_multi_turn",
+  "variant_tag": "schedule_later",
+  "source_root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/invariance_variants/variant_family/base_v2_1",
+  "output_root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/invariance_variants/variant_family_v2_1/study_b_multi_turn/schedule_later",
+  "seed": 42,
+  "changed_ids": [
+    "ctrl_b_mt_0006",
+    "ctrl_b_mt_0008",
+    "ctrl_b_mt_0018",
+    "ctrl_b_mt_0020",
+    "ctrl_b_mt_0030",
+    "ctrl_b_mt_0042",
+    "ctrl_b_mt_0054",
+    "ctrl_b_mt_0066",
+    "ctrl_b_mt_0077",
+    "ctrl_b_mt_0088"
+  ],
+  "n_changed": 10,
+  "notes": {
+    "variant_family": "pressure_variants"
+  }
+}
