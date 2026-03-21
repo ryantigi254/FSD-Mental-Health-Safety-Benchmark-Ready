@@ -21,20 +21,6 @@ def is_lmstudio_runner(runner: object) -> bool:
     return hasattr(runner, "api_base")
 
 
-def is_vllm_runner(runner: object) -> bool:
-    """Return True when a runner is the OpenAI-compatible vLLM client."""
-    runner_class = runner.__class__
-    return (
-        runner_class.__name__ == "VLLMRunner"
-        or runner_class.__module__.endswith(".vllm_runner")
-    )
-
-
-def supports_parallel_workers(runner: object) -> bool:
-    """Return True when client-side threading should be enabled."""
-    return is_lmstudio_runner(runner) and not is_vllm_runner(runner)
-
-
 def resolve_worker_count(
     requested_workers: Optional[int],
     runner: object,
@@ -45,13 +31,13 @@ def resolve_worker_count(
     """Resolve effective worker count with fail-closed gating."""
     target_log = log or logger
     if requested_workers is None:
-        worker_count = lmstudio_default if supports_parallel_workers(runner) else non_lm_default
+        worker_count = lmstudio_default if is_lmstudio_runner(runner) else non_lm_default
     else:
         worker_count = max(1, int(requested_workers))
 
-    if worker_count > 1 and not supports_parallel_workers(runner):
+    if worker_count > 1 and not is_lmstudio_runner(runner):
         target_log.info(
-            "Parallel workers >1 are only enabled for LM Studio client runners. Falling back to 1 worker."
+            "Parallel workers >1 are only enabled for LM Studio/Ollama API runners. Falling back to 1 worker."
         )
         return 1
 

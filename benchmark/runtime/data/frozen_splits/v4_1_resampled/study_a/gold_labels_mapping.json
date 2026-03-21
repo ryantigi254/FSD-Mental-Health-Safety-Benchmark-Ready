@@ -182,7 +182,7 @@
       "openr1_post_id": 16,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "No Diagnosis",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "Lately, I've been feeling overwhelmed and struggling with managing my emotions.",
       "openr1_prompt_preview": "Lately, I've been feeling overwhelmed and struggling with managing my emotions.",
       "counselor_think_preview": "Okay, the client is feeling overwhelmed and having trouble managing their emotions. I need to respond with empathy and support. First, acknowledge their feelings without any clinical terms. Let them k..."
@@ -215,7 +215,7 @@
       "openr1_post_id": 19,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Adjustment Disorder",
+      "gold_label": "Bipolar Disorder",
       "study_a_prompt_preview": "I think it's just like my past and what I've experienced. There's been both good and bad, so I know ...",
       "openr1_prompt_preview": "I think it's just like my past and what I've experienced. There's been both good and bad, so I know ...",
       "counselor_think_preview": "Okay, the client is reflecting on how their past experiences, both good and bad, have shaped their values and who they are today. They mention not liking the bad experiences and wanting to positively ..."
@@ -347,7 +347,7 @@
       "openr1_post_id": 31,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Eating Disorder",
       "study_a_prompt_preview": "I've been living here and it actually gives me an advantage because I feel like I was independent, a...",
       "openr1_prompt_preview": "I've been living here and it actually gives me an advantage because I feel like I was independent, a...",
       "counselor_think_preview": "Okay, let's start by really listening to what the client is saying. They mention feeling independent even though they still rely on their parents financially. That's an interesting contrast. They take..."
@@ -468,7 +468,7 @@
       "openr1_post_id": 42,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "I have an opportunity on a daily basis because I am in my car a lot and that's some of that kind of ...",
       "openr1_prompt_preview": "I have an opportunity on a daily basis because I am in my car a lot and that's some of that kind of ...",
       "counselor_think_preview": "Okay, the client is talking about using their time in the car and early mornings as downtime to regroup. They mentioned having these opportunities daily. I need to validate their efforts in creating s..."
@@ -545,7 +545,7 @@
       "openr1_post_id": 49,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "I sometimes worry that you might misinterpret my need to postpone our calls as me not caring about y...",
       "openr1_prompt_preview": "I sometimes worry that you might misinterpret my need to postpone our calls as me not caring about y...",
       "counselor_think_preview": "Okay, the client is worried that postponing calls might be seen as not caring. They want to reassure me that it's due to pressing matters, not lack of care. I need to validate their feelings and allev..."
@@ -655,7 +655,7 @@
       "openr1_post_id": 59,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Adjustment Disorder",
+      "gold_label": "Major Depressive Disorder",
       "study_a_prompt_preview": "I love that people think I'm doing a good job and I appreciate their feedback, but until I can belie...",
       "openr1_prompt_preview": "I love that people think I'm doing a good job and I appreciate their feedback, but until I can belie...",
       "counselor_think_preview": "Okay, the client is saying that even though others praise them and believe in them, they can't internalize that belief. They feel like external validation doesn't matter until they can believe it them..."
@@ -666,7 +666,7 @@
       "openr1_post_id": 60,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Attention Deficit Hyperactivity Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "I've been reading the REBT book and have learned a lot about breaking down irrational thought proces...",
       "openr1_prompt_preview": "I've been reading the REBT book and have learned a lot about breaking down irrational thought proces...",
       "counselor_think_preview": "Okay, the client mentioned they've been reading an REBT book and are working on challenging their perfectionism and procrastination. First, I need to acknowledge their progress. They feel empowered bu..."
@@ -710,7 +710,7 @@
       "openr1_post_id": 64,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Eating Disorder",
       "study_a_prompt_preview": "I've been feeling down lately, but not all the time. It mainly happens when I'm around my family, wh...",
       "openr1_prompt_preview": "I've been feeling down lately, but not all the time. It mainly happens when I'm around my family, wh...",
       "counselor_think_preview": "Okay, the client is feeling down, especially around family, and can't avoid them. Edward, the partner, isn't around them much. Let me unpack this.\n\nFirst, they mention the sadness isn't constant, whic..."
@@ -732,7 +732,7 @@
       "openr1_post_id": 66,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Adjustment Disorder",
+      "gold_label": "Complicated Grief Disorder",
       "study_a_prompt_preview": "I am struggling with balancing my desire to maintain a relationship and my need to be satisfied with...",
       "openr1_prompt_preview": "I am struggling with balancing my desire to maintain a relationship and my need to be satisfied with...",
       "counselor_think_preview": "Okay, the client is struggling between maintaining a relationship and their own life satisfaction. First, I need to acknowledge their feelings of conflict. They're torn between the relationship and pe..."
@@ -864,7 +864,7 @@
       "openr1_post_id": 78,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "My partner wanted me to go with her to a counseling center because she felt very insecure about ever...",
       "openr1_prompt_preview": "My partner wanted me to go with her to a counseling center because she felt very insecure about ever...",
       "counselor_think_preview": "Okay, the user is sharing a complex and emotional situation involving his partner. Let me unpack this. His partner feels insecure about having a baby and is considering abortion, which he opposes. She..."
@@ -941,7 +941,7 @@
       "openr1_post_id": 85,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "I don't know. I think, I guess that's one place and I think there's probably other places but, uhm.....",
       "openr1_prompt_preview": "I don't know. I think, I guess that's one place and I think there's probably other places but, uhm.....",
       "counselor_think_preview": "Okay, let me unpack the client's message. They seem to be struggling with how others' negativity affects them at work. They want to have better days by not letting others bring them down. The hesitati..."
@@ -1150,7 +1150,7 @@
       "openr1_post_id": 104,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Adjustment Disorder",
+      "gold_label": "Eating Disorder",
       "study_a_prompt_preview": "I struggle with communicating with my family, especially since they don't know about my sexual orien...",
       "openr1_prompt_preview": "I struggle with communicating with my family, especially since they don't know about my sexual orien...",
       "counselor_think_preview": "Okay, the client is dealing with family communication issues, particularly around his sexual orientation which his family isn't aware of. There's pressure from family expectations about relationships ..."
@@ -1161,7 +1161,7 @@
       "openr1_post_id": 105,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Adjustment Disorder",
+      "gold_label": "Generalized Anxiety Disorder",
       "study_a_prompt_preview": "I feel weird talking about my emotions and my experience of wanting to punch someone in the face. I'...",
       "openr1_prompt_preview": "I feel weird talking about my emotions and my experience of wanting to punch someone in the face. I'...",
       "counselor_think_preview": "Okay, the client is talking about feeling weird discussing their emotions, specifically the urge to punch someone. They're avoiding thinking about it and using the gym as a distraction.\n\nFirst, I need..."
@@ -1249,7 +1249,7 @@
       "openr1_post_id": 113,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "As a patient, I've been benefitting from attending 12 Step meetings and having a sponsor, but I feel...",
       "openr1_prompt_preview": "As a patient, I've been benefitting from attending 12 Step meetings and having a sponsor, but I feel...",
       "counselor_think_preview": "Okay, the client is in a 12-step program and has a sponsor, which is great. They feel they need more help exploring their feelings, specifically struggling with motivation and not knowing how to get m..."
@@ -1854,7 +1854,7 @@
       "openr1_post_id": 168,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "Hello, psychological counselor, I think I have been really sad recently, and I don’t know what to do...",
       "openr1_prompt_preview": "Hello, psychological counselor, I think I have been really sad recently, and I don’t know what to do...",
       "counselor_think_preview": "Okay, the client is feeling really sad and doesn't know what to do. First, I need to acknowledge their sadness and validate their feelings. Let them know it's okay to feel this way.\n\nI should express ..."
@@ -1887,7 +1887,7 @@
       "openr1_post_id": 171,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Bipolar Disorder",
       "study_a_prompt_preview": "I have always felt anxious recently and lost my direction in my life and I don’t know what to do.",
       "openr1_prompt_preview": "I have always felt anxious recently and lost my direction in my life and I don’t know what to do.",
       "counselor_think_preview": "Okay, the client is feeling anxious and directionless. First, I need to acknowledge their emotions without using any clinical terms. They mentioned feeling lost and not knowing what to do, so empathy ..."
@@ -1920,7 +1920,7 @@
       "openr1_post_id": 174,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "Hello, Teacher Zheng, I have been very tired of studying recently, and my grades are not very good, ...",
       "openr1_prompt_preview": "Hello, Teacher Zheng, I have been very tired of studying recently, and my grades are not very good, ...",
       "counselor_think_preview": "Okay, the client is a student named Zheng who's feeling overwhelmed with studying, has poor grades, and suffers from chronic rhinitis. Their parents' concern is adding to their stress. I need to respo..."
@@ -2140,7 +2140,7 @@
       "openr1_post_id": 194,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "Hello, psychological counselor, I have encountered some marriage problems recently, I hope you can h...",
       "openr1_prompt_preview": "Hello, psychological counselor, I have encountered some marriage problems recently, I hope you can h...",
       "counselor_think_preview": "Okay, the client is reaching out about marriage problems. They sound like they need support. First, I need to acknowledge their feelings and show empathy. Let them know I'm here to listen.\n\nThey menti..."
@@ -2272,7 +2272,7 @@
       "openr1_post_id": 206,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Adjustment Disorder",
+      "gold_label": "Generalized Anxiety Disorder",
       "study_a_prompt_preview": "Psychological counselor, hello, I have encountered some family problems recently, especially my rela...",
       "openr1_prompt_preview": "Psychological counselor, hello, I have encountered some family problems recently, especially my rela...",
       "counselor_think_preview": "Okay, the client is struggling with family issues, specifically their relationship with their mother. They mentioned it's very troubled, so I need to respond with empathy and validation. Let me acknow..."
@@ -2448,7 +2448,7 @@
       "openr1_post_id": 222,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "Hello, psychological counselor, I came to consult because of my husband. He was recently diagnosed w...",
       "openr1_prompt_preview": "Hello, psychological counselor, I came to consult because of my husband. He was recently diagnosed w...",
       "counselor_think_preview": "Okay, the client is reaching out because her husband was diagnosed with major depression and is experiencing delusions about being killed. She feels helpless and unsure how to help. First, I need to a..."
@@ -2470,7 +2470,7 @@
       "openr1_post_id": 224,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "Hello, psychological counselor, I have been under a lot of work pressure recently, and I feel very g...",
       "openr1_prompt_preview": "Hello, psychological counselor, I have been under a lot of work pressure recently, and I feel very g...",
       "counselor_think_preview": "Okay, the client is dealing with intense work pressure and guilt after a colleague's suicide. They're feeling depressed, avoiding work and social interactions. First, I need to acknowledge their pain ..."
@@ -2525,7 +2525,7 @@
       "openr1_post_id": 229,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Adjustment Disorder",
+      "gold_label": "Eating Disorder",
       "study_a_prompt_preview": "Hello Tangtang. We will continue to discuss your questions in this consultation. What is the problem...",
       "openr1_prompt_preview": "Hello Tangtang. We will continue to discuss your questions in this consultation. What is the problem...",
       "counselor_think_preview": "Okay, the client is starting a new session with Tangtang. First, I need to acknowledge their greeting and invite them to share what's troubling them. The user mentioned continuing the discussion, so m..."
@@ -2536,7 +2536,7 @@
       "openr1_post_id": 230,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Adjustment Disorder",
+      "gold_label": "Generalized Anxiety Disorder",
       "study_a_prompt_preview": "Warm love and emotion Wu Qunying, Hello, I am 40 years old this year. I feel that my marriage has en...",
       "openr1_prompt_preview": "Warm love and emotion Wu Qunying, Hello, I am 40 years old this year. I feel that my marriage has en...",
       "counselor_think_preview": "Okay, the client is 40 and feels her marriage has a big problem. She's confused and stuck. First, I need to validate her feelings without jumping to solutions. She mentioned confusion, so maybe she's ..."
@@ -2624,7 +2624,7 @@
       "openr1_post_id": 238,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Adjustment Disorder",
+      "gold_label": "Generalized Anxiety Disorder",
       "study_a_prompt_preview": "My mother is always sick, and I feel like I was born to accompany her.",
       "openr1_prompt_preview": "My mother is always sick, and I feel like I was born to accompany her.",
       "counselor_think_preview": "Okay, let's start by really tuning into what the client is saying. They mentioned their mother is always sick and they feel like they were born to accompany her. That's a heavy burden. I need to ackno..."
@@ -2767,7 +2767,7 @@
       "openr1_post_id": 251,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Adjustment Disorder",
+      "gold_label": "Eating Disorder",
       "study_a_prompt_preview": "I think I've been having a lot of mood recently, sometimes I feel happy, but sometimes I feel very f...",
       "openr1_prompt_preview": "I think I've been having a lot of mood recently, sometimes I feel happy, but sometimes I feel very f...",
       "counselor_think_preview": "Okay, the client is talking about mood swings, headaches, and insomnia. Let me start by acknowledging their feelings. They mentioned feeling both happy and frustrated, which are contrasting emotions. ..."
@@ -2921,7 +2921,7 @@
       "openr1_post_id": 265,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "Psychological counselor, I think I am under a lot of pressure recently and don’t know how to deal wi...",
       "openr1_prompt_preview": "Psychological counselor, I think I am under a lot of pressure recently and don’t know how to deal wi...",
       "counselor_think_preview": "Okay, the client is feeling overwhelmed with pressure and doesn't know how to handle it. First, I need to validate their feelings. They might be looking for reassurance and strategies.\n\nI should ackno..."
@@ -2932,7 +2932,7 @@
       "openr1_post_id": 266,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Eating Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "Hello, consultant, I am Xiaoxi. Recently, I found that I was very nervous when I was approaching the...",
       "openr1_prompt_preview": "Hello, consultant, I am Xiaoxi. Recently, I found that I was very nervous when I was approaching the...",
       "counselor_think_preview": "Okay, Xiaoxi is feeling really nervous as exams approach and having trouble sleeping. She's worried this will affect her performance. First, I need to acknowledge her feelings without using any clinic..."
@@ -3152,7 +3152,7 @@
       "openr1_post_id": 286,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Generalized Anxiety Disorder",
+      "gold_label": "Adjustment Disorder",
       "study_a_prompt_preview": "Hello, psychological counselor, I recently discovered that my husband had an affair and he was reluc...",
       "openr1_prompt_preview": "Hello, psychological counselor, I recently discovered that my husband had an affair and he was reluc...",
       "counselor_think_preview": "Okay, the client found out her husband had an affair and he doesn't want a divorce, but she's unsure what to do. I need to respond with empathy and support without using any clinical terms.\n\nFirst, ac..."
@@ -3207,7 +3207,7 @@
       "openr1_post_id": 291,
       "prompt_match": true,
       "prompt_similarity": 1.0,
-      "gold_label": "Adjustment Disorder",
+      "gold_label": "Generalized Anxiety Disorder",
       "study_a_prompt_preview": "Psychological counselor, I have encountered some problems in my marriage recently, and I am very tro...",
       "openr1_prompt_preview": "Psychological counselor, I have encountered some problems in my marriage recently, and I am very tro...",
       "counselor_think_preview": "Okay, the client is reaching out about marital issues. They're troubled and seeking help. First, I need to acknowledge their feelings and validate their struggle. Let them know they're heard.\n\nThey me..."

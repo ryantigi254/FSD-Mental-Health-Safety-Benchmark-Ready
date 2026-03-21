@@ -3,6 +3,7 @@
 *.log
 *.zip
 .cursor/
+/.codex/
 
 # Python/Jupyter caches
 __pycache__/
@@ -16,6 +17,7 @@ benchmark/runtime/.pytest_cache/
 AGENTS.md
 codex_scratchpad.*
 codex_scratchpad.md
+codex_logs/
 .claudemd
 .claude/
 .claude
@@ -24,6 +26,7 @@ Repo Readiness (GitHub).md
 benchmark/runtime/walkthrough.md
 
 # Local benchmark runtime artefacts
+.venv-*/
 benchmark/runtime/.venv-runtime-ryangichuru-20260215/
 benchmark/runtime/Misc/datasets/
 benchmark/runtime/.conda-envs/
@@ -36,22 +39,16 @@ benchmark/runtime/swarm/
 benchmark/runtime/metric-results/misc/
 benchmark/runtime/scripts/preprocessing/misc/
 benchmark/runtime/docs/misc/
+benchmark/runtime/analysis/
+benchmark/runtime/docs/reports/**/stage2_gate_report.json
+benchmark/runtime/docs/reports/**/sendoff_preflight_report.json
 benchmark/runtime/processed/_archived/
+benchmark/runtime/results/**/study_a_generations.jsonl
+benchmark/runtime/results/**/study_b_generations.jsonl
+benchmark/runtime/results/**/study_c_generations.jsonl
 benchmark/runtime/data/verification/
 benchmark/runtime/data/DATASET_TURN_ANALYSIS_REPORT.md
 benchmark/runtime/data/persona_splits_report.md
-benchmark/runtime/analysis/
-!benchmark/runtime/analysis/
-!benchmark/runtime/analysis/figures/
-!benchmark/runtime/analysis/figures/pgfplots/
-!benchmark/runtime/analysis/figures/pgfplots/controlability figures/
-!benchmark/runtime/analysis/figures/pgfplots/controlability figures/**
-benchmark/runtime/analysis/figures/pgfplots/controlability figures/**/*.aux
-benchmark/runtime/results/
-codex_logs/
-benchmark/runtime/tests/unit/test_generate_pgfplots.py
-benchmark/runtime/tests/unit/test_generate_pgfplots_additional.py
-scripts/archive_codex_scratchpad.sh
 
 # Windsurf local config/state (ignore everything)
 .windsurf/
@@ -59,6 +56,27 @@ scripts/archive_codex_scratchpad.sh
 # Local one-off directories
 json-render-3d-test/
 models/
-output/
+/scripts/
+
+# Symphony local runtime state
+.codex/symphony/workspaces/
+.codex/symphony/logs/
+
+# Root policy file kept local
+/AGENTS.md
+
+# Local helper scripts
+scripts/*.sh
+
+# Local Codex run history
+codex_logs/
+
+# Local PGFPlots test drafts
+benchmark/runtime/tests/unit/test_generate_pgfplots.py
+benchmark/runtime/tests/unit/test_generate_pgfplots_additional.py
 
 .codex/
+
+.agent/
+Assignment/Misc/
+benchmark/runtime/Misc/

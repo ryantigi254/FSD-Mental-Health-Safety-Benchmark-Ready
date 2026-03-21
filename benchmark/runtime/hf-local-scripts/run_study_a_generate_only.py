@@ -20,6 +20,103 @@ def _ensure_src_on_path(uni_setup_root: Path) -> None:
 
 
 
+def _parse_args() -> argparse.Namespace:
+
+    parser = argparse.ArgumentParser(description="Study A generation-only runner (no evaluation.py).")
+
+    parser.add_argument(
+
+        "--model-id",
+
+        type=str,
+
+        required=True,
+
+        help="Model ID understood by reliable_clinical_benchmark.models.factory.get_model_runner",
+
+    )
+
+    parser.add_argument(
+
+        "--data-dir",
+
+        type=str,
+
+        default=None,
+
+        help="Directory containing study_a_test.json (defaults to Uni-setup/data/openr1_psy_splits).",
+
+    )
+
+    parser.add_argument(
+
+        "--output-dir",
+
+        type=str,
+
+        default=None,
+
+        help="Results directory (defaults to Uni-setup/results).",
+
+    )
+
+    parser.add_argument("--max-samples", type=int, default=None, help="Limit Study A samples.")
+
+    parser.add_argument(
+
+        "--max-tokens",
+
+        type=int,
+
+        default=32000,
+
+        help="Max new tokens per generation (default: 32000 for long reasoning traces).",
+
+    )
+
+    parser.add_argument(
+
+        "--cache-out",
+
+        type=str,
+
+        default=None,
+
+        help="Explicit cache path (defaults to results/<model-id>/study_a_generations.jsonl).",
+
+    )
+
+    parser.add_argument(
+
+        "--workers",
+
+        type=int,
+
+        default=None,
+
+        help=(
+
+            "Number of parallel generation workers. "
+
+            "Default is auto: 4 for LM Studio/Ollama API runners, 1 for non-LM Studio runners."
+
+        ),
+
+    )
+
+    parser.add_argument(
+
+        "--progress-interval-seconds",
+
+        type=int,
+
+        default=10,
+
+        help="Heartbeat interval for progress logging while waiting for workers.",
+
+    )
+
+    return parser.parse_args()
 
 
 
@@ -48,6 +145,8 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "psyche_r1_local": "psyche-r1-local",
 
         "qwen3_lmstudio": "qwen3-lmstudio",
+        "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax_m2_5_cloud": "minimax-m2.5-cloud",
 
     }
 
@@ -115,63 +214,6 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
 
 
 
-def _parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Study A generation-only runner (no evaluation.py).")
-    parser.add_argument(
-        "--model-id",
-        type=str,
-        required=True,
-        help="Model ID understood by reliable_clinical_benchmark.models.factory.get_model_runner",
-    )
-    parser.add_argument(
-        "--data-dir",
-        type=str,
-        default=None,
-        help="Directory containing study_a_test.json (defaults to Uni-setup/data/openr1_psy_splits).",
-    )
-    parser.add_argument(
-        "--output-dir",
-        type=str,
-        default=None,
-        help="Results directory (defaults to Uni-setup/results).",
-    )
-    parser.add_argument("--max-samples", type=int, default=None, help="Limit Study A samples.")
-    parser.add_argument(
-        "--max-tokens",
-        type=int,
-        default=32000,
-        help="Max new tokens per generation (default: 32000 for long reasoning traces).",
-    )
-    parser.add_argument(
-        "--cache-out",
-        type=str,
-        default=None,
-        help="Explicit cache path (defaults to results/<model-id>/study_a_generations.jsonl).",
-    )
-    parser.add_argument(
-        "--workers",
-        type=int,
-        default=None,
-        help=(
-            "Number of parallel generation workers. "
-            "Default is auto: 4 for LM Studio runners, 1 for non-LM Studio runners."
-        ),
-    )
-    parser.add_argument(
-        "--progress-interval-seconds",
-        type=int,
-        default=10,
-        help="Heartbeat interval for progress logging while waiting for workers.",
-    )
-    parser.add_argument(
-        "--quantization",
-        type=str,
-        default=None,
-        help="Quantization mode for local models (e.g., '4bit', '8bit', 'none').",
-    )
-    return parser.parse_args()
-
-
 def main() -> None:
 
     uni_setup_root = Path(__file__).resolve().parents[1]
@@ -210,7 +252,7 @@ def main() -> None:
 
     config = GenerationConfig(max_tokens=args.max_tokens)
 
-    runner = get_model_runner(args.model_id, config, quantization=args.quantization)
+    runner = get_model_runner(args.model_id, config)
 
     worker_count = resolve_worker_count(args.workers, runner, lmstudio_default=4, non_lm_default=1)
 
@@ -315,7 +357,7 @@ def _parse_args() -> argparse.Namespace:
         default=None,
         help=(
             "Number of parallel generation workers. "
-            "Default is auto: 4 for LM Studio runners, 1 for non-LM Studio runners."
+            "Default is auto: 4 for LM Studio/Ollama API runners, 1 for non-LM Studio runners."
         ),
     )
     parser.add_argument(
@@ -323,12 +365,6 @@ def _parse_args() -> argparse.Namespace:
         type=int,
         default=10,
         help="Heartbeat interval for progress logging while waiting for workers.",
-    )
-    parser.add_argument(
-        "--quantization",
-        type=str,
-        default=None,
-        help="Quantization mode for local models (e.g., '4bit', '8bit', 'none').",
     )
     return parser.parse_args()
 
@@ -345,6 +381,8 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "psyllm_gml_local": "psyllm-gml-local",
         "psyche_r1_local": "psyche-r1-local",
         "qwen3_lmstudio": "qwen3-lmstudio",
+        "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax_m2_5_cloud": "minimax-m2.5-cloud",
         # vLLM-served local models → same results folders as HF-local
         "psyllm_gml_vllm": "psyllm-gml-local",
         "piaget_vllm": "piaget-8b-local",
@@ -402,7 +440,7 @@ def main() -> None:
         raise SystemExit(f"Study A split not found: {study_a_path}")
 
     config = GenerationConfig(max_tokens=args.max_tokens)
-    runner = get_model_runner(args.model_id, config, quantization=args.quantization)
+    runner = get_model_runner(args.model_id, config)
     worker_count = resolve_worker_count(args.workers, runner, lmstudio_default=4, non_lm_default=1)
 
     normalized_model_id = _normalize_model_id_for_path(args.model_id, output_dir)

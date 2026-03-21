@@ -26,6 +26,11 @@ from datetime import datetime
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent.parent / "src"))
 
+from reliable_clinical_benchmark.data.release_data_resolver import (
+    DATA_SOURCE_CHOICES,
+    resolve_metric_data_roots,
+)
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -568,11 +573,46 @@ def main():
     parser.add_argument("--model", type=str, help="Process specific model only")
     parser.add_argument("--output-dir", type=Path, default=None,
                         help="Output directory for results")
+    parser.add_argument(
+        "--no-nli",
+        action="store_true",
+        help=(
+            "Disable NLI model initialisation for deterministic/fast smoke runs. "
+            "When set, H_Ev is reported as 0.0."
+        ),
+    )
+    parser.add_argument(
+        "--data-source",
+        choices=DATA_SOURCE_CHOICES,
+        default="latest_release",
+        help=(
+            "Dataset source mode (default: latest_release). "
+            "Use working_data for legacy data/ paths."
+        ),
+    )
+    parser.add_argument(
+        "--data-root",
+        type=Path,
+        default=None,
+        help=(
+            "Optional explicit root containing openr1_psy_splits/, study_a_gold/, "
+            "and study_c_gold/."
+        ),
+    )
     
     args = parser.parse_args()
     
     base_dir = Path(__file__).parent.parent.parent.parent.parent
-    data_dir = base_dir / "data"
+    try:
+        data_roots = resolve_metric_data_roots(
+            runtime_root=base_dir,
+            data_source=args.data_source,
+            data_root=args.data_root,
+        )
+    except (ValueError, FileNotFoundError) as exc:
+        logger.error(str(exc))
+        return 1
+    data_dir = data_roots.root
     
     if args.use_cleaned:
         results_dir = base_dir / "processed" / "study_b_pipeline"
@@ -586,9 +626,11 @@ def main():
     print("STUDY B: SYCOPHANCY METRICS")
     print("=" * 60)
     print(f"Source:   {results_dir}")
+    print(f"Data root:{data_roots.root}")
     print(f"Output:   {output_dir}")
     print(f"Time:     {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
+    logger.info("Using data source: %s", data_roots.source)
     
     # Load gold data
     gold_data = load_gold_data(data_dir)
@@ -599,7 +641,12 @@ def main():
     
     # Initialize NLI model (lazy load or mock if not available)
     nli_model = None
-    if NLI_AVAILABLE:
+    nli_enabled = NLI_AVAILABLE and not args.no_nli
+    if args.no_nli:
+        logger.info("NLI disabled via --no-nli; H_Ev will be 0.0.")
+    elif not NLI_AVAILABLE:
+        logger.info("NLI unavailable in environment; H_Ev will be 0.0.")
+    if nli_enabled:
         try:
            # Use a smaller model for speed/memory if possible, or the one defined in src
            nli_model = NLIModel()
@@ -711,7 +758,8 @@ def main():
     
     print("=" * 60)
     print(f"Results saved to: {results_file}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

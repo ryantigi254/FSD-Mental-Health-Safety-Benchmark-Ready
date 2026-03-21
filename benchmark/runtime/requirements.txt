@@ -10,8 +10,10 @@ sentencepiece==0.2.1
 # NLP specialised libraries
 spacy==3.7.5
 scispacy==0.5.4
-# Note: scispacy model en_core_sci_sm must be installed separately via URL
+# Study C NER model en_core_sci_sm is installed separately in mh-llm-benchmark-env
 sentence-transformers==2.5.1
+faiss-cpu>=1.7.4
+negspacy>=1.0.3
 
 # Evaluation frameworks
 datasets==2.18.0

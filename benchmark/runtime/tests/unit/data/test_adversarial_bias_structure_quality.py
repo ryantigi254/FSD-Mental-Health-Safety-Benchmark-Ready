@@ -25,7 +25,12 @@ EXPECTED_CANONICAL_COUNT = 2000
 EXPECTED_PERSONA_COUNT = 40
 EXPECTED_PERSONA_CASES = 50
 EXPECTED_PAIR_GROUPS = 1000
+EXPECTED_RETAINED_GROUPS = 886
+EXPECTED_REPLACED_GROUPS = 114
 STRUCTURE_VERSION = "v3.2"
+LATEST_RELEASE_DIR = (
+    BASE_DIR / "data" / "releases" / "clinician_readiness_v4_2026-02-22"
+)
 
 
 def _load_cases(path: Path) -> list[dict]:
@@ -33,6 +38,17 @@ def _load_cases(path: Path) -> list[dict]:
     cases = payload.get("cases", [])
     assert isinstance(cases, list), f"Invalid cases list in: {path}"
     return cases
+
+
+def _group_by_slot(cases: list[dict]) -> dict[tuple[str, ...], list[dict]]:
+    grouped: dict[str, list[dict]] = {}
+    for case in cases:
+        grouped.setdefault(str(case.get("pair_group_id", "") or ""), []).append(case)
+    by_slot: dict[tuple[str, ...], list[dict]] = {}
+    for rows in grouped.values():
+        slot = tuple(sorted(str(row.get("id", "") or "") for row in rows))
+        by_slot[slot] = sorted(rows, key=lambda row: str(row.get("id", "") or ""))
+    return by_slot
 
 
 @pytest.mark.unit
@@ -119,3 +135,53 @@ def test_catalog_group_targets_are_feasible():
 
     mins = [int(math.ceil(int(d.get("minimum_cases", 0)) / 2.0)) for d in dims]
     assert sum(mins) <= EXPECTED_PAIR_GROUPS
+
+
+@pytest.mark.unit
+def test_release_overlap_groups_are_the_only_bias_groups_replaced():
+    release_cases = _load_cases(LATEST_RELEASE_DIR / "adversarial_bias" / "biased_vignettes.json")
+    current_cases = _load_cases(CANONICAL_PATH)
+    study_a_payload = json.loads(
+        (LATEST_RELEASE_DIR / "openr1_psy_splits" / "study_a_test.json").read_text(encoding="utf-8")
+    )
+
+    study_a_source_pairs = set()
+    for sample in study_a_payload.get("samples", []):
+        metadata = sample.get("metadata", {}) or {}
+        split_name = str(metadata.get("source_split", "") or "").strip().lower()
+        if split_name not in {"test", "train"}:
+            continue
+        for source_id in metadata.get("source_openr1_ids", []) or []:
+            study_a_source_pairs.add((split_name, int(source_id)))
+
+    release_groups = _group_by_slot(release_cases)
+    current_groups = _group_by_slot(current_cases)
+    assert set(release_groups.keys()) == set(current_groups.keys())
+
+    retained = 0
+    replaced = 0
+    for slot_key, old_rows in release_groups.items():
+        new_rows = current_groups[slot_key]
+        old_meta = old_rows[0].get("metadata", {}) or {}
+        old_source_pair = (
+            str(old_meta.get("source_openr1_split", "") or "").strip().lower(),
+            int(old_meta.get("source_openr1_id", -1)),
+        )
+        old_payload = json.dumps(old_rows, sort_keys=True, ensure_ascii=False)
+        new_payload = json.dumps(new_rows, sort_keys=True, ensure_ascii=False)
+
+        if old_source_pair in study_a_source_pairs:
+            replaced += 1
+            assert old_payload != new_payload
+            new_meta = new_rows[0].get("metadata", {}) or {}
+            new_source_pair = (
+                str(new_meta.get("source_openr1_split", "") or "").strip().lower(),
+                int(new_meta.get("source_openr1_id", -1)),
+            )
+            assert new_source_pair not in study_a_source_pairs
+        else:
+            retained += 1
+            assert old_payload == new_payload
+
+    assert retained == EXPECTED_RETAINED_GROUPS
+    assert replaced == EXPECTED_REPLACED_GROUPS

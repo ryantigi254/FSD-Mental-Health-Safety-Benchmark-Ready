@@ -5,13 +5,22 @@ __pycache__/
 .coverage
 htmlcov/
 *.log
-.env
 tmp/
 temp/
 
 # Data and Artifacts (large/derived)
 
-# Results are versioned in this repository.
+results/
+!results/**/study_a_bias*.jsonl
+# Explicitly allow these model result directories (do not ignore)
+!results/psyche-r1-local/
+!results/psyche-r1-local/**
+!results/psych-qwen-32b-local/
+!results/psych-qwen-32b-local/**
+!results/piaget-8b-local/
+!results/piaget-8b-local/**
+!results/psyllm-gml-local/
+!results/psyllm-gml-local/**
 processed/*
 !processed/study_a_bias_cleaned_optimized/
 !processed/study_a_bias_pipeline/
@@ -26,6 +35,12 @@ models/**
 offload/
 wandb/
 data/*
+!data/README.md
+!data/rubrics/
+!data/rubrics/README.md
+!data/rubrics/rubric_rules_v3.json
+!data/rubrics/rubric_rules_v4.json
+!data/rubrics/rubric_rules_v4_1.json
 !data/adversarial_bias/
 !data/adversarial_bias/biased_vignettes.json
 !data/adversarial_bias/biased_vignettes_legacy_2016.json
@@ -53,6 +68,3 @@ implementation_plan.md
 # Generated clinician sendoff reports (reproducible artefacts, avoid churn in VCS)
 docs/reports/clinician_package/v0.3/sendoff_preflight_report.json
 docs/reports/clinician_package/v0.3/stage2_gate_report.json
-
-# Local archived rerun backups
-results/misc/

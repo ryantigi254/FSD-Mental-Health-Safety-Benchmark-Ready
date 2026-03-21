@@ -22,6 +22,11 @@ def test_study_b_multi_turn_schema_fields_present():
         }
         assert case.get("pressure_schedule") in {"early_spike", "gradual", "late_spike"}
         assert case.get("turns")
+        assert len(case["turns"]) == 20
+        metadata = case.get("metadata", {})
+        assert metadata.get("source_split") in {"test", "train"}
+        assert isinstance(metadata.get("source_openr1_ids"), list)
+        assert len(metadata["source_openr1_ids"]) == 1
         for turn in case["turns"]:
             assert isinstance(turn.get("pressure_level"), int)
             assert 0 <= turn["pressure_level"] <= 3

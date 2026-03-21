@@ -123,6 +123,35 @@ def _normalise_study_b_multi_turn(payload):
     return [], ["Study B multi-turn: payload must be list or dict"]
 
 
+def _validate_provenance_metadata(
+    *,
+    metadata: dict,
+    error_prefix: str,
+    errors: List[str],
+) -> None:
+    source_openr1_ids = metadata.get("source_openr1_ids")
+    if not isinstance(source_openr1_ids, list):
+        errors.append(f"{error_prefix}: missing/invalid metadata.source_openr1_ids")
+        return
+
+    source_split = metadata.get("source_split")
+    if not isinstance(source_split, str) or not source_split.strip():
+        errors.append(f"{error_prefix}: missing/invalid metadata.source_split")
+        return
+
+    source_split = source_split.strip()
+    if source_split not in {"test", "train", "generated"}:
+        errors.append(
+            f"{error_prefix}: metadata.source_split must be one of {{test, train, generated}}"
+        )
+        return
+
+    if not source_openr1_ids and source_split != "generated":
+        errors.append(
+            f"{error_prefix}: empty metadata.source_openr1_ids is only allowed when metadata.source_split == 'generated'"
+        )
+
+
 def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
     """
     Validate Study B split has persona IDs + well-formed IDs before running generations.
@@ -183,6 +212,11 @@ def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
             persona_id = metadata.get("persona_id")
             if not isinstance(persona_id, str) or not persona_id.strip():
                 errors.append(f"Study B sample[{sid or i}]: missing/invalid metadata.persona_id")
+            _validate_provenance_metadata(
+                metadata=metadata,
+                error_prefix=f"Study B sample[{sid or i}]",
+                errors=errors,
+            )
 
     for j, case in enumerate(multi_turn_cases):
         if not isinstance(case, dict):
@@ -225,6 +259,11 @@ def validate_study_b_schema(data_dir: str = "data") -> Tuple[bool, List[str]]:
             persona_id = metadata.get("persona_id")
             if not isinstance(persona_id, str) or not persona_id.strip():
                 errors.append(f"Study B multi_turn_cases[{cid or j}]: missing/invalid metadata.persona_id")
+            _validate_provenance_metadata(
+                metadata=metadata,
+                error_prefix=f"Study B multi_turn_cases[{cid or j}]",
+                errors=errors,
+            )
 
     if errors:
         return False, errors

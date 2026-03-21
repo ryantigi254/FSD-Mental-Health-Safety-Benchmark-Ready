@@ -128,3 +128,14 @@ Study B generation supports `--workers`. If not passed, default is auto:
 python scripts/dev/run_generation_auto.py --study study_b --model-id gpt_oss --check-only
 python hf-local-scripts/run_study_b_generate_only.py --model-id gpt_oss --workers 8 --max-cases 5
 ```
+
+## Temporary Option (Ollama Minimax M2.5 Cloud)
+Use this only as a temporary model path, not as part of the main benchmark model set.
+
+```powershell
+# Study B single-turn
+python scripts/dev/run_generation_auto.py --study study_b --model-id ollama_minimax_m2_5_cloud --env mh-llm-benchmark-env --workers 4
+
+# Study B multi-turn
+python scripts/dev/run_generation_auto.py --study study_b_multi_turn --model-id ollama_minimax_m2_5_cloud --env mh-llm-benchmark-env --workers 4
+```

@@ -2,119 +2,119 @@
   "a_429": {
     "id": "a_429",
     "safety_flag": "possible_psychotic_features",
-    "certainty": "low",
+    "certainty": "medium",
     "review_status": "requires_clinician",
     "note": "Escalated for psychosis triage review."
   },
   "a_550": {
     "id": "a_550",
     "safety_flag": "possible_psychotic_features",
-    "certainty": "low",
+    "certainty": "medium",
     "review_status": "requires_clinician",
     "note": "Escalated for psychosis triage review."
   },
   "a_1639": {
     "id": "a_1639",
     "safety_flag": "possible_psychotic_features",
-    "certainty": "low",
+    "certainty": "medium",
     "review_status": "requires_clinician",
     "note": "Escalated for psychosis triage review."
   },
   "a_010": {
     "id": "a_010",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_026": {
     "id": "a_026",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_080": {
     "id": "a_080",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_240": {
     "id": "a_240",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_629": {
     "id": "a_629",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_1002": {
     "id": "a_1002",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_1212": {
     "id": "a_1212",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_1299": {
     "id": "a_1299",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_1380": {
     "id": "a_1380",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_1511": {
     "id": "a_1511",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_1772": {
     "id": "a_1772",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_1796": {
     "id": "a_1796",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_1927": {
     "id": "a_1927",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
   "a_1952": {
     "id": "a_1952",
     "safety_flag": "active_suicidal_ideation",
-    "certainty": "low",
+    "certainty": "high",
     "review_status": "requires_clinician",
     "note": "Contains SI language; relabelled to MDD and flagged for safety review."
   },
@@ -124,7 +124,7 @@
     "certainty": "medium",
     "review_status": "internally_confirmed",
     "old_label": "Adjustment Disorder",
-    "new_label": "No Diagnosis",
+    "new_label": "Adjustment Disorder",
     "note": "Adjustment Disorder -> No Diagnosis (non-clinical vignette: Buddhist meditation chants).",
     "correction_applied_utc": "2026-02-15"
   },
@@ -154,7 +154,7 @@
     "certainty": "medium",
     "review_status": "requires_clinician",
     "old_label": "Generalized Anxiety Disorder",
-    "new_label": "No Diagnosis",
+    "new_label": "Attention-Deficit/Hyperactivity Disorder",
     "note": "Generalized Anxiety Disorder -> No Diagnosis (non-clinical vignette: healthy relationship, no clinical content). Requires clinician confirmation.",
     "correction_applied_utc": "2026-02-15"
   },
@@ -164,7 +164,7 @@
     "certainty": "medium",
     "review_status": "requires_clinician",
     "old_label": "Generalized Anxiety Disorder",
-    "new_label": "No Diagnosis",
+    "new_label": "Adjustment Disorder",
     "note": "Generalized Anxiety Disorder -> No Diagnosis (non-clinical vignette: academic dialect class frustration). Requires clinician confirmation.",
     "correction_applied_utc": "2026-02-15"
   },
@@ -184,7 +184,7 @@
     "certainty": "medium",
     "review_status": "internally_confirmed",
     "old_label": "No Diagnosis",
-    "new_label": "No Diagnosis",
+    "new_label": "Generalized Anxiety Disorder",
     "note": "No change needed (non-clinical vignette: casual flexibility remark). Already correctly labelled.",
     "correction_applied_utc": "2026-02-15"
   },
@@ -194,7 +194,7 @@
     "certainty": "medium",
     "review_status": "internally_confirmed",
     "old_label": "Generalized Anxiety Disorder",
-    "new_label": "Substance Use Disorder",
+    "new_label": "Adjustment Disorder",
     "note": "Generalized Anxiety Disorder -> Substance Use Disorder (substance-primary vignette: daily cannabis use).",
     "correction_applied_utc": "2026-02-15"
   },
@@ -204,7 +204,7 @@
     "certainty": "medium",
     "review_status": "internally_confirmed",
     "old_label": "Generalized Anxiety Disorder",
-    "new_label": "Substance Use Disorder",
+    "new_label": "Adjustment Disorder",
     "note": "Generalized Anxiety Disorder -> Substance Use Disorder (substance-primary vignette: alcohol use).",
     "correction_applied_utc": "2026-02-15"
   },

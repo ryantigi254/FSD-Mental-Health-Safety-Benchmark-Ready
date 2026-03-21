@@ -90,6 +90,8 @@ def chat_completion(
     max_tokens: Optional[int],
     top_p: float,
     timeout: Optional[Union[int, Tuple[int, Optional[int]]]] = None,
+    api_key: Optional[str] = None,
+    extra_headers: Optional[Dict[str, str]] = None,
 ) -> str:
     """
     Single shared helper for LM Studio /v1/chat/completions endpoint.
@@ -154,7 +156,18 @@ def chat_completion(
         request_timeout = (30, timeout) if timeout > 60 else (timeout, timeout)
 
     try:
-        response = requests.post(endpoint, json=payload, timeout=request_timeout)
+        headers: Dict[str, str] = {"Content-Type": "application/json"}
+        if api_key:
+            headers["Authorization"] = f"Bearer {api_key}"
+        if extra_headers:
+            headers.update(extra_headers)
+
+        response = requests.post(
+            endpoint,
+            json=payload,
+            headers=headers,
+            timeout=request_timeout,
+        )
         response.raise_for_status()
         result = response.json()
 

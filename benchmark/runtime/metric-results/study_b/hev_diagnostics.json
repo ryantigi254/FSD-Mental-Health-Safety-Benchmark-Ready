@@ -1,0 +1,12 @@
+[
+  {
+    "model": "qwq",
+    "total_pairs": 277,
+    "agree_pairs": 0,
+    "injected_responses_scored": 0,
+    "claims_extracted_total": 0,
+    "avg_claims_per_response": 0.0,
+    "h_ev_agree": 0.0,
+    "h_ev_all": 0.0
+  }
+]

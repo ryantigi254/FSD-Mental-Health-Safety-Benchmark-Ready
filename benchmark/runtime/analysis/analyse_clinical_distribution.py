@@ -283,21 +283,7 @@ SEV_COLOURS = {
 }
 
 # Per-study colours
-STUDY_COLOURS = {
-    "A": "#3B82C4",
-    "A_bias": "#4B1D9A",
-    "B": "#F4A261",
-    "B_multi_turn": "#C46A2A",
-    "C": "#2A9D8F",
-}
-
-STUDY_LABELS = {
-    "A": "Study A",
-    "A_bias": "Study A Bias",
-    "B": "Study B",
-    "B_multi_turn": "Study B Multi-turn",
-    "C": "Study C",
-}
+STUDY_COLOURS = {"A": "#3B82C4", "B": "#F4A261", "C": "#2A9D8F"}
 
 plt.rcParams.update({
     "font.family": "serif",
@@ -366,25 +352,6 @@ def load_study_a():
     return results
 
 
-def load_study_a_bias():
-    """Study A Bias: adversarial bias vignettes aligned with the v4.1 release."""
-    with open(DATA / "adversarial_bias" / "biased_vignettes.json") as f:
-        raw = json.load(f)
-
-    cases = raw.get("cases", [])
-    results = []
-    for case in cases:
-        results.append({
-            "id": case["id"],
-            "study": "A_bias",
-            "condition": case.get("bias_label", "Unknown").lower().strip(),
-            "reasoning": "",
-            "prompt": case.get("prompt", ""),
-            "gold_answer": case.get("bias_label", ""),
-        })
-    return results
-
-
 def load_study_b():
     """Study B: sycophancy evaluation, 2000 single-turn samples."""
     with open(DATA / "study_b_test.json") as f:
@@ -399,27 +366,6 @@ def load_study_b():
             "reasoning": "",
             "prompt": s.get("prompt", ""),
             "gold_answer": s.get("gold_answer", ""),
-        })
-    return results
-
-
-def load_study_b_multi_turn():
-    """Study B multi-turn: sycophancy pressure over 20-turn conversations."""
-    with open(DATA / "study_b_multi_turn_test.json") as f:
-        cases = json.load(f)
-
-    results = []
-    for case in cases:
-        metadata = case.get("metadata") or {}
-        condition = metadata.get("condition_phrase") or case.get("gold_answer", "Unknown")
-        prompt_text = " ".join(turn.get("message", "") for turn in case.get("turns", []))
-        results.append({
-            "id": case["id"],
-            "study": "B_multi_turn",
-            "condition": condition.lower().strip(),
-            "reasoning": "",
-            "prompt": prompt_text,
-            "gold_answer": case.get("gold_answer", ""),
         })
     return results
 
@@ -453,23 +399,9 @@ def classify_category(condition: str) -> str:
     return CONDITION_TO_CATEGORY.get(condition, "Unclassified")
 
 
-def classify_category_for_study(study: str, condition: str) -> str:
-    """Map a condition to a study-aware category."""
-    if study == "A_bias":
-        return "Bias / Adversarial"
-    return classify_category(condition)
-
-
 def classify_severity(condition: str) -> str:
     """Map a specific condition to its severity level."""
     return SEVERITY_MAP.get(condition, "Unknown")
-
-
-def classify_severity_for_study(study: str, condition: str) -> str:
-    """Map a condition to a study-aware severity bucket."""
-    if study == "A_bias":
-        return "Unknown"
-    return classify_severity(condition)
 
 
 def detect_modalities(text: str) -> list[str]:
@@ -511,24 +443,12 @@ def normalise_condition_name(cond: str) -> str:
 def run_analysis():
     print("Loading data...")
     study_a = load_study_a()
-    study_a_bias = load_study_a_bias()
     study_b = load_study_b()
-    study_b_multi_turn = load_study_b_multi_turn()
     study_c = load_study_c()
-    rows_by_study = {
-        "A": study_a,
-        "A_bias": study_a_bias,
-        "B": study_b,
-        "B_multi_turn": study_b_multi_turn,
-        "C": study_c,
-    }
-    study_order = list(rows_by_study)
-    all_samples = [sample for rows in rows_by_study.values() for sample in rows]
+    all_samples = study_a + study_b + study_c
 
     print(f"  Study A: {len(study_a)} samples")
-    print(f"  Study A Bias: {len(study_a_bias)} samples")
     print(f"  Study B: {len(study_b)} samples")
-    print(f"  Study B Multi-turn: {len(study_b_multi_turn)} cases")
     print(f"  Study C: {len(study_c)} cases")
     print(f"  Total:   {len(all_samples)}")
 
@@ -540,18 +460,13 @@ def run_analysis():
     condition_per_study = defaultdict(lambda: Counter())
 
     for s in all_samples:
-        cat = classify_category_for_study(s["study"], s["condition"])
+        cat = classify_category(s["condition"])
         category_counts[cat] += 1
         category_per_study[s["study"]][cat] += 1
         condition_counts[s["condition"]] += 1
         condition_per_study[s["study"]][s["condition"]] += 1
 
-    unclassified = [
-        c
-        for c in condition_counts
-        if c not in {"unknown"}
-        and classify_category(c) == "Unclassified"
-    ]
+    unclassified = [c for c in condition_counts if classify_category(c) == "Unclassified"]
     if unclassified:
         print(f"  WARNING: {len(unclassified)} unclassified conditions:")
         for c in unclassified:
@@ -563,7 +478,7 @@ def run_analysis():
     severity_per_study = defaultdict(lambda: Counter())
 
     for s in all_samples:
-        sev = classify_severity_for_study(s["study"], s["condition"])
+        sev = classify_severity(s["condition"])
         severity_counts[sev] += 1
         severity_per_study[s["study"]][sev] += 1
 
@@ -592,35 +507,18 @@ def run_analysis():
     # ── Build output ─────────────────────────────────────────────────────
     analysis = {
         "total_samples": len(all_samples),
-        "study_labels": STUDY_LABELS,
-        "readme_notes": [
-            "Study A Bias contributes adversarial labels rather than gold clinical diagnoses, so category charts include a dedicated `Bias / Adversarial` bucket.",
-            "Severity is marked as `Unknown` for Study A Bias because the adversarial bias arm does not expose a defensible clinical-severity mapping.",
-        ],
-        "radar": {
-            "exclude_categories": ["Bias / Adversarial", "Other", "Unclassified"],
-            "max_value": 100,
-            "tick_step": 20,
-            "tick_label_mode": "fraction",
-            "manual_tick_labels": True,
-            "tick_label_angle": -8,
+        "per_study": {
+            "A": len(study_a),
+            "B": len(study_b),
+            "C": len(study_c),
         },
-        "radar_series": [
-            {"key": "A_bias", "label": "Study A Bias", "style": "study_a_bias_dotted"},
-            {"key": "overall", "label": "Overall", "style": "overall"},
-            {"key": "B", "label": "Study B", "style": "study_b"},
-            {"key": "B_multi_turn", "label": "Study B Multi-turn", "style": "study_b_multiturn"},
-            {"key": "C", "label": "Study C", "style": "study_c"},
-            {"key": "A", "label": "Study A", "style": "study_a"},
-        ],
-        "per_study": {study: len(rows_by_study[study]) for study in study_order},
         "diagnostic_categories": {
             cat: {
                 "total": count,
                 "pct": round(100.0 * count / len(all_samples), 2),
                 "per_study": {
                     st: category_per_study[st][cat]
-                    for st in study_order
+                    for st in ["A", "B", "C"]
                 },
             }
             for cat, count in category_counts.most_common()
@@ -628,19 +526,11 @@ def run_analysis():
         "specific_conditions": {
             cond: {
                 "total": count,
-                "category": (
-                    "Bias / Adversarial"
-                    if condition_per_study["A_bias"][cond] == count
-                    else classify_category(cond)
-                ),
-                "severity": (
-                    "Unknown"
-                    if condition_per_study["A_bias"][cond] == count
-                    else classify_severity(cond)
-                ),
+                "category": classify_category(cond),
+                "severity": classify_severity(cond),
                 "per_study": {
                     st: condition_per_study[st][cond]
-                    for st in study_order
+                    for st in ["A", "B", "C"]
                 },
             }
             for cond, count in condition_counts.most_common()
@@ -651,7 +541,7 @@ def run_analysis():
                 "pct": round(100.0 * count / len(all_samples), 2),
                 "per_study": {
                     st: severity_per_study[st][sev]
-                    for st in study_order
+                    for st in ["A", "B", "C"]
                 },
             }
             for sev, count in severity_counts.most_common()
@@ -664,8 +554,9 @@ def run_analysis():
             for mod, count in modality_counts.most_common()
         },
         "unique_conditions_per_study": {
-            study: len(set(s["condition"] for s in rows_by_study[study]))
-            for study in study_order
+            "A": len(set(s["condition"] for s in study_a)),
+            "B": len(set(s["condition"] for s in study_b)),
+            "C": len(set(s["condition"] for s in study_c)),
         },
         "total_unique_conditions": len(condition_counts),
     }
@@ -784,14 +675,14 @@ def plot_fig2_per_study(analysis):
 
     fig, ax = plt.subplots(figsize=(11.0, 6.4))
 
-    studies = list(analysis.get("per_study", {}).keys())
+    studies = ["A", "B", "C"]
     left = np.zeros(len(cat_names_rev))
 
     for study in studies:
         vals = [cats[c]["per_study"].get(study, 0) for c in cat_names_rev]
         ax.barh(range(len(cat_names_rev)), vals, left=left,
-                color=STUDY_COLOURS.get(study, BLUE), edgecolor=WHITE, linewidth=0.6,
-                height=0.72, label=analysis.get("study_labels", {}).get(study, study))
+                color=STUDY_COLOURS[study], edgecolor=WHITE, linewidth=0.6,
+                height=0.72, label=f"Study {study}")
         left += np.array(vals)
 
     ax.set_yticks(range(len(cat_names_rev)))
@@ -799,7 +690,7 @@ def plot_fig2_per_study(analysis):
     ax.set_xlabel("Samples")
     ax.set_title("Diagnostic Category Split by Study", loc="left", pad=10)
     ax.legend(loc="upper center", bbox_to_anchor=(0.52, 1.03),
-              frameon=False, ncol=min(3, max(1, len(studies))), title="Dataset")
+              frameon=False, ncol=3, title="Dataset")
     style_axis(ax, grid_axis="x")
 
     # Total labels
@@ -943,36 +834,23 @@ def plot_single_overview_radar(analysis):
     """Single paper-ready overview figure with a radar chart and compact summary."""
     cat_data = analysis["diagnostic_categories"]
     # Use top-7 categories for readability and parity with paper-style radar examples.
-    excluded = set((analysis.get("radar") or {}).get("exclude_categories", []))
-    radar_categories = [cat for cat in cat_data if cat not in excluded][:7]
+    radar_categories = list(cat_data.keys())[:7]
 
-    series_specs = analysis.get("radar_series") or [
-        {"key": "overall", "label": "Overall"},
-        {"key": "A", "label": "Study A"},
-        {"key": "B", "label": "Study B"},
-        {"key": "C", "label": "Study C"},
-    ]
+    series_names = ["Overall", "Study A", "Study B", "Study C"]
     series_colours = {
-        "overall": "#EF4444",
-        "A": "#3B82C4",
-        "A_bias": "#4B1D9A",
-        "B": "#F4A261",
-        "B_multi_turn": "#C46A2A",
-        "C": "#2A9D8F",
+        "Overall": "#EF4444",
+        "Study A": "#3B82C4",
+        "Study B": "#F4A261",
+        "Study C": "#2A9D8F",
     }
 
-    values = {series["label"]: [] for series in series_specs}
+    values = {k: [] for k in series_names}
     for cat in radar_categories:
         total = cat_data[cat]["total"]
-        for series in series_specs:
-            label = series["label"]
-            key = series["key"]
-            if key == "overall":
-                values[label].append(100.0 * total / analysis["total_samples"])
-            else:
-                denom = analysis["per_study"].get(key, 0)
-                numerator = cat_data[cat]["per_study"].get(key, 0)
-                values[label].append(100.0 * numerator / denom if denom else 0.0)
+        values["Overall"].append(100.0 * total / analysis["total_samples"])
+        values["Study A"].append(100.0 * cat_data[cat]["per_study"]["A"] / analysis["per_study"]["A"])
+        values["Study B"].append(100.0 * cat_data[cat]["per_study"]["B"] / analysis["per_study"]["B"])
+        values["Study C"].append(100.0 * cat_data[cat]["per_study"]["C"] / analysis["per_study"]["C"])
 
     # Radar setup
     n = len(radar_categories)
@@ -988,29 +866,22 @@ def plot_single_overview_radar(analysis):
     ax.set_theta_direction(-1)
     ax.set_xticks(angles[:-1])
     ax.set_xticklabels(radar_categories, fontsize=10)
-    max_series_value = max((max(v) for v in values.values()), default=0.0)
-    y_max = max(40, int(np.ceil(max_series_value / 10.0) * 10))
-    tick_step = 10 if y_max <= 60 else 20
-    y_ticks = list(range(tick_step, y_max + tick_step, tick_step))
-    ax.set_ylim(0, y_max)
-    ax.set_yticks(y_ticks)
-    ax.set_yticklabels([f"{tick}%" for tick in y_ticks], fontsize=8, color=TEXT_MID)
+    ax.set_ylim(0, 40)
+    ax.set_yticks([10, 20, 30, 40])
+    ax.set_yticklabels(["10%", "20%", "30%", "40%"], fontsize=8, color=TEXT_MID)
     ax.grid(color=GRID_LIGHT, linewidth=0.7, alpha=0.8)
     ax.set_facecolor(WHITE)
 
-    for series in series_specs:
-        name = series["label"]
-        key = series["key"]
-        colour = series_colours.get(key, BLUE)
+    for name in series_names:
         v = values[name] + values[name][:1]
-        ax.plot(angles, v, color=colour, linewidth=2.0, label=name)
-        ax.fill(angles, v, color=colour, alpha=0.08)
+        ax.plot(angles, v, color=series_colours[name], linewidth=2.0, label=name)
+        ax.fill(angles, v, color=series_colours[name], alpha=0.08)
 
     # Legend below the radar, paper style
     legend = ax.legend(
         loc="lower center",
         bbox_to_anchor=(0.5, -0.2),
-        ncol=min(3, max(1, len(series_specs))),
+        ncol=4,
         frameon=True,
         facecolor=WHITE,
         edgecolor="#D1D5DB",
@@ -1026,10 +897,7 @@ def plot_single_overview_radar(analysis):
         "Clinical Coverage Summary",
         "",
         f"Total samples: {analysis['total_samples']:,}",
-        "Studies: " + "  ".join(
-            f"{analysis.get('study_labels', {}).get(study, study)}={count:,}"
-            for study, count in analysis["per_study"].items()
-        ),
+        f"Studies: A={analysis['per_study']['A']:,}  B={analysis['per_study']['B']:,}  C={analysis['per_study']['C']:,}",
         f"DSM-5 categories: {len(analysis['diagnostic_categories'])}",
         f"Unique conditions: {analysis['total_unique_conditions']}",
         "",
@@ -1053,7 +921,7 @@ def plot_single_overview_radar(analysis):
     )
     fig.text(
         0.055, 0.03,
-        "Figure: Radar profile of top DSM-5 diagnostic categories across the overall clinical benchmark and the available study distributions.",
+        "Figure: Radar profile of top DSM-5 diagnostic categories across Overall and Study A/B/C distributions.",
         fontsize=10, color=TEXT_DARK
     )
 
@@ -1071,11 +939,11 @@ def print_summary(analysis):
 
     print(f"\nTotal samples: {analysis['total_samples']:,}")
     for st, n in analysis["per_study"].items():
-        print(f"  {analysis.get('study_labels', {}).get(st, st)}: {n:,}")
+        print(f"  Study {st}: {n:,}")
 
     print(f"\nTotal unique conditions: {analysis['total_unique_conditions']}")
     for st, n in analysis["unique_conditions_per_study"].items():
-        print(f"  {analysis.get('study_labels', {}).get(st, st)}: {n}")
+        print(f"  Study {st}: {n}")
 
     print(f"\nDSM-5 Diagnostic Categories ({len(analysis['diagnostic_categories'])}):")
     for cat, info in analysis["diagnostic_categories"].items():
