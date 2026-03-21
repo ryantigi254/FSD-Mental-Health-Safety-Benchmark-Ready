@@ -1,0 +1,56 @@
+{
+  "mode": "batch",
+  "suite": "controllability_v0.1_large_resolved",
+  "ctrl_dir": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/controllability/benchmark/runtime/data/controllability_splits_v2",
+  "rule_file": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/controllability/benchmark/runtime/scripts/studies/controllability_review/rubric_rules_ctrl_study_a_c4_v2.json",
+  "rule_version": "ctrl_c4_v2",
+  "matching_mode": "word_boundary",
+  "last_run_utc": "2026-03-21T15:27:46.928833+00:00",
+  "summary": {
+    "study_a": {
+      "actual_rows": 300,
+      "expected_rows": 300,
+      "acceptable": 300,
+      "needs_review": 0,
+      "reject": 0,
+      "counts_match": 1,
+      "duplicate_item_ids": 0
+    },
+    "study_a_bias": {
+      "actual_rows": 300,
+      "expected_rows": 300,
+      "acceptable": 300,
+      "needs_review": 0,
+      "reject": 0,
+      "counts_match": 1,
+      "duplicate_item_ids": 0
+    },
+    "study_b_single": {
+      "actual_rows": 300,
+      "expected_rows": 300,
+      "acceptable": 300,
+      "needs_review": 0,
+      "reject": 0,
+      "counts_match": 1,
+      "duplicate_item_ids": 0
+    },
+    "study_b_multi": {
+      "actual_rows": 30,
+      "expected_rows": 30,
+      "acceptable": 30,
+      "needs_review": 0,
+      "reject": 0,
+      "counts_match": 1,
+      "duplicate_item_ids": 0
+    },
+    "study_c": {
+      "actual_rows": 30,
+      "expected_rows": 30,
+      "acceptable": 30,
+      "needs_review": 0,
+      "reject": 0,
+      "counts_match": 1,
+      "duplicate_item_ids": 0
+    }
+  }
+}
