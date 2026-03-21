@@ -1,0 +1,132 @@
+{
+  "version": "v6.1",
+  "description": "Strict no-generation clinically ready frozen split — rubric v2 scored, stage2 gated, construct validated, deterministic edits only",
+  "created_utc": "2026-03-21T22:01:30.604407+00:00",
+  "supersedes": "v6",
+  "generation_policy": "strict_no_generation",
+  "turn_count_policy": "exact_count_with_manual_review",
+  "sources": {
+    "study_a": "v6 direct_source (unchanged prompts, 100% rubric ACCEPTABLE)",
+    "study_a_bias": "v5 source_anchored_deterministic_edit (cue insertion, no generation)",
+    "study_b_single": "v5 direct_source (construct validated, 95.3% pass)",
+    "study_b_multi_turn": "v6 retrieved_composed + direct_source (20 turns, no generation)",
+    "study_c": "v6 retrieved_composed + direct_source (20 turns, no generation)"
+  },
+  "provenance_taxonomy": [
+    "direct_source",
+    "retrieved_composed",
+    "source_anchored_deterministic_edit"
+  ],
+  "pipeline": {
+    "gate_thresholds": {
+      "single_turn_cosine_min": 0.88,
+      "multi_turn_edit_cosine_min": 0.82,
+      "summary_coherence_cosine_min": 0.78,
+      "bias_fuzz_min": 85,
+      "multi_turn_fuzz_min": 70
+    },
+    "protected_categories": [
+      "suicidality",
+      "self_harm",
+      "medications",
+      "allergies",
+      "age",
+      "duration",
+      "family_history"
+    ],
+    "forbidden": [
+      "language_model_generation",
+      "masked_infill",
+      "edit_model",
+      "generative_fallback"
+    ]
+  },
+  "validation": {
+    "rubric_version": "v2",
+    "rubric_matching_mode": "word_boundary",
+    "cross_study_review": {
+      "study_a": {
+        "rows": 2000,
+        "acceptable": 2000,
+        "needs_review": 0,
+        "reject": 0
+      },
+      "study_b_single": {
+        "rows": 2000,
+        "acceptable": 2000,
+        "needs_review": 0,
+        "reject": 0
+      },
+      "study_b_multi": {
+        "rows": 120,
+        "acceptable": 120,
+        "needs_review": 0,
+        "reject": 0
+      },
+      "study_c": {
+        "rows": 100,
+        "acceptable": 100,
+        "needs_review": 0,
+        "reject": 0
+      }
+    },
+    "stage2_gates": {
+      "label_policy": "2034/2034 PASS (100%)",
+      "multiturn_uniqueness": "120/120 unique (0 duplicates)",
+      "construct_validation": "95.3% pass (≥90% threshold)"
+    }
+  },
+  "multi_turn_contract": {
+    "turns_per_case": 20,
+    "phase_map": {
+      "1-4": "presentation / clarification",
+      "5-8": "elaboration / resistance onset",
+      "9-12": "pressure or instability escalation",
+      "13-16": "conflict, doubt, or clarification under strain",
+      "17-20": "consolidation, boundary test, or summary-oriented closure"
+    }
+  },
+  "manual_review": {
+    "study_b_multi_turn_reviewed": 0,
+    "study_c_reviewed": 0,
+    "policy": "unresolved turns go to manual review, not generation"
+  },
+  "files": [
+    {
+      "name": "adversarial_bias/biased_vignettes.json",
+      "sha256": "c65ad0ece6dbb3a302580364ab2ed735d79625f6021ef476f82a0fd140a6e97e"
+    },
+    {
+      "name": "entity_evidence_map.json",
+      "sha256": "98d479cd2a1b852f8e283b01679e76f44942e92c037d20839f29231a8354991f"
+    },
+    {
+      "name": "gold_diagnosis_labels.json",
+      "sha256": "2eedaea53664864582f1a095be2ffb2e5436d9dfef2e71f7ae0b0502146a6285"
+    },
+    {
+      "name": "gold_diagnosis_metadata.json",
+      "sha256": "14f6f5d6d0e52ebd1b9b82768b82cec6577f6e8692dfe007b619a007d206a6b4"
+    },
+    {
+      "name": "gold_labels_mapping.json",
+      "sha256": "fa2c3ee6a8c192afa00a609965817d4acaa51f867daac68504c5d37d81fa60a5"
+    },
+    {
+      "name": "study_a_test.json",
+      "sha256": "a33b8b5658fef50084b708c90f68220b6c0625a28d1118e57fccec22cd84b417"
+    },
+    {
+      "name": "study_b_multi_turn_test.json",
+      "sha256": "e20b85bbbdeedc883ae8116fab24745d9c2a19cb645915b82a80f6317d7b2839"
+    },
+    {
+      "name": "study_b_test.json",
+      "sha256": "84737233b6ad638de1c80a753735378f2cccd66dc9fe7ac2b429da2f79dbc5fd"
+    },
+    {
+      "name": "study_c_test.json",
+      "sha256": "66d49c40053992af3436acdf81ebed692b3b196960ef76747ac1049947e7afcf"
+    }
+  ]
+}
