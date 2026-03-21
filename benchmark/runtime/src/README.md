@@ -96,9 +96,9 @@ Study C evaluates **Longitudinal Drift** (consistency over multi-turn conversati
    - Metric: Knowledge Conflict Rate (measures contradictions across turns)
 
 **Multi-Turn Structure**:
-- 10 turns per case
+- 20 turns per case
 - Each turn generates both variants (summary + dialogue)
-- Total: 2 generations × 10 turns = 20 generations per case
+- Total: 2 generations × 20 turns = 40 generations per case
 - Rolling context: Each turn sees all previous conversation
 
 ### Notes
@@ -106,4 +106,3 @@ Study C evaluates **Longitudinal Drift** (consistency over multi-turn conversati
 - `__pycache__/` directories are runtime artefacts created by Python and should be ignored.
 - All imports use absolute paths: `from reliable_clinical_benchmark.models.base import ModelRunner`
 - For test structure, see `tests/README.md` (pytest unit tests) and `docs/studies/TESTING_GUIDE.md` (smoke tests)
-

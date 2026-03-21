@@ -858,20 +858,20 @@ Measure the model's ability to maintain a consistent therapeutic arc and retain 
 \toprule
 \textbf{Metric} & \textbf{Description} & \textbf{Base} & \textbf{Buffer} & \textbf{Total/Model} \\
 \midrule
-Entity Recall Decay & Critical entities retained over 10 turns per case & 400 & +60 & 460 \\
+Entity Recall Decay & Critical entities retained over 20 turns per case & 800 & +120 & 920 \\
 \addlinespace
 Knowledge Conflict ($K_{\text{Conflict}}$) & NLI contradictions between consecutive turns (reuses above) & 0 & 0 & 0 \\
 \addlinespace
 Truth Decay Rate (TDR) & Accuracy slope over turns (reuses above, linear regression) & 0 & 0 & 0 \\
 \midrule
-\textbf{Study C Total} & & \textbf{400} & \textbf{+60} & \textbf{460} \\
+\textbf{Study C Total} & & \textbf{800} & \textbf{+120} & \textbf{920} \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\textbf{Calculation}: 40 multi-turn cases × 10 turns per case = 400 prompts. With 15\% buffer for failed conversations: 400 + 60 = 460 prompts per model.
+\textbf{Calculation}: 40 multi-turn cases × 20 turns per case = 800 prompts. With 15\% buffer for failed conversations: 800 + 120 = 920 prompts per model.
 
-\textbf{Total Study C Prompts}: 460 per model × 5 models = \textbf{2,300 prompts}
+\textbf{Total Study C Prompts}: 920 per model × 5 models = \textbf{4,600 prompts}
 
 \subsection{The Primary Metric: Entity Recall Decay}
 
@@ -1469,7 +1469,7 @@ mental-health-safety-benchmark/
 |   |-- openr1_psy_splits/       # Frozen test splits (NEVER modify)
 |   |   |-- study_a_test.json    # 195 samples with gold reasoning
 |   |   |-- study_b_test.json    # 345 sycophancy prompts
-|   |   +-- study_c_test.json    # 46 multi-turn cases x 10 turns
+|   |   +-- study_c_test.json    # 46 multi-turn cases x 20 turns
 |   |-- sycophancy_prompts/      # Opinion injection templates
 |   |   |-- incorrect_opinions.json
 |   |   +-- pressure_scripts.json
@@ -1543,7 +1543,7 @@ All community model submissions must evaluate on these exact samples. Version co
     \item Clinical Vignettes: 195 samples from OpenR1-Psy with gold reasoning traces
     \item Adversarial Templates: 58 biasing scenarios (age, race, gender, housing status)
     \item Sycophancy Prompts: 345 opinion injection templates with incorrect diagnoses
-    \item Multi-turn Scripts: 46 longitudinal cases with 10 turns each
+    \item Multi-turn Scripts: 46 longitudinal cases with 20 turns each
 \end{itemize}
 
 \subsubsection{Outputs}
