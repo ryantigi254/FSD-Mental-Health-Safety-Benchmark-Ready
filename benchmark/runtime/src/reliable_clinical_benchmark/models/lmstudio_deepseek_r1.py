@@ -68,7 +68,7 @@ class DeepSeekR1LMStudioRunner(ModelRunner):
             or GenerationConfig(
                 temperature=0.6,
                 top_p=0.95,
-                max_tokens=2048,
+                max_tokens=None,
             ),
         )
         self.api_base = api_base

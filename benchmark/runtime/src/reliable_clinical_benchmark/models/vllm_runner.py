@@ -13,6 +13,7 @@ Default port assignments (one model per GPU at a time):
     Psych_Qwen_32B    → 8104
 """
 
+import os
 import re
 from typing import Dict, List, Optional, Tuple
 
@@ -53,9 +54,28 @@ def _extract_answer_and_reasoning(full_response: str) -> Tuple[str, str]:
 
 # ── Runner ──────────────────────────────────────────────────────────────────
 
-# vLLM enforces input_tokens + max_tokens <= max_model_len.
-# With --max-model-len 24576, we reserve headroom for the prompt.
-_VLLM_MAX_COMPLETION_TOKENS = 16384
+# vLLM validates requests against max_model_len server-side.
+# If max_tokens is omitted, vLLM validates only the prompt length against the
+# server's configured max_model_len. We keep the legacy caps as optional
+# env-driven explicit limits rather than forcing them on every request.
+#
+# Env overrides (precedence high -> low):
+# 1) VLLM_MAX_COMPLETION_TOKENS               (global override for all models)
+# 2) VLLM_MAX_COMPLETION_TOKENS_PSYCH_QWEN    (Psych_Qwen only)
+# 3) VLLM_MAX_COMPLETION_TOKENS_DEFAULT       (all non-Psych_Qwen models)
+# 4) no client-side cap by default
+_DEFAULT_NON_PSYCH_QWEN_CAP = os.environ.get("VLLM_MAX_COMPLETION_TOKENS_DEFAULT")
+_DEFAULT_PSYCH_QWEN_CAP = os.environ.get("VLLM_MAX_COMPLETION_TOKENS_PSYCH_QWEN")
+
+
+def _resolve_model_max_completion_tokens(model_name: str) -> Optional[int]:
+    global_override = os.environ.get("VLLM_MAX_COMPLETION_TOKENS")
+    if global_override:
+        return int(global_override)
+    name = (model_name or "").lower()
+    if "psych_qwen" in name or "compumacy/psych_qwen_32b" in name:
+        return int(_DEFAULT_PSYCH_QWEN_CAP) if _DEFAULT_PSYCH_QWEN_CAP else None
+    return int(_DEFAULT_NON_PSYCH_QWEN_CAP) if _DEFAULT_NON_PSYCH_QWEN_CAP else None
 
 
 class VLLMRunner(ModelRunner):
@@ -73,11 +93,17 @@ class VLLMRunner(ModelRunner):
         host: str = "127.0.0.1",
         config: Optional[GenerationConfig] = None,
     ):
-        if config is not None and config.max_tokens > _VLLM_MAX_COMPLETION_TOKENS:
+        model_max_tokens = _resolve_model_max_completion_tokens(model_name)
+        if (
+            config is not None
+            and config.max_tokens is not None
+            and model_max_tokens is not None
+            and config.max_tokens > model_max_tokens
+        ):
             config = GenerationConfig(
                 temperature=config.temperature,
                 top_p=config.top_p,
-                max_tokens=_VLLM_MAX_COMPLETION_TOKENS,
+                max_tokens=model_max_tokens,
             )
         super().__init__(
             model_name,
@@ -85,7 +111,7 @@ class VLLMRunner(ModelRunner):
             or GenerationConfig(
                 temperature=0.7,
                 top_p=0.9,
-                max_tokens=_VLLM_MAX_COMPLETION_TOKENS,
+                max_tokens=None,
             ),
         )
         self.api_base = f"http://{host}:{port}/v1"

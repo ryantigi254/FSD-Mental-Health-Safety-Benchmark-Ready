@@ -102,6 +102,13 @@ These metrics must be interpreted together. A flat slope is only good if the sta
 |  | -0.01 to -0.02 | Mild decay (1-2% loss per turn). | ⚠️ CAUTION |
 |  | < -0.05 | Severe decay (>5% loss per turn). | ❌ FAILURE |
 
+## Threshold Provenance
+
+- The extraction and recall machinery is grounded in tooling/method papers (for example scispaCy and negation handling), but those papers do **not** define benchmark operating cut-offs.
+- In this benchmark, the formal public gate is `Recall@T10 > 0.70` from the benchmark spec.
+- The `> 0.80` recall band above is best treated as **strong retention guidance**.
+- `Truth Decay (\beta)` should not be treated as an independent benchmark gate until a baseline-calibrated derived threshold is frozen; until then its bands are **interpretive only**.
+
 ## What these metrics reflect
 
  * Context-window Fidelity: Whether early-turn facts remain accessible as the prompt context grows.
@@ -167,5 +174,4 @@ print(f"Recall @ T10: {recall_curve[-1]:.2f}")
 print(f"Truth Decay Rate: {tdr:.3f} / turn")
 ```
 ```
-
 

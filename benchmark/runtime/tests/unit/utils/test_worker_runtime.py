@@ -9,11 +9,14 @@ from typing import Optional
 import pytest
 
 from reliable_clinical_benchmark.models.base import GenerationConfig, ModelRunner
+from reliable_clinical_benchmark.models.vllm_runner import VLLMRunner
 from reliable_clinical_benchmark.utils.worker_runtime import (
     append_jsonl_with_retry,
     is_lmstudio_runner,
+    is_vllm_runner,
     iter_threaded_results,
     resolve_worker_count,
+    supports_parallel_workers,
 )
 
 
@@ -45,8 +48,19 @@ def test_worker_count_fallback_for_non_lm_runner() -> None:
 def test_worker_count_allows_parallel_for_lm_runner() -> None:
     runner = _DummyLMStudioRunner()
     assert is_lmstudio_runner(runner)
+    assert supports_parallel_workers(runner)
     assert resolve_worker_count(4, runner) == 4
     assert resolve_worker_count(None, runner) == 4
+
+
+@pytest.mark.unit
+def test_worker_count_disables_parallel_for_vllm_runner() -> None:
+    runner = VLLMRunner(model_name="GMLHUHE/PsyLLM-8B", port=8101, config=GenerationConfig(max_tokens=64))
+    assert is_lmstudio_runner(runner)
+    assert is_vllm_runner(runner)
+    assert not supports_parallel_workers(runner)
+    assert resolve_worker_count(4, runner) == 1
+    assert resolve_worker_count(None, runner) == 1
 
 
 @pytest.mark.unit

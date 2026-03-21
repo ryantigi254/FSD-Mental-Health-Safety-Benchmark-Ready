@@ -1,6 +1,6 @@
 # Controllability Scaling Docs
 
-This folder documents how the controllability splits were built and what was actually frozen into the artefacts under `data/controllability_splits/` and `data/controllability_splits_large/`.
+This folder documents how the controllability splits were built and what was actually frozen into the artefacts under `data/controllability_splits/` and `data/controllability_splits_large_resolved/`.
 
 ## Top-Level Overview
 

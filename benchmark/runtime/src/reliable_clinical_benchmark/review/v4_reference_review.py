@@ -418,6 +418,40 @@ def score_study_a_bias(item: dict[str, Any], id_unique: bool = True) -> dict[str
     return {**checks, "mapped_contract_pass": mapped_contract_pass, "verdict": verdict, "reason_codes": reason_codes}
 
 
+def score_study_a_bias(item: dict[str, Any], id_unique: bool = True) -> dict[str, Any]:
+    metadata = item.get("metadata", {}) if isinstance(item.get("metadata"), dict) else {}
+    inferred_condition = str(metadata.get("inferred_condition", "") or "").strip().lower()
+
+    checks = {
+        "prompt_nonempty": 1 if str(item.get("prompt", "") or "").strip() else 0,
+        "bias_feature_nonempty": 1 if str(item.get("bias_feature", "") or "").strip() else 0,
+        "bias_label_nonempty": 1 if str(item.get("bias_label", "") or "").strip() else 0,
+        "dimension_present": 1 if str(metadata.get("dimension", "") or "").strip() else 0,
+        "dimension_family_present": 1 if str(metadata.get("dimension_family", "") or "").strip() else 0,
+        "source_openr1_id_present": 1
+        if metadata.get("source_openr1_id") is not None or metadata.get("source_openr1_ids")
+        else 0,
+        "inferred_condition_present": 1 if inferred_condition and inferred_condition != "unresolved" else 0,
+        "condition_resolution_source_present": 1
+        if str(metadata.get("condition_resolution_source", "") or "").strip()
+        else 0,
+        "id_unique": 1 if id_unique else 0,
+    }
+
+    mapped_contract_pass = 1 if all(v == 1 for v in checks.values()) else 0
+    fail_count = sum(1 for v in checks.values() if v == 0)
+
+    if fail_count == 0:
+        verdict = "ACCEPTABLE"
+    elif fail_count == 1:
+        verdict = "NEEDS_REVIEW"
+    else:
+        verdict = "REJECT"
+
+    reason_codes = [k for k, v in checks.items() if v == 0]
+    return {**checks, "mapped_contract_pass": mapped_contract_pass, "verdict": verdict, "reason_codes": reason_codes}
+
+
 def score_study_b_multi(item: dict[str, Any]) -> dict[str, Any]:
     turns = item.get("turns", [])
     if not isinstance(turns, list):

@@ -67,6 +67,227 @@ class StudyCResultSchema:
         return {k: v for k, v in result.items() if v is not None}
 
 
+@dataclass
+class ControllabilityThresholdSchema:
+    """Threshold provenance for controllability-facing metrics."""
+
+    metric_name: str
+    threshold_value: float
+    direction: str
+    threshold_source: str
+    threshold_source_path: str
+    status: str
+    freeze_stage: str
+    enforcement_mode: str
+    public_safety_gate: bool
+    meets_threshold: Optional[bool] = None
+    notes: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = asdict(self)
+        return {k: v for k, v in result.items() if v is not None}
+
+
+@dataclass
+class ControlledMetricProfileSchema:
+    """Per-metric controlled performance profile entry."""
+
+    metric_name: str
+    classification: str
+    controlled_value: Optional[float]
+    baseline_value: Optional[float] = None
+    delta_from_baseline: Optional[float] = None
+    compliance_anchor: Optional[float] = None
+    outcome_gain: Optional[float] = None
+    control_score: Optional[float] = None
+    included_in_rollup: bool = False
+    threshold: Optional[ControllabilityThresholdSchema] = None
+    notes: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = asdict(self)
+        if self.threshold is not None:
+            result["threshold"] = self.threshold.to_dict()
+        return {k: v for k, v in result.items() if v is not None}
+
+
+@dataclass
+class ControllabilityPrimaryMetricSchema:
+    """Primary controllability metric output for a study."""
+
+    metric_name: str
+    value: float
+    n_total: int
+    n_compliant: int
+    ci_lower: float = 0.0
+    ci_upper: float = 0.0
+    notes: Optional[str] = None
+    threshold: Optional[ControllabilityThresholdSchema] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = asdict(self)
+        if self.threshold is not None:
+            result["threshold"] = self.threshold.to_dict()
+        return {k: v for k, v in result.items() if v is not None}
+
+
+@dataclass
+class ControllabilityAggregateSchema:
+    """Experimental study- or benchmark-level controllability roll-up."""
+
+    score: Optional[float]
+    weighting_policy: str
+    experimental: bool
+    provisional_components: bool
+    missing_components: list
+    notes: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = asdict(self)
+        return {k: v for k, v in result.items() if v is not None}
+
+
+@dataclass
+class ControllabilityStudyResultSchema:
+    """Structured controllability result payload for one study."""
+
+    model: str
+    study: str
+    primary_metric: ControllabilityPrimaryMetricSchema
+    controlled_profile: list
+    aggregate: ControllabilityAggregateSchema
+    baseline_source: Optional[str] = None
+    source_cache: Optional[str] = None
+    generated_at: Optional[str] = None
+    notes: Optional[list] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = {
+            "model": self.model,
+            "study": self.study,
+            "primary_metric": self.primary_metric.to_dict(),
+            "controlled_profile": [
+                entry.to_dict() if hasattr(entry, "to_dict") else entry
+                for entry in self.controlled_profile
+            ],
+            "aggregate": self.aggregate.to_dict(),
+        }
+        if self.baseline_source is not None:
+            result["baseline_source"] = self.baseline_source
+        if self.source_cache is not None:
+            result["source_cache"] = self.source_cache
+        if self.generated_at is not None:
+            result["generated_at"] = self.generated_at
+        if self.notes is not None:
+            result["notes"] = self.notes
+        return result
+
+
+@dataclass
+class ControllabilityBenchmarkResultSchema:
+    """Top-level controllability summary across studies."""
+
+    model: str
+    studies: Dict[str, Dict[str, Any]]
+    benchmark_control: ControllabilityAggregateSchema
+    generated_at: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = {
+            "model": self.model,
+            "studies": self.studies,
+            "benchmark_control": self.benchmark_control.to_dict(),
+        }
+        if self.generated_at is not None:
+            result["generated_at"] = self.generated_at
+        return result
+
+
+@dataclass
+class ControllabilityV2ArmResultSchema:
+    """Arm-aware controllability result block for one study arm."""
+
+    arm: str
+    primary_metric: Dict[str, Any]
+    task_metrics: Dict[str, Any]
+    counts: Dict[str, Any]
+    notes: Optional[list] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = asdict(self)
+        return {k: v for k, v in result.items() if v is not None}
+
+
+@dataclass
+class ControllabilityV2ArmDeltaSchema:
+    """Pairwise delta block between two controllability arms."""
+
+    from_arm: str
+    to_arm: str
+    n_pairs: int
+    metrics: Dict[str, Any]
+    notes: Optional[list] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = asdict(self)
+        return {k: v for k, v in result.items() if v is not None}
+
+
+@dataclass
+class ControllabilityV2StudyResultSchema:
+    """Structured arm-aware controllability result payload for one study."""
+
+    model: str
+    study: str
+    arms: Dict[str, ControllabilityV2ArmResultSchema]
+    pairwise_deltas: list
+    source_cache: Optional[str] = None
+    generated_at: Optional[str] = None
+    exclusions: Optional[Dict[str, Any]] = None
+    notes: Optional[list] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = {
+            "model": self.model,
+            "study": self.study,
+            "arms": {
+                arm_name: arm_result.to_dict() if hasattr(arm_result, "to_dict") else arm_result
+                for arm_name, arm_result in self.arms.items()
+            },
+            "pairwise_deltas": [
+                entry.to_dict() if hasattr(entry, "to_dict") else entry
+                for entry in self.pairwise_deltas
+            ],
+        }
+        if self.source_cache is not None:
+            result["source_cache"] = self.source_cache
+        if self.generated_at is not None:
+            result["generated_at"] = self.generated_at
+        if self.exclusions is not None:
+            result["exclusions"] = self.exclusions
+        if self.notes is not None:
+            result["notes"] = self.notes
+        return result
+
+
+@dataclass
+class ControllabilityV2BenchmarkResultSchema:
+    """Top-level v2 controllability summary across arm-aware studies."""
+
+    model: str
+    studies: Dict[str, Dict[str, Any]]
+    generated_at: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = {
+            "model": self.model,
+            "studies": self.studies,
+        }
+        if self.generated_at is not None:
+            result["generated_at"] = self.generated_at
+        return result
+
+
 def load_study_results(results_dir: str, model_name: str) -> Dict[str, Any]:
     """
     Load all study results for a model.
@@ -84,12 +305,55 @@ def load_study_results(results_dir: str, model_name: str) -> Dict[str, Any]:
     for study in ["A", "B", "C"]:
         result_file = results_path / f"study_{study.lower()}_results.json"
         if result_file.exists():
-            with open(result_file, "r") as f:
+            with open(result_file, "r", encoding="utf-8") as f:
                 results[study] = json.load(f)
         else:
             results[study] = None
 
     return results
+
+
+def load_controllability_results(results_dir: str, model_name: str) -> Dict[str, Any]:
+    """Load controllability result payloads for a model if present."""
+
+    results_path = Path(results_dir) / model_name
+    results = {}
+
+    file_map = {
+        "A": "ctrl_study_a_results.json",
+        "A_bias": "ctrl_study_a_bias_results.json",
+        "B": "ctrl_study_b_results.json",
+        "B_multi_turn": "ctrl_study_b_multi_turn_results.json",
+        "C": "ctrl_study_c_results.json",
+    }
+
+    for study, filename in file_map.items():
+        result_file = results_path / filename
+        if not result_file.exists():
+            legacy_v2_file = results_path / filename.replace("ctrl_study_", "ctrl_v2_study_")
+            result_file = legacy_v2_file
+        if result_file.exists():
+            with open(result_file, "r", encoding="utf-8") as f:
+                results[study] = json.load(f)
+        else:
+            results[study] = None
+
+    summary_file = results_path / "controllability_summary.json"
+    if not summary_file.exists():
+        summary_file = results_path / "controllability_v2_summary.json"
+    if summary_file.exists():
+        with open(summary_file, "r", encoding="utf-8") as f:
+            results["summary"] = json.load(f)
+    else:
+        results["summary"] = None
+
+    return results
+
+
+def load_controllability_v2_results(results_dir: str, model_name: str) -> Dict[str, Any]:
+    """Compatibility alias for loading canonical arm-aware controllability results."""
+
+    return load_controllability_results(results_dir, model_name)
 
 
 def compute_safety_score(results: Dict[str, Any]) -> float:

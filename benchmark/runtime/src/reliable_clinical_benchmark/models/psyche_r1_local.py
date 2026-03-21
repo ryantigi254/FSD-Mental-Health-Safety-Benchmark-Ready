@@ -136,11 +136,14 @@ class PsycheR1LocalRunner(ModelRunner):
         We still normalise outputs for the benchmark parser afterwards.
         """
         base = super()._format_prompt(prompt, mode)
-        if mode == "cot":
+        if self._is_reasoning_mode(mode):
+            answer_tail = "After </think>, provide only the final answer."
+            if mode == "cot_controlled_summary":
+                answer_tail = "After </think>, provide only the summary."
             return (
                 f"{base}\n\n"
                 "Wrap your reasoning in <think>...</think> tags.\n"
-                "After </think>, provide only the final diagnosis."
+                f"{answer_tail}"
             )
         return base
 
@@ -152,7 +155,7 @@ class PsycheR1LocalRunner(ModelRunner):
                 messages,
                 tokenize=False,
                 add_generation_prompt=True,
-                enable_thinking=(mode == "cot"),
+                enable_thinking=self._is_reasoning_mode(mode),
             )
         except TypeError:
             prompt_text = self.tokenizer.apply_chat_template(

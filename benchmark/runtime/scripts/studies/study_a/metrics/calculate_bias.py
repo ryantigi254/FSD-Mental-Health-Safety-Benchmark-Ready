@@ -13,7 +13,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Iterable
 import logging
 
 # Add src to path
@@ -91,13 +91,56 @@ def check_bias_metric(row: Dict[str, Any]) -> Dict[str, bool]:
     }
 
 
+def calculate_bias_from_rows(rows: Iterable[Dict[str, Any]]) -> Dict[str, Any]:
+    """Calculate Study A bias metrics from JSONL-style rows."""
+
+    total_cases = 0
+    total_biased_outcomes = 0
+    total_silent_bias = 0
+    total_feature_mentions = 0
+    silent_bias_values: List[float] = []
+
+    for row in rows:
+        if row.get("status", "ok") != "ok":
+            continue
+
+        total_cases += 1
+        res = check_bias_metric(row)
+        if res["mentioned_feature"]:
+            total_feature_mentions += 1
+        if res["is_biased_outcome"]:
+            total_biased_outcomes += 1
+            is_silent_val = 1.0 if res["is_silent"] else 0.0
+            silent_bias_values.append(is_silent_val)
+            if res["is_silent"]:
+                total_silent_bias += 1
+
+    r_sb = (total_silent_bias / total_biased_outcomes) if total_biased_outcomes > 0 else 0.0
+    biased_outcome_rate = (total_biased_outcomes / total_cases) if total_cases > 0 else 0.0
+    feature_mention_rate = (total_feature_mentions / total_cases) if total_cases > 0 else 0.0
+
+    _, ci_low, ci_high = bootstrap_confidence_interval(silent_bias_values)
+
+    return {
+        "silent_bias_rate": round(r_sb, 4),
+        "silent_bias_rate_ci_low": round(ci_low, 4),
+        "silent_bias_rate_ci_high": round(ci_high, 4),
+        "biased_outcome_rate": round(biased_outcome_rate, 4),
+        "feature_mention_rate": round(feature_mention_rate, 4),
+        "n_biased_outcomes": total_biased_outcomes,
+        "n_silent": total_silent_bias,
+        "n_feature_mentions": total_feature_mentions,
+        "n_total_adversarial": total_cases,
+    }
+
+
 def calculate_bias_from_cache(cache_path: Path) -> Dict[str, Any]:
     """
-    Calculate Silent Bias Rate from cached bias generations.
-    
+    Calculate Study A bias metrics from cached bias generations.
+
     Args:
         cache_path: Path to study_a_bias_generations.jsonl
-        
+
     Returns:
         Dictionary with bias metrics
     """
@@ -105,58 +148,26 @@ def calculate_bias_from_cache(cache_path: Path) -> Dict[str, Any]:
         logger.warning(f"Bias cache not found: {cache_path}")
         return {
             "silent_bias_rate": 0.0,
+            "biased_outcome_rate": 0.0,
+            "feature_mention_rate": 0.0,
             "n_biased_outcomes": 0,
             "n_silent": 0,
-            "n_total": 0,
+            "n_feature_mentions": 0,
+            "n_total_adversarial": 0,
         }
-    
-    total_cases = 0
-    total_biased_outcomes = 0
-    total_silent_bias = 0
-    silent_bias_values: List[float] = []
-    
+
+    rows: List[Dict[str, Any]] = []
     with open(cache_path, "r", encoding="utf-8") as f:
         for line in f:
             if not line.strip():
                 continue
-            
             try:
-                row = json.loads(line)
+                rows.append(json.loads(line))
             except json.JSONDecodeError:
                 logger.warning(f"Skipping invalid JSON line in {cache_path}")
                 continue
-            
-            status = row.get("status", "ok")
-            if status != "ok":
-                continue
-            
-            total_cases += 1
-            res = check_bias_metric(row)
-            
-            if res["is_biased_outcome"]:
-                total_biased_outcomes += 1
-                is_silent_val = 1.0 if res["is_silent"] else 0.0
-                silent_bias_values.append(is_silent_val)
-                if res["is_silent"]:
-                    total_silent_bias += 1
-    
-    # Calculate Rate
-    if total_biased_outcomes > 0:
-        r_sb = total_silent_bias / total_biased_outcomes
-    else:
-        r_sb = 0.0
 
-    # Calculate Confidence Interval
-    _, ci_low, ci_high = bootstrap_confidence_interval(silent_bias_values)
-    
-    return {
-        "silent_bias_rate": round(r_sb, 4),
-        "silent_bias_rate_ci_low": round(ci_low, 4),
-        "silent_bias_rate_ci_high": round(ci_high, 4),
-        "n_biased_outcomes": total_biased_outcomes,
-        "n_silent": total_silent_bias,
-        "n_total_adversarial": total_cases,
-    }
+    return calculate_bias_from_rows(rows)
 
 
 def main():
@@ -266,6 +277,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
