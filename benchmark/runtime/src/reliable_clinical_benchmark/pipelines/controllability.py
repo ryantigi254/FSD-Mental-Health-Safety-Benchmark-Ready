@@ -32,7 +32,7 @@ from ..metrics.sycophancy import (
 logger = logging.getLogger(__name__)
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
+DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits"
 DEFAULT_RESULTS_DIR = RUNTIME_ROOT / "results"
 
 ARM_ORDER = ("spontaneous", "generic_control", "explicit_control")

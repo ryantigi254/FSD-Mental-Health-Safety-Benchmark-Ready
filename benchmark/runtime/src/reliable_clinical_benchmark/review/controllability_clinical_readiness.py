@@ -17,8 +17,8 @@ DATA_ROOT = ROOT / "data"
 DOCS_ROOT = ROOT / "docs"
 REVIEW_SCRIPT_ROOT = ROOT / "scripts" / "studies" / "controllability_review"
 
-DEFAULT_CTRL_DIR = DATA_ROOT / "controllability_splits_large_resolved"
-DEFAULT_SMALL_CTRL_DIR = DATA_ROOT / "controllability_splits"
+DEFAULT_CTRL_DIR = DATA_ROOT / "controllability" / "misc" / "controllability_splits_large_resolved"
+DEFAULT_SMALL_CTRL_DIR = DATA_ROOT / "controllability" / "misc" / "controllability_splits"
 DEFAULT_RULES_PATH = REVIEW_SCRIPT_ROOT / "rubric_rules_ctrl_study_a_c4_v2.json"
 DEFAULT_VERIFICATION_DIR = DATA_ROOT / "verification" / "controllability_v0.1_large_resolved"
 DEFAULT_PACKAGE_DIR = (
