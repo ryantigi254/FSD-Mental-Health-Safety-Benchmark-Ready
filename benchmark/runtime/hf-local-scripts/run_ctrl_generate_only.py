@@ -31,9 +31,9 @@ from typing import Any, Callable, Dict, Iterable, List, Optional, Set
 
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
+DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits"
 DEFAULT_BIAS_DATA_PATH = (
-    RUNTIME_ROOT / "data" / "controllability_splits" / "study_a_bias_controllability_test.json"
+    RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits" / "study_a_bias_controllability_test.json"
 )
 
 ARM_SPONTANEOUS = "spontaneous"
@@ -729,7 +729,7 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help=(
             "Directory containing controllability split files. "
-            "Defaults to benchmark/runtime/data/controllability_splits."
+            "Defaults to benchmark/runtime/data/controllability/misc/controllability_splits."
         ),
     )
     parser.add_argument(

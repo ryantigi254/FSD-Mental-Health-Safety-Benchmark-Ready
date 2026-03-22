@@ -32,7 +32,7 @@ from transformers import AutoModel, AutoModelForSequenceClassification, AutoToke
 
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_SPLIT_PATH = RUNTIME_ROOT / "data" / "controllability_splits" / "study_a_controllability_test.json"
+DEFAULT_SPLIT_PATH = RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits" / "study_a_controllability_test.json"
 DEFAULT_OUTPUT_PATH = Path("/tmp/diagnosis_backbone_benchmark.json")
 
 DEFAULT_MODELS: Dict[str, str] = {

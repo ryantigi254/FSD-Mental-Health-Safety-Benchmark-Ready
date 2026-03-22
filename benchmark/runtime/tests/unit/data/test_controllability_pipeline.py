@@ -18,7 +18,7 @@ from reliable_clinical_benchmark.utils.condition_resolution import (
 
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[3]
-CTRL_DATA_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
+CTRL_DATA_DIR = RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits"
 BUILD_SPLITS_PATH = RUNTIME_ROOT / "scripts" / "preprocessing" / "build_controllability_splits.py"
 CTRL_RUNNER_PATH = RUNTIME_ROOT / "hf-local-scripts" / "run_ctrl_generate_only.py"
 AUTO_RUNNER_PATH = RUNTIME_ROOT / "scripts" / "dev" / "run_generation_auto.py"
