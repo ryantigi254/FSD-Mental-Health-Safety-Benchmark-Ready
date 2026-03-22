@@ -8,10 +8,13 @@ from pathlib import Path
 
 import pytest
 
+from reliable_clinical_benchmark.data.release_paths import CLINICIAN_READINESS_RELEASE_ID
+
 
 BASE_DIR = Path(__file__).resolve().parents[3]
 PACKAGE_DIR = BASE_DIR / "docs" / "reports" / "clinician_package" / "v0.3"
 DATA_DIR = BASE_DIR / "data"
+STUDY_A_GOLD_DIR = DATA_DIR / "releases" / CLINICIAN_READINESS_RELEASE_ID / "study_a_gold"
 
 EXPECTED_PACKAGE_FILES = {
     "CLINICIAN_REVIEW_GUIDE.md",
@@ -80,7 +83,7 @@ def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
 
 
 def _study_a_alias_map() -> dict[str, str]:
-    canonical_path = DATA_DIR / "study_a_gold" / "label_canonical_map.json"
+    canonical_path = STUDY_A_GOLD_DIR / "label_canonical_map.json"
     payload = json.loads(canonical_path.read_text(encoding="utf-8"))
     aliases = payload.get("aliases", {}) if isinstance(payload, dict) else {}
     return aliases if isinstance(aliases, dict) else {}
@@ -91,7 +94,7 @@ def _canonicalise(label: str, alias_map: dict[str, str]) -> str:
 
 
 def _repo_derived_ed_ids() -> set[str]:
-    labels_path = DATA_DIR / "study_a_gold" / "gold_diagnosis_labels.json"
+    labels_path = STUDY_A_GOLD_DIR / "gold_diagnosis_labels.json"
     labels_payload = json.loads(labels_path.read_text(encoding="utf-8"))
     labels = labels_payload.get("labels", {}) if isinstance(labels_payload, dict) else {}
     alias_map = _study_a_alias_map()
@@ -174,7 +177,7 @@ def test_study_c_required_columns_present():
 def test_safety_sheet_includes_metadata_and_ed_union():
     path = PACKAGE_DIR / "safety_priority_review.csv"
     _, rows = _read_csv(path)
-    metadata_path = DATA_DIR / "study_a_gold" / "gold_diagnosis_metadata.json"
+    metadata_path = STUDY_A_GOLD_DIR / "gold_diagnosis_metadata.json"
     metadata_map = json.loads(metadata_path.read_text(encoding="utf-8"))
     metadata_ids = set(metadata_map.keys())
     ed_ids = _repo_derived_ed_ids()

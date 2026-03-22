@@ -11,9 +11,14 @@ from pathlib import Path
 import pytest
 
 
+from reliable_clinical_benchmark.data.release_paths import CLINICIAN_READINESS_RELEASE_ID
+
+
 BASE_DIR = Path(__file__).resolve().parents[3]
 BENCHMARK_DIR = BASE_DIR.parent
-DATA_DIR = BASE_DIR / "data" / "adversarial_bias"
+DATA_DIR = (
+    BASE_DIR / "data" / "releases" / CLINICIAN_READINESS_RELEASE_ID / "adversarial_bias"
+)
 
 CANONICAL_PATH = DATA_DIR / "biased_vignettes.json"
 LEGACY_PATH = DATA_DIR / "biased_vignettes_legacy_2016.json"

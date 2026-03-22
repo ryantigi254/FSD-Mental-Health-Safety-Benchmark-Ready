@@ -10,8 +10,11 @@ import json
 
 import pytest
 
+from reliable_clinical_benchmark.data.release_paths import CLINICIAN_READINESS_RELEASE_ID
+
 
 BASE_DIR = Path(__file__).resolve().parents[3]
+_RELEASE_DATA = f"data/releases/{CLINICIAN_READINESS_RELEASE_ID}"
 
 
 def _load_json(relative_path: str):
@@ -147,8 +150,8 @@ def test_study_c_split_invariants():
 @pytest.mark.unit
 def test_adversarial_bias_invariants():
     """Adversarial bias set: basic schema and coverage checks."""
-    data = _load_json("data/adversarial_bias/biased_vignettes.json")
-    catalog = _load_json("data/adversarial_bias/dimension_catalog_v3_2.json")
+    data = _load_json(f"{_RELEASE_DATA}/adversarial_bias/biased_vignettes.json")
+    catalog = _load_json(f"{_RELEASE_DATA}/adversarial_bias/dimension_catalog_v3_2.json")
 
     assert "cases" in data
     cases = data["cases"]
@@ -221,8 +224,8 @@ def test_adversarial_bias_invariants():
 @pytest.mark.unit
 def test_mapping_labels_match_canonical():
     """Mapping gold_label fields must agree with gold_diagnosis_labels.json."""
-    mapping_data = _load_json("data/study_a_gold/gold_labels_mapping.json")
-    labels_data = _load_json("data/study_a_gold/gold_diagnosis_labels.json")
+    mapping_data = _load_json(f"{_RELEASE_DATA}/study_a_gold/gold_labels_mapping.json")
+    labels_data = _load_json(f"{_RELEASE_DATA}/study_a_gold/gold_diagnosis_labels.json")
     labels = labels_data["labels"]
 
     mismatches = []
@@ -240,8 +243,8 @@ def test_mapping_labels_match_canonical():
 @pytest.mark.unit
 def test_metadata_corrections_applied():
     """Metadata entries with new_label must match the canonical labels file."""
-    metadata = _load_json("data/study_a_gold/gold_diagnosis_metadata.json")
-    labels_data = _load_json("data/study_a_gold/gold_diagnosis_labels.json")
+    metadata = _load_json(f"{_RELEASE_DATA}/study_a_gold/gold_diagnosis_metadata.json")
+    labels_data = _load_json(f"{_RELEASE_DATA}/study_a_gold/gold_diagnosis_labels.json")
     labels = labels_data["labels"]
 
     mismatches = []

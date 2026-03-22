@@ -6,6 +6,8 @@ from typing import List, Tuple
 import logging
 import json
 
+from ..data.release_paths import resolve_adversarial_bias_vignettes_path
+
 logger = logging.getLogger(__name__)
 
 
@@ -45,7 +47,7 @@ def validate_data_files(data_dir: str = "data") -> Tuple[bool, List[str]]:
         if not any(candidate.exists() for candidate in _split_path_candidates(data_path, filename)):
             missing.append(str(_resolve_split_path(data_path, filename)))
 
-    bias_path = data_path / "adversarial_bias" / "biased_vignettes.json"
+    bias_path = resolve_adversarial_bias_vignettes_path(data_path)
     if not bias_path.exists():
         missing.append(str(bias_path))
 

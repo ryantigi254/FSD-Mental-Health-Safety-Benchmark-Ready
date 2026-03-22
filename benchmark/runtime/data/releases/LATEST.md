@@ -9,5 +9,8 @@ Use `manifest.json` in that directory as the source-of-truth inventory.
 
 Notes:
 - `clinician_readiness_v0.2_2026-02-15` is retained for historical comparison.
-- Working-source data lives in `data/openr1_psy_splits/`, `data/study_a_gold/`, and `data/study_c_gold/`.
+- Study splits live in `data/openr1_psy_splits/`. Adversarial bias, Study A gold, and Study C gold
+  artefacts ship under `data/releases/<release_id>/` (see manifest); optional working copies under
+  `data/adversarial_bias/`, `data/study_a_gold/`, and `data/study_c_gold/` are not required when the
+  release bundle is present.
 - Frozen snapshot for audit reproducibility is `data/frozen_splits/v0.3_postclinician_audit/`.

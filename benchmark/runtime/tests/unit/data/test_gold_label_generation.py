@@ -11,7 +11,10 @@ import shutil
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
+from reliable_clinical_benchmark.data.release_paths import CLINICIAN_READINESS_RELEASE_ID
 from reliable_clinical_benchmark.data.study_a_loader import load_study_a_data
+
+_STUDY_A_GOLD = Path(f"data/releases/{CLINICIAN_READINESS_RELEASE_ID}/study_a_gold")
 
 
 class TestGoldLabelReproducibility:
@@ -19,7 +22,7 @@ class TestGoldLabelReproducibility:
     
     def test_gold_labels_file_structure(self):
         """Test that gold_diagnosis_labels.json has correct structure."""
-        labels_path = Path("data/study_a_gold/gold_diagnosis_labels.json")
+        labels_path = _STUDY_A_GOLD / "gold_diagnosis_labels.json"
         if not labels_path.exists():
             pytest.skip("Gold labels file not found")
         
@@ -41,7 +44,7 @@ class TestGoldLabelReproducibility:
     
     def test_gold_labels_id_matching(self):
         """Test that gold labels are correctly ID-matched to study_a_test.json."""
-        labels_path = Path("data/study_a_gold/gold_diagnosis_labels.json")
+        labels_path = _STUDY_A_GOLD / "gold_diagnosis_labels.json"
         study_a_path = Path("data/openr1_psy_splits/study_a_test.json")
         
         if not labels_path.exists() or not study_a_path.exists():
@@ -62,7 +65,7 @@ class TestGoldLabelReproducibility:
     
     def test_gold_labels_format(self):
         """Test that gold labels use standard DSM-5/ICD-10 format."""
-        labels_path = Path("data/study_a_gold/gold_diagnosis_labels.json")
+        labels_path = _STUDY_A_GOLD / "gold_diagnosis_labels.json"
         if not labels_path.exists():
             pytest.skip("Gold labels file not found")
         
@@ -98,6 +101,10 @@ class TestGoldLabelReproducibility:
             "Sleep Disorder",
             "No Diagnosis",  # For subclinical cases
             "",  # Empty is allowed (unlabeled)
+            # Clinician-style risk phrases present in the v0.3 gold bundle
+            "Evaluate for psychotic features — possible psychotic prodrome",
+            "Evaluate for psychotic features — auditory hallucination",
+            "Evaluate for psychotic features — command-type auditory experiences",
         }
         
         # Check that non-empty labels are valid
@@ -115,7 +122,7 @@ class TestGoldLabelReproducibility:
     
     def test_gold_labels_mapping_file(self):
         """Test that gold_labels_mapping.json has correct structure."""
-        mapping_path = Path("data/study_a_gold/gold_labels_mapping.json")
+        mapping_path = _STUDY_A_GOLD / "gold_labels_mapping.json"
         if not mapping_path.exists():
             pytest.skip("Mapping file not found")
         
@@ -137,7 +144,7 @@ class TestGoldLabelReproducibility:
         # This test would require mocking the OpenR1-Psy dataset
         # For now, we verify that the extraction function is deterministic
         
-        labels_path = Path("data/study_a_gold/gold_diagnosis_labels.json")
+        labels_path = _STUDY_A_GOLD / "gold_diagnosis_labels.json"
         if not labels_path.exists():
             pytest.skip("Gold labels file not found")
         
@@ -155,7 +162,7 @@ class TestGoldLabelReproducibility:
     
     def test_gold_labels_coverage(self):
         """Test that gold labels have reasonable coverage."""
-        labels_path = Path("data/study_a_gold/gold_diagnosis_labels.json")
+        labels_path = _STUDY_A_GOLD / "gold_diagnosis_labels.json"
         if not labels_path.exists():
             pytest.skip("Gold labels file not found")
         
@@ -175,7 +182,7 @@ class TestGoldLabelReproducibility:
     
     def test_gold_labels_distribution(self):
         """Test that gold labels have reasonable distribution."""
-        labels_path = Path("data/study_a_gold/gold_diagnosis_labels.json")
+        labels_path = _STUDY_A_GOLD / "gold_diagnosis_labels.json"
         if not labels_path.exists():
             pytest.skip("Gold labels file not found")
         
@@ -203,6 +210,7 @@ class TestGoldLabelReproducibility:
 
 def _load_populate_module():
     """Helper to load populate_from_openr1 module."""
+    pytest.importorskip("datasets")
     import importlib.util
     repo_root = Path(__file__).resolve().parents[3]
     populate_path = repo_root / "scripts" / "studies" / "study_a" / "gold_labels" / "populate_from_openr1.py"

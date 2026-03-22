@@ -116,6 +116,12 @@
       "sha256": "d5344ffb4d0c54091e00617914f3ed0a2b521b3bd8df1f8c2af7c01a980c6bd4",
       "row_count": 2016,
       "bytes": 682255
+    },
+    {
+      "path": "adversarial_bias/dimension_catalog_v3_2.json",
+      "sha256": "995845c1fb5851b083adcb32ee777a21d30e7cae4a8301bb471028782c10986b",
+      "row_count": 44,
+      "bytes": 23911
     }
   ]
 }

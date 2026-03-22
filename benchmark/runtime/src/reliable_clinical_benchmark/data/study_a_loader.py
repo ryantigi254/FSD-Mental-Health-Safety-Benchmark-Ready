@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List, Dict, Optional
 import logging
 
+from .release_paths import resolve_study_a_gold_dir
 from .study_a_metadata import load_study_a_metadata_map, resolve_study_a_metadata
 
 logger = logging.getLogger(__name__)
@@ -40,12 +41,12 @@ def load_study_a_data(
     if gold_diagnosis_labels_path:
         labels_path = Path(gold_diagnosis_labels_path)
     else:
-        # Try new location first (data/study_a_gold/)
-        candidate_new = path.parent.parent / "study_a_gold" / "gold_diagnosis_labels.json"
-        if candidate_new.exists():
-            labels_path = candidate_new
-        else:
-            # Fallback to old location for backwards compatibility
+        gold_dir = resolve_study_a_gold_dir(path)
+        if gold_dir is not None:
+            candidate_new = gold_dir / "gold_diagnosis_labels.json"
+            if candidate_new.exists():
+                labels_path = candidate_new
+        if labels_path is None:
             candidate_old = path.parent / "study_a_gold_diagnosis_labels.json"
             if candidate_old.exists():
                 labels_path = candidate_old
@@ -71,10 +72,12 @@ def load_study_a_data(
         if gold_diagnosis_metadata_path:
             metadata_path = Path(gold_diagnosis_metadata_path)
         else:
-            candidate_new = path.parent.parent / "study_a_gold" / "gold_diagnosis_metadata.json"
-            if candidate_new.exists():
-                metadata_path = candidate_new
-            else:
+            gold_dir = resolve_study_a_gold_dir(path)
+            if gold_dir is not None:
+                candidate_new = gold_dir / "gold_diagnosis_metadata.json"
+                if candidate_new.exists():
+                    metadata_path = candidate_new
+            if metadata_path is None:
                 candidate_old = path.parent / "study_a_gold_diagnosis_metadata.json"
                 if candidate_old.exists():
                     metadata_path = candidate_old

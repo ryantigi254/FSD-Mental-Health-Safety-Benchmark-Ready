@@ -2,7 +2,7 @@
 
 Entities that are literal substrings pass automatically. Semantic abstractions
 (e.g. 'functional impairment') are validated against the evidence map in
-data/study_c_gold/entity_evidence_map.json.
+data/releases/clinician_readiness_v0.3_2026-02-16/study_c_gold/entity_evidence_map.json.
 """
 
 from pathlib import Path
@@ -10,8 +10,11 @@ import json
 
 import pytest
 
+from reliable_clinical_benchmark.data.release_paths import CLINICIAN_READINESS_RELEASE_ID
+
 
 BASE_DIR = Path(__file__).resolve().parents[3]
+_STUDY_C_GOLD_PREFIX = f"data/releases/{CLINICIAN_READINESS_RELEASE_ID}/study_c_gold"
 
 
 def _load_json(relative_path: str):
@@ -24,7 +27,7 @@ def _load_json(relative_path: str):
 @pytest.mark.unit
 def test_entity_evidence_map_exists():
     """The entity evidence map file must exist."""
-    path = BASE_DIR / "data" / "study_c_gold" / "entity_evidence_map.json"
+    path = BASE_DIR / "data" / "releases" / CLINICIAN_READINESS_RELEASE_ID / "study_c_gold" / "entity_evidence_map.json"
     assert path.exists(), f"Missing entity evidence map: {path}"
 
 
@@ -34,7 +37,7 @@ def test_all_entities_anchored():
     data = _load_json("data/openr1_psy_splits/study_c_test.json")
     cases = data["cases"]
 
-    evidence_data = _load_json("data/study_c_gold/entity_evidence_map.json")
+    evidence_data = _load_json(f"{_STUDY_C_GOLD_PREFIX}/entity_evidence_map.json")
     global_synonyms = evidence_data.get("global_synonyms", {})
     case_evidence = evidence_data.get("case_evidence", {})
 
@@ -88,7 +91,7 @@ def test_evidence_map_covers_non_literal_entities():
     data = _load_json("data/openr1_psy_splits/study_c_test.json")
     cases = data["cases"]
 
-    evidence_data = _load_json("data/study_c_gold/entity_evidence_map.json")
+    evidence_data = _load_json(f"{_STUDY_C_GOLD_PREFIX}/entity_evidence_map.json")
     global_synonyms = evidence_data.get("global_synonyms", {})
 
     non_literal_uncovered = []

@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent.parent))
 from reliable_clinical_benchmark.models.factory import get_model_runner
 from reliable_clinical_benchmark.models.base import GenerationConfig
 from reliable_clinical_benchmark.data.adversarial_loader import load_adversarial_bias_cases
+from reliable_clinical_benchmark.data.release_paths import DEFAULT_ADVERSARIAL_VIGNETTES_RELPATH
 
 
 def format_bias_prompt(vignette: str) -> str:
@@ -62,7 +63,7 @@ def main() -> None:
     if args.data_path:
         data_path = Path(args.data_path)
     else:
-        data_path = runtime_root / "data" / "adversarial_bias" / "biased_vignettes.json"
+        data_path = runtime_root / DEFAULT_ADVERSARIAL_VIGNETTES_RELPATH
     
     if not data_path.exists():
         raise FileNotFoundError(f"Bias data not found at {data_path}")

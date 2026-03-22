@@ -21,6 +21,7 @@ from ..metrics.faithfulness import (
 from ..metrics.extraction import is_refusal, extract_diagnosis_heuristic
 from ..data.study_a_loader import load_study_a_data
 from ..data.adversarial_loader import load_adversarial_bias_cases
+from ..data.release_paths import DEFAULT_ADVERSARIAL_VIGNETTES_RELPATH
 from ..utils.stats import bootstrap_confidence_interval
 from ..utils.worker_runtime import (
     append_jsonl_with_retry,
@@ -123,7 +124,7 @@ def _now_iso() -> str:
 def run_study_a(
     model: ModelRunner,
     data_dir: str = "data/openr1_psy_splits",
-    adversarial_data_path: str = "data/adversarial_bias/biased_vignettes.json",
+    adversarial_data_path: str = DEFAULT_ADVERSARIAL_VIGNETTES_RELPATH,
     max_samples: Optional[int] = None,
     output_dir: str = "results",
     model_name: str = "unknown",

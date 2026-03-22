@@ -36,6 +36,7 @@ from ..metrics.drift import (
     compute_drift_slope,
     DriftResult,
 )
+from ..data.release_paths import resolve_study_c_gold_dir
 from ..data.study_c_loader import load_study_c_data
 from ..utils.nli import NLIModel
 from ..utils.stats import bootstrap_confidence_interval
@@ -428,13 +429,14 @@ def _remove_repetition_basic(text: str, max_repetition_ratio: float, min_repeat_
 def _load_study_c_target_plans(study_c_split_path: Path) -> Dict[str, str]:
     """Load Study C gold target plans if present.
 
-    Expected location (mirrors Study A gold approach):
-    data/study_c_gold/target_plans.json
-    (sibling of data/openr1_psy_splits/)
+    Expected location: data/study_c_gold/target_plans.json when present, else
+    data/releases/clinician_readiness_v0.3_2026-02-16/study_c_gold/target_plans.json
+    (resolved from the Study C split path under data/openr1_psy_splits/).
     """
-    candidate = (
-        study_c_split_path.parent.parent / "study_c_gold" / "target_plans.json"
-    )
+    gold_dir = resolve_study_c_gold_dir(study_c_split_path)
+    if gold_dir is None:
+        return {}
+    candidate = gold_dir / "target_plans.json"
     if not candidate.exists():
         return {}
 

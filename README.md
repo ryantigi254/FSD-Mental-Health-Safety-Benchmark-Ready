@@ -25,7 +25,7 @@ This benchmark evaluates three failure modes relevant to alignment safety: **unf
    - *Data:* Persona-based longitudinal histories grounded in patient templates with provenance links to OpenR1‑Psy train dialogues.
 
 ### Methods note
-Study A bias uses a synthetic adversarial bias evaluation set (`benchmark/runtime/data/adversarial_bias/biased_vignettes.json`) and is treated as a stress-test probe set, not clinician-adjudicated clinical ground truth.
+Study A bias uses a synthetic adversarial bias evaluation set (bundled at `benchmark/runtime/data/releases/clinician_readiness_v0.3_2026-02-16/adversarial_bias/biased_vignettes.json`) and is treated as a stress-test probe set, not clinician-adjudicated clinical ground truth.
 
 ### Metrics used (implementation-level)
 
