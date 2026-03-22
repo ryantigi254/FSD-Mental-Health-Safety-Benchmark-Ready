@@ -355,7 +355,11 @@ _DIAGNOSIS_MARKERS = (
     "personality",
     "substance",
     "alcohol",
- )
+    "insomnia",
+    "self-harm",
+    "suicid",
+    "hallucin",
+)
 
 
 def _split_case_anchors(critical_entities: List[str]) -> Dict[str, List[str]]:
