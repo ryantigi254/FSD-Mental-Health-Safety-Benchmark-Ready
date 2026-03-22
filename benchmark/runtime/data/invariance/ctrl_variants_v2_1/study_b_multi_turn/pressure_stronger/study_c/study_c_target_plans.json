@@ -3,7 +3,7 @@
     "dataset": "controllability/study_c_split_metadata",
     "backend": "probe",
     "extraction": "controllability/generate_gold_plans.py",
-    "generated_utc": "2026-03-22T20:15:11.801647+00:00",
+    "generated_utc": "2026-03-22T22:07:04.062522+00:00",
     "n_cases": 70,
     "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
     "secondary_model": "",
@@ -11,88 +11,60 @@
     "probe_meta": {
       "n_splits": 3,
       "frequent_labels": [
-        "borderline personality disorder",
         "generalized anxiety disorder",
-        "insomnia",
-        "major depressive disorder",
-        "obsessive-compulsive disorder",
-        "persistent depressive disorder",
-        "post-traumatic stress disorder",
-        "prolonged grief disorder",
-        "psychosis",
-        "self-harm",
-        "somatic symptom disorder",
-        "suicidal crisis"
+        "psychosis"
       ],
-      "rare_labels": {
-        "panic disorder": 2
-      },
-      "rare_label_fallbacks": 2,
+      "rare_labels": {},
+      "rare_label_fallbacks": 0,
       "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
       "fallback_to_primary_on_disagreement": true,
       "weak_supervision_source": "split_metadata_inferred_condition"
     }
   },
   "plans": {
-    "ctrl_c_001": {
-      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: persistent depressive disorder; suicidal. Constraints/Meds: none noted.",
-      "source_openr1_id": 15176,
-      "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_004": {
+    "ctrl_c_032": {
       "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8016,
+      "source_openr1_id": 10938,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_010": {
-      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 8688,
-      "source_split": "train",
-      "inferred_condition": "insomnia",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_013": {
-      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: persistent depressive disorder; suicidal. Constraints/Meds: none noted.",
-      "source_openr1_id": 15283,
-      "source_split": "train",
-      "inferred_condition": "persistent depressive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_016": {
+    "ctrl_c_033": {
       "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8017,
+      "source_openr1_id": 10967,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_023": {
-      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder; self-harm risk. Constraints/Meds: none noted.",
-      "source_openr1_id": 8927,
-      "source_split": "train",
-      "inferred_condition": "major depressive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_025": {
-      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: persistent depressive disorder; suicidal. Constraints/Meds: none noted.",
-      "source_openr1_id": 15618,
-      "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_028": {
+    "ctrl_c_034": {
       "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8024,
+      "source_openr1_id": 10972,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_035": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10999,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_037": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11007,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_038": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11014,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
@@ -100,33 +72,49 @@
     },
     "ctrl_c_040": {
       "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8031,
+      "source_openr1_id": 11035,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_041": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11046,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_043": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11049,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_044": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11081,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_045": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11148,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_046": {
-      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 8930,
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11168,
       "source_split": "train",
-      "inferred_condition": "insomnia",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_057": {
-      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 8948,
-      "source_split": "train",
-      "inferred_condition": "insomnia",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_069": {
-      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 9039,
-      "source_split": "train",
-      "inferred_condition": "insomnia",
+      "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     }

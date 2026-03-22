@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-03-22T20:15:51.313285+00:00",
+  "created_at_utc": "2026-03-22T22:21:00.481751+00:00",
   "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v6_1",
   "source_profile": "v5",
   "manifest_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/v5_samples_v2_1",
@@ -7,11 +7,10 @@
   "inherits_unchanged_studies_from": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/misc/v5_invariance_samples",
   "parent_version": "v6.1_strict_no_generation",
   "regeneration_policy": {
-    "copied_through": [
-      "study_a",
-      "study_a_bias"
-    ],
+    "copied_through": [],
     "regenerated": [
+      "study_a",
+      "study_a_bias",
       "study_b",
       "study_b_multi_turn",
       "study_c"
@@ -21,6 +20,10 @@
     "study_a_bias": {
       "n_rows": 150,
       "path": "adversarial_bias/biased_vignettes.json"
+    },
+    "study_a": {
+      "n_rows": 150,
+      "path": "study_a_test.json"
     },
     "study_b": {
       "n_rows": 160,
@@ -33,10 +36,6 @@
     "study_c": {
       "n_rows": 15,
       "path": "study_c_test.json"
-    },
-    "study_a": {
-      "n_rows": 150,
-      "path": "study_a_test.json"
     }
   }
 }

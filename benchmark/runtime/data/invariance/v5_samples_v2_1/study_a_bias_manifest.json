@@ -2,7 +2,7 @@
   "study": "study_a_bias",
   "seed": 42,
   "sample_size": 150,
-  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v5",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v6_1",
   "source_profile": "v5",
   "sampling_unit": "row",
   "sampling_role": "diagnostic_subset",

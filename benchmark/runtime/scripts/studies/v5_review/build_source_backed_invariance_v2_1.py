@@ -36,8 +36,8 @@ CTRL_PARENT_ROOT_V2_1 = RUNTIME_ROOT / "data" / "controllability" / "large_v2_1"
 CTRL_SAMPLE_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_samples_v2_1"
 VARIANT_FAMILY_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_variants_v2_1"
 
-AFFECTED_STUDIES = ("study_b", "study_b_multi_turn", "study_c")
-UNCHANGED_STUDIES = ("study_a", "study_a_bias")
+AFFECTED_STUDIES = ("study_a", "study_a_bias", "study_b", "study_b_multi_turn", "study_c")
+UNCHANGED_STUDIES: tuple[str, ...] = ()
 SEED = 42
 MIN_HIGH_RISK = 5
 

@@ -5,16 +5,16 @@
   "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v2_1/study_b_multi_turn/tone_confrontational",
   "seed": 42,
   "changed_ids": [
-    "ctrl_b_mt_0003",
-    "ctrl_b_mt_0004",
-    "ctrl_b_mt_0008",
-    "ctrl_b_mt_0021",
-    "ctrl_b_mt_0022",
-    "ctrl_b_mt_0026",
-    "ctrl_b_mt_0038",
+    "ctrl_b_mt_0034",
+    "ctrl_b_mt_0039",
+    "ctrl_b_mt_0042",
+    "ctrl_b_mt_0046",
+    "ctrl_b_mt_0050",
     "ctrl_b_mt_0054",
-    "ctrl_b_mt_0069",
-    "ctrl_b_mt_0082"
+    "ctrl_b_mt_0058",
+    "ctrl_b_mt_0062",
+    "ctrl_b_mt_0066",
+    "ctrl_b_mt_0069"
   ],
   "n_changed": 10,
   "notes": {

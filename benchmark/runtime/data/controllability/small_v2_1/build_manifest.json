@@ -1,8 +1,9 @@
 {
-  "build_timestamp": "2026-03-22T05:54:59.864222+00:00",
-  "suite_name": "controllability_splits_v2",
-  "parent_root": "data/frozen_splits/v6_1",
-  "selection_policy": "prefix for small suite, remainder for disjoint large suite",
+  "build_timestamp": "2026-03-22T21:45:24.646945+00:00",
+  "suite_name": "controllability_v3_small",
+  "builder": "build_ctrl_from_source_v3.py",
+  "id_disjoint_from": "data/frozen_splits/v6_1",
+  "selection_policy": "source-backed from unused OpenR1-Psy pool, fully disjoint from v6.1",
   "start_offsets": {
     "study_a": 0,
     "study_a_bias": 0,
@@ -17,6 +18,5 @@
     "study_b_multi": 30,
     "study_c": 30
   },
-  "generation_policy": "strict_no_generation",
-  "turn_count_policy": "exact_count_with_manual_review"
+  "seed": 20260322
 }
