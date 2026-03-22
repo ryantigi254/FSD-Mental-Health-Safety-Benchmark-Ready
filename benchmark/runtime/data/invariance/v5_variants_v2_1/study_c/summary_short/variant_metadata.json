@@ -1,0 +1,28 @@
+{
+  "study": "study_c",
+  "variant_tag": "summary_short",
+  "source_root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/invariance/v5_samples_v2_1",
+  "output_root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/invariance/v5_variants_v2_1/study_c/summary_short",
+  "seed": 42,
+  "changed_ids": [
+    "c_004",
+    "c_008",
+    "c_009",
+    "c_019",
+    "c_020",
+    "c_030",
+    "c_031",
+    "c_041",
+    "c_042",
+    "c_052",
+    "c_053",
+    "c_063",
+    "c_074",
+    "c_085",
+    "c_096"
+  ],
+  "n_changed": 15,
+  "notes": {
+    "variant_family": "control_paraphrases"
+  }
+}

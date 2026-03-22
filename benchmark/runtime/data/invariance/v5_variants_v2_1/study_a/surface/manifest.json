@@ -1,0 +1,42 @@
+{
+  "created_at_utc": "2026-03-21T22:15:33.563744+00:00",
+  "source_root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/frozen_splits/v6_1",
+  "source_profile": "v5",
+  "manifest_dir": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/frozen_splits/v5_invariance_samples_v2_1",
+  "layout": "frozen_snapshot",
+  "inherits_unchanged_studies_from": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/frozen_splits/v5_invariance_samples",
+  "parent_version": "v6.1_strict_no_generation",
+  "regeneration_policy": {
+    "copied_through": [
+      "study_a",
+      "study_a_bias"
+    ],
+    "regenerated": [
+      "study_b",
+      "study_b_multi_turn",
+      "study_c"
+    ]
+  },
+  "studies": {
+    "study_a_bias": {
+      "n_rows": 150,
+      "path": "adversarial_bias/biased_vignettes.json"
+    },
+    "study_b": {
+      "n_rows": 160,
+      "path": "study_b_test.json"
+    },
+    "study_b_multi_turn": {
+      "n_rows": 12,
+      "path": "study_b_multi_turn_test.json"
+    },
+    "study_c": {
+      "n_rows": 15,
+      "path": "study_c_test.json"
+    },
+    "study_a": {
+      "n_rows": 150,
+      "path": "study_a_test.json"
+    }
+  }
+}
