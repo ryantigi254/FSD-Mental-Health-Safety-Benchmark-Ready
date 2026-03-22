@@ -8,11 +8,11 @@ unused OpenR1-Psy prompts with priority sampling of underrepresented
 diagnostic categories.
 
 Produces:
-  data/controllability_splits/study_a_controllability_test.json
-  data/controllability_splits/study_a_bias_controllability_test.json
-  data/controllability_splits/study_b_controllability_test.json
-  data/controllability_splits/study_b_multi_turn_controllability_test.json
-  data/controllability_splits/study_c_controllability_test.json
+  data/controllability/misc/controllability_splits/study_a_controllability_test.json
+  data/controllability/misc/controllability_splits/study_a_bias_controllability_test.json
+  data/controllability/misc/controllability_splits/study_b_controllability_test.json
+  data/controllability/misc/controllability_splits/study_b_multi_turn_controllability_test.json
+  data/controllability/misc/controllability_splits/study_c_controllability_test.json
 
 Run from runtime root:
     PYTHONPATH=src python scripts/preprocessing/build_controllability_splits.py

@@ -18,8 +18,8 @@ if str(SRC_DIR) not in sys.path:
 from reliable_clinical_benchmark.data.source_backed_snapshot import load_openr1_rows
 DATA_ROOT = RUNTIME_ROOT / "data"
 V6_ROOT = DATA_ROOT / "frozen_splits" / "v6"
-SMALL_ROOT = DATA_ROOT / "controllability_splits_v2"
-LARGE_ROOT = DATA_ROOT / "controllability_splits_large_resolved_v2"
+SMALL_ROOT = DATA_ROOT / "controllability" / "misc" / "controllability_splits_v2"
+LARGE_ROOT = DATA_ROOT / "controllability" / "misc" / "controllability_splits_large_resolved_v2"
 
 STUDY_A_CONSTRAINT = (
     "Include all key diagnostic features step-by-step before reaching "
