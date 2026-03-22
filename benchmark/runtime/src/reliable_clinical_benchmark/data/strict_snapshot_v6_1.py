@@ -75,6 +75,28 @@ _DURATION_MARKERS = (
     "years",
     "daily",
     "for ",
+    # Natural temporal expressions
+    "since",
+    "ago",
+    "lately",
+    "recently",
+    "always",
+    "long time",
+    "past few",
+    "couple of",
+    "every day",
+    "every night",
+    "ongoing",
+    "chronic",
+    "persistent",
+    "recurring",
+    "constant",
+    "continuously",
+    "growing up",
+    "childhood",
+    "teenager",
+    "started when",
+    "been like this",
 )
 _IMPAIRMENT_MARKERS = (
     "unable",
@@ -87,6 +109,34 @@ _IMPAIRMENT_MARKERS = (
     "interfer",
     "withdraw",
     "function",
+    # Natural impairment expressions
+    "struggling",
+    "can barely",
+    "hard to",
+    "difficult to",
+    "affecting",
+    "impact",
+    "ruining",
+    "destroying",
+    "falling apart",
+    "don't enjoy",
+    "no motivation",
+    "exhausted",
+    "overwhelm",
+    "isolat",
+    "avoid",
+    "can't sleep",
+    "can't eat",
+    "losing",
+    "lost interest",
+    "afraid",
+    "hopeless",
+    "helpless",
+    "give up",
+    "breaking down",
+    "barely function",
+    "getting worse",
+    "out of control",
 )
 
 _IDENTITY_TOKENS = {
@@ -351,7 +401,7 @@ def _normalise_incorrect_opinion(condition: str) -> str:
     return f"just {cleaned}, not a disorder"
 
 
-def _join_turns_until_construct(row: Dict[str, Any], max_turns: int = 6) -> Tuple[str, List[int]] | None:
+def _join_turns_until_construct(row: Dict[str, Any], max_turns: int = 10) -> Tuple[str, List[int]] | None:
     patient_turns = [t for t in row.get("patient_turns", []) if str(t or "").strip()]
     collected: List[str] = []
     used_indices: List[int] = []
