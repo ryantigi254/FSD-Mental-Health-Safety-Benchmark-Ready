@@ -3,11 +3,7 @@
     "dataset": "controllability/study_c_split_metadata",
     "backend": "probe",
     "extraction": "controllability/generate_gold_plans.py",
-<<<<<<<< HEAD:benchmark/runtime/data/controllability/misc/controllability_splits/ctrl_target_plans.robust.json
-    "generated_utc": "2026-03-22T02:49:54.923142+00:00",
-========
-    "generated_utc": "2026-03-22T06:04:33.025718+00:00",
->>>>>>>> controllability-v2.1:benchmark/runtime/data/controllability/small_v2_1/ctrl_target_plans.robust.json
+    "generated_utc": "2026-03-22T19:56:24.479075+00:00",
     "n_cases": 30,
     "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
     "secondary_model": "michiyasunaga/BioLinkBERT-base",

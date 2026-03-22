@@ -16,5 +16,7 @@
     "study_b_single": 1700,
     "study_b_multi": 90,
     "study_c": 70
-  }
+  },
+  "generation_policy": "strict_no_generation",
+  "turn_count_policy": "exact_count_with_manual_review"
 }

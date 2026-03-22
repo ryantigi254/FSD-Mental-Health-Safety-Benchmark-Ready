@@ -2005,11 +2005,11 @@
     "backend": "probe",
     "dataset": "study_a_split",
     "extraction": "populate_from_openr1.py",
-    "updated_utc": "2026-03-22T02:32:10.186216+00:00",
+    "updated_utc": "2026-03-13T20:22:55.589798+00:00",
     "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
     "secondary_model": "",
     "tertiary_model": "",
-    "weak_labels_path": "data/frozen_splits/v6_1/gold_diagnosis_labels.json",
+    "weak_labels_path": "data/frozen_splits/v5/gold_diagnosis_labels.json",
     "probe_meta": {
       "n_splits": 3,
       "frequent_labels": [
@@ -2043,7 +2043,7 @@
       "rare_label_fallbacks": 10,
       "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
       "fallback_to_primary_on_disagreement": true,
-      "weak_supervision_source": "data/frozen_splits/v6_1/gold_diagnosis_labels.json"
+      "weak_supervision_source": "data/frozen_splits/v5/gold_diagnosis_labels.json"
     }
   }
 }

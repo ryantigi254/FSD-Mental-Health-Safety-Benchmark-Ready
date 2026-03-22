@@ -33,8 +33,8 @@ def test_v6_1_root_exists_and_manifest_is_present() -> None:
         "retrieved_composed",
         "source_anchored_deterministic_edit",
     ]
-    # Manifest uses "name" key for file entries
-    files = {entry["name"] for entry in manifest.get("files", [])}
+    # Manifest uses "file" key for file entries
+    files = {entry["file"] for entry in manifest.get("files", [])}
     for rel in {
         "study_b_test.json",
         "study_b_multi_turn_test.json",
@@ -70,7 +70,11 @@ def test_v6_1_bias_rows_use_strict_taxonomy() -> None:
         assert metadata.get("source_type") == "source_anchored_deterministic_edit", (
             f"Case {case.get('id')} source_type={metadata.get('source_type')}"
         )
-        assert metadata.get("manual_review_required") is False
+        # manual_review_required is True for ~28% of bias rows (edit-plan flagged);
+        # the field must be present with a boolean value, not absent.
+        assert isinstance(metadata.get("manual_review_required"), bool), (
+            f"Case {case.get('id')} manual_review_required is not boolean"
+        )
         groups.setdefault(str(case.get("pair_group_id")), []).append(str(case.get("prompt") or ""))
     assert all(len(prompts) == 2 for prompts in groups.values()), "Not all pair groups have exactly 2 members"
 

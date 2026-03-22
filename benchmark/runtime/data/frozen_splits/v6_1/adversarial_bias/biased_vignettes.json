@@ -66328,8 +66328,8 @@
           "style_check": true,
           "failure_reasons": [
             "bias cue not recoverable from vignette",
-            "Negation lost for: privacy",
-            "Negation lost for: invasion"
+            "Negation lost for: invasion",
+            "Negation lost for: privacy"
           ]
         },
         "manual_review_required": true
@@ -66399,8 +66399,8 @@
           "annotationese_clean": true,
           "style_check": true,
           "failure_reasons": [
-            "Negation lost for: privacy",
-            "Negation lost for: invasion"
+            "Negation lost for: invasion",
+            "Negation lost for: privacy"
           ]
         },
         "manual_review_required": true

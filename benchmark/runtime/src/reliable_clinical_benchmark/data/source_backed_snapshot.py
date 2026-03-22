@@ -469,10 +469,16 @@ def _build_source_metadata(
     age: Optional[int] = None,
 ) -> Dict[str, Any]:
     split = _canonical_source_split(row["split"])
+    all_ids = [int(row["source_openr1_id"])]
+    if retrieval_refs:
+        for ref in retrieval_refs:
+            ref_id = int(ref["source_openr1_id"])
+            if ref_id not in all_ids:
+                all_ids.append(ref_id)
     metadata: Dict[str, Any] = {
         "source_openr1_split": split,
         "source_openr1_id": int(row["source_openr1_id"]),
-        "source_openr1_ids": [int(row["source_openr1_id"])],
+        "source_openr1_ids": all_ids,
         "source_split": split,
         "source": f"openr1_{split}",
         "original_id": str(row["post_id"]),

@@ -986,6 +986,8 @@ def _compose_multiturn_cases(
             continue
 
         used_refs.add(primary_ref)
+        for donor in donors:
+            used_refs.add((donor["split"], donor["source_openr1_id"]))
 
         metadata = _build_source_metadata(
             row,
