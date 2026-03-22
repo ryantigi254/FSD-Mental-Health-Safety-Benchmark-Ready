@@ -41,15 +41,6 @@ data/*
 !data/rubrics/rubric_rules_v3.json
 !data/rubrics/rubric_rules_v4.json
 !data/rubrics/rubric_rules_v4_1.json
-!data/adversarial_bias/
-!data/adversarial_bias/biased_vignettes.json
-!data/adversarial_bias/biased_vignettes_legacy_2016.json
-!data/adversarial_bias/BIAS_DIMENSIONS.md
-!data/adversarial_bias/README.md
-!data/adversarial_bias/dimension_catalog_v3_2.json
-!data/study_a_gold/
-data/study_a_gold/*
-!data/study_a_gold/gold_diagnosis_metadata.json
 !data/frozen_splits/
 !data/frozen_splits/v0.2_preclinician/
 !data/frozen_splits/v0.2_preclinician/**
