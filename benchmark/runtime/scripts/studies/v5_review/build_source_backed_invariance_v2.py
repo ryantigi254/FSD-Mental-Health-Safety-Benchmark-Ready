@@ -24,17 +24,17 @@ from reliable_clinical_benchmark.invariance import (  # noqa: E402
 )
 
 
-V5_SAMPLE_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v5_invariance_samples"
-V5_SAMPLE_ROOT_V2 = RUNTIME_ROOT / "data" / "frozen_splits" / "v5_invariance_samples_v2"
+V5_SAMPLE_ROOT = RUNTIME_ROOT / "data" / "invariance" / "misc" / "v5_invariance_samples"
+V5_SAMPLE_ROOT_V2 = RUNTIME_ROOT / "data" / "invariance" / "misc" / "v5_invariance_samples_v2"
 V6_PARENT_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v6"
 
-CTRL_BASE_ROOT = RUNTIME_ROOT / "data" / "invariance_variants" / "variant_family" / "base"
-CTRL_BASE_ROOT_V2 = RUNTIME_ROOT / "data" / "invariance_variants" / "variant_family" / "base_v2"
-CTRL_PARENT_ROOT_V2 = RUNTIME_ROOT / "data" / "controllability_splits_large_resolved_v2"
+CTRL_BASE_ROOT = RUNTIME_ROOT / "data" / "invariance" / "misc" / "invariance_variants" / "variant_family" / "base"
+CTRL_BASE_ROOT_V2 = RUNTIME_ROOT / "data" / "invariance" / "misc" / "invariance_variants" / "variant_family" / "base_v2"
+CTRL_PARENT_ROOT_V2 = RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits_large_resolved_v2"
 CTRL_SAMPLE_ROOT_V2 = (
-    RUNTIME_ROOT / "data" / "controllability_splits_large_resolved_invariance_samples_v2"
+    RUNTIME_ROOT / "data" / "invariance" / "misc" / "controllability_splits_large_resolved_invariance_samples_v2"
 )
-VARIANT_FAMILY_ROOT_V2 = RUNTIME_ROOT / "data" / "invariance_variants" / "variant_family_v2"
+VARIANT_FAMILY_ROOT_V2 = RUNTIME_ROOT / "data" / "invariance" / "misc" / "invariance_variants" / "variant_family_v2"
 
 AFFECTED_STUDIES = ("study_b", "study_b_multi_turn", "study_c")
 UNCHANGED_STUDIES = ("study_a", "study_a_bias")
