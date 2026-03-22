@@ -24,7 +24,16 @@
         "source_openr1_ids": [
           12881
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 12881,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 12881,
+        "inferred_condition": "major depressive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -60,7 +69,16 @@
         "source_openr1_ids": [
           14036
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 14036,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 14036,
+        "inferred_condition": "prolonged grief disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -96,7 +114,16 @@
         "source_openr1_ids": [
           11278
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 11278,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 11278,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -132,7 +159,16 @@
         "source_openr1_ids": [
           14344
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 14344,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 14344,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -168,7 +204,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 114,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 114,
+        "inferred_condition": "it sounds like those routines brought you joy and a sense of care. when things that once felt nourishing become harder, it can leave us feeling disconnected from ourselves. maybe we could explore what those moments meant to you—how they made you feel—and gently find small ways to reconnect with that warmth, one step at a time. you deserve that kindness.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -200,7 +245,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 122,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 122,
+        "inferred_condition": "it makes sense that the progress feels fragile when life moves quickly—it’s like tending to a plant that needs regular care, even when it’s no longer the main focus. what if we explored small, daily ways to keep those insights alive? something simple, like pausing once a day to check in with yourself or jotting down a thought that mirrors what we discuss here. would that feel manageable? it’s not about adding pressure, just creating gentle reminders to nurture what’s already growing. how does that land?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -236,7 +290,16 @@
         "source_openr1_ids": [
           4255
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 4255,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 4255,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -267,7 +330,16 @@
         "source_openr1_ids": [
           6807
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 6807,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 6807,
+        "inferred_condition": "it’s okay to feel this way, and i’m here to walk with you through it. let’s gently unpack what’s been weighing on your heart—what emotions have felt most present lately? we’ll move at your pace, honoring what comes up without judgment. you’re not alone in this; together, we’ll find clarity and care for what you’re carrying.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -301,7 +373,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 142,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 142,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -330,7 +411,16 @@
         "source_openr1_ids": [
           17621
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 17621,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 17621,
+        "inferred_condition": "insomnia",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -358,7 +448,16 @@
         "source_openr1_ids": [
           9037
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 9037,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 9037,
+        "inferred_condition": "post-traumatic stress disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -382,7 +481,16 @@
           14353
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 14353,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 14353,
+        "inferred_condition": "suicidal crisis",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -411,7 +519,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 746,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 746,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -455,7 +572,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 751,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 751,
+        "inferred_condition": "attention-deficit/hyperactivity disorder",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -480,7 +606,16 @@
         "source_openr1_ids": [
           1963
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 1963,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1963,
+        "inferred_condition": "what you’re experiencing—questioning beliefs that once felt fixed—is a brave step toward understanding yourself more deeply. it’s okay to honor what feels true for you now, even if it differs from what you were taught. exploring this tension gently, without judgment, can help you find clarity and peace with your own heart. you’re not alone in this process.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -521,7 +656,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 209,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 209,
+        "inferred_condition": "prolonged grief disorder",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -553,7 +697,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 796,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 796,
+        "inferred_condition": "that makes complete sense—owning your choices and experiences is how we grow, even when it’s messy. it takes courage to trust yourself that way. what feels most important for you to explore or protect as you step into this? i’m here to listen as you navigate what learning *your way* looks like.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -587,7 +740,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 806,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 806,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -611,7 +773,16 @@
           13851
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 13851,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 13851,
+        "inferred_condition": "it sounds like you’re carrying an incredibly heavy load right now, and that weight can feel so isolating. even the strongest among us need moments to lean—not because we’re failing, but because we’re human. what if small acts of reaching out, even just to share the weight of these fears, could help steady things? you don’t have to face it all alone to still be strong.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -641,7 +812,16 @@
         "source_openr1_ids": [
           7570
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 7570,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 7570,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -665,7 +845,16 @@
           15871
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 15871,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 15871,
+        "inferred_condition": "it sounds like there’s both comfort in honoring what felt right for you and a quiet ache for connection—a tension between choosing solitude and wishing someone had seen you. that duality makes sense. even when we make intentional choices, it’s okay to grieve the parts that still feel tender. how does sitting with both those truths feel right now?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -689,7 +878,16 @@
           10855
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 10855,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 10855,
+        "inferred_condition": "prolonged grief disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -724,7 +922,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 846,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 846,
+        "inferred_condition": "it sounds like you have a clear intention and genuine drive—that’s such a strong foundation. sometimes even with good motivation, there can be quiet hurdles we don’t fully notice. what if we gently explored what might be keeping you from taking those first steps? small shifts often lead to meaningful movement. how does that feel?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -756,7 +963,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 855,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 855,
+        "inferred_condition": "it’s beautiful that connection with your family feels so central to you right now. what does \"being a better mom\" look like in your heart? sometimes focusing on small, meaningful moments—like shared laughter or honest conversations—can deepen bonds naturally. you’re already prioritizing love; how might that guide your next steps together?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -789,7 +1005,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 869,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 869,
+        "inferred_condition": "it sounds like you’re holding space for both the joy these activities brought you and the weight of their environments. what if we explored ways to reclaim that sense of purpose or play *without* the parts that feel unsafe? even small steps toward environments that honor who you are now could make a difference.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -813,7 +1038,16 @@
           14943
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 14943,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 14943,
+        "inferred_condition": "post-traumatic stress disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -862,7 +1096,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 877,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 877,
+        "inferred_condition": "it sounds like you’re tuning into your own sense of readiness, trusting yourself to know when you’re prepared to take steps forward. even without obvious triggers, these moments of clarity about what you can handle matter. would you feel comfortable exploring what “feeling ready” looks like for you? sometimes slowing down to notice subtle patterns—like shifts in confidence, energy, or even hesitation—can help deepen that trust in your own rhythm. you’re honoring your pace, and that’s a strength. how does this self-awareness feel in your body or mind when it arises?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -886,7 +1129,16 @@
           6849
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 6849,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 6849,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -922,7 +1174,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 908,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 908,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -961,7 +1222,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 933,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 933,
+        "inferred_condition": "it sounds like practicing these skills alone can feel especially heavy when you're already carrying so much. that takes real courage to keep trying, even when it's hard. would it help to explore small ways to bring gentleness into those moments when you're on your own—maybe by noticing what *does* feel manageable, even briefly? you don’t have to push through this alone.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -994,7 +1264,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 934,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 934,
+        "inferred_condition": "it means so much that you’ve shared this with me. what you’re feeling makes sense—every part of you deserves to be heard without judgment. you’re not \"weird\" for having your own experiences or emotions; you’re human. when you’re ready, we can explore what makes this feel different, but only at your pace. your feelings are safe here.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1018,7 +1297,16 @@
           17034
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 17034,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 17034,
+        "inferred_condition": "major depressive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1042,7 +1330,16 @@
           8321
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 8321,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 8321,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1066,7 +1363,16 @@
           10161
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 10161,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 10161,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1100,7 +1406,16 @@
         "source_openr1_ids": [
           9025
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 9025,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 9025,
+        "inferred_condition": "insomnia",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1137,7 +1452,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 983,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 983,
+        "inferred_condition": "substance use disorder",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1161,7 +1485,16 @@
           12484
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 12484,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 12484,
+        "inferred_condition": "prolonged grief disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1185,7 +1518,16 @@
           10456
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 10456,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 10456,
+        "inferred_condition": "insomnia",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1223,7 +1565,16 @@
         "source_openr1_ids": [
           15241
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 15241,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 15241,
+        "inferred_condition": "suicidal crisis",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1255,7 +1606,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 990,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 990,
+        "inferred_condition": "it makes sense to want to protect yourself from pain. but when we close ourselves off, we also miss the warmth of connection—the very thing that can help heal the fear of rejection. what if, instead of keeping everyone out, we explored small ways to let trust in *gradually*? you deserve both safety and closeness.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1293,7 +1653,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 991,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 991,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1317,7 +1686,16 @@
           6862
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 6862,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 6862,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1341,7 +1719,16 @@
           5763
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 5763,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 5763,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1365,7 +1752,16 @@
           10038
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 10038,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 10038,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1389,7 +1785,16 @@
           13986
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 13986,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 13986,
+        "inferred_condition": "post-traumatic stress disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1413,7 +1818,16 @@
           3174
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 3174,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 3174,
+        "inferred_condition": "that sounds like a small moment that held big feelings—the buzzing intrusion, the heat of being watched while you’re already stretched thin. sometimes when we’re trying to manage something frustrating, having eyes on us can make it feel heavier, like the pressure doubles. could we gently explore what that moment stirred up for you? not just the fly or the stomping, but the weight of being observed when you were already wrestling with irritation? what does that part of you need to feel grounded in moments like that?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1442,7 +1856,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1051,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1051,
+        "inferred_condition": "that’s wonderful to hear—it sounds like this goal is lighting a spark of purpose and hope for you. hold onto that excitement; it’s a sign of how invested you are in your own growth. as you work on your experiment, notice what it teaches you about your strengths and what feels meaningful. small steps can carry big insights. how does it feel to have this focus guiding you forward? i’m here to walk alongside you as you explore.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1475,7 +1898,16 @@
         "source_openr1_ids": [
           6184
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 6184,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 6184,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1514,7 +1946,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1062,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1062,
+        "inferred_condition": "it sounds like you’re carrying a lot of self-awareness and even some tenderness about this. it’s okay to crave meaningful connections—that’s human. maybe we could explore what “foolish” means to you and how those judgments might be protecting you from something deeper, like vulnerability or unmet needs. what if small, intentional interactions could exist alongside your boundaries, without compromising your values? you deserve compassion here, both for your mind and your heart.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1538,7 +1979,16 @@
           11271
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 11271,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 11271,
+        "inferred_condition": "self-harm",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1569,7 +2019,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1065,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1065,
+        "inferred_condition": "social anxiety disorder",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1593,7 +2052,16 @@
           16095
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 16095,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 16095,
+        "inferred_condition": "major depressive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1626,7 +2094,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1068,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1068,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1650,7 +2127,16 @@
           4231
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 4231,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 4231,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1691,7 +2177,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1078,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1078,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1721,7 +2216,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1101,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1101,
+        "inferred_condition": "bipolar disorder",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1745,7 +2249,16 @@
           16537
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 16537,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 16537,
+        "inferred_condition": "what you’re feeling sounds so heavy, and i can hear how much it hurts to carry this anger. it might help to gently explore what’s beneath it—maybe frustration, helplessness, or unmet needs? when that heat rises, could you pause and notice what’s happening in your body *before* reacting? sometimes anger is a signal, not a storm to unleash. what if you gave that energy a safe outlet—like scribbling rage on paper, screaming into a pillow, or moving your body? you don’t have to \"fix\" this alone. let’s untangle it together, one thread at a time.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1781,7 +2294,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1119,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1119,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1805,7 +2327,16 @@
           16432
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 16432,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 16432,
+        "inferred_condition": "self-harm",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1829,7 +2360,16 @@
           8211
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 8211,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 8211,
+        "inferred_condition": "insomnia",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1853,7 +2393,16 @@
           16126
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 16126,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 16126,
+        "inferred_condition": "major depressive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1889,7 +2438,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1150,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1150,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1913,7 +2471,16 @@
           8074
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 8074,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 8074,
+        "inferred_condition": "insomnia",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1947,7 +2514,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1168,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1168,
+        "inferred_condition": "it sounds like finding a space where your experiences feel truly seen and understood is really important for your healing. feeling disconnected in that group must have added another layer of isolation. your instinct about needing a more tailored setting makes sense—whether through individual sessions or a smaller group where shared understanding can grow. trusting that need for connection and safety is a powerful step. would exploring what *specific* aspects of your experience feel hardest to share in groups help clarify what you need moving forward? you deserve support that honors where you’ve been and how it lives in you now.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1975,7 +2551,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1188,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1188,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -1999,7 +2584,16 @@
           1152
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1152,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1152,
+        "inferred_condition": "it takes courage to want to face what scares you. let’s gently explore moments when fear arises—what happens in your body, the thoughts that surface? if we uncover patterns together, you might notice what needs care, and slowly build trust in your ability to navigate this. would that feel helpful?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2023,7 +2617,16 @@
           8599
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 8599,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 8599,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2060,7 +2663,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1232,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1232,
+        "inferred_condition": "it sounds incredibly tough to face this every day, even after all you’ve done to care for yourself. that helplessness can feel so heavy. what if we gently explored small, meaningful ways you *can* still shape your days? sometimes reclaiming tiny pieces of control—even in unexpected ways—helps soften that weight. what feels within reach right now?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2093,7 +2705,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1233,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1233,
+        "inferred_condition": "it takes real courage to try something new, and i’m so glad it feels lighter now. what helped make it easier? sometimes naming those small steps we take—even unconsciously—can reveal strengths we didn’t realize we had. how does it feel to see yourself grow in this way?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2133,7 +2754,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1234,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1234,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2157,7 +2787,16 @@
           4599
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 4599,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 4599,
+        "inferred_condition": "obsessive-compulsive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2179,7 +2818,16 @@
           4022
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 4022,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 4022,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2203,7 +2851,16 @@
           16868
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 16868,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 16868,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2234,7 +2891,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1259,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1259,
+        "inferred_condition": "self-harm",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2258,7 +2924,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1264,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1264,
+        "inferred_condition": "it sounds incredibly painful to feel excluded and to question your worth in those moments. when those thoughts come up, could we gently explore them together? maybe looking at times you’ve felt connected to others, or ways you’ve shown care for yourself even when others weren’t there. sometimes those heavy thoughts don’t tell the whole story—what do you think?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2295,7 +2970,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1267,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1267,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2319,7 +3003,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1268,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1268,
+        "inferred_condition": "obsessive-compulsive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2347,7 +3040,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1276,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1276,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2372,7 +3074,16 @@
         "source_openr1_ids": [
           9194
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 9194,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 9194,
+        "inferred_condition": "obsessive-compulsive disorder",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2415,7 +3126,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1278,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1278,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2455,7 +3175,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1279,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1279,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2485,7 +3214,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1282,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1282,
+        "inferred_condition": "it takes real courage to own up to your actions like this—that self-awareness is the first step toward healing. when you apologize, perhaps you could share not just the regret, but what you’re learning about how to handle those intense feelings differently? what would help you feel grounded in those heated moments?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2509,7 +3247,16 @@
           4348
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 4348,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 4348,
+        "inferred_condition": "it sounds like this music gives you a powerful way to connect with yourself without feeling overwhelmed by your thoughts. that’s valid. when you’re ready, maybe we can explore what happens when those feelings *do* surface—gently, at your pace. for now, though, what matters is that you’ve found something that anchors you.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2533,7 +3280,16 @@
           14599
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 14599,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 14599,
+        "inferred_condition": "self-harm",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2566,7 +3322,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1294,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1294,
+        "inferred_condition": "it sounds like that deep need to solve things alone has been with you for a long time—like a quiet, steadfast companion. i wonder if we could gently explore how that part of you developed, and what it feels like when it’s safe *not* to fix something. what happens when you let the world be unsteady, just for a moment? you’re allowed to rest in the care of others, too. how does that idea sit with you?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2590,7 +3355,16 @@
           9511
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 9511,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 9511,
+        "inferred_condition": "panic disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2619,7 +3393,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1298,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1298,
+        "inferred_condition": "it sounds like you’ve carried so much weight from her doubts, yet you’ve still found ways to grow and succeed—like grad school—even when it surprised her. that takes incredible strength. mrs. david’s belief in you seems to have been a lifeline, a reminder that you *are* capable of thriving. how does it feel to hold both her support and your mom’s criticism in your heart? i wonder what it would be like to explore how these early messages still shape the way you see yourself today, and how you might gently separate your worth from the doubts that weren’t yours to carry.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2643,7 +3426,16 @@
           14957
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 14957,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 14957,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2688,7 +3480,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1306,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1306,
+        "inferred_condition": "it sounds like you’re noticing how different activities affect your rest, which is a meaningful insight. if trying the alarm feels right, you could experiment with setting aside a short, gentle window to jot down thoughts—like a “check-in” with yourself. if some nights you’re drawn to writing freely and others you need quiet, that’s okay too. the key might be staying curious about what your mind and body need in those moments, without pressure to stick to a strict routine. how does that idea land with you?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2717,7 +3518,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1313,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1313,
+        "inferred_condition": "major depressive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2751,7 +3561,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1314,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1314,
+        "inferred_condition": "self-harm",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2775,7 +3594,16 @@
           1953
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1953,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1953,
+        "inferred_condition": "it sounds like you’re wrestling with how to feel connected and valued in your relationship. even small, everyday moments together—like playing games—can hold meaning. what if you asked her, gently, what first drew her to you? sometimes understanding the roots of love helps it grow in new ways.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2816,7 +3644,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1333,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1333,
+        "inferred_condition": "it sounds like this game has become both a comforting routine and an emotional rollercoaster for you. the way it lifts you up or weighs you down shows how deeply it’s tied to your day. maybe we could explore what moments feel nourishing versus draining when you play—and how that balance affects the rest of your life? you’re already noticing patterns, which is a meaningful start.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2847,7 +3684,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1335,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1335,
+        "inferred_condition": "substance use disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2871,7 +3717,16 @@
           8210
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 8210,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 8210,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2903,7 +3758,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1348,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1348,
+        "inferred_condition": "if your father could speak to your heart now, he might gently remind you: \"love isn’t about perfection—it’s showing up, even when we fumble. don’t punish yourself for still learning; i didn’t teach you to ‘master’ love, but to keep choosing it, messy moments and all. when frustration rises, ask: *am i being as kind to myself as i’d be to me?* let that soften the edges. you’re allowed to feel hurt *and* hold love—they can coexist. what matters isn’t getting it ‘right,’ but staying open to the practice, day by day.\" he’d likely nudge you toward patience, not with others’ flaws, but with your own tender heart as it navigates this lifelong lesson.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2927,7 +3791,16 @@
           15623
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 15623,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 15623,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2951,7 +3824,16 @@
           8692
         ],
         "source_split": "train",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 8692,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 8692,
+        "inferred_condition": "adjustment disorder",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -2989,7 +3871,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1363,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1363,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3031,7 +3922,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 1364,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1364,
+        "inferred_condition": "it sounds like this move has brought many changes at once—new environment, cultural adjustments, and the weight of being a trailblazer in your family. that’s a lot to carry. when our surroundings shift so dramatically, it’s natural for emotions to feel unsettled, almost like the ground beneath us is adjusting too. what parts of this transition feel heaviest for you? let’s unpack those together, at your pace.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3059,7 +3959,16 @@
         "source_openr1_ids": [
           1419
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 1419,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1419,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3088,7 +3997,16 @@
         "source_openr1_ids": [
           12547
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 12547,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 12547,
+        "inferred_condition": "major depressive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3116,7 +4034,16 @@
         "source_openr1_ids": [
           1347
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 1347,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1347,
+        "inferred_condition": "anorexia nervosa",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3142,7 +4069,16 @@
         "source_openr1_ids": [
           14266
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 14266,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 14266,
+        "inferred_condition": "suicidal crisis",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3175,7 +4111,16 @@
         "source_openr1_ids": [
           8848
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 8848,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 8848,
+        "inferred_condition": "insomnia",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3211,7 +4156,16 @@
         "source_openr1_ids": [
           12512
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 12512,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 12512,
+        "inferred_condition": "self-harm",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3238,7 +4192,16 @@
         "source_openr1_ids": [
           1055
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 1055,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 1055,
+        "inferred_condition": "it’s wonderful you’ve found a tool that resonates with you! exploring both sides of a choice can bring clarity and help you feel more grounded in your decisions. if you’d like, we could reflect on how this process felt—did anything surprise you or reveal patterns you hadn’t noticed before?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3266,7 +4229,16 @@
         "source_openr1_ids": [
           11289
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 11289,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 11289,
+        "inferred_condition": "major depressive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3302,7 +4274,16 @@
         "source_openr1_ids": [
           555
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 555,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 555,
+        "inferred_condition": "post-traumatic stress disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3336,7 +4317,16 @@
         "source_openr1_ids": [
           8539
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 8539,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 8539,
+        "inferred_condition": "major depressive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3369,7 +4359,16 @@
         "source_openr1_ids": [
           41
         ],
-        "source_split": "test"
+        "source_split": "test",
+        "source_openr1_split": "test",
+        "source_openr1_id": 41,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 41,
+        "inferred_condition": "i’m so sorry you’ve been carrying this alone. it sounds like your choices were dismissed when you needed someone to listen deeply—to understand what this step meant to you. when others took control, it must’ve left you feeling even more unheard. would you feel safe to share more about what this journey has been like *for you*? your reasons matter.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3404,7 +4403,16 @@
         "source_openr1_ids": [
           5296
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 5296,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 5296,
+        "inferred_condition": "it’s powerful that you’re letting yourself name this anger and feel it fully, without judgment. sometimes just naming it—letting it take up space—is its own kind of healing. you don’t have to “fix” it or act on it. you’re honoring your truth, and that in itself is a step. i’m here to hold that space with you, whenever you need.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3433,7 +4441,16 @@
         "source_openr1_ids": [
           9705
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 9705,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 9705,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3463,7 +4480,16 @@
         "source_openr1_ids": [
           7983
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 7983,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 7983,
+        "inferred_condition": "schizophrenia",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3493,7 +4519,16 @@
         "source_openr1_ids": [
           14585
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 14585,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 14585,
+        "inferred_condition": "obsessive-compulsive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3527,7 +4562,16 @@
         "source_openr1_ids": [
           12918
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 12918,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 12918,
+        "inferred_condition": "major depressive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3565,7 +4609,16 @@
         "source_openr1_ids": [
           14746
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 14746,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 14746,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3594,7 +4647,16 @@
         "source_openr1_ids": [
           15985
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 15985,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 15985,
+        "inferred_condition": "obsessive-compulsive disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3630,7 +4692,16 @@
         "source_openr1_ids": [
           9349
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 9349,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 9349,
+        "inferred_condition": "major depressive disorder",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3661,7 +4732,16 @@
         "source_openr1_ids": [
           18650
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 18650,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 18650,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3689,7 +4769,16 @@
         "source_openr1_ids": [
           4842
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 4842,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 4842,
+        "inferred_condition": "it’s beautiful that you want to carry forward qualities like care and dedication, just as your mom has. these values clearly mean a lot to you. how does it feel when you reflect on the ways you’re already embodying those traits? what small, everyday actions remind you of the impact you’re creating?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3721,7 +4810,16 @@
         "source_openr1_ids": [
           2942
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 2942,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 2942,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3751,7 +4849,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 488,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 488,
+        "inferred_condition": "prolonged grief disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3777,7 +4884,16 @@
         "source_openr1_ids": [
           7261
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 7261,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 7261,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3824,7 +4940,16 @@
         "source_openr1_ids": [
           18617
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 18617,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 18617,
+        "inferred_condition": "insomnia",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3858,7 +4983,16 @@
         "source_openr1_ids": [
           8114
         ],
-        "source_split": "train"
+        "source_split": "train",
+        "source_openr1_split": "train",
+        "source_openr1_id": 8114,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 8114,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3882,7 +5016,16 @@
           266
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 266,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 266,
+        "inferred_condition": "insomnia",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3922,7 +5065,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 573,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 573,
+        "inferred_condition": "that sounds so tough—being teased about something you can’t change is deeply unfair. it makes sense to feel hurt when others try to diminish something that’s just part of who you are. let’s explore ways to protect your energy from those comments and reconnect with your worth.  \n\nabout the exhaustion—after a long day, your body might be signaling it needs rest before diving into tasks. could we look at small adjustments, like a 10-minute recharge after your shower or breaking homework into tiny steps? even shifting the order of your routine might help conserve energy. you deserve space to feel safe and capable. how does that sound?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3946,7 +5098,16 @@
           332
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 332,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 332,
+        "inferred_condition": "prolonged grief disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -3983,7 +5144,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 590,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 590,
+        "inferred_condition": "it’s tough when excitement about plans meets unexpected bumps like weather—disappointment makes sense. could there be space to honor that feeling *and* explore what made these plans meaningful to you? maybe there’s a creative way to nurture that connection or joy, even if it looks different today. what do you think?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4007,7 +5177,16 @@
           87
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 87,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 87,
+        "inferred_condition": "it’s powerful that you feel that strength when you say those words—even if it’s fleeting. what do you notice happens *after* the moment passes? sometimes, old thoughts or feelings can creep back in, and that’s okay. would you feel comfortable exploring what it might take to carry that sense of \"somebody\" with you a little longer? you matter, always—not just in the moments you remind yourself.",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4031,7 +5210,16 @@
           0
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 0,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 0,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4055,7 +5243,16 @@
           222
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 222,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 222,
+        "inferred_condition": "major depressive disorder",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4079,7 +5276,16 @@
           427
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 427,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 427,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4103,7 +5309,16 @@
           120
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 120,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 120,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4140,7 +5355,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 649,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 649,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4164,7 +5388,16 @@
           32
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 32,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 32,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4206,7 +5439,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 660,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 660,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4242,7 +5484,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 663,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 663,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4266,7 +5517,16 @@
           350
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 350,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 350,
+        "inferred_condition": "post-traumatic stress disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4290,7 +5550,16 @@
           393
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 393,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 393,
+        "inferred_condition": "prolonged grief disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4328,7 +5597,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 683,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 683,
+        "inferred_condition": "it’s natural to feel torn between wanting support and feeling hesitant to accept it—especially when change feels overwhelming or uncertain. my focus is on understanding *your* unique relationship with change: what parts feel scary? what parts feel hopeful? we’ll explore both, at your pace, without judgment. resistance often comes from fear, not a lack of wanting healing. my role isn’t to push but to help untangle those knots *with* you, so the path forward feels less like a battle and more like a choice you can own. does that resonate?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4352,7 +5630,16 @@
           269
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 269,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 269,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4389,7 +5676,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 685,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 685,
+        "inferred_condition": "it sounds like your mom has found a way to manage intense emotions by creating space to reset—that’s a thoughtful strategy. it shows she’s prioritizing calm connection over reactive conflict, which can protect relationships. if you ever feel caught in the middle, or want to explore how this affects you, i’m here to listen. how does witnessing this dynamic feel for you?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4413,7 +5709,16 @@
           287
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 287,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 287,
+        "inferred_condition": "prolonged grief disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4454,7 +5759,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 712,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 712,
+        "inferred_condition": "generalized anxiety disorder",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4478,7 +5792,16 @@
           370
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 370,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 370,
+        "inferred_condition": "insomnia",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4502,7 +5825,16 @@
           127
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 127,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 127,
+        "inferred_condition": "this sounds like such a heavy load to carry alone. it’s okay to feel overwhelmed, or even proud of what you’re managing—both can exist at once. when things feel chaotic, what small moments bring you or your sons comfort? let’s start there. you’re rebuilding, not just surviving, even if it doesn’t feel that way yet. how can you weave tiny acts of care—for them *and* yourself—into each day? you don’t have to be \"strong\" every second. what would it look like to let yourself lean, even a little, on others right now?",
+        "condition_resolution_source": "study_a_gold_answer_fallback",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4526,7 +5858,16 @@
           175
         ],
         "source_split": "test",
-        "added_during_scaling": true
+        "added_during_scaling": true,
+        "source_openr1_split": "test",
+        "source_openr1_id": 175,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 175,
+        "inferred_condition": "psychosis",
+        "condition_resolution_source": "symptom_heuristic",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     },
     {
@@ -4559,7 +5900,16 @@
         ],
         "source_split": "train",
         "resampled_from": "OpenR1-Psy",
-        "resampled_v4_1": true
+        "resampled_v4_1": true,
+        "source_openr1_split": "train",
+        "source_openr1_id": 728,
+        "source_type": "direct_source",
+        "source": "openr1_psy",
+        "original_id": 728,
+        "inferred_condition": "post-traumatic stress disorder",
+        "condition_resolution_source": "reasoning_explicit",
+        "generation_policy": "strict_no_generation",
+        "turn_count_policy": "exact_count_with_manual_review"
       }
     }
   ]

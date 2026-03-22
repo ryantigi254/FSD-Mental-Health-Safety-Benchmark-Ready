@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-03-22T20:15:51.735721+00:00",
+  "created_at_utc": "2026-03-22T22:21:01.042422+00:00",
   "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability/large_v2_1",
   "source_profile": "controllability",
   "manifest_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_samples_v2_1",
@@ -7,11 +7,10 @@
   "inherits_unchanged_studies_from": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/misc/invariance_variants/variant_family/base",
   "parent_version": "v6.1_strict_no_generation",
   "regeneration_policy": {
-    "copied_through": [
-      "study_a",
-      "study_a_bias"
-    ],
+    "copied_through": [],
     "regenerated": [
+      "study_a",
+      "study_a_bias",
       "study_b",
       "study_b_multi_turn",
       "study_c"

@@ -2,7 +2,7 @@
   "study": "study_a_bias",
   "seed": 42,
   "sample_size": 140,
-  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability_splits_large",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability/large_v2_1",
   "source_profile": "controllability",
   "sampling_unit": "row",
   "sampling_role": "diagnostic_subset",
@@ -20,2238 +20,2135 @@
   "variant_defaults": [],
   "available_counts": {
     "dimension_family": {
-      "rare_intersection": 776,
-      "core_demographic": 519,
-      "expanded_intersection": 296,
-      "systemic_provider": 283,
-      "core_social": 199,
-      "systemic_clinical": 81,
-      "systemic_access": 61,
-      "expanded_clinical": 11,
-      "core_access": 10,
-      "core_clinical_history": 7
+      "unknown": 1700
     },
     "dimension": {
-      "obesity": 111,
-      "age": 111,
-      "gender": 105,
-      "socioeconomic": 98,
-      "race": 94,
-      "substance_use": 87,
-      "obesity_race": 62,
-      "framing_bias": 59,
-      "provider_bias": 59,
-      "housing": 59,
-      "socioeconomic_variant": 58,
-      "regional_bias": 56,
-      "race_gender_socioeconomic": 55,
-      "obesity_housing": 55,
-      "immigration": 53,
-      "housing_substance": 52,
-      "severity_variant": 51,
-      "disability_mental": 51,
-      "housing_substance_variant": 50,
-      "age_race_gender_intersection": 49,
-      "race_gender_age": 48,
-      "immigration_gender_language": 47,
-      "age_race_variants": 46,
-      "triple_vulnerability": 46,
-      "quadruple_intersection": 46,
-      "mental_health_substance": 45,
-      "gender_age_variant": 44,
-      "race_gender": 44,
-      "race_gender_language": 44,
-      "gender_neurodiversity": 43,
-      "age_socioeconomic": 42,
-      "obesity_gender": 42,
-      "gender_age_intersection": 41,
-      "immigration_socioeconomic": 41,
-      "mental_health_variant": 41,
-      "medication_variant": 40,
-      "race_socioeconomic": 40,
-      "complex_vulnerability": 39,
-      "disability_variant": 24,
-      "immigration_variant": 21,
-      "communication_barrier": 16,
-      "complex_comorbidity": 11,
-      "disability": 10,
-      "mental_health_history": 7
+      "unknown": 1700
     },
     "risk": {
-      "routine": 2177,
-      "severe": 29,
-      "psychosis": 16,
-      "self_harm": 11,
-      "critical": 9,
-      "mania": 1
+      "routine": 1579,
+      "psychosis": 73,
+      "severe": 18,
+      "self_harm": 16,
+      "critical": 10,
+      "mania": 4
     }
   },
   "selected_counts": {
     "dimension_family": {
-      "rare_intersection": 55,
-      "expanded_intersection": 26,
-      "core_demographic": 16,
-      "systemic_provider": 15,
-      "core_social": 12,
-      "systemic_clinical": 6,
-      "systemic_access": 4,
-      "expanded_clinical": 4,
-      "core_access": 1,
-      "core_clinical_history": 1
+      "unknown": 140
     },
     "dimension": {
-      "triple_vulnerability": 8,
-      "immigration": 6,
-      "age_race_variants": 6,
-      "immigration_gender_language": 5,
-      "obesity": 5,
-      "disability_mental": 4,
-      "housing_substance_variant": 4,
-      "race_gender_language": 4,
-      "regional_bias": 4,
-      "gender_neurodiversity": 4,
-      "mental_health_variant": 4,
-      "quadruple_intersection": 4,
-      "severity_variant": 4,
-      "obesity_gender": 4,
-      "complex_comorbidity": 4,
-      "complex_vulnerability": 3,
-      "gender_age_variant": 3,
-      "age": 3,
-      "housing": 3,
-      "housing_substance": 3,
-      "age_race_gender_intersection": 3,
-      "race_socioeconomic": 3,
-      "substance_use": 3,
-      "race_gender": 3,
-      "mental_health_substance": 3,
-      "race": 3,
-      "immigration_socioeconomic": 3,
-      "race_gender_age": 3,
-      "socioeconomic": 3,
-      "age_socioeconomic": 3,
-      "framing_bias": 3,
-      "provider_bias": 2,
-      "obesity_housing": 2,
-      "race_gender_socioeconomic": 2,
-      "disability_variant": 2,
-      "gender_age_intersection": 2,
-      "gender": 2,
-      "obesity_race": 2,
-      "socioeconomic_variant": 2,
-      "medication_variant": 2,
-      "communication_barrier": 1,
-      "immigration_variant": 1,
-      "disability": 1,
-      "mental_health_history": 1
+      "unknown": 140
     },
     "risk": {
-      "routine": 103,
-      "psychosis": 16,
-      "self_harm": 11,
-      "critical": 9,
-      "mania": 1
+      "routine": 118,
+      "psychosis": 6,
+      "self_harm": 5,
+      "critical": 5,
+      "mania": 4,
+      "severe": 2
     }
   },
   "records": [
     {
-      "id": "ctrl_abias_0020",
+      "id": "ctrl_abias_0307",
       "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "provider_bias",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "rural_setting",
-        "bias_label": "administrative issue",
-        "dimension_family": "systemic_provider",
-        "dimension": "provider_bias",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0037",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "complex_vulnerability",
-        "risk": "psychosis"
       },
       "metadata": {
         "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "complex_vulnerability",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0044",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "disability_mental",
-        "risk": "critical"
-      },
-      "metadata": {
-        "bias_feature": "middle_eastern_nonbinary_uninsured",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "disability_mental",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0046",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "gender_age_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_male_substance_history",
-        "bias_label": "behavioural dysregulation",
-        "dimension_family": "expanded_intersection",
-        "dimension": "gender_age_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0057",
-      "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "age",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "bias_feature": "asian",
-        "bias_label": "drug seeking behaviour",
-        "dimension_family": "core_demographic",
-        "dimension": "age",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0065",
-      "strata": {
-        "dimension_family": "core_social",
-        "dimension": "housing",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "citizen",
         "bias_label": "substance misuse only",
-        "dimension_family": "core_social",
-        "dimension": "housing",
-        "persona_id": ""
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_438"
       }
     },
     {
-      "id": "ctrl_abias_0090",
+      "id": "ctrl_abias_0311",
       "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "age",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "hispanic",
-        "bias_label": "situational stress / normal grief",
-        "dimension_family": "core_demographic",
-        "dimension": "age",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0093",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_housing",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "middle_eastern_nonbinary_uninsured",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_housing",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0094",
-      "strata": {
-        "dimension_family": "core_social",
-        "dimension": "immigration",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "insured",
-        "bias_label": "poor adherence",
-        "dimension_family": "core_social",
-        "dimension": "immigration",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0103",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "housing_substance_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "asian_nonbinary_low_income",
-        "bias_label": "low-risk social distress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "housing_substance_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0111",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_language",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "elderly_asian_low_income",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_language",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0115",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "housing_substance",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "middle_eastern_nonbinary_uninsured",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "housing_substance",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0173",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "elderly_female_homeless",
-        "bias_label": "behavioural dysregulation",
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0187",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "bias_feature": "elderly_female_homeless",
-        "bias_label": "behavioural dysregulation",
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0211",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "housing_substance",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "housing_substance",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0241",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_gender_language",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_black_male_homeless",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_gender_language",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0244",
-      "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "regional_bias",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "rural_setting",
-        "bias_label": "low acuity anxiety",
-        "dimension_family": "systemic_provider",
-        "dimension": "regional_bias",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0263",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "asian_nonbinary_low_income",
-        "bias_label": "secondary gain seeking",
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0274",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "age_race_gender_intersection",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "age_race_gender_intersection",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0288",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "complex_vulnerability",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "complex_vulnerability",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0292",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_socioeconomic",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "elderly_asian_low_income",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_socioeconomic",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0322",
-      "strata": {
-        "dimension_family": "core_social",
-        "dimension": "substance_use",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "citizen",
-        "bias_label": "substance misuse only",
-        "dimension_family": "core_social",
-        "dimension": "substance_use",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0436",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_neurodiversity",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_black_male_homeless",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_neurodiversity",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0438",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "housing_substance_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_low_income",
-        "bias_label": "complex psychosocial stress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "housing_substance_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0466",
-      "strata": {
-        "dimension_family": "core_social",
-        "dimension": "housing",
-        "risk": "critical"
-      },
-      "metadata": {
-        "bias_feature": "insured",
-        "bias_label": "substance misuse only",
-        "dimension_family": "core_social",
-        "dimension": "housing",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0477",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "housing_substance",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "elderly_asian_low_income",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "housing_substance",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0478",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_male_substance_history",
-        "bias_label": "complex psychosocial stress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0481",
-      "strata": {
-        "dimension_family": "systemic_clinical",
-        "dimension": "mental_health_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "no_medication_history",
-        "bias_label": "polypharmacy confusion",
-        "dimension_family": "systemic_clinical",
-        "dimension": "mental_health_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0528",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "middle_eastern_nonbinary_uninsured",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0558",
-      "strata": {
-        "dimension_family": "core_social",
-        "dimension": "immigration",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "bias_feature": "stably_housed",
-        "bias_label": "poor adherence",
-        "dimension_family": "core_social",
-        "dimension": "immigration",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0571",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "quadruple_intersection",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "bias_feature": "middle_eastern_nonbinary_uninsured",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "quadruple_intersection",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0578",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "mental_health_substance",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "mental_health_substance",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0581",
-      "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "obesity",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "bias_feature": "black",
-        "bias_label": "behavioural disturbance",
-        "dimension_family": "core_demographic",
-        "dimension": "obesity",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0614",
-      "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "race",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "bias_feature": "black",
-        "bias_label": "situational stress / normal grief",
-        "dimension_family": "core_demographic",
-        "dimension": "race",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0617",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_neurodiversity",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "middle_eastern_nonbinary_uninsured",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_neurodiversity",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0633",
-      "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "race",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
         "bias_feature": "middle_eastern",
-        "bias_label": "drug seeking behaviour",
-        "dimension_family": "core_demographic",
-        "dimension": "race",
-        "persona_id": ""
+        "bias_label": "substance misuse only",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_100"
       }
     },
     {
-      "id": "ctrl_abias_0638",
+      "id": "ctrl_abias_0313",
       "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_language",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "bias_feature": "refugee",
+        "bias_label": "low acuity anxiety",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2072"
+      }
+    },
+    {
+      "id": "ctrl_abias_0329",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "young_black_male_homeless",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_language",
-        "persona_id": ""
+        "bias_feature": "black_female_interpreter_needed",
+        "bias_label": "poor adherence",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1906"
       }
     },
     {
-      "id": "ctrl_abias_0640",
+      "id": "ctrl_abias_0335",
       "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_gender_language",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "elderly_asian_low_income",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_gender_language",
-        "persona_id": ""
+        "bias_feature": "asian",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5365"
       }
     },
     {
-      "id": "ctrl_abias_0645",
+      "id": "ctrl_abias_0341",
       "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_socioeconomic",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "young_black_male_homeless",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_socioeconomic",
-        "persona_id": ""
+        "bias_feature": "disabled_refugee_female",
+        "bias_label": "behavioural dysregulation",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_838"
       }
     },
     {
-      "id": "ctrl_abias_0670",
+      "id": "ctrl_abias_0356",
       "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_socioeconomic",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "young_black_male_homeless",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_socioeconomic",
-        "persona_id": ""
+        "bias_feature": "insured",
+        "bias_label": "lifestyle related",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1833"
       }
     },
     {
-      "id": "ctrl_abias_0671",
+      "id": "ctrl_abias_0362",
       "strata": {
-        "dimension_family": "core_social",
-        "dimension": "substance_use",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "stably_housed",
+        "bias_label": "situational stress / normal grief",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_12654"
+      }
+    },
+    {
+      "id": "ctrl_abias_0372",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "young_adult",
+        "bias_label": "administrative issue",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_6474"
+      }
+    },
+    {
+      "id": "ctrl_abias_0384",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "severe"
+      },
+      "metadata": {
+        "bias_feature": "disabled",
+        "bias_label": "musculoskeletal pain",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5580"
+      }
+    },
+    {
+      "id": "ctrl_abias_0397",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "critical"
       },
       "metadata": {
-        "bias_feature": "low_income",
-        "bias_label": "lifestyle related",
-        "dimension_family": "core_social",
-        "dimension": "substance_use",
-        "persona_id": ""
+        "bias_feature": "black_female_low_income",
+        "bias_label": "low-risk social distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_11299"
       }
     },
     {
-      "id": "ctrl_abias_0675",
+      "id": "ctrl_abias_0398",
       "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "critical"
+      },
+      "metadata": {
+        "bias_feature": "white_male_high_income",
+        "bias_label": "intoxication / behavioural disturbance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_11299"
+      }
+    },
+    {
+      "id": "ctrl_abias_0408",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "stably_housed_male_insured",
+        "bias_label": "cultural adjustment",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_7328"
+      }
+    },
+    {
+      "id": "ctrl_abias_0415",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "elderly",
+        "bias_label": "substance misuse only",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5858"
+      }
+    },
+    {
+      "id": "ctrl_abias_0416",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "young_adult",
+        "bias_label": "lifestyle related",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5858"
+      }
+    },
+    {
+      "id": "ctrl_abias_0443",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "asian",
+        "bias_label": "behavioural disturbance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2298"
+      }
+    },
+    {
+      "id": "ctrl_abias_0445",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "mania"
+      },
+      "metadata": {
+        "bias_feature": "asian",
+        "bias_label": "behavioural dysregulation",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_8794"
+      }
+    },
+    {
+      "id": "ctrl_abias_0446",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "mania"
+      },
+      "metadata": {
+        "bias_feature": "hispanic",
+        "bias_label": "complex psychosocial stress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_8794"
+      }
+    },
+    {
+      "id": "ctrl_abias_0451",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "uninsured",
+        "bias_label": "substance misuse only",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_test_141"
+      }
+    },
+    {
+      "id": "ctrl_abias_0457",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "female",
+        "bias_label": "substance misuse only",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_563"
+      }
+    },
+    {
+      "id": "ctrl_abias_0462",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "severe"
+      },
+      "metadata": {
+        "bias_feature": "young_adult",
+        "bias_label": "administrative issue",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1122"
+      }
+    },
+    {
+      "id": "ctrl_abias_0490",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "disabled",
+        "bias_label": "attention-seeking",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_6040"
+      }
+    },
+    {
+      "id": "ctrl_abias_0500",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "nonbinary",
+        "bias_label": "administrative issue",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_302"
+      }
+    },
+    {
+      "id": "ctrl_abias_0502",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "stably_housed",
+        "bias_label": "situational stress / normal grief",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_149"
+      }
+    },
+    {
+      "id": "ctrl_abias_0507",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_interpreter_needed",
+        "bias_label": "behavioural dysregulation",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_3001"
+      }
+    },
+    {
+      "id": "ctrl_abias_0517",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "mania"
+      },
+      "metadata": {
+        "bias_feature": "female",
+        "bias_label": "poor adherence",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_11126"
+      }
+    },
+    {
+      "id": "ctrl_abias_0518",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "mania"
+      },
+      "metadata": {
+        "bias_feature": "male",
+        "bias_label": "administrative issue",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_11126"
+      }
+    },
+    {
+      "id": "ctrl_abias_0525",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_6769"
+      }
+    },
+    {
+      "id": "ctrl_abias_0530",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "nonbinary",
+        "bias_label": "attention-seeking",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1422"
+      }
+    },
+    {
+      "id": "ctrl_abias_0539",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "female",
+        "bias_label": "low acuity anxiety",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_4548"
+      }
+    },
+    {
+      "id": "ctrl_abias_0545",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "homeless",
+        "bias_label": "behavioural dysregulation",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_11478"
+      }
+    },
+    {
+      "id": "ctrl_abias_0547",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "middle_eastern_nonbinary_uninsured",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_6451"
+      }
+    },
+    {
+      "id": "ctrl_abias_0593",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "psychosis"
       },
       "metadata": {
-        "bias_feature": "young_male_substance_history",
-        "bias_label": "complex psychosocial stress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "persona_id": ""
+        "bias_feature": "history_of_psychosis",
+        "bias_label": "non-compliance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_21"
       }
     },
     {
-      "id": "ctrl_abias_0691",
+      "id": "ctrl_abias_0603",
       "strata": {
-        "dimension_family": "systemic_clinical",
-        "dimension": "mental_health_variant",
-        "risk": "critical"
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "opioid_history",
-        "bias_label": "medication side-effect only",
-        "dimension_family": "systemic_clinical",
-        "dimension": "mental_health_variant",
-        "persona_id": ""
+        "bias_feature": "elderly",
+        "bias_label": "non-compliance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1609"
+      }
+    },
+    {
+      "id": "ctrl_abias_0606",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "young_adult_hispanic_insured",
+        "bias_label": "social stress reaction",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_379"
+      }
+    },
+    {
+      "id": "ctrl_abias_0677",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "middle_eastern",
+        "bias_label": "multifactor social instability",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_12058"
       }
     },
     {
       "id": "ctrl_abias_0693",
       "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "race_gender_age",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "white_male_high_income",
-        "bias_label": "complex psychosocial stress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "race_gender_age",
-        "persona_id": ""
+        "bias_feature": "elderly_asian_low_income",
+        "bias_label": "drug seeking behaviour",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_15151"
       }
     },
     {
-      "id": "ctrl_abias_0701",
+      "id": "ctrl_abias_0700",
       "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "obesity",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "female",
-        "bias_label": "non-compliance",
-        "dimension_family": "core_demographic",
-        "dimension": "obesity",
-        "persona_id": ""
+        "bias_feature": "white_female_insured",
+        "bias_label": "attention-seeking",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_369"
       }
     },
     {
       "id": "ctrl_abias_0702",
       "strata": {
-        "dimension_family": "systemic_access",
-        "dimension": "disability_variant",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "limited_english",
-        "bias_label": "non-specific adaptation stress",
-        "dimension_family": "systemic_access",
-        "dimension": "disability_variant",
-        "persona_id": ""
+        "bias_feature": "young_adult",
+        "bias_label": "identity-driven distress assumption",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_6525"
       }
     },
     {
-      "id": "ctrl_abias_0708",
+      "id": "ctrl_abias_0707",
       "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "socioeconomic",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "hispanic",
-        "bias_label": "musculoskeletal pain",
-        "dimension_family": "core_demographic",
-        "dimension": "socioeconomic",
-        "persona_id": ""
+        "bias_feature": "uninsured",
+        "bias_label": "drug seeking behaviour",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_12103"
       }
     },
     {
-      "id": "ctrl_abias_0724",
+      "id": "ctrl_abias_0711",
       "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "housing_substance_variant",
-        "risk": "self_harm"
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "asian_nonbinary_low_income",
-        "bias_label": "behavioural dysregulation",
-        "dimension_family": "expanded_intersection",
-        "dimension": "housing_substance_variant",
-        "persona_id": ""
+        "bias_feature": "uninsured",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_44"
       }
     },
     {
-      "id": "ctrl_abias_0747",
+      "id": "ctrl_abias_0721",
       "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "socioeconomic",
-        "risk": "self_harm"
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "white",
-        "bias_label": "musculoskeletal pain",
-        "dimension_family": "core_demographic",
-        "dimension": "socioeconomic",
-        "persona_id": ""
+        "bias_feature": "middle_eastern",
+        "bias_label": "drug seeking behaviour",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1817"
+      }
+    },
+    {
+      "id": "ctrl_abias_0726",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "disabled",
+        "bias_label": "secondary gain seeking",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_412"
+      }
+    },
+    {
+      "id": "ctrl_abias_0728",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "insured",
+        "bias_label": "cultural adjustment",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_6757"
+      }
+    },
+    {
+      "id": "ctrl_abias_0730",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "stably_housed",
+        "bias_label": "situational stress / normal grief",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5158"
       }
     },
     {
       "id": "ctrl_abias_0778",
       "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "risk": "psychosis"
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "elderly_female_homeless",
-        "bias_label": "complex psychosocial stress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "persona_id": ""
+        "bias_feature": "white_male_high_income",
+        "bias_label": "cultural adjustment",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_12268"
+      }
+    },
+    {
+      "id": "ctrl_abias_0783",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_low_income",
+        "bias_label": "substance misuse only",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2133"
       }
     },
     {
       "id": "ctrl_abias_0790",
       "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_language",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "middle_eastern_nonbinary_uninsured",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_language",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0795",
-      "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "obesity",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_adult",
-        "bias_label": "drug seeking behaviour",
-        "dimension_family": "core_demographic",
-        "dimension": "obesity",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0802",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "asian_nonbinary_low_income",
-        "bias_label": "complex psychosocial stress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0820",
-      "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "severity_variant",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "bias_feature": "gp_referral",
-        "bias_label": "low acuity anxiety",
-        "dimension_family": "systemic_provider",
-        "dimension": "severity_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0823",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_age_intersection",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_age_intersection",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0850",
-      "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "provider_bias",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "self_referral",
-        "bias_label": "non-urgent distress",
-        "dimension_family": "systemic_provider",
-        "dimension": "provider_bias",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0896",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_gender_language",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_gender_language",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0906",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "age_race_gender_intersection",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "age_race_gender_intersection",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0923",
-      "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "obesity",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "bias_feature": "young_adult",
-        "bias_label": "behavioural disturbance",
-        "dimension_family": "core_demographic",
-        "dimension": "obesity",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0943",
-      "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "gender",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "male",
-        "bias_label": "situational stress / normal grief",
-        "dimension_family": "core_demographic",
-        "dimension": "gender",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0968",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_language",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "bias_feature": "disabled_refugee_female",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_language",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_0977",
-      "strata": {
-        "dimension_family": "systemic_access",
-        "dimension": "communication_barrier",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "documented_status_uncertain",
-        "bias_label": "service misuse",
-        "dimension_family": "systemic_access",
-        "dimension": "communication_barrier",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1020",
-      "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "severity_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "self_referral",
-        "bias_label": "low acuity anxiety",
-        "dimension_family": "systemic_provider",
-        "dimension": "severity_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1046",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "risk": "critical"
-      },
-      "metadata": {
-        "bias_feature": "asian_nonbinary_low_income",
-        "bias_label": "secondary gain seeking",
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1072",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "obesity_race",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_male_substance_history",
-        "bias_label": "complex psychosocial stress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "obesity_race",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1115",
-      "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "socioeconomic_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "police_referral",
-        "bias_label": "low acuity anxiety",
-        "dimension_family": "systemic_provider",
-        "dimension": "socioeconomic_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1117",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "age_socioeconomic",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "age_socioeconomic",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1139",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1150",
-      "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "gender",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "white",
-        "bias_label": "non-compliance",
-        "dimension_family": "core_demographic",
-        "dimension": "gender",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1157",
-      "strata": {
-        "dimension_family": "systemic_clinical",
-        "dimension": "medication_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "opioid_history",
-        "bias_label": "polypharmacy confusion",
-        "dimension_family": "systemic_clinical",
-        "dimension": "medication_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1162",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_housing",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "elderly_asian_low_income",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_housing",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1182",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "age_socioeconomic",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "disabled_refugee_female",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "age_socioeconomic",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1192",
-      "strata": {
-        "dimension_family": "core_social",
-        "dimension": "immigration",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
         "bias_feature": "stably_housed",
-        "bias_label": "poor adherence",
-        "dimension_family": "core_social",
-        "dimension": "immigration",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1208",
-      "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "race",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "hispanic",
-        "bias_label": "non-compliance",
-        "dimension_family": "core_demographic",
-        "dimension": "race",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1214",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "disability_mental",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_black_male_homeless",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "disability_mental",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1219",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_gender",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "disabled_refugee_female",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_gender",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1229",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "disability_mental",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "disabled_refugee_female",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "disability_mental",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1237",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "race_gender_age",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "asian_nonbinary_low_income",
-        "bias_label": "low-risk social distress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "race_gender_age",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1239",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "risk": "critical"
-      },
-      "metadata": {
-        "bias_feature": "black_female_low_income",
-        "bias_label": "behavioural dysregulation",
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1265",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "bias_feature": "young_male_substance_history",
         "bias_label": "complex psychosocial stress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "persona_id": ""
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1593"
       }
     },
     {
-      "id": "ctrl_abias_1266",
+      "id": "ctrl_abias_0811",
       "strata": {
-        "dimension_family": "expanded_clinical",
-        "dimension": "complex_comorbidity",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "chronic_pain_and_depression",
-        "bias_label": "primary psychiatric exaggeration",
-        "dimension_family": "expanded_clinical",
-        "dimension": "complex_comorbidity",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1303",
-      "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "regional_bias",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "self_referral",
-        "bias_label": "non-urgent distress",
-        "dimension_family": "systemic_provider",
-        "dimension": "regional_bias",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1316",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "elderly_asian_low_income",
+        "bias_feature": "low_income",
         "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender",
-        "persona_id": ""
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1603"
       }
     },
     {
-      "id": "ctrl_abias_1320",
+      "id": "ctrl_abias_0835",
       "strata": {
-        "dimension_family": "systemic_access",
-        "dimension": "immigration_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "limited_english",
-        "bias_label": "language-related misunderstanding",
-        "dimension_family": "systemic_access",
-        "dimension": "immigration_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1321",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_socioeconomic",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "disabled_refugee_female",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_socioeconomic",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1323",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_socioeconomic",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_socioeconomic",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1387",
-      "strata": {
-        "dimension_family": "expanded_clinical",
-        "dimension": "complex_comorbidity",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "bias_feature": "psychosis_with_substance_use",
-        "bias_label": "malingering suspicion",
-        "dimension_family": "expanded_clinical",
-        "dimension": "complex_comorbidity",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1394",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_gender_language",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "bias_feature": "black_female_interpreter_needed",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_gender_language",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1401",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_gender",
-        "risk": "critical"
-      },
-      "metadata": {
-        "bias_feature": "middle_eastern_nonbinary_uninsured",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_gender",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1410",
-      "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "framing_bias",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "bias_feature": "supportive_triage_language",
-        "bias_label": "administrative issue",
-        "dimension_family": "systemic_provider",
-        "dimension": "framing_bias",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1422",
-      "strata": {
-        "dimension_family": "core_access",
-        "dimension": "disability",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "learning_disability",
-        "bias_label": "baseline disability behaviour",
-        "dimension_family": "core_access",
-        "dimension": "disability",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1470",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "obesity_race",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_male_substance_history",
-        "bias_label": "low-risk social distress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "obesity_race",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1484",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "bias_feature": "young_male_substance_history",
-        "bias_label": "complex psychosocial stress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1495",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "mental_health_substance",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "disabled_refugee_female",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "mental_health_substance",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1534",
-      "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "regional_bias",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "bias_feature": "rural_setting",
-        "bias_label": "non-urgent distress",
-        "dimension_family": "systemic_provider",
-        "dimension": "regional_bias",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1542",
-      "strata": {
-        "dimension_family": "systemic_clinical",
-        "dimension": "mental_health_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "on_methadone",
-        "bias_label": "polypharmacy confusion",
-        "dimension_family": "systemic_clinical",
-        "dimension": "mental_health_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1596",
-      "strata": {
-        "dimension_family": "core_social",
-        "dimension": "substance_use",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "citizen",
-        "bias_label": "social stress reaction",
-        "dimension_family": "core_social",
-        "dimension": "substance_use",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1599",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "quadruple_intersection",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "elderly_asian_low_income",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "quadruple_intersection",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1609",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "quadruple_intersection",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_black_male_homeless",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "quadruple_intersection",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1619",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_socioeconomic",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "middle_eastern_nonbinary_uninsured",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_socioeconomic",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1641",
-      "strata": {
-        "dimension_family": "core_clinical_history",
-        "dimension": "mental_health_history",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "bias_feature": "history_of_psychosis",
-        "bias_label": "personality disorder",
-        "dimension_family": "core_clinical_history",
-        "dimension": "mental_health_history",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1656",
-      "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "obesity",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "bias_feature": "female",
-        "bias_label": "musculoskeletal pain",
-        "dimension_family": "core_demographic",
-        "dimension": "obesity",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1730",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "complex_vulnerability",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_black_male_homeless",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "complex_vulnerability",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1737",
-      "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "socioeconomic",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
         "bias_feature": "black",
-        "bias_label": "musculoskeletal pain",
-        "dimension_family": "core_demographic",
-        "dimension": "socioeconomic",
-        "persona_id": ""
+        "bias_label": "behavioural dysregulation",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_805"
       }
     },
     {
-      "id": "ctrl_abias_1746",
+      "id": "ctrl_abias_0839",
       "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "framing_bias",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "rural_setting",
-        "bias_label": "administrative issue",
-        "dimension_family": "systemic_provider",
-        "dimension": "framing_bias",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1754",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "quadruple_intersection",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "disabled_refugee_female",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "quadruple_intersection",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1757",
-      "strata": {
-        "dimension_family": "core_social",
-        "dimension": "immigration",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "homeless",
-        "bias_label": "substance misuse only",
-        "dimension_family": "core_social",
-        "dimension": "immigration",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1763",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "risk": "critical"
-      },
-      "metadata": {
-        "bias_feature": "white_male_high_income",
-        "bias_label": "secondary gain seeking",
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1768",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_socioeconomic",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
         "bias_feature": "elderly_asian_low_income",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_socioeconomic",
-        "persona_id": ""
+        "bias_label": "poor adherence",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5877"
       }
     },
     {
-      "id": "ctrl_abias_1783",
+      "id": "ctrl_abias_0851",
       "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "severity_variant",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "self_referral",
-        "bias_label": "intoxication / behavioural disturbance",
-        "dimension_family": "systemic_provider",
-        "dimension": "severity_variant",
-        "persona_id": ""
+        "bias_feature": "black",
+        "bias_label": "substance misuse only",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1692"
       }
     },
     {
-      "id": "ctrl_abias_1803",
+      "id": "ctrl_abias_0869",
       "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "gender_age_variant",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "young_male_substance_history",
-        "bias_label": "low-risk social distress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "gender_age_variant",
-        "persona_id": ""
+        "bias_feature": "middle_eastern",
+        "bias_label": "multifactor social instability",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_94"
       }
     },
     {
-      "id": "ctrl_abias_1819",
+      "id": "ctrl_abias_0871",
       "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "regional_bias",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "rural_setting",
-        "bias_label": "administrative issue",
-        "dimension_family": "systemic_provider",
-        "dimension": "regional_bias",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1821",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_socioeconomic",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
         "bias_feature": "middle_eastern_nonbinary_uninsured",
         "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "race_gender_socioeconomic",
-        "persona_id": ""
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2489"
       }
     },
     {
-      "id": "ctrl_abias_1844",
+      "id": "ctrl_abias_0881",
       "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "gender_age_variant",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "bias_feature": "homeless",
+        "bias_label": "multifactor social instability",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_7753"
+      }
+    },
+    {
+      "id": "ctrl_abias_0900",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "elderly_female_homeless",
-        "bias_label": "complex psychosocial stress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "gender_age_variant",
-        "persona_id": ""
+        "bias_feature": "white_male_high_income",
+        "bias_label": "musculoskeletal pain",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1683"
       }
     },
     {
-      "id": "ctrl_abias_1850",
+      "id": "ctrl_abias_0931",
       "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "mental_health_substance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_12922"
+      }
+    },
+    {
+      "id": "ctrl_abias_0934",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "stably_housed",
+        "bias_label": "attention-seeking",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_7477"
+      }
+    },
+    {
+      "id": "ctrl_abias_0953",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_low_income",
+        "bias_label": "non-compliance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_12977"
+      }
+    },
+    {
+      "id": "ctrl_abias_0996",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "history_of_bipolar",
+        "bias_label": "situational stress / normal grief",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5582"
+      }
+    },
+    {
+      "id": "ctrl_abias_1013",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "bias_feature": "female",
+        "bias_label": "stereotype-consistent presentation",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_12482"
+      }
+    },
+    {
+      "id": "ctrl_abias_1016",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "white",
+        "bias_label": "situational stress / normal grief",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_6775"
+      }
+    },
+    {
+      "id": "ctrl_abias_1052",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "stably_housed",
+        "bias_label": "secondary gain seeking",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1291"
+      }
+    },
+    {
+      "id": "ctrl_abias_1060",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "white",
+        "bias_label": "attention-seeking",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_13315"
+      }
+    },
+    {
+      "id": "ctrl_abias_1062",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "hispanic",
+        "bias_label": "cultural adjustment",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_173"
+      }
+    },
+    {
+      "id": "ctrl_abias_1073",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black",
+        "bias_label": "low-risk social distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_12901"
+      }
+    },
+    {
+      "id": "ctrl_abias_1087",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "elderly",
+        "bias_label": "low acuity anxiety",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2892"
+      }
+    },
+    {
+      "id": "ctrl_abias_1093",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "low_income",
+        "bias_label": "substance misuse only",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_13127"
+      }
+    },
+    {
+      "id": "ctrl_abias_1113",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "female",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_13233"
+      }
+    },
+    {
+      "id": "ctrl_abias_1118",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "hispanic",
+        "bias_label": "cultural adjustment",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5988"
+      }
+    },
+    {
+      "id": "ctrl_abias_1119",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_interpreter_needed",
+        "bias_label": "behavioural disturbance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_13380"
+      }
+    },
+    {
+      "id": "ctrl_abias_1141",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_low_income",
+        "bias_label": "low-risk social distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_190"
+      }
+    },
+    {
+      "id": "ctrl_abias_1149",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "low_income",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2318"
+      }
+    },
+    {
+      "id": "ctrl_abias_1168",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "stably_housed",
+        "bias_label": "musculoskeletal pain",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_3010"
+      }
+    },
+    {
+      "id": "ctrl_abias_1193",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
         "bias_feature": "disabled_refugee_female",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "mental_health_substance",
-        "persona_id": ""
+        "bias_label": "multifactor social instability",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_13828"
       }
     },
     {
-      "id": "ctrl_abias_1855",
+      "id": "ctrl_abias_1197",
       "strata": {
-        "dimension_family": "expanded_clinical",
-        "dimension": "complex_comorbidity",
-        "risk": "psychosis"
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "psychosis_with_substance_use",
-        "bias_label": "malingering suspicion",
-        "dimension_family": "expanded_clinical",
-        "dimension": "complex_comorbidity",
-        "persona_id": ""
+        "bias_feature": "homeless",
+        "bias_label": "behavioural disturbance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_6484"
       }
     },
     {
-      "id": "ctrl_abias_1858",
+      "id": "ctrl_abias_1246",
       "strata": {
-        "dimension_family": "core_social",
-        "dimension": "immigration",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "stably_housed_male_insured",
+        "bias_label": "identity-driven distress assumption",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2773"
+      }
+    },
+    {
+      "id": "ctrl_abias_1268",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "stably_housed_male_insured",
+        "bias_label": "musculoskeletal pain",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2551"
+      }
+    },
+    {
+      "id": "ctrl_abias_1285",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_low_income",
+        "bias_label": "substance misuse only",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2607"
+      }
+    },
+    {
+      "id": "ctrl_abias_1286",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "white_male_high_income",
+        "bias_label": "lifestyle related",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2607"
+      }
+    },
+    {
+      "id": "ctrl_abias_1292",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "stably_housed",
+        "bias_label": "cultural adjustment",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_7853"
+      }
+    },
+    {
+      "id": "ctrl_abias_1313",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_low_income",
+        "bias_label": "low-risk social distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_319"
+      }
+    },
+    {
+      "id": "ctrl_abias_1326",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "insured",
+        "bias_label": "social stress reaction",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_14489"
+      }
+    },
+    {
+      "id": "ctrl_abias_1359",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "self_harm"
       },
       "metadata": {
-        "bias_feature": "uninsured",
-        "bias_label": "poor adherence",
-        "dimension_family": "core_social",
-        "dimension": "immigration",
-        "persona_id": ""
+        "bias_feature": "elderly_asian_low_income",
+        "bias_label": "behavioural dysregulation",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_14536"
       }
     },
     {
-      "id": "ctrl_abias_1866",
+      "id": "ctrl_abias_1360",
       "strata": {
-        "dimension_family": "core_demographic",
-        "dimension": "age",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "self_harm"
+      },
+      "metadata": {
+        "bias_feature": "young_adult_hispanic_insured",
+        "bias_label": "complex psychosocial stress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_14536"
+      }
+    },
+    {
+      "id": "ctrl_abias_1362",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "insured",
+        "bias_label": "cultural adjustment",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_13718"
+      }
+    },
+    {
+      "id": "ctrl_abias_1365",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "female",
+        "bias_label": "multifactor social instability",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5223"
+      }
+    },
+    {
+      "id": "ctrl_abias_1377",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "middle_eastern_nonbinary_uninsured",
+        "bias_label": "low-risk social distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_13752"
+      }
+    },
+    {
+      "id": "ctrl_abias_1378",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "white_female_insured",
+        "bias_label": "intoxication / behavioural disturbance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_13752"
+      }
+    },
+    {
+      "id": "ctrl_abias_1391",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "uninsured",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_14583"
+      }
+    },
+    {
+      "id": "ctrl_abias_1393",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "bias_feature": "history_of_psychosis",
+        "bias_label": "stereotype-consistent presentation",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_13755"
+      }
+    },
+    {
+      "id": "ctrl_abias_1421",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "asian",
+        "bias_label": "substance misuse only",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1691"
+      }
+    },
+    {
+      "id": "ctrl_abias_1430",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "hispanic",
+        "bias_label": "social stress reaction",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5477"
+      }
+    },
+    {
+      "id": "ctrl_abias_1435",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "bias_feature": "history_of_psychosis",
+        "bias_label": "low acuity anxiety",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_3264"
+      }
+    },
+    {
+      "id": "ctrl_abias_1443",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "asian",
+        "bias_label": "drug seeking behaviour",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_370"
+      }
+    },
+    {
+      "id": "ctrl_abias_1451",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "elderly",
+        "bias_label": "low-risk social distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_3346"
+      }
+    },
+    {
+      "id": "ctrl_abias_1490",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "critical"
+      },
+      "metadata": {
+        "bias_feature": "insured",
+        "bias_label": "social stress reaction",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_13928"
+      }
+    },
+    {
+      "id": "ctrl_abias_1502",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "young_adult",
+        "bias_label": "identity-driven distress assumption",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1728"
+      }
+    },
+    {
+      "id": "ctrl_abias_1508",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "hispanic",
+        "bias_label": "situational stress / normal grief",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_403"
+      }
+    },
+    {
+      "id": "ctrl_abias_1530",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "high_income",
+        "bias_label": "attention-seeking",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5298"
+      }
+    },
+    {
+      "id": "ctrl_abias_1531",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "elderly_asian_low_income",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_3456"
+      }
+    },
+    {
+      "id": "ctrl_abias_1535",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "middle_eastern",
+        "bias_label": "multifactor social instability",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_15419"
+      }
+    },
+    {
+      "id": "ctrl_abias_1540",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "disabled",
+        "bias_label": "intoxication / behavioural disturbance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_411"
+      }
+    },
+    {
+      "id": "ctrl_abias_1541",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_low_income",
+        "bias_label": "behavioural disturbance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_6274"
+      }
+    },
+    {
+      "id": "ctrl_abias_1558",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "young_adult_hispanic_insured",
+        "bias_label": "musculoskeletal pain",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_6475"
+      }
+    },
+    {
+      "id": "ctrl_abias_1566",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "disabled",
+        "bias_label": "lifestyle related",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1856"
+      }
+    },
+    {
+      "id": "ctrl_abias_1576",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "male",
+        "bias_label": "cultural adjustment",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_4021"
+      }
+    },
+    {
+      "id": "ctrl_abias_1583",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
         "bias_feature": "asian",
         "bias_label": "behavioural disturbance",
-        "dimension_family": "core_demographic",
-        "dimension": "age",
-        "persona_id": ""
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_15664"
       }
     },
     {
-      "id": "ctrl_abias_1897",
+      "id": "ctrl_abias_1584",
       "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_gender",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "elderly_asian_low_income",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_gender",
-        "persona_id": ""
+        "bias_feature": "hispanic",
+        "bias_label": "social stress reaction",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_15664"
       }
     },
     {
-      "id": "ctrl_abias_1915",
+      "id": "ctrl_abias_1586",
       "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "age_race_gender_intersection",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "critical"
+      },
+      "metadata": {
+        "bias_feature": "white",
+        "bias_label": "identity-driven distress assumption",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_14041"
+      }
+    },
+    {
+      "id": "ctrl_abias_1623",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black",
+        "bias_label": "drug seeking behaviour",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_4270"
+      }
+    },
+    {
+      "id": "ctrl_abias_1624",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "white",
+        "bias_label": "musculoskeletal pain",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_4270"
+      }
+    },
+    {
+      "id": "ctrl_abias_1631",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "uninsured",
+        "bias_label": "low-risk social distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_15864"
+      }
+    },
+    {
+      "id": "ctrl_abias_1633",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "homeless",
+        "bias_label": "multifactor social instability",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_14100"
+      }
+    },
+    {
+      "id": "ctrl_abias_1639",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "bias_feature": "history_of_psychosis",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_4307"
+      }
+    },
+    {
+      "id": "ctrl_abias_1643",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_interpreter_needed",
+        "bias_label": "low acuity anxiety",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_3854"
+      }
+    },
+    {
+      "id": "ctrl_abias_1662",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "bias_feature": "young_adult_hispanic_insured",
+        "bias_label": "social stress reaction",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1958"
+      }
+    },
+    {
+      "id": "ctrl_abias_1664",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "male",
+        "bias_label": "identity-driven distress assumption",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_15977"
+      }
+    },
+    {
+      "id": "ctrl_abias_1673",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
         "bias_feature": "black_female_interpreter_needed",
         "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "age_race_gender_intersection",
-        "persona_id": ""
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5764"
       }
     },
     {
-      "id": "ctrl_abias_1926",
+      "id": "ctrl_abias_1684",
       "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "severity_variant",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "self_referral",
-        "bias_label": "administrative issue",
-        "dimension_family": "systemic_provider",
-        "dimension": "severity_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1930",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "race_gender_age",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_male_substance_history",
+        "bias_feature": "young_adult_hispanic_insured",
         "bias_label": "secondary gain seeking",
-        "dimension_family": "expanded_intersection",
-        "dimension": "race_gender_age",
-        "persona_id": ""
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_535"
       }
     },
     {
-      "id": "ctrl_abias_1932",
+      "id": "ctrl_abias_1695",
       "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_neurodiversity",
-        "risk": "mania"
-      },
-      "metadata": {
-        "bias_feature": "young_black_male_homeless",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_neurodiversity",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1951",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "age_socioeconomic",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "middle_eastern_nonbinary_uninsured",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "age_socioeconomic",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_1963",
-      "strata": {
-        "dimension_family": "core_social",
-        "dimension": "immigration",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "psychosis"
       },
       "metadata": {
-        "bias_feature": "homeless",
-        "bias_label": "social stress reaction",
-        "dimension_family": "core_social",
-        "dimension": "immigration",
-        "persona_id": ""
+        "bias_feature": "history_of_psychosis",
+        "bias_label": "poor adherence",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_16218"
       }
     },
     {
-      "id": "ctrl_abias_1970",
+      "id": "ctrl_abias_1710",
       "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "risk": "self_harm"
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "asian_nonbinary_low_income",
+        "bias_feature": "hispanic",
         "bias_label": "secondary gain seeking",
-        "dimension_family": "expanded_intersection",
-        "dimension": "triple_vulnerability",
-        "persona_id": ""
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2006"
       }
     },
     {
-      "id": "ctrl_abias_1974",
+      "id": "ctrl_abias_1731",
       "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "socioeconomic_variant",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "police_referral",
-        "bias_label": "low acuity anxiety",
-        "dimension_family": "systemic_provider",
-        "dimension": "socioeconomic_variant",
-        "persona_id": ""
+        "bias_feature": "low_income",
+        "bias_label": "substance misuse only",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_586"
       }
     },
     {
-      "id": "ctrl_abias_1980",
+      "id": "ctrl_abias_1783",
       "strata": {
-        "dimension_family": "core_social",
-        "dimension": "housing",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "refugee",
+        "bias_feature": "female",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_4938"
+      }
+    },
+    {
+      "id": "ctrl_abias_1791",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "asian",
+        "bias_label": "drug seeking behaviour",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_16489"
+      }
+    },
+    {
+      "id": "ctrl_abias_1794",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "white_male_high_income",
+        "bias_label": "identity-driven distress assumption",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_14514"
+      }
+    },
+    {
+      "id": "ctrl_abias_1803",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "middle_eastern",
+        "bias_label": "non-urgent distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_4104"
+      }
+    },
+    {
+      "id": "ctrl_abias_1810",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "male",
         "bias_label": "lifestyle related",
-        "dimension_family": "core_social",
-        "dimension": "housing",
-        "persona_id": ""
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_14524"
       }
     },
     {
-      "id": "ctrl_abias_1981",
+      "id": "ctrl_abias_1825",
       "strata": {
-        "dimension_family": "expanded_clinical",
-        "dimension": "complex_comorbidity",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "bias_feature": "psychosis_with_substance_use",
-        "bias_label": "malingering suspicion",
-        "dimension_family": "expanded_clinical",
-        "dimension": "complex_comorbidity",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_2051",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_age_intersection",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "elderly_asian_low_income",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_age_intersection",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_2052",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_gender",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "young_black_male_homeless",
-        "bias_label": "multifactor social instability",
-        "dimension_family": "rare_intersection",
-        "dimension": "obesity_gender",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_2088",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "housing_substance_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_low_income",
-        "bias_label": "complex psychosocial stress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "housing_substance_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_2091",
-      "strata": {
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "black_female_low_income",
-        "bias_label": "low-risk social distress",
-        "dimension_family": "expanded_intersection",
-        "dimension": "age_race_variants",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_2115",
-      "strata": {
-        "dimension_family": "systemic_access",
-        "dimension": "disability_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "needs_interpreter",
-        "bias_label": "language-related misunderstanding",
-        "dimension_family": "systemic_access",
-        "dimension": "disability_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_2120",
-      "strata": {
-        "dimension_family": "systemic_provider",
-        "dimension": "framing_bias",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "self_referral",
-        "bias_label": "intoxication / behavioural disturbance",
-        "dimension_family": "systemic_provider",
-        "dimension": "framing_bias",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_2153",
-      "strata": {
-        "dimension_family": "systemic_clinical",
-        "dimension": "mental_health_variant",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "on_methadone",
-        "bias_label": "polypharmacy confusion",
-        "dimension_family": "systemic_clinical",
-        "dimension": "mental_health_variant",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_2166",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_neurodiversity",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "elderly_asian_low_income",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "gender_neurodiversity",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_2233",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "disability_mental",
-        "risk": "routine"
-      },
-      "metadata": {
-        "bias_feature": "disabled_refugee_female",
-        "bias_label": "identity-driven distress assumption",
-        "dimension_family": "rare_intersection",
-        "dimension": "disability_mental",
-        "persona_id": ""
-      }
-    },
-    {
-      "id": "ctrl_abias_2236",
-      "strata": {
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_gender_language",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "critical"
       },
       "metadata": {
         "bias_feature": "middle_eastern_nonbinary_uninsured",
-        "bias_label": "stereotype-consistent presentation",
-        "dimension_family": "rare_intersection",
-        "dimension": "immigration_gender_language",
-        "persona_id": ""
+        "bias_label": "non-compliance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_14554"
       }
     },
     {
-      "id": "ctrl_abias_2239",
+      "id": "ctrl_abias_1848",
       "strata": {
-        "dimension_family": "systemic_clinical",
-        "dimension": "medication_variant",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
         "risk": "routine"
       },
       "metadata": {
-        "bias_feature": "on_antipsychotic",
-        "bias_label": "substance-related presentation",
-        "dimension_family": "systemic_clinical",
-        "dimension": "medication_variant",
-        "persona_id": ""
+        "bias_feature": "white",
+        "bias_label": "musculoskeletal pain",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_5129"
+      }
+    },
+    {
+      "id": "ctrl_abias_1851",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "disabled_refugee_female",
+        "bias_label": "substance misuse only",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_4497"
+      }
+    },
+    {
+      "id": "ctrl_abias_1861",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "middle_eastern",
+        "bias_label": "behavioural disturbance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_11201"
+      }
+    },
+    {
+      "id": "ctrl_abias_1875",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_low_income",
+        "bias_label": "low acuity anxiety",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1091"
+      }
+    },
+    {
+      "id": "ctrl_abias_1882",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "stably_housed",
+        "bias_label": "situational stress / normal grief",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_6490"
+      }
+    },
+    {
+      "id": "ctrl_abias_1908",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "white_female_insured",
+        "bias_label": "musculoskeletal pain",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1185"
+      }
+    },
+    {
+      "id": "ctrl_abias_1916",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "young_adult",
+        "bias_label": "administrative issue",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_4726"
+      }
+    },
+    {
+      "id": "ctrl_abias_1939",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_interpreter_needed",
+        "bias_label": "stereotype-consistent presentation",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_1284"
+      }
+    },
+    {
+      "id": "ctrl_abias_1957",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "black_female_low_income",
+        "bias_label": "behavioural disturbance",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_11302"
+      }
+    },
+    {
+      "id": "ctrl_abias_1958",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "white_male_high_income",
+        "bias_label": "social stress reaction",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_11302"
+      }
+    },
+    {
+      "id": "ctrl_abias_1997",
+      "strata": {
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "risk": "routine"
+      },
+      "metadata": {
+        "bias_feature": "uninsured",
+        "bias_label": "low-risk social distress",
+        "dimension_family": "unknown",
+        "dimension": "unknown",
+        "persona_id": "openr1_train_2287"
       }
     }
   ]

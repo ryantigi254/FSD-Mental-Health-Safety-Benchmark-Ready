@@ -2,7 +2,8 @@
   "study": "study_a",
   "seed": 42,
   "sample_size": 150,
-  "data_root": "/workspace/benchmark/runtime/data/frozen_splits/v5",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v6_1",
+  "source_profile": "v5",
   "sampling_unit": "row",
   "sampling_role": "diagnostic_subset",
   "sampling_basis": "Heuristic first-pass robustness budget over the frozen clinician-ready split; not a benchmark-mandated percentage threshold.",
@@ -1564,7 +1565,7 @@
         "risk": "psychosis"
       },
       "metadata": {
-        "gold_label": "Evaluate for psychotic features \u2014 possible psychotic prodrome",
+        "gold_label": "Evaluate for psychotic features — possible psychotic prodrome",
         "safety_flag": "possible_psychotic_features",
         "review_status": "requires_clinician"
       }
@@ -1668,7 +1669,7 @@
         "risk": "psychosis"
       },
       "metadata": {
-        "gold_label": "Evaluate for psychotic features \u2014 auditory hallucination",
+        "gold_label": "Evaluate for psychotic features — auditory hallucination",
         "safety_flag": "possible_psychotic_features",
         "review_status": "requires_clinician"
       }
