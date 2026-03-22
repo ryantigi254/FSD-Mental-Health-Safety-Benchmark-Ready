@@ -2,7 +2,7 @@
   "study": "study_c",
   "seed": 42,
   "sample_size": 15,
-  "data_root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/frozen_splits/v6_1",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v6_1",
   "source_profile": "v5",
   "sampling_unit": "conversation",
   "sampling_role": "diagnostic_subset",
@@ -26,373 +26,374 @@
   ],
   "available_counts": {
     "condition": {
-      "personality": 10,
-      "anxiety": 9,
+      "mood": 14,
+      "anxiety": 11,
+      "personality": 9,
       "insomnia": 9,
-      "mood": 9,
-      "obsessive_compulsive": 9,
-      "trauma": 9,
-      "prolonged_grief_disorder": 9,
-      "psychosis": 9,
-      "self_harm": 9,
-      "somatic": 9,
-      "suicidality": 9
+      "obsessive_compulsive": 8,
+      "trauma": 8,
+      "prolonged_grief_disorder": 8,
+      "psychosis": 8,
+      "self_harm": 8,
+      "somatic": 8,
+      "suicidality": 8,
+      "attention_deficit_hyperactivity_disorder": 1
     },
     "risk": {
-      "routine": 67,
-      "critical": 11,
+      "routine": 61,
+      "critical": 19,
       "psychosis": 11,
-      "self_harm": 9,
-      "severe": 2
+      "self_harm": 8,
+      "severe": 1
     },
     "age_bucket": {
       "unknown": 98,
-      "adult": 1,
-      "young_adult": 1
+      "adolescent": 2
     },
     "persona": {
-      "openr1_train_12352": 1,
-      "openr1_train_8079": 1,
-      "openr1_train_9494": 1,
-      "openr1_train_8132": 1,
-      "openr1_train_8181": 1,
-      "openr1_train_8229": 1,
-      "openr1_train_8170": 1,
-      "openr1_train_8048": 1,
-      "openr1_train_11451": 1,
-      "openr1_train_12600": 1,
-      "openr1_train_11800": 1,
-      "openr1_train_12406": 1,
-      "openr1_train_8082": 1,
-      "openr1_train_9509": 1,
-      "openr1_train_8152": 1,
-      "openr1_train_8190": 1,
-      "openr1_train_8267": 1,
-      "openr1_train_8176": 1,
-      "openr1_train_8057": 1,
-      "openr1_train_11459": 1,
-      "openr1_train_12670": 1,
-      "openr1_train_11801": 1,
-      "openr1_train_12452": 1,
-      "openr1_train_8088": 1,
-      "openr1_train_9513": 1,
-      "openr1_train_8238": 1,
-      "openr1_train_8202": 1,
+      "openr1_train_10290": 1,
+      "openr1_train_10426": 1,
+      "openr1_test_426": 1,
+      "openr1_train_8430": 1,
+      "openr1_train_8624": 1,
+      "openr1_train_8320": 1,
+      "openr1_train_13533": 1,
+      "openr1_train_8026": 1,
+      "openr1_train_8656": 1,
+      "openr1_test_424": 1,
+      "openr1_train_9383": 1,
+      "openr1_train_9031": 1,
+      "openr1_train_10506": 1,
+      "openr1_train_10493": 1,
+      "openr1_train_8009": 1,
+      "openr1_train_8543": 1,
+      "openr1_train_8636": 1,
+      "openr1_train_8335": 1,
+      "openr1_train_13871": 1,
+      "openr1_train_8191": 1,
+      "openr1_train_8732": 1,
+      "openr1_train_8005": 1,
+      "openr1_train_9591": 1,
+      "openr1_train_9372": 1,
+      "openr1_train_10545": 1,
+      "openr1_train_10695": 1,
+      "openr1_train_8018": 1,
+      "openr1_train_8544": 1,
+      "openr1_train_8687": 1,
+      "openr1_train_8410": 1,
+      "openr1_train_15176": 1,
+      "openr1_train_8206": 1,
+      "openr1_train_8737": 1,
+      "openr1_train_8016": 1,
+      "openr1_train_9633": 1,
+      "openr1_train_9386": 1,
+      "openr1_train_10572": 1,
+      "openr1_train_10881": 1,
+      "openr1_train_8021": 1,
+      "openr1_train_8688": 1,
+      "openr1_train_8786": 1,
+      "openr1_train_8417": 1,
+      "openr1_train_15283": 1,
+      "openr1_train_8212": 1,
+      "openr1_train_8758": 1,
+      "openr1_train_8017": 1,
+      "openr1_train_9741": 1,
+      "openr1_train_9674": 1,
+      "openr1_train_10690": 1,
+      "openr1_train_11157": 1,
+      "openr1_train_8027": 1,
+      "openr1_train_8879": 1,
+      "openr1_train_8927": 1,
+      "openr1_train_8445": 1,
+      "openr1_train_15618": 1,
       "openr1_train_8272": 1,
-      "openr1_train_8196": 1,
-      "openr1_train_8060": 1,
-      "openr1_train_11475": 1,
-      "openr1_train_12698": 1,
-      "openr1_train_11812": 1,
-      "openr1_train_12461": 1,
-      "openr1_train_8100": 1,
-      "openr1_train_9520": 1,
-      "openr1_train_8302": 1,
-      "openr1_train_8209": 1,
+      "openr1_train_8801": 1,
+      "openr1_train_8024": 1,
+      "openr1_train_9779": 1,
+      "openr1_train_9679": 1,
+      "openr1_train_10732": 1,
+      "openr1_train_11295": 1,
+      "openr1_train_8043": 1,
+      "openr1_train_8918": 1,
+      "openr1_train_8999": 1,
+      "openr1_train_8489": 1,
+      "openr1_train_12284": 1,
       "openr1_train_8279": 1,
-      "openr1_train_8222": 1,
-      "openr1_train_8067": 1,
-      "openr1_train_11476": 1,
-      "openr1_train_12871": 1,
-      "openr1_train_11825": 1,
-      "openr1_train_12478": 1,
-      "openr1_train_8101": 1,
-      "openr1_train_9521": 1,
-      "openr1_train_8338": 1,
-      "openr1_train_8218": 1,
-      "openr1_train_8283": 1,
-      "openr1_train_8261": 1,
-      "openr1_train_8077": 1,
-      "openr1_train_11483": 1,
-      "openr1_train_12949": 1,
-      "openr1_train_11871": 1,
-      "openr1_train_12492": 1,
-      "openr1_train_8104": 1,
-      "openr1_train_9528": 1,
-      "openr1_train_8359": 1,
-      "openr1_train_8226": 1,
-      "openr1_train_8291": 1,
-      "openr1_train_8263": 1,
-      "openr1_train_8080": 1,
-      "openr1_train_11507": 1,
-      "openr1_train_12954": 1,
-      "openr1_train_11919": 1,
-      "openr1_train_12604": 1,
-      "openr1_train_8124": 1,
-      "openr1_train_9537": 1,
-      "openr1_train_8416": 1,
-      "openr1_train_8231": 1,
-      "openr1_train_8292": 1,
-      "openr1_train_8268": 1,
-      "openr1_train_8081": 1,
-      "openr1_train_11515": 1,
-      "openr1_train_12991": 1,
-      "openr1_train_11940": 1,
-      "openr1_train_12659": 1,
-      "openr1_train_8125": 1,
-      "openr1_train_9545": 1,
-      "openr1_train_8464": 1,
-      "openr1_train_8277": 1,
-      "openr1_train_8317": 1,
-      "openr1_train_8271": 1,
-      "openr1_train_8089": 1,
-      "openr1_train_11573": 1,
-      "openr1_train_13110": 1,
-      "openr1_train_11950": 1,
-      "openr1_train_12671": 1,
-      "openr1_train_8128": 1,
-      "openr1_train_9549": 1,
-      "openr1_train_8467": 1,
-      "openr1_train_8288": 1,
-      "openr1_train_8350": 1,
-      "openr1_train_8296": 1,
-      "openr1_train_8106": 1,
-      "openr1_train_11609": 1,
-      "openr1_train_13117": 1,
-      "openr1_train_11956": 1,
-      "openr1_train_12677": 1
+      "openr1_train_8842": 1,
+      "openr1_train_8031": 1,
+      "openr1_train_9799": 1,
+      "openr1_train_9797": 1,
+      "openr1_train_10740": 1,
+      "openr1_train_11819": 1,
+      "openr1_train_8051": 1,
+      "openr1_train_8930": 1,
+      "openr1_train_9157": 1,
+      "openr1_train_8495": 1,
+      "openr1_train_8485": 1,
+      "openr1_train_8856": 1,
+      "openr1_train_8034": 1,
+      "openr1_train_9835": 1,
+      "openr1_train_9816": 1,
+      "openr1_train_10750": 1,
+      "openr1_train_11976": 1,
+      "openr1_train_8052": 1,
+      "openr1_train_8948": 1,
+      "openr1_train_9189": 1,
+      "openr1_train_8496": 1,
+      "openr1_train_13424": 1,
+      "openr1_train_8538": 1,
+      "openr1_train_8890": 1,
+      "openr1_train_8036": 1,
+      "openr1_train_9869": 1,
+      "openr1_train_9971": 1,
+      "openr1_train_10863": 1,
+      "openr1_train_11984": 1,
+      "openr1_train_8055": 1,
+      "openr1_train_9039": 1,
+      "openr1_train_9337": 1
     }
   },
   "selected_counts": {
     "condition": {
-      "psychosis": 9,
-      "self_harm": 5,
-      "mood": 1
+      "mood": 6,
+      "insomnia": 5,
+      "personality": 2,
+      "psychosis": 1,
+      "obsessive_compulsive": 1
     },
     "risk": {
-      "psychosis": 9,
-      "self_harm": 5,
-      "critical": 1
+      "critical": 11,
+      "psychosis": 4
     },
     "age_bucket": {
       "unknown": 15
     },
     "persona": {
-      "openr1_train_8132": 1,
-      "openr1_train_8048": 1,
-      "openr1_train_11451": 1,
-      "openr1_train_8057": 1,
-      "openr1_train_11459": 1,
-      "openr1_train_8060": 1,
-      "openr1_train_11475": 1,
-      "openr1_train_8067": 1,
-      "openr1_train_11476": 1,
-      "openr1_train_8077": 1,
-      "openr1_train_11483": 1,
-      "openr1_train_8080": 1,
-      "openr1_train_8081": 1,
-      "openr1_train_8089": 1,
-      "openr1_train_8106": 1
+      "openr1_train_8430": 1,
+      "openr1_train_13533": 1,
+      "openr1_test_424": 1,
+      "openr1_train_10493": 1,
+      "openr1_train_13871": 1,
+      "openr1_train_10695": 1,
+      "openr1_train_8410": 1,
+      "openr1_train_15176": 1,
+      "openr1_train_8688": 1,
+      "openr1_train_15283": 1,
+      "openr1_train_8927": 1,
+      "openr1_train_15618": 1,
+      "openr1_train_8930": 1,
+      "openr1_train_8948": 1,
+      "openr1_train_9039": 1
     }
   },
   "records": [
     {
       "id": "c_004",
       "strata": {
-        "persona": "openr1_train_8132",
+        "persona": "openr1_train_8430",
+        "condition": "insomnia",
+        "age_bucket": "unknown",
+        "risk": "critical"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_8430",
+        "condition_anchor": "insomnia",
+        "age": null
+      }
+    },
+    {
+      "id": "c_007",
+      "strata": {
+        "persona": "openr1_train_13533",
         "condition": "mood",
         "age_bucket": "unknown",
         "risk": "critical"
       },
       "metadata": {
-        "persona_id": "openr1_train_8132",
-        "condition_anchor": "major depressive disorder",
+        "persona_id": "openr1_train_13533",
+        "condition_anchor": "persistent depressive disorder",
         "age": null
       }
     },
     {
-      "id": "c_008",
+      "id": "c_010",
       "strata": {
-        "persona": "openr1_train_8048",
+        "persona": "openr1_test_424",
         "condition": "psychosis",
         "age_bucket": "unknown",
         "risk": "psychosis"
       },
       "metadata": {
-        "persona_id": "openr1_train_8048",
+        "persona_id": "openr1_test_424",
         "condition_anchor": "psychosis",
         "age": null
       }
     },
     {
-      "id": "c_009",
+      "id": "c_014",
       "strata": {
-        "persona": "openr1_train_11451",
-        "condition": "self_harm",
+        "persona": "openr1_train_10493",
+        "condition": "personality",
         "age_bucket": "unknown",
-        "risk": "self_harm"
+        "risk": "psychosis"
       },
       "metadata": {
-        "persona_id": "openr1_train_11451",
-        "condition_anchor": "self-harm",
+        "persona_id": "openr1_train_10493",
+        "condition_anchor": "borderline personality disorder",
         "age": null
       }
     },
     {
       "id": "c_019",
       "strata": {
-        "persona": "openr1_train_8057",
-        "condition": "psychosis",
+        "persona": "openr1_train_13871",
+        "condition": "mood",
         "age_bucket": "unknown",
-        "risk": "psychosis"
+        "risk": "critical"
       },
       "metadata": {
-        "persona_id": "openr1_train_8057",
-        "condition_anchor": "psychosis",
+        "persona_id": "openr1_train_13871",
+        "condition_anchor": "persistent depressive disorder",
         "age": null
       }
     },
     {
-      "id": "c_020",
+      "id": "c_026",
       "strata": {
-        "persona": "openr1_train_11459",
-        "condition": "self_harm",
+        "persona": "openr1_train_10695",
+        "condition": "personality",
         "age_bucket": "unknown",
-        "risk": "self_harm"
+        "risk": "psychosis"
       },
       "metadata": {
-        "persona_id": "openr1_train_11459",
-        "condition_anchor": "self-harm",
+        "persona_id": "openr1_train_10695",
+        "condition_anchor": "borderline personality disorder",
         "age": null
       }
     },
     {
       "id": "c_030",
       "strata": {
-        "persona": "openr1_train_8060",
-        "condition": "psychosis",
+        "persona": "openr1_train_8410",
+        "condition": "obsessive_compulsive",
         "age_bucket": "unknown",
         "risk": "psychosis"
       },
       "metadata": {
-        "persona_id": "openr1_train_8060",
-        "condition_anchor": "psychosis",
+        "persona_id": "openr1_train_8410",
+        "condition_anchor": "obsessive-compulsive disorder",
         "age": null
       }
     },
     {
       "id": "c_031",
       "strata": {
-        "persona": "openr1_train_11475",
-        "condition": "self_harm",
+        "persona": "openr1_train_15176",
+        "condition": "mood",
         "age_bucket": "unknown",
-        "risk": "self_harm"
+        "risk": "critical"
       },
       "metadata": {
-        "persona_id": "openr1_train_11475",
-        "condition_anchor": "self-harm",
+        "persona_id": "openr1_train_15176",
+        "condition_anchor": "persistent depressive disorder",
         "age": null
       }
     },
     {
-      "id": "c_041",
+      "id": "c_040",
       "strata": {
-        "persona": "openr1_train_8067",
-        "condition": "psychosis",
+        "persona": "openr1_train_8688",
+        "condition": "insomnia",
         "age_bucket": "unknown",
-        "risk": "psychosis"
+        "risk": "critical"
       },
       "metadata": {
-        "persona_id": "openr1_train_8067",
-        "condition_anchor": "psychosis",
+        "persona_id": "openr1_train_8688",
+        "condition_anchor": "insomnia",
         "age": null
       }
     },
     {
-      "id": "c_042",
+      "id": "c_043",
       "strata": {
-        "persona": "openr1_train_11476",
-        "condition": "self_harm",
+        "persona": "openr1_train_15283",
+        "condition": "mood",
         "age_bucket": "unknown",
-        "risk": "self_harm"
+        "risk": "critical"
       },
       "metadata": {
-        "persona_id": "openr1_train_11476",
-        "condition_anchor": "self-harm",
-        "age": null
-      }
-    },
-    {
-      "id": "c_052",
-      "strata": {
-        "persona": "openr1_train_8077",
-        "condition": "psychosis",
-        "age_bucket": "unknown",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "persona_id": "openr1_train_8077",
-        "condition_anchor": "psychosis",
+        "persona_id": "openr1_train_15283",
+        "condition_anchor": "persistent depressive disorder",
         "age": null
       }
     },
     {
       "id": "c_053",
       "strata": {
-        "persona": "openr1_train_11483",
-        "condition": "self_harm",
+        "persona": "openr1_train_8927",
+        "condition": "mood",
         "age_bucket": "unknown",
-        "risk": "self_harm"
+        "risk": "critical"
       },
       "metadata": {
-        "persona_id": "openr1_train_11483",
-        "condition_anchor": "self-harm",
+        "persona_id": "openr1_train_8927",
+        "condition_anchor": "major depressive disorder",
         "age": null
       }
     },
     {
-      "id": "c_063",
+      "id": "c_055",
       "strata": {
-        "persona": "openr1_train_8080",
-        "condition": "psychosis",
+        "persona": "openr1_train_15618",
+        "condition": "mood",
         "age_bucket": "unknown",
-        "risk": "psychosis"
+        "risk": "critical"
       },
       "metadata": {
-        "persona_id": "openr1_train_8080",
-        "condition_anchor": "psychosis",
+        "persona_id": "openr1_train_15618",
+        "condition_anchor": "persistent depressive disorder",
         "age": null
       }
     },
     {
-      "id": "c_074",
+      "id": "c_076",
       "strata": {
-        "persona": "openr1_train_8081",
-        "condition": "psychosis",
+        "persona": "openr1_train_8930",
+        "condition": "insomnia",
         "age_bucket": "unknown",
-        "risk": "psychosis"
+        "risk": "critical"
       },
       "metadata": {
-        "persona_id": "openr1_train_8081",
-        "condition_anchor": "psychosis",
+        "persona_id": "openr1_train_8930",
+        "condition_anchor": "insomnia",
         "age": null
       }
     },
     {
-      "id": "c_085",
+      "id": "c_087",
       "strata": {
-        "persona": "openr1_train_8089",
-        "condition": "psychosis",
+        "persona": "openr1_train_8948",
+        "condition": "insomnia",
         "age_bucket": "unknown",
-        "risk": "psychosis"
+        "risk": "critical"
       },
       "metadata": {
-        "persona_id": "openr1_train_8089",
-        "condition_anchor": "psychosis",
+        "persona_id": "openr1_train_8948",
+        "condition_anchor": "insomnia",
         "age": null
       }
     },
     {
-      "id": "c_096",
+      "id": "c_099",
       "strata": {
-        "persona": "openr1_train_8106",
-        "condition": "psychosis",
+        "persona": "openr1_train_9039",
+        "condition": "insomnia",
         "age_bucket": "unknown",
-        "risk": "psychosis"
+        "risk": "critical"
       },
       "metadata": {
-        "persona_id": "openr1_train_8106",
-        "condition_anchor": "psychosis",
+        "persona_id": "openr1_train_9039",
+        "condition_anchor": "insomnia",
         "age": null
       }
     }

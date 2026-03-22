@@ -2,116 +2,131 @@
   "meta": {
     "dataset": "controllability/study_c_split_metadata",
     "backend": "probe",
-    "extraction": "controllability/build_source_backed_v2.py",
-    "generated_utc": "2026-03-21T22:11:51.764665+00:00",
+    "extraction": "controllability/generate_gold_plans.py",
+    "generated_utc": "2026-03-22T06:05:01.052112+00:00",
     "n_cases": 70,
-    "primary_model": "direct_parent",
+    "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
     "secondary_model": "",
     "tertiary_model": "",
     "probe_meta": {
-      "mode": "direct_parent",
-      "n_splits": 1,
-      "primary_model_name": "direct_parent",
-      "weak_supervision_source": "v6.study_c_target_plans+case_metadata",
-      "parent_root": "benchmark/runtime/data/frozen_splits/v6",
-      "inherits_source_backed_parent": true,
-      "fallback_to_primary_on_disagreement": false
+      "n_splits": 3,
+      "frequent_labels": [
+        "borderline personality disorder",
+        "generalized anxiety disorder",
+        "insomnia",
+        "major depressive disorder",
+        "obsessive-compulsive disorder",
+        "persistent depressive disorder",
+        "post-traumatic stress disorder",
+        "prolonged grief disorder",
+        "psychosis",
+        "self-harm",
+        "somatic symptom disorder",
+        "suicidal crisis"
+      ],
+      "rare_labels": {
+        "panic disorder": 2
+      },
+      "rare_label_fallbacks": 2,
+      "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
+      "fallback_to_primary_on_disagreement": true,
+      "weak_supervision_source": "split_metadata_inferred_condition"
     }
   },
   "plans": {
     "ctrl_c_001": {
-      "plan": "Okay, the client is in a really tough spot. They've been kicked out by their family, feel scared, alone, and hopeless. They're facing homelessness, which is terrifying Case anchors: Problem: self-harm; persistent low mood; auditory hallucinations. Constraints/Meds: none noted.",
-      "source_openr1_id": 11475,
+      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: persistent depressive disorder; suicidal. Constraints/Meds: none noted.",
+      "source_openr1_id": 15176,
       "source_split": "train",
-      "inferred_condition": "self-harm",
+      "inferred_condition": "borderline personality disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_011": {
-      "plan": "Therapy: consider external factors Case anchors: Problem: psychosis; anhedonia. Constraints/Meds: none noted.",
-      "source_openr1_id": 8067,
+    "ctrl_c_004": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8016,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_012": {
-      "plan": "Okay, the client is feeling lost, heavy, confused, and overwhelmed with alternating sadness and numbness. They don't understand why they're feeling this way. I need to respond with empathy and support without using clinical terms Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11476,
+    "ctrl_c_010": {
+      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
+      "source_openr1_id": 8688,
       "source_split": "train",
-      "inferred_condition": "self-harm",
+      "inferred_condition": "insomnia",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_022": {
-      "plan": "Therapy: consider practical steps without overwhelming her Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8077,
+    "ctrl_c_013": {
+      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: persistent depressive disorder; suicidal. Constraints/Meds: none noted.",
+      "source_openr1_id": 15283,
+      "source_split": "train",
+      "inferred_condition": "persistent depressive disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_016": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8017,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_023": {
-      "plan": "Okay, the client is really struggling with feelings of hopelessness and mentions not seeing the point anymore. They feel like they're drowning and that no one notices, which suggests isolation. The thought of not being here indicates suicidal ideation, which is a red flag Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11483,
+      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder; self-harm risk. Constraints/Meds: none noted.",
+      "source_openr1_id": 8927,
       "source_split": "train",
-      "inferred_condition": "self-harm",
+      "inferred_condition": "major depressive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_033": {
-      "plan": "Therapy: Considering therapeutic approaches, a humanistic approach focusing on self-actualization and worth might help Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8080,
+    "ctrl_c_025": {
+      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: persistent depressive disorder; suicidal. Constraints/Meds: none noted.",
+      "source_openr1_id": 15618,
+      "source_split": "train",
+      "inferred_condition": "borderline personality disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_028": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8024,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_034": {
-      "plan": "Okay, the client is feeling guilty about a breakup and struggling with their ex wanting to meet as friends. They don't know how to say no without feeling cruel. There's conflict between cutting contact and fearing being too harsh Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11507,
-      "source_split": "train",
-      "inferred_condition": "self-harm",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_044": {
-      "plan": "Therapy: suggest exploring how these roles made them feel as a child and how that impacts them now Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8081,
+    "ctrl_c_040": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8031,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_045": {
-      "plan": "Therapy: suggest a small step they can take to feel safer, like contacting a friend or a helpline Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11515,
+    "ctrl_c_046": {
+      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
+      "source_openr1_id": 8930,
       "source_split": "train",
-      "inferred_condition": "self-harm",
+      "inferred_condition": "insomnia",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_055": {
-      "plan": "Therapy: considering practical steps she can take, like seeking support networks or financial planning, since financial strain is part of the issue Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8089,
+    "ctrl_c_057": {
+      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
+      "source_openr1_id": 8948,
       "source_split": "train",
-      "inferred_condition": "psychosis",
+      "inferred_condition": "insomnia",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_056": {
-      "plan": "Therapy: Considering therapeutic approaches, Cognitive Behavioral Therapy (CBT) techniques for anxiety could help here, like grounding exercises Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11573,
+    "ctrl_c_069": {
+      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
+      "source_openr1_id": 9039,
       "source_split": "train",
-      "inferred_condition": "self-harm",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_066": {
-      "plan": "Therapy: considering the earlier incident, there might be unresolved feelings from that event affecting their current interactions Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8106,
-      "source_split": "train",
-      "inferred_condition": "psychosis",
+      "inferred_condition": "insomnia",
       "plan_components": [],
       "plan_component_evidence": {}
     }
