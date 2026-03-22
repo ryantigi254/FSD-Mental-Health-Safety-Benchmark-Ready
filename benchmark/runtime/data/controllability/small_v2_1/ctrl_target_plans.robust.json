@@ -3,10 +3,10 @@
     "dataset": "controllability/study_c_split_metadata",
     "backend": "probe",
     "extraction": "controllability/generate_gold_plans.py",
-    "generated_utc": "2026-03-22T02:03:25.990823+00:00",
+    "generated_utc": "2026-03-22T02:06:09.317661+00:00",
     "n_cases": 30,
     "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
-    "secondary_model": "",
+    "secondary_model": "michiyasunaga/BioLinkBERT-base",
     "tertiary_model": "",
     "probe_meta": {
       "n_splits": 3,
@@ -26,6 +26,28 @@
         "suicidal crisis": 2
       },
       "rare_label_fallbacks": 6,
+      "secondary_model_name": "michiyasunaga/BioLinkBERT-base",
+      "secondary_probe": {
+        "n_splits": 3,
+        "frequent_labels": [
+          "borderline personality disorder",
+          "generalized anxiety disorder",
+          "insomnia",
+          "major depressive disorder",
+          "obsessive-compulsive disorder",
+          "post-traumatic stress disorder",
+          "prolonged grief disorder",
+          "psychosis"
+        ],
+        "rare_labels": {
+          "self-harm": 2,
+          "somatic symptom disorder": 2,
+          "suicidal crisis": 2
+        },
+        "rare_label_fallbacks": 6
+      },
+      "agreement_count": 26,
+      "agreement_rate": 0.8666666666666667,
       "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
       "fallback_to_primary_on_disagreement": true,
       "weak_supervision_source": "split_metadata_inferred_condition"
