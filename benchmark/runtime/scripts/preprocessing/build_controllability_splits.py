@@ -8,11 +8,11 @@ unused OpenR1-Psy prompts with priority sampling of underrepresented
 diagnostic categories.
 
 Produces:
-  data/controllability_splits/study_a_controllability_test.json
-  data/controllability_splits/study_a_bias_controllability_test.json
-  data/controllability_splits/study_b_controllability_test.json
-  data/controllability_splits/study_b_multi_turn_controllability_test.json
-  data/controllability_splits/study_c_controllability_test.json
+  data/controllability/misc/controllability_splits/study_a_controllability_test.json
+  data/controllability/misc/controllability_splits/study_a_bias_controllability_test.json
+  data/controllability/misc/controllability_splits/study_b_controllability_test.json
+  data/controllability/misc/controllability_splits/study_b_multi_turn_controllability_test.json
+  data/controllability/misc/controllability_splits/study_c_controllability_test.json
 
 Run from runtime root:
     PYTHONPATH=src python scripts/preprocessing/build_controllability_splits.py
@@ -46,7 +46,7 @@ from reliable_clinical_benchmark.utils.condition_resolution import (
 SEED = 20260307
 RUNTIME_ROOT = Path(__file__).resolve().parents[2]
 DATA_ROOT = RUNTIME_ROOT / "data"
-OUTPUT_DIR = DATA_ROOT / "controllability_splits"
+OUTPUT_DIR = DATA_ROOT / "controllability" / "misc" / "controllability_splits"
 V5_REFERENCE_BRANCH = "codex/v4_1-data-refresh"
 # Phase-two hardening: prefer v6 frozen splits over v5 when available.
 PARENT_DATA_VERSION = "v6"

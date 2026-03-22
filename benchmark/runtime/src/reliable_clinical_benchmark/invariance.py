@@ -32,9 +32,9 @@ RUNTIME_ROOT = Path(__file__).resolve().parents[2]
 _V6_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v6"
 DEFAULT_V5_ROOT = _V6_ROOT if _V6_ROOT.exists() else RUNTIME_ROOT / "data" / "frozen_splits" / "v5"
 DEFAULT_V5_INVARIANCE_ROOT = RUNTIME_ROOT / "data" / "invariance" / "misc" / "v5_invariance_samples"
-DEFAULT_CONTROLLABILITY_ROOT = RUNTIME_ROOT / "data" / "controllability_splits_large"
+DEFAULT_CONTROLLABILITY_ROOT = RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits_large"
 DEFAULT_CONTROLLABILITY_INVARIANCE_ROOT = (
-    RUNTIME_ROOT / "data" / "controllability_splits_large" / "base"
+    RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits_large" / "base"
 )
 HIGH_RISK_BUCKETS = {
     "critical",

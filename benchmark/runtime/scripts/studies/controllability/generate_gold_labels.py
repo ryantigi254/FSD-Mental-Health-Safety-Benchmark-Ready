@@ -5,7 +5,7 @@ uses NLI (DeBERTa-v3) to extract diagnosis labels from the OpenR1-Psy counselor_
 field for each controllability sample.
 
 Output:
-  data/controllability_splits/ctrl_gold_diagnosis_labels.json
+  data/controllability/misc/controllability_splits/ctrl_gold_diagnosis_labels.json
 
 Run from runtime root:
   PYTHONPATH=src python scripts/studies/controllability/generate_gold_labels.py
@@ -37,7 +37,7 @@ from reliable_clinical_benchmark.utils.weak_supervision_probe import (
 )
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
+DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits"
 CTRL_DIR = Path(os.environ.get("CONTROLLABILITY_DIR", str(DEFAULT_CTRL_DIR)))
 OUTPUT_PATH = CTRL_DIR / "ctrl_gold_diagnosis_labels.json"
 

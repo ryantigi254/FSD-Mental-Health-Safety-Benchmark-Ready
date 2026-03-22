@@ -5,7 +5,7 @@ uses NLI (DeBERTa-v3) to verify plan components from OpenR1-Psy counselor_think
 and falls back to condition-based treatment maps.
 
 Output:
-  data/controllability_splits/ctrl_target_plans.json
+  data/controllability/misc/controllability_splits/ctrl_target_plans.json
 
 Run from runtime root:
   PYTHONPATH=src python scripts/studies/controllability/generate_gold_plans.py
@@ -40,7 +40,7 @@ from reliable_clinical_benchmark.utils.weak_supervision_probe import (
 )
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability_splits"
+DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits"
 CTRL_DIR = Path(os.environ.get("CONTROLLABILITY_DIR", str(DEFAULT_CTRL_DIR)))
 OUTPUT_PATH = CTRL_DIR / "ctrl_target_plans.json"
 
