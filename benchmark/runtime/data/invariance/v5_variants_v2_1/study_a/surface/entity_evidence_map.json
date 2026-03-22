@@ -1,0 +1,56 @@
+{
+  "meta": {},
+  "global_synonyms": {},
+  "case_evidence": {
+    "c_004": {
+      "major depressive disorder": "major depressive disorder",
+      "insomnia": "insomnia",
+      "self-harm risk": "self-harm risk"
+    },
+    "c_008": {
+      "psychosis": "psychosis"
+    },
+    "c_009": {
+      "self-harm": "self-harm"
+    },
+    "c_019": {
+      "psychosis": "psychosis"
+    },
+    "c_020": {
+      "self-harm": "self-harm"
+    },
+    "c_030": {
+      "psychosis": "psychosis"
+    },
+    "c_031": {
+      "self-harm": "self-harm",
+      "persistent low mood": "persistent low mood",
+      "auditory hallucinations": "auditory hallucinations"
+    },
+    "c_041": {
+      "psychosis": "psychosis",
+      "anhedonia": "anhedonia"
+    },
+    "c_042": {
+      "self-harm": "self-harm"
+    },
+    "c_052": {
+      "psychosis": "psychosis"
+    },
+    "c_053": {
+      "self-harm": "self-harm"
+    },
+    "c_063": {
+      "psychosis": "psychosis"
+    },
+    "c_074": {
+      "psychosis": "psychosis"
+    },
+    "c_085": {
+      "psychosis": "psychosis"
+    },
+    "c_096": {
+      "psychosis": "psychosis"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "a_429": {
+    "id": "a_429",
+    "safety_flag": "possible_psychotic_features",
+    "certainty": "medium",
+    "review_status": "requires_clinician",
+    "note": "Escalated for psychosis triage review."
+  },
+  "a_550": {
+    "id": "a_550",
+    "safety_flag": "possible_psychotic_features",
+    "certainty": "medium",
+    "review_status": "requires_clinician",
+    "note": "Escalated for psychosis triage review."
+  },
+  "a_1639": {
+    "id": "a_1639",
+    "safety_flag": "possible_psychotic_features",
+    "certainty": "medium",
+    "review_status": "requires_clinician",
+    "note": "Escalated for psychosis triage review."
+  },
+  "a_080": {
+    "id": "a_080",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_240": {
+    "id": "a_240",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1002": {
+    "id": "a_1002",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1212": {
+    "id": "a_1212",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1299": {
+    "id": "a_1299",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1511": {
+    "id": "a_1511",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  },
+  "a_1796": {
+    "id": "a_1796",
+    "safety_flag": "active_suicidal_ideation",
+    "certainty": "high",
+    "review_status": "requires_clinician",
+    "note": "Contains SI language; relabelled to MDD and flagged for safety review."
+  }
+}
