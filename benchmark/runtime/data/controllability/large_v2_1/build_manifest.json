@@ -1,7 +1,7 @@
 {
-  "build_timestamp": "2026-03-21T22:11:51.765537+00:00",
+  "build_timestamp": "2026-03-22T05:54:59.864356+00:00",
   "suite_name": "controllability_splits_large_resolved_v2",
-  "parent_root": "benchmark/runtime/data/frozen_splits/v6_1",
+  "parent_root": "data/frozen_splits/v6_1",
   "selection_policy": "prefix for small suite, remainder for disjoint large suite",
   "start_offsets": {
     "study_a": 300,

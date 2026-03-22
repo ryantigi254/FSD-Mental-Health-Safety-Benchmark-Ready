@@ -3,7 +3,7 @@
     "dataset": "controllability/study_a_split_metadata",
     "backend": "probe",
     "extraction": "controllability/generate_gold_labels.py",
-    "generated_utc": "2026-03-22T02:03:07.586952+00:00",
+    "generated_utc": "2026-03-22T05:56:34.523018+00:00",
     "n_samples": 300,
     "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
     "secondary_model": "",

@@ -9,8 +9,8 @@ import pytest
 
 
 BASE_DIR = Path(__file__).resolve().parents[3]
-SMALL_ROOT = BASE_DIR / "data" / "controllability_splits_v2"
-LARGE_ROOT = BASE_DIR / "data" / "controllability_splits_large_resolved_v2"
+SMALL_ROOT = BASE_DIR / "data" / "controllability" / "misc" / "controllability_splits_v2"
+LARGE_ROOT = BASE_DIR / "data" / "controllability" / "misc" / "controllability_splits_large_resolved_v2"
 VERIFY_ROOT = BASE_DIR / "data" / "verification"
 
 

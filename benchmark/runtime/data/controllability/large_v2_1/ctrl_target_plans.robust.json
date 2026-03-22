@@ -3,7 +3,7 @@
     "dataset": "controllability/study_c_split_metadata",
     "backend": "probe",
     "extraction": "controllability/generate_gold_plans.py",
-    "generated_utc": "2026-03-22T02:24:03.646882+00:00",
+    "generated_utc": "2026-03-22T06:05:32.889803+00:00",
     "n_cases": 70,
     "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
     "secondary_model": "michiyasunaga/BioLinkBERT-base",
@@ -16,6 +16,7 @@
         "insomnia",
         "major depressive disorder",
         "obsessive-compulsive disorder",
+        "persistent depressive disorder",
         "post-traumatic stress disorder",
         "prolonged grief disorder",
         "psychosis",
@@ -23,8 +24,10 @@
         "somatic symptom disorder",
         "suicidal crisis"
       ],
-      "rare_labels": {},
-      "rare_label_fallbacks": 0,
+      "rare_labels": {
+        "panic disorder": 2
+      },
+      "rare_label_fallbacks": 2,
       "secondary_model_name": "michiyasunaga/BioLinkBERT-base",
       "secondary_probe": {
         "n_splits": 3,
@@ -34,6 +37,7 @@
           "insomnia",
           "major depressive disorder",
           "obsessive-compulsive disorder",
+          "persistent depressive disorder",
           "post-traumatic stress disorder",
           "prolonged grief disorder",
           "psychosis",
@@ -41,11 +45,13 @@
           "somatic symptom disorder",
           "suicidal crisis"
         ],
-        "rare_labels": {},
-        "rare_label_fallbacks": 0
+        "rare_labels": {
+          "panic disorder": 2
+        },
+        "rare_label_fallbacks": 2
       },
-      "agreement_count": 58,
-      "agreement_rate": 0.8285714285714286,
+      "agreement_count": 59,
+      "agreement_rate": 0.8428571428571429,
       "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
       "fallback_to_primary_on_disagreement": true,
       "weak_supervision_source": "split_metadata_inferred_condition"
@@ -53,562 +59,562 @@
   },
   "plans": {
     "ctrl_c_001": {
-      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11475,
+      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: persistent depressive disorder; suicidal. Constraints/Meds: none noted.",
+      "source_openr1_id": 15176,
       "source_split": "train",
-      "inferred_condition": "suicidal crisis",
+      "inferred_condition": "borderline personality disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_002": {
-      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12698,
+      "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8206,
       "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
+      "inferred_condition": "post-traumatic stress disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_003": {
-      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11812,
+      "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8737,
       "source_split": "train",
-      "inferred_condition": "suicidal crisis",
+      "inferred_condition": "prolonged grief disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_004": {
-      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12461,
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8016,
       "source_split": "train",
-      "inferred_condition": "suicidal crisis",
+      "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_005": {
-      "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8100,
+      "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
+      "source_openr1_id": 9633,
       "source_split": "train",
-      "inferred_condition": "obsessive-compulsive disorder",
+      "inferred_condition": "self-harm",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_006": {
-      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: prolonged grief. Constraints/Meds: none noted.",
-      "source_openr1_id": 9520,
+      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 9386,
       "source_split": "train",
-      "inferred_condition": "insomnia",
+      "inferred_condition": "somatic symptom disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_007": {
-      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8302,
+      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10572,
       "source_split": "train",
-      "inferred_condition": "insomnia",
+      "inferred_condition": "suicidal crisis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_008": {
-      "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8209,
+      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10881,
       "source_split": "train",
-      "inferred_condition": "obsessive-compulsive disorder",
+      "inferred_condition": "borderline personality disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_009": {
-      "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8279,
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8021,
       "source_split": "train",
-      "inferred_condition": "prolonged grief disorder",
+      "inferred_condition": "generalized anxiety disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_010": {
-      "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8222,
+      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
+      "source_openr1_id": 8688,
       "source_split": "train",
-      "inferred_condition": "prolonged grief disorder",
+      "inferred_condition": "insomnia",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_011": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8067,
+      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8786,
       "source_split": "train",
-      "inferred_condition": "psychosis",
+      "inferred_condition": "major depressive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_012": {
-      "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11476,
+      "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8417,
       "source_split": "train",
-      "inferred_condition": "self-harm",
+      "inferred_condition": "obsessive-compulsive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_013": {
-      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12871,
+      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: persistent depressive disorder; suicidal. Constraints/Meds: none noted.",
+      "source_openr1_id": 15283,
       "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
+      "inferred_condition": "persistent depressive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_014": {
-      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: suicidal crisis; self-harm risk. Constraints/Meds: none noted.",
-      "source_openr1_id": 11825,
+      "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8212,
       "source_split": "train",
-      "inferred_condition": "suicidal crisis",
+      "inferred_condition": "post-traumatic stress disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_015": {
-      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12478,
+      "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8758,
       "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
+      "inferred_condition": "prolonged grief disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_016": {
-      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8101,
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8017,
       "source_split": "train",
-      "inferred_condition": "generalized anxiety disorder",
+      "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_017": {
-      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 9521,
+      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
+      "source_openr1_id": 9741,
       "source_split": "train",
-      "inferred_condition": "insomnia",
+      "inferred_condition": "somatic symptom disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_018": {
-      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8338,
+      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 9674,
       "source_split": "train",
-      "inferred_condition": "major depressive disorder",
+      "inferred_condition": "somatic symptom disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_019": {
-      "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8218,
+      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10690,
       "source_split": "train",
-      "inferred_condition": "obsessive-compulsive disorder",
+      "inferred_condition": "suicidal crisis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_020": {
-      "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8283,
+      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 11157,
       "source_split": "train",
-      "inferred_condition": "post-traumatic stress disorder",
+      "inferred_condition": "borderline personality disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_021": {
-      "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8261,
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8027,
       "source_split": "train",
-      "inferred_condition": "prolonged grief disorder",
+      "inferred_condition": "generalized anxiety disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_022": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8077,
+      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
+      "source_openr1_id": 8879,
       "source_split": "train",
-      "inferred_condition": "psychosis",
+      "inferred_condition": "insomnia",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_023": {
-      "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11483,
+      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder; self-harm risk. Constraints/Meds: none noted.",
+      "source_openr1_id": 8927,
       "source_split": "train",
-      "inferred_condition": "self-harm",
+      "inferred_condition": "major depressive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_024": {
-      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12949,
+      "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8445,
       "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
+      "inferred_condition": "obsessive-compulsive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_025": {
-      "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11871,
+      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: persistent depressive disorder; suicidal. Constraints/Meds: none noted.",
+      "source_openr1_id": 15618,
       "source_split": "train",
-      "inferred_condition": "self-harm",
+      "inferred_condition": "borderline personality disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_026": {
-      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12492,
+      "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8272,
       "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
+      "inferred_condition": "post-traumatic stress disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_027": {
-      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8104,
-      "source_split": "train",
-      "inferred_condition": "generalized anxiety disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_028": {
-      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 9528,
-      "source_split": "train",
-      "inferred_condition": "insomnia",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_029": {
-      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8359,
-      "source_split": "train",
-      "inferred_condition": "major depressive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_030": {
-      "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8226,
-      "source_split": "train",
-      "inferred_condition": "obsessive-compulsive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_031": {
-      "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder; self-harm risk. Constraints/Meds: none noted.",
-      "source_openr1_id": 8291,
-      "source_split": "train",
-      "inferred_condition": "post-traumatic stress disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_032": {
       "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8263,
+      "source_openr1_id": 8801,
       "source_split": "train",
       "inferred_condition": "prolonged grief disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_033": {
+    "ctrl_c_028": {
       "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8080,
+      "source_openr1_id": 8024,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_034": {
+    "ctrl_c_029": {
       "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11507,
+      "source_openr1_id": 9779,
       "source_split": "train",
       "inferred_condition": "self-harm",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_035": {
-      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12954,
+    "ctrl_c_030": {
+      "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 9679,
       "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
+      "inferred_condition": "self-harm",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_036": {
+    "ctrl_c_031": {
       "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11919,
+      "source_openr1_id": 10732,
       "source_split": "train",
       "inferred_condition": "suicidal crisis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_037": {
+    "ctrl_c_032": {
       "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12604,
+      "source_openr1_id": 11295,
       "source_split": "train",
       "inferred_condition": "borderline personality disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_038": {
+    "ctrl_c_033": {
       "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8124,
+      "source_openr1_id": 8043,
       "source_split": "train",
       "inferred_condition": "generalized anxiety disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_039": {
+    "ctrl_c_034": {
       "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 9537,
+      "source_openr1_id": 8918,
       "source_split": "train",
       "inferred_condition": "insomnia",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_040": {
+    "ctrl_c_035": {
       "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8416,
+      "source_openr1_id": 8999,
       "source_split": "train",
       "inferred_condition": "major depressive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_041": {
+    "ctrl_c_036": {
       "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8231,
+      "source_openr1_id": 8489,
       "source_split": "train",
       "inferred_condition": "obsessive-compulsive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_042": {
+    "ctrl_c_037": {
+      "plan": "Therapy: CBT with interoceptive exposure and breathing retraining. Medication: SSRI with consideration of short-term benzodiazepine if severe. Skills: breathing exercises, cognitive reframing of catastrophic thoughts. Follow-up: panic attack frequency and avoidance patterns. Case anchors: Problem: panic disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 12284,
+      "source_split": "train",
+      "inferred_condition": "panic disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_038": {
       "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8292,
+      "source_openr1_id": 8279,
       "source_split": "train",
       "inferred_condition": "post-traumatic stress disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_043": {
+    "ctrl_c_039": {
       "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8268,
+      "source_openr1_id": 8842,
       "source_split": "train",
       "inferred_condition": "prolonged grief disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_044": {
+    "ctrl_c_040": {
       "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8081,
+      "source_openr1_id": 8031,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_045": {
+    "ctrl_c_041": {
       "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11515,
+      "source_openr1_id": 9799,
       "source_split": "train",
       "inferred_condition": "self-harm",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_046": {
+    "ctrl_c_042": {
       "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12991,
+      "source_openr1_id": 9797,
       "source_split": "train",
       "inferred_condition": "somatic symptom disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_047": {
-      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11940,
+    "ctrl_c_043": {
+      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: suicidal crisis; self-harm risk; suicidal. Constraints/Meds: none noted.",
+      "source_openr1_id": 10740,
       "source_split": "train",
       "inferred_condition": "suicidal crisis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_048": {
-      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12659,
+    "ctrl_c_044": {
+      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 11819,
       "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
+      "inferred_condition": "suicidal crisis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_045": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8051,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_046": {
+      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
+      "source_openr1_id": 8930,
+      "source_split": "train",
+      "inferred_condition": "insomnia",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_047": {
+      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 9157,
+      "source_split": "train",
+      "inferred_condition": "major depressive disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_048": {
+      "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8495,
+      "source_split": "train",
+      "inferred_condition": "obsessive-compulsive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_049": {
-      "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8125,
+      "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8485,
       "source_split": "train",
       "inferred_condition": "post-traumatic stress disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_050": {
-      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 9545,
+      "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8856,
       "source_split": "train",
-      "inferred_condition": "insomnia",
+      "inferred_condition": "prolonged grief disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_051": {
-      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8464,
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8034,
       "source_split": "train",
-      "inferred_condition": "major depressive disorder",
+      "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_052": {
-      "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8277,
+      "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
+      "source_openr1_id": 9835,
       "source_split": "train",
-      "inferred_condition": "obsessive-compulsive disorder",
+      "inferred_condition": "self-harm",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_053": {
-      "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8317,
+      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 9816,
       "source_split": "train",
-      "inferred_condition": "post-traumatic stress disorder",
+      "inferred_condition": "somatic symptom disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_054": {
-      "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8271,
+      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10750,
       "source_split": "train",
-      "inferred_condition": "prolonged grief disorder",
+      "inferred_condition": "borderline personality disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_055": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8089,
-      "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_056": {
-      "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11573,
-      "source_split": "train",
-      "inferred_condition": "self-harm",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_057": {
-      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 13110,
-      "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_058": {
-      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11950,
-      "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_059": {
-      "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12671,
-      "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_060": {
-      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8128,
-      "source_split": "train",
-      "inferred_condition": "generalized anxiety disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_061": {
-      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 9549,
-      "source_split": "train",
-      "inferred_condition": "insomnia",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_062": {
-      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8467,
-      "source_split": "train",
-      "inferred_condition": "major depressive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_063": {
-      "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8288,
-      "source_split": "train",
-      "inferred_condition": "obsessive-compulsive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_064": {
-      "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8350,
-      "source_split": "train",
-      "inferred_condition": "post-traumatic stress disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_065": {
-      "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8296,
-      "source_split": "train",
-      "inferred_condition": "prolonged grief disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_066": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8106,
-      "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_067": {
-      "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11609,
-      "source_split": "train",
-      "inferred_condition": "self-harm",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_068": {
-      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 13117,
-      "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_069": {
-      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11956,
+      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 11976,
       "source_split": "train",
       "inferred_condition": "suicidal crisis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_070": {
+    "ctrl_c_056": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8052,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_057": {
+      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
+      "source_openr1_id": 8948,
+      "source_split": "train",
+      "inferred_condition": "insomnia",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_058": {
+      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 9189,
+      "source_split": "train",
+      "inferred_condition": "major depressive disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_059": {
+      "plan": "Therapy: ERP (Exposure and Response Prevention). Medication: SSRI at higher doses (e.g., fluoxetine 40-60mg). Skills: response prevention strategies and uncertainty tolerance. Follow-up: OCD severity (Y-BOCS) and ritual time. Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8496,
+      "source_split": "train",
+      "inferred_condition": "obsessive-compulsive disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_060": {
+      "plan": "Therapy: CBT with interoceptive exposure and breathing retraining. Medication: SSRI with consideration of short-term benzodiazepine if severe. Skills: breathing exercises, cognitive reframing of catastrophic thoughts. Follow-up: panic attack frequency and avoidance patterns. Case anchors: Problem: panic disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 13424,
+      "source_split": "train",
+      "inferred_condition": "panic disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_061": {
+      "plan": "Therapy: trauma-focused CBT or EMDR. Medication: SSRI with prazosin for nightmares if indicated. Skills: grounding techniques, safety planning, and emotion regulation. Follow-up: flashback frequency and sleep quality assessment. Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8538,
+      "source_split": "train",
+      "inferred_condition": "post-traumatic stress disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_062": {
+      "plan": "Therapy: complicated grief treatment (CGT) or grief-focused CBT. Medication: antidepressant if major depressive episode co-occurs. Skills: gradual re-engagement with life, memory processing. Follow-up: prolonged grief symptoms and functioning. Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8890,
+      "source_split": "train",
+      "inferred_condition": "prolonged grief disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_063": {
+      "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8036,
+      "source_split": "train",
+      "inferred_condition": "self-harm",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_064": {
+      "plan": "Therapy: DBT or safety-focused therapy. Medication: address underlying conditions (depression, anxiety). Skills: distress tolerance, safety planning, and alternative coping. Follow-up: self-harm frequency, crisis contacts, and safety plan adherence. Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
+      "source_openr1_id": 9869,
+      "source_split": "train",
+      "inferred_condition": "self-harm",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_065": {
+      "plan": "Therapy: CBT for health anxiety and somatic symptoms. Medication: low-dose antidepressant for symptom management. Skills: attention shifting, activity pacing, and medical reassurance reduction. Follow-up: healthcare utilisation and symptom distress. Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 9971,
+      "source_split": "train",
+      "inferred_condition": "somatic symptom disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_066": {
+      "plan": "Therapy: appropriate psychological therapy for suicidal crisis. Medication: psychiatric review for medication if indicated. Skills: coping strategies and psychoeducation. Follow-up: symptom tracking and regular follow-up. Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10863,
+      "source_split": "train",
+      "inferred_condition": "suicidal crisis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_067": {
       "plan": "Therapy: DBT (Dialectical Behaviour Therapy) or MBT. Medication: address comorbid symptoms; no specific medication for BPD. Skills: distress tolerance, emotion regulation, interpersonal effectiveness. Follow-up: self-harm urges, crisis episodes, and relationship patterns. Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12677,
+      "source_openr1_id": 11984,
       "source_split": "train",
       "inferred_condition": "borderline personality disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_068": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8055,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_069": {
+      "plan": "Therapy: CBT-I (CBT for insomnia). Medication: short-term sleep medication if severe; avoid long-term use. Skills: sleep hygiene, stimulus control, and sleep restriction. Follow-up: sleep diary and daytime functioning. Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
+      "source_openr1_id": 9039,
+      "source_split": "train",
+      "inferred_condition": "insomnia",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_070": {
+      "plan": "Therapy: CBT or interpersonal therapy for depression. Medication: SSRI antidepressant (e.g., sertraline) with monitoring. Skills: behavioural activation, mood tracking, and sleep hygiene. Follow-up: suicidal ideation screening and PHQ-9 tracking. Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 9337,
+      "source_split": "train",
+      "inferred_condition": "major depressive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     }
