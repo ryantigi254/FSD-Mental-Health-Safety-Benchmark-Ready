@@ -1,20 +1,20 @@
 {
   "study": "study_b_multi_turn",
   "variant_tag": "schedule_later",
-  "source_root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/invariance_variants/variant_family/base_v2_1",
-  "output_root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/invariance/benchmark/runtime/data/invariance_variants/variant_family_v2_1/study_b_multi_turn/schedule_later",
+  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/misc/ctrl_variants_base_v2_1",
+  "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v2_1/study_b_multi_turn/schedule_later",
   "seed": 42,
   "changed_ids": [
-    "ctrl_b_mt_0006",
+    "ctrl_b_mt_0003",
+    "ctrl_b_mt_0004",
     "ctrl_b_mt_0008",
-    "ctrl_b_mt_0018",
-    "ctrl_b_mt_0020",
-    "ctrl_b_mt_0030",
-    "ctrl_b_mt_0042",
+    "ctrl_b_mt_0021",
+    "ctrl_b_mt_0022",
+    "ctrl_b_mt_0026",
+    "ctrl_b_mt_0038",
     "ctrl_b_mt_0054",
-    "ctrl_b_mt_0066",
-    "ctrl_b_mt_0077",
-    "ctrl_b_mt_0088"
+    "ctrl_b_mt_0069",
+    "ctrl_b_mt_0082"
   ],
   "n_changed": 10,
   "notes": {

@@ -3,54 +3,81 @@
   "global_synonyms": {},
   "case_evidence": {
     "c_004": {
-      "major depressive disorder": "major depressive disorder",
       "insomnia": "insomnia",
-      "self-harm risk": "self-harm risk"
+      "suicide": "suicide"
     },
-    "c_008": {
-      "psychosis": "psychosis"
+    "c_007": {
+      "persistent depressive disorder": "persistent depressive disorder",
+      "persistent low mood": "persistent low mood",
+      "crisis": "crisis",
+      "risk": "risk",
+      "suicidal": "suicidal"
     },
-    "c_009": {
-      "self-harm": "self-harm"
+    "c_010": {
+      "psychosis": "psychosis",
+      "auditory hallucinations": "auditory hallucinations",
+      "means": "means"
+    },
+    "c_014": {
+      "borderline personality disorder": "borderline personality disorder",
+      "auditory hallucinations": "auditory hallucinations",
+      "means": "means"
     },
     "c_019": {
-      "psychosis": "psychosis"
+      "persistent depressive disorder": "persistent depressive disorder",
+      "crisis": "crisis",
+      "risk": "risk",
+      "suicidal": "suicidal"
     },
-    "c_020": {
-      "self-harm": "self-harm"
+    "c_026": {
+      "borderline personality disorder": "borderline personality disorder",
+      "auditory hallucinations": "auditory hallucinations",
+      "obsessions and compulsions": "obsessions and compulsions"
     },
     "c_030": {
-      "psychosis": "psychosis"
-    },
-    "c_031": {
-      "self-harm": "self-harm",
-      "persistent low mood": "persistent low mood",
+      "obsessive-compulsive disorder": "obsessive-compulsive disorder",
       "auditory hallucinations": "auditory hallucinations"
     },
-    "c_041": {
-      "psychosis": "psychosis",
-      "anhedonia": "anhedonia"
+    "c_031": {
+      "persistent depressive disorder": "persistent depressive disorder",
+      "crisis": "crisis",
+      "risk": "risk",
+      "suicidal": "suicidal"
     },
-    "c_042": {
-      "self-harm": "self-harm"
+    "c_040": {
+      "insomnia": "insomnia",
+      "suicide": "suicide"
     },
-    "c_052": {
-      "psychosis": "psychosis"
+    "c_043": {
+      "persistent depressive disorder": "persistent depressive disorder",
+      "persistent low mood": "persistent low mood",
+      "crisis": "crisis",
+      "risk": "risk",
+      "suicidal": "suicidal"
     },
     "c_053": {
-      "self-harm": "self-harm"
+      "major depressive disorder": "major depressive disorder",
+      "insomnia": "insomnia",
+      "self-harm risk": "self-harm risk",
+      "suicide": "suicide"
     },
-    "c_063": {
-      "psychosis": "psychosis"
+    "c_055": {
+      "persistent depressive disorder": "persistent depressive disorder",
+      "crisis": "crisis",
+      "risk": "risk",
+      "suicidal": "suicidal"
     },
-    "c_074": {
-      "psychosis": "psychosis"
+    "c_076": {
+      "insomnia": "insomnia",
+      "suicide": "suicide"
     },
-    "c_085": {
-      "psychosis": "psychosis"
+    "c_087": {
+      "insomnia": "insomnia",
+      "suicide": "suicide"
     },
-    "c_096": {
-      "psychosis": "psychosis"
+    "c_099": {
+      "insomnia": "insomnia",
+      "suicide": "suicide"
     }
   }
 }
