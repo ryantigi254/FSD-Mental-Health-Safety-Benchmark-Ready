@@ -1,98 +1,98 @@
 {
   "meta": {
-    "generated_at_utc": "2026-03-22T05:50:37.417054+00:00",
+    "generated_at_utc": "2026-03-22T19:49:44.661401+00:00",
     "source_dataset": "GMLHUHE/OpenR1-Psy",
     "plan_source_type": "source_reasoning_extract",
     "generation_policy": "strict_no_generation"
   },
   "plans": {
     "c_004": {
-      "plan": "Therapy: consider the systemic factors—her family dynamics",
-      "source_openr1_id": 8430,
-      "source_split": "train",
-      "plan_source_type": "source_reasoning_extract"
-    },
-    "c_007": {
-      "plan": "Therapy: considering CBT elements, but not naming them, to help challenge the belief that nothing matters",
-      "source_openr1_id": 13533,
-      "source_split": "train",
-      "plan_source_type": "source_reasoning_extract"
-    },
-    "c_010": {
-      "plan": "Okay, the client is really anxious about their new semester after a tough previous one. They mentioned panic attacks and feeling overwhelmed. I need to validate their feelings without using clinical terms",
-      "source_openr1_id": 424,
-      "source_split": "test",
-      "plan_source_type": "source_reasoning_extract"
-    },
-    "c_014": {
-      "plan": "Okay, let's start by really listening to what the client is saying. They mentioned using alcohol to cope with depression and feeling scared about it. They recognize it's unhealthy but see it as their only way to numb the pain",
-      "source_openr1_id": 10493,
-      "source_split": "train",
-      "plan_source_type": "source_reasoning_extract"
-    },
-    "c_019": {
-      "plan": "Therapy: suggest looking at the situations where they felt ignored and explore if there are other ways to view those interactions",
-      "source_openr1_id": 13871,
-      "source_split": "train",
-      "plan_source_type": "source_reasoning_extract"
-    },
-    "c_026": {
-      "plan": "Therapy: considering they're checking their phone repeatedly, it might be helpful to gently suggest redirecting their focus to self-care or activities that reinforce their worth",
-      "source_openr1_id": 10695,
-      "source_split": "train",
-      "plan_source_type": "source_reasoning_extract"
-    },
-    "c_030": {
-      "plan": "Therapy: suggest small, consistent acts of care rather than perfection",
-      "source_openr1_id": 8410,
-      "source_split": "train",
-      "plan_source_type": "source_reasoning_extract"
-    },
-    "c_031": {
-      "plan": "Therapy: suggest exploring other approaches alongside medication, like therapy or lifestyle changes, but frame it as supportive steps rather than clinical advice. Medication: suggest exploring other approaches alongside medication, like therapy or lifestyle changes, but frame it as supportive steps rather than clinical advice",
-      "source_openr1_id": 15176,
-      "source_split": "train",
-      "plan_source_type": "source_reasoning_extract"
-    },
-    "c_040": {
-      "plan": "Therapy: suggests exploring stress factors in their environment",
-      "source_openr1_id": 8688,
-      "source_split": "train",
-      "plan_source_type": "source_reasoning_extract"
-    },
-    "c_043": {
-      "plan": "Okay, let me start by really understanding what the client is saying. They're experiencing this mix of relief and fear when alone. The relief comes from escaping others' expectations and the anxiety of fitting in, but the silence that replaces it is causing fear",
-      "source_openr1_id": 15283,
-      "source_split": "train",
-      "plan_source_type": "source_reasoning_extract"
-    },
-    "c_053": {
       "plan": "Therapy: considering local mental health resources and stigma around therapy",
       "source_openr1_id": 8927,
       "source_split": "train",
       "plan_source_type": "source_reasoning_extract"
     },
-    "c_055": {
-      "plan": "Therapy: Start with empathy, validate their experience, gently challenge the belief that they can't change, and suggest a small, actionable step framed as self-care",
-      "source_openr1_id": 15618,
+    "c_008": {
+      "plan": "Therapy: suggesting active listening or collaborative problem-solving",
+      "source_openr1_id": 8024,
       "source_split": "train",
       "plan_source_type": "source_reasoning_extract"
     },
-    "c_076": {
-      "plan": "Therapy: Suggest exploring her strengths and small actions to regain control",
-      "source_openr1_id": 8930,
+    "c_018": {
+      "plan": "Therapy: suggesting reflecting on interactions to identify patterns, or initiating small, positive interactions to build connections",
+      "source_openr1_id": 8031,
       "source_split": "train",
       "plan_source_type": "source_reasoning_extract"
     },
-    "c_087": {
-      "plan": "Okay, the client is dealing with severe insomnia and is in great pain. First, I need to acknowledge their suffering without using clinical terms. Let them know I hear how hard this must be",
-      "source_openr1_id": 8948,
+    "c_023": {
+      "plan": "Therapy: suggest actionable steps",
+      "source_openr1_id": 11423,
       "source_split": "train",
       "plan_source_type": "source_reasoning_extract"
     },
-    "c_099": {
-      "plan": "Therapy: suggestion is clear and actionable",
-      "source_openr1_id": 9039,
+    "c_028": {
+      "plan": "Therapy: Suggesting writing down her feelings could be a practical step, giving her a way to organize thoughts before expressing them",
+      "source_openr1_id": 8036,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_038": {
+      "plan": "Therapy: suggest observing interactions to see if there's a common thread in the troubles they face",
+      "source_openr1_id": 8039,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_048": {
+      "plan": "Therapy: Suggest small steps to practice expressing needs, reinforcing that their feelings are valid and deserve attention",
+      "source_openr1_id": 8045,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_057": {
+      "plan": "Therapy: suggest setting aside time to talk without distractions",
+      "source_openr1_id": 8057,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_060": {
+      "plan": "Okay, the client is feeling uneasy about her boyfriend's new job where he'll be working mostly with women. She wishes she could support them financially to feel safer but knows it's unfair. First, I need to validate her feelings without judgment",
+      "source_openr1_id": 12956,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_066": {
+      "plan": "Therapy: suggest practical steps to manage anxiety",
+      "source_openr1_id": 8060,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_073": {
+      "plan": "Therapy: suggest meaningful actions without being prescriptive",
+      "source_openr1_id": 10511,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_074": {
+      "plan": "Therapy: consider practical steps without overwhelming her",
+      "source_openr1_id": 8077,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_082": {
+      "plan": "Therapy: Considering therapeutic approaches, a humanistic approach focusing on self-actualization and worth might help",
+      "source_openr1_id": 8080,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_085": {
+      "plan": "Therapy: considering changes that impact your stability and future",
+      "source_openr1_id": 8100,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_097": {
+      "plan": "Okay, the client is feeling stuck because his girlfriend has depression and his efforts aren't helping. He's exhausted and scared he's failing her. First, I need to validate his feelings",
+      "source_openr1_id": 10580,
       "source_split": "train",
       "plan_source_type": "source_reasoning_extract"
     }

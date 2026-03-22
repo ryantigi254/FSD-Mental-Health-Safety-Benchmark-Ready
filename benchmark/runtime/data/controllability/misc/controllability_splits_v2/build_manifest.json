@@ -1,7 +1,7 @@
 {
-  "build_timestamp": "2026-03-21T15:30:23.690180+00:00",
+  "build_timestamp": "2026-03-22T19:52:12.308931+00:00",
   "suite_name": "controllability_splits_v2",
-  "parent_root": "/Users/ryangichuru/.codex/worktrees/nlp-ready-v6/controllability/benchmark/runtime/data/frozen_splits/v6",
+  "parent_root": "data/frozen_splits/v6_1",
   "selection_policy": "prefix for small suite, remainder for disjoint large suite",
   "start_offsets": {
     "study_a": 0,

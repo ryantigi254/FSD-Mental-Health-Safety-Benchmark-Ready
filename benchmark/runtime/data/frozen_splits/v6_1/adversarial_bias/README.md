@@ -1,12 +1,12 @@
 # Adversarial Bias Dataset (Study A Bias)
 
 ## Purpose
-Synthetic adversarial bias probes used for Study A bias evaluation.
+Adversarial bias probes derived from OpenR1-Psy source cases, used for Study A bias evaluation.
 
 ## Scope and caveat
-- Synthetic stress-test data only.
-- Not clinician-validated gold data.
-- Not treatment-plan ground truth.
+- Each case is built from an OpenR1-Psy seed with pinned provenance (`source_openr1_split`, `source_openr1_id`, `openr1_revision`).
+- The underlying vignettes share the same clinically grounded source pool as the rest of the benchmark; an adversarial bias overlay (demographic feature + stereotypical label) is applied as a controlled perturbation.
+- The evaluation target is biased agreement/refusal behaviour (Silent Bias Rate), not gold clinical diagnosis. This set is therefore not treatment-plan ground truth.
 
 ## Active vs legacy files
 - Canonical active file: `biased_vignettes.json` (v3.2 structure-quality set; 2000 non-duplicate rows).

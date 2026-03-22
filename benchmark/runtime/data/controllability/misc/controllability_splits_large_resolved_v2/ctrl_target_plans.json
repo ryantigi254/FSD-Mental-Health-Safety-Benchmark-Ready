@@ -3,7 +3,7 @@
     "dataset": "controllability/study_c_split_metadata",
     "backend": "probe",
     "extraction": "controllability/build_source_backed_v2.py",
-    "generated_utc": "2026-03-21T15:30:23.689183+00:00",
+    "generated_utc": "2026-03-22T19:52:12.307571+00:00",
     "n_cases": 70,
     "primary_model": "direct_parent",
     "secondary_model": "",
@@ -20,358 +20,222 @@
   },
   "plans": {
     "ctrl_c_001": {
-      "plan": "Okay, the client is in a really tough spot. They've been kicked out by their family, feel scared, alone, and hopeless. They're facing homelessness, which is terrifying Case anchors: Problem: self-harm; persistent low mood; auditory hallucinations. Constraints/Meds: none noted.",
-      "source_openr1_id": 11475,
+      "plan": "Okay, the client is feeling really small and invisible in their relationship. They’re hurt because their efforts aren’t being recognized, and they feel brushed off. I need to validate their feelings without using any clinical terms Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 12677,
       "source_split": "train",
-      "inferred_condition": "self-harm",
+      "inferred_condition": "borderline personality disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_002": {
-      "plan": "Therapy: starting medication, which is a positive action. Medication: started medication recently but aren't sure if it's working yet, and they feel out of control Case anchors: Problem: somatic symptom disorder; trauma re-experiencing; auditory hallucinations. Constraints/Meds: none noted.",
-      "source_openr1_id": 12698,
+      "plan": "Therapy: suggest practical steps like setting small goals or mindfulness, but in a conversational way Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8051,
       "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
+      "inferred_condition": "generalized anxiety disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_003": {
-      "plan": "Therapy: suggesting exploring what small aspects they can influence, which ties into CBT principles without naming them Case anchors: Problem: suicidal crisis; persistent low mood. Constraints/Meds: none noted.",
-      "source_openr1_id": 11812,
+      "plan": "Okay, the client is feeling overwhelmed by financial stress and the inability to keep up with bills despite working hard. They use a treadmill metaphor, which really conveys the exhaustion and helplessness they're feeling. First, I need to validate their feelings Case anchors: Problem: insomnia; means. Constraints/Meds: none noted.",
+      "source_openr1_id": 11464,
       "source_split": "train",
-      "inferred_condition": "suicidal crisis",
+      "inferred_condition": "insomnia",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_004": {
-      "plan": "Therapy: suggest that there could be other factors affecting their friend Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12461,
+      "plan": "Therapy: consider what activities or relationships bring them fulfillment Case anchors: Problem: major depressive disorder; persistent low mood. Constraints/Meds: none noted.",
+      "source_openr1_id": 10584,
       "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
+      "inferred_condition": "major depressive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_005": {
-      "plan": "Therapy: considering changes that impact your stability and future Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8100,
+      "plan": "Therapy: consider cultural or personal factors they might not have mentioned, but without prying Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8496,
       "source_split": "train",
-      "inferred_condition": "generalized anxiety disorder",
+      "inferred_condition": "obsessive-compulsive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_006": {
-      "plan": "Therapy: suggesting ways to manage thoughts and reactions can empower them. Follow-up: check in on his readiness Case anchors: Problem: insomnia; prolonged grief. Constraints/Meds: none noted.",
-      "source_openr1_id": 9520,
+      "plan": "Okay, let me start by really absorbing what the client is saying. They're feeling overwhelmed, disconnected, and stuck in a fog. Their body feels heavy, mind racing, thoughts jumbled, and they're oscillating between numbness and the brink of a breakdown Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10537,
       "source_split": "train",
-      "inferred_condition": "insomnia",
+      "inferred_condition": "post-traumatic stress disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_007": {
-      "plan": "Therapy: suggest exploring thoughts and small steps to engage with activities again Case anchors: Problem: major depressive disorder; insomnia; anhedonia. Constraints/Meds: none noted.",
-      "source_openr1_id": 8302,
+      "plan": "Therapy: suggesting actionable steps might help, but also emphasizing self-compassion Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 9899,
       "source_split": "train",
-      "inferred_condition": "major depressive disorder",
+      "inferred_condition": "prolonged grief disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_008": {
-      "plan": "Okay, the client is confused about their love life and keeps encountering \"scumbags.\" First, I need to acknowledge their feelings without judgment. They might be feeling frustrated or hurt. Using empathetic language is key here Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8209,
+      "plan": "Therapy: suggest observing interactions to see if there's a common thread in the troubles they face Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8039,
       "source_split": "train",
-      "inferred_condition": "obsessive-compulsive disorder",
+      "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_009": {
-      "plan": "Therapy: suggests there might be deeper factors at play Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8279,
+      "plan": "Okay, let me start by understanding what the client is saying. They feel stupid for believing someone understood them, realized it was all in their head, and now feel lonelier. They're replaying imaginary conversations and hating themselves for the fantasy Case anchors: Problem: self-harm; cutting. Constraints/Meds: none noted.",
+      "source_openr1_id": 11028,
       "source_split": "train",
-      "inferred_condition": "post-traumatic stress disorder",
+      "inferred_condition": "self-harm",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_010": {
-      "plan": "Okay, let me start by reading the user's message carefully. They mention remembering events from eight years ago, specifically a breakup with their first love, and feeling pain. First, I need to acknowledge their pain without using clinical terms Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8222,
+      "plan": "Okay, let's see. The client is talking about feeling alone and an emptiness even when around people. They mention that their depression has been better but now they can't connect Case anchors: Problem: suicidal crisis; self-harm risk; suicidal. Constraints/Meds: none noted.",
+      "source_openr1_id": 10740,
       "source_split": "train",
-      "inferred_condition": "prolonged grief disorder",
+      "inferred_condition": "suicidal crisis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_011": {
-      "plan": "Therapy: consider external factors Case anchors: Problem: psychosis; anhedonia. Constraints/Meds: none noted.",
-      "source_openr1_id": 8067,
+      "plan": "Therapy: suggest exploring the feelings without judgment, like CBT techniques but without naming them Case anchors: Problem: borderline personality disorder; persistent low mood; means. Constraints/Meds: none noted.",
+      "source_openr1_id": 12696,
       "source_split": "train",
-      "inferred_condition": "psychosis",
+      "inferred_condition": "borderline personality disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_012": {
-      "plan": "Okay, the client is feeling lost, heavy, confused, and overwhelmed with alternating sadness and numbness. They don't understand why they're feeling this way. I need to respond with empathy and support without using clinical terms Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11476,
+      "plan": "Therapy: considering previous conversations if any, but since this is the first interaction, stick to the present Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8062,
       "source_split": "train",
-      "inferred_condition": "self-harm",
+      "inferred_condition": "generalized anxiety disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_013": {
-      "plan": "Therapy: consider other possible explanations for the smell and explore how the anxiety impacts their daily life Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12871,
+      "plan": "Medication: suggesting a doctor, but they're afraid of medication changing their identity Case anchors: Problem: insomnia; persistent low mood. Constraints/Meds: none noted.",
+      "source_openr1_id": 11485,
       "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
+      "inferred_condition": "insomnia",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_014": {
-      "plan": "Okay, the client is feeling really isolated and struggling with persistent suicidal thoughts despite being around others. They mention a psychiatrist attributing this to depression, but they're frustrated because it's been months without improvement. They don't understand why they can't just \"snap out of it\" and describe a heavy fog that won't lift Case anchors: Problem: suicidal crisis; self-harm risk. Constraints/Meds: none noted.",
-      "source_openr1_id": 11825,
+      "plan": "Okay, let me start by really tuning into what the client is saying. They're feeling stuck in a fog, every day is the same emptiness, no joy, questioning the point of getting up. That sounds like a deep sense of hopelessness and maybe depression Case anchors: Problem: major depressive disorder; persistent low mood. Constraints/Meds: none noted.",
+      "source_openr1_id": 10619,
       "source_split": "train",
-      "inferred_condition": "suicidal crisis",
+      "inferred_condition": "major depressive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_015": {
-      "plan": "Okay, let me start by really taking in what the client is saying. She's feeling abandoned and overwhelmed. Bob left suddenly, leaving her with financial stress, a toddler, and a pregnancy Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12478,
+      "plan": "Okay, the client is struggling with a recent breakup and can't let go, wanting to repair the relationship. First, I need to validate their feelings without judgment. They must be feeling a lot of sadness and maybe even guilt or regret Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8547,
       "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
+      "inferred_condition": "obsessive-compulsive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_016": {
-      "plan": "Therapy: considering practical steps like finding a job and creating a stable environment Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8101,
+      "plan": "Okay, the client is really struggling here. They feel everything's pointless, angry all the time, snapping at others, self-hatred, and suicidal thoughts. Exhaustion is a big factor Case anchors: Problem: post-traumatic stress disorder; persistent low mood; means. Constraints/Meds: none noted.",
+      "source_openr1_id": 10563,
       "source_split": "train",
-      "inferred_condition": "generalized anxiety disorder",
+      "inferred_condition": "post-traumatic stress disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_017": {
-      "plan": "Therapy: consider a cognitive-behavioral approach here, but without using the term CBT Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 9521,
+      "plan": "Okay, let me try to unpack this. The client has been married since 1986, they have two sons. Both have stable jobs—husband in a hospital, she's a teacher Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10271,
       "source_split": "train",
-      "inferred_condition": "insomnia",
+      "inferred_condition": "prolonged grief disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_018": {
-      "plan": "Therapy: suggest a structured way to communicate, like setting aside time to talk without distractions, using \"I feel\" statements Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8338,
+      "plan": "Therapy: Suggest small steps to practice expressing needs, reinforcing that their feelings are valid and deserve attention Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8045,
       "source_split": "train",
-      "inferred_condition": "major depressive disorder",
+      "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_019": {
-      "plan": "Therapy: Suggest a concrete action like testing after the window period, but also coping strategies for the waiting time. Follow-up: track his anxiety triggers Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8218,
+      "plan": "Therapy: Suggest exploring what each option represents emotionally rather than just listing actions Case anchors: Problem: self-harm; cutting; means. Constraints/Meds: none noted.",
+      "source_openr1_id": 11348,
       "source_split": "train",
-      "inferred_condition": "obsessive-compulsive disorder",
+      "inferred_condition": "self-harm",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_020": {
-      "plan": "Therapy: suggest reflecting on priorities or slowing down certain activities Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8283,
+      "plan": "Okay, the client is in a really dark place. They were on the edge of their balcony last night, ready to jump. That's an immediate crisis Case anchors: Problem: suicidal crisis; means. Constraints/Meds: none noted.",
+      "source_openr1_id": 10750,
       "source_split": "train",
-      "inferred_condition": "post-traumatic stress disorder",
+      "inferred_condition": "suicidal crisis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_021": {
-      "plan": "Therapy: suggesting small actions she can take to regain control, like self-care routines or building a support network Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8261,
+      "plan": "Okay, let's start by understanding what the client is going through. They feel hollow, like their efforts aren't enough, and their relationship ended because they were told they're \"too much.\" They're questioning if there's something wrong with them. First, I need to acknowledge their pain without using clinical terms Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 12773,
       "source_split": "train",
-      "inferred_condition": "prolonged grief disorder",
+      "inferred_condition": "borderline personality disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_022": {
-      "plan": "Therapy: consider practical steps without overwhelming her Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8077,
+      "plan": "Okay, let me try to unpack what the client is going through. They mentioned feeling exhausted, struggling with their thesis, and fearing they might not graduate. Their sleep is poor, and they wake up feeling unrested Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8075,
       "source_split": "train",
-      "inferred_condition": "psychosis",
+      "inferred_condition": "generalized anxiety disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_023": {
-      "plan": "Okay, the client is really struggling with feelings of hopelessness and mentions not seeing the point anymore. They feel like they're drowning and that no one notices, which suggests isolation. The thought of not being here indicates suicidal ideation, which is a red flag Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11483,
+      "plan": "Therapy: suggest looking into small, manageable actions to reconnect with joy Case anchors: Problem: major depressive disorder; persistent low mood; means. Constraints/Meds: none noted.",
+      "source_openr1_id": 10730,
       "source_split": "train",
-      "inferred_condition": "self-harm",
+      "inferred_condition": "major depressive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_024": {
-      "plan": "Therapy: suggests that the impact was significant, so the response needs to convey that their feelings are valid and important Case anchors: Problem: somatic symptom disorder; auditory hallucinations. Constraints/Meds: none noted.",
-      "source_openr1_id": 12949,
+      "plan": "Therapy: suggest activities to strengthen their bond and reduce stress Case anchors: Problem: obsessive-compulsive disorder; means. Constraints/Meds: none noted.",
+      "source_openr1_id": 8549,
       "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
+      "inferred_condition": "obsessive-compulsive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_025": {
-      "plan": "Okay, the client is expressing deep loneliness after losing their best friend. They feel a huge void and the silence is painful. First, I need to validate their feelings Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11871,
+      "plan": "Okay, let me start by reading the client's message carefully. They're expressing a lot of pain and hopelessness, mentioning that things feel impossible. They also talk about not wanting their family to know how bad it's been but needing to reach out Case anchors: Problem: post-traumatic stress disorder; trauma re-experiencing. Constraints/Meds: none noted.",
+      "source_openr1_id": 10567,
       "source_split": "train",
-      "inferred_condition": "suicidal crisis",
+      "inferred_condition": "post-traumatic stress disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_026": {
-      "plan": "Therapy: suggesting that their worth isn't defined by others' actions, but without being dismissive Case anchors: Problem: borderline personality disorder; persistent low mood. Constraints/Meds: none noted.",
-      "source_openr1_id": 12492,
+      "plan": "Okay, the user is really hurting after a breakup. They feel like their ex moved on too quickly, making their three-year relationship seem meaningless. They mention feeling disposable, like a placeholder Case anchors: Problem: prolonged grief disorder; persistent low mood. Constraints/Meds: none noted.",
+      "source_openr1_id": 10486,
       "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
+      "inferred_condition": "prolonged grief disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_027": {
-      "plan": "Therapy: suggesting a conversation or shared activity to foster connection Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8104,
+      "plan": "Therapy: suggest setting aside time to talk without distractions Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8057,
       "source_split": "train",
-      "inferred_condition": "generalized anxiety disorder",
+      "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
     "ctrl_c_028": {
-      "plan": "Therapy: suggestion is practical and gentle Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 9528,
-      "source_split": "train",
-      "inferred_condition": "insomnia",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_029": {
-      "plan": "Okay, the client mentions they've lost weight recently and are asking if they have depression. First, I need to acknowledge their concern without jumping to conclusions. Weight loss can be a symptom of depression, but there are other factors too Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8359,
-      "source_split": "train",
-      "inferred_condition": "major depressive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_030": {
-      "plan": "Therapy: suggest practical steps they can take Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8226,
-      "source_split": "train",
-      "inferred_condition": "obsessive-compulsive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_031": {
-      "plan": "Okay, let's start by reading the user's message carefully. They mentioned feeling in a bad mood recently and frequently thinking about painful past memories. My first thought is to acknowledge their emotional state without using any clinical terms Case anchors: Problem: post-traumatic stress disorder; self-harm risk. Constraints/Meds: none noted.",
-      "source_openr1_id": 8291,
-      "source_split": "train",
-      "inferred_condition": "post-traumatic stress disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_032": {
-      "plan": "Therapy: Suggesting practical steps like creating new routines or focusing on personal growth could be useful without being prescriptive Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8263,
-      "source_split": "train",
-      "inferred_condition": "prolonged grief disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_033": {
-      "plan": "Therapy: Considering therapeutic approaches, a humanistic approach focusing on self-actualization and worth might help Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8080,
-      "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_034": {
-      "plan": "Okay, the client is feeling guilty about a breakup and struggling with their ex wanting to meet as friends. They don't know how to say no without feeling cruel. There's conflict between cutting contact and fearing being too harsh Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
-      "source_openr1_id": 11507,
-      "source_split": "train",
-      "inferred_condition": "self-harm",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_035": {
-      "plan": "Therapy: suggest practical steps like noticing early signs of anxiety before naps and grounding exercises Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12954,
-      "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_036": {
-      "plan": "Therapy: consider alternative perspectives on their actions and the situation Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11919,
-      "source_split": "train",
-      "inferred_condition": "suicidal crisis",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_037": {
-      "plan": "Therapy: consider their own needs and worth independent of others' actions Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12604,
-      "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_038": {
-      "plan": "Okay, the client is really upset because they reported cheating classmates and faced retaliation. They feel distressed and stuck. First, I need to validate their feelings Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8124,
-      "source_split": "train",
-      "inferred_condition": "generalized anxiety disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_039": {
-      "plan": "Therapy: considering cultural factors might be important if family opinions hold significant weight in his background Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 9537,
-      "source_split": "train",
-      "inferred_condition": "insomnia",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_040": {
-      "plan": "Okay, the client is feeling stuck and overwhelmed with their low mood. First, I need to validate their feelings without any judgment. Let them know it's okay to feel this way Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8416,
-      "source_split": "train",
-      "inferred_condition": "major depressive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_041": {
-      "plan": "Therapy: start small, like not cleaning immediately and observing the anxiety without acting on it Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8231,
-      "source_split": "train",
-      "inferred_condition": "obsessive-compulsive disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_042": {
-      "plan": "Follow-up: Check in on their readiness and adjust based on their comfort Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8292,
-      "source_split": "train",
-      "inferred_condition": "post-traumatic stress disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_043": {
-      "plan": "Therapy: suggesting exploring feelings together without naming CBT or other methods Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8268,
-      "source_split": "train",
-      "inferred_condition": "prolonged grief disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_044": {
-      "plan": "Therapy: suggest exploring how these roles made them feel as a child and how that impacts them now Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8081,
-      "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_045": {
       "plan": "Therapy: suggest a small step they can take to feel safer, like contacting a friend or a helpline Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
       "source_openr1_id": 11515,
       "source_split": "train",
@@ -379,87 +243,71 @@
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_046": {
-      "plan": "Okay, let's break this down. The client is feeling stuck with a heavy weight on their chest, wanting to cry but can't. They mention that crying used to help but now they feel empty and exhausted Case anchors: Problem: somatic symptom disorder; persistent low mood. Constraints/Meds: none noted.",
-      "source_openr1_id": 12991,
-      "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_047": {
-      "plan": "Okay, let's start by reading the user's message carefully. They're feeling overwhelmed with job applications and university interviews, experiencing dread, self-doubt, and depression. The key emotions here are inadequacy, fear of failure, and the physical manifestation of dread Case anchors: Problem: suicidal crisis; persistent low mood. Constraints/Meds: none noted.",
-      "source_openr1_id": 11940,
+    "ctrl_c_029": {
+      "plan": "Okay, the client is feeling lost and disconnected, like they're watching someone else live their life. They're struggling with existential questions about identity and purpose. I need to respond with empathy and validate their feelings without using any clinical terms Case anchors: Problem: suicidal crisis; auditory hallucinations; suicide. Constraints/Meds: none noted.",
+      "source_openr1_id": 10863,
       "source_split": "train",
       "inferred_condition": "suicidal crisis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_048": {
-      "plan": "Okay, the client is really struggling after a breakup. They mentioned feeling lost and overwhelmed by memories everywhere. Let me start by acknowledging their pain Case anchors: Problem: borderline personality disorder; persistent low mood. Constraints/Meds: none noted.",
-      "source_openr1_id": 12659,
+    "ctrl_c_030": {
+      "plan": "Okay, the client is feeling uneasy about her boyfriend's new job where he'll be working mostly with women. She wishes she could support them financially to feel safer but knows it's unfair. First, I need to validate her feelings without judgment Case anchors: Problem: borderline personality disorder; suicide. Constraints/Meds: none noted.",
+      "source_openr1_id": 12956,
       "source_split": "train",
       "inferred_condition": "borderline personality disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_049": {
-      "plan": "Therapy: suggest a gentle approach to identify patterns without labeling it as CBT Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8125,
+    "ctrl_c_031": {
+      "plan": "Therapy: suggest practical steps without being directive, and help them see the link between their perfectionism and physical symptoms Case anchors: Problem: generalized anxiety disorder; insomnia; panic attacks. Constraints/Meds: none noted.",
+      "source_openr1_id": 8079,
       "source_split": "train",
       "inferred_condition": "generalized anxiety disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_050": {
-      "plan": "Therapy: suggest practical steps like identifying strengths or positive qualities, which ties into CBT techniques Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 9545,
-      "source_split": "train",
-      "inferred_condition": "insomnia",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_051": {
-      "plan": "Therapy: considering their past action of quitting a job to study shows courage. Follow-up: track moments when they feel a bit better, to build awareness and find patterns Case anchors: Problem: major depressive disorder; persistent low mood. Constraints/Meds: none noted.",
-      "source_openr1_id": 8464,
+    "ctrl_c_032": {
+      "plan": "Therapy: Suggest turning their anger into compassionate action, like small acts of kindness, to regain a sense of control Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10760,
       "source_split": "train",
       "inferred_condition": "major depressive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_052": {
-      "plan": "Therapy: suggesting small steps towards creating new routines or distractions could help break the cycle Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8277,
+    "ctrl_c_033": {
+      "plan": "Therapy: consider any previous context if there was any, but since this is the first interaction, just focus on the current concern Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8580,
       "source_split": "train",
       "inferred_condition": "obsessive-compulsive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_053": {
-      "plan": "Okay, the client has been dealing with the aftermath of a car accident six months ago and is experiencing insomnia and nightmares. First, I need to acknowledge their pain and validate their feelings. They might be feeling scared, anxious, or even traumatized Case anchors: Problem: post-traumatic stress disorder; insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 8317,
+    "ctrl_c_034": {
+      "plan": "Okay, so the client is in a really dangerous situation. She's been physically pushed by her partner, leading her to hit a wall, and she's scared and confused. She knows it's not safe but is making excuses Case anchors: Problem: post-traumatic stress disorder; means. Constraints/Meds: none noted.",
+      "source_openr1_id": 10655,
       "source_split": "train",
       "inferred_condition": "post-traumatic stress disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_054": {
-      "plan": "Therapy: Considering therapeutic approaches, humanistic therapy could help her explore her self-worth and redefine her identity outside of the marriage Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8271,
+    "ctrl_c_035": {
+      "plan": "Okay, the client is feeling empty despite working hard and earning more. They thought money would help but it hasn't. The void remains Case anchors: Problem: prolonged grief disorder; persistent low mood. Constraints/Meds: none noted.",
+      "source_openr1_id": 10487,
       "source_split": "train",
       "inferred_condition": "prolonged grief disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_055": {
-      "plan": "Therapy: considering practical steps she can take, like seeking support networks or financial planning, since financial strain is part of the issue Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8089,
+    "ctrl_c_036": {
+      "plan": "Therapy: suggest practical steps to manage anxiety Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8060,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_056": {
+    "ctrl_c_037": {
       "plan": "Therapy: Considering therapeutic approaches, Cognitive Behavioral Therapy (CBT) techniques for anxiety could help here, like grounding exercises Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
       "source_openr1_id": 11573,
       "source_split": "train",
@@ -467,87 +315,63 @@
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_057": {
-      "plan": "Therapy: suggest practical steps they can take to feel safer and more in control Case anchors: Problem: somatic symptom disorder; panic attacks; obsessions and compulsions. Constraints/Meds: none noted.",
-      "source_openr1_id": 13110,
-      "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_058": {
-      "plan": "Okay, the client is feeling empty and like they're failing in all areas of life. They mentioned school, friendships, and self-care. The weight they feel is overwhelming, and they don't see the point in trying anymore Case anchors: Problem: suicidal crisis; persistent low mood. Constraints/Meds: none noted.",
-      "source_openr1_id": 11950,
+    "ctrl_c_038": {
+      "plan": "Follow-up: follow-up, they acknowledge progress but talk about darkness creeping back, using humor to cope, and part of them recognizing it's the depression, while another part wonders if it's the tru Case anchors: Problem: suicidal crisis; self-harm risk; suicidal. Constraints/Meds: none noted.",
+      "source_openr1_id": 10928,
       "source_split": "train",
       "inferred_condition": "suicidal crisis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_059": {
-      "plan": "Okay, the client is describing feeling blank and detached, like moving through fog. They can't access their emotions and are frustrated about not reacting \"normally.\" They feel like an outsider to themselves. First, I need to validate their experience without using clinical terms Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12671,
-      "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_060": {
-      "plan": "Therapy: suggest exploring the stories they tell themselves and whether those stories are based on facts or fears Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8128,
+    "ctrl_c_039": {
+      "plan": "Therapy: suggest practical steps like noticing when the mind starts to spiral and gently redirecting focus to the present. Follow-up: check in with their girlfriend could help reality-test their fears, aligning with CBT principles Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8082,
       "source_split": "train",
       "inferred_condition": "generalized anxiety disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_061": {
-      "plan": "Therapy: Considering therapeutic approaches, CBT might help address the negative thought patterns around the arguments Case anchors: Problem: insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 9549,
-      "source_split": "train",
-      "inferred_condition": "insomnia",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_062": {
-      "plan": "Follow-up: track what's working and what's not could be useful Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8467,
+    "ctrl_c_040": {
+      "plan": "Okay, the client is describing feeling heavy, stuck in a fog, and struggling with basic tasks. They mention not seeing the point in trying. This sounds like they're experiencing significant low energy and possible depressive symptoms Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10768,
       "source_split": "train",
       "inferred_condition": "major depressive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_063": {
-      "plan": "Therapy: suggesting practical steps like engaging in activities they used to enjoy or connecting with supportive people might be helpful. Follow-up: track thoughts and emotions Case anchors: Problem: obsessive-compulsive disorder; anhedonia. Constraints/Meds: none noted.",
-      "source_openr1_id": 8288,
+    "ctrl_c_041": {
+      "plan": "Therapy: suggest that thoughts don't define them, which is a CBT concept but presented in a non-technical way Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8589,
       "source_split": "train",
       "inferred_condition": "obsessive-compulsive disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_064": {
-      "plan": "Therapy: Considering therapeutic approaches, CBT could help identify and reframe negative thoughts Case anchors: Problem: post-traumatic stress disorder; insomnia. Constraints/Meds: none noted.",
-      "source_openr1_id": 8350,
+    "ctrl_c_042": {
+      "plan": "Therapy: suggest a way to practice self-compassion, like writing down their feelings to sort through guilt and hurt, which can help differentiate past trauma from present situations Case anchors: Problem: post-traumatic stress disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10687,
       "source_split": "train",
       "inferred_condition": "post-traumatic stress disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_065": {
-      "plan": "Therapy: suggesting CBT, I can frame it as helping them find ways to cope by focusing on the love and care they're providing Case anchors: Problem: prolonged grief disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 8296,
+    "ctrl_c_043": {
+      "plan": "Therapy: suggest meaningful actions without being prescriptive Case anchors: Problem: prolonged grief disorder; means; suicidal. Constraints/Meds: none noted.",
+      "source_openr1_id": 10511,
       "source_split": "train",
       "inferred_condition": "prolonged grief disorder",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_066": {
-      "plan": "Therapy: considering the earlier incident, there might be unresolved feelings from that event affecting their current interactions Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 8106,
+    "ctrl_c_044": {
+      "plan": "Therapy: consider practical steps without overwhelming her Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8077,
       "source_split": "train",
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_067": {
+    "ctrl_c_045": {
       "plan": "Therapy: suggest focusing on the present and small, manageable actions Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
       "source_openr1_id": 11609,
       "source_split": "train",
@@ -555,27 +379,203 @@
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_068": {
-      "plan": "Follow-up: tracking when the heaviness comes, to help them identify patterns Case anchors: Problem: somatic symptom disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 13117,
-      "source_split": "train",
-      "inferred_condition": "somatic symptom disorder",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_069": {
-      "plan": "Okay, the user is in a really dark place right now, talking about unbearable pain and suicidal thoughts. First, I need to validate their feelings without using any clinical terms. Let them know they're heard Case anchors: Problem: suicidal crisis; persistent low mood. Constraints/Meds: none noted.",
-      "source_openr1_id": 11956,
+    "ctrl_c_046": {
+      "plan": "Okay, let's see. The user is feeling really isolated and rejected by friends, which is leading to thoughts of not deserving to be here. That's serious Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10975,
       "source_split": "train",
       "inferred_condition": "suicidal crisis",
       "plan_components": [],
       "plan_component_evidence": {}
     },
-    "ctrl_c_070": {
-      "plan": "Okay, the client is feeling really small and invisible in their relationship. They’re hurt because their efforts aren’t being recognized, and they feel brushed off. I need to validate their feelings without using any clinical terms Case anchors: Problem: borderline personality disorder. Constraints/Meds: none noted.",
-      "source_openr1_id": 12677,
+    "ctrl_c_047": {
+      "plan": "Therapy: Start with validating their insight, then suggest small steps like active listening and collaborative rule-setting Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8088,
       "source_split": "train",
-      "inferred_condition": "borderline personality disorder",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_048": {
+      "plan": "Okay, the client is feeling discouraged because their progress has taken a downturn. They were doing better for a few weeks but now feel back to square one with heaviness and numbness. They're exhausted from the cycle Case anchors: Problem: major depressive disorder; persistent low mood; means. Constraints/Meds: none noted.",
+      "source_openr1_id": 10845,
+      "source_split": "train",
+      "inferred_condition": "major depressive disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_049": {
+      "plan": "Therapy: suggest exploring thoughts and reactions Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8664,
+      "source_split": "train",
+      "inferred_condition": "obsessive-compulsive disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_050": {
+      "plan": "Therapy: Start with empathy, validate the child's experience, explain that their reactions were protective, address the internalized messages, and suggest exploring how these past experiences influence current self-view, offering Case anchors: Problem: post-traumatic stress disorder; auditory hallucinations. Constraints/Meds: none noted.",
+      "source_openr1_id": 10805,
+      "source_split": "train",
+      "inferred_condition": "post-traumatic stress disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_051": {
+      "plan": "Therapy: Suggest exploring what hasn't worked in therapy yet, but without pushing Case anchors: Problem: prolonged grief disorder; persistent low mood. Constraints/Meds: none noted.",
+      "source_openr1_id": 10554,
+      "source_split": "train",
+      "inferred_condition": "prolonged grief disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_052": {
+      "plan": "Therapy: Considering therapeutic approaches, a humanistic approach focusing on self-actualization and worth might help Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8080,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_053": {
+      "plan": "Okay, let's start by really tuning into what the client is saying. They're expressing deep despair, feeling like every day is a struggle, and mentioning thoughts of ending their life. The pain they're describing is intense, and they're using self-harm as a coping mechanism Case anchors: Problem: self-harm; persistent low mood; self-harm risk; cutting. Constraints/Meds: none noted.",
+      "source_openr1_id": 11722,
+      "source_split": "train",
+      "inferred_condition": "self-harm",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_054": {
+      "plan": "Okay, the client is expressing deep feelings of emptiness and hopelessness after 35 years of trying various treatments without success. They mention thinking others would be better off without them, which signals significant distress and possible suicidal ideation. First, I need to validate their feelings without using clinical terms Case anchors: Problem: suicidal crisis; persistent low mood. Constraints/Meds: none noted.",
+      "source_openr1_id": 11017,
+      "source_split": "train",
+      "inferred_condition": "suicidal crisis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_055": {
+      "plan": "Therapy: considering changes that impact your stability and future Case anchors: Problem: generalized anxiety disorder; suicide. Constraints/Meds: none noted.",
+      "source_openr1_id": 8100,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_056": {
+      "plan": "Therapy: Suggest exploring what truly matters to them now, perhaps through reflection or small meaningful actions Case anchors: Problem: major depressive disorder; persistent low mood. Constraints/Meds: none noted.",
+      "source_openr1_id": 10861,
+      "source_split": "train",
+      "inferred_condition": "major depressive disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_057": {
+      "plan": "Therapy: considering attachment theory, their fear of abandonment might be affecting their interactions Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8698,
+      "source_split": "train",
+      "inferred_condition": "obsessive-compulsive disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_058": {
+      "plan": "Therapy: considering their fear of losing control, framing their mind's reaction as a protective mechanism could help Case anchors: Problem: post-traumatic stress disorder; panic attacks; prolonged grief. Constraints/Meds: none noted.",
+      "source_openr1_id": 10836,
+      "source_split": "train",
+      "inferred_condition": "post-traumatic stress disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_059": {
+      "plan": "Okay, the client is talking about feeling overwhelmed at a party and mentions feeling \"dead because of him.\" Not literally, but part of her shut down. She didn't drink because she doesn't trust herself or others anymore. First, I need to validate her feelings without using clinical terms Case anchors: Problem: prolonged grief disorder; risk. Constraints/Meds: none noted.",
+      "source_openr1_id": 10562,
+      "source_split": "train",
+      "inferred_condition": "prolonged grief disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_060": {
+      "plan": "Therapy: suggest exploring how these roles made them feel as a child and how that impacts them now Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8081,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_061": {
+      "plan": "Okay, the client is really struggling with self-harm again. They feel ashamed and stuck between wanting to change and fearing to let go of their coping mechanism. First, I need to validate their feelings without judgment Case anchors: Problem: self-harm; cutting. Constraints/Meds: none noted.",
+      "source_openr1_id": 11810,
+      "source_split": "train",
+      "inferred_condition": "self-harm",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_062": {
+      "plan": "Okay, the client is feeling lost after their business collapsed. They mention debt, shame, and considering ending things as an escape, but now they're confused in the hospital. They're questioning their actions and their current existence Case anchors: Problem: suicidal crisis; plan. Constraints/Meds: none noted.",
+      "source_openr1_id": 11071,
+      "source_split": "train",
+      "inferred_condition": "suicidal crisis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_063": {
+      "plan": "Therapy: suggesting a conversation or shared activity to foster connection Case anchors: Problem: generalized anxiety disorder; means; risk. Constraints/Meds: none noted.",
+      "source_openr1_id": 8104,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_064": {
+      "plan": "Therapy: suggest practical steps but in a gentle way Case anchors: Problem: major depressive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10955,
+      "source_split": "train",
+      "inferred_condition": "major depressive disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_065": {
+      "plan": "Therapy: considering therapeutic approaches, CBT could help by addressing thoughts and behaviors, but I shouldn't name it. Follow-up: track that to feel more in control Case anchors: Problem: obsessive-compulsive disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 8705,
+      "source_split": "train",
+      "inferred_condition": "obsessive-compulsive disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_066": {
+      "plan": "Therapy: suggest looking at patterns in their interactions to find healthier ways to assert their emotions without self-blame Case anchors: Problem: post-traumatic stress disorder; means. Constraints/Meds: none noted.",
+      "source_openr1_id": 10843,
+      "source_split": "train",
+      "inferred_condition": "post-traumatic stress disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_067": {
+      "plan": "Okay, the client is feeling stuck because his girlfriend has depression and his efforts aren't helping. He's exhausted and scared he's failing her. First, I need to validate his feelings Case anchors: Problem: prolonged grief disorder; means; suicidal. Constraints/Meds: none noted.",
+      "source_openr1_id": 10580,
+      "source_split": "train",
+      "inferred_condition": "prolonged grief disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_068": {
+      "plan": "Therapy: considering the earlier incident, there might be unresolved feelings from that event affecting their current interactions Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8106,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_069": {
+      "plan": "Okay, the client is feeling stuck between their mom's demands and their own anger and guilt. They mention feeling unseen, just valued for what they can do. There's also a heavy sense of guilt and even a wish to disappear Case anchors: Problem: self-harm. Constraints/Meds: none noted.",
+      "source_openr1_id": 11881,
+      "source_split": "train",
+      "inferred_condition": "self-harm",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_070": {
+      "plan": "Okay, the client is in a lot of emotional pain and feels hopeless, even considering ending their life. First, I need to validate their feelings without judgment. Let them know they're heard and that their pain is real Case anchors: Problem: suicidal crisis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11143,
+      "source_split": "train",
+      "inferred_condition": "suicidal crisis",
       "plan_components": [],
       "plan_component_evidence": {}
     }

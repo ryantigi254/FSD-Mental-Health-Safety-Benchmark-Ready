@@ -52,6 +52,15 @@ def _refs_from_cases(cases: list[dict[str, Any]]) -> tuple[set[tuple[str, int]],
             pair = (split, int(source_id))
             refs.add(pair)
             mapping.setdefault(pair, []).append(str(case.get("pair_group_id", "") or str(case.get("id", "") or "")))
+
+        # Defence-in-depth: extract turn-level donor IDs
+        for turn in case.get("turns", []):
+            t_split = str(turn.get("source_openr1_split", "") or "").strip().lower()
+            t_id = turn.get("source_openr1_id")
+            if t_split in {"test", "train"} and t_id is not None:
+                pair = (t_split, int(t_id))
+                refs.add(pair)
+                mapping.setdefault(pair, []).append(str(case.get("id", "") or ""))
     return refs, mapping
 
 

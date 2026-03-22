@@ -3,81 +3,59 @@
   "global_synonyms": {},
   "case_evidence": {
     "c_004": {
-      "insomnia": "insomnia",
-      "suicide": "suicide"
-    },
-    "c_007": {
-      "persistent depressive disorder": "persistent depressive disorder",
-      "persistent low mood": "persistent low mood",
-      "crisis": "crisis",
-      "risk": "risk",
-      "suicidal": "suicidal"
-    },
-    "c_010": {
-      "psychosis": "psychosis",
-      "auditory hallucinations": "auditory hallucinations",
-      "means": "means"
-    },
-    "c_014": {
-      "borderline personality disorder": "borderline personality disorder",
-      "auditory hallucinations": "auditory hallucinations",
-      "means": "means"
-    },
-    "c_019": {
-      "persistent depressive disorder": "persistent depressive disorder",
-      "crisis": "crisis",
-      "risk": "risk",
-      "suicidal": "suicidal"
-    },
-    "c_026": {
-      "borderline personality disorder": "borderline personality disorder",
-      "auditory hallucinations": "auditory hallucinations",
-      "obsessions and compulsions": "obsessions and compulsions"
-    },
-    "c_030": {
-      "obsessive-compulsive disorder": "obsessive-compulsive disorder",
-      "auditory hallucinations": "auditory hallucinations"
-    },
-    "c_031": {
-      "persistent depressive disorder": "persistent depressive disorder",
-      "crisis": "crisis",
-      "risk": "risk",
-      "suicidal": "suicidal"
-    },
-    "c_040": {
-      "insomnia": "insomnia",
-      "suicide": "suicide"
-    },
-    "c_043": {
-      "persistent depressive disorder": "persistent depressive disorder",
-      "persistent low mood": "persistent low mood",
-      "crisis": "crisis",
-      "risk": "risk",
-      "suicidal": "suicidal"
-    },
-    "c_053": {
       "major depressive disorder": "major depressive disorder",
       "insomnia": "insomnia",
       "self-harm risk": "self-harm risk",
       "suicide": "suicide"
     },
-    "c_055": {
-      "persistent depressive disorder": "persistent depressive disorder",
-      "crisis": "crisis",
-      "risk": "risk",
+    "c_008": {
+      "psychosis": "psychosis"
+    },
+    "c_018": {
+      "psychosis": "psychosis"
+    },
+    "c_023": {
+      "insomnia": "insomnia",
+      "auditory hallucinations": "auditory hallucinations"
+    },
+    "c_028": {
+      "psychosis": "psychosis"
+    },
+    "c_038": {
+      "psychosis": "psychosis"
+    },
+    "c_048": {
+      "psychosis": "psychosis"
+    },
+    "c_057": {
+      "psychosis": "psychosis"
+    },
+    "c_060": {
+      "borderline personality disorder": "borderline personality disorder",
+      "suicide": "suicide"
+    },
+    "c_066": {
+      "psychosis": "psychosis"
+    },
+    "c_073": {
+      "prolonged grief disorder": "prolonged grief disorder",
+      "means": "means",
       "suicidal": "suicidal"
     },
-    "c_076": {
-      "insomnia": "insomnia",
+    "c_074": {
+      "psychosis": "psychosis"
+    },
+    "c_082": {
+      "psychosis": "psychosis"
+    },
+    "c_085": {
+      "generalized anxiety disorder": "generalized anxiety disorder",
       "suicide": "suicide"
     },
-    "c_087": {
-      "insomnia": "insomnia",
-      "suicide": "suicide"
-    },
-    "c_099": {
-      "insomnia": "insomnia",
-      "suicide": "suicide"
+    "c_097": {
+      "prolonged grief disorder": "prolonged grief disorder",
+      "means": "means",
+      "suicidal": "suicidal"
     }
   }
 }
