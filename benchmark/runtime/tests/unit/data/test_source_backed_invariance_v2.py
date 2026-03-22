@@ -9,15 +9,15 @@ import pytest
 
 
 BASE_DIR = Path(__file__).resolve().parents[3]
-V5_ROOT = BASE_DIR / "data" / "frozen_splits" / "v5_invariance_samples"
-V5_ROOT_V2 = BASE_DIR / "data" / "frozen_splits" / "v5_invariance_samples_v2"
+V5_ROOT = BASE_DIR / "data" / "invariance" / "misc" / "v5_invariance_samples"
+V5_ROOT_V2 = BASE_DIR / "data" / "invariance" / "misc" / "v5_invariance_samples_v2"
 V6_PARENT = BASE_DIR / "data" / "frozen_splits" / "v6"
 
-CTRL_BASE = BASE_DIR / "data" / "invariance_variants" / "variant_family" / "base"
-CTRL_BASE_V2 = BASE_DIR / "data" / "invariance_variants" / "variant_family" / "base_v2"
-CTRL_PARENT_V2 = BASE_DIR / "data" / "controllability_splits_large_resolved_v2"
-CTRL_SAMPLE_V2 = BASE_DIR / "data" / "controllability_splits_large_resolved_invariance_samples_v2"
-VARIANT_FAMILY_V2 = BASE_DIR / "data" / "invariance_variants" / "variant_family_v2"
+CTRL_BASE = BASE_DIR / "data" / "invariance" / "misc" / "invariance_variants" / "variant_family" / "base"
+CTRL_BASE_V2 = BASE_DIR / "data" / "invariance" / "misc" / "invariance_variants" / "variant_family" / "base_v2"
+CTRL_PARENT_V2 = BASE_DIR / "data" / "invariance" / "misc" / "controllability_splits_large_resolved_invariance_samples_v2"
+CTRL_SAMPLE_V2 = BASE_DIR / "data" / "invariance" / "misc" / "controllability_splits_large_resolved_invariance_samples_v2"
+VARIANT_FAMILY_V2 = BASE_DIR / "data" / "invariance" / "misc" / "invariance_variants" / "variant_family_v2"
 
 
 def _read_json(path: Path):
