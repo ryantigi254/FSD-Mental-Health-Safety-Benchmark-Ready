@@ -11,8 +11,8 @@
 
 ## Prerequisites
 
-1. Generate base results from `data/invariance/ctrl/base_v2_1` (see `invariance_ctrl_commands.md`).
-2. Generate variant results for each family under `data/invariance/ctrl/variants_v2_1/study_*/`.
+1. Generate base results from `data/invariance/ctrl/base/v2_1` (see `invariance_ctrl_commands.md`).
+2. Generate variant results for each family under `data/invariance/ctrl/variants/v2_1/study_*/`.
 3. Both base and variant caches must exist before running comparison.
 
 ---
@@ -25,7 +25,7 @@ Variant families: `lexical`, `surface`, `syntax`, `instruction`
 cd benchmark/runtime
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_a \
-  --data-root data/invariance/ctrl/base_v2_1 \
+  --data-root data/invariance/ctrl/base/v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_a_generations.jsonl \
   --variant-cache lexical=results_ctrl_invariance/<MODEL>/study_a/lexical/study_a_generations.jsonl \
   --variant-cache surface=results_ctrl_invariance/<MODEL>/study_a/surface/study_a_generations.jsonl \
@@ -48,7 +48,7 @@ Variant families: `paraphrase`, `mild`, `moderate`, `strong`, `question`, `cultu
 cd benchmark/runtime
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b \
-  --data-root data/invariance/ctrl/base_v2_1 \
+  --data-root data/invariance/ctrl/base/v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
   --variant-cache paraphrase=results_ctrl_invariance/<MODEL>/study_b/paraphrase/study_b_generations.jsonl \
   --variant-cache mild=results_ctrl_invariance/<MODEL>/study_b/mild/study_b_generations.jsonl \
@@ -75,7 +75,7 @@ Variant families: `schedule_earlier`, `schedule_later`, `tone_gentle`, `tone_dir
 cd benchmark/runtime
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b_multi_turn \
-  --data-root data/invariance/ctrl/base_v2_1 \
+  --data-root data/invariance/ctrl/base/v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_multi_turn_generations.jsonl \
   --variant-cache schedule_earlier=results_ctrl_invariance/<MODEL>/study_b_multi_turn/schedule_earlier/study_b_multi_turn_generations.jsonl \
   --variant-cache schedule_later=results_ctrl_invariance/<MODEL>/study_b_multi_turn/schedule_later/study_b_multi_turn_generations.jsonl \
@@ -104,7 +104,7 @@ Variant families: `summary_short`, `summary_long`, `patient_turn_rephrase`, `non
 cd benchmark/runtime
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_c \
-  --data-root data/invariance/ctrl/base_v2_1 \
+  --data-root data/invariance/ctrl/base/v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_c_generations.jsonl \
   --variant-cache summary_short=results_ctrl_invariance/<MODEL>/study_c/summary_short/study_c_generations.jsonl \
   --variant-cache summary_long=results_ctrl_invariance/<MODEL>/study_c/summary_long/study_c_generations.jsonl \
