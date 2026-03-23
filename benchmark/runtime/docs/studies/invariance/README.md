@@ -68,6 +68,15 @@ That note covers:
 - the automatic `base` and `variant-family` save roots under `results_invariance/`
 - running the paired comparison scripts afterward
 
+Controllability-backed invariance commands live in:
+
+- `docs/studies/invariance/ctrl_invariance_commands.md`
+- `docs/studies/invariance/study_a/study_a_ctrl_invariance_commands.md`
+- `docs/studies/invariance/study_a/study_a_bias_ctrl_invariance_commands.md`
+- `docs/studies/invariance/study_b/study_b_ctrl_invariance_commands.md`
+- `docs/studies/invariance/study_b/study_b_multi_turn_ctrl_invariance_commands.md`
+- `docs/studies/invariance/study_c/study_c_ctrl_invariance_commands.md`
+
 Canonical direct runner:
 
 - `hf-local-scripts/run_invariance_generate_only.py`
