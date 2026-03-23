@@ -21,7 +21,7 @@ so the runner still reads `study_a_test.json` plus the normal gold-label files.
 
 ## Sampled roots
 
-- `data/invariance/v5_samples_v2_1`
+- `data/invariance/v5_base_v2_1`
 - `data/invariance/v5_variants_v2_1/base`
 
 Default budgets:

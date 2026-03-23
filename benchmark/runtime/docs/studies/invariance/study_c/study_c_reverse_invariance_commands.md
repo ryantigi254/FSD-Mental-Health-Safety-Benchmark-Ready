@@ -18,7 +18,7 @@
 cd benchmark/runtime
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_c \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_c_generations.jsonl \
   --variant-cache summary_short=results_ctrl_invariance/<MODEL>/study_c/summary_short/study_c_generations.jsonl \
   --variant-cache summary_long=results_ctrl_invariance/<MODEL>/study_c/summary_long/study_c_generations.jsonl \
@@ -37,7 +37,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Summary Short
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_c \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_c_generations.jsonl \
   --variant-cache summary_short=results_ctrl_invariance/<MODEL>/study_c/summary_short/study_c_generations.jsonl \
   --variant-type summary_short=summary \
@@ -46,7 +46,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Summary Long
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_c \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_c_generations.jsonl \
   --variant-cache summary_long=results_ctrl_invariance/<MODEL>/study_c/summary_long/study_c_generations.jsonl \
   --variant-type summary_long=summary \
@@ -55,7 +55,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Patient Turn Rephrase
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_c \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_c_generations.jsonl \
   --variant-cache patient_turn_rephrase=results_ctrl_invariance/<MODEL>/study_c/patient_turn_rephrase/study_c_generations.jsonl \
   --variant-type patient_turn_rephrase=paraphrase \
@@ -64,7 +64,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Noncritical Reorder
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_c \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_c_generations.jsonl \
   --variant-cache noncritical_reorder=results_ctrl_invariance/<MODEL>/study_c/noncritical_reorder/study_c_generations.jsonl \
   --variant-type noncritical_reorder=reorder \

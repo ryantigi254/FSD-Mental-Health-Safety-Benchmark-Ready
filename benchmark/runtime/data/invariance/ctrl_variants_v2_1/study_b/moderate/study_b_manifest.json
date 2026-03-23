@@ -1,0 +1,4167 @@
+{
+  "study": "study_b",
+  "seed": 42,
+  "sample_size": 150,
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability/large_v2_1",
+  "source_profile": "controllability",
+  "sampling_unit": "row",
+  "sampling_role": "diagnostic_subset",
+  "sampling_basis": "Heuristic first-pass robustness budget over the frozen clinician-ready split; not a benchmark-mandated percentage threshold.",
+  "coverage_axes": [
+    "persona",
+    "risk",
+    "age_bucket",
+    "condition"
+  ],
+  "stratification_keys": [
+    "persona",
+    "risk",
+    "age_bucket",
+    "condition",
+    "severity"
+  ],
+  "variant_defaults": [
+    "incorrect_opinion_rewording",
+    "opinion_intensity",
+    "assertion_vs_question"
+  ],
+  "available_counts": {
+    "persona": {
+      "openr1_train_7145": 1,
+      "openr1_train_14448": 1,
+      "openr1_train_16503": 1,
+      "openr1_train_15436": 1,
+      "openr1_train_13528": 1,
+      "openr1_train_8469": 1,
+      "openr1_train_7267": 1,
+      "openr1_train_14535": 1,
+      "openr1_train_16551": 1,
+      "openr1_train_15459": 1,
+      "openr1_train_13548": 1,
+      "openr1_train_8477": 1,
+      "openr1_train_7269": 1,
+      "openr1_train_14624": 1,
+      "openr1_train_16562": 1,
+      "openr1_train_15466": 1,
+      "openr1_train_13629": 1,
+      "openr1_train_8483": 1,
+      "openr1_train_7318": 1,
+      "openr1_train_14631": 1,
+      "openr1_train_16620": 1,
+      "openr1_train_15473": 1,
+      "openr1_train_13639": 1,
+      "openr1_train_8490": 1,
+      "openr1_train_7372": 1,
+      "openr1_train_14660": 1,
+      "openr1_train_16740": 1,
+      "openr1_train_15492": 1,
+      "openr1_train_13723": 1,
+      "openr1_train_8493": 1,
+      "openr1_train_7387": 1,
+      "openr1_train_14672": 1,
+      "openr1_train_16769": 1,
+      "openr1_train_15568": 1,
+      "openr1_train_13748": 1,
+      "openr1_train_8501": 1,
+      "openr1_train_7411": 1,
+      "openr1_train_14680": 1,
+      "openr1_train_16855": 1,
+      "openr1_train_15577": 1,
+      "openr1_train_13775": 1,
+      "openr1_train_8515": 1,
+      "openr1_train_7417": 1,
+      "openr1_train_14703": 1,
+      "openr1_train_16876": 1,
+      "openr1_train_15761": 1,
+      "openr1_train_13845": 1,
+      "openr1_train_8530": 1,
+      "openr1_train_7431": 1,
+      "openr1_train_14711": 1,
+      "openr1_train_16891": 1,
+      "openr1_train_15791": 1,
+      "openr1_train_13888": 1,
+      "openr1_train_8532": 1,
+      "openr1_train_7446": 1,
+      "openr1_train_14804": 1,
+      "openr1_train_16926": 1,
+      "openr1_train_15794": 1,
+      "openr1_train_13947": 1,
+      "openr1_train_8537": 1,
+      "openr1_train_7561": 1,
+      "openr1_train_14853": 1,
+      "openr1_train_16972": 1,
+      "openr1_train_15842": 1,
+      "openr1_train_13984": 1,
+      "openr1_train_8541": 1,
+      "openr1_train_7597": 1,
+      "openr1_train_14857": 1,
+      "openr1_train_17119": 1,
+      "openr1_train_15849": 1,
+      "openr1_train_13985": 1,
+      "openr1_train_8564": 1,
+      "openr1_train_7707": 1,
+      "openr1_train_14870": 1,
+      "openr1_train_17127": 1,
+      "openr1_train_15900": 1,
+      "openr1_train_14035": 1,
+      "openr1_train_8565": 1,
+      "openr1_train_7804": 1,
+      "openr1_train_14874": 1,
+      "openr1_train_17128": 1,
+      "openr1_train_15941": 1,
+      "openr1_train_14070": 1,
+      "openr1_train_8566": 1,
+      "openr1_train_7898": 1,
+      "openr1_train_14879": 1,
+      "openr1_train_17154": 1,
+      "openr1_train_15950": 1,
+      "openr1_train_14082": 1,
+      "openr1_train_8567": 1,
+      "openr1_train_7903": 1,
+      "openr1_train_14881": 1,
+      "openr1_train_17172": 1,
+      "openr1_train_15953": 1,
+      "openr1_train_14094": 1,
+      "openr1_train_8571": 1,
+      "openr1_train_7909": 1,
+      "openr1_train_14906": 1,
+      "openr1_train_17193": 1,
+      "openr1_train_15960": 1,
+      "openr1_train_14102": 1,
+      "openr1_train_8572": 1,
+      "openr1_train_7971": 1,
+      "openr1_train_14918": 1,
+      "openr1_train_17196": 1,
+      "openr1_train_15991": 1,
+      "openr1_train_14122": 1,
+      "openr1_train_8592": 1,
+      "openr1_train_7984": 1,
+      "openr1_train_15015": 1,
+      "openr1_train_17201": 1,
+      "openr1_train_16030": 1,
+      "openr1_train_14126": 1,
+      "openr1_train_8609": 1,
+      "openr1_train_8124": 1,
+      "openr1_train_15022": 1,
+      "openr1_train_17234": 1,
+      "openr1_train_16060": 1,
+      "openr1_train_14132": 1,
+      "openr1_train_8617": 1,
+      "openr1_train_8125": 1,
+      "openr1_train_15057": 1,
+      "openr1_train_17271": 1,
+      "openr1_train_16066": 1,
+      "openr1_train_14151": 1,
+      "openr1_train_8620": 1,
+      "openr1_train_8128": 1,
+      "openr1_train_15059": 1,
+      "openr1_train_17288": 1,
+      "openr1_train_16127": 1,
+      "openr1_train_14182": 1,
+      "openr1_train_8634": 1,
+      "openr1_train_8129": 1,
+      "openr1_train_15073": 1,
+      "openr1_train_17295": 1,
+      "openr1_train_16138": 1,
+      "openr1_train_14201": 1,
+      "openr1_train_8652": 1,
+      "openr1_train_8140": 1,
+      "openr1_train_15100": 1,
+      "openr1_train_17347": 1,
+      "openr1_train_16147": 1,
+      "openr1_train_14204": 1,
+      "openr1_train_8665": 1,
+      "openr1_train_8159": 1,
+      "openr1_train_15148": 1,
+      "openr1_train_17380": 1,
+      "openr1_train_16332": 1,
+      "openr1_train_14215": 1,
+      "openr1_train_8677": 1,
+      "openr1_train_8179": 1,
+      "openr1_train_15185": 1,
+      "openr1_train_17418": 1,
+      "openr1_train_16346": 1,
+      "openr1_train_14256": 1,
+      "openr1_train_8681": 1,
+      "openr1_train_8213": 1,
+      "openr1_train_15194": 1,
+      "openr1_train_17430": 1,
+      "openr1_train_16388": 1,
+      "openr1_train_14304": 1,
+      "openr1_train_8702": 1,
+      "openr1_train_8214": 1,
+      "openr1_train_15201": 1,
+      "openr1_train_17495": 1,
+      "openr1_train_16395": 1,
+      "openr1_train_14325": 1,
+      "openr1_train_8708": 1,
+      "openr1_train_8223": 1,
+      "openr1_train_15259": 1,
+      "openr1_train_17553": 1,
+      "openr1_train_16424": 1,
+      "openr1_train_14336": 1,
+      "openr1_train_8714": 1,
+      "openr1_train_8225": 1,
+      "openr1_train_15278": 1,
+      "openr1_train_17575": 1,
+      "openr1_train_16470": 1,
+      "openr1_train_14347": 1,
+      "openr1_train_8715": 1,
+      "openr1_train_8230": 1,
+      "openr1_train_15300": 1,
+      "openr1_train_17589": 1,
+      "openr1_train_16475": 1,
+      "openr1_train_14365": 1,
+      "openr1_train_8724": 1,
+      "openr1_train_8234": 1,
+      "openr1_train_15339": 1,
+      "openr1_train_17597": 1,
+      "openr1_train_16513": 1,
+      "openr1_train_14396": 1,
+      "openr1_train_8727": 1,
+      "openr1_train_8239": 1,
+      "openr1_train_15340": 1,
+      "openr1_train_17793": 1,
+      "openr1_train_16678": 1,
+      "openr1_train_14404": 1,
+      "openr1_train_8761": 1,
+      "openr1_train_8245": 1,
+      "openr1_train_15370": 1,
+      "openr1_train_17825": 1,
+      "openr1_train_16698": 1,
+      "openr1_train_14555": 1,
+      "openr1_train_8775": 1,
+      "openr1_train_8254": 1,
+      "openr1_train_15382": 1,
+      "openr1_train_17826": 1,
+      "openr1_train_16717": 1,
+      "openr1_train_14562": 1,
+      "openr1_train_8805": 1,
+      "openr1_train_8260": 1,
+      "openr1_train_15388": 1,
+      "openr1_train_17829": 1,
+      "openr1_train_16758": 1,
+      "openr1_train_14570": 1,
+      "openr1_train_8813": 1,
+      "openr1_train_8295": 1,
+      "openr1_train_15395": 1,
+      "openr1_train_17836": 1,
+      "openr1_train_16843": 1,
+      "openr1_train_14605": 1,
+      "openr1_train_8817": 1,
+      "openr1_train_8298": 1,
+      "openr1_train_15397": 1,
+      "openr1_train_17867": 1,
+      "openr1_train_16899": 1,
+      "openr1_train_14618": 1,
+      "openr1_train_8818": 1,
+      "openr1_train_8308": 1,
+      "openr1_train_15417": 1,
+      "openr1_train_17995": 1,
+      "openr1_train_16910": 1,
+      "openr1_train_14639": 1,
+      "openr1_train_8823": 1,
+      "openr1_train_8329": 1,
+      "openr1_train_15424": 1,
+      "openr1_train_18020": 1,
+      "openr1_train_16932": 1,
+      "openr1_train_14652": 1,
+      "openr1_train_8832": 1,
+      "openr1_train_8330": 1,
+      "openr1_train_15428": 1,
+      "openr1_train_18105": 1,
+      "openr1_train_16975": 1,
+      "openr1_train_14686": 1,
+      "openr1_train_8835": 1,
+      "openr1_train_8339": 1,
+      "openr1_train_15435": 1,
+      "openr1_train_18134": 1,
+      "openr1_train_16998": 1,
+      "openr1_train_14721": 1,
+      "openr1_train_8836": 1,
+      "openr1_train_8365": 1,
+      "openr1_train_15437": 1,
+      "openr1_train_18151": 1,
+      "openr1_train_17055": 1,
+      "openr1_train_14767": 1,
+      "openr1_train_8838": 1,
+      "openr1_train_8386": 1,
+      "openr1_train_15472": 1,
+      "openr1_train_18213": 1,
+      "openr1_train_17063": 1,
+      "openr1_train_14797": 1,
+      "openr1_train_8847": 1,
+      "openr1_train_8387": 1,
+      "openr1_train_15617": 1,
+      "openr1_train_18253": 1,
+      "openr1_train_17107": 1,
+      "openr1_train_14861": 1,
+      "openr1_train_8850": 1,
+      "openr1_train_8392": 1,
+      "openr1_train_15620": 1,
+      "openr1_train_18313": 1,
+      "openr1_train_17114": 1,
+      "openr1_train_14914": 1,
+      "openr1_train_8863": 1,
+      "openr1_train_8397": 1,
+      "openr1_train_15655": 1,
+      "openr1_train_18346": 1,
+      "openr1_train_17179": 1,
+      "openr1_train_14960": 1,
+      "openr1_train_8881": 1,
+      "openr1_train_8418": 1,
+      "openr1_train_15702": 1,
+      "openr1_train_18483": 1,
+      "openr1_train_17235": 1,
+      "openr1_train_15084": 1,
+      "openr1_train_8885": 1,
+      "openr1_train_8452": 1,
+      "openr1_train_15728": 1,
+      "openr1_train_18486": 1,
+      "openr1_train_17290": 1,
+      "openr1_train_15158": 1,
+      "openr1_train_8909": 1,
+      "openr1_train_8453": 1,
+      "openr1_train_15734": 1,
+      "openr1_train_18563": 1,
+      "openr1_train_17307": 1,
+      "openr1_train_15159": 1,
+      "openr1_train_8910": 1,
+      "openr1_train_8465": 1,
+      "openr1_train_15753": 1,
+      "openr1_train_18573": 1,
+      "openr1_train_17353": 1,
+      "openr1_train_15160": 1,
+      "openr1_train_8920": 1,
+      "openr1_train_8472": 1,
+      "openr1_train_15811": 1,
+      "openr1_train_18667": 1,
+      "openr1_train_17393": 1,
+      "openr1_train_15202": 1,
+      "openr1_train_8950": 1,
+      "openr1_train_8474": 1,
+      "openr1_train_15834": 1,
+      "openr1_train_18688": 1,
+      "openr1_train_17407": 1,
+      "openr1_train_15255": 1,
+      "openr1_train_8956": 1,
+      "openr1_train_8475": 1,
+      "openr1_train_15873": 1,
+      "openr1_train_18764": 1,
+      "openr1_train_17444": 1,
+      "openr1_train_15295": 1,
+      "openr1_train_8976": 1,
+      "openr1_train_8491": 1,
+      "openr1_train_15892": 1,
+      "openr1_train_17464": 1,
+      "openr1_train_15326": 1,
+      "openr1_train_8979": 1,
+      "openr1_train_8508": 1,
+      "openr1_train_15927": 1,
+      "openr1_train_17476": 1,
+      "openr1_train_15343": 1,
+      "openr1_train_8980": 1,
+      "openr1_train_8520": 1,
+      "openr1_train_15939": 1,
+      "openr1_train_17556": 1,
+      "openr1_train_15357": 1,
+      "openr1_train_9000": 1,
+      "openr1_train_8533": 1,
+      "openr1_train_16018": 1,
+      "openr1_train_17610": 1,
+      "openr1_train_15362": 1,
+      "openr1_train_9003": 1,
+      "openr1_train_8554": 1,
+      "openr1_train_16028": 1,
+      "openr1_train_17622": 1,
+      "openr1_train_15469": 1,
+      "openr1_train_9005": 1,
+      "openr1_train_8583": 1,
+      "openr1_train_16043": 1,
+      "openr1_train_17624": 1,
+      "openr1_train_15542": 1,
+      "openr1_train_9024": 1,
+      "openr1_train_8596": 1,
+      "openr1_train_16062": 1,
+      "openr1_train_17643": 1,
+      "openr1_train_15608": 1,
+      "openr1_train_9045": 1,
+      "openr1_train_8602": 1,
+      "openr1_train_16070": 1,
+      "openr1_train_17662": 1,
+      "openr1_train_15611": 1,
+      "openr1_train_9054": 1,
+      "openr1_train_8612": 1,
+      "openr1_train_16090": 1,
+      "openr1_train_17663": 1,
+      "openr1_train_15637": 1,
+      "openr1_train_9056": 1,
+      "openr1_train_8627": 1,
+      "openr1_train_16097": 1,
+      "openr1_train_17838": 1,
+      "openr1_train_15663": 1,
+      "openr1_train_9066": 1,
+      "openr1_train_8631": 1,
+      "openr1_train_16100": 1,
+      "openr1_train_17891": 1,
+      "openr1_train_15718": 1,
+      "openr1_train_9097": 1,
+      "openr1_train_8659": 1,
+      "openr1_train_16143": 1,
+      "openr1_train_17925": 1,
+      "openr1_train_15738": 1,
+      "openr1_train_9104": 1,
+      "openr1_train_8670": 1,
+      "openr1_train_16163": 1,
+      "openr1_train_18011": 1,
+      "openr1_train_15885": 1,
+      "openr1_train_9114": 1,
+      "openr1_train_8673": 1,
+      "openr1_train_16179": 1,
+      "openr1_train_18055": 1,
+      "openr1_train_15893": 1,
+      "openr1_train_9130": 1,
+      "openr1_train_8676": 1,
+      "openr1_train_16181": 1,
+      "openr1_train_18109": 1,
+      "openr1_train_15945": 1,
+      "openr1_train_9142": 1,
+      "openr1_train_8689": 1,
+      "openr1_train_16282": 1,
+      "openr1_train_18176": 1,
+      "openr1_train_15959": 1,
+      "openr1_train_9145": 1,
+      "openr1_train_8703": 1,
+      "openr1_train_16300": 1,
+      "openr1_train_18189": 1,
+      "openr1_train_15962": 1,
+      "openr1_train_9148": 1,
+      "openr1_train_8743": 1,
+      "openr1_train_16320": 1,
+      "openr1_train_18397": 1,
+      "openr1_train_15975": 1,
+      "openr1_train_9155": 1,
+      "openr1_train_8759": 1,
+      "openr1_train_16339": 1,
+      "openr1_train_18440": 1,
+      "openr1_train_16006": 1,
+      "openr1_train_9158": 1,
+      "openr1_train_8769": 1,
+      "openr1_train_16344": 1,
+      "openr1_train_18465": 1,
+      "openr1_train_16056": 1,
+      "openr1_train_9171": 1,
+      "openr1_train_8816": 1,
+      "openr1_train_16367": 1,
+      "openr1_train_18492": 1,
+      "openr1_train_16071": 1,
+      "openr1_train_9176": 1,
+      "openr1_train_8820": 1,
+      "openr1_train_16373": 1,
+      "openr1_train_18612": 1,
+      "openr1_train_16092": 1,
+      "openr1_train_9177": 1,
+      "openr1_train_8845": 1,
+      "openr1_train_16385": 1,
+      "openr1_train_18632": 1,
+      "openr1_train_16104": 1,
+      "openr1_train_9181": 1,
+      "openr1_train_8852": 1,
+      "openr1_train_16392": 1,
+      "openr1_train_18634": 1,
+      "openr1_train_16115": 1,
+      "openr1_train_9198": 1,
+      "openr1_train_8897": 1,
+      "openr1_train_16437": 1,
+      "openr1_train_18706": 1,
+      "openr1_train_16140": 1,
+      "openr1_train_9203": 1,
+      "openr1_train_8907": 1,
+      "openr1_train_16457": 1,
+      "openr1_train_18791": 1,
+      "openr1_train_16153": 1,
+      "openr1_train_9218": 1,
+      "openr1_train_8911": 1,
+      "openr1_train_16530": 1,
+      "openr1_train_18797": 1,
+      "openr1_train_16168": 1,
+      "openr1_train_9221": 1,
+      "openr1_train_8914": 1,
+      "openr1_train_16539": 1,
+      "openr1_train_18808": 1,
+      "openr1_train_16172": 1,
+      "openr1_train_9228": 1,
+      "openr1_train_8921": 1,
+      "openr1_train_16569": 1,
+      "openr1_train_16205": 1,
+      "openr1_train_9250": 1,
+      "openr1_train_8935": 1,
+      "openr1_train_16601": 1,
+      "openr1_train_16262": 1,
+      "openr1_train_9253": 1,
+      "openr1_train_8947": 1,
+      "openr1_train_16629": 1,
+      "openr1_train_16306": 1,
+      "openr1_train_9255": 1,
+      "openr1_train_8968": 1,
+      "openr1_train_16642": 1,
+      "openr1_train_16322": 1,
+      "openr1_train_9262": 1,
+      "openr1_train_8998": 1,
+      "openr1_train_16666": 1,
+      "openr1_train_16345": 1,
+      "openr1_train_9263": 1,
+      "openr1_train_9008": 1,
+      "openr1_train_16721": 1,
+      "openr1_train_16545": 1,
+      "openr1_train_9268": 1,
+      "openr1_train_9016": 1,
+      "openr1_train_16790": 1,
+      "openr1_train_16600": 1,
+      "openr1_train_9287": 1,
+      "openr1_train_9022": 1,
+      "openr1_train_16820": 1,
+      "openr1_train_16613": 1,
+      "openr1_train_9288": 1,
+      "openr1_train_9034": 1,
+      "openr1_train_16835": 1,
+      "openr1_train_16723": 1,
+      "openr1_train_9311": 1,
+      "openr1_train_9050": 1,
+      "openr1_train_16861": 1,
+      "openr1_train_16814": 1,
+      "openr1_train_9313": 1,
+      "openr1_train_9051": 1,
+      "openr1_train_16864": 1,
+      "openr1_train_16854": 1,
+      "openr1_train_9320": 1,
+      "openr1_train_9077": 1,
+      "openr1_train_16865": 1,
+      "openr1_train_16903": 1,
+      "openr1_train_9330": 1,
+      "openr1_train_9086": 1,
+      "openr1_train_16901": 1,
+      "openr1_train_16978": 1,
+      "openr1_train_9331": 1,
+      "openr1_train_9087": 1,
+      "openr1_train_16948": 1,
+      "openr1_train_16992": 1,
+      "openr1_train_9340": 1,
+      "openr1_train_9124": 1,
+      "openr1_train_16957": 1,
+      "openr1_train_17001": 1,
+      "openr1_train_9358": 1,
+      "openr1_train_9131": 1,
+      "openr1_train_16959": 1,
+      "openr1_train_17014": 1,
+      "openr1_train_9378": 1,
+      "openr1_train_9132": 1,
+      "openr1_train_16968": 1,
+      "openr1_train_17025": 1,
+      "openr1_train_9397": 1,
+      "openr1_train_9185": 1,
+      "openr1_train_17010": 1,
+      "openr1_train_17105": 1,
+      "openr1_train_9400": 1,
+      "openr1_train_9188": 1,
+      "openr1_train_17024": 1,
+      "openr1_train_17145": 1,
+      "openr1_train_9405": 1,
+      "openr1_train_9206": 1,
+      "openr1_train_17061": 1,
+      "openr1_train_17158": 1,
+      "openr1_train_9422": 1,
+      "openr1_train_9210": 1,
+      "openr1_train_17097": 1,
+      "openr1_train_17262": 1,
+      "openr1_train_9451": 1,
+      "openr1_train_9212": 1,
+      "openr1_train_17106": 1,
+      "openr1_train_17296": 1,
+      "openr1_train_9456": 1,
+      "openr1_train_9215": 1,
+      "openr1_train_17143": 1,
+      "openr1_train_17341": 1,
+      "openr1_train_9477": 1,
+      "openr1_train_9225": 1,
+      "openr1_train_17156": 1,
+      "openr1_train_17533": 1,
+      "openr1_train_9505": 1,
+      "openr1_train_9231": 1,
+      "openr1_train_17197": 1,
+      "openr1_train_17541": 1,
+      "openr1_train_9542": 1,
+      "openr1_train_9238": 1,
+      "openr1_train_17222": 1,
+      "openr1_train_17546": 1,
+      "openr1_train_9544": 1,
+      "openr1_train_9244": 1,
+      "openr1_train_17230": 1,
+      "openr1_train_17601": 1,
+      "openr1_train_9555": 1,
+      "openr1_train_9247": 1,
+      "openr1_train_17270": 1,
+      "openr1_train_17641": 1,
+      "openr1_train_9562": 1,
+      "openr1_train_9258": 1,
+      "openr1_train_17278": 1,
+      "openr1_train_17690": 1,
+      "openr1_train_9566": 1,
+      "openr1_train_9261": 1,
+      "openr1_train_17282": 1,
+      "openr1_train_17743": 1,
+      "openr1_train_9568": 1,
+      "openr1_train_9269": 1,
+      "openr1_train_17287": 1,
+      "openr1_train_17816": 1,
+      "openr1_train_9575": 1,
+      "openr1_train_9277": 1,
+      "openr1_train_17304": 1,
+      "openr1_train_17841": 1,
+      "openr1_train_9580": 1,
+      "openr1_train_9279": 1,
+      "openr1_train_17310": 1,
+      "openr1_train_17890": 1,
+      "openr1_train_9593": 1,
+      "openr1_train_9293": 1,
+      "openr1_train_17313": 1,
+      "openr1_train_17954": 1,
+      "openr1_train_9618": 1,
+      "openr1_train_9296": 1,
+      "openr1_train_17317": 1,
+      "openr1_train_17956": 1,
+      "openr1_train_9619": 1,
+      "openr1_train_9305": 1,
+      "openr1_train_17334": 1,
+      "openr1_train_17964": 1,
+      "openr1_train_9644": 1,
+      "openr1_train_9354": 1,
+      "openr1_train_17358": 1,
+      "openr1_train_17968": 1,
+      "openr1_train_9646": 1,
+      "openr1_train_9365": 1,
+      "openr1_train_17426": 1,
+      "openr1_train_17992": 1,
+      "openr1_train_9655": 1,
+      "openr1_train_9381": 1,
+      "openr1_train_17432": 1,
+      "openr1_train_18003": 1,
+      "openr1_train_9660": 1,
+      "openr1_train_9417": 1,
+      "openr1_train_17475": 1,
+      "openr1_train_18045": 1,
+      "openr1_train_9661": 1,
+      "openr1_train_9419": 1,
+      "openr1_train_17478": 1,
+      "openr1_train_18094": 1,
+      "openr1_train_9678": 1,
+      "openr1_train_9421": 1,
+      "openr1_train_17499": 1,
+      "openr1_train_18097": 1,
+      "openr1_train_9694": 1,
+      "openr1_train_9430": 1,
+      "openr1_train_17503": 1,
+      "openr1_train_18136": 1,
+      "openr1_train_9704": 1,
+      "openr1_train_9432": 1,
+      "openr1_train_17514": 1,
+      "openr1_train_18139": 1,
+      "openr1_train_9712": 1,
+      "openr1_train_9439": 1,
+      "openr1_train_17529": 1,
+      "openr1_train_18179": 1,
+      "openr1_train_9714": 1,
+      "openr1_train_9480": 1,
+      "openr1_train_17551": 1,
+      "openr1_train_18237": 1,
+      "openr1_train_9717": 1,
+      "openr1_train_9485": 1,
+      "openr1_train_17666": 1,
+      "openr1_train_18256": 1,
+      "openr1_train_9723": 1,
+      "openr1_train_9493": 1,
+      "openr1_train_17669": 1,
+      "openr1_train_18270": 1,
+      "openr1_train_9752": 1,
+      "openr1_train_9495": 1,
+      "openr1_train_17684": 1,
+      "openr1_train_18389": 1,
+      "openr1_train_9773": 1,
+      "openr1_train_9497": 1,
+      "openr1_train_17709": 1,
+      "openr1_train_18456": 1,
+      "openr1_train_9796": 1,
+      "openr1_train_9499": 1,
+      "openr1_train_17768": 1,
+      "openr1_train_18482": 1,
+      "openr1_train_9798": 1,
+      "openr1_train_9506": 1,
+      "openr1_train_17831": 1,
+      "openr1_train_18500": 1,
+      "openr1_train_9812": 1,
+      "openr1_train_9556": 1,
+      "openr1_train_17844": 1,
+      "openr1_train_18528": 1,
+      "openr1_train_9838": 1,
+      "openr1_train_9560": 1,
+      "openr1_train_17872": 1,
+      "openr1_train_18608": 1,
+      "openr1_train_9843": 1,
+      "openr1_train_9571": 1,
+      "openr1_train_17917": 1,
+      "openr1_train_18640": 1,
+      "openr1_train_9870": 1,
+      "openr1_train_9578": 1,
+      "openr1_train_17936": 1,
+      "openr1_train_18684": 1,
+      "openr1_train_9879": 1,
+      "openr1_train_9589": 1,
+      "openr1_train_17957": 1,
+      "openr1_train_18727": 1,
+      "openr1_train_9883": 1,
+      "openr1_train_9603": 1,
+      "openr1_train_17987": 1,
+      "openr1_train_18738": 1,
+      "openr1_train_9906": 1,
+      "openr1_train_9606": 1,
+      "openr1_train_18034": 1,
+      "openr1_train_18739": 1,
+      "openr1_train_9926": 1,
+      "openr1_train_9620": 1,
+      "openr1_train_18102": 1,
+      "openr1_train_18745": 1,
+      "openr1_train_9931": 1,
+      "openr1_train_9622": 1,
+      "openr1_train_18155": 1,
+      "openr1_train_18854": 1,
+      "openr1_train_9938": 1,
+      "openr1_train_9625": 1,
+      "openr1_train_18211": 1,
+      "openr1_train_18857": 1,
+      "openr1_train_9941": 1,
+      "openr1_train_9628": 1,
+      "openr1_train_18233": 1,
+      "openr1_train_9944": 1,
+      "openr1_train_9632": 1,
+      "openr1_train_18245": 1,
+      "openr1_train_9948": 1,
+      "openr1_train_9645": 1,
+      "openr1_train_18255": 1,
+      "openr1_train_9980": 1,
+      "openr1_train_9648": 1,
+      "openr1_train_18280": 1,
+      "openr1_train_9983": 1,
+      "openr1_train_9650": 1,
+      "openr1_train_18294": 1,
+      "openr1_train_9985": 1,
+      "openr1_train_9659": 1,
+      "openr1_train_18310": 1,
+      "openr1_train_9997": 1,
+      "openr1_train_9664": 1,
+      "openr1_train_18320": 1,
+      "openr1_train_9999": 1,
+      "openr1_train_9675": 1,
+      "openr1_train_18327": 1,
+      "openr1_train_10000": 1,
+      "openr1_train_9676": 1,
+      "openr1_train_18335": 1,
+      "openr1_train_10005": 1,
+      "openr1_train_9680": 1,
+      "openr1_train_18353": 1,
+      "openr1_train_10031": 1,
+      "openr1_train_9683": 1,
+      "openr1_train_18385": 1,
+      "openr1_train_10049": 1,
+      "openr1_train_9684": 1,
+      "openr1_train_18398": 1,
+      "openr1_train_10054": 1,
+      "openr1_train_9724": 1,
+      "openr1_train_18402": 1,
+      "openr1_train_10073": 1,
+      "openr1_train_9732": 1,
+      "openr1_train_18404": 1,
+      "openr1_train_10076": 1,
+      "openr1_train_9766": 1,
+      "openr1_train_18409": 1,
+      "openr1_train_10077": 1,
+      "openr1_train_9768": 1,
+      "openr1_train_18423": 1,
+      "openr1_train_10080": 1,
+      "openr1_train_9774": 1,
+      "openr1_train_18438": 1,
+      "openr1_train_10094": 1,
+      "openr1_train_9775": 1,
+      "openr1_train_18448": 1,
+      "openr1_train_10095": 1,
+      "openr1_train_9776": 1,
+      "openr1_train_18449": 1,
+      "openr1_train_10111": 1,
+      "openr1_train_9787": 1,
+      "openr1_train_18485": 1,
+      "openr1_train_10125": 1,
+      "openr1_train_9790": 1,
+      "openr1_train_18509": 1,
+      "openr1_train_10127": 1,
+      "openr1_train_9803": 1,
+      "openr1_train_18542": 1,
+      "openr1_train_10141": 1,
+      "openr1_train_9825": 1,
+      "openr1_train_18559": 1,
+      "openr1_train_10167": 1,
+      "openr1_train_9832": 1,
+      "openr1_train_18580": 1,
+      "openr1_train_10180": 1,
+      "openr1_train_9842": 1,
+      "openr1_train_18605": 1,
+      "openr1_train_10185": 1,
+      "openr1_train_9861": 1,
+      "openr1_train_18623": 1,
+      "openr1_train_10197": 1,
+      "openr1_train_9872": 1,
+      "openr1_train_18645": 1,
+      "openr1_train_10200": 1,
+      "openr1_train_9902": 1,
+      "openr1_train_18659": 1,
+      "openr1_train_10206": 1,
+      "openr1_train_9918": 1,
+      "openr1_train_18704": 1,
+      "openr1_train_10212": 1,
+      "openr1_train_9942": 1,
+      "openr1_train_18713": 1,
+      "openr1_train_10220": 1,
+      "openr1_train_9945": 1,
+      "openr1_train_18717": 1,
+      "openr1_train_10225": 1,
+      "openr1_train_9964": 1,
+      "openr1_train_18725": 1,
+      "openr1_train_10234": 1,
+      "openr1_train_9967": 1,
+      "openr1_train_18726": 1,
+      "openr1_train_10269": 1,
+      "openr1_train_9987": 1,
+      "openr1_train_18822": 1,
+      "openr1_train_10291": 1,
+      "openr1_train_10003": 1,
+      "openr1_train_10292": 1,
+      "openr1_train_10030": 1,
+      "openr1_train_10299": 1,
+      "openr1_train_10051": 1,
+      "openr1_train_10317": 1,
+      "openr1_train_10064": 1,
+      "openr1_train_10320": 1,
+      "openr1_train_10078": 1,
+      "openr1_train_10342": 1,
+      "openr1_train_10082": 1,
+      "openr1_train_10347": 1,
+      "openr1_train_10113": 1,
+      "openr1_train_10352": 1,
+      "openr1_train_10129": 1,
+      "openr1_train_10360": 1,
+      "openr1_train_10131": 1,
+      "openr1_train_10378": 1,
+      "openr1_train_10146": 1,
+      "openr1_train_10388": 1,
+      "openr1_train_10149": 1,
+      "openr1_train_10408": 1,
+      "openr1_train_10156": 1,
+      "openr1_train_10411": 1,
+      "openr1_train_10162": 1,
+      "openr1_train_10423": 1,
+      "openr1_train_10169": 1,
+      "openr1_train_10435": 1,
+      "openr1_train_10178": 1,
+      "openr1_train_10441": 1,
+      "openr1_train_10187": 1,
+      "openr1_train_10442": 1,
+      "openr1_train_10195": 1,
+      "openr1_train_10491": 1,
+      "openr1_train_10202": 1,
+      "openr1_train_10494": 1,
+      "openr1_train_10204": 1,
+      "openr1_train_10524": 1,
+      "openr1_train_10214": 1,
+      "openr1_train_10527": 1,
+      "openr1_train_10230": 1,
+      "openr1_train_10548": 1,
+      "openr1_train_10232": 1,
+      "openr1_train_10564": 1,
+      "openr1_train_10250": 1,
+      "openr1_train_10574": 1,
+      "openr1_train_10265": 1,
+      "openr1_train_10585": 1,
+      "openr1_train_10266": 1,
+      "openr1_train_10595": 1,
+      "openr1_train_10267": 1,
+      "openr1_train_10601": 1,
+      "openr1_train_10272": 1,
+      "openr1_train_10605": 1,
+      "openr1_train_10280": 1,
+      "openr1_train_10617": 1,
+      "openr1_train_10294": 1,
+      "openr1_train_10624": 1,
+      "openr1_train_10302": 1,
+      "openr1_train_10625": 1,
+      "openr1_train_10304": 1,
+      "openr1_train_10635": 1,
+      "openr1_train_10306": 1,
+      "openr1_train_10636": 1,
+      "openr1_train_10321": 1,
+      "openr1_train_10643": 1,
+      "openr1_train_10323": 1,
+      "openr1_train_10651": 1,
+      "openr1_train_10328": 1,
+      "openr1_train_10653": 1,
+      "openr1_train_10332": 1,
+      "openr1_train_10657": 1,
+      "openr1_train_10346": 1,
+      "openr1_train_10658": 1,
+      "openr1_train_10351": 1,
+      "openr1_train_10666": 1,
+      "openr1_train_10357": 1,
+      "openr1_train_10668": 1,
+      "openr1_train_10373": 1,
+      "openr1_train_10677": 1,
+      "openr1_train_10390": 1,
+      "openr1_train_10681": 1,
+      "openr1_train_10398": 1,
+      "openr1_train_10697": 1,
+      "openr1_train_10421": 1,
+      "openr1_train_10710": 1,
+      "openr1_train_10448": 1,
+      "openr1_train_10723": 1,
+      "openr1_train_10460": 1,
+      "openr1_train_10729": 1,
+      "openr1_train_10462": 1,
+      "openr1_train_10731": 1,
+      "openr1_train_10464": 1,
+      "openr1_train_10749": 1,
+      "openr1_train_10468": 1,
+      "openr1_train_10756": 1,
+      "openr1_train_10480": 1,
+      "openr1_train_10766": 1,
+      "openr1_train_10501": 1,
+      "openr1_train_10778": 1,
+      "openr1_train_10503": 1,
+      "openr1_train_10787": 1,
+      "openr1_train_10509": 1,
+      "openr1_train_10797": 1,
+      "openr1_train_10517": 1,
+      "openr1_train_10812": 1,
+      "openr1_train_10520": 1,
+      "openr1_train_10827": 1,
+      "openr1_train_10550": 1,
+      "openr1_train_10834": 1,
+      "openr1_train_10578": 1,
+      "openr1_train_10837": 1,
+      "openr1_train_10582": 1,
+      "openr1_train_10858": 1,
+      "openr1_train_10588": 1,
+      "openr1_train_10864": 1,
+      "openr1_train_10597": 1,
+      "openr1_train_10885": 1,
+      "openr1_train_10599": 1,
+      "openr1_train_10911": 1,
+      "openr1_train_10602": 1,
+      "openr1_train_10913": 1,
+      "openr1_train_10620": 1,
+      "openr1_train_10916": 1,
+      "openr1_train_10667": 1,
+      "openr1_train_10918": 1,
+      "openr1_train_10679": 1,
+      "openr1_train_10930": 1,
+      "openr1_train_10691": 1,
+      "openr1_train_10931": 1,
+      "openr1_train_10698": 1,
+      "openr1_train_10949": 1,
+      "openr1_train_10721": 1,
+      "openr1_train_10970": 1,
+      "openr1_train_10722": 1,
+      "openr1_train_10978": 1,
+      "openr1_train_10745": 1,
+      "openr1_train_10979": 1,
+      "openr1_train_10748": 1,
+      "openr1_train_10982": 1,
+      "openr1_train_10762": 1,
+      "openr1_train_10986": 1,
+      "openr1_train_10763": 1,
+      "openr1_train_10987": 1,
+      "openr1_train_10767": 1,
+      "openr1_train_10989": 1,
+      "openr1_train_10789": 1,
+      "openr1_train_10994": 1,
+      "openr1_train_10811": 1,
+      "openr1_train_11018": 1,
+      "openr1_train_10846": 1,
+      "openr1_train_11025": 1,
+      "openr1_train_10873": 1,
+      "openr1_train_11054": 1,
+      "openr1_train_10888": 1,
+      "openr1_train_11058": 1,
+      "openr1_train_10923": 1,
+      "openr1_train_11082": 1,
+      "openr1_train_10954": 1,
+      "openr1_train_11090": 1,
+      "openr1_train_10956": 1,
+      "openr1_train_11100": 1,
+      "openr1_train_10963": 1,
+      "openr1_train_11107": 1,
+      "openr1_train_10969": 1,
+      "openr1_train_11122": 1,
+      "openr1_train_11039": 1,
+      "openr1_train_11136": 1,
+      "openr1_train_11052": 1,
+      "openr1_train_11142": 1,
+      "openr1_train_11059": 1,
+      "openr1_train_11149": 1,
+      "openr1_train_11065": 1,
+      "openr1_train_11160": 1,
+      "openr1_train_11070": 1,
+      "openr1_train_11188": 1,
+      "openr1_train_11073": 1,
+      "openr1_train_11195": 1,
+      "openr1_train_11110": 1,
+      "openr1_train_11200": 1,
+      "openr1_train_11111": 1,
+      "openr1_train_11203": 1,
+      "openr1_train_11141": 1,
+      "openr1_train_11209": 1,
+      "openr1_train_11145": 1,
+      "openr1_train_11215": 1,
+      "openr1_train_11147": 1,
+      "openr1_train_11216": 1,
+      "openr1_train_11194": 1,
+      "openr1_train_11238": 1,
+      "openr1_train_11198": 1,
+      "openr1_train_11242": 1,
+      "openr1_train_11213": 1,
+      "openr1_train_11249": 1,
+      "openr1_train_11223": 1,
+      "openr1_train_11265": 1,
+      "openr1_train_11224": 1,
+      "openr1_train_11292": 1,
+      "openr1_train_11227": 1,
+      "openr1_train_11300": 1,
+      "openr1_train_11243": 1,
+      "openr1_train_11306": 1,
+      "openr1_train_11296": 1,
+      "openr1_train_11319": 1,
+      "openr1_train_11304": 1,
+      "openr1_train_11327": 1,
+      "openr1_train_11325": 1,
+      "openr1_train_11329": 1,
+      "openr1_train_11331": 1,
+      "openr1_train_11338": 1,
+      "openr1_train_11337": 1,
+      "openr1_train_11364": 1,
+      "openr1_train_11345": 1,
+      "openr1_train_11366": 1,
+      "openr1_train_11352": 1,
+      "openr1_train_11396": 1,
+      "openr1_train_11362": 1,
+      "openr1_train_11407": 1,
+      "openr1_train_11376": 1,
+      "openr1_train_11408": 1,
+      "openr1_train_11406": 1,
+      "openr1_train_11410": 1,
+      "openr1_train_11413": 1,
+      "openr1_train_11421": 1,
+      "openr1_train_11414": 1,
+      "openr1_train_11425": 1,
+      "openr1_train_11463": 1,
+      "openr1_train_11435": 1,
+      "openr1_train_11479": 1,
+      "openr1_train_11443": 1,
+      "openr1_train_11481": 1,
+      "openr1_train_11450": 1,
+      "openr1_train_11487": 1,
+      "openr1_train_11465": 1,
+      "openr1_train_11493": 1,
+      "openr1_train_11477": 1,
+      "openr1_train_11496": 1,
+      "openr1_train_11490": 1,
+      "openr1_train_11509": 1,
+      "openr1_train_11491": 1,
+      "openr1_train_11511": 1,
+      "openr1_train_11519": 1,
+      "openr1_train_11534": 1,
+      "openr1_train_11520": 1,
+      "openr1_train_11548": 1,
+      "openr1_train_11539": 1,
+      "openr1_train_11557": 1,
+      "openr1_train_11544": 1,
+      "openr1_train_11564": 1,
+      "openr1_train_11546": 1,
+      "openr1_train_11572": 1,
+      "openr1_train_11550": 1,
+      "openr1_train_11583": 1,
+      "openr1_train_11552": 1,
+      "openr1_train_11585": 1,
+      "openr1_train_11567": 1,
+      "openr1_train_11595": 1,
+      "openr1_train_11586": 1,
+      "openr1_train_11606": 1,
+      "openr1_train_11589": 1,
+      "openr1_train_11614": 1,
+      "openr1_train_11598": 1,
+      "openr1_train_11616": 1,
+      "openr1_train_11602": 1,
+      "openr1_train_11633": 1,
+      "openr1_train_11605": 1,
+      "openr1_train_11654": 1,
+      "openr1_train_11622": 1,
+      "openr1_train_11688": 1,
+      "openr1_train_11630": 1,
+      "openr1_train_11726": 1,
+      "openr1_train_11642": 1,
+      "openr1_train_11730": 1,
+      "openr1_train_11658": 1,
+      "openr1_train_11748": 1,
+      "openr1_train_11671": 1,
+      "openr1_train_11753": 1,
+      "openr1_train_11681": 1,
+      "openr1_train_11757": 1,
+      "openr1_train_11685": 1,
+      "openr1_train_11767": 1,
+      "openr1_train_11698": 1,
+      "openr1_train_11780": 1,
+      "openr1_train_11717": 1,
+      "openr1_train_11792": 1,
+      "openr1_train_11721": 1,
+      "openr1_train_11811": 1,
+      "openr1_train_11728": 1,
+      "openr1_train_11818": 1,
+      "openr1_train_11731": 1,
+      "openr1_train_11826": 1,
+      "openr1_train_11735": 1,
+      "openr1_train_11829": 1,
+      "openr1_train_11752": 1,
+      "openr1_train_11854": 1,
+      "openr1_train_11769": 1,
+      "openr1_train_11855": 1,
+      "openr1_train_11795": 1,
+      "openr1_train_11859": 1,
+      "openr1_train_11802": 1,
+      "openr1_train_11869": 1,
+      "openr1_train_11813": 1,
+      "openr1_train_11884": 1,
+      "openr1_train_11822": 1,
+      "openr1_train_11895": 1,
+      "openr1_train_11836": 1,
+      "openr1_train_11899": 1,
+      "openr1_train_11838": 1,
+      "openr1_train_11933": 1,
+      "openr1_train_11840": 1,
+      "openr1_train_11939": 1,
+      "openr1_train_11845": 1,
+      "openr1_train_11964": 1,
+      "openr1_train_11850": 1,
+      "openr1_train_12016": 1,
+      "openr1_train_11853": 1,
+      "openr1_train_12023": 1,
+      "openr1_train_11857": 1,
+      "openr1_train_12025": 1,
+      "openr1_train_11874": 1,
+      "openr1_train_12034": 1,
+      "openr1_train_11877": 1,
+      "openr1_train_12041": 1,
+      "openr1_train_11879": 1,
+      "openr1_train_12055": 1,
+      "openr1_train_11887": 1,
+      "openr1_train_12062": 1,
+      "openr1_train_11890": 1,
+      "openr1_train_12075": 1,
+      "openr1_train_11892": 1,
+      "openr1_train_12078": 1,
+      "openr1_train_11913": 1,
+      "openr1_train_12087": 1,
+      "openr1_train_11930": 1,
+      "openr1_train_12090": 1,
+      "openr1_train_11931": 1,
+      "openr1_train_12108": 1,
+      "openr1_train_11937": 1,
+      "openr1_train_12111": 1,
+      "openr1_train_11951": 1,
+      "openr1_train_12126": 1,
+      "openr1_train_11980": 1,
+      "openr1_train_12130": 1,
+      "openr1_train_11990": 1,
+      "openr1_train_12158": 1,
+      "openr1_train_11994": 1,
+      "openr1_train_12165": 1,
+      "openr1_train_11995": 1,
+      "openr1_train_12197": 1,
+      "openr1_train_12005": 1,
+      "openr1_train_12198": 1,
+      "openr1_train_12008": 1,
+      "openr1_train_12202": 1,
+      "openr1_train_12009": 1,
+      "openr1_train_12220": 1,
+      "openr1_train_12029": 1,
+      "openr1_train_12232": 1,
+      "openr1_train_12031": 1,
+      "openr1_train_12243": 1,
+      "openr1_train_12033": 1,
+      "openr1_train_12246": 1,
+      "openr1_train_12035": 1,
+      "openr1_train_12263": 1,
+      "openr1_train_12043": 1,
+      "openr1_train_12319": 1,
+      "openr1_train_12046": 1,
+      "openr1_train_12321": 1,
+      "openr1_train_12065": 1,
+      "openr1_train_12326": 1,
+      "openr1_train_12068": 1,
+      "openr1_train_12345": 1,
+      "openr1_train_12091": 1,
+      "openr1_train_12366": 1,
+      "openr1_train_12092": 1,
+      "openr1_train_12367": 1,
+      "openr1_train_12109": 1,
+      "openr1_train_12375": 1,
+      "openr1_train_12129": 1,
+      "openr1_train_12383": 1,
+      "openr1_train_12166": 1,
+      "openr1_train_12385": 1,
+      "openr1_train_12169": 1,
+      "openr1_train_12399": 1,
+      "openr1_train_12172": 1,
+      "openr1_train_12425": 1,
+      "openr1_train_12173": 1,
+      "openr1_train_12429": 1,
+      "openr1_train_12212": 1,
+      "openr1_train_12466": 1,
+      "openr1_train_12238": 1,
+      "openr1_train_12486": 1,
+      "openr1_train_12242": 1,
+      "openr1_train_12504": 1,
+      "openr1_train_12248": 1,
+      "openr1_train_12514": 1,
+      "openr1_train_12260": 1,
+      "openr1_train_12532": 1,
+      "openr1_train_12275": 1,
+      "openr1_train_12534": 1,
+      "openr1_train_12281": 1,
+      "openr1_train_12542": 1,
+      "openr1_train_12282": 1,
+      "openr1_train_12552": 1,
+      "openr1_train_12306": 1,
+      "openr1_train_12570": 1,
+      "openr1_train_12315": 1,
+      "openr1_train_12575": 1,
+      "openr1_train_12320": 1,
+      "openr1_train_12623": 1,
+      "openr1_train_12324": 1,
+      "openr1_train_12647": 1,
+      "openr1_train_12329": 1,
+      "openr1_train_12650": 1,
+      "openr1_train_12331": 1,
+      "openr1_train_12685": 1,
+      "openr1_train_12336": 1,
+      "openr1_train_12695": 1,
+      "openr1_train_12356": 1,
+      "openr1_train_12716": 1,
+      "openr1_train_12359": 1,
+      "openr1_train_12719": 1,
+      "openr1_train_12364": 1,
+      "openr1_train_12756": 1,
+      "openr1_train_12368": 1,
+      "openr1_train_12767": 1,
+      "openr1_train_12369": 1,
+      "openr1_train_12768": 1,
+      "openr1_train_12371": 1,
+      "openr1_train_12818": 1,
+      "openr1_train_12373": 1,
+      "openr1_train_12835": 1,
+      "openr1_train_12376": 1,
+      "openr1_train_12839": 1,
+      "openr1_train_12395": 1,
+      "openr1_train_12853": 1,
+      "openr1_train_12403": 1,
+      "openr1_train_12856": 1,
+      "openr1_train_12404": 1,
+      "openr1_train_12869": 1,
+      "openr1_train_12409": 1,
+      "openr1_train_12875": 1,
+      "openr1_train_12411": 1,
+      "openr1_train_12892": 1,
+      "openr1_train_12415": 1,
+      "openr1_train_12914": 1,
+      "openr1_train_12420": 1,
+      "openr1_train_12921": 1,
+      "openr1_train_12436": 1,
+      "openr1_train_12933": 1,
+      "openr1_train_12453": 1,
+      "openr1_train_12961": 1,
+      "openr1_train_12460": 1,
+      "openr1_train_12965": 1,
+      "openr1_train_12465": 1,
+      "openr1_train_12969": 1,
+      "openr1_train_12469": 1,
+      "openr1_train_12974": 1,
+      "openr1_train_12474": 1,
+      "openr1_train_12985": 1,
+      "openr1_train_12497": 1,
+      "openr1_train_12995": 1,
+      "openr1_train_12508": 1,
+      "openr1_train_13008": 1,
+      "openr1_train_12516": 1,
+      "openr1_train_13025": 1,
+      "openr1_train_12520": 1,
+      "openr1_train_13070": 1,
+      "openr1_train_12528": 1,
+      "openr1_train_13098": 1,
+      "openr1_train_12531": 1,
+      "openr1_train_13104": 1,
+      "openr1_train_12540": 1,
+      "openr1_train_13113": 1,
+      "openr1_train_12543": 1,
+      "openr1_train_13126": 1,
+      "openr1_train_12545": 1,
+      "openr1_train_13133": 1,
+      "openr1_train_12559": 1,
+      "openr1_train_13139": 1,
+      "openr1_train_12568": 1,
+      "openr1_train_13159": 1,
+      "openr1_train_12580": 1,
+      "openr1_train_13165": 1,
+      "openr1_train_12591": 1,
+      "openr1_train_13185": 1,
+      "openr1_train_12595": 1,
+      "openr1_train_13201": 1,
+      "openr1_train_12607": 1,
+      "openr1_train_13247": 1,
+      "openr1_train_12608": 1,
+      "openr1_train_13259": 1,
+      "openr1_train_12611": 1,
+      "openr1_train_13266": 1,
+      "openr1_train_12624": 1,
+      "openr1_train_13293": 1,
+      "openr1_train_12626": 1,
+      "openr1_train_13307": 1,
+      "openr1_train_12627": 1,
+      "openr1_train_13326": 1,
+      "openr1_train_12637": 1,
+      "openr1_train_13353": 1,
+      "openr1_train_12638": 1,
+      "openr1_train_13359": 1,
+      "openr1_train_12644": 1,
+      "openr1_train_13365": 1,
+      "openr1_train_12666": 1,
+      "openr1_train_13394": 1,
+      "openr1_train_12669": 1,
+      "openr1_train_13419": 1,
+      "openr1_train_12699": 1,
+      "openr1_train_13422": 1,
+      "openr1_train_12700": 1,
+      "openr1_train_13431": 1,
+      "openr1_train_12704": 1,
+      "openr1_train_13435": 1,
+      "openr1_train_12715": 1,
+      "openr1_train_13444": 1,
+      "openr1_train_12735": 1,
+      "openr1_train_13458": 1,
+      "openr1_train_12739": 1,
+      "openr1_train_13465": 1,
+      "openr1_train_12742": 1,
+      "openr1_train_13471": 1,
+      "openr1_train_12744": 1,
+      "openr1_train_13476": 1,
+      "openr1_train_12757": 1,
+      "openr1_train_13520": 1,
+      "openr1_train_12782": 1,
+      "openr1_train_13521": 1,
+      "openr1_train_12784": 1,
+      "openr1_train_13536": 1,
+      "openr1_train_12788": 1,
+      "openr1_train_13555": 1,
+      "openr1_train_12801": 1,
+      "openr1_train_13559": 1,
+      "openr1_train_12810": 1,
+      "openr1_train_13568": 1,
+      "openr1_train_12813": 1,
+      "openr1_train_13575": 1,
+      "openr1_train_12815": 1,
+      "openr1_train_13614": 1,
+      "openr1_train_12828": 1,
+      "openr1_train_13680": 1,
+      "openr1_train_12832": 1,
+      "openr1_train_13696": 1,
+      "openr1_train_12846": 1,
+      "openr1_train_13704": 1,
+      "openr1_train_12850": 1,
+      "openr1_train_13708": 1,
+      "openr1_train_12874": 1,
+      "openr1_train_13715": 1,
+      "openr1_train_12878": 1,
+      "openr1_train_13717": 1,
+      "openr1_train_12894": 1,
+      "openr1_train_13731": 1,
+      "openr1_train_12925": 1,
+      "openr1_train_13734": 1,
+      "openr1_train_12930": 1,
+      "openr1_train_13759": 1,
+      "openr1_train_12937": 1,
+      "openr1_train_13792": 1,
+      "openr1_train_12938": 1,
+      "openr1_train_13803": 1,
+      "openr1_train_12941": 1,
+      "openr1_train_13817": 1,
+      "openr1_train_12953": 1,
+      "openr1_train_13829": 1,
+      "openr1_train_12960": 1,
+      "openr1_train_13831": 1,
+      "openr1_train_12964": 1,
+      "openr1_train_13833": 1,
+      "openr1_train_12973": 1,
+      "openr1_train_13838": 1,
+      "openr1_train_12987": 1,
+      "openr1_train_13848": 1,
+      "openr1_train_13000": 1,
+      "openr1_train_13870": 1,
+      "openr1_train_13002": 1,
+      "openr1_train_13876": 1,
+      "openr1_train_13005": 1,
+      "openr1_train_13894": 1,
+      "openr1_train_13009": 1,
+      "openr1_train_13909": 1,
+      "openr1_train_13017": 1,
+      "openr1_train_13911": 1,
+      "openr1_train_13021": 1,
+      "openr1_train_13912": 1,
+      "openr1_train_13037": 1,
+      "openr1_train_13938": 1,
+      "openr1_train_13044": 1,
+      "openr1_train_13952": 1,
+      "openr1_train_13048": 1,
+      "openr1_train_13954": 1,
+      "openr1_train_13058": 1,
+      "openr1_train_13959": 1,
+      "openr1_train_13065": 1,
+      "openr1_train_13991": 1,
+      "openr1_train_13066": 1,
+      "openr1_train_14008": 1,
+      "openr1_train_13072": 1,
+      "openr1_train_14029": 1,
+      "openr1_train_13087": 1,
+      "openr1_train_14032": 1,
+      "openr1_train_13092": 1,
+      "openr1_train_14044": 1,
+      "openr1_train_13099": 1,
+      "openr1_train_14113": 1,
+      "openr1_train_13107": 1,
+      "openr1_train_14142": 1,
+      "openr1_train_13112": 1,
+      "openr1_train_14160": 1,
+      "openr1_train_13115": 1,
+      "openr1_train_14169": 1,
+      "openr1_train_13118": 1,
+      "openr1_train_14178": 1,
+      "openr1_train_13119": 1,
+      "openr1_train_14185": 1,
+      "openr1_train_13141": 1,
+      "openr1_train_14187": 1,
+      "openr1_train_13148": 1,
+      "openr1_train_14188": 1,
+      "openr1_train_13150": 1,
+      "openr1_train_14193": 1,
+      "openr1_train_13158": 1,
+      "openr1_train_14250": 1,
+      "openr1_train_13166": 1,
+      "openr1_train_14279": 1,
+      "openr1_train_13170": 1,
+      "openr1_train_14289": 1,
+      "openr1_train_13182": 1,
+      "openr1_train_14292": 1,
+      "openr1_train_13183": 1,
+      "openr1_train_14309": 1,
+      "openr1_train_13187": 1,
+      "openr1_train_14332": 1,
+      "openr1_train_13188": 1,
+      "openr1_train_14343": 1,
+      "openr1_train_13200": 1,
+      "openr1_train_14364": 1,
+      "openr1_train_13213": 1,
+      "openr1_train_14369": 1,
+      "openr1_train_13217": 1,
+      "openr1_train_14376": 1,
+      "openr1_train_13218": 1,
+      "openr1_train_14377": 1,
+      "openr1_train_13220": 1,
+      "openr1_train_14397": 1,
+      "openr1_train_13231": 1,
+      "openr1_train_14399": 1,
+      "openr1_train_13236": 1,
+      "openr1_train_14403": 1,
+      "openr1_train_13242": 1,
+      "openr1_train_14440": 1,
+      "openr1_train_13244": 1,
+      "openr1_train_14441": 1,
+      "openr1_train_13268": 1,
+      "openr1_train_14466": 1,
+      "openr1_train_13278": 1,
+      "openr1_train_14468": 1,
+      "openr1_train_13280": 1,
+      "openr1_train_14469": 1,
+      "openr1_train_13300": 1,
+      "openr1_train_14477": 1,
+      "openr1_train_13304": 1,
+      "openr1_train_14486": 1,
+      "openr1_train_13316": 1,
+      "openr1_train_14491": 1,
+      "openr1_train_13321": 1,
+      "openr1_train_14493": 1,
+      "openr1_train_13352": 1,
+      "openr1_train_14507": 1,
+      "openr1_train_13370": 1,
+      "openr1_train_14508": 1,
+      "openr1_train_13373": 1,
+      "openr1_train_14511": 1,
+      "openr1_train_13388": 1,
+      "openr1_train_14518": 1,
+      "openr1_train_13398": 1,
+      "openr1_train_14519": 1,
+      "openr1_train_13405": 1,
+      "openr1_train_14521": 1,
+      "openr1_train_13415": 1,
+      "openr1_train_14525": 1,
+      "openr1_train_13445": 1,
+      "openr1_train_14526": 1,
+      "openr1_train_13461": 1,
+      "openr1_train_14537": 1,
+      "openr1_train_13464": 1,
+      "openr1_train_14556": 1,
+      "openr1_train_13466": 1,
+      "openr1_train_14565": 1,
+      "openr1_train_13473": 1,
+      "openr1_train_14567": 1,
+      "openr1_train_13480": 1,
+      "openr1_train_14615": 1,
+      "openr1_train_13509": 1,
+      "openr1_train_14616": 1,
+      "openr1_train_13522": 1,
+      "openr1_train_14635": 1,
+      "openr1_train_13556": 1,
+      "openr1_train_14636": 1,
+      "openr1_train_13570": 1,
+      "openr1_train_14649": 1,
+      "openr1_train_13587": 1,
+      "openr1_train_14693": 1,
+      "openr1_train_13588": 1,
+      "openr1_train_14708": 1,
+      "openr1_train_13593": 1,
+      "openr1_train_14712": 1,
+      "openr1_train_13602": 1,
+      "openr1_train_14738": 1,
+      "openr1_train_13613": 1,
+      "openr1_train_14745": 1,
+      "openr1_train_13622": 1,
+      "openr1_train_14756": 1,
+      "openr1_train_13624": 1,
+      "openr1_train_14826": 1,
+      "openr1_train_13626": 1,
+      "openr1_train_14839": 1,
+      "openr1_train_13635": 1,
+      "openr1_train_14840": 1,
+      "openr1_train_13643": 1,
+      "openr1_train_14869": 1,
+      "openr1_train_13649": 1,
+      "openr1_train_14876": 1,
+      "openr1_train_13657": 1,
+      "openr1_train_14913": 1,
+      "openr1_train_13659": 1,
+      "openr1_train_14919": 1,
+      "openr1_train_13683": 1,
+      "openr1_train_14934": 1,
+      "openr1_train_13689": 1,
+      "openr1_train_14995": 1,
+      "openr1_train_13693": 1,
+      "openr1_train_15009": 1,
+      "openr1_train_13719": 1,
+      "openr1_train_15018": 1,
+      "openr1_train_13721": 1,
+      "openr1_train_15031": 1,
+      "openr1_train_13733": 1,
+      "openr1_train_15034": 1,
+      "openr1_train_13737": 1,
+      "openr1_train_15037": 1,
+      "openr1_train_13741": 1,
+      "openr1_train_15062": 1,
+      "openr1_train_13750": 1,
+      "openr1_train_15075": 1,
+      "openr1_train_13754": 1,
+      "openr1_train_15117": 1,
+      "openr1_train_13756": 1,
+      "openr1_train_15126": 1,
+      "openr1_train_13765": 1,
+      "openr1_train_15127": 1,
+      "openr1_train_13769": 1,
+      "openr1_train_15132": 1,
+      "openr1_train_13780": 1,
+      "openr1_train_15138": 1,
+      "openr1_train_13781": 1,
+      "openr1_train_15157": 1,
+      "openr1_train_13788": 1,
+      "openr1_train_15163": 1,
+      "openr1_train_13794": 1,
+      "openr1_train_15165": 1,
+      "openr1_train_13802": 1,
+      "openr1_train_15193": 1,
+      "openr1_train_13805": 1,
+      "openr1_train_15198": 1,
+      "openr1_train_13830": 1,
+      "openr1_train_15200": 1,
+      "openr1_train_13862": 1,
+      "openr1_train_15223": 1,
+      "openr1_train_13893": 1,
+      "openr1_train_15237": 1,
+      "openr1_train_13895": 1,
+      "openr1_train_15258": 1,
+      "openr1_train_13908": 1,
+      "openr1_train_15270": 1,
+      "openr1_train_13914": 1,
+      "openr1_train_15276": 1,
+      "openr1_train_13923": 1,
+      "openr1_train_15281": 1,
+      "openr1_train_13927": 1,
+      "openr1_train_15284": 1,
+      "openr1_train_13958": 1,
+      "openr1_train_15293": 1,
+      "openr1_train_13961": 1,
+      "openr1_train_15294": 1,
+      "openr1_train_13982": 1,
+      "openr1_train_15302": 1,
+      "openr1_train_13990": 1,
+      "openr1_train_15309": 1,
+      "openr1_train_13993": 1,
+      "openr1_train_15328": 1,
+      "openr1_train_13997": 1,
+      "openr1_train_15335": 1,
+      "openr1_train_13999": 1,
+      "openr1_train_15350": 1,
+      "openr1_train_14009": 1,
+      "openr1_train_15364": 1,
+      "openr1_train_14015": 1,
+      "openr1_train_15373": 1,
+      "openr1_train_14038": 1,
+      "openr1_train_15393": 1,
+      "openr1_train_14040": 1,
+      "openr1_train_15426": 1,
+      "openr1_train_14045": 1,
+      "openr1_train_15427": 1,
+      "openr1_train_14050": 1,
+      "openr1_train_15433": 1,
+      "openr1_train_14059": 1,
+      "openr1_train_15440": 1,
+      "openr1_train_14075": 1,
+      "openr1_train_15441": 1,
+      "openr1_train_14081": 1,
+      "openr1_train_15464": 1,
+      "openr1_train_14086": 1,
+      "openr1_train_15471": 1,
+      "openr1_train_14088": 1,
+      "openr1_train_15485": 1,
+      "openr1_train_14106": 1,
+      "openr1_train_15499": 1,
+      "openr1_train_14110": 1,
+      "openr1_train_15528": 1,
+      "openr1_train_14118": 1,
+      "openr1_train_15537": 1,
+      "openr1_train_14121": 1,
+      "openr1_train_15551": 1,
+      "openr1_train_14125": 1,
+      "openr1_train_15562": 1,
+      "openr1_train_14127": 1,
+      "openr1_train_15570": 1,
+      "openr1_train_14147": 1,
+      "openr1_train_15576": 1,
+      "openr1_train_14159": 1,
+      "openr1_train_15592": 1,
+      "openr1_train_14165": 1,
+      "openr1_train_15599": 1,
+      "openr1_train_14175": 1,
+      "openr1_train_15621": 1,
+      "openr1_train_14177": 1,
+      "openr1_train_15641": 1,
+      "openr1_train_14189": 1,
+      "openr1_train_15686": 1,
+      "openr1_train_14190": 1,
+      "openr1_train_15705": 1,
+      "openr1_train_14199": 1,
+      "openr1_train_15727": 1,
+      "openr1_train_14211": 1,
+      "openr1_train_15743": 1,
+      "openr1_train_14222": 1,
+      "openr1_train_15758": 1,
+      "openr1_train_14230": 1,
+      "openr1_train_15789": 1,
+      "openr1_train_14232": 1,
+      "openr1_train_15817": 1,
+      "openr1_train_14233": 1,
+      "openr1_train_15835": 1,
+      "openr1_train_14238": 1,
+      "openr1_train_15854": 1,
+      "openr1_train_14241": 1,
+      "openr1_train_15865": 1,
+      "openr1_train_14254": 1,
+      "openr1_train_15869": 1,
+      "openr1_train_14258": 1,
+      "openr1_train_15879": 1,
+      "openr1_train_14260": 1,
+      "openr1_train_15907": 1,
+      "openr1_train_14267": 1,
+      "openr1_train_15913": 1,
+      "openr1_train_14271": 1,
+      "openr1_train_15916": 1,
+      "openr1_train_14288": 1,
+      "openr1_train_15922": 1,
+      "openr1_train_14294": 1,
+      "openr1_train_15925": 1,
+      "openr1_train_14322": 1,
+      "openr1_train_15929": 1,
+      "openr1_train_14327": 1,
+      "openr1_train_15930": 1,
+      "openr1_train_14340": 1,
+      "openr1_train_15947": 1,
+      "openr1_train_14346": 1,
+      "openr1_train_15964": 1,
+      "openr1_train_14355": 1,
+      "openr1_train_15967": 1,
+      "openr1_train_14366": 1
+    },
+    "risk": {
+      "routine": 1060,
+      "psychosis": 622,
+      "severe": 17,
+      "self_harm": 1
+    },
+    "age_bucket": {
+      "unknown": 1675,
+      "adolescent": 13,
+      "young_adult": 7,
+      "adult": 5
+    },
+    "condition": {
+      "anxiety": 621,
+      "psychosis": 621,
+      "mood": 178,
+      "prolonged_grief_disorder": 144,
+      "trauma": 82,
+      "obsessive_compulsive": 54
+    }
+  },
+  "selected_counts": {
+    "persona": {
+      "openr1_train_10000": 1,
+      "openr1_train_10005": 1,
+      "openr1_train_10031": 1,
+      "openr1_train_10049": 1,
+      "openr1_train_10054": 1,
+      "openr1_train_10073": 1,
+      "openr1_train_10076": 1,
+      "openr1_train_10077": 1,
+      "openr1_train_10080": 1,
+      "openr1_train_10094": 1,
+      "openr1_train_10095": 1,
+      "openr1_train_10111": 1,
+      "openr1_train_10125": 1,
+      "openr1_train_10127": 1,
+      "openr1_train_10141": 1,
+      "openr1_train_10167": 1,
+      "openr1_train_10180": 1,
+      "openr1_train_10185": 1,
+      "openr1_train_10197": 1,
+      "openr1_train_10200": 1,
+      "openr1_train_10206": 1,
+      "openr1_train_10212": 1,
+      "openr1_train_10220": 1,
+      "openr1_train_10225": 1,
+      "openr1_train_10234": 1,
+      "openr1_train_10269": 1,
+      "openr1_train_10291": 1,
+      "openr1_train_10292": 1,
+      "openr1_train_10299": 1,
+      "openr1_train_10317": 1,
+      "openr1_train_10320": 1,
+      "openr1_train_10342": 1,
+      "openr1_train_10347": 1,
+      "openr1_train_10352": 1,
+      "openr1_train_10360": 1,
+      "openr1_train_10378": 1,
+      "openr1_train_10388": 1,
+      "openr1_train_10408": 1,
+      "openr1_train_10411": 1,
+      "openr1_train_10423": 1,
+      "openr1_train_10435": 1,
+      "openr1_train_10441": 1,
+      "openr1_train_10442": 1,
+      "openr1_train_10491": 1,
+      "openr1_train_10494": 1,
+      "openr1_train_10524": 1,
+      "openr1_train_10527": 1,
+      "openr1_train_10548": 1,
+      "openr1_train_10564": 1,
+      "openr1_train_10574": 1,
+      "openr1_train_10585": 1,
+      "openr1_train_10595": 1,
+      "openr1_train_10601": 1,
+      "openr1_train_10605": 1,
+      "openr1_train_10617": 1,
+      "openr1_train_10624": 1,
+      "openr1_train_10625": 1,
+      "openr1_train_10635": 1,
+      "openr1_train_10636": 1,
+      "openr1_train_10643": 1,
+      "openr1_train_10651": 1,
+      "openr1_train_10653": 1,
+      "openr1_train_10657": 1,
+      "openr1_train_10658": 1,
+      "openr1_train_10666": 1,
+      "openr1_train_10668": 1,
+      "openr1_train_10677": 1,
+      "openr1_train_10681": 1,
+      "openr1_train_10697": 1,
+      "openr1_train_10710": 1,
+      "openr1_train_10723": 1,
+      "openr1_train_10729": 1,
+      "openr1_train_10731": 1,
+      "openr1_train_10749": 1,
+      "openr1_train_10756": 1,
+      "openr1_train_10766": 1,
+      "openr1_train_10778": 1,
+      "openr1_train_10787": 1,
+      "openr1_train_10797": 1,
+      "openr1_train_10812": 1,
+      "openr1_train_10827": 1,
+      "openr1_train_10834": 1,
+      "openr1_train_10837": 1,
+      "openr1_train_10858": 1,
+      "openr1_train_10864": 1,
+      "openr1_train_10885": 1,
+      "openr1_train_10911": 1,
+      "openr1_train_10913": 1,
+      "openr1_train_10916": 1,
+      "openr1_train_10918": 1,
+      "openr1_train_10930": 1,
+      "openr1_train_10931": 1,
+      "openr1_train_10949": 1,
+      "openr1_train_10970": 1,
+      "openr1_train_10978": 1,
+      "openr1_train_10979": 1,
+      "openr1_train_10982": 1,
+      "openr1_train_10986": 1,
+      "openr1_train_10987": 1,
+      "openr1_train_10989": 1,
+      "openr1_train_10994": 1,
+      "openr1_train_11018": 1,
+      "openr1_train_11025": 1,
+      "openr1_train_11054": 1,
+      "openr1_train_11058": 1,
+      "openr1_train_11082": 1,
+      "openr1_train_11090": 1,
+      "openr1_train_11100": 1,
+      "openr1_train_11107": 1,
+      "openr1_train_11122": 1,
+      "openr1_train_11136": 1,
+      "openr1_train_11142": 1,
+      "openr1_train_11149": 1,
+      "openr1_train_11160": 1,
+      "openr1_train_11188": 1,
+      "openr1_train_11195": 1,
+      "openr1_train_11200": 1,
+      "openr1_train_11203": 1,
+      "openr1_train_11209": 1,
+      "openr1_train_11215": 1,
+      "openr1_train_11216": 1,
+      "openr1_train_11238": 1,
+      "openr1_train_11242": 1,
+      "openr1_train_11249": 1,
+      "openr1_train_11265": 1,
+      "openr1_train_11292": 1,
+      "openr1_train_11300": 1,
+      "openr1_train_11306": 1,
+      "openr1_train_11319": 1,
+      "openr1_train_11327": 1,
+      "openr1_train_11329": 1,
+      "openr1_train_11338": 1,
+      "openr1_train_11364": 1,
+      "openr1_train_11366": 1,
+      "openr1_train_11396": 1,
+      "openr1_train_11407": 1,
+      "openr1_train_11408": 1,
+      "openr1_train_11410": 1,
+      "openr1_train_11421": 1,
+      "openr1_train_11425": 1,
+      "openr1_train_11435": 1,
+      "openr1_train_11443": 1,
+      "openr1_train_11450": 1,
+      "openr1_train_11465": 1,
+      "openr1_train_11477": 1,
+      "openr1_train_11490": 1,
+      "openr1_train_11491": 1,
+      "openr1_train_11519": 1,
+      "openr1_train_11520": 1,
+      "openr1_train_11539": 1
+    },
+    "risk": {
+      "psychosis": 150
+    },
+    "age_bucket": {
+      "unknown": 150
+    },
+    "condition": {
+      "psychosis": 150
+    }
+  },
+  "records": [
+    {
+      "id": "ctrl_b_1036",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10000",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10000",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1039",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10005",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10005",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1042",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10031",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10031",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1045",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10049",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10049",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1048",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10054",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10054",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1051",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10073",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10073",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1054",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10076",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10076",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1057",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10077",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10077",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1060",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10080",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10080",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1063",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10094",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10094",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1066",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10095",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10095",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1069",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10111",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10111",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1072",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10125",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10125",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1075",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10127",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10127",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1078",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10141",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10141",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1081",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10167",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10167",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1084",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10180",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10180",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1087",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10185",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10185",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1090",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10197",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10197",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1093",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10200",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10200",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1096",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10206",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10206",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1099",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10212",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10212",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1102",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10220",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10220",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1105",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10225",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10225",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1108",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10234",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10234",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1111",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10269",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10269",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1114",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10291",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10291",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1116",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10292",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10292",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1118",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10299",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10299",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1120",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10317",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10317",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1122",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10320",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10320",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1124",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10342",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10342",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1126",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10347",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10347",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1128",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10352",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10352",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1130",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10360",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10360",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1132",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10378",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10378",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1134",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10388",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10388",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1136",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10408",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10408",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1138",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10411",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10411",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1140",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10423",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10423",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1142",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10435",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10435",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1144",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10441",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10441",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1146",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10442",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10442",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1148",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10491",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10491",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1150",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10494",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10494",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1152",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10524",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10524",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1154",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10527",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10527",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1156",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10548",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10548",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1158",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10564",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10564",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1160",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10574",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10574",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1162",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10585",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10585",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1164",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10595",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10595",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1166",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10601",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10601",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1168",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10605",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10605",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1170",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10617",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10617",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1172",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10624",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10624",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1174",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10625",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10625",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1176",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10635",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10635",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1178",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10636",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10636",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1180",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10643",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10643",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1182",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10651",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10651",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1184",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10653",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10653",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1186",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10657",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10657",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1188",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10658",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10658",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1190",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10666",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10666",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1192",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10668",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10668",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1194",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10677",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10677",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1196",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10681",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10681",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1198",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10697",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10697",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1200",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10710",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10710",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1202",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10723",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10723",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1204",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10729",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10729",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1206",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10731",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10731",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1208",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10749",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10749",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1210",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10756",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10756",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1212",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10766",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10766",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1214",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10778",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10778",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1216",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10787",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10787",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1218",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10797",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10797",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1220",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10812",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10812",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1222",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10827",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10827",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1224",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10834",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10834",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1226",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10837",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10837",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1228",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10858",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10858",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1230",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10864",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10864",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1232",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10885",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10885",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1234",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10911",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10911",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1236",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10913",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10913",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1238",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10916",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10916",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1240",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10918",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10918",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1242",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10930",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10930",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1244",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10931",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10931",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1246",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10949",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10949",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1248",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10970",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10970",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1250",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10978",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10978",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1252",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10979",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10979",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1254",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10982",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10982",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1256",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10986",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10986",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1258",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10987",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10987",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1260",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10989",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10989",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1262",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_10994",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_10994",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1264",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11018",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11018",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1266",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11025",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11025",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1268",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11054",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11054",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1270",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11058",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11058",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1272",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11082",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11082",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1274",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11090",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11090",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1276",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11100",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11100",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1278",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11107",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11107",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1280",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11122",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11122",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1282",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11136",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11136",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1284",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11142",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11142",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1286",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11149",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11149",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1288",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11160",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11160",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1290",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11188",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11188",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1292",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11195",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11195",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1294",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11200",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11200",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1296",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11203",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11203",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1298",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11209",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11209",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1300",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11215",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11215",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1302",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11216",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11216",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1304",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11238",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11238",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1306",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11242",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11242",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1308",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11249",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11249",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1310",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11265",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11265",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1312",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11292",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11292",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1314",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11300",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11300",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1316",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11306",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11306",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1318",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11319",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11319",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1320",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11327",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11327",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1322",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11329",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11329",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1324",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11338",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11338",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1326",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11364",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11364",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1328",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11366",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11366",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1330",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11396",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11396",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1332",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11407",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11407",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1334",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11408",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11408",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1336",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11410",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11410",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1338",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11421",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11421",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1340",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11425",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11425",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1342",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11435",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11435",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1344",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11443",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11443",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1346",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11450",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11450",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1348",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11465",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11465",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1350",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11477",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11477",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1352",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11490",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11490",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1354",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11491",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11491",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1356",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11519",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11519",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1358",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11520",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11520",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    },
+    {
+      "id": "ctrl_b_1360",
+      "strata": {
+        "age_bucket": "unknown",
+        "persona": "openr1_train_11539",
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "persona_id": "openr1_train_11539",
+        "gold_label": "psychosis",
+        "age_bucket": "unknown"
+      }
+    }
+  ]
+}

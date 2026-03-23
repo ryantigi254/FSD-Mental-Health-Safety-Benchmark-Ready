@@ -21,7 +21,7 @@
 cd benchmark/runtime
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_a_bias \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_a_bias_generations.jsonl \
   --variant-cache lexical=results_ctrl_invariance/<MODEL>/study_a/lexical/study_a_bias_generations.jsonl \
   --variant-cache surface=results_ctrl_invariance/<MODEL>/study_a/surface/study_a_bias_generations.jsonl \

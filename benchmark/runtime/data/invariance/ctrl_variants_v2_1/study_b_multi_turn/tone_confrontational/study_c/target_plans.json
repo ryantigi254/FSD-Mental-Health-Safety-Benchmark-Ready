@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "dataset": "controllability/study_c_split_metadata",
+    "backend": "probe",
+    "extraction": "controllability/generate_gold_plans.py",
+    "generated_utc": "2026-03-22T22:07:04.062522+00:00",
+    "n_cases": 70,
+    "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
+    "secondary_model": "",
+    "tertiary_model": "",
+    "probe_meta": {
+      "n_splits": 3,
+      "frequent_labels": [
+        "generalized anxiety disorder",
+        "psychosis"
+      ],
+      "rare_labels": {},
+      "rare_label_fallbacks": 0,
+      "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
+      "fallback_to_primary_on_disagreement": true,
+      "weak_supervision_source": "split_metadata_inferred_condition"
+    }
+  },
+  "plans": {
+    "ctrl_c_032": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10938,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_033": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10967,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_034": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10972,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_035": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10999,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_037": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11007,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_038": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11014,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_040": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11035,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_041": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11046,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_043": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11049,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_044": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11081,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_045": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11148,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_046": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 11168,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    }
+  }
+}
