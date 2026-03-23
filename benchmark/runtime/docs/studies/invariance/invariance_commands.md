@@ -76,7 +76,8 @@ Per-study notes:
 Ctrl invariance commands (using `data/invariance/ctrl_base` and
 `data/invariance/ctrl_variant_family`) live in separate files:
 
-- `docs/studies/invariance/invariance_ctrl_commands.md` — top-level ctrl overview
+- `docs/studies/invariance/invariance_ctrl_commands.md` — top-level ctrl overview (forward + reverse)
+- `docs/studies/invariance/invariance_reverse_commands.md` — reverse evaluation (Controllability → Invariance)
 - `docs/studies/invariance/study_a/study_a_invariance_ctrl_commands.md`
 - `docs/studies/invariance/study_a/study_a_bias_invariance_ctrl_commands.md`
 - `docs/studies/invariance/study_b/study_b_invariance_ctrl_commands.md`

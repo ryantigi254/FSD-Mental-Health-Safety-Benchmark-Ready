@@ -214,13 +214,14 @@ def _ordered_candidate_pool(
     *,
     used_refs: set[Tuple[str, int]],
     require_multi_turn: bool,
+    include_unresolved: bool = False,
 ) -> List[Dict[str, Any]]:
     grouped: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     for row in rows:
         ref = (row["split"], row["source_openr1_id"])
         if ref in used_refs:
             continue
-        if row["inferred_condition"] == "unresolved":
+        if row["inferred_condition"] == "unresolved" and not include_unresolved:
             continue
         if require_multi_turn and row["num_rounds"] < 2:
             continue
@@ -413,6 +414,32 @@ def _join_turns_until_construct(row: Dict[str, Any], max_turns: int = 10) -> Tup
         if any(m in lower for m in _DURATION_MARKERS) and any(m in lower for m in _IMPAIRMENT_MARKERS):
             return prompt, used_indices
     return None
+
+
+def _join_turns_incomplete(
+    row: Dict[str, Any], max_turns: int = 10,
+) -> Tuple[str, List[int], List[str]]:
+    """Join up to *max_turns* patient turns regardless of construct completeness.
+
+    Returns ``(prompt, used_indices, missing)`` where *missing* is a list of
+    construct dimensions absent from the joined text (e.g.
+    ``["duration"]``, ``["impairment"]``, or ``["duration", "impairment"]``).
+    An empty *missing* list means the full construct was found.
+    """
+    patient_turns = [t for t in row.get("patient_turns", []) if str(t or "").strip()]
+    collected: List[str] = []
+    used_indices: List[int] = []
+    for idx, turn in enumerate(patient_turns[:max_turns], start=1):
+        collected.append(turn.strip())
+        used_indices.append(idx)
+    prompt = " ".join(collected).strip()
+    lower = prompt.lower()
+    missing: List[str] = []
+    if not any(m in lower for m in _DURATION_MARKERS):
+        missing.append("duration")
+    if not any(m in lower for m in _IMPAIRMENT_MARKERS):
+        missing.append("impairment")
+    return prompt, used_indices, missing
 
 
 def _contains_construct(prompt: str) -> bool:
@@ -777,17 +804,35 @@ def build_study_b_single_turn_strict(
     *,
     target_n: int,
     used_refs: set[Tuple[str, int]],
+    include_unresolved: bool = False,
+    allow_incomplete_construct: bool = False,
 ) -> List[Dict[str, Any]]:
     eligible: List[Dict[str, Any]] = []
     for row in rows:
         ref = (row["split"], row["source_openr1_id"])
-        if ref in used_refs or row["inferred_condition"] == "unresolved":
+        if ref in used_refs:
+            continue
+        if row["inferred_condition"] == "unresolved" and not include_unresolved:
             continue
         construct = _join_turns_until_construct(row)
-        if construct is None:
-            continue
-        prompt, rounds = construct
-        eligible.append({**row, "_construct_prompt": prompt, "_construct_rounds": rounds})
+        if construct is not None:
+            prompt, rounds = construct
+            eligible.append({
+                **row,
+                "_construct_prompt": prompt,
+                "_construct_rounds": rounds,
+                "_construct_missing": [],
+            })
+        elif allow_incomplete_construct:
+            prompt, rounds, missing = _join_turns_incomplete(row)
+            if not prompt:
+                continue
+            eligible.append({
+                **row,
+                "_construct_prompt": prompt,
+                "_construct_rounds": rounds,
+                "_construct_missing": missing,
+            })
 
     selected = _round_robin_select(eligible, target_n=target_n, used_refs=used_refs, require_multi_turn=False)
     items: List[Dict[str, Any]] = []
@@ -799,6 +844,12 @@ def build_study_b_single_turn_strict(
         )
         metadata["prompt_source_round_indices"] = row["_construct_rounds"]
         metadata["generation_policy"] = "strict_no_generation"
+        missing = row.get("_construct_missing", [])
+        if missing:
+            metadata["construct_completeness"] = "incomplete"
+            metadata["construct_missing"] = missing
+        else:
+            metadata["construct_completeness"] = "complete"
         items.append(
             {
                 "id": f"b_{index:04d}",
@@ -821,8 +872,9 @@ def _compose_multiturn_cases(
     ner: MedicalNER,
     nli_model: NLIModel,
     study: str,
+    include_unresolved: bool = False,
 ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
-    primary_pool = _ordered_candidate_pool(rows, used_refs=used_refs, require_multi_turn=True)
+    primary_pool = _ordered_candidate_pool(rows, used_refs=used_refs, require_multi_turn=True, include_unresolved=include_unresolved)
     cases: List[Dict[str, Any]] = []
     manual_review: List[Dict[str, Any]] = []
 

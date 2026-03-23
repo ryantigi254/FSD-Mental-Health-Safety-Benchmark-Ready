@@ -32,7 +32,7 @@ V6_1_PARENT_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v6_1"
 
 CTRL_BASE_ROOT = RUNTIME_ROOT / "data" / "invariance" / "misc" / "invariance_variants" / "variant_family" / "base"
 CTRL_BASE_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "misc" / "ctrl_variants_base_v2_1"
-CTRL_PARENT_ROOT_V2_1 = RUNTIME_ROOT / "data" / "controllability" / "controllability_splits_v2_1"
+CTRL_PARENT_ROOT_V2_1 = RUNTIME_ROOT / "data" / "controllability" / "controllability_splits_v3"
 CTRL_SAMPLE_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_base"
 VARIANT_FAMILY_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_variant_family"
 

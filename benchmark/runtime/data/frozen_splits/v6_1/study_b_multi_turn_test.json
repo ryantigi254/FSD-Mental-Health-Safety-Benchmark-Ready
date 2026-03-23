@@ -9216,15 +9216,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 240,
       "source_openr1_ids": [
-        240,
-        9175,
-        10026,
-        8507,
-        10290,
-        18267,
-        8542,
-        14837,
-        9502
+        240
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -9289,7 +9281,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9175
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10026
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8507
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10290
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18267
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8542
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14837
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9502
+        }
+      ]
     }
   },
   {
@@ -15007,15 +15033,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 200,
       "source_openr1_ids": [
-        200,
-        16083,
-        18731,
-        10493,
-        13732,
-        11984,
-        13381,
-        8262,
-        16659
+        200
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -15080,7 +15098,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16083
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18731
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10493
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13732
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11984
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13381
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8262
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16659
+        }
+      ]
     }
   },
   {
@@ -17537,15 +17589,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 174,
       "source_openr1_ids": [
-        174,
-        9290,
-        10102,
-        8027,
-        9802,
-        8513,
-        8200,
-        9851,
-        10481
+        174
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -17610,7 +17654,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9290
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10102
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8027
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9802
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8513
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8200
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9851
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10481
+        }
+      ]
     }
   },
   {
@@ -19742,15 +19820,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 251,
       "source_openr1_ids": [
-        251,
-        8376,
-        8879,
-        8011,
-        8065,
-        10231,
-        8122,
-        8091,
-        9966
+        251
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -19815,7 +19885,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8376
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8879
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8011
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8065
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10231
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8122
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8091
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9966
+        }
+      ]
     }
   },
   {
@@ -21467,15 +21571,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 171,
       "source_openr1_ids": [
-        171,
-        10404,
-        10274,
-        10369,
-        8636,
-        9438,
-        8078,
-        9558,
-        17142
+        171
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -21540,7 +21636,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10404
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10274
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10369
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8636
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9438
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8078
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9558
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17142
+        }
+      ]
     }
   },
   {
@@ -25090,15 +25220,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 311,
       "source_openr1_ids": [
-        311,
-        16886,
-        12468,
-        16870,
-        14221,
-        14705,
-        15434,
-        14702,
-        18814
+        311
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -25163,7 +25285,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16886
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12468
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16870
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14221
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14705
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15434
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14702
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18814
+        }
+      ]
     }
   },
   {
@@ -32346,15 +32502,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 212,
       "source_openr1_ids": [
-        212,
-        8212,
-        10399,
-        9245,
-        8913,
-        8026,
-        8485,
-        10241,
-        8279
+        212
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -32419,7 +32567,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8212
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10399
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9245
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8913
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8026
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8485
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10241
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8279
+        }
+      ]
     }
   },
   {
@@ -34222,15 +34404,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 219,
       "source_openr1_ids": [
-        219,
-        10228,
-        8801,
-        10168,
-        8959,
-        10181,
-        8890,
-        9885,
-        8758
+        219
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -34295,7 +34469,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10228
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8801
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10168
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8959
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10181
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8890
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9885
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8758
+        }
+      ]
     }
   },
   {
@@ -36805,15 +37013,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 164,
       "source_openr1_ids": [
-        164,
-        8372,
-        8707,
-        9256,
-        9344,
-        9756,
-        8558,
-        8770,
-        8905
+        164
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -36878,7 +37078,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8372
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8707
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9256
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9344
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9756
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8558
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8770
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8905
+        }
+      ]
     }
   },
   {
@@ -40258,15 +40492,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 339,
       "source_openr1_ids": [
-        339,
-        10093,
-        14921,
-        17539,
-        18358,
-        17412,
-        14259,
-        16850,
-        16799
+        339
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -40331,7 +40557,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10093
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14921
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17539
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18358
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17412
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14259
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16850
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16799
+        }
+      ]
     }
   },
   {
@@ -46227,14 +46487,7 @@
       "source_openr1_id": 346,
       "source_openr1_ids": [
         346,
-        386,
-        15540,
-        12312,
-        11047,
-        11555,
-        14431,
-        10670,
-        10618
+        386
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -46299,7 +46552,37 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15540
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12312
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11047
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11555
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14431
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10670
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10618
+        }
+      ]
     }
   },
   {
@@ -53030,15 +53313,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 330,
       "source_openr1_ids": [
-        330,
-        16235,
-        17664,
-        16406,
-        18064,
-        17798,
-        18299,
-        13738,
-        17596
+        330
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -53103,7 +53378,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16235
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17664
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16406
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18064
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17798
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18299
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13738
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17596
+        }
+      ]
     }
   },
   {
@@ -60228,15 +60537,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 191,
       "source_openr1_ids": [
-        191,
-        9979,
-        10140,
-        9731,
-        10321,
-        8184,
-        8165,
-        9908,
-        9645
+        191
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -60301,7 +60602,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9979
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10140
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9731
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10321
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8184
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8165
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9908
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9645
+        }
+      ]
     }
   },
   {
@@ -64847,15 +65182,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 177,
       "source_openr1_ids": [
-        177,
-        9443,
-        8624,
-        10455,
-        9157,
-        9815,
-        9189,
-        9607,
-        9337
+        177
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -64920,7 +65247,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9443
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8624
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10455
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9157
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9815
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9189
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9607
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9337
+        }
+      ]
     }
   },
   {
@@ -67838,15 +68199,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 351,
       "source_openr1_ids": [
-        351,
-        9817,
-        12827,
-        17870,
-        13151,
-        11724,
-        18328,
-        11562,
-        8764
+        351
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -67911,7 +68264,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9817
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12827
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17870
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13151
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11724
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18328
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11562
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8764
+        }
+      ]
     }
   },
   {
@@ -76272,14 +76659,7 @@
       "source_openr1_id": 303,
       "source_openr1_ids": [
         303,
-        17913,
-        322,
-        12653,
-        11804,
-        13531,
-        12389,
-        18547,
-        14166
+        322
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -76344,7 +76724,37 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17913
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12653
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11804
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13531
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12389
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18547
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14166
+        }
+      ]
     }
   },
   {
@@ -79314,15 +79724,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 306,
       "source_openr1_ids": [
-        306,
-        10977,
-        11446,
-        16096,
-        16362,
-        13553,
-        12391,
-        16766,
-        14539
+        306
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -79387,7 +79789,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10977
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11446
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16096
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16362
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13553
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12391
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16766
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14539
+        }
+      ]
     }
   },
   {
@@ -80907,15 +81343,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 190,
       "source_openr1_ids": [
-        190,
-        9339,
-        9932,
-        10128,
-        10363,
-        9171,
-        9083,
-        9024,
-        9263
+        190
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -80980,7 +81408,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9339
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9932
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10128
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10363
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9171
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9083
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9024
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9263
+        }
+      ]
     }
   },
   {
@@ -84146,15 +84608,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 363,
       "source_openr1_ids": [
-        363,
-        17579,
-        14421,
-        17982,
-        18095,
-        11483,
-        16297,
-        17404,
-        16681
+        363
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -84219,7 +84673,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17579
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14421
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17982
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18095
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11483
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16297
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17404
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16681
+        }
+      ]
     }
   },
   {
@@ -87680,15 +88168,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 369,
       "source_openr1_ids": [
-        369,
-        11968,
-        10640,
-        15762,
-        16034,
-        12177,
-        18008,
-        10980,
-        12949
+        369
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -87753,7 +88233,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11968
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10640
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15762
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16034
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12177
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18008
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10980
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12949
+        }
+      ]
     }
   },
   {
@@ -90382,15 +90896,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 391,
       "source_openr1_ids": [
-        391,
-        13789,
-        15327,
-        18192,
-        15004,
-        18657,
-        13842,
-        16514,
-        12341
+        391
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -90455,7 +90961,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13789
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15327
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18192
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15004
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18657
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13842
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16514
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12341
+        }
+      ]
     }
   },
   {
@@ -96187,13 +96727,6 @@
       "source_openr1_id": 236,
       "source_openr1_ids": [
         236,
-        9695,
-        10183,
-        8465,
-        9754,
-        8442,
-        9573,
-        8935,
         298
       ],
       "source_split": "test",
@@ -96260,7 +96793,37 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9695
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10183
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8465
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9754
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8442
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9573
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8935
+        }
+      ]
     }
   },
   {
@@ -101384,15 +101947,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 320,
       "source_openr1_ids": [
-        320,
-        15288,
-        18265,
-        16280,
-        18013,
-        17787,
-        17378,
-        16474,
-        17346
+        320
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -101457,7 +102012,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15288
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18265
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16280
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18013
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17787
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17378
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16474
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17346
+        }
+      ]
     }
   },
   {
@@ -104244,15 +104833,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 431,
       "source_openr1_ids": [
-        431,
-        10312,
-        10467,
-        13023,
-        9845,
-        13078,
-        16400,
-        15211,
-        9280
+        431
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -104317,7 +104898,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10312
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10467
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13023
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9845
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13078
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16400
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15211
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9280
+        }
+      ]
     }
   },
   {
@@ -110011,15 +110626,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 322,
       "source_openr1_ids": [
-        322,
-        14107,
-        15513,
-        13056,
-        9522,
-        14993,
-        17019,
-        13292,
-        14546
+        322
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -110084,7 +110691,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14107
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15513
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13056
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9522
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14993
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17019
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13292
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14546
+        }
+      ]
     }
   },
   {
@@ -114530,15 +115171,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 235,
       "source_openr1_ids": [
-        235,
-        10243,
-        9847,
-        8034,
-        8378,
-        8585,
-        8379,
-        8046,
-        8648
+        235
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -114603,7 +115236,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10243
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9847
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8034
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8378
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8585
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8379
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8046
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8648
+        }
+      ]
     }
   },
   {
@@ -117453,15 +118120,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 406,
       "source_openr1_ids": [
-        406,
-        18468,
-        14490,
-        15822,
-        14436,
-        16301,
-        16462,
-        11448,
-        15325
+        406
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -117526,7 +118185,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18468
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14490
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15822
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14436
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16301
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16462
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11448
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15325
+        }
+      ]
     }
   },
   {
@@ -120775,15 +121468,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 386,
       "source_openr1_ids": [
-        386,
-        17006,
-        11790,
-        17970,
-        13807,
-        16206,
-        17370,
-        16255,
-        18518
+        386
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -120848,7 +121533,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17006
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11790
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17970
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13807
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16206
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17370
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16255
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18518
+        }
+      ]
     }
   },
   {
@@ -123434,15 +124153,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 433,
       "source_openr1_ids": [
-        433,
-        15475,
-        17044,
-        13253,
-        17214,
-        14019,
-        14317,
-        17904,
-        11956
+        433
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -123507,7 +124218,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15475
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17044
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13253
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17214
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14019
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14317
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17904
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11956
+        }
+      ]
     }
   },
   {
@@ -127975,15 +128720,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 256,
       "source_openr1_ids": [
-        256,
-        9824,
-        9647,
-        9432,
-        9826,
-        9032,
-        8228,
-        8266,
-        8633
+        256
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -128048,7 +128785,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9824
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9647
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9432
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9826
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9032
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8228
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8266
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8633
+        }
+      ]
     }
   },
   {
@@ -133435,15 +134206,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 399,
       "source_openr1_ids": [
-        399,
-        12576,
-        11512,
-        11032,
-        13809,
-        16649,
-        18843,
-        12805,
-        17707
+        399
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -133508,7 +134271,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12576
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11512
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11032
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13809
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16649
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18843
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12805
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17707
+        }
+      ]
     }
   },
   {
@@ -136920,15 +137717,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 445,
       "source_openr1_ids": [
-        445,
-        11734,
-        11596,
-        18023,
-        16633,
-        14563,
-        17703,
-        18289,
-        17131
+        445
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -136993,7 +137782,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11734
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11596
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18023
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16633
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14563
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17703
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18289
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17131
+        }
+      ]
     }
   },
   {
@@ -142489,15 +143312,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 358,
       "source_openr1_ids": [
-        358,
-        16652,
-        16442,
-        18626,
-        16580,
-        18495,
-        10665,
-        14658,
-        17474
+        358
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -142562,7 +143377,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16652
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16442
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18626
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16580
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18495
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10665
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14658
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17474
+        }
+      ]
     }
   },
   {
@@ -146719,15 +147568,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 286,
       "source_openr1_ids": [
-        286,
-        9767,
-        9098,
-        8635,
-        9566,
-        8089,
-        9583,
-        9738,
-        8853
+        286
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -146792,7 +147633,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9767
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9098
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8635
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9566
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8089
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9583
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9738
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8853
+        }
+      ]
     }
   },
   {
@@ -154507,15 +155382,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 447,
       "source_openr1_ids": [
-        447,
-        16286,
-        14623,
-        18630,
-        18503,
-        14830,
-        15780,
-        14875,
-        14098
+        447
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -154580,7 +155447,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16286
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14623
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18630
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18503
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14830
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15780
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14875
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14098
+        }
+      ]
     }
   },
   {
@@ -158907,15 +159808,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 295,
       "source_openr1_ids": [
-        295,
-        9742,
-        10011,
-        8305,
-        8446,
-        9748,
-        10345,
-        9993,
-        8143
+        295
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -158981,7 +159874,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9742
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10011
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8305
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8446
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9748
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10345
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9993
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8143
+        }
+      ]
     }
   },
   {
@@ -169312,15 +170239,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 371,
       "source_openr1_ids": [
-        371,
-        13389,
-        18670,
-        12661,
-        12793,
-        16697,
-        18212,
-        18432,
-        12293
+        371
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -169385,7 +170304,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13389
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18670
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12661
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12793
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16697
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18212
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18432
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12293
+        }
+      ]
     }
   },
   {
@@ -173815,15 +174768,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 291,
       "source_openr1_ids": [
-        291,
-        8896,
-        8017,
-        10019,
-        8048,
-        8241,
-        8739,
-        10277,
-        8524
+        291
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -173888,7 +174833,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8896
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8017
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10019
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8048
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8241
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8739
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10277
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8524
+        }
+      ]
     }
   },
   {
@@ -185105,15 +186084,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 298,
       "source_openr1_ids": [
-        298,
-        9078,
-        10346,
-        8623,
-        8009,
-        8055,
-        8540,
-        9771,
-        8428
+        298
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -185179,7 +186150,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9078
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10346
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8623
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8009
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8055
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8540
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9771
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8428
+        }
+      ]
     }
   },
   {
@@ -194633,15 +195638,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 390,
       "source_openr1_ids": [
-        390,
-        17224,
-        18824,
-        18826,
-        14451,
-        12537,
-        10704,
-        15457,
-        18288
+        390
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -194706,7 +195703,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17224
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18824
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18826
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14451
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12537
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10704
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15457
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18288
+        }
+      ]
     }
   },
   {
@@ -201038,15 +202069,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 385,
       "source_openr1_ids": [
-        385,
-        18198,
-        16098,
-        15465,
-        17246,
-        14733,
-        10984,
-        15136,
-        16966
+        385
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -201111,7 +202134,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18198
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16098
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15465
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17246
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14733
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10984
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15136
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16966
+        }
+      ]
     }
   },
   {
@@ -213608,15 +214665,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 373,
       "source_openr1_ids": [
-        373,
-        8101,
-        8849,
-        17810,
-        14176,
-        16671,
-        18322,
-        13255,
-        17767
+        373
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -213681,7 +214730,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8101
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 8849
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17810
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14176
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16671
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18322
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13255
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17767
+        }
+      ]
     }
   },
   {
@@ -223694,15 +224777,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 394,
       "source_openr1_ids": [
-        394,
-        11958,
-        17517,
-        12726,
-        16716,
-        10702,
-        11898,
-        16505,
-        15087
+        394
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -223767,7 +224842,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11958
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17517
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12726
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16716
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10702
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11898
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16505
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15087
+        }
+      ]
     }
   },
   {
@@ -228927,15 +230036,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 408,
       "source_openr1_ids": [
-        408,
-        10264,
-        10692,
-        18252,
-        9570,
-        15709,
-        13926,
-        17168,
-        15412
+        408
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -229000,7 +230101,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10264
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10692
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18252
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9570
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15709
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13926
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17168
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15412
+        }
+      ]
     }
   },
   {
@@ -242652,15 +243787,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 425,
       "source_openr1_ids": [
-        425,
-        15308,
-        10742,
-        18202,
-        13493,
-        13682,
-        9365,
-        16508,
-        18443
+        425
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -242725,7 +243852,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 15308
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10742
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18202
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13493
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13682
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9365
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16508
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 18443
+        }
+      ]
     }
   },
   {
@@ -256959,15 +258120,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 424,
       "source_openr1_ids": [
-        424,
-        17897,
-        16583,
-        10166,
-        16554,
-        16784,
-        17555,
-        16007,
-        13455
+        424
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -257032,7 +258185,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17897
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16583
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10166
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16554
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16784
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 17555
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 16007
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13455
+        }
+      ]
     }
   },
   {
@@ -268298,15 +269485,7 @@
       "source_openr1_split": "test",
       "source_openr1_id": 426,
       "source_openr1_ids": [
-        426,
-        9916,
-        9855,
-        10884,
-        9886,
-        11394,
-        14867,
-        12074,
-        13597
+        426
       ],
       "source_split": "test",
       "source": "openr1_test",
@@ -268371,7 +269550,41 @@
         "source_anchored_deterministic_edit": 0
       },
       "manual_review_required": false,
-      "manual_review_accepted_turns": 0
+      "manual_review_accepted_turns": 0,
+      "donor_source_refs": [
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9916
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9855
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 10884
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 9886
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 11394
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 14867
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 12074
+        },
+        {
+          "source_openr1_split": "train",
+          "source_openr1_id": 13597
+        }
+      ]
     }
   },
   {
