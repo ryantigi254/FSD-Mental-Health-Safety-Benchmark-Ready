@@ -31,14 +31,6 @@ python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance 
 python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance --model-id psych_qwen_vllm --env mh-llm-vllm-env --data-dir data/invariance/base --output-dir results_invariance
 ```
 
-## Controllability Base Runs
-
-### LM Studio
-
-```powershell
-python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-dir data/invariance/variant_family/base --output-dir results_invariance --workers 2
-```
-
 ## Variant-Family Runs
 
 Use `data/invariance/variant_family/study_b_multi_turn` to run every

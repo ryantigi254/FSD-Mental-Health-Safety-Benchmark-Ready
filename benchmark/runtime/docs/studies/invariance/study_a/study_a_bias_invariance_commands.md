@@ -39,45 +39,6 @@ python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --mode
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psych_qwen_vllm --env mh-llm-vllm-env --data-path data/invariance/base/adversarial_bias/biased_vignettes.json --output-dir results_invariance
 ```
 
-## Controllability Base Runs
-
-Uses the sampled invariance subset at
-`data/invariance/variant_family/adversarial_bias/biased_vignettes.json`
-(140 cases sampled from the 2,243-case controllability bias file).
-
-### LM Studio
-
-```powershell
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 2
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 6
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwq --env mh-llm-benchmark-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 6
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 4
-```
-
-### Local HF
-
-```powershell
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyllm_gml_local --env mh-llm-local-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id piaget_local --env mh-llm-local-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyche_r1_local --env mh-llm-local-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psych_qwen_local --env mh-llm-local-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance --quantization 4bit
-```
-
-### vLLM
-
-```powershell
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyllm_gml_vllm --env mh-llm-vllm-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id piaget_vllm --env mh-llm-vllm-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyche_r1_vllm --env mh-llm-vllm-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psych_qwen_vllm --env mh-llm-vllm-env --data-path data/invariance/variant_family/adversarial_bias/biased_vignettes.json --output-dir results_invariance
-```
-
-## Variant-Family Runs
-
-Not applicable for `study_a_bias_invariance`.
-
-The bias invariance study does not use variant-family perturbations.
-
 ## Direct Runner
 
 ```powershell
