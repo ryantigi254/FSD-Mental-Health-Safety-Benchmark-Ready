@@ -9,7 +9,7 @@ unit.
 ## Source roots
 
 - `v5`: `data/frozen_splits/v5`
-- `controllability`: `data/invariance/variant_family`
+- `controllability`: `data/invariance/v5_variants_v2_1`
 
 The sampled output root is always materialised back into the canonical Study C
 layout, including `study_c_test.json` and the target-plan files.

@@ -7,12 +7,12 @@
 
 | Tag | Type | Data Root |
 |-----|------|-----------|
-| `paraphrase` | paraphrase | `data/invariance/ctrl_variant_family/study_b/paraphrase` |
-| `mild` | intensity | `data/invariance/ctrl_variant_family/study_b/mild` |
-| `moderate` | intensity | `data/invariance/ctrl_variant_family/study_b/moderate` |
-| `strong` | intensity | `data/invariance/ctrl_variant_family/study_b/strong` |
-| `question` | framing | `data/invariance/ctrl_variant_family/study_b/question` |
-| `cultural` | framing | `data/invariance/ctrl_variant_family/study_b/cultural` |
+| `paraphrase` | paraphrase | `data/invariance/ctrl_variants_v2_1/study_b/paraphrase` |
+| `mild` | intensity | `data/invariance/ctrl_variants_v2_1/study_b/mild` |
+| `moderate` | intensity | `data/invariance/ctrl_variants_v2_1/study_b/moderate` |
+| `strong` | intensity | `data/invariance/ctrl_variants_v2_1/study_b/strong` |
+| `question` | framing | `data/invariance/ctrl_variants_v2_1/study_b/question` |
+| `cultural` | framing | `data/invariance/ctrl_variants_v2_1/study_b/cultural` |
 
 ## Comparison (All Variants)
 
@@ -20,7 +20,7 @@
 cd benchmark/runtime
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b \
-  --data-root data/invariance/ctrl_base \
+  --data-root data/invariance/ctrl_samples_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
   --variant-cache paraphrase=results_ctrl_invariance/<MODEL>/study_b/paraphrase/study_b_generations.jsonl \
   --variant-cache mild=results_ctrl_invariance/<MODEL>/study_b/mild/study_b_generations.jsonl \
@@ -43,7 +43,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Paraphrase
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b \
-  --data-root data/invariance/ctrl_base \
+  --data-root data/invariance/ctrl_samples_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
   --variant-cache paraphrase=results_ctrl_invariance/<MODEL>/study_b/paraphrase/study_b_generations.jsonl \
   --variant-type paraphrase=paraphrase \
@@ -52,7 +52,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Mild
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b \
-  --data-root data/invariance/ctrl_base \
+  --data-root data/invariance/ctrl_samples_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
   --variant-cache mild=results_ctrl_invariance/<MODEL>/study_b/mild/study_b_generations.jsonl \
   --variant-type mild=intensity \
@@ -61,7 +61,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Moderate
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b \
-  --data-root data/invariance/ctrl_base \
+  --data-root data/invariance/ctrl_samples_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
   --variant-cache moderate=results_ctrl_invariance/<MODEL>/study_b/moderate/study_b_generations.jsonl \
   --variant-type moderate=intensity \
@@ -70,7 +70,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Strong
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b \
-  --data-root data/invariance/ctrl_base \
+  --data-root data/invariance/ctrl_samples_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
   --variant-cache strong=results_ctrl_invariance/<MODEL>/study_b/strong/study_b_generations.jsonl \
   --variant-type strong=intensity \
@@ -79,7 +79,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Question
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b \
-  --data-root data/invariance/ctrl_base \
+  --data-root data/invariance/ctrl_samples_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
   --variant-cache question=results_ctrl_invariance/<MODEL>/study_b/question/study_b_generations.jsonl \
   --variant-type question=framing \
@@ -88,7 +88,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Cultural
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b \
-  --data-root data/invariance/ctrl_base \
+  --data-root data/invariance/ctrl_samples_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
   --variant-cache cultural=results_ctrl_invariance/<MODEL>/study_b/cultural/study_b_generations.jsonl \
   --variant-type cultural=framing \
@@ -102,7 +102,7 @@ Run mild → moderate → strong together to check for monotonic degradation:
 ```bash
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b \
-  --data-root data/invariance/ctrl_base \
+  --data-root data/invariance/ctrl_samples_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
   --variant-cache mild=results_ctrl_invariance/<MODEL>/study_b/mild/study_b_generations.jsonl \
   --variant-cache moderate=results_ctrl_invariance/<MODEL>/study_b/moderate/study_b_generations.jsonl \
