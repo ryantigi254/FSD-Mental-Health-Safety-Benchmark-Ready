@@ -1,26 +1,4 @@
 {
-  "meta": {
-    "dataset": "controllability/study_c_split_metadata",
-    "backend": "probe",
-    "extraction": "controllability/generate_gold_plans.py",
-    "generated_utc": "2026-03-22T22:07:04.062522+00:00",
-    "n_cases": 70,
-    "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
-    "secondary_model": "",
-    "tertiary_model": "",
-    "probe_meta": {
-      "n_splits": 3,
-      "frequent_labels": [
-        "generalized anxiety disorder",
-        "psychosis"
-      ],
-      "rare_labels": {},
-      "rare_label_fallbacks": 0,
-      "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
-      "fallback_to_primary_on_disagreement": true,
-      "weak_supervision_source": "split_metadata_inferred_condition"
-    }
-  },
   "plans": {
     "ctrl_c_031": {
       "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
@@ -581,6 +559,268 @@
       "inferred_condition": "psychosis",
       "plan_components": [],
       "plan_component_evidence": {}
+    },
+    "ctrl_c_001": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10529,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_002": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 8941,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_003": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10680,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_004": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 9933,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_005": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis; prolonged grief. Constraints/Meds: none noted.",
+      "source_openr1_id": 10560,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_006": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10726,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_007": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10573,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_008": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10856,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_009": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10593,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_010": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10621,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_011": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 10968,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_012": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10711,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_013": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10717,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_014": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 11021,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_015": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10775,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_016": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10792,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_017": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10808,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_018": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 11171,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_019": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10847,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_020": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10849,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_021": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 11192,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_022": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10854,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_023": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 11211,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_024": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis; self-harm risk. Constraints/Meds: none noted.",
+      "source_openr1_id": 10862,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_025": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10868,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_026": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 11263,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_027": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10874,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_028": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10906,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_029": {
+      "plan": "Therapy: CBT focusing on worry management and uncertainty tolerance. Medication: SSRI or SNRI for persistent anxiety. Skills: worry time scheduling, relaxation training, and mindfulness. Follow-up: GAD-7 scores and sleep quality. Case anchors: Problem: generalized anxiety disorder. Constraints/Meds: none noted.",
+      "source_openr1_id": 11412,
+      "source_split": "train",
+      "inferred_condition": "generalized anxiety disorder",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    },
+    "ctrl_c_030": {
+      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
+      "source_openr1_id": 10937,
+      "source_split": "train",
+      "inferred_condition": "psychosis",
+      "plan_components": [],
+      "plan_component_evidence": {}
+    }
+  },
+  "meta": {
+    "dataset": "controllability/study_c_split_metadata",
+    "backend": "probe",
+    "extraction": "controllability/generate_gold_plans.py",
+    "generated_utc": "2026-03-22T21:49:54.661883+00:00",
+    "n_cases": 30,
+    "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
+    "secondary_model": "",
+    "tertiary_model": "",
+    "probe_meta": {
+      "n_splits": 3,
+      "frequent_labels": [
+        "generalized anxiety disorder",
+        "psychosis"
+      ],
+      "rare_labels": {},
+      "rare_label_fallbacks": 0,
+      "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
+      "fallback_to_primary_on_disagreement": true,
+      "weak_supervision_source": "split_metadata_inferred_condition"
     }
   }
 }
