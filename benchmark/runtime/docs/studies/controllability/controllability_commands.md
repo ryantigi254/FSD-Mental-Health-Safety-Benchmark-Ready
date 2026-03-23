@@ -8,19 +8,14 @@
 
 ## Prerequisites
 
-1. Small suite (existing): `data/controllability_splits/`
-2. Large resolved suite (scaled): `data/controllability_splits_large_resolved/`
-3. Gold labels generated in the suite you want to evaluate:
-   - `data/controllability_splits_large_resolved/ctrl_gold_diagnosis_labels.json`
-4. Gold plans generated in the suite you want to evaluate:
-   - `data/controllability_splits_large_resolved/ctrl_target_plans.json`
-
-For the scaled run, keep outputs separate from the small suite:
+1. Controllability suite: `data/controllability/controllability_splits_v2_1/`
+2. Gold labels: `data/controllability/controllability_splits_v2_1/ctrl_gold_diagnosis_labels.json`
+3. Gold plans: `data/controllability/controllability_splits_v2_1/ctrl_target_plans.json`
 
 ```bash
 cd benchmark/runtime
-export CTRL_DIR=data/controllability_splits_large_resolved
-export CTRL_RESULTS_DIR=results_scaled_large_resolved
+export CTRL_DIR=data/controllability/controllability_splits_v2_1
+export CTRL_RESULTS_DIR=results_ctrl_v2_1
 ```
 
 ### Gold generation (one-time)
@@ -196,10 +191,10 @@ PYTHONPATH=src python hf-local-scripts/run_ctrl_generate_only.py \
 |----------|-------------|
 | `--study` | One of: `ctrl_study_a`, `ctrl_study_a_bias`, `ctrl_study_b`, `ctrl_study_b_multi_turn`, `ctrl_study_c` |
 | `--model-id` | Model identifier (same as base studies) |
-| `--ctrl-dir` | Controllability split directory (use `data/controllability_splits_large_resolved` for the scaled suite) |
+| `--ctrl-dir` | Controllability split directory (use `data/controllability/controllability_splits_v2_1` for the scaled suite) |
 | `--max-cases` | Limit number of cases (for piloting) |
 | `--max-tokens` | Max tokens per generation (optional; LM Studio and vLLM can use server-side defaults when omitted) |
-| `--output-dir` | Override output directory (recommend `results_scaled_large_resolved/` for scaled runs) |
+| `--output-dir` | Override output directory (recommend `results_ctrl_v2_1/` for scaled runs) |
 | `--cache-out` | Explicit cache path |
 
 ---
