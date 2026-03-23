@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Build source-backed invariance `_v2_1` roots from strict v6_1 parent datasets."""
+"""Build source-backed invariance roots from strict parent datasets.
+
+Supports two ctrl lineages:
+  - v2_1: sampled from controllability_splits_v2_1
+  - v3:   sampled from controllability_splits_v3  (scaled pool)
+"""
 
 from __future__ import annotations
 
@@ -32,9 +37,15 @@ V6_1_PARENT_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v6_1"
 
 CTRL_BASE_ROOT = RUNTIME_ROOT / "data" / "invariance" / "misc" / "invariance_variants" / "variant_family" / "base"
 CTRL_BASE_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "misc" / "ctrl_variants_base_v2_1"
-CTRL_PARENT_ROOT_V2_1 = RUNTIME_ROOT / "data" / "controllability" / "controllability_splits_v3"
+CTRL_PARENT_ROOT_V2_1 = RUNTIME_ROOT / "data" / "controllability" / "controllability_splits_v2_1"
 CTRL_SAMPLE_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_samples_v2_1"
 VARIANT_FAMILY_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_variants_v2_1"
+
+# v3: sampled from the scaled controllability_splits_v3 pool
+CTRL_BASE_ROOT_V3 = RUNTIME_ROOT / "data" / "invariance" / "misc" / "ctrl_variants_base_v3"
+CTRL_PARENT_ROOT_V3 = RUNTIME_ROOT / "data" / "controllability" / "controllability_splits_v3"
+CTRL_SAMPLE_ROOT_V3 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_samples_v3"
+VARIANT_FAMILY_ROOT_V3 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_variants_v3"
 
 AFFECTED_STUDIES = ("study_a", "study_a_bias", "study_b", "study_b_multi_turn", "study_c")
 UNCHANGED_STUDIES: tuple[str, ...] = ()
@@ -193,47 +204,95 @@ def _build_variant_family_matrix(*, base_root: Path, output_root: Path) -> None:
     )
 
 
-def main() -> int:
-    v5_summary = _build_partial_v2_1_root(
-        inherited_root=V5_SAMPLE_ROOT,
-        output_root=V5_SAMPLE_ROOT_V2_1,
-        parent_root=V6_1_PARENT_ROOT,
-        profile="v5",
-    )
+def _read_existing_summary(root: Path) -> Dict[str, Any]:
+    """Load an already-built manifest as the summary dict."""
+    manifest = _read_json(root / "manifest.json")
+    return manifest
 
-    ctrl_summary = _build_partial_v2_1_root(
-        inherited_root=CTRL_BASE_ROOT,
-        output_root=CTRL_BASE_ROOT_V2_1,
-        parent_root=CTRL_PARENT_ROOT_V2_1,
+
+def main() -> int:
+    # ── v2_1 builds (skip if already materialised or inherited root missing) ──
+    v5_summary: Dict[str, Any] | None = None
+    if V5_SAMPLE_ROOT_V2_1.exists() and (V5_SAMPLE_ROOT_V2_1 / "manifest.json").exists():
+        print(f"[skip] v5 v2_1 already exists at {V5_SAMPLE_ROOT_V2_1}")
+        v5_summary = _read_existing_summary(V5_SAMPLE_ROOT_V2_1)
+    elif V5_SAMPLE_ROOT.exists():
+        v5_summary = _build_partial_v2_1_root(
+            inherited_root=V5_SAMPLE_ROOT,
+            output_root=V5_SAMPLE_ROOT_V2_1,
+            parent_root=V6_1_PARENT_ROOT,
+            profile="v5",
+        )
+    else:
+        print(f"[skip] v5 inherited root missing ({V5_SAMPLE_ROOT}), skipping v5 build")
+
+    if CTRL_SAMPLE_ROOT_V2_1.exists() and (CTRL_SAMPLE_ROOT_V2_1 / "manifest.json").exists():
+        print(f"[skip] ctrl v2_1 already exists at {CTRL_SAMPLE_ROOT_V2_1}")
+        ctrl_summary = _read_existing_summary(CTRL_SAMPLE_ROOT_V2_1)
+    else:
+        ctrl_summary = _build_partial_v2_1_root(
+            inherited_root=CTRL_BASE_ROOT,
+            output_root=CTRL_BASE_ROOT_V2_1,
+            parent_root=CTRL_PARENT_ROOT_V2_1,
+            profile="controllability",
+        )
+        _replace_tree(CTRL_BASE_ROOT_V2_1, CTRL_SAMPLE_ROOT_V2_1)
+        _write_json(
+            CTRL_SAMPLE_ROOT_V2_1 / "manifest.json",
+            {
+                **ctrl_summary,
+                "manifest_dir": str(CTRL_SAMPLE_ROOT_V2_1),
+                "mirrors_base_root": str(CTRL_BASE_ROOT_V2_1),
+            },
+        )
+        _build_variant_family_matrix(
+            base_root=CTRL_BASE_ROOT_V2_1,
+            output_root=VARIANT_FAMILY_ROOT_V2_1,
+        )
+
+    # ── v3 ctrl invariance (from scaled controllability_splits_v3) ──
+    ctrl_v3_inherited = CTRL_SAMPLE_ROOT_V2_1  # use existing v2_1 as skeleton
+    ctrl_v3_summary = _build_partial_v2_1_root(
+        inherited_root=ctrl_v3_inherited,
+        output_root=CTRL_BASE_ROOT_V3,
+        parent_root=CTRL_PARENT_ROOT_V3,
         profile="controllability",
     )
 
-    _replace_tree(CTRL_BASE_ROOT_V2_1, CTRL_SAMPLE_ROOT_V2_1)
+    _replace_tree(CTRL_BASE_ROOT_V3, CTRL_SAMPLE_ROOT_V3)
     _write_json(
-        CTRL_SAMPLE_ROOT_V2_1 / "manifest.json",
+        CTRL_SAMPLE_ROOT_V3 / "manifest.json",
         {
-            **ctrl_summary,
-            "manifest_dir": str(CTRL_SAMPLE_ROOT_V2_1),
-            "mirrors_base_root": str(CTRL_BASE_ROOT_V2_1),
+            **ctrl_v3_summary,
+            "manifest_dir": str(CTRL_SAMPLE_ROOT_V3),
+            "mirrors_base_root": str(CTRL_BASE_ROOT_V3),
+            "parent_version": "v3_scaled_full_pool",
         },
     )
 
     _build_variant_family_matrix(
-        base_root=CTRL_BASE_ROOT_V2_1,
-        output_root=VARIANT_FAMILY_ROOT_V2_1,
+        base_root=CTRL_BASE_ROOT_V3,
+        output_root=VARIANT_FAMILY_ROOT_V3,
     )
 
-    payload = {
-        "v5_invariance_samples_v2_1": {
+    payload: Dict[str, Any] = {}
+    if v5_summary is not None:
+        payload["v5_invariance_samples_v2_1"] = {
             "root": str(V5_SAMPLE_ROOT_V2_1),
             "studies": v5_summary["studies"],
-        },
+        }
+    payload.update({
         "controllability_invariance_samples_v2_1": {
             "root": str(CTRL_SAMPLE_ROOT_V2_1),
             "studies": ctrl_summary["studies"],
         },
         "variant_family_v2_1": str(VARIANT_FAMILY_ROOT_V2_1),
-    }
+        "controllability_invariance_samples_v3": {
+            "root": str(CTRL_SAMPLE_ROOT_V3),
+            "studies": ctrl_v3_summary["studies"],
+        },
+        "variant_family_v3": str(VARIANT_FAMILY_ROOT_V3),
+    })
     print(json.dumps(payload, indent=2))
     return 0
 

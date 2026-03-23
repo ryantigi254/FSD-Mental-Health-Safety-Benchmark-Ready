@@ -1,0 +1,172 @@
+{
+  "workflow": "fixed_sample_variant_matrix",
+  "sampling_policy": "sample_once_then_fan_out_variants",
+  "base_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/misc/ctrl_variants_base_v3",
+  "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3",
+  "seed": 42,
+  "studies": {
+    "study_a": {
+      "variants": [
+        {
+          "variant": "lexical",
+          "family": "lexical_paraphrase",
+          "description": "Swap low-risk lexical choices while keeping the clinical content fixed.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_a/lexical"
+        },
+        {
+          "variant": "surface",
+          "family": "surface_formatting",
+          "description": "Alter punctuation and surface formatting without changing the task semantics.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_a/surface"
+        },
+        {
+          "variant": "syntax",
+          "family": "syntax_reordering",
+          "description": "Reorder clause structure while preserving the same diagnostic content.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_a/syntax"
+        },
+        {
+          "variant": "instruction",
+          "family": "instruction_wrapper",
+          "description": "Add a benign instruction wrapper before the unchanged case prompt.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_a/instruction"
+        }
+      ]
+    },
+    "study_b": {
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "family": "incorrect_opinion_rewording",
+          "description": "Rephrase the injected incorrect opinion in neutral wording.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b/paraphrase"
+        },
+        {
+          "variant": "mild",
+          "family": "opinion_intensity",
+          "description": "Use a mild injected disagreement cue.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b/mild"
+        },
+        {
+          "variant": "moderate",
+          "family": "opinion_intensity",
+          "description": "Use a moderate injected disagreement cue.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b/moderate"
+        },
+        {
+          "variant": "strong",
+          "family": "opinion_intensity",
+          "description": "Use a strong injected disagreement cue.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b/strong"
+        },
+        {
+          "variant": "question",
+          "family": "assertion_vs_question",
+          "description": "Turn the injected belief into a question instead of an assertion.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b/question"
+        },
+        {
+          "variant": "cultural",
+          "family": "cultural_framing",
+          "description": "Wrap the same incorrect opinion in a cultural framing cue.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b/cultural"
+        }
+      ]
+    },
+    "study_b_multi_turn": {
+      "variants": [
+        {
+          "variant": "schedule_earlier",
+          "family": "pressure_schedule",
+          "description": "Move the pressure spike earlier in the same conversation.",
+          "script": "pressure_variants.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b_multi_turn/schedule_earlier"
+        },
+        {
+          "variant": "schedule_later",
+          "family": "pressure_schedule",
+          "description": "Move the pressure spike later in the same conversation.",
+          "script": "pressure_variants.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b_multi_turn/schedule_later"
+        },
+        {
+          "variant": "tone_gentle",
+          "family": "pressure_tone",
+          "description": "Retone pressure turns to a gentler register.",
+          "script": "pressure_variants.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b_multi_turn/tone_gentle"
+        },
+        {
+          "variant": "tone_direct",
+          "family": "pressure_tone",
+          "description": "Retone pressure turns to a direct register.",
+          "script": "pressure_variants.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b_multi_turn/tone_direct"
+        },
+        {
+          "variant": "tone_confrontational",
+          "family": "pressure_tone",
+          "description": "Retone pressure turns to a confrontational register.",
+          "script": "pressure_variants.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b_multi_turn/tone_confrontational"
+        },
+        {
+          "variant": "pressure_milder",
+          "family": "pressure_intensity",
+          "description": "Reduce pressure intensity while keeping turn order fixed.",
+          "script": "pressure_variants.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b_multi_turn/pressure_milder"
+        },
+        {
+          "variant": "pressure_stronger",
+          "family": "pressure_intensity",
+          "description": "Increase pressure intensity while keeping turn order fixed.",
+          "script": "pressure_variants.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_b_multi_turn/pressure_stronger"
+        }
+      ]
+    },
+    "study_c": {
+      "variants": [
+        {
+          "variant": "summary_short",
+          "family": "summary_wording",
+          "description": "Shorten the patient summary while preserving anchor facts.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_c/summary_short"
+        },
+        {
+          "variant": "summary_long",
+          "family": "summary_wording",
+          "description": "Lengthen the patient summary with a harmless anchor reminder.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_c/summary_long"
+        },
+        {
+          "variant": "patient_turn_rephrase",
+          "family": "patient_rephrasing",
+          "description": "Lightly rephrase a subset of patient turns without changing content.",
+          "script": "control_paraphrases.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_c/patient_turn_rephrase"
+        },
+        {
+          "variant": "noncritical_reorder",
+          "family": "noncritical_turn_reorder",
+          "description": "Swap only non-critical turns while preserving anchor turns and numbering.",
+          "script": "reorder_turns.py",
+          "output_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl_variants_v3/study_c/noncritical_reorder"
+        }
+      ]
+    }
+  }
+}
