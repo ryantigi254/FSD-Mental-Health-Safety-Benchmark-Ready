@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "generated_at_utc": "2026-03-22T19:49:44.661401+00:00",
+    "source_dataset": "GMLHUHE/OpenR1-Psy",
+    "plan_source_type": "source_reasoning_extract",
+    "generation_policy": "strict_no_generation"
+  },
+  "plans": {
+    "c_004": {
+      "plan": "Therapy: considering local mental health resources and stigma around therapy",
+      "source_openr1_id": 8927,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_008": {
+      "plan": "Therapy: suggesting active listening or collaborative problem-solving",
+      "source_openr1_id": 8024,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_018": {
+      "plan": "Therapy: suggesting reflecting on interactions to identify patterns, or initiating small, positive interactions to build connections",
+      "source_openr1_id": 8031,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_023": {
+      "plan": "Therapy: suggest actionable steps",
+      "source_openr1_id": 11423,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_028": {
+      "plan": "Therapy: Suggesting writing down her feelings could be a practical step, giving her a way to organize thoughts before expressing them",
+      "source_openr1_id": 8036,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_038": {
+      "plan": "Therapy: suggest observing interactions to see if there's a common thread in the troubles they face",
+      "source_openr1_id": 8039,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_048": {
+      "plan": "Therapy: Suggest small steps to practice expressing needs, reinforcing that their feelings are valid and deserve attention",
+      "source_openr1_id": 8045,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_057": {
+      "plan": "Therapy: suggest setting aside time to talk without distractions",
+      "source_openr1_id": 8057,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_060": {
+      "plan": "Okay, the client is feeling uneasy about her boyfriend's new job where he'll be working mostly with women. She wishes she could support them financially to feel safer but knows it's unfair. First, I need to validate her feelings without judgment",
+      "source_openr1_id": 12956,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_066": {
+      "plan": "Therapy: suggest practical steps to manage anxiety",
+      "source_openr1_id": 8060,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_073": {
+      "plan": "Therapy: suggest meaningful actions without being prescriptive",
+      "source_openr1_id": 10511,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_074": {
+      "plan": "Therapy: consider practical steps without overwhelming her",
+      "source_openr1_id": 8077,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_082": {
+      "plan": "Therapy: Considering therapeutic approaches, a humanistic approach focusing on self-actualization and worth might help",
+      "source_openr1_id": 8080,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_085": {
+      "plan": "Therapy: considering changes that impact your stability and future",
+      "source_openr1_id": 8100,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "c_097": {
+      "plan": "Okay, the client is feeling stuck because his girlfriend has depression and his efforts aren't helping. He's exhausted and scared he's failing her. First, I need to validate his feelings",
+      "source_openr1_id": 10580,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    }
+  }
+}

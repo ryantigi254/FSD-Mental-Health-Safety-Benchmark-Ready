@@ -22,7 +22,7 @@
 cd benchmark/runtime
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b_multi_turn \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_multi_turn_generations.jsonl \
   --variant-cache schedule_earlier=results_ctrl_invariance/<MODEL>/study_b_multi_turn/schedule_earlier/study_b_multi_turn_generations.jsonl \
   --variant-cache schedule_later=results_ctrl_invariance/<MODEL>/study_b_multi_turn/schedule_later/study_b_multi_turn_generations.jsonl \
@@ -47,7 +47,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Schedule Earlier
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b_multi_turn \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_multi_turn_generations.jsonl \
   --variant-cache schedule_earlier=results_ctrl_invariance/<MODEL>/study_b_multi_turn/schedule_earlier/study_b_multi_turn_generations.jsonl \
   --variant-type schedule_earlier=schedule \
@@ -56,7 +56,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Schedule Later
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b_multi_turn \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_multi_turn_generations.jsonl \
   --variant-cache schedule_later=results_ctrl_invariance/<MODEL>/study_b_multi_turn/schedule_later/study_b_multi_turn_generations.jsonl \
   --variant-type schedule_later=schedule \
@@ -65,7 +65,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Tone Gentle
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b_multi_turn \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_multi_turn_generations.jsonl \
   --variant-cache tone_gentle=results_ctrl_invariance/<MODEL>/study_b_multi_turn/tone_gentle/study_b_multi_turn_generations.jsonl \
   --variant-type tone_gentle=tone \
@@ -74,7 +74,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Tone Direct
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b_multi_turn \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_multi_turn_generations.jsonl \
   --variant-cache tone_direct=results_ctrl_invariance/<MODEL>/study_b_multi_turn/tone_direct/study_b_multi_turn_generations.jsonl \
   --variant-type tone_direct=tone \
@@ -83,7 +83,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Tone Confrontational
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b_multi_turn \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_multi_turn_generations.jsonl \
   --variant-cache tone_confrontational=results_ctrl_invariance/<MODEL>/study_b_multi_turn/tone_confrontational/study_b_multi_turn_generations.jsonl \
   --variant-type tone_confrontational=tone \
@@ -92,7 +92,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Pressure Milder
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b_multi_turn \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_multi_turn_generations.jsonl \
   --variant-cache pressure_milder=results_ctrl_invariance/<MODEL>/study_b_multi_turn/pressure_milder/study_b_multi_turn_generations.jsonl \
   --variant-type pressure_milder=pressure \
@@ -101,7 +101,7 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
 # Pressure Stronger
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b_multi_turn \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_multi_turn_generations.jsonl \
   --variant-cache pressure_stronger=results_ctrl_invariance/<MODEL>/study_b_multi_turn/pressure_stronger/study_b_multi_turn_generations.jsonl \
   --variant-type pressure_stronger=pressure \
@@ -115,7 +115,7 @@ Run gentle → direct → confrontational together:
 ```bash
 PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --study study_b_multi_turn \
-  --data-root data/invariance/ctrl_samples_v2_1 \
+  --data-root data/invariance/ctrl_base_v2_1 \
   --base-cache results_ctrl_invariance/<MODEL>/study_b_multi_turn_generations.jsonl \
   --variant-cache tone_gentle=results_ctrl_invariance/<MODEL>/study_b_multi_turn/tone_gentle/study_b_multi_turn_generations.jsonl \
   --variant-cache tone_direct=results_ctrl_invariance/<MODEL>/study_b_multi_turn/tone_direct/study_b_multi_turn_generations.jsonl \

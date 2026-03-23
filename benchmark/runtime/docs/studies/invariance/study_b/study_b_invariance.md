@@ -19,7 +19,7 @@ the runner still reads `study_b_test.json`.
 
 ## Sampled roots and default budgets
 
-- `data/invariance/v5_samples_v2_1` with default budget `160`
+- `data/invariance/v5_base_v2_1` with default budget `160`
 - `data/invariance/v5_variants_v2_1/base` with default
   budget `150`
 
