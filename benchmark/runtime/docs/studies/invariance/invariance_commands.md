@@ -76,9 +76,9 @@ Per-study notes:
 Ctrl invariance commands (using `data/invariance/ctrl_base` and
 `data/invariance/ctrl_variant_family`) live in separate files:
 
-- `docs/studies/invariance/ctrl_invariance_commands.md` — top-level ctrl overview
-- `docs/studies/invariance/study_a/study_a_ctrl_invariance_commands.md`
-- `docs/studies/invariance/study_a/study_a_bias_ctrl_invariance_commands.md`
-- `docs/studies/invariance/study_b/study_b_ctrl_invariance_commands.md`
-- `docs/studies/invariance/study_b/study_b_multi_turn_ctrl_invariance_commands.md`
-- `docs/studies/invariance/study_c/study_c_ctrl_invariance_commands.md`
+- `docs/studies/invariance/invariance_ctrl_commands.md` — top-level ctrl overview
+- `docs/studies/invariance/study_a/study_a_invariance_ctrl_commands.md`
+- `docs/studies/invariance/study_a/study_a_bias_invariance_ctrl_commands.md`
+- `docs/studies/invariance/study_b/study_b_invariance_ctrl_commands.md`
+- `docs/studies/invariance/study_b/study_b_multi_turn_invariance_ctrl_commands.md`
+- `docs/studies/invariance/study_c/study_c_invariance_ctrl_commands.md`
