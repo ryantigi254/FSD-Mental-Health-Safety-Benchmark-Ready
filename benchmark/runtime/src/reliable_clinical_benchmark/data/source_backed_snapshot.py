@@ -398,10 +398,14 @@ def load_openr1_rows(cache_dir: Optional[Path] = None) -> List[Dict[str, Any]]:
     return rows
 
 
-def _condition_groups(rows: Iterable[Dict[str, Any]]) -> Dict[str, List[Dict[str, Any]]]:
+def _condition_groups(
+    rows: Iterable[Dict[str, Any]],
+    *,
+    include_unresolved: bool = False,
+) -> Dict[str, List[Dict[str, Any]]]:
     grouped: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     for row in rows:
-        if row["inferred_condition"] == "unresolved":
+        if row["inferred_condition"] == "unresolved" and not include_unresolved:
             continue
         grouped[row["inferred_condition"]].append(row)
     for values in grouped.values():
@@ -415,18 +419,19 @@ def _round_robin_select(
     target_n: int,
     used_refs: set[Tuple[str, int]],
     require_multi_turn: bool = False,
+    include_unresolved: bool = False,
 ) -> List[Dict[str, Any]]:
     eligible = []
     for row in rows:
         ref = (row["split"], row["source_openr1_id"])
         if ref in used_refs:
             continue
-        if row["inferred_condition"] == "unresolved":
+        if row["inferred_condition"] == "unresolved" and not include_unresolved:
             continue
         if require_multi_turn and row["num_rounds"] < 2:
             continue
         eligible.append(row)
-    grouped = _condition_groups(eligible)
+    grouped = _condition_groups(eligible, include_unresolved=include_unresolved)
     ordered_conditions = sorted(grouped)
     selected: List[Dict[str, Any]] = []
     while len(selected) < target_n and ordered_conditions:

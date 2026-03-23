@@ -1,0 +1,117 @@
+# Study B — Reverse Invariance Commands
+
+> **Direction:** Controllability → Invariance.
+> Measures which perturbation families change Study B controllability metrics most.
+
+## Variant Families
+
+| Tag | Type | Data Root |
+|-----|------|-----------|
+| `paraphrase` | paraphrase | `data/invariance/ctrl_variant_family/study_b/paraphrase` |
+| `mild` | intensity | `data/invariance/ctrl_variant_family/study_b/mild` |
+| `moderate` | intensity | `data/invariance/ctrl_variant_family/study_b/moderate` |
+| `strong` | intensity | `data/invariance/ctrl_variant_family/study_b/strong` |
+| `question` | framing | `data/invariance/ctrl_variant_family/study_b/question` |
+| `cultural` | framing | `data/invariance/ctrl_variant_family/study_b/cultural` |
+
+## Comparison (All Variants)
+
+```bash
+cd benchmark/runtime
+PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
+  --study study_b \
+  --data-root data/invariance/ctrl_base \
+  --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
+  --variant-cache paraphrase=results_ctrl_invariance/<MODEL>/study_b/paraphrase/study_b_generations.jsonl \
+  --variant-cache mild=results_ctrl_invariance/<MODEL>/study_b/mild/study_b_generations.jsonl \
+  --variant-cache moderate=results_ctrl_invariance/<MODEL>/study_b/moderate/study_b_generations.jsonl \
+  --variant-cache strong=results_ctrl_invariance/<MODEL>/study_b/strong/study_b_generations.jsonl \
+  --variant-cache question=results_ctrl_invariance/<MODEL>/study_b/question/study_b_generations.jsonl \
+  --variant-cache cultural=results_ctrl_invariance/<MODEL>/study_b/cultural/study_b_generations.jsonl \
+  --variant-type paraphrase=paraphrase \
+  --variant-type mild=intensity \
+  --variant-type moderate=intensity \
+  --variant-type strong=intensity \
+  --variant-type question=framing \
+  --variant-type cultural=framing \
+  --out metric-results/<MODEL>/study_b_reverse_invariance.json
+```
+
+## Per-Variant (Individual)
+
+```bash
+# Paraphrase
+PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
+  --study study_b \
+  --data-root data/invariance/ctrl_base \
+  --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
+  --variant-cache paraphrase=results_ctrl_invariance/<MODEL>/study_b/paraphrase/study_b_generations.jsonl \
+  --variant-type paraphrase=paraphrase \
+  --out metric-results/<MODEL>/study_b_reverse_invariance_paraphrase.json
+
+# Mild
+PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
+  --study study_b \
+  --data-root data/invariance/ctrl_base \
+  --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
+  --variant-cache mild=results_ctrl_invariance/<MODEL>/study_b/mild/study_b_generations.jsonl \
+  --variant-type mild=intensity \
+  --out metric-results/<MODEL>/study_b_reverse_invariance_mild.json
+
+# Moderate
+PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
+  --study study_b \
+  --data-root data/invariance/ctrl_base \
+  --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
+  --variant-cache moderate=results_ctrl_invariance/<MODEL>/study_b/moderate/study_b_generations.jsonl \
+  --variant-type moderate=intensity \
+  --out metric-results/<MODEL>/study_b_reverse_invariance_moderate.json
+
+# Strong
+PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
+  --study study_b \
+  --data-root data/invariance/ctrl_base \
+  --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
+  --variant-cache strong=results_ctrl_invariance/<MODEL>/study_b/strong/study_b_generations.jsonl \
+  --variant-type strong=intensity \
+  --out metric-results/<MODEL>/study_b_reverse_invariance_strong.json
+
+# Question
+PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
+  --study study_b \
+  --data-root data/invariance/ctrl_base \
+  --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
+  --variant-cache question=results_ctrl_invariance/<MODEL>/study_b/question/study_b_generations.jsonl \
+  --variant-type question=framing \
+  --out metric-results/<MODEL>/study_b_reverse_invariance_question.json
+
+# Cultural
+PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
+  --study study_b \
+  --data-root data/invariance/ctrl_base \
+  --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
+  --variant-cache cultural=results_ctrl_invariance/<MODEL>/study_b/cultural/study_b_generations.jsonl \
+  --variant-type cultural=framing \
+  --out metric-results/<MODEL>/study_b_reverse_invariance_cultural.json
+```
+
+## Intensity Dose-Response
+
+Run mild → moderate → strong together to check for monotonic degradation:
+
+```bash
+PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
+  --study study_b \
+  --data-root data/invariance/ctrl_base \
+  --base-cache results_ctrl_invariance/<MODEL>/study_b_generations.jsonl \
+  --variant-cache mild=results_ctrl_invariance/<MODEL>/study_b/mild/study_b_generations.jsonl \
+  --variant-cache moderate=results_ctrl_invariance/<MODEL>/study_b/moderate/study_b_generations.jsonl \
+  --variant-cache strong=results_ctrl_invariance/<MODEL>/study_b/strong/study_b_generations.jsonl \
+  --variant-type mild=intensity \
+  --variant-type moderate=intensity \
+  --variant-type strong=intensity \
+  --variant-intensity mild=1 \
+  --variant-intensity moderate=2 \
+  --variant-intensity strong=3 \
+  --out metric-results/<MODEL>/study_b_reverse_invariance_dose_response.json
+```

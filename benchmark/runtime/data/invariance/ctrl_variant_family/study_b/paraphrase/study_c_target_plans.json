@@ -1,122 +1,82 @@
 {
   "meta": {
-    "dataset": "controllability/study_c_split_metadata",
-    "backend": "probe",
-    "extraction": "controllability/generate_gold_plans.py",
-    "generated_utc": "2026-03-22T22:07:04.062522+00:00",
-    "n_cases": 70,
-    "primary_model": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
-    "secondary_model": "",
-    "tertiary_model": "",
-    "probe_meta": {
-      "n_splits": 3,
-      "frequent_labels": [
-        "generalized anxiety disorder",
-        "psychosis"
-      ],
-      "rare_labels": {},
-      "rare_label_fallbacks": 0,
-      "primary_model_name": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
-      "fallback_to_primary_on_disagreement": true,
-      "weak_supervision_source": "split_metadata_inferred_condition"
-    }
+    "generated_at_utc": "2026-03-23T04:56:42.674684+00:00",
+    "source_dataset": "GMLHUHE/OpenR1-Psy",
+    "plan_source_type": "source_reasoning_extract",
+    "generation_policy": "strict_no_generation"
   },
   "plans": {
-    "ctrl_c_032": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 10938,
+    "ctrl_c_006": {
+      "plan": "Therapy: considering the possibility of couples therapy could be a way to facilitate communication, but she might not be ready for that yet, so it's important to gauge her readiness. Follow-up: reassess her needs",
+      "source_openr1_id": 8108,
       "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_015": {
+      "plan": "Therapy: Suggest exploring how their daily lives and stressors might be impacting their connection",
+      "source_openr1_id": 8110,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_024": {
+      "plan": "Therapy: suggest practical steps like slowing down speech and practicing in safe environments, which are actionable and give the user a sense of control",
+      "source_openr1_id": 8119,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
     },
     "ctrl_c_033": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 10967,
+      "plan": "Therapy: suggest practical steps like expressing needs calmly, using \"I\" statements, and preparing for emotional responses",
+      "source_openr1_id": 8121,
       "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_034": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 10972,
-      "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_035": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 10999,
-      "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_037": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11007,
-      "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_038": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11014,
-      "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
-    },
-    "ctrl_c_040": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11035,
-      "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_source_type": "source_reasoning_extract"
     },
     "ctrl_c_041": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11046,
+      "plan": "Okay, let me start by understanding the client's situation. She's a senior female student preparing to study abroad. She's met the university requirements but still feels inadequate compared to others",
+      "source_openr1_id": 8130,
       "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_source_type": "source_reasoning_extract"
     },
-    "ctrl_c_043": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11049,
+    "ctrl_c_050": {
+      "plan": "Therapy: consider: Cognitive Behavioral Therapy (CBT) to address negative thought patterns, or humanistic approaches to build self-compassion",
+      "source_openr1_id": 8133,
       "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_source_type": "source_reasoning_extract"
     },
-    "ctrl_c_044": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11081,
+    "ctrl_c_100": {
+      "plan": "Okay, the client is feeling isolated even in social settings, with racing thoughts about saying the wrong thing and being judged. They mention anxiety, depression, and OCD rituals that they can't stop despite knowing they're irrational. They feel stuck while others move forward",
+      "source_openr1_id": 10758,
       "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_source_type": "source_reasoning_extract"
     },
-    "ctrl_c_045": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11148,
+    "ctrl_c_107": {
+      "plan": "Okay, the client is feeling really empty and stuck. They mentioned that nothing changes despite their efforts, and their encouragement to others feels hollow. They’re struggling with sleeplessness and a heavy, suffocating feeling",
+      "source_openr1_id": 11343,
       "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_source_type": "source_reasoning_extract"
     },
-    "ctrl_c_046": {
-      "plan": "Therapy: CBTp and family intervention. Medication: antipsychotic with metabolic monitoring. Skills: early warning signs, medication adherence, and social engagement. Follow-up: symptom severity, side effects, and functional goals. Case anchors: Problem: psychosis. Constraints/Meds: none noted.",
-      "source_openr1_id": 11168,
+    "ctrl_c_242": {
+      "plan": "Okay, the client is expressing a deep sense of emptiness and detachment. They feel numb, like they're just going through the motions each day. The phrases \"floating through each day\" and \"detached from everything and everyone\" suggest possible symptoms of depression, maybe anhedonia or emotional blunting",
+      "source_openr1_id": 11764,
       "source_split": "train",
-      "inferred_condition": "psychosis",
-      "plan_components": [],
-      "plan_component_evidence": {}
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_266": {
+      "plan": "Okay, the client is feeling empty, dread about the future, and numbness. They're scared it won't end. First, I need to validate their feelings",
+      "source_openr1_id": 11816,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_271": {
+      "plan": "Okay, the user is a student named Classmate A who's feeling confused, lost confidence, and even disgusted with learning. They don't know what to do. I need to respond with empathy and support without using any clinical terms",
+      "source_openr1_id": 8329,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_279": {
+      "plan": "Okay, the user is feeling confused and intense emotions after reconnecting with someone from their past. They had a crush on this person as a teenager but were in the closet, while the other person was out and confident. Now, years later, they're at different life stages—the other person is settled, and the user is just starting to explore their identity",
+      "source_openr1_id": 11417,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
     }
   }
 }

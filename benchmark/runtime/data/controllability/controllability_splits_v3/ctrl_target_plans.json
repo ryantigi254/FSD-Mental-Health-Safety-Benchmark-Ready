@@ -1,0 +1,1702 @@
+{
+  "meta": {
+    "generated_at_utc": "2026-03-23T04:56:42.674684+00:00",
+    "source_dataset": "GMLHUHE/OpenR1-Psy",
+    "plan_source_type": "source_reasoning_extract",
+    "generation_policy": "strict_no_generation"
+  },
+  "plans": {
+    "ctrl_c_001": {
+      "plan": "Okay, the client is really upset because they reported cheating classmates and faced retaliation. They feel distressed and stuck. First, I need to validate their feelings",
+      "source_openr1_id": 8124,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_002": {
+      "plan": "Okay, the client is describing feelings of emptiness, persistent sadness, heaviness, and isolation even when around friends. They feel detached, like they're observing life from behind glass. First, I need to acknowledge their emotions without any clinical terms",
+      "source_openr1_id": 10962,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_003": {
+      "plan": "Therapy: suggest a practical step, like writing down memories and then reflecting on what he's learned",
+      "source_openr1_id": 8985,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_004": {
+      "plan": "Therapy: suggest that their body might be reacting to protect them from past pain, and that exploring these feelings in a safe space could help them heal",
+      "source_openr1_id": 10872,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_005": {
+      "plan": "Okay, let's start by really taking in what the client is sharing. They feel alone and invisible, even in the presence of others. The physical pain they're experiencing adds another layer, especially since doctors can't find a cause",
+      "source_openr1_id": 10587,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_006": {
+      "plan": "Therapy: considering the possibility of couples therapy could be a way to facilitate communication, but she might not be ready for that yet, so it's important to gauge her readiness. Follow-up: reassess her needs",
+      "source_openr1_id": 8108,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_007": {
+      "plan": "Okay, let me start by understanding the user's message. They were feeling good, had energy, laughed with a friend, but then suddenly a wave of darkness hit, leading to thoughts of self-harm. They're confused because this happens when things seem okay",
+      "source_openr1_id": 12155,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_008": {
+      "plan": "Therapy: consider next steps without pushing any specific action",
+      "source_openr1_id": 11299,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_009": {
+      "plan": "Therapy: suggesting therapy models outright, I can incorporate elements of person-centered therapy by offering a safe space for them to explore their feelings",
+      "source_openr1_id": 157,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_010": {
+      "plan": "Therapy: suggest a gentle approach to identify patterns without labeling it as CBT",
+      "source_openr1_id": 8125,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_011": {
+      "plan": "Okay, the user is in a really tough spot. They lost their apartment, are staying with a friend but can't stay long, shelters are full, and they feel helpless. I need to respond with empathy first",
+      "source_openr1_id": 11193,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_012": {
+      "plan": "Therapy: recommend spending quality time together without pushing for communication, like shared activities. Follow-up: follow-up, reinforce the need for consistent, gentle efforts and maybe suggest seeking a counselor if things don't improve, but without pushing it aggressively",
+      "source_openr1_id": 9347,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_013": {
+      "plan": "Therapy: suggesting grounding techniques or mindfulness could help, but framed as simple practices to find steadiness",
+      "source_openr1_id": 10880,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_014": {
+      "plan": "Okay, the user is talking about feeling empty and unmoored after their youngest child left for college. They mention the house being quiet and feeling like they're just going through the motions at work. They expected relief but feel lost instead",
+      "source_openr1_id": 10591,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_015": {
+      "plan": "Therapy: Suggest exploring how their daily lives and stressors might be impacting their connection",
+      "source_openr1_id": 8110,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_016": {
+      "plan": "Okay, the client is feeling overwhelmed with loneliness, the weight of their breakup, unemployment, and isolation. They don't know where to start. First, I need to validate their feelings without using clinical terms",
+      "source_openr1_id": 12226,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_017": {
+      "plan": "Okay, the client is in a really tough spot. They're experiencing intense suicidal thoughts and considering hospitalization but are scared of being stigmatized or losing control. I need to respond with empathy and validate their feelings without using clinical terms",
+      "source_openr1_id": 11347,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_018": {
+      "plan": "Therapy: suggesting a specific therapy approach, maybe use elements of humanistic or cognitive-behavioral techniques",
+      "source_openr1_id": 165,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_019": {
+      "plan": "Therapy: suggest exploring the stories they tell themselves and whether those stories are based on facts or fears",
+      "source_openr1_id": 8128,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_020": {
+      "plan": "Okay, the client is feeling really empty and hopeless, like there's no point in anything. They mention constant pain and not seeing a way things could get better. They're staying here for their mom, but that feels like a burden",
+      "source_openr1_id": 11201,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_021": {
+      "plan": "Therapy: adjustments in their interactions can lead to positive changes",
+      "source_openr1_id": 9587,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_022": {
+      "plan": "Therapy: consider here might be grounding techniques from CBT to manage immediate triggers, or perhaps narrative therapy to help them reframe their experiences",
+      "source_openr1_id": 10886,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_023": {
+      "plan": "Okay, the client is really struggling with their decision to leave music. They feel a heavy weight, which tells me there's a lot of grief and regret. They mention choosing stability over their passion and now feel lost",
+      "source_openr1_id": 10606,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_024": {
+      "plan": "Therapy: suggest practical steps like slowing down speech and practicing in safe environments, which are actionable and give the user a sense of control",
+      "source_openr1_id": 8119,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_025": {
+      "plan": "Okay, let me start by understanding what the user is going through. They're feeling deep shame and self-loathing after repeating a behavior they vowed to stop. They mention feeling disgusting and even their dog can sense their worthlessness",
+      "source_openr1_id": 12274,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_026": {
+      "plan": "Therapy: consider, but since this is a first interaction, focus on the current messages",
+      "source_openr1_id": 11397,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_027": {
+      "plan": "Therapy: suggesting small steps to engage in meaningful activities or reconnecting with hobbies they once enjoyed",
+      "source_openr1_id": 172,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_028": {
+      "plan": "Therapy: suggest finding small ways to honor both commitments, like scheduling specific times for wedding planning and mother-daughter activities",
+      "source_openr1_id": 8129,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_029": {
+      "plan": "Okay, the client is feeling exhausted and stuck in a cycle where nothing changes. They start the day hoping for something different but end up back where they began. The relief they get from just making it through the day feels empty",
+      "source_openr1_id": 11207,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_030": {
+      "plan": "Okay, let's start by reading the client's message carefully. They mention feeling depressed, having trouble sleeping, and physical symptoms like leg pain and gastrointestinal issues. They were diagnosed with depression while abroad, but medication didn't help",
+      "source_openr1_id": 9594,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_031": {
+      "plan": "Therapy: start by empathizing with their loneliness and the hurt from friends' reactions",
+      "source_openr1_id": 10899,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_032": {
+      "plan": "Okay, the client is really struggling with their dad's sudden change after an accident. They feel lost, angry, and sad, and their family is scrambling. I need to validate those emotions first",
+      "source_openr1_id": 10634,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_033": {
+      "plan": "Therapy: suggest practical steps like expressing needs calmly, using \"I\" statements, and preparing for emotional responses",
+      "source_openr1_id": 8121,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_034": {
+      "plan": "Okay, so the client is really struggling with intense mood swings. They felt okay yesterday but now they're overwhelmed with negative thoughts and self-harm. I need to acknowledge their pain without using clinical terms",
+      "source_openr1_id": 12482,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_035": {
+      "plan": "Okay, the user is sharing a tough experience where they felt overwhelmed but managed to cope using their favorite playlist and memes. They mention feeling relieved but also hint at how close they were to not making it through. First, I need to validate their feelings without any clinical terms",
+      "source_openr1_id": 11473,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_036": {
+      "plan": "Therapy: suggest a conversation starter or setting aside dedicated time to talk without distractions",
+      "source_openr1_id": 223,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_037": {
+      "plan": "Okay, the client is experiencing a lot of fear related to sex, which is causing them pain. First, I need to acknowledge their feelings without using any clinical terms. They mentioned it's making them \"very painful,\" so emotional pain is significant here",
+      "source_openr1_id": 8131,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_038": {
+      "plan": "Therapy: suggesting a small act of self-care",
+      "source_openr1_id": 11210,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_039": {
+      "plan": "Therapy: suggesting alternative activities that address those emotions. Follow-up: track moods and snacking times",
+      "source_openr1_id": 9719,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_040": {
+      "plan": "Okay, the client is experiencing intrusive memories and feelings of powerlessness, replaying a past event. They mention freezing up and fear taking over, which might indicate trauma. I need to respond with empathy and validation",
+      "source_openr1_id": 11057,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_041": {
+      "plan": "Okay, let me start by understanding the client's situation. She's a senior female student preparing to study abroad. She's met the university requirements but still feels inadequate compared to others",
+      "source_openr1_id": 8130,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_042": {
+      "plan": "Okay, the client is feeling really isolated and unseen. They mention school being hell with whispers and laughter, which suggests bullying or social exclusion. At home, parents are either yelling or ignoring them, so no support there",
+      "source_openr1_id": 12588,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_043": {
+      "plan": "Okay, the user is feeling overwhelmed by darkness and self-loathing, comparing themselves to the anti-Christ. That's a strong metaphor indicating deep guilt or shame. They're fixated on past mistakes, believing they've ruined their happiness",
+      "source_openr1_id": 11478,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_044": {
+      "plan": "Okay, the user is saying, \"He was wrong, why did he still rely on me?\" Let me unpack this. They're feeling confused and maybe hurt because someone they care about did something wrong but still depends on them. The key emotions here are probably betrayal, frustration, or confusion",
+      "source_openr1_id": 241,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_045": {
+      "plan": "Therapy: suggested, and they have fears about unfamiliar environments and interacting with strangers",
+      "source_openr1_id": 8136,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_046": {
+      "plan": "Therapy: suggesting small, manageable goals when interacting with men, or finding alternative ways to participate in group projects",
+      "source_openr1_id": 11266,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_047": {
+      "plan": "Therapy: consider: Cognitive Behavioral Therapy could help the parent identify and adjust their expectations. Follow-up: follow-up questions",
+      "source_openr1_id": 10233,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_048": {
+      "plan": "Therapy: start with empathy, then gently guide towards reflecting on their reaction and finding constructive ways to move forward",
+      "source_openr1_id": 11069,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_049": {
+      "plan": "Okay, the client is describing feelings of heaviness, exhaustion, and a sense of pointlessness. They feel overwhelmed and isolated, like they're drowning but no one notices. First, I need to validate their emotions without using clinical terms",
+      "source_openr1_id": 10676,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_050": {
+      "plan": "Therapy: consider: Cognitive Behavioral Therapy (CBT) to address negative thought patterns, or humanistic approaches to build self-compassion",
+      "source_openr1_id": 8133,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_051": {
+      "plan": "Okay, the user is really upset after a bad experience at the clinic. They felt dismissed and unheard by the doctor. First, I need to validate their feelings",
+      "source_openr1_id": 12776,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_052": {
+      "plan": "Okay, the client is really struggling with feelings of hopelessness and exhaustion. They mentioned the heaviness in their chest, going through the motions, and thoughts about not being here. They feel unnoticed and are tired of pretending",
+      "source_openr1_id": 11484,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_053": {
+      "plan": "Okay, the client is addressing me as \"Teacher,\" which might indicate they see me in a guiding or mentoring role. They're saying they're very upset, so my first priority is to validate their feelings. I need to respond with empathy and openness, letting them know I'm here to listen",
+      "source_openr1_id": 261,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_054": {
+      "plan": "Therapy: suggest a practical step they can take together",
+      "source_openr1_id": 8137,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_055": {
+      "plan": "Therapy: Considering therapeutic approaches, CBT could help challenge these negative thoughts, but I shouldn't name it",
+      "source_openr1_id": 11287,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_056": {
+      "plan": "Therapy: suggest gently exploring how their younger self's longing for approval influences their current actions or goals",
+      "source_openr1_id": 10377,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_057": {
+      "plan": "Therapy: suggest small steps to test their fears, like observing their partner's consistent actions",
+      "source_openr1_id": 11086,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_058": {
+      "plan": "Okay, the client is sharing that they found old photos of them and their ex-partner, which brings up mixed emotions. They feel both warmth from the happy memories and sadness because the relationship ended. They miss the closeness they once had",
+      "source_openr1_id": 10738,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_059": {
+      "plan": "Therapy: suggest small actions to start asserting her needs",
+      "source_openr1_id": 8153,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_060": {
+      "plan": "Okay, the client is expressing deep despair and feelings of rejection. They feel stuck in a cycle of pain and mention wanting it to stop, which could indicate suicidal thoughts. I need to acknowledge their pain without using clinical terms",
+      "source_openr1_id": 13127,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_061": {
+      "plan": "Okay, let's start by really understanding what the client is going through. They're feeling completely shattered after a breakup, which they describe as the \"final straw.\" That phrase makes me think they've experienced multiple losses before this, and now this breakup has pushed them to a breaking point. The pain they're feeling is unbearable, and they're waking up every morning wishing they hadn't",
+      "source_openr1_id": 11635,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_062": {
+      "plan": "Follow-up: track their emotions to find triggers, but frame it as a way to understand their feelings better, not as an intervention",
+      "source_openr1_id": 300,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_063": {
+      "plan": "Therapy: suggestion is practical, like choosing a calm moment to talk, and focusing on mutual goals rather than accusations",
+      "source_openr1_id": 8139,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_064": {
+      "plan": "Therapy: recommended activities",
+      "source_openr1_id": 11291,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_065": {
+      "plan": "Therapy: suggest focusing on present moments when she feels safe to counteract the hyper-vigilance",
+      "source_openr1_id": 10513,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_066": {
+      "plan": "Okay, the client is describing a nightmare where they were back in a traumatic place and couldn't move. They mention physical symptoms like itching wrists and fresh bruises, indicating their body is reacting to the trauma even when they're not consciously thinking about it. The key here is the mind-body connection related to past trauma",
+      "source_openr1_id": 11161,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_067": {
+      "plan": "Okay, the client is feeling crushed after receiving a denial for disability benefits. They mention financial strain from surgery, barely making rent, and the emotional toll on their wife. They feel stuck in pain and bureaucracy, and think the system is designed to make them give up",
+      "source_openr1_id": 10781,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_068": {
+      "plan": "Okay, the client mentioned that the atmosphere at home is tense and their mother is quarreling with them about studies. First, I need to validate their feelings. They might feel stressed or misunderstood",
+      "source_openr1_id": 8154,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_069": {
+      "plan": "Therapy: Start with empathy, acknowledge the struggle, normalize their feelings, then perhaps offer a gentle nudge towards exploring small actions or memories that once brought them joy",
+      "source_openr1_id": 13233,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_070": {
+      "plan": "Okay, the client is expressing deep despair and suicidal thoughts. First, I need to acknowledge their pain without any clinical terms. They feel isolated and exhausted from pretending",
+      "source_openr1_id": 11768,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_071": {
+      "plan": "Okay, let me start by really trying to understand where the user is coming from. They're upset about an article that claims happiness is a choice, and they feel like that's dismissing their struggles. My first thought is to validate their frustration because that's a common reaction when people feel their experiences are being minimized",
+      "source_openr1_id": 319,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_072": {
+      "plan": "Therapy: suggest practical steps like noting down moments of worry and examining the underlying thoughts. Follow-up: track situations, thoughts, and emotions",
+      "source_openr1_id": 8140,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_073": {
+      "plan": "Okay, let's start by really listening to what the client is saying. They're feeling overwhelmed and stuck at work, with recurring setbacks leading to self-doubt and fear of failure. The key emotions here are overwhelm, frustration, and anxiety about their capabilities",
+      "source_openr1_id": 11302,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_074": {
+      "plan": "Okay, the client is really struggling with grief on what would have been the birthday of someone they've lost. They bought a cake but can't bring themselves to light the candles. The pain is overwhelming, and they miss the person's presence deeply",
+      "source_openr1_id": 10583,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_075": {
+      "plan": "Okay, the client is feeling numb despite being in a relationship that should make them happy. They're confused and scared, questioning if they're broken. I need to validate their feelings without using clinical terms",
+      "source_openr1_id": 11234,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_076": {
+      "plan": "Okay, the client just shared that they're cancer-free but feel empty and lonely instead of happy. First, I need to acknowledge their mixed emotions. They might be experiencing survivor's guilt or post-treatment letdown",
+      "source_openr1_id": 10790,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_077": {
+      "plan": "Therapy: considering the systemic nature of their issues, maybe suggesting ways to break the negative interaction cycle",
+      "source_openr1_id": 8158,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_078": {
+      "plan": "Okay, the client is feeling really down after New Year's Eve. They had a great time but now they're crying alone, thinking they won't have intimacy again for a long time. They're calling themselves a loser for getting attached to one night",
+      "source_openr1_id": 13567,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_079": {
+      "plan": "Okay, the client is expressing intense feelings of self-loathing and worthlessness. They mention feeling disgusting, not deserving to be here, and even thoughts of disappearing. The shame is overwhelming them",
+      "source_openr1_id": 12058,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_080": {
+      "plan": "Therapy: consider that emotions can be complex, not always tied to external factors",
+      "source_openr1_id": 323,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_081": {
+      "plan": "Therapy: considering cultural factors might be relevant here, especially if the parents have specific expectations",
+      "source_openr1_id": 8144,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_082": {
+      "plan": "Therapy: suggest a small actionable step, address loneliness by encouraging reaching out, mention their strength, and connect past and present gently",
+      "source_openr1_id": 11307,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_083": {
+      "plan": "Okay, let's start by unpacking what the client is sharing. They're feeling a mix of emptiness and anger, which is really intense. The sense that nothing matters and the exhaustion from fighting those feelings are key here",
+      "source_openr1_id": 10644,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_084": {
+      "plan": "Therapy: suggest examining the stories they tell themselves and whether they're based on facts or old fears",
+      "source_openr1_id": 11256,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_085": {
+      "plan": "Therapy: considering their current situation (sleeping in a car), practical resources might be needed, but since I'm acting as a counselor, I can't provide direct resources, just emotional support",
+      "source_openr1_id": 10802,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_086": {
+      "plan": "Therapy: Suggesting small acts of openness and kindness could help them take safe steps towards others",
+      "source_openr1_id": 8160,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_087": {
+      "plan": "Therapy: Start with empathy: \"It sounds like this cycle is exhausting—wanting to feel differently but caught in reactions that leave you frustrated with yourself",
+      "source_openr1_id": 13651,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_088": {
+      "plan": "Okay, the client is feeling really stuck despite doing all the right things—meds, therapy, exercise. They mentioned a fog that won't lift and exhaustion from trying without results. They don't want to die but don't want to exist like this",
+      "source_openr1_id": 12103,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_089": {
+      "plan": "Okay, the client is feeling really down because their birthday didn't meet their expectations. They got a few texts but no calls or plans from friends, and they're struggling with feeling heavy and pathetic for caring. I need to validate their feelings without dismissing them as silly",
+      "source_openr1_id": 324,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_090": {
+      "plan": "Therapy: considering therapeutic approaches, CBT could help him examine thoughts behind the distrust. Follow-up: track when the distrust arises and what thoughts accompany it",
+      "source_openr1_id": 8159,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_091": {
+      "plan": "Follow-up: track what happens before the spiral might help them gain some control",
+      "source_openr1_id": 11316,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_092": {
+      "plan": "Okay, let me start by really understanding what the client is saying. They feel like they're never enough, which points to deep self-esteem issues. The mirror and body image mention suggests possible body dysmorphia",
+      "source_openr1_id": 10669,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_093": {
+      "plan": "Okay, the client is in a really distressing situation. They experienced a violent outburst from their partner, which led to them being locked out and feeling unsafe. Their immediate emotions are fear, vulnerability, and physical symptoms like chest pain",
+      "source_openr1_id": 11277,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_094": {
+      "plan": "Therapy: suggest reconnecting with activities in a way that feels manageable",
+      "source_openr1_id": 10804,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_095": {
+      "plan": "Therapy: suggest looking at patterns in thoughts or behaviors that might be contributing, which ties into CBT elements. Follow-up: track of their experiences to notice patterns",
+      "source_openr1_id": 8166,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_096": {
+      "plan": "Okay, the client is sharing some really heavy feelings about not wanting to be here anymore. First, I need to acknowledge their pain without making them feel judged. They mention feeling scared, confused, and tired of fighting with themselves",
+      "source_openr1_id": 12133,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_097": {
+      "plan": "Okay, let me try to unpack this. The client is feeling really hurt and angry because they trusted someone again, even though they knew better. They're upset with themselves and others, feeling like people always let them down",
+      "source_openr1_id": 331,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_098": {
+      "plan": "Therapy: consider if there's cultural or personal context affecting their interactions",
+      "source_openr1_id": 8179,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_099": {
+      "plan": "Okay, the client is feeling overwhelmed with anger and exhaustion. They mention small triggers like dishes and emails leading to emotional collapse. They feel like things won't get better",
+      "source_openr1_id": 11341,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_100": {
+      "plan": "Okay, the client is feeling isolated even in social settings, with racing thoughts about saying the wrong thing and being judged. They mention anxiety, depression, and OCD rituals that they can't stop despite knowing they're irrational. They feel stuck while others move forward",
+      "source_openr1_id": 10758,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_101": {
+      "plan": "Okay, the client is feeling extremely alone and trapped in fear, almost paralyzed. They mention a heavy fog and suffocating silence, which are strong metaphors indicating maybe depression or anxiety. They're worried this state might never end, which is a common thought in such emotional states",
+      "source_openr1_id": 11381,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_102": {
+      "plan": "Okay, the client is experiencing a mix of gratitude and unease because someone they had conflicts with helped them. They feel guilty and are confused about why this person would help after their past issues. This is causing sleepless nights",
+      "source_openr1_id": 10809,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_103": {
+      "plan": "Therapy: suggest a technique where they pause before responding to understand each other's feelings instead of reacting",
+      "source_openr1_id": 8177,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_104": {
+      "plan": "Okay, the client is feeling overwhelmed by the constant questions from doctors and therapists. They're struggling to keep up and having thoughts about stopping everything. I need to acknowledge their feelings without using clinical terms",
+      "source_openr1_id": 12191,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_105": {
+      "plan": "Okay, the client is feeling blindsided by Carla and her boyfriend's actions. They trusted them, and now there are major issues at home they didn't anticipate. The client feels overwhelmed and unsure",
+      "source_openr1_id": 360,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_106": {
+      "plan": "Therapy: suggesting other practical strategies could help",
+      "source_openr1_id": 8213,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_107": {
+      "plan": "Okay, the client is feeling really empty and stuck. They mentioned that nothing changes despite their efforts, and their encouragement to others feels hollow. They’re struggling with sleeplessness and a heavy, suffocating feeling",
+      "source_openr1_id": 11343,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_108": {
+      "plan": "Therapy: suggest small steps towards in-person interactions, like joining a local event or group related to their interests",
+      "source_openr1_id": 10791,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_109": {
+      "plan": "Therapy: suggest ways to manage the present reactions by connecting past and present gently",
+      "source_openr1_id": 11383,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_110": {
+      "plan": "Okay, the client is expressing a deep sense of apathy and futility. They feel stuck in a routine that lacks meaning. First, I need to validate their feelings without using any clinical terms",
+      "source_openr1_id": 10833,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_111": {
+      "plan": "Therapy: suggesting small steps like journaling or a walk could align with behavioral activation from CBT, but I shouldn't mention CBT",
+      "source_openr1_id": 8180,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_112": {
+      "plan": "Okay, the client is feeling stuck and weighed down, experiencing a sense of hopelessness. They mention waking up with \"What's the point?\" which suggests a loss of motivation or interest. They feel weak because they can't just snap out of it, which might indicate self-criticism or shame about their situation",
+      "source_openr1_id": 12268,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_113": {
+      "plan": "Therapy: consider external factors and separate their self-worth from the outcomes",
+      "source_openr1_id": 368,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_114": {
+      "plan": "Therapy: suggest practical steps",
+      "source_openr1_id": 8214,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_115": {
+      "plan": "Okay, let me see. The client is feeling overwhelmed and having thoughts about not wanting to be here anymore. They're scared by these thoughts and feel stuck",
+      "source_openr1_id": 11346,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_116": {
+      "plan": "Okay, the client is feeling overwhelmed after being suddenly kicked out. They mentioned Wolf losing it and feeling unsteady and angry. First, I need to acknowledge their feelings of instability and anger without using any clinical terms",
+      "source_openr1_id": 10817,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_117": {
+      "plan": "Therapy: suggesting that their actions, like standing up to their dad, were brave and came from a place of love",
+      "source_openr1_id": 11420,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_118": {
+      "plan": "Okay, the client is feeling overwhelmed by multiple stressors. They mention pride in their therapy progress but also the burden of their Nana's declining health, a move, and caregiving responsibilities. They feel like progress is undone by setbacks",
+      "source_openr1_id": 10848,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_119": {
+      "plan": "Okay, the client is feeling annoyed because their mother constantly compares them to others. I need to validate their feelings first. Let them know it's understandable to feel that way",
+      "source_openr1_id": 8183,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_120": {
+      "plan": "Okay, the client is talking about thinking a lot about certain methods being quick and painless. They feel stuck on this. Hmm, first, I need to acknowledge their feelings without judgment",
+      "source_openr1_id": 12308,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_121": {
+      "plan": "Therapy: considering the guilt, it's important to address his commitment and the potential consequences of his actions",
+      "source_openr1_id": 372,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_122": {
+      "plan": "Medication: suggest a small step, like discussing medication concerns with a healthcare provider if they haven't already",
+      "source_openr1_id": 8223,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_123": {
+      "plan": "Therapy: considering cognitive behavioral elements, perhaps helping them identify patterns between their thoughts and physical state without using CBT jargon",
+      "source_openr1_id": 11363,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_124": {
+      "plan": "Therapy: consider any previous conversations if there were any, but since this is the first interaction, focus on the present",
+      "source_openr1_id": 10870,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_125": {
+      "plan": "Okay, the client is feeling really stuck and numb, going through the same routine every day without any relief. They mention feeling like they're drowning and fighting it makes it worse. First, I need to validate their feelings",
+      "source_openr1_id": 11439,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_126": {
+      "plan": "Follow-up: reassess their situation in a way that's less self-critical",
+      "source_openr1_id": 10859,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_127": {
+      "plan": "Therapy: start, suggesting concrete actions like journaling or setting boundaries could be useful. Follow-up: track progress and identify patterns",
+      "source_openr1_id": 8193,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_128": {
+      "plan": "Okay, let's start by really tuning into what the client is expressing here. They're feeling hopeless and stuck in a cycle of self-loathing and fear. The first thing I need to do is acknowledge their pain without any judgment",
+      "source_openr1_id": 12370,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_129": {
+      "plan": "Okay, the user is feeling lost and stuck in their relationship. They mentioned their partner and the cyclical nature of their conflicts, which makes them feel disconnected. Friends are advising them to leave, but they feel it's not that simple",
+      "source_openr1_id": 379,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_130": {
+      "plan": "Therapy: suggest practical steps like expressing concerns using \"I\" statements to avoid blame, offering support with the kids, and finding moments when everyone is calm to discuss",
+      "source_openr1_id": 8224,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_131": {
+      "plan": "Okay, the client is feeling intense loneliness despite being with their partner. They describe it as a heavy blanket, which makes it hard to get up. They acknowledge their partner cares, but they still feel empty and everything seems pointless",
+      "source_openr1_id": 11387,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_132": {
+      "plan": "Therapy: suggest a way to observe the thoughts rather than be consumed by them, which is a mindfulness or CBT technique without naming it",
+      "source_openr1_id": 10878,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_133": {
+      "plan": "Okay, the client is describing intense feelings of overwhelm, sensory sensitivity, and a loss of control after a flashback. They mention hypervigilance to noises, which makes me think of trauma responses. First, I need to validate their feelings without using clinical terms like PTSD or hyperarousal",
+      "source_openr1_id": 11442,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_134": {
+      "plan": "Okay, the client is feeling blindsided by motherhood. She expected it to be magical but is dealing with exhaustion, loneliness, and self-doubt. She loves her baby but feels like she's failing because she's not experiencing the joy others promised",
+      "source_openr1_id": 10869,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_135": {
+      "plan": "Therapy: suggest reflecting on how their past influences current interactions, but frame it as self-awareness rather than a flaw. Follow-up: track interactions and reactions, which can help identify triggers and alternative responses",
+      "source_openr1_id": 8194,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_136": {
+      "plan": "Therapy: consider their own worth outside of their family's reactions",
+      "source_openr1_id": 12416,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_137": {
+      "plan": "Therapy: suggest practical steps like creating a list of next steps or reaching out to support networks",
+      "source_openr1_id": 387,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_138": {
+      "plan": "Okay, the client is dealing with a fear of their mother but wants to reconnect. First, I need to validate their feelings. Fear and the desire to connect can create a lot of inner conflict",
+      "source_openr1_id": 8225,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_139": {
+      "plan": "Okay, the client is describing feelings of heaviness, exhaustion, and hopelessness. They mention waking up tired despite long sleep, which makes me think about possible depression symptoms. The spiraling thoughts and sense of pointlessness align with that too",
+      "source_openr1_id": 11391,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_140": {
+      "plan": "Okay, the client is really struggling after a breakup. They feel lost, guilty, and empty. They mention replaying things they could have done differently, which makes me think of rumination, maybe related to adjustment issues or unresolved grief",
+      "source_openr1_id": 10947,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_141": {
+      "plan": "Therapy: suggest exploring ways to process these emotions, but frame it as a supportive next step without using therapy jargon",
+      "source_openr1_id": 11449,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_142": {
+      "plan": "Therapy: suggest practical ways to support the sister, like listening or helping with daily tasks, to give a sense of control",
+      "source_openr1_id": 10933,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_143": {
+      "plan": "Therapy: Suggest practical steps like small experiments with giving space, focusing on her own activities, and open communication",
+      "source_openr1_id": 8195,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_144": {
+      "plan": "Okay, let's start by really tuning into what the client is expressing. They're feeling overwhelmed, hopeless, and isolated. The key emotions here are exhaustion, fear, and a sense of pointlessness",
+      "source_openr1_id": 12578,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_145": {
+      "plan": "Okay, the client is in a really tough spot. Their partner is abusive again, and they're feeling terrified and trapped because of the lease. They want to leave but are worried about legal issues and feel overwhelmed",
+      "source_openr1_id": 392,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_146": {
+      "plan": "Therapy: suggest reflecting on what they think the classmates are actually thinking versus their fears",
+      "source_openr1_id": 8227,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_147": {
+      "plan": "Okay, the client is feeling like a monster because they're snapping at loved ones and can't control it. They used to see themselves as patient and kind, but now they don't recognize themselves. They mention depression turning them into an angry, hollow version",
+      "source_openr1_id": 11400,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_148": {
+      "plan": "Okay, the client is describing physical symptoms like headaches, muscle tightness, and a racing heart. These are common signs of stress or anxiety. I need to acknowledge their feelings without using clinical terms",
+      "source_openr1_id": 11010,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_149": {
+      "plan": "Okay, the client is feeling frustrated and helpless because their best friend is stuck in a toxic relationship cycle. They want to help but feel ineffective. First, I need to acknowledge their feelings of frustration and helplessness",
+      "source_openr1_id": 11499,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_150": {
+      "plan": "Therapy: suggesting small steps to manage the practical aspects",
+      "source_openr1_id": 10939,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_151": {
+      "plan": "Therapy: start, I should offer a gentle, actionable step",
+      "source_openr1_id": 8207,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_152": {
+      "plan": "Okay, let me start by understanding what the client is sharing. They're feeling indifferent about their own death but worried about how their family and friends would feel. There's a conflict between not caring for themselves and caring deeply about others' pain",
+      "source_openr1_id": 12750,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_153": {
+      "plan": "Okay, the client is feeling stuck in a cycle of exhaustion and hopelessness. They mentioned that their daily routines feel meaningless and they're disappointed in themselves. They used to love life but now they're just surviving",
+      "source_openr1_id": 410,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_154": {
+      "plan": "Therapy: Suggest observing patterns together, which leans into CBT techniques without naming them",
+      "source_openr1_id": 8230,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_155": {
+      "plan": "Therapy: suggest actionable steps without being prescriptive",
+      "source_openr1_id": 11434,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_156": {
+      "plan": "Therapy: suggest small actionable steps, and reinforce their worth beyond their performance",
+      "source_openr1_id": 11024,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_157": {
+      "plan": "Okay, let's start by understanding what the client is going through. They experienced a traumatic event where they were grabbed in a parking lot and froze. Now they're having flashbacks, physical sensations like shaking and the smell of cologne, and feelings of guilt for not acting",
+      "source_openr1_id": 11501,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_158": {
+      "plan": "Okay, the client is dealing with the sudden loss of someone close. They're overwhelmed by the logistics and the grief, feeling isolated in a bustling airport where life continues despite their personal tragedy. First, I need to validate their feelings of shock and overwhelm",
+      "source_openr1_id": 10942,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_159": {
+      "plan": "Therapy: start with self-care practices, which also ties into managing psoriasis",
+      "source_openr1_id": 8253,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_160": {
+      "plan": "Therapy: suggest exploring why it's hard to accept care, which touches on cognitive patterns without naming CBT",
+      "source_openr1_id": 12909,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_161": {
+      "plan": "Therapy: Start with empathy, validate feelings, then gently guide towards exploring underlying emotions and possible small actions or shifts in perspective",
+      "source_openr1_id": 412,
+      "source_split": "test",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_162": {
+      "plan": "Therapy: Start with validation, then gently guide them to reflect on their own needs and the authenticity of their actions",
+      "source_openr1_id": 8232,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_163": {
+      "plan": "Therapy: suggest looking at small actions that can create shifts",
+      "source_openr1_id": 11486,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_164": {
+      "plan": "Okay, the client is really struggling with the trauma of witnessing their friend's dog's horrific incident. They mention replaying the event, feeling dread, sadness, and a tight chest. I need to validate their feelings first",
+      "source_openr1_id": 11075,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_165": {
+      "plan": "Okay, the user is going through a really tough time. Their marriage ended, they can't see their child, and they're overwhelmed with guilt. They feel like they failed and don't know if they deserve help",
+      "source_openr1_id": 11527,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_166": {
+      "plan": "Therapy: suggests a loss of agency, so guiding them toward small, meaningful actions might restore some sense of control",
+      "source_openr1_id": 10966,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_167": {
+      "plan": "Therapy: suggesting a calm conversation with the mother when things are less heated might be a practical step",
+      "source_openr1_id": 8258,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_168": {
+      "plan": "Okay, let me start by really taking in what the client is saying. They're feeling overwhelmed, trapped in a cycle of pain, and having thoughts of ending their life. This is a crisis situation, so my first priority is to ensure their safety",
+      "source_openr1_id": 12922,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_169": {
+      "plan": "Therapy: considering therapeutic approaches without naming them, perhaps elements of humanistic therapy by emphasizing her worth and agency",
+      "source_openr1_id": 8029,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_170": {
+      "plan": "Okay, the client is feeling that their father's action of hiring a tutor was more about improving grades than showing care. They might feel neglected or that their father's love is conditional on academic performance. I need to validate their feelings of hurt and the desire for emotional connection",
+      "source_openr1_id": 8234,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_171": {
+      "plan": "Medication: starting medication. Follow-up: monitoring changes together",
+      "source_openr1_id": 11498,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_172": {
+      "plan": "Therapy: suggesting CBT techniques, frame it as exploring small ways to share the load emotionally",
+      "source_openr1_id": 11108,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_173": {
+      "plan": "Therapy: starting therapy and then shutting down, which they recognize happens in relationships too",
+      "source_openr1_id": 11535,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_174": {
+      "plan": "Therapy: consider small actions they can take today to reduce the overwhelm, like making a list or prioritizing tasks",
+      "source_openr1_id": 10983,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_175": {
+      "plan": "Therapy: suggesting setting aside time to talk without distractions, expressing her needs without blame",
+      "source_openr1_id": 8264,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_176": {
+      "plan": "Okay, the user is feeling really empty and unheard. They mentioned that when they try to talk to others, people either change the subject or offer platitudes like \"it'll get better,\" which isn't helpful. They're even thinking about not being here anymore",
+      "source_openr1_id": 12977,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_177": {
+      "plan": "Therapy: consider their own needs without labeling it as CBT",
+      "source_openr1_id": 8041,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_178": {
+      "plan": "Okay, the client is feeling helpless because his girlfriend gets angry over small things, and he doesn't know how to comfort her. First, I need to acknowledge his feelings of helplessness. Empathy is key here",
+      "source_openr1_id": 8239,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_179": {
+      "plan": "Therapy: start building trust in small interactions",
+      "source_openr1_id": 11537,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_180": {
+      "plan": "Medication: suggest a method to track their medication, like a pill organizer or app. Follow-up: track their medication, like a pill organizer or app",
+      "source_openr1_id": 11112,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_181": {
+      "plan": "Okay, the client is talking about feeling alone despite making progress. They mention past abuse and feeling small, carrying an invisible weight. But there's also hope in small moments",
+      "source_openr1_id": 11559,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_182": {
+      "plan": "Okay, the client is feeling empty and lonely after a fun weekend with friends. They tried activities like drawing, spending time with their Service Parrot, and gaming, but nothing helped. They miss their friends and their ex, even though they know they shouldn't",
+      "source_openr1_id": 10992,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_183": {
+      "plan": "Follow-up: check in on their emotional state after imagining this dialogue",
+      "source_openr1_id": 8265,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_184": {
+      "plan": "Okay, the client is expressing deep exhaustion and thoughts about not wanting to be here anymore. First, I need to acknowledge their pain without any clinical terms. They mentioned everything feeling heavy and not knowing how to stop these feelings",
+      "source_openr1_id": 13189,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_185": {
+      "plan": "Therapy: suggesting active listening and expressing needs gently",
+      "source_openr1_id": 8047,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_186": {
+      "plan": "Therapy: considering therapeutic approaches, CBT might be helpful here because it addresses the connection between thoughts, feelings, and behaviors. Follow-up: track progress and identify triggers",
+      "source_openr1_id": 8244,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_187": {
+      "plan": "Therapy: suggest a disconnection from their own life and a lack of engagement with activities or relationships that once might have mattered",
+      "source_openr1_id": 11599,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_188": {
+      "plan": "Okay, the client is talking about past obsessive behavior towards someone, feeling shame now. They used to check social media, imagine conversations, write stories. They feel like a stalker and cringe looking back",
+      "source_openr1_id": 11123,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_189": {
+      "plan": "Okay, the client just got diagnosed with PTSD. They have mixed feelings—relief because it explains their symptoms, but also resistance to the label 'mentally ill.' They feel broken or defective. First, I need to validate their feelings",
+      "source_openr1_id": 11569,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_190": {
+      "plan": "Okay, the client is dealing with the loss of their dog Chinook after 12 years, which is a significant loss. They also moved to a new city for a job promotion but feel guilty about being excited because Chinook isn't there. I need to validate their grief and the conflicting emotions about the new job",
+      "source_openr1_id": 11027,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_191": {
+      "plan": "Therapy: suggest exploring how this impacts them and ways to express their needs",
+      "source_openr1_id": 8273,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_192": {
+      "plan": "Okay, the client is expressing intense feelings of hopelessness and suicidal ideation. First, I need to validate their emotions without using clinical terms. They mentioned everything feeling heavy, no way out, and not seeing the point",
+      "source_openr1_id": 13203,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_193": {
+      "plan": "Therapy: Suggesting alternative activities that fulfill the same need might replace the habit",
+      "source_openr1_id": 8063,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_194": {
+      "plan": "Therapy: suggesting they notice negative thought patterns and challenge them, but without using CBT terminology",
+      "source_openr1_id": 8245,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_195": {
+      "plan": "Medication: suggest discussing medication timing, and offer collaborative exploration of steps forward",
+      "source_openr1_id": 11640,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_196": {
+      "plan": "Therapy: considering therapeutic approaches, CBT might help by addressing the thought patterns",
+      "source_openr1_id": 11156,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_197": {
+      "plan": "Okay, let's start by really listening to what the client is saying. They feel devastated because the judge denied their protection order despite providing evidence. They feel violated and like their fear doesn't matter",
+      "source_openr1_id": 11576,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_198": {
+      "plan": "Okay, the client is talking about their experience with depression, accepting it as a lifelong companion. They have mixed feelings—some days strong, others exhausted. They're conflicted between pride in their progress and resentment at the constant struggle",
+      "source_openr1_id": 11072,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_199": {
+      "plan": "Therapy: adjust negative thought patterns without labeling it as CBT",
+      "source_openr1_id": 8274,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_200": {
+      "plan": "Okay, the user is feeling really low, worthless, and like a burden. They mentioned thinking about not being here anymore. I need to respond with empathy and support without using any clinical terms",
+      "source_openr1_id": 13290,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_201": {
+      "plan": "Therapy: suggest exploring underlying reasons and possible steps, like considering counseling or honest conversations, but gently",
+      "source_openr1_id": 8069,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_202": {
+      "plan": "Therapy: suggest looking at how past experiences influence current reactions. Follow-up: track triggers and outcomes",
+      "source_openr1_id": 8254,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_203": {
+      "plan": "Follow-up: follow-up, maybe build on earlier points",
+      "source_openr1_id": 11660,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_204": {
+      "plan": "Therapy: suggest small steps to reconnect with themselves, like journaling or new activities",
+      "source_openr1_id": 11159,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_205": {
+      "plan": "Therapy: suggest practical steps without overwhelming them, and reinforce that seeking help is okay",
+      "source_openr1_id": 11594,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_206": {
+      "plan": "Therapy: suggesting ways to channel their love and memories into positive actions or rituals",
+      "source_openr1_id": 11079,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_207": {
+      "plan": "Therapy: Start with empathy, validate their feelings, suggest exploring the dream's meaning in real life, challenge negative thoughts, and encourage small actions to build confidence. Follow-up: track patterns, but in a non-clinical way",
+      "source_openr1_id": 8278,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_208": {
+      "plan": "Follow-up: check in, but she thought they should take it slow",
+      "source_openr1_id": 8086,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_209": {
+      "plan": "Therapy: considering this step, validate her efforts, provide actionable advice for starting the conversation, and reassure her that it's a process that can grow with patience and practice",
+      "source_openr1_id": 8260,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_210": {
+      "plan": "Therapy: Start with empathy, validate their struggle, suggest practical steps, offer hope, and reassure them of their strength and support availability",
+      "source_openr1_id": 11663,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_211": {
+      "plan": "Okay, the client is struggling with taking their medication consistently. They mentioned forgetting and sometimes choosing not to take it even when they remember. They also have a part that wants someone to notice, which is causing frustration because they don't understand their own behavior",
+      "source_openr1_id": 11169,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_212": {
+      "plan": "Therapy: suggest practical steps like finding a way to physically release tension or creating a ritual to honor the losses, which can help in making the emotional load more manageable",
+      "source_openr1_id": 11600,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_213": {
+      "plan": "Therapy: suggest practical steps while highlighting their care as a strength",
+      "source_openr1_id": 11117,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_214": {
+      "plan": "Therapy: considering small, actionable steps. Follow-up: track progress and patterns, which serves both reflective and cognitive purposes",
+      "source_openr1_id": 8284,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_215": {
+      "plan": "Therapy: suggested active listening and expressing needs calmly",
+      "source_openr1_id": 8123,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_216": {
+      "plan": "Therapy: suggesting family activities to strengthen their bond might help",
+      "source_openr1_id": 8290,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_217": {
+      "plan": "Therapy: suggest alternative ways to cope, like talking to someone, engaging in a hobby, or physical activity",
+      "source_openr1_id": 11680,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_218": {
+      "plan": "Okay, the client is feeling shattered after a breakup. They thought the relationship was solid, but their partner left, saying they needed space. The client is oscillating between anger and sadness, feeling unworthy",
+      "source_openr1_id": 11173,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_219": {
+      "plan": "Okay, let me start by understanding what the client is going through. They're feeling constantly on edge, with physical reactions like a racing heart when their phone buzzes or they hear footsteps. They've taken steps like filing a police report and talking to an advocate, but they're still worried it's not enough",
+      "source_openr1_id": 11647,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_220": {
+      "plan": "Okay, let's break this down. The client is talking about feeling both strong and exhausted. They push through and find beauty in painting and writing, but there's an underlying ache",
+      "source_openr1_id": 11137,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_221": {
+      "plan": "Okay, the user is really doubting their abilities here. They asked, \"Why do you think I can do it. I don't think I have any ability.\" I need to respond with empathy and support",
+      "source_openr1_id": 8301,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_222": {
+      "plan": "Therapy: suggesting setting aside time to talk without distractions, using \"I\" statements to express feelings without blame, which is a CBT technique but framed as a practical tip",
+      "source_openr1_id": 8127,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_223": {
+      "plan": "Therapy: Suggest that noticing others' needs is a skill that can be developed, and this incident is a chance to grow rather than a character flaw. Follow-up: check in with others in the future without neglecting their own needs",
+      "source_openr1_id": 8293,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_224": {
+      "plan": "Okay, the client is describing intense and fluctuating emotions—laughing, crying, numbness, physical symptoms like chest tightness. They seem confused and concerned about what's happening. First, I need to validate their feelings without using clinical terms",
+      "source_openr1_id": 11715,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_225": {
+      "plan": "Therapy: suggesting practical steps",
+      "source_openr1_id": 11651,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_226": {
+      "plan": "Okay, the client is feeling deeply alone, not just physically but emotionally disconnected. They describe a heavy weight and exhaustion, which makes me think of depression or persistent complex bereavement disorder, but I can't mention those terms. They need empathy and validation",
+      "source_openr1_id": 11170,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_227": {
+      "plan": "Therapy: Suggest focusing on small, actionable steps rather than the big picture, which can make the future feel less daunting",
+      "source_openr1_id": 8306,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_228": {
+      "plan": "Therapy: Suggest redirecting energy into self-care or activities that fulfill her",
+      "source_openr1_id": 8142,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_229": {
+      "plan": "Therapy: suggest ways to reconnect emotionally, like setting aside time for meaningful conversations or shared activities despite the distance. Follow-up: reassess together",
+      "source_openr1_id": 8295,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_230": {
+      "plan": "Therapy: Start with empathy, validate their experience, acknowledge the impact of losing their job on their identity and routine",
+      "source_openr1_id": 11739,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_231": {
+      "plan": "Okay, so the client is really struggling with intense memories and physical reactions after a traumatic event. They mentioned adrenaline, fear, flashbacks, replaying the event, and hypervigilance. This sounds like symptoms of PTSD",
+      "source_openr1_id": 11662,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_232": {
+      "plan": "Therapy: suggest examining the thoughts around guilt and how it affects their actions",
+      "source_openr1_id": 11236,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_233": {
+      "plan": "Therapy: starting to see that his actions don't diminish his commitment to her. Follow-up: follow-up, so maybe she's been struggling for a while",
+      "source_openr1_id": 8318,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_234": {
+      "plan": "Therapy: considering the dynamics in their relationship, it's important to assess if there's any strain or if the income disparity affects their interactions",
+      "source_openr1_id": 8148,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_235": {
+      "plan": "Therapy: consider their previous interactions if any, but since this is the first message, keep it focused on current feelings",
+      "source_openr1_id": 8298,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_236": {
+      "plan": "Okay, the client is feeling lost and unmotivated. They mentioned hitting snooze repeatedly, work feeling meaningless, and tasks piling up. They feel stuck and like they're wasting days",
+      "source_openr1_id": 11761,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_237": {
+      "plan": "Okay, let me start by understanding what the client is going through. They're describing a traumatic experience where someone they trusted assaulted them. The emotions here are intense: shock, betrayal, physical freezing, and now shame and self-blame",
+      "source_openr1_id": 11696,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_238": {
+      "plan": "Okay, the client is really shaken up after a physical fight with their dad. They're feeling scared, confused, and maybe even in shock. First, I need to validate their feelings without using any clinical terms",
+      "source_openr1_id": 11288,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_239": {
+      "plan": "Therapy: suggest setting aside specific times for connection without distractions",
+      "source_openr1_id": 8327,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_240": {
+      "plan": "Therapy: Suggest taking things step by step, focusing on small, manageable actions. Follow-up: check in with themselves before reacting",
+      "source_openr1_id": 8149,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_241": {
+      "plan": "Therapy: suggest looking at intentions and how their actions are received",
+      "source_openr1_id": 8303,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_242": {
+      "plan": "Okay, the client is expressing a deep sense of emptiness and detachment. They feel numb, like they're just going through the motions each day. The phrases \"floating through each day\" and \"detached from everything and everyone\" suggest possible symptoms of depression, maybe anhedonia or emotional blunting",
+      "source_openr1_id": 11764,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_243": {
+      "plan": "Okay, let me start by really tuning into what the client is expressing. They mention shaking, seeing someone's face when they close their eyes, feeling trapped, and their body not listening. This sounds like trauma symptoms, possibly PTSD",
+      "source_openr1_id": 11712,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_244": {
+      "plan": "Okay, let's start by really listening to what the client is sharing. They're talking about their mother who worked incredibly hard after leaving an abusive father. The client admires her strength but is now feeling frustrated and sad seeing her still struggle and not accept help",
+      "source_openr1_id": 11310,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_245": {
+      "plan": "Okay, the client is worried about her marriage ending due to recent conflicts. I need to respond with empathy and support without using any clinical terms. Let me start by acknowledging her feelings",
+      "source_openr1_id": 8332,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_246": {
+      "plan": "Therapy: Suggest he reflect on their interactions, maybe she felt unheard in her interests",
+      "source_openr1_id": 8156,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_247": {
+      "plan": "Therapy: Start with empathy, then gently introduce strategies to address their anxiety, focusing on thoughts and actionable steps",
+      "source_openr1_id": 8308,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_248": {
+      "plan": "Therapy: Considering therapeutic approaches, CBT could help reframe their thoughts about failure and family expectations",
+      "source_openr1_id": 11779,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_249": {
+      "plan": "Therapy: suggests that the CBT approach they're using might not be addressing the underlying emotional pain",
+      "source_openr1_id": 11718,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_250": {
+      "plan": "Okay, the client is feeling lost after a breakup in a long-distance relationship. They mentioned their parents questioning the relationship and the time difference as factors. They feel angry at their parents and themselves, and it's really hurting them",
+      "source_openr1_id": 11330,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_251": {
+      "plan": "Okay, the client starts with \"Hello, Doctor, I don’t know what to do now. Please help me with this emotional problem.\" They're clearly feeling overwhelmed and seeking guidance. First, I need to acknowledge their distress without using any clinical terms",
+      "source_openr1_id": 8334,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_252": {
+      "plan": "Okay, the client is in a lot of pain after discovering her husband's infidelity. She feels overwhelmed and unsure how to handle the situation. My first step is to validate her feelings",
+      "source_openr1_id": 8172,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_253": {
+      "plan": "Therapy: suggestions, just a couple of actionable steps. Follow-up: track triggers and patterns",
+      "source_openr1_id": 8315,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_254": {
+      "plan": "Therapy: suggesting looking at patterns in a supportive way without naming CBT",
+      "source_openr1_id": 11785,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_255": {
+      "plan": "Okay, the client left an abusive partner a week ago. They feel relief but also lingering distress. They mention replaying negative memories like blame, manipulation, and boundary violations",
+      "source_openr1_id": 11765,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_256": {
+      "plan": "Okay, the user is really hurting here. They found out their best friend is dating someone they had feelings for, and now friends are pushing them to move on. They feel confused, hurt, and overwhelmed",
+      "source_openr1_id": 11356,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_257": {
+      "plan": "Therapy: suggest that family stress might be impacting the child, but without technical jargon",
+      "source_openr1_id": 8337,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_258": {
+      "plan": "Therapy: suggest exploring how emotions or stress might interact with their physical health, and how managing thoughts could alleviate some symptoms. Follow-up: track her stress levels and pain episodes to identify patterns",
+      "source_openr1_id": 8186,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_259": {
+      "plan": "Therapy: Suggest practical steps like setting a time to talk when emotions aren't high, using \"I\" statements to express his worries without accusing her",
+      "source_openr1_id": 8316,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_260": {
+      "plan": "Therapy: suggest exploring values, small actions, and offer support without pressure",
+      "source_openr1_id": 11787,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_261": {
+      "plan": "Therapy: suggest reflecting on past interactions to identify small successes or moments where they felt a bit connected, to build from there",
+      "source_openr1_id": 11837,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_262": {
+      "plan": "Therapy: suggest reflecting on how she views herself outside of his actions",
+      "source_openr1_id": 11365,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_263": {
+      "plan": "Therapy: suggest small steps to reclaim a sense of control, like setting personal goals or incorporating enjoyable activities into their routine",
+      "source_openr1_id": 8353,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_264": {
+      "plan": "Therapy: suggest practical steps: when she feels anger rising, pause to check her expectations",
+      "source_openr1_id": 8197,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_265": {
+      "plan": "Therapy: start, suggesting small, practical steps could help",
+      "source_openr1_id": 8324,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_266": {
+      "plan": "Okay, the client is feeling empty, dread about the future, and numbness. They're scared it won't end. First, I need to validate their feelings",
+      "source_openr1_id": 11816,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_267": {
+      "plan": "Therapy: Considering therapeutic approaches, grounding techniques from CBT could help them stay present",
+      "source_openr1_id": 11843,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_268": {
+      "plan": "Okay, let's break down what the client is saying. They're feeling like their brain isn't functioning as it used to, with difficulties in expressing themselves, stumbling over words, forgetting things mid-sentence. This is leading to frustration and self-doubt about their intelligence, competence, and worth",
+      "source_openr1_id": 11385,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_269": {
+      "plan": "Therapy: considering family systems theory, the mother's behavior impacts the client's mental state",
+      "source_openr1_id": 8354,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_270": {
+      "plan": "Therapy: consider his actions beyond words—consistent, transparent behavior over time can rebuild trust",
+      "source_openr1_id": 8198,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_271": {
+      "plan": "Okay, the user is a student named Classmate A who's feeling confused, lost confidence, and even disgusted with learning. They don't know what to do. I need to respond with empathy and support without using any clinical terms",
+      "source_openr1_id": 8329,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_272": {
+      "plan": "Therapy: Considering therapeutic approaches, cognitive-behavioral elements might help here—challenging the fear of breaking down, but without using CBT jargon",
+      "source_openr1_id": 11830,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_273": {
+      "plan": "Therapy: suggest something practical but gentle, like focusing on the present moment or a simple task",
+      "source_openr1_id": 11885,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_274": {
+      "plan": "Okay, the client is feeling really empty and hurt because their dad didn't show up for their graduation. They mentioned past issues like bullying and foster homes, so there's a history of instability and feeling let down. They thought this time would be different, but it wasn't, leading to self-blame (\"stupid to believe him\")",
+      "source_openr1_id": 11403,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_275": {
+      "plan": "Okay, the client is feeling inadequate and like they can't do anything right. I need to validate their emotions first. Let them know they're not alone",
+      "source_openr1_id": 8355,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_276": {
+      "plan": "Therapy: considering previous interactions, if they've felt stuck before, reinforcing their strength in sharing this might help",
+      "source_openr1_id": 8204,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_277": {
+      "plan": "Therapy: consider how family dynamics or past experiences might influence her reaction",
+      "source_openr1_id": 8330,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_278": {
+      "plan": "Follow-up: reassessing relationship patterns",
+      "source_openr1_id": 11844,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_279": {
+      "plan": "Okay, the user is feeling confused and intense emotions after reconnecting with someone from their past. They had a crush on this person as a teenager but were in the closet, while the other person was out and confident. Now, years later, they're at different life stages—the other person is settled, and the user is just starting to explore their identity",
+      "source_openr1_id": 11417,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_280": {
+      "plan": "Therapy: suggest some practical steps, like journaling or setting small goals, to track adaptation progress. Follow-up: track adaptation progress",
+      "source_openr1_id": 8361,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_281": {
+      "plan": "Therapy: suggest small, daily practices to reinforce self-care and reevaluate relationship dynamics",
+      "source_openr1_id": 8215,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    },
+    "ctrl_c_282": {
+      "plan": "Therapy: Suggest exploring how these interactions affect their self-view and gently challenge the negative beliefs, emphasizing their strengths and capacity to navigate challenges",
+      "source_openr1_id": 8339,
+      "source_split": "train",
+      "plan_source_type": "source_reasoning_extract"
+    }
+  }
+}

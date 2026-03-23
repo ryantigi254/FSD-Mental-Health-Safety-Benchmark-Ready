@@ -75,3 +75,28 @@ Per-study notes:
 - `docs/studies/invariance/study_b/study_b_ctrl_invariance_commands.md`
 - `docs/studies/invariance/study_b/study_b_multi_turn_ctrl_invariance_commands.md`
 - `docs/studies/invariance/study_c/study_c_ctrl_invariance_commands.md`
+
+## Forward Evaluation (Invariance → Controllability)
+
+Run `run_invariance_comparison.py` to measure whether ctrl metrics are stable
+across surface perturbations:
+
+```bash
+cd benchmark/runtime
+PYTHONPATH=src python scripts/evaluation/run_invariance_comparison.py \
+  --study study_a \
+  --data-root data/invariance/ctrl_base \
+  --base-cache results_ctrl_invariance/<MODEL>/study_a_generations.jsonl \
+  --variant-cache results_ctrl_invariance/<MODEL>/study_a/<VARIANT>/study_a_generations.jsonl \
+  --variant-name <VARIANT> \
+  --out metric-results/<MODEL>/study_a_ctrl_forward_invariance.json
+```
+
+Repeat per study and per variant family.
+
+## Reverse Evaluation (Controllability → Invariance)
+
+The reverse direction measures which perturbation families change ctrl metrics
+most, using `run_controllability_comparison.py` with variant-family caches.
+
+Full commands: [`invariance_reverse_commands.md`](invariance_reverse_commands.md)

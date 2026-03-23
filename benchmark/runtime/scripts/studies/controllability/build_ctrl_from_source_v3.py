@@ -188,6 +188,12 @@ def _collect_all_v6_1_refs(v6_root: Path) -> Set[Tuple[str, int]]:
                 t_id = turn.get("source_openr1_id")
                 if t_split in {"train", "test"} and t_id is not None:
                     refs.add((t_split, int(t_id)))
+            # Donor source refs (corrected split labels for multi-turn donors)
+            for donor_ref in meta.get("donor_source_refs", []) or []:
+                d_split = str(donor_ref.get("source_openr1_split", "") or "").strip().lower()
+                d_id = donor_ref.get("source_openr1_id")
+                if d_split in {"train", "test"} and d_id is not None:
+                    refs.add((d_split, int(d_id)))
     return refs
 
 
@@ -232,7 +238,8 @@ def _build_ctrl_study_a(
 ) -> Dict[str, Any]:
     """Build Study A controllability cases from unused OpenR1 rows."""
     selected = _round_robin_select(
-        rows, target_n=target_n, used_refs=used_refs, require_multi_turn=False
+        rows, target_n=target_n, used_refs=used_refs, require_multi_turn=False,
+        include_unresolved=True,
     )
     rng = random.Random(CTRL_SEED + 1)
     samples: List[Dict[str, Any]] = []
@@ -322,7 +329,9 @@ def _build_ctrl_study_b_single(
 ) -> List[Dict[str, Any]]:
     """Build Study B single-turn controllability cases from unused OpenR1 rows."""
     raw = build_study_b_single_turn_strict(
-        rows, target_n=target_n, used_refs=used_refs
+        rows, target_n=target_n, used_refs=used_refs,
+        include_unresolved=True,
+        allow_incomplete_construct=True,
     )
     out: List[Dict[str, Any]] = []
     pressure_styles = ("self_doubt", "social_proof", "authority_pressure")
@@ -375,6 +384,7 @@ def _build_ctrl_study_b_multi(
         ner=ner,
         nli_model=nli_model,
         study="study_b_multi_turn",
+        include_unresolved=True,
     )
     out: List[Dict[str, Any]] = []
     for offset, case in enumerate(raw_cases, start=start_index):
@@ -426,6 +436,7 @@ def _build_ctrl_study_c(
         ner=ner,
         nli_model=nli_model,
         study="study_c",
+        include_unresolved=True,
     )
     cases: List[Dict[str, Any]] = []
     for offset, case in enumerate(raw_cases, start=start_index):
@@ -542,10 +553,11 @@ def build_ctrl_roots(
     *,
     v6_root: Path,
     ctrl_root: Path,
-    study_a_target: int = 2000,
-    study_b_single_target: int = 2000,
-    study_b_multi_target: int = 120,
-    study_c_target: int = 100,
+    study_a_target: int = 2481,
+    study_a_bias_target: int = 2481,
+    study_b_single_target: int = 2481,
+    study_b_multi_target: int = 290,
+    study_c_target: int = 282,
     turns_per_case: int = 20,
 ) -> Dict[str, Any]:
     """Build merged controllability suite from source, disjoint from v6.1."""
@@ -562,39 +574,11 @@ def build_ctrl_roots(
     ner = MedicalNER()
     nli_model = NLIModel()
 
-    # Build full-sized studies from unused pool
-    print(f"Building Study A ({study_a_target} cases)...", flush=True)
-    study_a_full = _build_ctrl_study_a(
-        rows, target_n=study_a_target, used_refs=used_refs
-    )
-    print(f"  Built {len(study_a_full['samples'])} Study A cases", flush=True)
+    # Build order: multi-turn studies first (scarce rows), then single-turn.
+    # This ensures Study C and B-MT get first pick of multi-turn-compatible
+    # rows before A and B-single exhaust the pool.
 
-    bias_n = study_a_target // 2  # 1000 Study A cases → 2000 bias cases (paired)
-    print(f"Building Study A Bias ({bias_n} pairs = {bias_n * 2} cases)...", flush=True)
-    bias_source = dict(study_a_full)
-    bias_source["samples"] = study_a_full["samples"][:bias_n]
-    study_a_bias_full = _build_ctrl_study_a_bias(bias_source)
-    print(f"  Built {len(study_a_bias_full['cases'])} Study A Bias cases", flush=True)
-
-    print(f"Building Study B single-turn ({study_b_single_target} cases)...", flush=True)
-    study_b_single_full = _build_ctrl_study_b_single(
-        rows, target_n=study_b_single_target, used_refs=used_refs
-    )
-    print(f"  Built {len(study_b_single_full)} Study B single cases", flush=True)
-
-    print(f"Building Study B multi-turn ({study_b_multi_target} cases)...", flush=True)
-    study_b_multi_full = _build_ctrl_study_b_multi(
-        rows,
-        target_n=study_b_multi_target,
-        turns_per_case=turns_per_case,
-        used_refs=used_refs,
-        config=config,
-        ner=ner,
-        nli_model=nli_model,
-    )
-    print(f"  Built {len(study_b_multi_full)} Study B multi cases", flush=True)
-
-    print(f"Building Study C ({study_c_target} cases)...", flush=True)
+    print(f"Building Study C ({study_c_target} cases) [multi-turn first]...", flush=True)
     study_c_full, study_c_plans = _build_ctrl_study_c(
         rows,
         target_n=study_c_target,
@@ -606,6 +590,37 @@ def build_ctrl_roots(
         source_lookup=source_lookup,
     )
     print(f"  Built {len(study_c_full['cases'])} Study C cases", flush=True)
+
+    print(f"Building Study B multi-turn ({study_b_multi_target} cases) [multi-turn first]...", flush=True)
+    study_b_multi_full = _build_ctrl_study_b_multi(
+        rows,
+        target_n=study_b_multi_target,
+        turns_per_case=turns_per_case,
+        used_refs=used_refs,
+        config=config,
+        ner=ner,
+        nli_model=nli_model,
+    )
+    print(f"  Built {len(study_b_multi_full)} Study B multi cases", flush=True)
+
+    print(f"Building Study B single-turn ({study_b_single_target} cases)...", flush=True)
+    study_b_single_full = _build_ctrl_study_b_single(
+        rows, target_n=study_b_single_target, used_refs=used_refs
+    )
+    print(f"  Built {len(study_b_single_full)} Study B single cases", flush=True)
+
+    print(f"Building Study A ({study_a_target} cases)...", flush=True)
+    study_a_full = _build_ctrl_study_a(
+        rows, target_n=study_a_target, used_refs=used_refs
+    )
+    print(f"  Built {len(study_a_full['samples'])} Study A cases", flush=True)
+
+    print(f"Building Study A Bias ({study_a_bias_target} base samples → {study_a_bias_target * 2} bias cases)...", flush=True)
+    bias_base = _build_ctrl_study_a(
+        rows, target_n=study_a_bias_target, used_refs=used_refs, start_index=1
+    )
+    study_a_bias_full = _build_ctrl_study_a_bias(bias_base)
+    print(f"  Built {len(study_a_bias_full['cases'])} Study A Bias cases", flush=True)
 
     ctrl_ref_count = len(used_refs) - v6_ref_count
     print(f"Controllability uses {ctrl_ref_count} unique source IDs (disjoint from v6.1)", flush=True)
@@ -661,17 +676,18 @@ def build_ctrl_roots(
 
 DATA_ROOT = RUNTIME_ROOT / "data"
 V6_1_ROOT = DATA_ROOT / "frozen_splits" / "v6_1"
-CTRL_ROOT = DATA_ROOT / "controllability" / "controllability_splits_v2_1"
+CTRL_ROOT = DATA_ROOT / "controllability" / "controllability_splits_v3"
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--v6-root", type=Path, default=V6_1_ROOT)
     parser.add_argument("--ctrl-root", type=Path, default=CTRL_ROOT)
-    parser.add_argument("--study-a-target", type=int, default=2000)
-    parser.add_argument("--study-b-single-target", type=int, default=2000)
-    parser.add_argument("--study-b-multi-target", type=int, default=120)
-    parser.add_argument("--study-c-target", type=int, default=100)
+    parser.add_argument("--study-a-target", type=int, default=2481)
+    parser.add_argument("--study-a-bias-target", type=int, default=2481)
+    parser.add_argument("--study-b-single-target", type=int, default=2481)
+    parser.add_argument("--study-b-multi-target", type=int, default=290)
+    parser.add_argument("--study-c-target", type=int, default=282)
     parser.add_argument("--turns-per-case", type=int, default=20)
     return parser.parse_args()
 
@@ -682,6 +698,7 @@ def main() -> int:
         v6_root=args.v6_root,
         ctrl_root=args.ctrl_root,
         study_a_target=args.study_a_target,
+        study_a_bias_target=args.study_a_bias_target,
         study_b_single_target=args.study_b_single_target,
         study_b_multi_target=args.study_b_multi_target,
         study_c_target=args.study_c_target,

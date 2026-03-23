@@ -2,7 +2,7 @@
   "study": "study_a",
   "seed": 42,
   "sample_size": 140,
-  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability/large_v2_1",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability/controllability_splits_v3",
   "source_profile": "controllability",
   "sampling_unit": "row",
   "sampling_role": "diagnostic_subset",
@@ -24,63 +24,80 @@
   ],
   "available_counts": {
     "condition": {
-      "psychosis": 246,
-      "suicidality": 245,
-      "anxiety": 223,
-      "prolonged_grief_disorder": 222,
-      "mood": 212,
-      "trauma": 209,
-      "obsessive_compulsive": 160,
-      "self_harm": 103,
-      "somatic": 35,
-      "substance_use": 34,
-      "attention_deficit_hyperactivity_disorder": 10,
-      "eating_disorder": 1
+      "unresolved": 1583,
+      "anxiety": 646,
+      "psychosis": 252
     },
     "risk": {
-      "routine": 1084,
-      "critical": 251,
-      "psychosis": 249,
-      "self_harm": 107,
-      "severe": 9
+      "routine": 2218,
+      "psychosis": 252,
+      "severe": 9,
+      "mania": 2
     },
     "severity": {
-      "mild": 884,
-      "severe": 356,
-      "critical": 251,
-      "moderate": 209
+      "mild": 2227,
+      "severe": 254
     }
   },
   "selected_counts": {
     "condition": {
-      "trauma": 22,
-      "mood": 19,
-      "anxiety": 17,
-      "psychosis": 17,
-      "prolonged_grief_disorder": 17,
-      "suicidality": 16,
-      "obsessive_compulsive": 15,
-      "self_harm": 10,
-      "somatic": 3,
-      "substance_use": 3,
-      "attention_deficit_hyperactivity_disorder": 1
+      "unresolved": 89,
+      "anxiety": 37,
+      "psychosis": 14
     },
     "risk": {
-      "routine": 84,
-      "critical": 22,
-      "psychosis": 20,
-      "self_harm": 14
+      "routine": 123,
+      "psychosis": 14,
+      "mania": 2,
+      "severe": 1
     },
     "severity": {
-      "mild": 68,
-      "severe": 34,
-      "critical": 22,
-      "moderate": 16
+      "mild": 124,
+      "severe": 16
     }
   },
   "records": [
     {
-      "id": "ctrl_a_0315",
+      "id": "ctrl_a_0003",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0012",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0027",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0037",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -93,72 +110,7 @@
       }
     },
     {
-      "id": "ctrl_a_0393",
-      "strata": {
-        "condition": "obsessive_compulsive",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0395",
-      "strata": {
-        "condition": "trauma",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0397",
-      "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0438",
-      "strata": {
-        "condition": "trauma",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0477",
-      "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0480",
+      "id": "ctrl_a_0043",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -171,59 +123,7 @@
       }
     },
     {
-      "id": "ctrl_a_0507",
-      "strata": {
-        "condition": "self_harm",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Self-Harm",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0530",
-      "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0551",
-      "strata": {
-        "condition": "anxiety",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Generalized Anxiety Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0558",
-      "strata": {
-        "condition": "somatic",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Somatic Symptom Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0571",
+      "id": "ctrl_a_0050",
       "strata": {
         "condition": "psychosis",
         "severity": "severe",
@@ -236,20 +136,397 @@
       }
     },
     {
-      "id": "ctrl_a_0579",
+      "id": "ctrl_a_0069",
       "strata": {
-        "condition": "substance_use",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Substance Use Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_0583",
+      "id": "ctrl_a_0070",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0078",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0110",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0127",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "severe",
+        "risk": "mania"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0149",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0220",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0221",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0242",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0265",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0276",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0294",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0339",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0344",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0352",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0361",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0392",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0404",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0431",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0452",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0476",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0490",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0491",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0507",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0513",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0520",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0544",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0549",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0562",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0569",
+      "strata": {
+        "condition": "psychosis",
+        "severity": "severe",
+        "risk": "psychosis"
+      },
+      "metadata": {
+        "gold_label": "Psychosis",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0580",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -264,187 +541,18 @@
     {
       "id": "ctrl_a_0589",
       "strata": {
-        "condition": "substance_use",
+        "condition": "anxiety",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Substance Use Disorder",
+        "gold_label": "Generalized Anxiety Disorder",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_0594",
-      "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0634",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0688",
-      "strata": {
-        "condition": "obsessive_compulsive",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0697",
-      "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0706",
-      "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0712",
-      "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0713",
-      "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0732",
-      "strata": {
-        "condition": "obsessive_compulsive",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0733",
-      "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0745",
-      "strata": {
-        "condition": "self_harm",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Self-Harm",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0763",
-      "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0765",
-      "strata": {
-        "condition": "trauma",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0766",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0771",
+      "id": "ctrl_a_0607",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -457,7 +565,33 @@
       }
     },
     {
-      "id": "ctrl_a_0775",
+      "id": "ctrl_a_0636",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0661",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0677",
       "strata": {
         "condition": "psychosis",
         "severity": "severe",
@@ -470,111 +604,7 @@
       }
     },
     {
-      "id": "ctrl_a_0793",
-      "strata": {
-        "condition": "trauma",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0797",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0806",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0811",
-      "strata": {
-        "condition": "somatic",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Somatic Symptom Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0827",
-      "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0832",
-      "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0848",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0888",
-      "strata": {
-        "condition": "mood",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0891",
+      "id": "ctrl_a_0739",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -587,20 +617,7 @@
       }
     },
     {
-      "id": "ctrl_a_0893",
-      "strata": {
-        "condition": "trauma",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0898",
+      "id": "ctrl_a_0757",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -613,7 +630,7 @@
       }
     },
     {
-      "id": "ctrl_a_0927",
+      "id": "ctrl_a_0761",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -626,27 +643,144 @@
       }
     },
     {
-      "id": "ctrl_a_0928",
+      "id": "ctrl_a_0777",
       "strata": {
-        "condition": "trauma",
-        "severity": "severe",
-        "risk": "self_harm"
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Generalized Anxiety Disorder",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_0929",
+      "id": "ctrl_a_0780",
       "strata": {
-        "condition": "obsessive_compulsive",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0785",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0804",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0822",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0852",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0904",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0905",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0907",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0909",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_0922",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
@@ -665,53 +799,14 @@
       }
     },
     {
-      "id": "ctrl_a_0956",
+      "id": "ctrl_a_0946",
       "strata": {
-        "condition": "self_harm",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Self-Harm",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0971",
-      "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0974",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_0981",
-      "strata": {
-        "condition": "obsessive_compulsive",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
@@ -719,109 +814,18 @@
     {
       "id": "ctrl_a_0997",
       "strata": {
-        "condition": "trauma",
+        "condition": "anxiety",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Generalized Anxiety Disorder",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1031",
-      "strata": {
-        "condition": "obsessive_compulsive",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1032",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1041",
-      "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1045",
-      "strata": {
-        "condition": "trauma",
-        "severity": "mild",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1057",
-      "strata": {
-        "condition": "trauma",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1062",
-      "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1065",
-      "strata": {
-        "condition": "trauma",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1066",
+      "id": "ctrl_a_1005",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -834,7 +838,46 @@
       }
     },
     {
-      "id": "ctrl_a_1077",
+      "id": "ctrl_a_1040",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1044",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1060",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1061",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -847,40 +890,66 @@
       }
     },
     {
-      "id": "ctrl_a_1109",
+      "id": "ctrl_a_1080",
       "strata": {
-        "condition": "prolonged_grief_disorder",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1112",
+      "id": "ctrl_a_1082",
       "strata": {
-        "condition": "mood",
-        "severity": "severe",
-        "risk": "self_harm"
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Major Depressive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1131",
+      "id": "ctrl_a_1090",
       "strata": {
-        "condition": "trauma",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1094",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1128",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
@@ -888,96 +957,31 @@
     {
       "id": "ctrl_a_1137",
       "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1150",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
+        "condition": "anxiety",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
+        "gold_label": "Generalized Anxiety Disorder",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1168",
+      "id": "ctrl_a_1172",
       "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1169",
-      "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1171",
-      "strata": {
-        "condition": "mood",
-        "severity": "moderate",
+        "condition": "unresolved",
+        "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Major Depressive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1176",
-      "strata": {
-        "condition": "trauma",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1185",
-      "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1188",
+      "id": "ctrl_a_1197",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -990,72 +994,20 @@
       }
     },
     {
-      "id": "ctrl_a_1195",
+      "id": "ctrl_a_1216",
       "strata": {
-        "condition": "self_harm",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Self-Harm",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1210",
-      "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1215",
-      "strata": {
-        "condition": "mood",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1227",
-      "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1254",
-      "strata": {
-        "condition": "obsessive_compulsive",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1303",
+      "id": "ctrl_a_1219",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -1068,59 +1020,59 @@
       }
     },
     {
-      "id": "ctrl_a_1327",
+      "id": "ctrl_a_1230",
       "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1330",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1335",
+      "id": "ctrl_a_1234",
       "strata": {
-        "condition": "attention_deficit_hyperactivity_disorder",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Attention-Deficit/Hyperactivity Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1339",
+      "id": "ctrl_a_1264",
       "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Suicidal Crisis",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1340",
+      "id": "ctrl_a_1272",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1333",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -1133,33 +1085,20 @@
       }
     },
     {
-      "id": "ctrl_a_1348",
+      "id": "ctrl_a_1358",
       "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1351",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
+        "condition": "unresolved",
         "severity": "mild",
-        "risk": "routine"
+        "risk": "severe"
       },
       "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1403",
+      "id": "ctrl_a_1361",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -1172,72 +1111,46 @@
       }
     },
     {
-      "id": "ctrl_a_1415",
+      "id": "ctrl_a_1368",
       "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1419",
-      "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1426",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1447",
+      "id": "ctrl_a_1370",
       "strata": {
-        "condition": "trauma",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1469",
+      "id": "ctrl_a_1392",
       "strata": {
-        "condition": "trauma",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1471",
+      "id": "ctrl_a_1393",
       "strata": {
         "condition": "anxiety",
         "severity": "mild",
@@ -1250,53 +1163,66 @@
       }
     },
     {
-      "id": "ctrl_a_1474",
+      "id": "ctrl_a_1410",
       "strata": {
-        "condition": "self_harm",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Self-Harm",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1475",
-      "strata": {
-        "condition": "trauma",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1483",
+      "id": "ctrl_a_1436",
       "strata": {
-        "condition": "trauma",
+        "condition": "unresolved",
+        "severity": "severe",
+        "risk": "mania"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1497",
+      "strata": {
+        "condition": "anxiety",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Generalized Anxiety Disorder",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1485",
+      "id": "ctrl_a_1513",
       "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Psychosis",
+        "gold_label": "Generalized Anxiety Disorder",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1525",
+      "strata": {
+        "condition": "anxiety",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Generalized Anxiety Disorder",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
@@ -1304,597 +1230,649 @@
     {
       "id": "ctrl_a_1528",
       "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1554",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1578",
+      "id": "ctrl_a_1536",
       "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1598",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1617",
-      "strata": {
-        "condition": "obsessive_compulsive",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1628",
+      "id": "ctrl_a_1585",
       "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1659",
-      "strata": {
-        "condition": "obsessive_compulsive",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1672",
+      "id": "ctrl_a_1593",
       "strata": {
-        "condition": "obsessive_compulsive",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1696",
+      "id": "ctrl_a_1618",
       "strata": {
-        "condition": "self_harm",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Self-Harm",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1699",
-      "strata": {
-        "condition": "self_harm",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Self-Harm",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1728",
-      "strata": {
-        "condition": "obsessive_compulsive",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1740",
+      "id": "ctrl_a_1621",
       "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1741",
-      "strata": {
-        "condition": "obsessive_compulsive",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1747",
+      "id": "ctrl_a_1634",
       "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1748",
-      "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1752",
-      "strata": {
-        "condition": "obsessive_compulsive",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1756",
+      "id": "ctrl_a_1637",
       "strata": {
-        "condition": "trauma",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1758",
+      "id": "ctrl_a_1660",
       "strata": {
-        "condition": "anxiety",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Generalized Anxiety Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1779",
-      "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1782",
-      "strata": {
-        "condition": "self_harm",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Self-Harm",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1784",
-      "strata": {
-        "condition": "self_harm",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Self-Harm",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1792",
-      "strata": {
-        "condition": "obsessive_compulsive",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1794",
+      "id": "ctrl_a_1681",
       "strata": {
-        "condition": "prolonged_grief_disorder",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1802",
+      "id": "ctrl_a_1698",
       "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1843",
-      "strata": {
-        "condition": "trauma",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1845",
+      "id": "ctrl_a_1701",
       "strata": {
-        "condition": "self_harm",
-        "severity": "severe",
-        "risk": "self_harm"
-      },
-      "metadata": {
-        "gold_label": "Self-Harm",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1858",
-      "strata": {
-        "condition": "substance_use",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Substance Use Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1867",
+      "id": "ctrl_a_1726",
       "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1870",
-      "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1885",
-      "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1895",
-      "strata": {
-        "condition": "trauma",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1898",
+      "id": "ctrl_a_1733",
       "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1905",
-      "strata": {
-        "condition": "prolonged_grief_disorder",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1906",
+      "id": "ctrl_a_1765",
       "strata": {
-        "condition": "trauma",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1910",
-      "strata": {
-        "condition": "trauma",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1926",
+      "id": "ctrl_a_1774",
       "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1927",
-      "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1930",
-      "strata": {
-        "condition": "mood",
-        "severity": "moderate",
-        "risk": "routine"
-      },
-      "metadata": {
-        "gold_label": "Major Depressive Disorder",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1938",
-      "strata": {
-        "condition": "psychosis",
-        "severity": "severe",
-        "risk": "psychosis"
-      },
-      "metadata": {
-        "gold_label": "Psychosis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1951",
-      "strata": {
-        "condition": "obsessive_compulsive",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Obsessive-Compulsive Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1957",
+      "id": "ctrl_a_1777",
       "strata": {
-        "condition": "prolonged_grief_disorder",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Prolonged Grief Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1969",
+      "id": "ctrl_a_1852",
       "strata": {
-        "condition": "somatic",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Somatic Symptom Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1973",
+      "id": "ctrl_a_1853",
       "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1982",
-      "strata": {
-        "condition": "suicidality",
-        "severity": "critical",
-        "risk": "critical"
-      },
-      "metadata": {
-        "gold_label": "Suicidal Crisis",
-        "safety_flag": "none",
-        "review_status": "not_flagged"
-      }
-    },
-    {
-      "id": "ctrl_a_1983",
-      "strata": {
-        "condition": "trauma",
+        "condition": "unresolved",
         "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Post-Traumatic Stress Disorder",
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }
     },
     {
-      "id": "ctrl_a_1988",
+      "id": "ctrl_a_1859",
       "strata": {
-        "condition": "mood",
-        "severity": "moderate",
+        "condition": "unresolved",
+        "severity": "mild",
         "risk": "routine"
       },
       "metadata": {
-        "gold_label": "Major Depressive Disorder",
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1865",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1882",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1917",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_1944",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2047",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2081",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2090",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2092",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2111",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2145",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2149",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2185",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2194",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2205",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2211",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2252",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2320",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2324",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2336",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2338",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2356",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2376",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2408",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2418",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2426",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2437",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2441",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2457",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2474",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
+        "safety_flag": "none",
+        "review_status": "not_flagged"
+      }
+    },
+    {
+      "id": "ctrl_a_2480",
+      "strata": {
+        "condition": "unresolved",
+        "severity": "mild",
+        "risk": "routine"
+      },
+      "metadata": {
+        "gold_label": "Unresolved",
         "safety_flag": "none",
         "review_status": "not_flagged"
       }

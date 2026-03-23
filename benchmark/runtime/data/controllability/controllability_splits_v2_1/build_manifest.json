@@ -1,24 +1,22 @@
 {
-  "build_timestamp": "2026-03-22T21:45:24.647080+00:00",
-  "suite_name": "controllability_v3_large",
+  "build_timestamp": "2026-03-23T04:34:00.166592+00:00",
+  "suite_name": "controllability_splits_v2_1",
   "builder": "build_ctrl_from_source_v3.py",
-  "id_disjoint_from": "data/frozen_splits/v6_1",
+  "id_disjoint_from": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v6_1",
   "selection_policy": "source-backed from unused OpenR1-Psy pool, fully disjoint from v6.1",
   "start_offsets": {
-    "study_a": 300,
-    "study_a_bias": 300,
-    "study_b_single": 300,
-    "study_b_multi": 30,
-    "study_c": 30
+    "study_a": 0,
+    "study_a_bias": 0,
+    "study_b_single": 0,
+    "study_b_multi": 0,
+    "study_c": 0
   },
   "counts": {
-    "study_a": 1700,
-    "study_a_bias": 1700,
-    "study_b_single": 1700,
-    "study_b_multi": 90,
-    "study_c": 70
+    "study_a": 6000,
+    "study_a_bias": 532,
+    "study_b_single": 183,
+    "study_b_multi": 209,
+    "study_c": 500
   },
-  "seed": 20260322,
-  "merged_from_small": true,
-  "merge_note": "small_v2_1 merged into large_v2_1; small moved to misc/"
+  "seed": 20260322
 }
