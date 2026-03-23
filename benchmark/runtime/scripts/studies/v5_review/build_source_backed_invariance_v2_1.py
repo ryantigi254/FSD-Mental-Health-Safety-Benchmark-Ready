@@ -27,14 +27,14 @@ from reliable_clinical_benchmark.invariance import (  # noqa: E402
 # v2_1 uses v6_1 strict parents instead of v6
 # Reorganised layout: data/invariance/ and data/controllability/
 V5_SAMPLE_ROOT = RUNTIME_ROOT / "data" / "invariance" / "misc" / "v5_invariance_samples"
-V5_SAMPLE_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "v5_samples_v2_1"
+V5_SAMPLE_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "base"
 V6_1_PARENT_ROOT = RUNTIME_ROOT / "data" / "frozen_splits" / "v6_1"
 
 CTRL_BASE_ROOT = RUNTIME_ROOT / "data" / "invariance" / "misc" / "invariance_variants" / "variant_family" / "base"
 CTRL_BASE_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "misc" / "ctrl_variants_base_v2_1"
 CTRL_PARENT_ROOT_V2_1 = RUNTIME_ROOT / "data" / "controllability" / "controllability_splits_v2_1"
-CTRL_SAMPLE_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_samples_v2_1"
-VARIANT_FAMILY_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_variants_v2_1"
+CTRL_SAMPLE_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_base"
+VARIANT_FAMILY_ROOT_V2_1 = RUNTIME_ROOT / "data" / "invariance" / "ctrl_variant_family"
 
 AFFECTED_STUDIES = ("study_a", "study_a_bias", "study_b", "study_b_multi_turn", "study_c")
 UNCHANGED_STUDIES: tuple[str, ...] = ()

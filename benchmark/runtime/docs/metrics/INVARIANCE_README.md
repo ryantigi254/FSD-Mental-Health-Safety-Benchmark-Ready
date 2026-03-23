@@ -33,12 +33,12 @@ It is a diagnostic stress-test layer. It does not replace the canonical full-run
 
 ## Output locations
 
-- Sampling manifests: `data/frozen_splits/v5_invariance_samples/`
+- Sampling manifests: `data/invariance/base/`
 - Controllability-backed manifests:
   `data/controllability_splits_large/base/`
 - Variant caches: `results/{model-id}/study_*_invariance_*.jsonl`
 - Comparison outputs: `metric-results/{model-id}/...` or an explicit `--out` path
-- Materialised sampled split root: `data/frozen_splits/v5_invariance_samples/`
+- Materialised sampled split root: `data/invariance/base/`
 
 Manifest metadata includes:
 
@@ -177,7 +177,7 @@ The sampled `v5` invariance root can also be rendered through the same PGFPlots 
 Generate the invariance distribution snapshot:
 
 - `cd benchmark/runtime`
-- `python3 analysis/analyse_clinical_distribution.py --data-root data/frozen_splits/v5_invariance_samples --out-dir analysis/invariance --skip-figures`
+- `python3 analysis/analyse_clinical_distribution.py --data-root data/invariance/base --out-dir analysis/invariance --skip-figures`
 
 Render the PGFPlots figure bundle:
 
