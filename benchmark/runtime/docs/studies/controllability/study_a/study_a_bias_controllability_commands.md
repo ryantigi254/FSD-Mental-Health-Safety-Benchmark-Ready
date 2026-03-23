@@ -5,17 +5,16 @@ Study A bias controllability generation writes to `results/<model-folder>/ctrl_s
 Canonical Study A bias generation is arm-aware and runs each case under
 `spontaneous`, `generic_control`, and `explicit_control`.
 By default, Study A bias loads data from
-`data/controllability_splits/study_a_bias_controllability_test.json`.
+`data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json`.
 
-## Data Source Overrides
+## Data Directory
 
-Use `--data-path` to switch Study A bias to a different JSON source. `--ctrl-dir`
-does not select the bias input file.
+Use `--data-path` to point Study A bias at the merged suite.
 
 ```bash
 cd benchmark/runtime
-export CTRL_RESULTS_DIR=results_scaled_large_resolved
-export BIAS_DATA_PATH=data/controllability_splits/study_a_bias_controllability_test.json
+export CTRL_RESULTS_DIR=results_ctrl_v2_1
+export BIAS_DATA_PATH=data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json
 ```
 
 Example:
@@ -35,7 +34,7 @@ Effective direct runner command shape:
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id gpt_oss `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json `
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `
   --workers 2
 ```
 
@@ -53,22 +52,22 @@ cd "E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setu
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwen3_lmstudio `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json `
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `
   --workers 6
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwq `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json `
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `
   --workers 6
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id deepseek_r1_lmstudio `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json `
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `
   --workers 4
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id gpt_oss `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json `
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `
   --workers 2
 ```
 
@@ -78,19 +77,19 @@ python hf-local-scripts/run_ctrl_generate_only.py `
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id psyllm_gml_local `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id piaget_local `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id psyche_r1_local `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id psych_qwen_local `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json `
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `
   --quantization 4bit
 ```
 
@@ -136,25 +135,25 @@ python -m vllm.entrypoints.openai.api_server --model "Compumacy/Psych_Qwen_32B" 
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id psyllm_gml_vllm `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id piaget_vllm `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id psyche_r1_vllm `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id psych_qwen_vllm `
   --study ctrl_study_a_bias `
-  --data-path data/controllability_splits/study_a_bias_controllability_test.json
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json
 ```
 
 ## Direct Runner
 
 ```powershell
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --data-path data/controllability_splits/study_a_bias_controllability_test.json --output-dir results_scaled_large_resolved --max-cases 5 --workers 6
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json --output-dir results_ctrl_v2_1 --max-cases 5 --workers 6
 ```
 
 `--max-tokens` is optional. For LM Studio and vLLM models, omitting it lets the
@@ -169,5 +168,5 @@ serving stack control the effective completion limit.
 ## Useful Checks
 
 ```bash
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id gpt_oss --data-path data/controllability_splits/study_a_bias_controllability_test.json --workers 8 --max-cases 5
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id gpt_oss --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json --workers 8 --max-cases 5
 ```

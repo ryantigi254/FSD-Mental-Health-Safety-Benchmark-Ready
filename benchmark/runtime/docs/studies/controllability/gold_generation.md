@@ -10,14 +10,10 @@ This note records the current gold-generation policy for controllability and why
 
 Canonical checked-in outputs:
 
-- `data/controllability_splits/ctrl_gold_diagnosis_labels.json`
-- `data/controllability_splits/ctrl_gold_diagnosis_labels.robust.json`
-- `data/controllability_splits/ctrl_target_plans.json`
-- `data/controllability_splits/ctrl_target_plans.robust.json`
-- `data/controllability_splits_large_resolved/ctrl_gold_diagnosis_labels.json`
-- `data/controllability_splits_large_resolved/ctrl_gold_diagnosis_labels.robust.json`
-- `data/controllability_splits_large_resolved/ctrl_target_plans.json`
-- `data/controllability_splits_large_resolved/ctrl_target_plans.robust.json`
+- `data/controllability/controllability_splits_v2_1/ctrl_gold_diagnosis_labels.json`
+- `data/controllability/controllability_splits_v2_1/ctrl_gold_diagnosis_labels.robust.json`
+- `data/controllability/controllability_splits_v2_1/ctrl_target_plans.json`
+- `data/controllability/controllability_splits_v2_1/ctrl_target_plans.robust.json`
 
 ## Why The NLI-First Path Was Replaced
 
@@ -85,8 +81,7 @@ Reason:
 
 Agreement rates in the checked-in robust artefacts:
 
-- standard split: `176 / 300` = `58.7%`
-- large resolved split: `1255 / 2243` = `56.0%`
+- merged suite: `1431 / 2543` = `56.3%`
 
 ### Study C plan benchmark
 
@@ -109,8 +104,7 @@ Reason:
 
 Agreement rates in the checked-in robust artefacts:
 
-- standard split: `24 / 30` = `80.0%`
-- large resolved split: `100 / 112` = `89.3%`
+- merged suite: `124 / 142` = `87.3%`
 
 ## Current Backend Semantics
 
@@ -155,8 +149,6 @@ Minimum re-test contract:
 
 Run from `benchmark/runtime`.
 
-Standard controllability suite:
-
 ```bash
 export KMP_USE_SHM=0
 export OMP_NUM_THREADS=1
@@ -166,52 +158,24 @@ export TOKENIZERS_PARALLELISM=false
 export PYTHONPATH=src
 
 python3 scripts/studies/controllability/generate_gold_labels.py \
-  --ctrl-dir data/controllability_splits \
+  --ctrl-dir data/controllability/controllability_splits_v2_1 \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
 
 python3 scripts/studies/controllability/generate_gold_labels.py \
-  --ctrl-dir data/controllability_splits \
+  --ctrl-dir data/controllability/controllability_splits_v2_1 \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext \
   --secondary-model emilyalsentzer/Bio_ClinicalBERT \
   --output-name ctrl_gold_diagnosis_labels.robust.json
 
 python3 scripts/studies/controllability/generate_gold_plans.py \
-  --ctrl-dir data/controllability_splits \
+  --ctrl-dir data/controllability/controllability_splits_v2_1 \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
 
 python3 scripts/studies/controllability/generate_gold_plans.py \
-  --ctrl-dir data/controllability_splits \
-  --backend probe \
-  --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext \
-  --secondary-model michiyasunaga/BioLinkBERT-base \
-  --output-name ctrl_target_plans.robust.json
-```
-
-Large resolved controllability suite:
-
-```bash
-python3 scripts/studies/controllability/generate_gold_labels.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
-  --backend probe \
-  --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
-
-python3 scripts/studies/controllability/generate_gold_labels.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
-  --backend probe \
-  --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext \
-  --secondary-model emilyalsentzer/Bio_ClinicalBERT \
-  --output-name ctrl_gold_diagnosis_labels.robust.json
-
-python3 scripts/studies/controllability/generate_gold_plans.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
-  --backend probe \
-  --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
-
-python3 scripts/studies/controllability/generate_gold_plans.py \
-  --ctrl-dir data/controllability_splits_large_resolved \
+  --ctrl-dir data/controllability/controllability_splits_v2_1 \
   --backend probe \
   --primary-model microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext \
   --secondary-model michiyasunaga/BioLinkBERT-base \

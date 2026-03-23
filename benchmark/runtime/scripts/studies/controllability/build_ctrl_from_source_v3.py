@@ -541,15 +541,14 @@ def _slice(items: Sequence[Dict[str, Any]], *, start: int, size: Optional[int]) 
 def build_ctrl_roots(
     *,
     v6_root: Path,
-    small_root: Path,
-    large_root: Path,
+    ctrl_root: Path,
     study_a_target: int = 2000,
     study_b_single_target: int = 2000,
     study_b_multi_target: int = 120,
     study_c_target: int = 100,
     turns_per_case: int = 20,
 ) -> Dict[str, Any]:
-    """Build controllability small + large suites from source, disjoint from v6.1."""
+    """Build merged controllability suite from source, disjoint from v6.1."""
     print("Loading OpenR1-Psy rows...", flush=True)
     rows = load_openr1_rows()
     source_lookup = {(row["split"], row["source_openr1_id"]): row for row in rows}
@@ -612,84 +611,44 @@ def build_ctrl_roots(
     print(f"Controllability uses {ctrl_ref_count} unique source IDs (disjoint from v6.1)", flush=True)
 
     # Slice into small + large
-    small_a = _slice(study_a_full["samples"], start=0, size=SMALL_TARGETS["study_a"])
-    large_a = _slice(study_a_full["samples"], start=SMALL_TARGETS["study_a"], size=None)
+    # Clean output directory
+    if ctrl_root.exists():
+        for path in sorted(ctrl_root.rglob("*"), reverse=True):
+            if path.is_file():
+                path.unlink()
+        for path in sorted(
+            (p for p in ctrl_root.rglob("*") if p.is_dir()), reverse=True
+        ):
+            path.rmdir()
+    ctrl_root.mkdir(parents=True, exist_ok=True)
 
-    small_a_bias = _slice(study_a_bias_full["cases"], start=0, size=SMALL_TARGETS["study_a_bias"])
-    large_a_bias = _slice(study_a_bias_full["cases"], start=SMALL_TARGETS["study_a_bias"], size=None)
+    # Write merged suite
+    _write_json(ctrl_root / "study_a_controllability_test.json", {"samples": study_a_full["samples"]})
+    _write_json(ctrl_root / "study_a_bias_controllability_test.json", {"cases": study_a_bias_full["cases"]})
+    _write_json(ctrl_root / "study_b_controllability_test.json", study_b_single_full)
+    _write_json(ctrl_root / "study_b_multi_turn_controllability_test.json", study_b_multi_full)
+    _write_json(ctrl_root / "study_c_controllability_test.json", {"cases": study_c_full["cases"]})
+    _write_labels(ctrl_root, study_a_full)
+    _write_plans(ctrl_root, study_c_plans)
 
-    small_b = _slice(study_b_single_full, start=0, size=SMALL_TARGETS["study_b_single"])
-    large_b = _slice(study_b_single_full, start=SMALL_TARGETS["study_b_single"], size=None)
-
-    small_b_mt = _slice(study_b_multi_full, start=0, size=SMALL_TARGETS["study_b_multi"])
-    large_b_mt = _slice(study_b_multi_full, start=SMALL_TARGETS["study_b_multi"], size=None)
-
-    small_c = _slice(study_c_full["cases"], start=0, size=SMALL_TARGETS["study_c"])
-    large_c = _slice(study_c_full["cases"], start=SMALL_TARGETS["study_c"], size=None)
-
-    # Clean output directories
-    for root in (small_root, large_root):
-        if root.exists():
-            for path in sorted(root.rglob("*"), reverse=True):
-                if path.is_file():
-                    path.unlink()
-            for path in sorted(
-                (p for p in root.rglob("*") if p.is_dir()), reverse=True
-            ):
-                path.rmdir()
-        root.mkdir(parents=True, exist_ok=True)
-
-    # Write small suite
-    _write_json(small_root / "study_a_controllability_test.json", {"samples": small_a})
-    _write_json(small_root / "study_a_bias_controllability_test.json", {"cases": small_a_bias})
-    _write_json(small_root / "study_b_controllability_test.json", small_b)
-    _write_json(small_root / "study_b_multi_turn_controllability_test.json", small_b_mt)
-    _write_json(small_root / "study_c_controllability_test.json", {"cases": small_c})
-    _write_labels(small_root, {"samples": small_a})
-    _write_plans(small_root, study_c_plans)
-
-    # Write large suite
-    _write_json(large_root / "study_a_controllability_test.json", {"samples": large_a})
-    _write_json(large_root / "study_a_bias_controllability_test.json", {"cases": large_a_bias})
-    _write_json(large_root / "study_b_controllability_test.json", large_b)
-    _write_json(large_root / "study_b_multi_turn_controllability_test.json", large_b_mt)
-    _write_json(large_root / "study_c_controllability_test.json", {"cases": large_c})
-    _write_labels(large_root, {"samples": large_a})
-    _write_plans(large_root, study_c_plans)
-
-    small_counts = {
-        "study_a": len(small_a),
-        "study_a_bias": len(small_a_bias),
-        "study_b_single": len(small_b),
-        "study_b_multi": len(small_b_mt),
-        "study_c": len(small_c),
-    }
-    large_counts = {
-        "study_a": len(large_a),
-        "study_a_bias": len(large_a_bias),
-        "study_b_single": len(large_b),
-        "study_b_multi": len(large_b_mt),
-        "study_c": len(large_c),
+    counts = {
+        "study_a": len(study_a_full["samples"]),
+        "study_a_bias": len(study_a_bias_full["cases"]),
+        "study_b_single": len(study_b_single_full),
+        "study_b_multi": len(study_b_multi_full),
+        "study_c": len(study_c_full["cases"]),
     }
 
     _write_manifest(
-        small_root,
-        suite_name="controllability_v3_small",
+        ctrl_root,
+        suite_name="controllability_splits_v2_1",
         v6_root=v6_root,
-        counts=small_counts,
-        start_offsets={k: 0 for k in small_counts},
-    )
-    _write_manifest(
-        large_root,
-        suite_name="controllability_v3_large",
-        v6_root=v6_root,
-        counts=large_counts,
-        start_offsets=SMALL_TARGETS,
+        counts=counts,
+        start_offsets={k: 0 for k in counts},
     )
 
     return {
-        "small": small_counts,
-        "large": large_counts,
+        "counts": counts,
         "v6_1_refs": v6_ref_count,
         "ctrl_refs": ctrl_ref_count,
         "total_pool": len({(r["split"], r["source_openr1_id"]) for r in rows}),
@@ -702,15 +661,13 @@ def build_ctrl_roots(
 
 DATA_ROOT = RUNTIME_ROOT / "data"
 V6_1_ROOT = DATA_ROOT / "frozen_splits" / "v6_1"
-SMALL_ROOT = DATA_ROOT / "controllability" / "small_v2_1"
-LARGE_ROOT = DATA_ROOT / "controllability" / "large_v2_1"
+CTRL_ROOT = DATA_ROOT / "controllability" / "controllability_splits_v2_1"
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--v6-root", type=Path, default=V6_1_ROOT)
-    parser.add_argument("--small-root", type=Path, default=SMALL_ROOT)
-    parser.add_argument("--large-root", type=Path, default=LARGE_ROOT)
+    parser.add_argument("--ctrl-root", type=Path, default=CTRL_ROOT)
     parser.add_argument("--study-a-target", type=int, default=2000)
     parser.add_argument("--study-b-single-target", type=int, default=2000)
     parser.add_argument("--study-b-multi-target", type=int, default=120)
@@ -723,8 +680,7 @@ def main() -> int:
     args = parse_args()
     result = build_ctrl_roots(
         v6_root=args.v6_root,
-        small_root=args.small_root,
-        large_root=args.large_root,
+        ctrl_root=args.ctrl_root,
         study_a_target=args.study_a_target,
         study_b_single_target=args.study_b_single_target,
         study_b_multi_target=args.study_b_multi_target,

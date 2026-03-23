@@ -25,8 +25,7 @@ RUNTIME_ROOT = Path(__file__).resolve().parents[2]
 DATA_ROOT = RUNTIME_ROOT / "data"
 
 V6_1_ROOT = DATA_ROOT / "frozen_splits" / "v6_1"
-CTRL_LARGE_V2_1 = DATA_ROOT / "controllability" / "large_v2_1"
-CTRL_SMALL_V2_1 = DATA_ROOT / "controllability" / "small_v2_1"
+CTRL_V2_1 = DATA_ROOT / "controllability" / "controllability_splits_v2_1"
 RUBRIC_RULES = DATA_ROOT / "rubrics" / "rubric_rules_v4_1.json"
 
 _VALID_PROVENANCE = {"direct_source", "retrieved_composed", "source_anchored_deterministic_edit"}
@@ -508,38 +507,19 @@ def validate_cross_dataset_disjointness() -> ValidationResult:
     ]
 
     v6_ids = _collect_ids(V6_1_ROOT, v6_files + v6_bias, ["samples", "cases", "multi_turn_cases"])
-    large_ids = _collect_ids(CTRL_LARGE_V2_1, ctrl_files, ["samples", "cases", "items", "multi_turn_cases"])
-    small_ids = _collect_ids(CTRL_SMALL_V2_1, ctrl_files, ["samples", "cases", "items", "multi_turn_cases"])
+    ctrl_ids = _collect_ids(CTRL_V2_1, ctrl_files, ["samples", "cases", "items", "multi_turn_cases"])
 
     vr.ok(f"v6.1 parent: {len(v6_ids)} unique source IDs")
-    vr.ok(f"Controllability large v2.1: {len(large_ids)} unique source IDs")
-    vr.ok(f"Controllability small v2.1: {len(small_ids)} unique source IDs")
+    vr.ok(f"Controllability v2.1: {len(ctrl_ids)} unique source IDs")
 
-    # large v2.1 should be subset of v6.1 (derived from it)
-    large_not_in_v6 = large_ids - v6_ids
-    if not large_not_in_v6:
-        vr.ok("Large v2.1 source IDs ⊆ v6.1 parent (expected — derived from parent)")
+    # ctrl v2.1 draws from a separate OpenR1-Psy slice — check disjointness with v6.1
+    ctrl_in_v6 = ctrl_ids & v6_ids
+    if not ctrl_in_v6:
+        vr.ok("Controllability v2.1 source IDs fully disjoint from v6.1 parent")
     else:
-        vr.warn(f"Large v2.1 has {len(large_not_in_v6)} source IDs not in v6.1 parent")
+        vr.warn(f"Controllability v2.1 shares {len(ctrl_in_v6)} source IDs with v6.1 parent")
 
-    # small v2.1 should be subset of v6.1
-    small_not_in_v6 = small_ids - v6_ids
-    if not small_not_in_v6:
-        vr.ok("Small v2.1 source IDs ⊆ v6.1 parent (expected — derived from parent)")
-    else:
-        vr.warn(f"Small v2.1 has {len(small_not_in_v6)} source IDs not in v6.1 parent")
-
-    # large and small — composite multi-turn cases may share source components
-    # (a source conversation can be stitched into cases in both splits)
-    overlap = large_ids & small_ids
-    if not overlap:
-        vr.ok("Large v2.1 and small v2.1 source IDs are fully disjoint")
-    elif len(overlap) <= 50:
-        vr.warn(f"Large v2.1 and small v2.1 share {len(overlap)} source IDs (expected for composite multi-turn cases)")
-    else:
-        vr.fail(f"Large v2.1 and small v2.1 share {len(overlap)} source IDs (excessive overlap)")
-
-    total_used = v6_ids | large_ids | small_ids
+    total_used = v6_ids | ctrl_ids
     vr.ok(f"Total unique source IDs used across all datasets: {len(total_used)}")
 
     return vr
@@ -558,11 +538,8 @@ def main() -> int:
     # 1. v6.1 parent
     results.append(validate_v6_1(rules))
 
-    # 2. Controllability large v2.1
-    results.append(validate_ctrl_v2_1(CTRL_LARGE_V2_1, "large", rules))
-
-    # 3. Controllability small v2.1
-    results.append(validate_ctrl_v2_1(CTRL_SMALL_V2_1, "small", rules))
+    # 2. Controllability v2.1 (merged)
+    results.append(validate_ctrl_v2_1(CTRL_V2_1, "merged", rules))
 
     # 4. Cross-dataset disjointness
     results.append(validate_cross_dataset_disjointness())

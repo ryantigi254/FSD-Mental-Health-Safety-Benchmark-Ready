@@ -5,15 +5,12 @@ Study B multi-turn controllability generation writes to `results/<model-folder>/
 Canonical Study B multi-turn generation is arm-aware. Each case is evaluated
 across `spontaneous`, `generic_control`, and `explicit_control`.
 
-## Scaled Suite Overrides
-
-Use these overrides for the large resolved suite so you do not mix caches with the
-small-scale run:
+## Data Directory
 
 ```bash
 cd benchmark/runtime
-export CTRL_DIR=data/controllability_splits_large_resolved
-export CTRL_RESULTS_DIR=results_scaled_large_resolved
+export CTRL_DIR=data/controllability/controllability_splits_v2_1
+export CTRL_RESULTS_DIR=results_ctrl_v2_1
 ```
 
 Example:
@@ -130,7 +127,7 @@ python hf-local-scripts/run_ctrl_generate_only.py `
 ## Direct Runner
 
 ```powershell
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/controllability_splits_large_resolved --output-dir results_scaled_large_resolved --max-cases 3 --workers 6
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/controllability/controllability_splits_v2_1 --output-dir results_ctrl_v2_1 --max-cases 3 --workers 6
 ```
 
 `--max-tokens` is optional. For LM Studio and vLLM models, omitting it lets the
