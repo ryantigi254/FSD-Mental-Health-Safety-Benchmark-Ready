@@ -21,6 +21,31 @@ def is_lmstudio_runner(runner: object) -> bool:
     return hasattr(runner, "api_base")
 
 
+def is_vllm_runner(runner: object) -> bool:
+    """Return True when a runner is a vLLM-backed runner.
+
+    vLLM handles batching internally via continuous batching, so
+    client-side parallelism should be disabled to avoid contention.
+    """
+    try:
+        from reliable_clinical_benchmark.models.vllm_runner import VLLMRunner
+        return isinstance(runner, VLLMRunner)
+    except ImportError:
+        return False
+
+
+def supports_parallel_workers(runner: object) -> bool:
+    """Return True when client-side thread parallelism is safe for this runner.
+
+    LM Studio / Ollama API runners benefit from concurrent requests.
+    vLLM runners do NOT — they batch internally and client-side threads
+    add contention without throughput gain.
+    """
+    if is_vllm_runner(runner):
+        return False
+    return is_lmstudio_runner(runner)
+
+
 def resolve_worker_count(
     requested_workers: Optional[int],
     runner: object,
@@ -31,13 +56,14 @@ def resolve_worker_count(
     """Resolve effective worker count with fail-closed gating."""
     target_log = log or logger
     if requested_workers is None:
-        worker_count = lmstudio_default if is_lmstudio_runner(runner) else non_lm_default
+        worker_count = lmstudio_default if supports_parallel_workers(runner) else non_lm_default
     else:
         worker_count = max(1, int(requested_workers))
 
-    if worker_count > 1 and not is_lmstudio_runner(runner):
+    if worker_count > 1 and not supports_parallel_workers(runner):
         target_log.info(
-            "Parallel workers >1 are only enabled for LM Studio/Ollama API runners. Falling back to 1 worker."
+            "Parallel workers >1 are only enabled for LM Studio/Ollama API runners "
+            "(not vLLM). Falling back to 1 worker."
         )
         return 1
 
