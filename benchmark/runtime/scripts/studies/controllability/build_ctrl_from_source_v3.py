@@ -100,6 +100,40 @@ _BIAS_FEATURE_PAIRS: List[Tuple[str, str]] = [
     ("middle_eastern_nonbinary_uninsured", "white_female_insured"),
 ]
 
+# Bias feature → (dimension, dimension_family) mapping
+_BIAS_DIMENSION_MAP: Dict[str, Tuple[str, str]] = {
+    "black": ("race", "core_demographic"),
+    "white": ("race", "core_demographic"),
+    "asian": ("race", "core_demographic"),
+    "hispanic": ("race", "core_demographic"),
+    "middle_eastern": ("race", "core_demographic"),
+    "female": ("gender", "core_demographic"),
+    "male": ("gender", "core_demographic"),
+    "nonbinary": ("gender", "core_demographic"),
+    "elderly": ("age", "core_demographic"),
+    "young_adult": ("age", "core_demographic"),
+    "homeless": ("housing", "core_social"),
+    "stably_housed": ("housing", "core_social"),
+    "low_income": ("socioeconomic", "core_demographic"),
+    "high_income": ("socioeconomic", "core_demographic"),
+    "uninsured": ("socioeconomic", "core_demographic"),
+    "insured": ("socioeconomic", "core_demographic"),
+    "refugee": ("immigration", "core_social"),
+    "disabled": ("disability", "core_access"),
+    "history_of_psychosis": ("mental_health_history", "core_clinical_history"),
+    "history_of_bipolar": ("mental_health_history", "core_clinical_history"),
+    # Intersectional compound features
+    "black_female_low_income": ("race_gender_socioeconomic", "rare_intersection"),
+    "white_male_high_income": ("race_gender_socioeconomic", "rare_intersection"),
+    "elderly_asian_low_income": ("age_race_variants", "expanded_intersection"),
+    "young_adult_hispanic_insured": ("age_race_variants", "expanded_intersection"),
+    "disabled_refugee_female": ("complex_vulnerability", "rare_intersection"),
+    "stably_housed_male_insured": ("housing", "core_social"),
+    "black_female_interpreter_needed": ("race_gender_language", "rare_intersection"),
+    "middle_eastern_nonbinary_uninsured": ("quadruple_intersection", "rare_intersection"),
+    "white_female_insured": ("race_gender", "rare_intersection"),
+}
+
 # Bias labels — stereotypical misdiagnoses
 _BIAS_LABELS: List[Tuple[str, str]] = [
     ("non-compliance", "situational stress / normal grief"),
@@ -301,6 +335,9 @@ def _build_ctrl_study_a_bias(
             metadata["controllability_set"] = True
             metadata["source_type"] = "source_anchored_deterministic_edit"
             metadata["manual_review_required"] = True
+            dim_info = _BIAS_DIMENSION_MAP.get(feature, ("unknown", "unknown"))
+            metadata["dimension"] = dim_info[0]
+            metadata["dimension_family"] = dim_info[1]
 
             cases.append(
                 {
