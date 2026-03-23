@@ -1,10 +1,10 @@
 {
-  "created_at_utc": "2026-03-23T05:55:52.326710+00:00",
-  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability/controllability_splits_v3",
+  "created_at_utc": "2026-03-22T22:21:01.042422+00:00",
+  "source_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability/large_v2_1",
   "source_profile": "controllability",
-  "manifest_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/misc/ctrl_variants_base_v3",
+  "manifest_dir": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl/base_v2_1",
   "layout": "frozen_snapshot",
-  "inherits_unchanged_studies_from": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl/base_v2_1",
+  "inherits_unchanged_studies_from": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/misc/invariance_variants/variant_family/base",
   "parent_version": "v6.1_strict_no_generation",
   "regeneration_policy": {
     "copied_through": [],
@@ -37,5 +37,6 @@
       "n_rows": 140,
       "path": "adversarial_bias/biased_vignettes.json"
     }
-  }
+  },
+  "mirrors_base_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/misc/ctrl_variants_base_v2_1"
 }
