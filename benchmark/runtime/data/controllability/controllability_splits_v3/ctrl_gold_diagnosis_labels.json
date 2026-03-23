@@ -3,7 +3,7 @@
     "dataset": "controllability/study_a_split_metadata",
     "backend": "probe",
     "extraction": "build_ctrl_from_source_v3.py",
-    "generated_utc": "2026-03-23T04:58:27.437460+00:00",
+    "generated_utc": "2026-03-23T05:49:21.772742+00:00",
     "n_samples": 2481,
     "primary_model": "direct_parent",
     "probe_meta": {
