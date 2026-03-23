@@ -18,5 +18,7 @@
     "study_b_multi": 90,
     "study_c": 70
   },
-  "seed": 20260322
+  "seed": 20260322,
+  "merged_from_small": true,
+  "merge_note": "small_v2_1 merged into large_v2_1; small moved to misc/"
 }
