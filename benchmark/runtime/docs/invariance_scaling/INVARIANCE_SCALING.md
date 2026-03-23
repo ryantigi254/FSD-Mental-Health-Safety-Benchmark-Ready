@@ -14,7 +14,7 @@ output layout. The difference is the source root and the default study budgets.
 
 - Source root: `data/frozen_splits/v5`
 - Materialised sampled root:
-  `data/invariance/base`
+  `data/invariance/v5_samples_v2_1`
 
 ### `controllability`
 
