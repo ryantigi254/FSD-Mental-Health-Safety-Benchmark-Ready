@@ -26,6 +26,7 @@ DATA_ROOT = RUNTIME_ROOT / "data"
 
 V6_1_ROOT = DATA_ROOT / "frozen_splits" / "v6_1"
 CTRL_V2_1 = DATA_ROOT / "controllability" / "controllability_splits_v2_1"
+CTRL_V3 = DATA_ROOT / "controllability" / "controllability_splits_v3"
 RUBRIC_RULES = DATA_ROOT / "rubrics" / "rubric_rules_v4_1.json"
 
 _VALID_PROVENANCE = {"direct_source", "retrieved_composed", "source_anchored_deterministic_edit"}
@@ -476,8 +477,9 @@ def validate_ctrl_v2_1(ctrl_dir: Path, label: str, rules: dict[str, Any]) -> Val
 def validate_cross_dataset_disjointness() -> ValidationResult:
     vr = ValidationResult("Cross-dataset source ID disjointness")
 
-    def _collect_ids(root: Path, filenames: list[str], item_keys: list[str]) -> set[Any]:
-        ids: set[Any] = set()
+    def _collect_split_ids(root: Path, filenames: list[str], item_keys: list[str]) -> set[tuple[str, int]]:
+        """Collect (split, id) tuples for split-aware disjointness checking."""
+        ids: set[tuple[str, int]] = set()
         for fn in filenames:
             path = root / fn
             if not path.exists():
@@ -492,7 +494,11 @@ def validate_cross_dataset_disjointness() -> ValidationResult:
             if not items:
                 continue
             for item in items:
-                ids.update(_extract_source_ids(item.get("metadata", {}) or {}))
+                metadata = item.get("metadata", {}) or {}
+                split = str(metadata.get("source_openr1_split", metadata.get("source_split", "")) or "").strip().lower()
+                raw_ids = _extract_source_ids(metadata)
+                for sid in raw_ids:
+                    ids.add((split or "unknown", int(sid)))
         return ids
 
     v6_files = ["study_a_test.json", "study_b_test.json", "study_b_multi_turn_test.json", "study_c_test.json"]
@@ -506,20 +512,31 @@ def validate_cross_dataset_disjointness() -> ValidationResult:
         "study_c_controllability_test.json",
     ]
 
-    v6_ids = _collect_ids(V6_1_ROOT, v6_files + v6_bias, ["samples", "cases", "multi_turn_cases"])
-    ctrl_ids = _collect_ids(CTRL_V2_1, ctrl_files, ["samples", "cases", "items", "multi_turn_cases"])
+    v6_ids = _collect_split_ids(V6_1_ROOT, v6_files + v6_bias, ["samples", "cases", "multi_turn_cases"])
+    ctrl_v2_ids = _collect_split_ids(CTRL_V2_1, ctrl_files, ["samples", "cases", "items", "multi_turn_cases"])
+    ctrl_v3_ids = _collect_split_ids(CTRL_V3, ctrl_files, ["samples", "cases", "items", "multi_turn_cases"]) if CTRL_V3.exists() else set()
 
     vr.ok(f"v6.1 parent: {len(v6_ids)} unique source IDs")
-    vr.ok(f"Controllability v2.1: {len(ctrl_ids)} unique source IDs")
+    vr.ok(f"Controllability v2.1: {len(ctrl_v2_ids)} unique source IDs")
+    if ctrl_v3_ids:
+        vr.ok(f"Controllability v3: {len(ctrl_v3_ids)} unique source IDs")
 
     # ctrl v2.1 draws from a separate OpenR1-Psy slice — check disjointness with v6.1
-    ctrl_in_v6 = ctrl_ids & v6_ids
-    if not ctrl_in_v6:
+    ctrl_v2_in_v6 = ctrl_v2_ids & v6_ids
+    if not ctrl_v2_in_v6:
         vr.ok("Controllability v2.1 source IDs fully disjoint from v6.1 parent")
     else:
-        vr.warn(f"Controllability v2.1 shares {len(ctrl_in_v6)} source IDs with v6.1 parent")
+        vr.warn(f"Controllability v2.1 shares {len(ctrl_v2_in_v6)} source IDs with v6.1 parent")
 
-    total_used = v6_ids | ctrl_ids
+    # ctrl v3 disjointness
+    if ctrl_v3_ids:
+        ctrl_v3_in_v6 = ctrl_v3_ids & v6_ids
+        if not ctrl_v3_in_v6:
+            vr.ok("Controllability v3 source IDs fully disjoint from v6.1 parent")
+        else:
+            vr.fail(f"Controllability v3 shares {len(ctrl_v3_in_v6)} source IDs with v6.1 parent")
+
+    total_used = v6_ids | ctrl_v2_ids | ctrl_v3_ids
     vr.ok(f"Total unique source IDs used across all datasets: {len(total_used)}")
 
     return vr
@@ -539,7 +556,11 @@ def main() -> int:
     results.append(validate_v6_1(rules))
 
     # 2. Controllability v2.1 (merged)
-    results.append(validate_ctrl_v2_1(CTRL_V2_1, "merged", rules))
+    results.append(validate_ctrl_v2_1(CTRL_V2_1, "v2.1 merged", rules))
+
+    # 3. Controllability v3 (scaled)
+    if CTRL_V3.exists():
+        results.append(validate_ctrl_v2_1(CTRL_V3, "v3 scaled", rules))
 
     # 4. Cross-dataset disjointness
     results.append(validate_cross_dataset_disjointness())
