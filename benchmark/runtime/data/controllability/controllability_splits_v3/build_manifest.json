@@ -1,0 +1,22 @@
+{
+  "build_timestamp": "2026-03-23T04:58:27.439511+00:00",
+  "suite_name": "controllability_splits_v2_1",
+  "builder": "build_ctrl_from_source_v3.py",
+  "id_disjoint_from": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/frozen_splits/v6_1",
+  "selection_policy": "source-backed from unused OpenR1-Psy pool, fully disjoint from v6.1",
+  "start_offsets": {
+    "study_a": 0,
+    "study_a_bias": 0,
+    "study_b_single": 0,
+    "study_b_multi": 0,
+    "study_c": 0
+  },
+  "counts": {
+    "study_a": 2481,
+    "study_a_bias": 4962,
+    "study_b_single": 2481,
+    "study_b_multi": 290,
+    "study_c": 282
+  },
+  "seed": 20260322
+}
