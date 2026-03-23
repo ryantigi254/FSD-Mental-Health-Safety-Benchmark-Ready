@@ -80,3 +80,7 @@ benchmark/runtime/tests/unit/test_generate_pgfplots_additional.py
 .agent/
 Assignment/Misc/
 benchmark/runtime/Misc/
+
+# Invariance data and docs (tracked on invariance-specific branches only)
+benchmark/runtime/data/invariance/
+benchmark/runtime/docs/invariance_scaling/
