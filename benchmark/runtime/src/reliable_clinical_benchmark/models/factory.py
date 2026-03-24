@@ -98,6 +98,16 @@ def get_model_runner(model_id: str, config: Optional[GenerationConfig] = None) -
 
         return PsychQwen32bLMStudioRunner(config=config)
 
+    if model_id_lower in (
+        "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
+        "qwen3.5-distilled",
+        "qwen3.5-27b-distilled",
+        "qwen3_5_distilled_lmstudio",
+    ):
+        from .lmstudio_qwen3_5_distilled import Qwen35DistilledLMStudioRunner
+
+        return Qwen35DistilledLMStudioRunner(config=config)
+
     if model_id_lower in ("piaget", "piaget-8b"):
         from .piaget import Piaget8BRunner
 
@@ -165,5 +175,5 @@ def get_model_runner(model_id: str, config: Optional[GenerationConfig] = None) -
         f"Unknown model ID: {model_id}. "
         "Supported models: psyllm, qwq, deepseek_r1, gpt_oss, qwen3, "
         "ollama_minimax_m2_5_cloud, piaget, psyche_r1, psych_qwen, "
-        "psych_qwen_32b-mlx"
+        "psych_qwen_32b-mlx, qwen3.5-distilled"
     )
