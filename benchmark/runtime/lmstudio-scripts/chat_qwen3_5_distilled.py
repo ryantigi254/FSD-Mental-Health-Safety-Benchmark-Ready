@@ -14,7 +14,9 @@ DEFAULT_SYSTEM = (
 MODEL_ID = "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2"
 
 
-def call_lmstudio(prompt: str, system_prompt: str, temperature: float, max_tokens: int) -> str:
+def call_lmstudio(
+    prompt: str, system_prompt: str, temperature: float, max_tokens: int | None = None
+) -> str:
     url = os.environ.get("LM_STUDIO_URL", DEFAULT_URL)
     api_key = os.environ.get("LM_STUDIO_API_KEY", "lm-studio")
     headers = {
@@ -31,9 +33,10 @@ def call_lmstudio(prompt: str, system_prompt: str, temperature: float, max_token
         "model": MODEL_ID,
         "messages": messages,
         "temperature": temperature,
-        "max_tokens": max_tokens,
         "stream": False,
     }
+    if max_tokens is not None:
+        payload["max_tokens"] = max_tokens
 
     response = requests.post(url, headers=headers, json=payload, timeout=300)
     response.raise_for_status()
@@ -67,8 +70,8 @@ def main() -> None:
     parser.add_argument(
         "--max-tokens",
         type=int,
-        default=512,
-        help="Maximum new tokens to generate.",
+        default=None,
+        help="Maximum new tokens to generate. Omit to use LM Studio server default.",
     )
 
     args = parser.parse_args()
