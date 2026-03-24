@@ -144,6 +144,11 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "piaget_vllm": "piaget-8b-local",
         "psyche_r1_vllm": "psyche-r1-local",
         "psych_qwen_vllm": "psych-qwen-32b-local",
+        "psych_qwen_32b-mlx": "psych-qwen-32b-mlx",
+        "qwen3.5-distilled": "qwen3.5-distilled",
+        "qwen3.5-27b-distilled": "qwen3.5-distilled",
+        "qwen3_5_distilled_lmstudio": "qwen3.5-distilled",
+        "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2": "qwen3.5-distilled",
     }
     return canonical_names.get(model_id_lower, model_id)
 
@@ -775,6 +780,12 @@ def main() -> int:
         "gpt_oss",
         "gpt-oss-lmstudio",
         "gpt-oss-20b",
+        "psych_qwen_32b-mlx",
+        "psych-qwen-32b-mlx",
+        "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
+        "qwen3.5-distilled",
+        "qwen3.5-27b-distilled",
+        "qwen3_5_distilled_lmstudio",
     }
     vllm_model_ids = {
         "psyllm_gml_vllm",
