@@ -260,3 +260,8 @@ Compatibility aliases are also written under the old `ctrl_v2_study_*` and
 - `ctrl_study_a_bias` uses the canonical adversarial bias cases for all three arms.
 - `ctrl_study_b_multi_turn` injects the control text once at conversation start.
 - `ctrl_study_c` applies the arm to summaries only.
+
+## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
+
+LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
+See per-study controllability command files for specific commands.
