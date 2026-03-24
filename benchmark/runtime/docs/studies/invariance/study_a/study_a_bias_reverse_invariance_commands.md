@@ -33,3 +33,22 @@ PYTHONPATH=src python scripts/evaluation/run_controllability_comparison.py \
   --variant-type instruction=paraphrase \
   --out metric-results/<MODEL>/study_a_bias_reverse_invariance.json
 ```
+
+## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
+
+LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
+
+### macOS (Apple Silicon)
+```bash
+python hf-local-scripts/run_invariance_generate_only.py \
+  --study study_a_bias_invariance \
+  --model-id qwen3.5-distilled \
+  --data-dir data/invariance/v5/base/v2_1 \
+  --output-dir results_invariance_reverse \
+  --workers 4
+```
+
+### Windows (PC)
+```powershell
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwen3.5-distilled --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance_reverse --workers 4
+```

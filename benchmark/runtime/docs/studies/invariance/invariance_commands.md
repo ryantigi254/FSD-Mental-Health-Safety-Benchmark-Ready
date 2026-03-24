@@ -83,3 +83,8 @@ Ctrl invariance commands (using `data/invariance/ctrl/base/v2_1` and
 - `docs/studies/invariance/study_b/study_b_invariance_ctrl_commands.md`
 - `docs/studies/invariance/study_b/study_b_multi_turn_invariance_ctrl_commands.md`
 - `docs/studies/invariance/study_c/study_c_invariance_ctrl_commands.md`
+
+## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
+
+LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
+See per-study invariance command files for specific commands.

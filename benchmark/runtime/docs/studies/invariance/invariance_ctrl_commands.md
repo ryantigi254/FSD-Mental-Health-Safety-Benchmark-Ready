@@ -100,3 +100,8 @@ The reverse direction measures which perturbation families change ctrl metrics
 most, using `run_controllability_comparison.py` with variant-family caches.
 
 Full commands: [`invariance_reverse_commands.md`](invariance_reverse_commands.md)
+
+## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
+
+LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
+See per-study invariance command files for specific commands.
