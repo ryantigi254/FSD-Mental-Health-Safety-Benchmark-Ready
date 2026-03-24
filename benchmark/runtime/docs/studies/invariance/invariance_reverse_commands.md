@@ -140,3 +140,8 @@ Each output JSON contains per-variant controllability deltas. Key questions:
   robustness.
 - **Is the shift consistent across studies?** — a variant family that destabilises
   ctrl in Study A but not Study B suggests study-specific sensitivity.
+
+## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
+
+LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
+See per-study invariance command files for specific commands.

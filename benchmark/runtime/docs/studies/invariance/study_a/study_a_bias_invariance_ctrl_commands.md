@@ -57,3 +57,22 @@ python hf-local-scripts/run_study_a_bias_generate_only.py --study-name study_a_b
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-path data/invariance/ctrl/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_ctrl_invariance --check-only
 python hf-local-scripts/run_study_a_bias_generate_only.py --study-name study_a_bias_invariance --model-id gpt_oss --data-path data/invariance/ctrl/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_ctrl_invariance --workers 2 --max-cases 5
 ```
+
+## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
+
+LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
+
+### macOS (Apple Silicon)
+```bash
+python hf-local-scripts/run_invariance_generate_only.py \
+  --study study_a_bias_invariance \
+  --model-id qwen3.5-distilled \
+  --data-dir data/invariance/ctrl/base/v2_1 \
+  --output-dir results_invariance_ctrl \
+  --workers 4
+```
+
+### Windows (PC)
+```powershell
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwen3.5-distilled --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_invariance_ctrl --workers 4
+```

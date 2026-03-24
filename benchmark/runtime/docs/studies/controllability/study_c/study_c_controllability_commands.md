@@ -144,3 +144,23 @@ serving stack control the effective completion limit.
 ```bash
 python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_c --model-id gpt_oss --workers 8 --max-cases 3
 ```
+
+## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
+
+LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
+
+### macOS (Apple Silicon)
+```bash
+python hf-local-scripts/run_ctrl_generate_only.py \
+  --model-id qwen3.5-distilled \
+  --study ctrl_study_c \
+  --workers 4
+```
+
+### Windows (PC)
+```powershell
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id qwen3.5-distilled `
+  --study ctrl_study_c `
+  --workers 4
+```
