@@ -4,9 +4,13 @@
 from __future__ import annotations
 
 import argparse
+import json
+import os
 import shlex
 import subprocess
 import sys
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 
@@ -31,6 +35,24 @@ INVARIANCE_STUDIES = {
     "study_b_invariance",
     "study_b_multi_turn_invariance",
     "study_c_invariance",
+}
+
+LMSTUDIO_MODEL_PREFLIGHT = {
+    "qwq": {
+        "env_var": "LMSTUDIO_QWQ_MODEL",
+        "default": "qwq-32b",
+        "aliases": ("qwen/qwq-32b", "qwq-32b"),
+    },
+    "qwen3_lmstudio": {
+        "env_var": "LMSTUDIO_QWEN3_MODEL",
+        "default": "qwen3-8b",
+        "aliases": ("qwen/qwen3-8b", "qwen3-8b"),
+    },
+    "deepseek_r1_lmstudio": {
+        "env_var": "LMSTUDIO_DEEPSEEK_R1_MODEL",
+        "default": "deepseek-r1-distill-qwen-14b",
+        "aliases": ("deepseek-r1-distill-qwen-14b",),
+    },
 }
 
 
@@ -66,6 +88,14 @@ def parse_args() -> tuple[argparse.Namespace, list[str]]:
         action="store_true",
         help="Validate path/script/model wiring only. Does not execute generation.",
     )
+    parser.add_argument(
+        "--allow-lmstudio-autoload",
+        action="store_true",
+        help=(
+            "Allow LM Studio to lazy-load models by skipping /v1/models preflight "
+            "for LM Studio model IDs."
+        ),
+    )
     args, passthrough = parser.parse_known_args()
     return args, passthrough
 
@@ -77,6 +107,63 @@ def _consume_flag_value(tokens: list[str], index: int, default: str) -> tuple[st
         if candidate and not candidate.startswith("-"):
             return candidate, next_index + 1
     return default, next_index
+
+
+def _normalise_model_id(model_id: str) -> str:
+    return (model_id or "").strip().lower()
+
+
+def _matches_loaded_model(loaded_model_id: str, candidate: str) -> bool:
+    loaded = _normalise_model_id(loaded_model_id)
+    expected = _normalise_model_id(candidate)
+    if not loaded or not expected:
+        return False
+    if loaded == expected:
+        return True
+    return loaded.endswith(f"/{expected}") or loaded.endswith(f"@{expected}")
+
+
+def _check_lmstudio_model_loaded(model_id: str) -> tuple[bool, str]:
+    model_key = _normalise_model_id(model_id)
+    preflight_cfg = LMSTUDIO_MODEL_PREFLIGHT.get(model_key)
+    if not preflight_cfg:
+        return True, ""
+
+    resolved_model = os.getenv(preflight_cfg["env_var"], preflight_cfg["default"]).strip()
+    aliases = [resolved_model, *preflight_cfg["aliases"]]
+    api_base = os.getenv("LMSTUDIO_API_BASE", "http://127.0.0.1:1234/v1").rstrip("/")
+    endpoint = f"{api_base}/models"
+    try:
+        with urllib.request.urlopen(endpoint, timeout=5) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except urllib.error.URLError as request_error:
+        return (
+            False,
+            f"Failed LM Studio preflight against {endpoint}: {request_error}.",
+        )
+    except json.JSONDecodeError as parse_error:
+        return (
+            False,
+            f"LM Studio /v1/models returned non-JSON payload from {endpoint}: {parse_error}.",
+        )
+
+    available_model_ids = []
+    for entry in payload.get("data", []) if isinstance(payload, dict) else []:
+        if isinstance(entry, dict) and entry.get("id"):
+            available_model_ids.append(str(entry["id"]))
+
+    for loaded_model_id in available_model_ids:
+        if any(_matches_loaded_model(loaded_model_id, alias) for alias in aliases):
+            return True, loaded_model_id
+
+    alias_msg = ", ".join(dict.fromkeys(aliases))
+    available_msg = ", ".join(available_model_ids) if available_model_ids else "<none>"
+    return (
+        False,
+        "LM Studio model preflight failed. "
+        f"Requested model-id '{model_id}' expects one of [{alias_msg}] to already be loaded, "
+        f"but /v1/models returned [{available_msg}].",
+    )
 
 
 def main() -> int:
@@ -162,6 +249,17 @@ def main() -> int:
 
     print(f"runtime root: {runtime_root}")
     print(f"Executing: {shlex.join(command)}")
+    if not args.allow_lmstudio_autoload:
+        is_ready, detail = _check_lmstudio_model_loaded(args.model_id)
+        if not is_ready:
+            print(
+                f"{detail} Load the model in LM Studio first, or pass "
+                "--allow-lmstudio-autoload to bypass this guard.",
+                file=sys.stderr,
+            )
+            return 2
+        if detail:
+            print(f"LM Studio preflight matched loaded model: {detail}")
     if args.check_only:
         print("Check-only mode: validation passed; no generation executed.")
         return 0
