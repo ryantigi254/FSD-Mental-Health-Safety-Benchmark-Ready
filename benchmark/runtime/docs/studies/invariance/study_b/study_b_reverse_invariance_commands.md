@@ -3,6 +3,90 @@
 > **Direction:** Controllability → Invariance.
 > Measures which perturbation families change Study B controllability metrics most.
 
+Use `--output-dir results_ctrl_invariance` for all generation commands below.
+
+---
+
+## Ctrl Base Runs
+
+### LM Studio
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwq --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id deepseek_r1_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+```
+
+### Local HF
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psyllm_gml_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id piaget_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psyche_r1_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psych_qwen_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --quantization 4bit
+```
+
+### vLLM
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psyllm_gml_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id piaget_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psyche_r1_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psych_qwen_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+```
+
+---
+
+## Ctrl Variant-Family Runs
+
+Use `data/invariance/ctrl/variants/v2_1/study_b` to run every Study B
+ctrl variant-family child in one go.
+
+### LM Studio
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id gpt_oss --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwq --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id deepseek_r1_lmstudio --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance --workers 4
+```
+
+### Local HF
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psyllm_gml_local --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id piaget_local --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psyche_r1_local --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psych_qwen_local --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance --quantization 4bit
+```
+
+### vLLM
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psyllm_gml_vllm --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id piaget_vllm --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psyche_r1_vllm --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psych_qwen_vllm --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance
+```
+
+---
+
+## Direct Runner
+
+```powershell
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_b --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --max-cases 5 --workers 2
+```
+
+## Checks
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --check-only
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_b --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2 --max-cases 5
+```
+
+---
+
 ## Variant Families
 
 | Tag | Type | Data Root |
@@ -122,15 +206,15 @@ LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
 
 ### macOS (Apple Silicon)
 ```bash
-python hf-local-scripts/run_invariance_generate_only.py \
-  --study study_b_invariance \
+python hf-local-scripts/run_ctrl_generate_only.py \
+  --study ctrl_study_b \
   --model-id qwen3.5-distilled \
-  --data-dir data/invariance/v5/base/v2_1 \
-  --output-dir results_invariance_reverse \
+  --ctrl-dir data/invariance/ctrl/base/v2_1 \
+  --output-dir results_ctrl_invariance \
   --workers 4
 ```
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwen3.5-distilled --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance_reverse --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwen3.5-distilled --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 ```

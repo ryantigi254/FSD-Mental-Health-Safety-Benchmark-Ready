@@ -29,6 +29,10 @@ BASE_MODEL_IDS = {
     "piaget_vllm",
     "psyche_r1_vllm",
     "psych_qwen_vllm",
+    "gpt-oss-120b-runpod",
+    "gpt_oss_120b_runpod",
+    "glm-4.7-flash-runpod",
+    "glm47_flash_runpod",
 }
 INVARIANCE_STUDIES = {
     "study_a_invariance",

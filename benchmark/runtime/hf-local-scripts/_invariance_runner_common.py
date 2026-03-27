@@ -12,6 +12,11 @@ CANONICAL_MODEL_DIRS = {
     "gpt_oss_lmstudio": "gpt-oss-20b",
     "gpt-oss-lmstudio": "gpt-oss-20b",
     "gpt-oss-20b": "gpt-oss-20b",
+    "gpt-oss-120b": "gpt-oss-120b",
+    "gpt-oss-120b-runpod": "gpt-oss-120b",
+    "gpt_oss_120b_runpod": "gpt-oss-120b",
+    "gpt_oss_remote": "gpt-oss-120b",
+    "gpt_oss_120b_remote": "gpt-oss-120b",
     "deepseek_r1_lmstudio": "deepseek-r1-lmstudio",
     "deepseek-r1-lmstudio": "deepseek-r1-lmstudio",
     "piaget_local": "piaget-8b-local",
@@ -29,6 +34,10 @@ CANONICAL_MODEL_DIRS = {
     "qwq_lmstudio": "qwq",
     "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
     "minimax_m2_5_cloud": "minimax-m2.5-cloud",
+    "glm-4.7-flash": "glm-4.7-flash",
+    "glm-4.7-flash-runpod": "glm-4.7-flash",
+    "glm47_flash_runpod": "glm-4.7-flash",
+    "glm47_flash": "glm-4.7-flash",
 }
 
 

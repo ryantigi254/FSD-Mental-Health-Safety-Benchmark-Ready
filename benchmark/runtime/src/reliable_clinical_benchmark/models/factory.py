@@ -75,7 +75,23 @@ def get_model_runner(model_id: str, config: Optional[GenerationConfig] = None) -
 
         return GPTOSSLMStudioRunner(config=config)
 
-    if model_id_lower in ("gpt_oss_remote", "gpt_oss_120b_remote", "gpt-oss-120b"):
+    if model_id_lower in (
+        "glm47_flash",
+        "glm-4.7-flash",
+        "glm-4.7-flash-runpod",
+        "glm47_flash_runpod",
+    ):
+        from .glm47_flash import GLM47FlashRunner
+
+        return GLM47FlashRunner(config=config)
+
+    if model_id_lower in (
+        "gpt_oss_remote",
+        "gpt_oss_120b_remote",
+        "gpt-oss-120b",
+        "gpt-oss-120b-runpod",
+        "gpt_oss_120b_runpod",
+    ):
         from .gpt_oss import GPTOSSRunner
 
         return GPTOSSRunner(config=config)

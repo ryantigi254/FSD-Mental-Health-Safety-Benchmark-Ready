@@ -6,6 +6,66 @@
 > Study A Bias shares the same variant families as Study A (lexical, surface,
 > syntax, instruction) but evaluates against the bias vignettes subset.
 
+Use `--output-dir results_ctrl_invariance` for all generation commands below.
+
+---
+
+## Ctrl Base Runs
+
+Uses the sampled invariance subset at
+`data/invariance/ctrl/base/v2_1/adversarial_bias/biased_vignettes.json`
+(140 cases sampled from the controllability bias file).
+
+### LM Studio
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwq --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id deepseek_r1_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+```
+
+### Local HF
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyllm_gml_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id piaget_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyche_r1_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psych_qwen_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --quantization 4bit
+```
+
+### vLLM
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyllm_gml_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id piaget_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyche_r1_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psych_qwen_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+```
+
+## Variant-Family Runs
+
+Not applicable for `ctrl_study_a_bias`.
+
+The bias reverse invariance study does not use variant-family perturbations.
+
+---
+
+## Direct Runner
+
+```powershell
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --max-cases 5 --workers 2
+```
+
+## Checks
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --check-only
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2 --max-cases 5
+```
+
+---
+
 ## Variant Families
 
 | Tag | Type | Data Root |
@@ -40,15 +100,15 @@ LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
 
 ### macOS (Apple Silicon)
 ```bash
-python hf-local-scripts/run_invariance_generate_only.py \
-  --study study_a_bias_invariance \
+python hf-local-scripts/run_ctrl_generate_only.py \
+  --study ctrl_study_a_bias \
   --model-id qwen3.5-distilled \
-  --data-dir data/invariance/v5/base/v2_1 \
-  --output-dir results_invariance_reverse \
+  --ctrl-dir data/invariance/ctrl/base/v2_1 \
+  --output-dir results_ctrl_invariance \
   --workers 4
 ```
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwen3.5-distilled --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance_reverse --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3.5-distilled --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 ```

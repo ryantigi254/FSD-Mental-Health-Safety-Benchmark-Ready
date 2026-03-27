@@ -84,6 +84,7 @@ Canonical LM Studio model IDs used throughout these commands:
 - `qwq`
 - `deepseek_r1_lmstudio`
 - `gpt_oss`
+- `gpt-oss-120b-runpod` (RunPod Serverless — see `docs/models/RUNPOD_GPT_OSS_120B.md`)
 
 ---
 
@@ -110,6 +111,9 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id piaget_local --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyche_r1_local --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psych_qwen_local --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
+
+# RunPod GPT-OSS-120B (requires RUNPOD_GPT_OSS_120B_ENDPOINT + GPT_OSS_API_KEY in .env)
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id gpt-oss-120b-runpod --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 ```
 
 **Output**: `results/<model>/ctrl_study_a_generations.jsonl`
