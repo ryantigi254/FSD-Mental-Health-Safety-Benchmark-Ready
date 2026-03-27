@@ -116,6 +116,16 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
 
         "gpt_oss": "gpt-oss-20b",
 
+        "gpt-oss-120b": "gpt-oss-120b",
+
+        "gpt-oss-120b-runpod": "gpt-oss-120b",
+
+        "gpt_oss_120b_runpod": "gpt-oss-120b",
+
+        "gpt_oss_remote": "gpt-oss-120b",
+
+        "gpt_oss_120b_remote": "gpt-oss-120b",
+
         "deepseek_r1_lmstudio": "deepseek-r1-lmstudio",
         "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
         "minimax_m2_5_cloud": "minimax-m2.5-cloud",
@@ -362,9 +372,18 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
     alias_map = {
         # LM Studio naming vs existing results folders
         "gpt_oss": "gpt-oss-20b",
+        "gpt-oss-120b": "gpt-oss-120b",
+        "gpt-oss-120b-runpod": "gpt-oss-120b",
+        "gpt_oss_120b_runpod": "gpt-oss-120b",
+        "gpt_oss_remote": "gpt-oss-120b",
+        "gpt_oss_120b_remote": "gpt-oss-120b",
         "deepseek_r1_lmstudio": "deepseek-r1-lmstudio",
         "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
         "minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "glm-4.7-flash": "glm-4.7-flash",
+        "glm-4.7-flash-runpod": "glm-4.7-flash",
+        "glm47_flash_runpod": "glm-4.7-flash",
+        "glm47_flash": "glm-4.7-flash",
         # HF local naming vs existing results folders
         "piaget_local": "piaget-8b-local",
         "psych_qwen_local": "psych-qwen-32b-local",

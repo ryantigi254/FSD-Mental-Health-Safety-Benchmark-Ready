@@ -11,9 +11,75 @@
 
 ## Prerequisites
 
-1. Generate base results from `data/invariance/ctrl/base/v2_1` (see `invariance_ctrl_commands.md`).
+1. Generate base results from `data/invariance/ctrl/base/v2_1` (see below).
 2. Generate variant results for each family under `data/invariance/ctrl/variants/v2_1/study_*/`.
 3. Both base and variant caches must exist before running comparison.
+
+---
+
+## Prepared Roots
+
+### Ctrl Base Runs
+
+- `data/invariance/ctrl/base/v2_1`
+
+### Ctrl Variant-Family Runs
+
+- `data/invariance/ctrl/variants/v2_1/study_a`
+- `data/invariance/ctrl/variants/v2_1/study_b`
+- `data/invariance/ctrl/variants/v2_1/study_b_multi_turn`
+- `data/invariance/ctrl/variants/v2_1/study_c`
+
+Use `--output-dir results_ctrl_invariance` throughout.
+
+---
+
+## LM Studio
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
+```
+
+## Local HF
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyllm_gml_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id piaget_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyche_r1_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psych_qwen_local --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --quantization 4bit
+```
+
+## vLLM
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyllm_gml_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id piaget_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyche_r1_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psych_qwen_vllm --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance
+```
+
+## RunPod GPT-OSS-120B
+
+Requires `RUNPOD_GPT_OSS_120B_ENDPOINT` and `GPT_OSS_API_KEY` set in `.env`.
+See `docs/models/RUNPOD_GPT_OSS_120B.md` for pod setup.
+
+```bash
+python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id gpt-oss-120b-runpod --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id gpt-oss-120b-runpod --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id gpt-oss-120b-runpod --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt-oss-120b-runpod --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id gpt-oss-120b-runpod --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+```
+
+## Direct Runner
+
+```powershell
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --max-cases 5 --workers 2
+```
 
 ---
 
@@ -144,4 +210,4 @@ Each output JSON contains per-variant controllability deltas. Key questions:
 ## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
 
 LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
-See per-study invariance command files for specific commands.
+See per-study reverse invariance command files for specific commands.

@@ -44,6 +44,19 @@ python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance 
 python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id psych_qwen_vllm --env mh-llm-vllm-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance
 ```
 
+## RunPod GPT-OSS-120B
+
+Requires `RUNPOD_GPT_OSS_120B_ENDPOINT` and `GPT_OSS_API_KEY` set in `.env`.
+See `docs/models/RUNPOD_GPT_OSS_120B.md` for pod setup.
+
+```bash
+python scripts/dev/run_generation_auto.py --study study_a_invariance --model-id gpt-oss-120b-runpod --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id gpt-oss-120b-runpod --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance --model-id gpt-oss-120b-runpod --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id gpt-oss-120b-runpod --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt-oss-120b-runpod --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 4
+```
+
 ## Direct Runner
 
 ```powershell
