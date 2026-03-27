@@ -21,6 +21,25 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+def _normalise_model_id(model: str) -> str:
+    return (model or "").strip().lower()
+
+
+def _model_ids_match(requested_model: str, loaded_model: str) -> bool:
+    requested = _normalise_model_id(requested_model)
+    loaded = _normalise_model_id(loaded_model)
+    if not requested or not loaded:
+        return False
+    if requested == loaded:
+        return True
+    return (
+        loaded.endswith(f"/{requested}")
+        or requested.endswith(f"/{loaded}")
+        or loaded.endswith(f"@{requested}")
+        or requested.endswith(f"@{loaded}")
+    )
+
+
 def is_model_loaded(api_base: str, model: str, timeout: int = 10) -> bool:
     """Check whether *model* is already loaded in LM Studio."""
     try:
@@ -30,8 +49,12 @@ def is_model_loaded(api_base: str, model: str, timeout: int = 10) -> bool:
         )
         resp.raise_for_status()
         data = resp.json().get("data", [])
-        loaded_ids = {m.get("id", "").lower() for m in data}
-        return model.lower() in loaded_ids
+        loaded_ids = [
+            str(m.get("id", "")).strip()
+            for m in data
+            if isinstance(m, dict) and m.get("id")
+        ]
+        return any(_model_ids_match(model, loaded_id) for loaded_id in loaded_ids)
     except Exception:
         return False
 

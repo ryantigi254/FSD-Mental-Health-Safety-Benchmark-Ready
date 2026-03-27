@@ -1,19 +1,103 @@
 """
-Local LM Studio runner for QwQ-32B-GGUF.
+Local LM Studio runner for QwQ.
 
 Uses the shared lmstudio_client to talk to LM Studio's /v1/chat/completions.
-Model name is pinned to the LM Studio label to keep runs reproducible.
+The runner resolves the concrete LM Studio model ID from /v1/models so it can
+work with provider-prefixed IDs such as ``qwen/qwq-32b``.
 """
 
 import os
 import re
 from typing import Tuple, List, Dict
 import logging
+import requests
 
 from .base import ModelRunner, GenerationConfig
 from .lmstudio_client import chat_completion
 
 logger = logging.getLogger(__name__)
+
+DEFAULT_QWQ_MODEL_ID = "qwq-32b"
+
+
+def _resolve_lmstudio_model_name(api_base: str, configured_model_name: str) -> str:
+    """
+    Resolve the actual loaded QwQ model ID from LM Studio /v1/models.
+
+    LM Studio may expose QwQ under IDs like ``qwen/qwq-32b`` while older local
+    setups used names like ``QwQ-32B-GGUF``. We accept the configured name when
+    present, then fall back to suffix and fuzzy ``qwq`` matches.
+    """
+    candidate_name = (configured_model_name or DEFAULT_QWQ_MODEL_ID).strip()
+    if not candidate_name:
+        candidate_name = DEFAULT_QWQ_MODEL_ID
+
+    endpoint = f"{api_base.rstrip('/')}/models"
+    try:
+        response = requests.get(endpoint, timeout=(5, 20))
+        response.raise_for_status()
+        payload = response.json()
+        model_entries = payload.get("data", []) if isinstance(payload, dict) else []
+        available_model_ids = [
+            entry.get("id", "").strip()
+            for entry in model_entries
+            if isinstance(entry, dict) and entry.get("id")
+        ]
+    except Exception as request_error:
+        logger.warning(
+            "Could not resolve LM Studio QwQ model id from %s (%s). Using configured id '%s'.",
+            endpoint,
+            request_error,
+            candidate_name,
+        )
+        return candidate_name
+
+    if not available_model_ids:
+        logger.warning(
+            "LM Studio returned no models from %s. Using configured id '%s'.",
+            endpoint,
+            candidate_name,
+        )
+        return candidate_name
+
+    if candidate_name in available_model_ids:
+        return candidate_name
+
+    candidate_name_lower = candidate_name.lower()
+    suffix_matches = [
+        model_id
+        for model_id in available_model_ids
+        if model_id.lower().endswith(candidate_name_lower)
+    ]
+    if suffix_matches:
+        resolved_model_id = suffix_matches[0]
+        logger.info(
+            "Resolved LM Studio model id '%s' -> '%s' via suffix match.",
+            candidate_name,
+            resolved_model_id,
+        )
+        return resolved_model_id
+
+    qwq_matches = [
+        model_id
+        for model_id in available_model_ids
+        if "qwq" in model_id.lower()
+    ]
+    if qwq_matches:
+        resolved_model_id = qwq_matches[0]
+        logger.info(
+            "Resolved LM Studio model id '%s' -> '%s' via QwQ fallback.",
+            candidate_name,
+            resolved_model_id,
+        )
+        return resolved_model_id
+
+    logger.warning(
+        "Configured model id '%s' not found in LM Studio models %s. Using configured id as-is.",
+        candidate_name,
+        available_model_ids,
+    )
+    return candidate_name
 
 
 def extract_answer_and_reasoning(full_response: str) -> Tuple[str, str]:
@@ -47,12 +131,12 @@ def extract_answer_and_reasoning(full_response: str) -> Tuple[str, str]:
 
 class QwQLMStudioRunner(ModelRunner):
     """
-    Local LM Studio inference for QwQ-32B-GGUF.
+    Local LM Studio inference for QwQ.
     """
 
     def __init__(
         self,
-        model_name: str = "QwQ-32B-GGUF",
+        model_name: str = DEFAULT_QWQ_MODEL_ID,
         api_base: str = "http://127.0.0.1:1234/v1",
         config: GenerationConfig = None,
     ):
@@ -60,8 +144,9 @@ class QwQLMStudioRunner(ModelRunner):
         # Example:
         #   $Env:LMSTUDIO_QWQ_MODEL="qwq-32b@q4_k_m"
         model_name = os.getenv("LMSTUDIO_QWQ_MODEL", model_name)
+        resolved_model_name = _resolve_lmstudio_model_name(api_base, model_name)
         super().__init__(
-            model_name,
+            resolved_model_name,
             config
             or GenerationConfig(
                 temperature=0.7,
