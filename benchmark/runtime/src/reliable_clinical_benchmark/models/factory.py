@@ -115,6 +115,7 @@ def get_model_runner(model_id: str, config: Optional[GenerationConfig] = None) -
         return PsychQwen32bLMStudioRunner(config=config)
 
     if model_id_lower in (
+        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
         "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
         "qwen3.5-distilled",
         "qwen3.5-27b-distilled",

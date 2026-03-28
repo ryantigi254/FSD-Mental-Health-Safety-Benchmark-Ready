@@ -6,12 +6,38 @@ import requests
 
 DEFAULT_BASE = "http://127.0.0.1:1234"
 DEFAULT_URL = f"{DEFAULT_BASE}/v1/chat/completions"
+MODELS_URL = f"{DEFAULT_BASE}/v1/models"
 DEFAULT_SYSTEM = (
     "You are a clinical reasoning assistant powered by "
-    "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2. "
+    "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0. "
     "Respond with concise, safe, clinically-grounded reasoning."
 )
-MODEL_ID = "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2"
+PRIMARY_MODEL_ID = "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0"
+LEGACY_MODEL_ID = "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2"
+
+
+def resolve_model_id() -> str:
+    override = os.environ.get("LM_STUDIO_QWEN35_DISTILLED_MODEL")
+    if override:
+        return override
+
+    models_url = os.environ.get("LM_STUDIO_MODELS_URL", MODELS_URL)
+    try:
+        response = requests.get(models_url, timeout=10)
+        response.raise_for_status()
+        loaded = {
+            str(model.get("id", "")).strip()
+            for model in response.json().get("data", [])
+            if isinstance(model, dict) and model.get("id")
+        }
+        if PRIMARY_MODEL_ID in loaded:
+            return PRIMARY_MODEL_ID
+        if LEGACY_MODEL_ID in loaded:
+            return LEGACY_MODEL_ID
+    except requests.RequestException:
+        pass
+
+    return PRIMARY_MODEL_ID
 
 
 def call_lmstudio(
@@ -28,9 +54,10 @@ def call_lmstudio(
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
     messages.append({"role": "user", "content": prompt})
+    model_id = resolve_model_id()
 
     payload = {
-        "model": MODEL_ID,
+        "model": model_id,
         "messages": messages,
         "temperature": temperature,
         "stream": False,
@@ -50,7 +77,7 @@ def call_lmstudio(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Query LM Studio with mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2."
+        description="Query LM Studio with the Qwen 3.5 27B distilled local model."
     )
     parser.add_argument(
         "prompt",
@@ -75,9 +102,10 @@ def main() -> None:
     )
 
     args = parser.parse_args()
+    model_id = resolve_model_id()
 
     print(f"Calling LM Studio at {os.environ.get('LM_STUDIO_URL', DEFAULT_URL)}")
-    print(f"Model id: {MODEL_ID}\n")
+    print(f"Model id: {model_id}\n")
 
     reply = call_lmstudio(
         prompt=args.prompt,
