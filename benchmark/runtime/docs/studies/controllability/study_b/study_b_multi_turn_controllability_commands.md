@@ -145,9 +145,14 @@ serving stack control the effective completion limit.
 python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_b_multi_turn --model-id gpt_oss --workers 8 --max-cases 3
 ```
 
-## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
+## Qwen 3.5 27B Distilled (`qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0`)
 
-LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
+LM Studio model via Apple Silicon MLX. Use the repo alias `qwen3.5-distilled`.
+The runtime now accepts both the current LM Studio loaded-model label
+`qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0` and the older legacy
+label `mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2`.
+
+Recommended max 4 workers on 48 GB.
 
 ### macOS (Apple Silicon)
 ```bash
@@ -163,4 +168,20 @@ python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwen3.5-distilled `
   --study ctrl_study_b_multi_turn `
   --workers 4
+```
+
+### Windows LM Studio Probe
+```powershell
+curl http://127.0.0.1:1234/v1/chat/completions `
+  -H "Content-Type: application/json" `
+  -H "Authorization: Bearer lm-studio" `
+  -d '{
+    "model": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
+    "messages": [
+      {"role": "system", "content": "You answer only in rhymes."},
+      {"role": "user", "content": "What is your favourite colour?"}
+    ],
+    "temperature": 0.7,
+    "stream": false
+  }'
 ```
