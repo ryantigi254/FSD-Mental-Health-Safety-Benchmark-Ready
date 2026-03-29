@@ -40,6 +40,13 @@ INVARIANCE_STUDIES = {
     "study_b_multi_turn_invariance",
     "study_c_invariance",
 }
+CTRL_STUDIES = {
+    "ctrl_study_a",
+    "ctrl_study_a_bias",
+    "ctrl_study_b",
+    "ctrl_study_b_multi_turn",
+    "ctrl_study_c",
+}
 
 LMSTUDIO_MODEL_PREFLIGHT = {
     "qwq": {
@@ -78,6 +85,11 @@ def parse_args() -> tuple[argparse.Namespace, list[str]]:
             "study_b_invariance",
             "study_b_multi_turn_invariance",
             "study_c_invariance",
+            "ctrl_study_a",
+            "ctrl_study_a_bias",
+            "ctrl_study_b",
+            "ctrl_study_b_multi_turn",
+            "ctrl_study_c",
         ],
         help="Study generation target.",
     )
@@ -185,6 +197,11 @@ def main() -> int:
         "study_b_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
         "study_b_multi_turn_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
         "study_c_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
+        "ctrl_study_a": runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py",
+        "ctrl_study_a_bias": runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py",
+        "ctrl_study_b": runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py",
+        "ctrl_study_b_multi_turn": runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py",
+        "ctrl_study_c": runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py",
     }
     allowed_model_ids_by_study = {
         "study_a": BASE_MODEL_IDS - {"psyllm"},
@@ -197,6 +214,11 @@ def main() -> int:
         "study_b_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
         "study_b_multi_turn_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
         "study_c_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
+        "ctrl_study_a": BASE_MODEL_IDS - {"psyllm"},
+        "ctrl_study_a_bias": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
+        "ctrl_study_b": BASE_MODEL_IDS,
+        "ctrl_study_b_multi_turn": BASE_MODEL_IDS,
+        "ctrl_study_c": BASE_MODEL_IDS,
     }
 
     if args.study in {"study_a_bias", "study_a_bias_invariance"}:
@@ -232,6 +254,31 @@ def main() -> int:
             out = ["--study-name", default_study_name, *out]
         passthrough = out
 
+    if args.study == "ctrl_study_a_bias":
+        default_bias_data = "data/invariance/ctrl/base/v2_1/adversarial_bias/biased_vignettes.json"
+        default_output_dir = "results_ctrl_invariance"
+
+        out = []
+        i = 0
+        while i < len(passthrough):
+            if passthrough[i] == "--data-path":
+                out.append("--data-path")
+                value, i = _consume_flag_value(passthrough, i, default_bias_data)
+                out.append(value)
+                continue
+            if passthrough[i] == "--output-dir":
+                out.append("--output-dir")
+                value, i = _consume_flag_value(passthrough, i, default_output_dir)
+                out.append(value)
+                continue
+            out.append(passthrough[i])
+            i += 1
+        if "--data-path" not in out:
+            out = ["--data-path", default_bias_data, *out]
+        if "--output-dir" not in out:
+            out = [*out, "--output-dir", default_output_dir]
+        passthrough = out
+
     target_script = study_script_map[args.study]
     if not target_script.exists():
         print(f"Script not found: {target_script}", file=sys.stderr)
@@ -246,7 +293,7 @@ def main() -> int:
 
     command = ["conda", "run", "--no-capture-output", "-n", args.env, "python"] if args.env else [sys.executable]
     command.append(str(target_script))
-    if args.study in INVARIANCE_STUDIES:
+    if args.study in (INVARIANCE_STUDIES | CTRL_STUDIES):
         command.extend(["--study", args.study])
     command.extend(["--model-id", args.model_id])
     command.extend(passthrough)
