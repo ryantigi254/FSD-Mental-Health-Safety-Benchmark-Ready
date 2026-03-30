@@ -21,7 +21,7 @@ python hf-local-scripts/run_ctrl_generate_only.py `
   --study ctrl_study_a `
   --ctrl-dir "$CTRL_DIR" `
   --output-dir "$CTRL_RESULTS_DIR" `
-  --workers 6
+  --workers 8
 ```
 
 ## One-Time Setup
@@ -38,11 +38,15 @@ cd "E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setu
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwen3_lmstudio `
   --study ctrl_study_a `
-  --workers 6
+  --workers 8
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwq `
   --study ctrl_study_a `
-  --workers 6
+  --workers 8
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id medgemma_lmstudio `
+  --study ctrl_study_a `
+  --workers 4
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id deepseek_r1_lmstudio `
   --study ctrl_study_a `
@@ -127,7 +131,7 @@ python hf-local-scripts/run_ctrl_generate_only.py `
 ## Direct Runner
 
 ```powershell
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a --model-id qwq --ctrl-dir data/controllability/controllability_splits_v2_1 --output-dir results_ctrl_v2_1 --max-cases 5 --workers 6
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a --model-id qwq --ctrl-dir data/controllability/controllability_splits_v2_1 --output-dir results_ctrl_v2_1 --max-cases 5 --workers 8
 ```
 
 `--max-tokens` is optional. For LM Studio and vLLM models, omitting it lets the

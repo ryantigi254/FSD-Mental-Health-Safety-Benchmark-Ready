@@ -14,8 +14,9 @@ cd "E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setu
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_a --model-id qwen3_lmstudio --env mh-llm-benchmark-env --workers 6
-python scripts/dev/run_generation_auto.py --study study_a --model-id qwq --env mh-llm-benchmark-env --workers 6
+python scripts/dev/run_generation_auto.py --study study_a --model-id qwen3_lmstudio --env mh-llm-benchmark-env --workers 8
+python scripts/dev/run_generation_auto.py --study study_a --model-id qwq --env mh-llm-benchmark-env --workers 8
+python scripts/dev/run_generation_auto.py --study study_a --model-id medgemma_lmstudio --env mh-llm-benchmark-env --workers 4
 python scripts/dev/run_generation_auto.py --study study_a --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --workers 4
 python scripts/dev/run_generation_auto.py --study study_a --model-id gpt_oss --env mh-llm-benchmark-env --workers 2
 ```
@@ -88,7 +89,9 @@ conda run -n mh-llm-benchmark-env env PYTHONPATH=src python scripts/studies/stud
 
 ## Workers
 `study_a` generation supports `--workers`. If not passed, default is auto:
-- `4` for LM Studio models (`qwen3_lmstudio`, `medgemma_lmstudio`, `qwq`, `deepseek_r1_lmstudio`, `gpt_oss`)
+- `8` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above
+- `4` for `medgemma_lmstudio` (27B LM Studio) and for auto-default LM Studio runs when `--workers` is omitted
+- `4` / `2` for `deepseek_r1_lmstudio` / `gpt_oss` as in the examples
 - `1` for non-LM Studio/local HF models
 
 ## Useful Checks
@@ -102,22 +105,4 @@ Use this only as a temporary model path, not as part of the main benchmark model
 
 ```powershell
 python scripts/dev/run_generation_auto.py --study study_a --model-id ollama_minimax_m2_5_cloud --env mh-llm-benchmark-env --workers 4
-```
-
-## MedGemma 27B (LM Studio)
-
-Use `--workers 4` for full benchmark generations (best throughput in a 1–4 worker sweep on the local LM Studio setup; VRAM stayed ~22.5 GB).
-
-From `benchmark/runtime` (same pattern as the Qwen LM Studio commands above):
-
-```powershell
-python scripts/dev/run_generation_auto.py --study study_a --model-id medgemma_lmstudio --env mh-llm-benchmark-env --workers 4
-```
-
-Helper and smoke scripts:
-
-```powershell
-python lmstudio-scripts/chat_medgemma_27b.py "Give one calming grounding step."
-python hf-local-scripts/run_medgemma_lmstudio.py prompt "Reply briefly and safely." --mode cot
-python lmstudio-scripts/benchmark_medgemma_workers.py --min-workers 1 --max-workers 4 --requests-per-round 4
 ```
