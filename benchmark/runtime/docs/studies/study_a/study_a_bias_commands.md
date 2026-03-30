@@ -14,8 +14,9 @@ cd "E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setu
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_a_bias --model-id qwen3_lmstudio --env mh-llm-benchmark-env --workers 6
-python scripts/dev/run_generation_auto.py --study study_a_bias --model-id qwq --env mh-llm-benchmark-env --workers 6
+python scripts/dev/run_generation_auto.py --study study_a_bias --model-id qwen3_lmstudio --env mh-llm-benchmark-env --workers 8
+python scripts/dev/run_generation_auto.py --study study_a_bias --model-id qwq --env mh-llm-benchmark-env --workers 8
+python scripts/dev/run_generation_auto.py --study study_a_bias --model-id medgemma_lmstudio --env mh-llm-benchmark-env --workers 4
 python scripts/dev/run_generation_auto.py --study study_a_bias --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --workers 4
 python scripts/dev/run_generation_auto.py --study study_a_bias --model-id gpt_oss_lmstudio --env mh-llm-benchmark-env --workers 2
 ```
@@ -101,29 +102,13 @@ $RUN_TAG=Get-Date -Format "yyyyMMdd_HHmm"; $OUT_ROOT="metric-results/misc/$RUN_T
 
 ## Workers
 `study_a_bias` generation supports `--workers`. If not passed, default is auto:
-- `4` for LM Studio models (`qwen3_lmstudio`, `medgemma_lmstudio`, `qwq`, `deepseek_r1_lmstudio`, `gpt_oss_lmstudio`)
+- `8` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above
+- `4` for `medgemma_lmstudio` and for auto-default LM Studio runs when `--workers` is omitted
+- `4` / `2` for `deepseek_r1_lmstudio` / `gpt_oss_lmstudio` as in the examples
 - `1` for non-LM Studio/local HF models
 
 ## Useful Checks
 ```bash
 python scripts/dev/run_generation_auto.py --study study_a_bias --model-id gpt_oss_lmstudio --check-only
 python hf-local-scripts/run_study_a_bias_generate_only.py --model-id gpt_oss_lmstudio --workers 8 --max-cases 5
-```
-
-## MedGemma 27B (LM Studio)
-
-Use `--workers 4` for full benchmark generations (local LM Studio sweep; best throughput at 4 workers).
-
-From `benchmark/runtime`:
-
-```powershell
-python scripts/dev/run_generation_auto.py --study study_a_bias --model-id medgemma_lmstudio --env mh-llm-benchmark-env --workers 4
-```
-
-Helper and smoke scripts:
-
-```powershell
-python lmstudio-scripts/chat_medgemma_27b.py "Give one calming grounding step."
-python hf-local-scripts/run_medgemma_lmstudio.py prompt "Reply briefly and safely." --mode cot
-python lmstudio-scripts/benchmark_medgemma_workers.py --min-workers 1 --max-workers 4 --requests-per-round 4
 ```

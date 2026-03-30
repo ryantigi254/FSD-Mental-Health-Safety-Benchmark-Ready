@@ -14,8 +14,9 @@ Use `--output-dir results_ctrl_invariance` for all generation commands below.
 
 ```powershell
 python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id medgemma_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id deepseek_r1_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 ```
 
@@ -48,8 +49,9 @@ Study B multi-turn ctrl variant-family child in one go.
 
 ```powershell
 python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id gpt_oss --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b_multi_turn --output-dir results_ctrl_invariance --workers 2
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b_multi_turn --output-dir results_ctrl_invariance --workers 6
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b_multi_turn --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b_multi_turn --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b_multi_turn --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id medgemma_lmstudio --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b_multi_turn --output-dir results_ctrl_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id deepseek_r1_lmstudio --ctrl-dir data/invariance/ctrl/variants/v2_1/study_b_multi_turn --output-dir results_ctrl_invariance --workers 4
 ```
 
@@ -248,7 +250,7 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
 ```
 
 ## QwQ-32B
@@ -267,7 +269,7 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
 ```
 
 ## DeepSeek-R1 Distill Qwen 14B
@@ -305,5 +307,5 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3.5-distilled --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3.5-distilled --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
 ```
