@@ -235,6 +235,8 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "glm47_flash": "glm-4.7-flash",
         "qwen3_lmstudio": "qwen3-lmstudio",
         "qwen3-lmstudio": "qwen3-lmstudio",
+        "medgemma_lmstudio": "medgemma-lmstudio",
+        "medgemma-lmstudio": "medgemma-lmstudio",
         "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
         "minimax_m2_5_cloud": "minimax-m2.5-cloud",
         "minimax-m2.5-cloud": "minimax-m2.5-cloud",
