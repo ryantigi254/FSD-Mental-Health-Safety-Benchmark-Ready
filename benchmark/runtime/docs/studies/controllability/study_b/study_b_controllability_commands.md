@@ -44,10 +44,6 @@ python hf-local-scripts/run_ctrl_generate_only.py `
   --study ctrl_study_b `
   --workers 6
 python hf-local-scripts/run_ctrl_generate_only.py `
-  --model-id medgemma_lmstudio `
-  --study ctrl_study_b `
-  --workers 4
-python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id deepseek_r1_lmstudio `
   --study ctrl_study_b `
   --workers 4
@@ -167,6 +163,26 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 ```powershell
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwen3.5-distilled `
+  --study ctrl_study_b `
+  --workers 4
+```
+
+## MedGemma 27B Text (`google.medgemma-27b-text-it`)
+
+In LM Studio, load the model as `google.medgemma-27b-text-it`. The benchmark runner uses `--model-id medgemma_lmstudio` (aliases include that identifier). Recommended max 4 workers.
+
+### macOS (Apple Silicon)
+```bash
+python hf-local-scripts/run_ctrl_generate_only.py \
+  --model-id medgemma_lmstudio \
+  --study ctrl_study_b \
+  --workers 4
+```
+
+### Windows (PC)
+```powershell
+python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id medgemma_lmstudio `
   --study ctrl_study_b `
   --workers 4
 ```

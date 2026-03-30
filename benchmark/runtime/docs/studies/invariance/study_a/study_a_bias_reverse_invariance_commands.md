@@ -22,7 +22,6 @@ Uses the sampled invariance subset at
 python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
 python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
 python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwq --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id medgemma_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id deepseek_r1_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 ```
 
@@ -188,4 +187,23 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 ### Windows (PC)
 ```powershell
 python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3.5-distilled --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+```
+
+## MedGemma 27B Text (`google.medgemma-27b-text-it`)
+
+In LM Studio, load the model as `google.medgemma-27b-text-it`. The benchmark runner uses `--model-id medgemma_lmstudio` (aliases include that identifier). Recommended max 4 workers for reverse invariance runs.
+
+### macOS (Apple Silicon)
+```bash
+python hf-local-scripts/run_ctrl_generate_only.py \
+  --study ctrl_study_a_bias \
+  --model-id medgemma_lmstudio \
+  --ctrl-dir data/invariance/ctrl/base/v2_1 \
+  --output-dir results_ctrl_invariance \
+  --workers 4
+```
+
+### Windows (PC)
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id medgemma_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 ```

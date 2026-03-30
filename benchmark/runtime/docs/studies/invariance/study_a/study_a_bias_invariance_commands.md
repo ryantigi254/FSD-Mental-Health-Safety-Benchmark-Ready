@@ -18,7 +18,6 @@ Uses the sampled invariance subset at
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 2
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 6
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwq --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 6
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id medgemma_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 4
 ```
 
@@ -70,4 +69,23 @@ python hf-local-scripts/run_invariance_generate_only.py \
 ### Windows (PC)
 ```powershell
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwen3.5-distilled --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 8
+```
+
+## MedGemma 27B Text (`google.medgemma-27b-text-it`)
+
+In LM Studio, load the model as `google.medgemma-27b-text-it`. The benchmark runner uses `--model-id medgemma_lmstudio` (aliases include that identifier). Recommended max 4 workers.
+
+### macOS (Apple Silicon)
+```bash
+python hf-local-scripts/run_invariance_generate_only.py \
+  --study study_a_bias_invariance \
+  --model-id medgemma_lmstudio \
+  --data-dir data/invariance/v5/base/v2_1 \
+  --output-dir results_invariance \
+  --workers 4
+```
+
+### Windows (PC)
+```powershell
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id medgemma_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 4
 ```

@@ -105,3 +105,8 @@ Full commands: [`invariance_reverse_commands.md`](invariance_reverse_commands.md
 
 LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
 See per-study invariance command files for specific commands.
+
+## MedGemma 27B Text (`google.medgemma-27b-text-it`)
+
+In LM Studio, load the model as `google.medgemma-27b-text-it`. The benchmark runner uses `--model-id medgemma_lmstudio` (aliases include that identifier). Recommended max 4 workers.
+See per-study invariance command files for specific commands.
