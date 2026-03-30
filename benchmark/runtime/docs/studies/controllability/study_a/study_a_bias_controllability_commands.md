@@ -1,4 +1,4 @@
-# Study A Bias Controllability Commands
+﻿# Study A Bias Controllability Commands
 
 ## Scope
 Study A bias controllability generation writes to `results/<model-folder>/ctrl_study_a_bias_generations.jsonl`.
@@ -178,7 +178,7 @@ LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
 ### macOS (Apple Silicon)
 ```bash
 python hf-local-scripts/run_ctrl_generate_only.py \
-  --model-id qwen3.5-distilled \
+  --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" \
   --study ctrl_study_a_bias \
   --workers 4
 ```
@@ -186,7 +186,7 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 ### Windows (PC)
 ```powershell
 python hf-local-scripts/run_ctrl_generate_only.py `
-  --model-id qwen3.5-distilled `
+  --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" `
   --study ctrl_study_a_bias `
   --workers 4
 ```
