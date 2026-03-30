@@ -1,4 +1,4 @@
-# Study A Bias — Reverse Invariance Commands
+﻿# Study A Bias — Reverse Invariance Commands
 
 > **Direction:** Controllability → Invariance.
 > Measures which perturbation families change Study A Bias controllability metrics most.
@@ -178,7 +178,7 @@ LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
 ```bash
 python hf-local-scripts/run_ctrl_generate_only.py \
   --study ctrl_study_a_bias \
-  --model-id qwen3.5-distilled \
+  --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" \
   --ctrl-dir data/invariance/ctrl/base/v2_1 \
   --output-dir results_ctrl_invariance \
   --workers 4
@@ -186,7 +186,7 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3.5-distilled --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
 ```
 
 ## MedGemma 27B Text (`google.medgemma-27b-text-it`)
