@@ -104,121 +104,107 @@ def parse_args() -> tuple[argparse.Namespace, list[str]]:
         action="store_true",
         help="Validate path/script/model wiring only. Does not execute generation.",
     )
-    parser.add_argument(
-        "--allow-lmstudio-autoload",
-        action="store_true",
-        help=(
-            "Allow LM Studio to lazy-load models by skipping /v1/models preflight "
-            "for LM Studio model IDs."
-        ),
-    )
     args, passthrough = parser.parse_known_args()
     return args, passthrough
 
 
-def _consume_flag_value(tokens: list[str], index: int, default: str) -> tuple[str, int]:
-    next_index = index + 1
-    if next_index < len(tokens):
-        candidate = tokens[next_index]
-        if candidate and not candidate.startswith("-"):
-            return candidate, next_index + 1
-    return default, next_index
-
-
-def _normalise_model_id(model_id: str) -> str:
-    return (model_id or "").strip().lower()
-
-
-def _matches_loaded_model(loaded_model_id: str, candidate: str) -> bool:
-    loaded = _normalise_model_id(loaded_model_id)
-    expected = _normalise_model_id(candidate)
-    if not loaded or not expected:
-        return False
-    if loaded == expected:
-        return True
-    return loaded.endswith(f"/{expected}") or loaded.endswith(f"@{expected}")
-
-
-def _check_lmstudio_model_loaded(model_id: str) -> tuple[bool, str]:
-    model_key = _normalise_model_id(model_id)
-    preflight_cfg = LMSTUDIO_MODEL_PREFLIGHT.get(model_key)
-    if not preflight_cfg:
-        return True, ""
-
-    resolved_model = os.getenv(preflight_cfg["env_var"], preflight_cfg["default"]).strip()
-    aliases = [resolved_model, *preflight_cfg["aliases"]]
-    api_base = os.getenv("LMSTUDIO_API_BASE", "http://127.0.0.1:1234/v1").rstrip("/")
-    endpoint = f"{api_base}/models"
-    try:
-        with urllib.request.urlopen(endpoint, timeout=5) as response:
-            payload = json.loads(response.read().decode("utf-8"))
-    except urllib.error.URLError as request_error:
-        return (
-            False,
-            f"Failed LM Studio preflight against {endpoint}: {request_error}.",
-        )
-    except json.JSONDecodeError as parse_error:
-        return (
-            False,
-            f"LM Studio /v1/models returned non-JSON payload from {endpoint}: {parse_error}.",
-        )
-
-    available_model_ids = []
-    for entry in payload.get("data", []) if isinstance(payload, dict) else []:
-        if isinstance(entry, dict) and entry.get("id"):
-            available_model_ids.append(str(entry["id"]))
-
-    for loaded_model_id in available_model_ids:
-        if any(_matches_loaded_model(loaded_model_id, alias) for alias in aliases):
-            return True, loaded_model_id
-
-    alias_msg = ", ".join(dict.fromkeys(aliases))
-    available_msg = ", ".join(available_model_ids) if available_model_ids else "<none>"
-    return (
-        False,
-        "LM Studio model preflight failed. "
-        f"Requested model-id '{model_id}' expects one of [{alias_msg}] to already be loaded, "
-        f"but /v1/models returned [{available_msg}].",
-    )
-
-
 def main() -> int:
     args, passthrough = parse_args()
+
     runtime_root = Path(__file__).resolve().parents[2]
 
     study_script_map = {
         "study_a": runtime_root / "hf-local-scripts" / "run_study_a_generate_only.py",
         "study_a_bias": runtime_root / "hf-local-scripts" / "run_study_a_bias_generate_only.py",
-        "study_a_bias_invariance": runtime_root / "hf-local-scripts" / "run_study_a_bias_generate_only.py",
         "study_b": runtime_root / "hf-local-scripts" / "run_study_b_generate_only.py",
         "study_b_multi_turn": runtime_root / "hf-local-scripts" / "run_study_b_multi_turn_generate_only.py",
         "study_c": runtime_root / "hf-local-scripts" / "run_study_c_generate_only.py",
-        "study_a_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
-        "study_b_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
-        "study_b_multi_turn_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
-        "study_c_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
-        "ctrl_study_a": runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py",
-        "ctrl_study_a_bias": runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py",
-        "ctrl_study_b": runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py",
-        "ctrl_study_b_multi_turn": runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py",
-        "ctrl_study_c": runtime_root / "hf-local-scripts" / "run_ctrl_generate_only.py",
     }
     allowed_model_ids_by_study = {
-        "study_a": BASE_MODEL_IDS - {"psyllm"},
-        "study_a_bias": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
-        "study_a_bias_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
-        "study_b": BASE_MODEL_IDS,
-        "study_b_multi_turn": BASE_MODEL_IDS,
-        "study_c": BASE_MODEL_IDS,
-        "study_a_invariance": (BASE_MODEL_IDS - {"psyllm"}) | {"gpt_oss_lmstudio"},
-        "study_b_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
-        "study_b_multi_turn_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
-        "study_c_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
-        "ctrl_study_a": BASE_MODEL_IDS - {"psyllm"},
-        "ctrl_study_a_bias": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
-        "ctrl_study_b": BASE_MODEL_IDS,
-        "ctrl_study_b_multi_turn": BASE_MODEL_IDS,
-        "ctrl_study_c": BASE_MODEL_IDS,
+        "study_a": {
+            "qwen3_lmstudio",
+            "medgemma_lmstudio",
+            "qwq",
+            "deepseek_r1_lmstudio",
+            "gpt_oss",
+            "ollama_minimax_m2_5_cloud",
+            "psyllm_gml_local",
+            "piaget_local",
+            "psyche_r1_local",
+            "psych_qwen_local",
+            "psyllm_gml_vllm",
+            "piaget_vllm",
+            "psyche_r1_vllm",
+            "psych_qwen_vllm",
+        },
+        "study_a_bias": {
+            "qwen3_lmstudio",
+            "medgemma_lmstudio",
+            "qwq",
+            "deepseek_r1_lmstudio",
+            "gpt_oss_lmstudio",
+            "ollama_minimax_m2_5_cloud",
+            "psyllm_gml_local",
+            "piaget_local",
+            "psyche_r1_local",
+            "psych_qwen_local",
+            "psyllm",
+            "psyllm_gml_vllm",
+            "piaget_vllm",
+            "psyche_r1_vllm",
+            "psych_qwen_vllm",
+        },
+        "study_b": {
+            "qwen3_lmstudio",
+            "medgemma_lmstudio",
+            "qwq",
+            "deepseek_r1_lmstudio",
+            "gpt_oss",
+            "ollama_minimax_m2_5_cloud",
+            "psyllm_gml_local",
+            "piaget_local",
+            "psyche_r1_local",
+            "psych_qwen_local",
+            "psyllm",
+            "psyllm_gml_vllm",
+            "piaget_vllm",
+            "psyche_r1_vllm",
+            "psych_qwen_vllm",
+        },
+        "study_b_multi_turn": {
+            "qwen3_lmstudio",
+            "medgemma_lmstudio",
+            "qwq",
+            "deepseek_r1_lmstudio",
+            "gpt_oss",
+            "ollama_minimax_m2_5_cloud",
+            "psyllm_gml_local",
+            "piaget_local",
+            "psyche_r1_local",
+            "psych_qwen_local",
+            "psyllm",
+            "psyllm_gml_vllm",
+            "piaget_vllm",
+            "psyche_r1_vllm",
+            "psych_qwen_vllm",
+        },
+        "study_c": {
+            "qwen3_lmstudio",
+            "medgemma_lmstudio",
+            "qwq",
+            "deepseek_r1_lmstudio",
+            "gpt_oss",
+            "ollama_minimax_m2_5_cloud",
+            "psyllm_gml_local",
+            "piaget_local",
+            "psyche_r1_local",
+            "psych_qwen_local",
+            "psyllm",
+            "psyllm_gml_vllm",
+            "piaget_vllm",
+            "psyche_r1_vllm",
+            "psych_qwen_vllm",
+        },
     }
 
     if args.study in {"study_a_bias", "study_a_bias_invariance"}:
