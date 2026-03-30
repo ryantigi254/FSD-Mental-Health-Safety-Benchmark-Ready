@@ -25,7 +25,7 @@ python hf-local-scripts/run_ctrl_generate_only.py `
   --study ctrl_study_a_bias `
   --data-path "$BIAS_DATA_PATH" `
   --output-dir "$CTRL_RESULTS_DIR" `
-  --workers 8
+  --workers 6
 ```
 
 Effective direct runner command shape:
@@ -53,12 +53,12 @@ python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwen3_lmstudio `
   --study ctrl_study_a_bias `
   --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `
-  --workers 8
+  --workers 6
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwq `
   --study ctrl_study_a_bias `
   --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `
-  --workers 8
+  --workers 6
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id medgemma_lmstudio `
   --study ctrl_study_a_bias `
@@ -158,7 +158,7 @@ python hf-local-scripts/run_ctrl_generate_only.py `
 ## Direct Runner
 
 ```powershell
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json --output-dir results_ctrl_v2_1 --max-cases 5 --workers 8
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json --output-dir results_ctrl_v2_1 --max-cases 5 --workers 6
 ```
 
 `--max-tokens` is optional. For LM Studio and vLLM models, omitting it lets the
@@ -167,7 +167,9 @@ serving stack control the effective completion limit.
 ## Workers
 
 `ctrl_study_a_bias` generation supports `--workers`. If not passed, default is auto:
-- `4` for LM Studio models (`qwen3_lmstudio`, `qwq`, `deepseek_r1_lmstudio`, `gpt_oss`)
+- `6` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above
+- `4` for `medgemma_lmstudio` and for auto-default LM Studio runs when `--workers` is omitted
+- `4` / `2` for `deepseek_r1_lmstudio` / `gpt_oss` as in the examples
 - `1` for vLLM and local HF models
 
 ## Useful Checks
