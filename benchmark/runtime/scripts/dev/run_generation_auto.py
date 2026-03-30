@@ -96,50 +96,98 @@ def main() -> int:
         "study_c_invariance": runtime_root / "hf-local-scripts" / "run_invariance_generate_only.py",
     }
     allowed_model_ids_by_study = {
-        "study_a": BASE_MODEL_IDS - {"psyllm"},
-        "study_a_bias": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
-        "study_a_bias_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
-        "study_b": BASE_MODEL_IDS,
-        "study_b_multi_turn": BASE_MODEL_IDS,
-        "study_c": BASE_MODEL_IDS,
-        "study_a_invariance": (BASE_MODEL_IDS - {"psyllm"}) | {"gpt_oss_lmstudio"},
-        "study_b_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
-        "study_b_multi_turn_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
-        "study_c_invariance": BASE_MODEL_IDS | {"gpt_oss_lmstudio"},
+        "study_a": {
+            "qwen3_lmstudio",
+            "medgemma_lmstudio",
+            "qwq",
+            "deepseek_r1_lmstudio",
+            "gpt_oss",
+            "ollama_minimax_m2_5_cloud",
+            "psyllm_gml_local",
+            "piaget_local",
+            "psyche_r1_local",
+            "psych_qwen_local",
+            "psyllm_gml_vllm",
+            "piaget_vllm",
+            "psyche_r1_vllm",
+            "psych_qwen_vllm",
+        },
+        "study_a_bias": {
+            "qwen3_lmstudio",
+            "medgemma_lmstudio",
+            "qwq",
+            "deepseek_r1_lmstudio",
+            "gpt_oss_lmstudio",
+            "ollama_minimax_m2_5_cloud",
+            "psyllm_gml_local",
+            "piaget_local",
+            "psyche_r1_local",
+            "psych_qwen_local",
+            "psyllm",
+            "psyllm_gml_vllm",
+            "piaget_vllm",
+            "psyche_r1_vllm",
+            "psych_qwen_vllm",
+        },
+        "study_b": {
+            "qwen3_lmstudio",
+            "medgemma_lmstudio",
+            "qwq",
+            "deepseek_r1_lmstudio",
+            "gpt_oss",
+            "ollama_minimax_m2_5_cloud",
+            "psyllm_gml_local",
+            "piaget_local",
+            "psyche_r1_local",
+            "psych_qwen_local",
+            "psyllm",
+            "psyllm_gml_vllm",
+            "piaget_vllm",
+            "psyche_r1_vllm",
+            "psych_qwen_vllm",
+        },
+        "study_b_multi_turn": {
+            "qwen3_lmstudio",
+            "medgemma_lmstudio",
+            "qwq",
+            "deepseek_r1_lmstudio",
+            "gpt_oss",
+            "ollama_minimax_m2_5_cloud",
+            "psyllm_gml_local",
+            "piaget_local",
+            "psyche_r1_local",
+            "psych_qwen_local",
+            "psyllm",
+            "psyllm_gml_vllm",
+            "piaget_vllm",
+            "psyche_r1_vllm",
+            "psych_qwen_vllm",
+        },
+        "study_c": {
+            "qwen3_lmstudio",
+            "medgemma_lmstudio",
+            "qwq",
+            "deepseek_r1_lmstudio",
+            "gpt_oss",
+            "ollama_minimax_m2_5_cloud",
+            "psyllm_gml_local",
+            "piaget_local",
+            "psyche_r1_local",
+            "psych_qwen_local",
+            "psyllm",
+            "psyllm_gml_vllm",
+            "piaget_vllm",
+            "psyche_r1_vllm",
+            "psych_qwen_vllm",
+        },
     }
 
-    if args.study in {"study_a_bias", "study_a_bias_invariance"}:
-        if args.study == "study_a_bias_invariance":
-            default_bias_data = "data/frozen_splits/v5/adversarial_bias/biased_vignettes.json"
-            default_output_dir = "results_invariance"
-            default_study_name = "study_a_bias_invariance"
-        else:
-            default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
-            default_output_dir = "results_invariance"
-            default_study_name = "study_a_bias"
-
-        out: list[str] = []
-        i = 0
-        while i < len(passthrough):
-            if passthrough[i] == "--data-path":
-                out.append("--data-path")
-                value, i = _consume_flag_value(passthrough, i, default_bias_data)
-                out.append(value)
-                continue
-            if passthrough[i] == "--output-dir":
-                out.append("--output-dir")
-                value, i = _consume_flag_value(passthrough, i, default_output_dir)
-                out.append(value)
-                continue
-            out.append(passthrough[i])
-            i += 1
-        if "--data-path" not in out:
-            out = ["--data-path", default_bias_data, *out]
-        if "--output-dir" not in out:
-            out = [*out, "--output-dir", default_output_dir]
-        if "--study-name" not in out:
-            out = ["--study-name", default_study_name, *out]
-        passthrough = out
+    # Inject default bias data path for Study A bias if not explicitly provided.
+    # This ensures the adversarial bias generations use the v4.1 resampled frozen split
+    # without requiring callers to pass --data-path manually.
+    if args.study == "study_a_bias" and "--data-path" not in passthrough:
+        default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
+        passthrough = ["--data-path", default_bias_data, *passthrough]
 
     target_script = study_script_map[args.study]
     if not target_script.exists():
@@ -148,16 +196,18 @@ def main() -> int:
     if args.model_id not in allowed_model_ids_by_study[args.study]:
         allowed_values = ", ".join(sorted(allowed_model_ids_by_study[args.study]))
         print(
-            f"Model ID '{args.model_id}' is not allowed for {args.study}. Allowed: {allowed_values}",
+            f"Model ID '{args.model_id}' is not allowed for {args.study}. "
+            f"Allowed: {allowed_values}",
             file=sys.stderr,
         )
         return 2
 
-    command = ["conda", "run", "--no-capture-output", "-n", args.env, "python"] if args.env else [sys.executable]
-    command.append(str(target_script))
-    if args.study in INVARIANCE_STUDIES:
-        command.extend(["--study", args.study])
-    command.extend(["--model-id", args.model_id])
+    if args.env:
+        command = ["conda", "run", "-n", args.env, "python"]
+    else:
+        command = [sys.executable]
+
+    command.extend([str(target_script), "--model-id", args.model_id])
     command.extend(passthrough)
 
     print(f"runtime root: {runtime_root}")
