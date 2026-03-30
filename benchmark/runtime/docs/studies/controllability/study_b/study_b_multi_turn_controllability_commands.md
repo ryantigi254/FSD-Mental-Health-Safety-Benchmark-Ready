@@ -149,9 +149,9 @@ python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_b_multi_tur
 
 ## Qwen 3.5 27B Distilled (`qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0`)
 
-LM Studio model via Apple Silicon MLX. Use the repo alias `qwen3.5-distilled`.
-The runtime now accepts both the current LM Studio loaded-model label
-`qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0` and the older legacy
+LM Studio model via Apple Silicon MLX. Use the loaded-model id
+`qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0` in the commands below.
+The runner also accepts the repo alias `qwen3.5-distilled` and the older legacy
 label `mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2`.
 
 Recommended max 4 workers on 48 GB.
@@ -159,7 +159,7 @@ Recommended max 4 workers on 48 GB.
 ### macOS (Apple Silicon)
 ```bash
 python hf-local-scripts/run_ctrl_generate_only.py \
-  --model-id qwen3.5-distilled \
+  --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" \
   --study ctrl_study_b_multi_turn \
   --workers 4
 ```
@@ -167,7 +167,7 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 ### Windows (PC)
 ```powershell
 python hf-local-scripts/run_ctrl_generate_only.py `
-  --model-id qwen3.5-distilled `
+  --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" `
   --study ctrl_study_b_multi_turn `
   --workers 4
 ```

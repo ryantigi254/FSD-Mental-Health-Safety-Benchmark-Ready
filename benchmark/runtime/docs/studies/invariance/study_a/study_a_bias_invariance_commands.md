@@ -1,4 +1,4 @@
-# Study A Bias Invariance Commands
+﻿# Study A Bias Invariance Commands
 
 Use `--data-path` pointing to the sampled invariance bias file
 and `--output-dir results_invariance`.
@@ -60,7 +60,7 @@ LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
 ```bash
 python hf-local-scripts/run_invariance_generate_only.py \
   --study study_a_bias_invariance \
-  --model-id qwen3.5-distilled \
+  --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" \
   --data-dir data/invariance/v5/base/v2_1 \
   --output-dir results_invariance \
   --workers 4
@@ -68,7 +68,7 @@ python hf-local-scripts/run_invariance_generate_only.py \
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwen3.5-distilled --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 8
 ```
 
 ## MedGemma 27B Text (`google.medgemma-27b-text-it`)
