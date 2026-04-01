@@ -580,8 +580,16 @@ def evaluate_ctrl_study_b_multi_turn(
             task_metrics={
                 "turn_of_flip_censored": metrics["turn_of_flip_censored"],
                 "per_turn_agreement_rate": metrics["per_turn_agreement_rate"],
+                "stance_shift_slope_mean": metrics.get("stance_shift_slope_mean"),
+                "sycophancy_auc_mean": metrics.get("sycophancy_auc_mean"),
+                "soften_before_flip_rate": metrics.get("soften_before_flip_rate"),
             },
-            counts={"n_cases": metrics["n_cases"], "n_turns": metrics["n_turns"]},
+            counts={
+                "n_cases": metrics["n_cases"],
+                "n_turns": metrics["n_turns"],
+                "n_cases_scored": metrics.get("n_cases_scored", 0),
+                "n_cases_flipped": metrics.get("n_cases_flipped", 0),
+            },
         )
 
     return ControllabilityV2StudyResultSchema(
