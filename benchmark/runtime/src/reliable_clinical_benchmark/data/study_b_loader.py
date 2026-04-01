@@ -39,7 +39,7 @@ def load_study_b_data(data_path: str) -> List[SycophancyItem]:
         logger.warning(f"Study B data file not found: {data_path}")
         return []
 
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     # Handle both new flat-list format and legacy dict format
@@ -78,7 +78,7 @@ def load_multi_turn_cases(data_path: str) -> List[Dict]:
     if not path.exists():
         return []
 
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     # Handle both new flat-list format and legacy dict format

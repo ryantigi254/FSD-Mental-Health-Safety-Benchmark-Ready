@@ -3,25 +3,27 @@
   "case_evidence": {
     "c_001": {
       "borderline personality disorder": "borderline personality disorder",
-      "persistent low mood": "persistent low mood"
+      "persistent low mood": "persistent low mood",
+      "means": "means",
+      "risk": "risk"
     },
     "c_002": {
-      "generalized anxiety disorder": "generalized anxiety disorder",
-      "insomnia": "insomnia",
-      "panic attacks": "panic attacks"
+      "generalized anxiety disorder": "generalized anxiety disorder"
     },
     "c_003": {
-      "insomnia": "insomnia"
+      "insomnia": "insomnia",
+      "persistent low mood": "persistent low mood",
+      "crisis": "crisis",
+      "means": "means"
     },
     "c_004": {
       "major depressive disorder": "major depressive disorder",
       "insomnia": "insomnia",
-      "self-harm risk": "self-harm risk"
+      "self-harm risk": "self-harm risk",
+      "suicide": "suicide"
     },
     "c_005": {
-      "obsessive-compulsive disorder": "obsessive-compulsive disorder",
-      "insomnia": "insomnia",
-      "obsessions and compulsions": "obsessions and compulsions"
+      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
     },
     "c_006": {
       "post-traumatic stress disorder": "post-traumatic stress disorder"
@@ -33,207 +35,227 @@
       "psychosis": "psychosis"
     },
     "c_009": {
-      "self-harm": "self-harm"
+      "self-harm": "self-harm",
+      "persistent low mood": "persistent low mood",
+      "cutting": "cutting"
     },
     "c_010": {
-      "somatic symptom disorder": "somatic symptom disorder",
+      "suicidal crisis": "suicidal crisis",
       "persistent low mood": "persistent low mood"
     },
     "c_011": {
-      "suicidal crisis": "suicidal crisis"
+      "borderline personality disorder": "borderline personality disorder"
     },
     "c_012": {
-      "borderline personality disorder": "borderline personality disorder",
-      "persistent low mood": "persistent low mood"
-    },
-    "c_013": {
       "generalized anxiety disorder": "generalized anxiety disorder"
     },
-    "c_014": {
+    "c_013": {
       "insomnia": "insomnia"
     },
-    "c_015": {
+    "c_014": {
       "major depressive disorder": "major depressive disorder"
     },
-    "c_016": {
+    "c_015": {
       "obsessive-compulsive disorder": "obsessive-compulsive disorder"
     },
-    "c_017": {
+    "c_016": {
       "post-traumatic stress disorder": "post-traumatic stress disorder"
     },
-    "c_018": {
+    "c_017": {
       "prolonged grief disorder": "prolonged grief disorder"
     },
-    "c_019": {
+    "c_018": {
       "psychosis": "psychosis"
     },
+    "c_019": {
+      "self-harm": "self-harm",
+      "persistent low mood": "persistent low mood",
+      "self-harm risk": "self-harm risk",
+      "means": "means"
+    },
     "c_020": {
-      "self-harm": "self-harm"
-    },
-    "c_021": {
-      "somatic symptom disorder": "somatic symptom disorder"
-    },
-    "c_022": {
       "suicidal crisis": "suicidal crisis",
       "persistent low mood": "persistent low mood"
     },
-    "c_023": {
+    "c_021": {
       "borderline personality disorder": "borderline personality disorder"
     },
-    "c_024": {
+    "c_022": {
       "generalized anxiety disorder": "generalized anxiety disorder"
     },
+    "c_023": {
+      "insomnia": "insomnia",
+      "auditory hallucinations": "auditory hallucinations"
+    },
+    "c_024": {
+      "major depressive disorder": "major depressive disorder"
+    },
     "c_025": {
-      "insomnia": "insomnia"
+      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
     },
     "c_026": {
-      "major depressive disorder": "major depressive disorder",
-      "insomnia": "insomnia",
-      "anhedonia": "anhedonia"
-    },
-    "c_027": {
-      "obsessive-compulsive disorder": "obsessive-compulsive disorder",
-      "obsessions and compulsions": "obsessions and compulsions"
-    },
-    "c_028": {
       "post-traumatic stress disorder": "post-traumatic stress disorder"
     },
-    "c_029": {
+    "c_027": {
       "prolonged grief disorder": "prolonged grief disorder",
+      "means": "means"
+    },
+    "c_028": {
+      "psychosis": "psychosis"
+    },
+    "c_029": {
+      "self-harm": "self-harm",
       "persistent low mood": "persistent low mood"
     },
     "c_030": {
-      "psychosis": "psychosis"
+      "suicidal crisis": "suicidal crisis",
+      "plan": "plan",
+      "suicidal": "suicidal"
     },
     "c_031": {
-      "self-harm": "self-harm",
-      "persistent low mood": "persistent low mood",
-      "auditory hallucinations": "auditory hallucinations"
+      "borderline personality disorder": "borderline personality disorder"
     },
     "c_032": {
-      "somatic symptom disorder": "somatic symptom disorder",
-      "trauma re-experiencing": "trauma re-experiencing",
-      "auditory hallucinations": "auditory hallucinations"
+      "generalized anxiety disorder": "generalized anxiety disorder"
     },
     "c_033": {
-      "suicidal crisis": "suicidal crisis",
-      "persistent low mood": "persistent low mood"
+      "insomnia": "insomnia",
+      "means": "means"
     },
     "c_034": {
-      "borderline personality disorder": "borderline personality disorder"
+      "major depressive disorder": "major depressive disorder",
+      "persistent low mood": "persistent low mood"
     },
     "c_035": {
-      "generalized anxiety disorder": "generalized anxiety disorder"
+      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
     },
     "c_036": {
-      "insomnia": "insomnia",
-      "prolonged grief": "prolonged grief"
+      "post-traumatic stress disorder": "post-traumatic stress disorder"
     },
     "c_037": {
-      "major depressive disorder": "major depressive disorder",
-      "insomnia": "insomnia",
-      "anhedonia": "anhedonia"
+      "prolonged grief disorder": "prolonged grief disorder"
     },
     "c_038": {
-      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
-    },
-    "c_039": {
-      "post-traumatic stress disorder": "post-traumatic stress disorder"
-    },
-    "c_040": {
-      "prolonged grief disorder": "prolonged grief disorder"
-    },
-    "c_041": {
-      "psychosis": "psychosis",
-      "anhedonia": "anhedonia"
-    },
-    "c_042": {
-      "self-harm": "self-harm"
-    },
-    "c_043": {
-      "somatic symptom disorder": "somatic symptom disorder"
-    },
-    "c_044": {
-      "suicidal crisis": "suicidal crisis",
-      "self-harm risk": "self-harm risk"
-    },
-    "c_045": {
-      "borderline personality disorder": "borderline personality disorder"
-    },
-    "c_046": {
-      "generalized anxiety disorder": "generalized anxiety disorder"
-    },
-    "c_047": {
-      "insomnia": "insomnia"
-    },
-    "c_048": {
-      "major depressive disorder": "major depressive disorder"
-    },
-    "c_049": {
-      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
-    },
-    "c_050": {
-      "post-traumatic stress disorder": "post-traumatic stress disorder"
-    },
-    "c_051": {
-      "prolonged grief disorder": "prolonged grief disorder"
-    },
-    "c_052": {
       "psychosis": "psychosis"
     },
+    "c_039": {
+      "self-harm": "self-harm",
+      "cutting": "cutting"
+    },
+    "c_040": {
+      "suicidal crisis": "suicidal crisis",
+      "self-harm risk": "self-harm risk",
+      "suicidal": "suicidal"
+    },
+    "c_041": {
+      "borderline personality disorder": "borderline personality disorder",
+      "persistent low mood": "persistent low mood",
+      "means": "means"
+    },
+    "c_042": {
+      "generalized anxiety disorder": "generalized anxiety disorder"
+    },
+    "c_043": {
+      "insomnia": "insomnia",
+      "persistent low mood": "persistent low mood"
+    },
+    "c_044": {
+      "major depressive disorder": "major depressive disorder",
+      "persistent low mood": "persistent low mood"
+    },
+    "c_045": {
+      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
+    },
+    "c_046": {
+      "post-traumatic stress disorder": "post-traumatic stress disorder",
+      "persistent low mood": "persistent low mood",
+      "means": "means"
+    },
+    "c_047": {
+      "prolonged grief disorder": "prolonged grief disorder"
+    },
+    "c_048": {
+      "psychosis": "psychosis"
+    },
+    "c_049": {
+      "self-harm": "self-harm",
+      "cutting": "cutting",
+      "means": "means"
+    },
+    "c_050": {
+      "suicidal crisis": "suicidal crisis",
+      "means": "means"
+    },
+    "c_051": {
+      "borderline personality disorder": "borderline personality disorder"
+    },
+    "c_052": {
+      "generalized anxiety disorder": "generalized anxiety disorder"
+    },
     "c_053": {
-      "self-harm": "self-harm"
+      "major depressive disorder": "major depressive disorder",
+      "persistent low mood": "persistent low mood",
+      "means": "means"
     },
     "c_054": {
-      "somatic symptom disorder": "somatic symptom disorder",
-      "auditory hallucinations": "auditory hallucinations"
+      "obsessive-compulsive disorder": "obsessive-compulsive disorder",
+      "means": "means"
     },
     "c_055": {
-      "suicidal crisis": "suicidal crisis"
+      "post-traumatic stress disorder": "post-traumatic stress disorder",
+      "trauma re-experiencing": "trauma re-experiencing"
     },
     "c_056": {
-      "borderline personality disorder": "borderline personality disorder",
+      "prolonged grief disorder": "prolonged grief disorder",
       "persistent low mood": "persistent low mood"
     },
     "c_057": {
-      "generalized anxiety disorder": "generalized anxiety disorder"
-    },
-    "c_058": {
-      "insomnia": "insomnia"
-    },
-    "c_059": {
-      "major depressive disorder": "major depressive disorder"
-    },
-    "c_060": {
-      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
-    },
-    "c_061": {
-      "post-traumatic stress disorder": "post-traumatic stress disorder",
-      "self-harm risk": "self-harm risk"
-    },
-    "c_062": {
-      "prolonged grief disorder": "prolonged grief disorder"
-    },
-    "c_063": {
       "psychosis": "psychosis"
     },
-    "c_064": {
+    "c_058": {
       "self-harm": "self-harm"
     },
+    "c_059": {
+      "suicidal crisis": "suicidal crisis",
+      "auditory hallucinations": "auditory hallucinations",
+      "suicide": "suicide"
+    },
+    "c_060": {
+      "borderline personality disorder": "borderline personality disorder",
+      "suicide": "suicide"
+    },
+    "c_061": {
+      "generalized anxiety disorder": "generalized anxiety disorder",
+      "insomnia": "insomnia",
+      "panic attacks": "panic attacks"
+    },
+    "c_062": {
+      "major depressive disorder": "major depressive disorder"
+    },
+    "c_063": {
+      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
+    },
+    "c_064": {
+      "post-traumatic stress disorder": "post-traumatic stress disorder",
+      "means": "means"
+    },
     "c_065": {
-      "somatic symptom disorder": "somatic symptom disorder"
+      "prolonged grief disorder": "prolonged grief disorder",
+      "persistent low mood": "persistent low mood"
     },
     "c_066": {
-      "suicidal crisis": "suicidal crisis"
+      "psychosis": "psychosis"
     },
     "c_067": {
-      "borderline personality disorder": "borderline personality disorder"
+      "self-harm": "self-harm"
     },
     "c_068": {
-      "generalized anxiety disorder": "generalized anxiety disorder"
+      "suicidal crisis": "suicidal crisis",
+      "self-harm risk": "self-harm risk",
+      "suicidal": "suicidal"
     },
     "c_069": {
-      "insomnia": "insomnia"
+      "generalized anxiety disorder": "generalized anxiety disorder"
     },
     "c_070": {
       "major depressive disorder": "major depressive disorder"
@@ -245,7 +267,9 @@
       "post-traumatic stress disorder": "post-traumatic stress disorder"
     },
     "c_073": {
-      "prolonged grief disorder": "prolonged grief disorder"
+      "prolonged grief disorder": "prolonged grief disorder",
+      "means": "means",
+      "suicidal": "suicidal"
     },
     "c_074": {
       "psychosis": "psychosis"
@@ -254,90 +278,99 @@
       "self-harm": "self-harm"
     },
     "c_076": {
-      "somatic symptom disorder": "somatic symptom disorder",
-      "persistent low mood": "persistent low mood"
+      "suicidal crisis": "suicidal crisis"
     },
     "c_077": {
-      "suicidal crisis": "suicidal crisis",
-      "persistent low mood": "persistent low mood"
-    },
-    "c_078": {
-      "borderline personality disorder": "borderline personality disorder",
-      "persistent low mood": "persistent low mood"
-    },
-    "c_079": {
       "generalized anxiety disorder": "generalized anxiety disorder"
     },
+    "c_078": {
+      "major depressive disorder": "major depressive disorder",
+      "persistent low mood": "persistent low mood",
+      "means": "means"
+    },
+    "c_079": {
+      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
+    },
     "c_080": {
-      "insomnia": "insomnia"
+      "post-traumatic stress disorder": "post-traumatic stress disorder",
+      "auditory hallucinations": "auditory hallucinations"
     },
     "c_081": {
-      "major depressive disorder": "major depressive disorder",
+      "prolonged grief disorder": "prolonged grief disorder",
       "persistent low mood": "persistent low mood"
     },
     "c_082": {
-      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
+      "psychosis": "psychosis"
     },
     "c_083": {
-      "post-traumatic stress disorder": "post-traumatic stress disorder",
-      "insomnia": "insomnia"
+      "self-harm": "self-harm",
+      "persistent low mood": "persistent low mood",
+      "self-harm risk": "self-harm risk",
+      "cutting": "cutting"
     },
     "c_084": {
-      "prolonged grief disorder": "prolonged grief disorder"
+      "suicidal crisis": "suicidal crisis",
+      "persistent low mood": "persistent low mood"
     },
     "c_085": {
-      "psychosis": "psychosis"
+      "generalized anxiety disorder": "generalized anxiety disorder",
+      "suicide": "suicide"
     },
     "c_086": {
-      "self-harm": "self-harm"
+      "major depressive disorder": "major depressive disorder",
+      "persistent low mood": "persistent low mood"
     },
     "c_087": {
-      "somatic symptom disorder": "somatic symptom disorder",
-      "panic attacks": "panic attacks",
-      "obsessions and compulsions": "obsessions and compulsions"
+      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
     },
     "c_088": {
-      "suicidal crisis": "suicidal crisis",
-      "persistent low mood": "persistent low mood"
+      "post-traumatic stress disorder": "post-traumatic stress disorder",
+      "panic attacks": "panic attacks",
+      "prolonged grief": "prolonged grief"
     },
     "c_089": {
-      "borderline personality disorder": "borderline personality disorder"
+      "prolonged grief disorder": "prolonged grief disorder",
+      "risk": "risk"
     },
     "c_090": {
-      "generalized anxiety disorder": "generalized anxiety disorder"
-    },
-    "c_091": {
-      "insomnia": "insomnia"
-    },
-    "c_092": {
-      "major depressive disorder": "major depressive disorder"
-    },
-    "c_093": {
-      "obsessive-compulsive disorder": "obsessive-compulsive disorder",
-      "anhedonia": "anhedonia"
-    },
-    "c_094": {
-      "post-traumatic stress disorder": "post-traumatic stress disorder",
-      "insomnia": "insomnia"
-    },
-    "c_095": {
-      "prolonged grief disorder": "prolonged grief disorder"
-    },
-    "c_096": {
       "psychosis": "psychosis"
     },
+    "c_091": {
+      "self-harm": "self-harm",
+      "cutting": "cutting"
+    },
+    "c_092": {
+      "suicidal crisis": "suicidal crisis",
+      "plan": "plan"
+    },
+    "c_093": {
+      "generalized anxiety disorder": "generalized anxiety disorder",
+      "means": "means",
+      "risk": "risk"
+    },
+    "c_094": {
+      "major depressive disorder": "major depressive disorder"
+    },
+    "c_095": {
+      "obsessive-compulsive disorder": "obsessive-compulsive disorder"
+    },
+    "c_096": {
+      "post-traumatic stress disorder": "post-traumatic stress disorder",
+      "means": "means"
+    },
     "c_097": {
-      "self-harm": "self-harm"
+      "prolonged grief disorder": "prolonged grief disorder",
+      "means": "means",
+      "suicidal": "suicidal"
     },
     "c_098": {
-      "somatic symptom disorder": "somatic symptom disorder"
+      "psychosis": "psychosis"
     },
     "c_099": {
-      "suicidal crisis": "suicidal crisis",
-      "persistent low mood": "persistent low mood"
+      "self-harm": "self-harm"
     },
     "c_100": {
-      "borderline personality disorder": "borderline personality disorder"
+      "suicidal crisis": "suicidal crisis"
     }
   }
 }

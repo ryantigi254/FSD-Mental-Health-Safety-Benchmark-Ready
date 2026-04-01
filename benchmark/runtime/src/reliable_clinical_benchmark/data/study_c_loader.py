@@ -47,7 +47,8 @@ def load_study_c_data(data_path: str) -> List[LongitudinalCase]:
         logger.warning(f"Study C data file not found: {data_path}")
         return []
 
-    with open(path, "r") as f:
+    # Use UTF-8 explicitly so Windows locale defaults (e.g. cp1252) do not break JSON decoding.
+    with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     cases = data.get("cases", [])

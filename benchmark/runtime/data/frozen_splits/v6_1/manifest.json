@@ -1,17 +1,127 @@
 {
+  "created_at_utc": "2026-03-22T19:49:44.891947+00:00",
   "version": "v6.1",
-  "description": "Strict no-generation clinically ready frozen split — rubric v2 scored, stage2 gated, construct validated, deterministic edits only",
-  "created_utc": "2026-03-21T22:01:30.604407+00:00",
+  "description": "Strict no-generation refresh from frozen v5 with direct-source Study A, deterministic Study A Bias edits, source-backed Study B single-turn, and exact-count source-first multi-turn rebuilds.",
   "supersedes": "v6",
+  "files": [
+    {
+      "file": "README.md",
+      "sha256": "ebb8f564d9537a4e0e75635eebe2a60cb2e0623f3400f71fed43b76bbfd49fb3",
+      "row_count": null
+    },
+    {
+      "file": "README_NOTE.txt",
+      "sha256": "69aa9ee97d295631de28c02dc7ad80f140171956cc11beeddaea597a689ddf76",
+      "row_count": null
+    },
+    {
+      "file": "adversarial_bias/BIAS_DIMENSIONS.md",
+      "sha256": "b043ceb05381e0b3211a68d8f6a4244c0600061eba2ad9d88b90a8d349f9f2c5",
+      "row_count": null
+    },
+    {
+      "file": "adversarial_bias/README.md",
+      "sha256": "f53724c8fec96045beafd0773fcf417e143aa17004fc595a5f0b552071cfd28f",
+      "row_count": null
+    },
+    {
+      "file": "adversarial_bias/biased_vignettes.json",
+      "sha256": "c0d056f8f66d17a13ac3f524a4884db8250fd32f03b4f7e7a4ee8deefbcf896f",
+      "row_count": 2000
+    },
+    {
+      "file": "adversarial_bias/biased_vignettes_legacy_2016.json",
+      "sha256": "d5344ffb4d0c54091e00617914f3ed0a2b521b3bd8df1f8c2af7c01a980c6bd4",
+      "row_count": 2016
+    },
+    {
+      "file": "audit_fix_diff_summary.json",
+      "sha256": "9589f25d1e44b09ea72b409ee44201b40bb4192bad259880c546a7d7b38fe711",
+      "row_count": 9
+    },
+    {
+      "file": "entity_evidence_map.json",
+      "sha256": "6f72fef2f5d76bb699a63b8217a1ecd4570ff18a31a7b1f302d5e5928385748a",
+      "row_count": 2
+    },
+    {
+      "file": "gold_diagnosis_labels.json",
+      "sha256": "f0a0866d334c02b5af10f65123623e05044064f12d23a39bdff11c8399923f78",
+      "row_count": 2
+    },
+    {
+      "file": "gold_diagnosis_metadata.json",
+      "sha256": "952eb2700b1abc76463edcb9c5bfc4382b935dc6aa31b4b3e410b357b101d6e9",
+      "row_count": 27
+    },
+    {
+      "file": "gold_labels_mapping.json",
+      "sha256": "fa2c3ee6a8c192afa00a609965817d4acaa51f867daac68504c5d37d81fa60a5",
+      "row_count": 4
+    },
+    {
+      "file": "study_a/gold_diagnosis_labels.json",
+      "sha256": "2eedaea53664864582f1a095be2ffb2e5436d9dfef2e71f7ae0b0502146a6285",
+      "row_count": 2
+    },
+    {
+      "file": "study_a/gold_diagnosis_metadata.json",
+      "sha256": "952eb2700b1abc76463edcb9c5bfc4382b935dc6aa31b4b3e410b357b101d6e9",
+      "row_count": 27
+    },
+    {
+      "file": "study_a/gold_labels_mapping.json",
+      "sha256": "fa2c3ee6a8c192afa00a609965817d4acaa51f867daac68504c5d37d81fa60a5",
+      "row_count": 4
+    },
+    {
+      "file": "study_a/study_a_test.json",
+      "sha256": "c667cd5a04b93119003fb035fe6a85f674aac2acecf9e2dce92315d9691daec7",
+      "row_count": 2000
+    },
+    {
+      "file": "study_a_test.json",
+      "sha256": "4c93be28ce3626044d9333a30174ea3208ef0c15ae85fff854cc49e561392a2b",
+      "row_count": 2000
+    },
+    {
+      "file": "study_b_multi_turn_test.json",
+      "sha256": "a90114fb13e3f42be7febd005cfc11eeb8328c7fe43eee33e9e63084a9bc1682",
+      "row_count": 120
+    },
+    {
+      "file": "study_b_test.json",
+      "sha256": "2352ce4ec229bed17681a4f16904263db2dda20411e5fb8e63c64d1f35cf9f3d",
+      "row_count": 2000
+    },
+    {
+      "file": "study_c/entity_evidence_map.json",
+      "sha256": "6f72fef2f5d76bb699a63b8217a1ecd4570ff18a31a7b1f302d5e5928385748a",
+      "row_count": 2
+    },
+    {
+      "file": "study_c/study_c_target_plans.json",
+      "sha256": "83bb78bfd13152d2300b40d61fc3d5c97a14ba900ccf3720442d5f6cd6fd086a",
+      "row_count": 100
+    },
+    {
+      "file": "study_c/study_c_test.json",
+      "sha256": "cc4b31ec1a3b2118cadd3c0f1b7f83fcc44557718949e01d3a4538b0b601e14f",
+      "row_count": 100
+    },
+    {
+      "file": "study_c_target_plans.json",
+      "sha256": "83bb78bfd13152d2300b40d61fc3d5c97a14ba900ccf3720442d5f6cd6fd086a",
+      "row_count": 100
+    },
+    {
+      "file": "study_c_test.json",
+      "sha256": "cc4b31ec1a3b2118cadd3c0f1b7f83fcc44557718949e01d3a4538b0b601e14f",
+      "row_count": 100
+    }
+  ],
   "generation_policy": "strict_no_generation",
   "turn_count_policy": "exact_count_with_manual_review",
-  "sources": {
-    "study_a": "v6 direct_source (unchanged prompts, 100% rubric ACCEPTABLE)",
-    "study_a_bias": "v5 source_anchored_deterministic_edit (cue insertion, no generation)",
-    "study_b_single": "v5 direct_source (construct validated, 95.3% pass)",
-    "study_b_multi_turn": "v6 retrieved_composed + direct_source (20 turns, no generation)",
-    "study_c": "v6 retrieved_composed + direct_source (20 turns, no generation)"
-  },
   "provenance_taxonomy": [
     "direct_source",
     "retrieved_composed",
@@ -26,107 +136,18 @@
       "multi_turn_fuzz_min": 70
     },
     "protected_categories": [
-      "suicidality",
-      "self_harm",
-      "medications",
-      "allergies",
       "age",
+      "allergies",
       "duration",
-      "family_history"
-    ],
-    "forbidden": [
-      "language_model_generation",
-      "masked_infill",
-      "edit_model",
-      "generative_fallback"
+      "family_history",
+      "medications",
+      "self_harm",
+      "suicidality"
     ]
   },
-  "validation": {
-    "rubric_version": "v2",
-    "rubric_matching_mode": "word_boundary",
-    "cross_study_review": {
-      "study_a": {
-        "rows": 2000,
-        "acceptable": 2000,
-        "needs_review": 0,
-        "reject": 0
-      },
-      "study_b_single": {
-        "rows": 2000,
-        "acceptable": 2000,
-        "needs_review": 0,
-        "reject": 0
-      },
-      "study_b_multi": {
-        "rows": 120,
-        "acceptable": 120,
-        "needs_review": 0,
-        "reject": 0
-      },
-      "study_c": {
-        "rows": 100,
-        "acceptable": 100,
-        "needs_review": 0,
-        "reject": 0
-      }
-    },
-    "stage2_gates": {
-      "label_policy": "2034/2034 PASS (100%)",
-      "multiturn_uniqueness": "120/120 unique (0 duplicates)",
-      "construct_validation": "95.3% pass (≥90% threshold)"
-    }
-  },
-  "multi_turn_contract": {
-    "turns_per_case": 20,
-    "phase_map": {
-      "1-4": "presentation / clarification",
-      "5-8": "elaboration / resistance onset",
-      "9-12": "pressure or instability escalation",
-      "13-16": "conflict, doubt, or clarification under strain",
-      "17-20": "consolidation, boundary test, or summary-oriented closure"
-    }
-  },
   "manual_review": {
-    "study_b_multi_turn_reviewed": 0,
-    "study_c_reviewed": 0,
-    "policy": "unresolved turns go to manual review, not generation"
-  },
-  "files": [
-    {
-      "name": "adversarial_bias/biased_vignettes.json",
-      "sha256": "c65ad0ece6dbb3a302580364ab2ed735d79625f6021ef476f82a0fd140a6e97e"
-    },
-    {
-      "name": "entity_evidence_map.json",
-      "sha256": "98d479cd2a1b852f8e283b01679e76f44942e92c037d20839f29231a8354991f"
-    },
-    {
-      "name": "gold_diagnosis_labels.json",
-      "sha256": "2eedaea53664864582f1a095be2ffb2e5436d9dfef2e71f7ae0b0502146a6285"
-    },
-    {
-      "name": "gold_diagnosis_metadata.json",
-      "sha256": "14f6f5d6d0e52ebd1b9b82768b82cec6577f6e8692dfe007b619a007d206a6b4"
-    },
-    {
-      "name": "gold_labels_mapping.json",
-      "sha256": "fa2c3ee6a8c192afa00a609965817d4acaa51f867daac68504c5d37d81fa60a5"
-    },
-    {
-      "name": "study_a_test.json",
-      "sha256": "a33b8b5658fef50084b708c90f68220b6c0625a28d1118e57fccec22cd84b417"
-    },
-    {
-      "name": "study_b_multi_turn_test.json",
-      "sha256": "e20b85bbbdeedc883ae8116fab24745d9c2a19cb645915b82a80f6317d7b2839"
-    },
-    {
-      "name": "study_b_test.json",
-      "sha256": "84737233b6ad638de1c80a753735378f2cccd66dc9fe7ac2b429da2f79dbc5fd"
-    },
-    {
-      "name": "study_c_test.json",
-      "sha256": "66d49c40053992af3436acdf81ebed692b3b196960ef76747ac1049947e7afcf"
-    }
-  ]
+    "study_b_multi_turn_queue": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/verification/v6_1/manual_review/study_b_multi_turn_queue.json",
+    "study_c_queue": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/verification/v6_1/manual_review/study_c_queue.json",
+    "accepted_turns": 0
+  }
 }

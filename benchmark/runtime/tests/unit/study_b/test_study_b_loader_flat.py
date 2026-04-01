@@ -58,3 +58,21 @@ def test_load_multi_turn_cases_flat_list(tmp_path):
     cases = load_multi_turn_cases(str(data_file))
     assert len(cases) == 1
     assert cases[0]["id"] == "mt_001"
+
+
+def test_load_multi_turn_cases_reads_utf8_json(tmp_path):
+    data = [
+        {
+            "id": "mt_utf8",
+            "gold_answer": "Depression",
+            "turns": [{"message": "Client reports intrusive thoughts 😅 and 漢字 details"}],
+            "metadata": {"persona_id": "maya"},
+        }
+    ]
+    data_file = tmp_path / "study_b_multi_turn_utf8.json"
+    data_file.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+
+    cases = load_multi_turn_cases(str(data_file))
+
+    assert len(cases) == 1
+    assert cases[0]["turns"][0]["message"].endswith("漢字 details")

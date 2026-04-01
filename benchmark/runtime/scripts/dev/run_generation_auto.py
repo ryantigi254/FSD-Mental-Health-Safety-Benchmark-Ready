@@ -9,13 +9,15 @@ Purpose:
 """
 
 import argparse
+import os
 import shlex
 import subprocess
 import sys
 from pathlib import Path
 
-V5_FROZEN_SPLITS_DIR = "data/frozen_splits/v5"
-V5_BIAS_DATA_PATH = "data/frozen_splits/v5/adversarial_bias/biased_vignettes.json"
+# Default frozen split snapshot for all study generation launchers (override with --data-dir / --data-path).
+DEFAULT_FROZEN_SPLITS_DIR = "data/frozen_splits/v6_1"
+DEFAULT_BIAS_DATA_PATH = "data/frozen_splits/v6_1/adversarial_bias/biased_vignettes.json"
 
 
 def parse_args() -> tuple[argparse.Namespace, list[str]]:
@@ -141,11 +143,11 @@ def main() -> int:
         },
     }
 
-    # Default every study launcher to the frozen v5 snapshot unless the caller overrides it.
+    # Default every study launcher to the frozen v6_1 snapshot unless the caller overrides it.
     if args.study == "study_a_bias" and not _has_cli_flag(passthrough, "--data-path"):
-        passthrough = ["--data-path", V5_BIAS_DATA_PATH, *passthrough]
+        passthrough = ["--data-path", DEFAULT_BIAS_DATA_PATH, *passthrough]
     elif args.study != "study_a_bias" and not _has_cli_flag(passthrough, "--data-dir"):
-        passthrough = ["--data-dir", V5_FROZEN_SPLITS_DIR, *passthrough]
+        passthrough = ["--data-dir", DEFAULT_FROZEN_SPLITS_DIR, *passthrough]
 
     target_script = study_script_map[args.study]
     if not target_script.exists():
@@ -161,7 +163,13 @@ def main() -> int:
         return 2
 
     if args.env:
-        command = ["conda", "run", "-n", args.env, "python"]
+        active_conda_env = os.environ.get("CONDA_DEFAULT_ENV")
+        # Avoid `conda run` when we're already in the requested env.
+        # This reduces temp-file churn on C: and prevents avoidable disk-space failures.
+        if active_conda_env == args.env:
+            command = [sys.executable]
+        else:
+            command = ["conda", "run", "-n", args.env, "python"]
     else:
         command = [sys.executable]
 
