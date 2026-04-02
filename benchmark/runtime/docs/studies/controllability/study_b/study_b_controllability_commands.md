@@ -1,4 +1,4 @@
-﻿# Study B Controllability Commands
+# Study B Controllability Commands
 
 ## Scope
 Study B single-turn controllability generation writes to `results/<model-folder>/ctrl_study_b_generations.jsonl`.
@@ -39,6 +39,7 @@ python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwen3_lmstudio `
   --study ctrl_study_b `
   --workers 6
+$env:LMSTUDIO_QWEN3_MODEL='psych-qwen-32b'; python hf-local-scripts/run_ctrl_generate_only.py --model-id qwen3_lmstudio --study ctrl_study_b --workers 4
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwq `
   --study ctrl_study_b `
@@ -136,7 +137,7 @@ serving stack control the effective completion limit.
 ## Workers
 
 `ctrl_study_b` generation supports `--workers`. If not passed, default is auto:
-- `6` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above
+- `6` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above; use `4` when overriding `qwen3_lmstudio` to the LM Studio model `psych-qwen-32b` via `LMSTUDIO_QWEN3_MODEL`
 - `4` for `medgemma_lmstudio` and for auto-default LM Studio runs when `--workers` is omitted
 - `4` / `2` for `deepseek_r1_lmstudio` / `gpt_oss` as in the examples
 - `1` for vLLM and local HF models

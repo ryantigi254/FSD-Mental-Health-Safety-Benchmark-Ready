@@ -9,6 +9,8 @@ In LM Studio, set:
 - API Identifier: e.g. "qwen3-8b" (matches default model_name below)
 """
 
+import os
+
 import re
 from typing import Tuple, List, Dict
 
@@ -53,12 +55,16 @@ class Qwen3LMStudioRunner(ModelRunner):
 
     def __init__(
         self,
-        model_name: str = "qwen3-8b",
+        model_name: str = None,
         api_base: str = "http://127.0.0.1:1234/v1",
         config: GenerationConfig = None,
     ):
+        resolved_model_name = (
+            model_name
+            or os.getenv("LMSTUDIO_QWEN3_MODEL", "qwen3-8b")
+        )
         super().__init__(
-            model_name,
+            resolved_model_name,
             config
             or GenerationConfig(
                 temperature=0.7,

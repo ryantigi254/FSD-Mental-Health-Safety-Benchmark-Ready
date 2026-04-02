@@ -1,4 +1,4 @@
-﻿# Study A Bias Controllability Commands
+# Study A Bias Controllability Commands
 
 ## Scope
 Study A bias controllability generation writes to `results/<model-folder>/ctrl_study_a_bias_generations.jsonl`.
@@ -54,6 +54,7 @@ python hf-local-scripts/run_ctrl_generate_only.py `
   --study ctrl_study_a_bias `
   --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `
   --workers 6
+$env:LMSTUDIO_QWEN3_MODEL='psych-qwen-32b'; python hf-local-scripts/run_ctrl_generate_only.py --model-id qwen3_lmstudio --study ctrl_study_a_bias --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json --workers 4
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwq `
   --study ctrl_study_a_bias `
@@ -154,6 +155,7 @@ python hf-local-scripts/run_ctrl_generate_only.py `
 
 ```powershell
 python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json --output-dir results_ctrl_v2_1 --max-cases 5 --workers 6
+$env:LMSTUDIO_QWEN3_MODEL='psych-qwen-32b'; python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json --output-dir results_ctrl_v2_1 --max-cases 5 --workers 4
 ```
 
 `--max-tokens` is optional. For LM Studio and vLLM models, omitting it lets the
@@ -162,7 +164,7 @@ serving stack control the effective completion limit.
 ## Workers
 
 `ctrl_study_a_bias` generation supports `--workers`. If not passed, default is auto:
-- `6` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above
+- `6` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above; use `4` when overriding `qwen3_lmstudio` to the LM Studio model `psych-qwen-32b` via `LMSTUDIO_QWEN3_MODEL`
 - `4` for `medgemma_lmstudio` and for auto-default LM Studio runs when `--workers` is omitted
 - `4` / `2` for `deepseek_r1_lmstudio` / `gpt_oss` as in the examples
 - `1` for vLLM and local HF models
