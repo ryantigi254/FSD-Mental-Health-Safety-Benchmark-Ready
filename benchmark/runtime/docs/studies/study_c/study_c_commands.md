@@ -22,7 +22,6 @@ conda run -n mh-llm-benchmark-env env PYTHONPATH=src python scripts/studies/stud
 ### Windows (PC)
 ```powershell
 python scripts/dev/run_generation_auto.py --study study_c --model-id qwen3_lmstudio --env mh-llm-benchmark-env --workers 6
-$env:LMSTUDIO_QWEN3_MODEL='psych-qwen-32b'; python scripts/dev/run_generation_auto.py --study study_c --model-id qwen3_lmstudio --env mh-llm-benchmark-env --workers 4
 python scripts/dev/run_generation_auto.py --study study_c --model-id qwq --env mh-llm-benchmark-env --workers 6
 python scripts/dev/run_generation_auto.py --study study_c --model-id medgemma_lmstudio --env mh-llm-benchmark-env --workers 4
 python scripts/dev/run_generation_auto.py --study study_c --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --workers 4
@@ -45,7 +44,7 @@ python scripts/dev/run_generation_auto.py --study study_c --model-id psych_qwen_
 This section is for the four HF-local models when served via vLLM's OpenAI-compatible server.
 
 - Client `--workers` should remain `1`.
-- Concurrency is controlled server-side via `--max-num-seqs` (recommended sweep: `2 Ã¢â€ â€™ 4 Ã¢â€ â€™ 8 Ã¢â€ â€™ 12`).
+- Concurrency is controlled server-side via `--max-num-seqs` (recommended sweep: `2 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ 4 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ 8 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ 12`).
 
 ### vLLM Server (per model)
 
@@ -96,7 +95,7 @@ conda run -n mh-llm-benchmark-env env PYTHONPATH=src python scripts/studies/stud
 
 ## Workers
 Study C generation supports `--workers`. If not passed, default is auto:
-- `6` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above; use `4` when overriding `qwen3_lmstudio` to the LM Studio model `psych-qwen-32b` via `LMSTUDIO_QWEN3_MODEL`
+- `6` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above
 - `4` for `medgemma_lmstudio` and for auto-default LM Studio runs when `--workers` is omitted
 - `4` / `2` for `deepseek_r1_lmstudio` / `gpt_oss` as in the examples
 - `1` for non-LM Studio/local HF models
