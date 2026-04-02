@@ -1,4 +1,4 @@
-﻿# Study A Bias Invariance Commands
+# Study A Bias Invariance Commands
 
 Use `--data-path` pointing to the sampled invariance bias file
 and `--output-dir results_invariance`.
@@ -17,6 +17,7 @@ Uses the sampled invariance subset at
 ```powershell
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 2
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 6
+$env:LMSTUDIO_QWEN3_MODEL='psych-qwen-32b'; python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwq --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 6
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 4
 ```
