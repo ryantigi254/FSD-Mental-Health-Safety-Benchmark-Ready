@@ -145,6 +145,15 @@ def _matches_loaded_model(loaded_model_id: str, candidate: str) -> bool:
     return loaded.endswith(f"/{expected}") or loaded.endswith(f"@{expected}")
 
 
+def _lmstudio_native_models_endpoint(api_base: str) -> str:
+    base = (api_base or "").rstrip("/")
+    if base.endswith("/api/v1"):
+        return f"{base}/models"
+    if base.endswith("/v1"):
+        return f"{base[:-3]}/api/v1/models"
+    return f"{base}/api/v1/models"
+
+
 def _check_lmstudio_model_loaded(model_id: str) -> tuple[bool, str]:
     model_key = _normalise_model_id(model_id)
     preflight_cfg = LMSTUDIO_MODEL_PREFLIGHT.get(model_key)
@@ -154,37 +163,63 @@ def _check_lmstudio_model_loaded(model_id: str) -> tuple[bool, str]:
     resolved_model = os.getenv(preflight_cfg["env_var"], preflight_cfg["default"]).strip()
     aliases = [resolved_model, *preflight_cfg["aliases"]]
     api_base = os.getenv("LMSTUDIO_API_BASE", "http://127.0.0.1:1234/v1").rstrip("/")
-    endpoint = f"{api_base}/models"
+    endpoint = _lmstudio_native_models_endpoint(api_base)
     try:
         with urllib.request.urlopen(endpoint, timeout=5) as response:
             payload = json.loads(response.read().decode("utf-8"))
     except urllib.error.URLError as request_error:
         return (
             False,
-            f"Failed LM Studio preflight against {endpoint}: {request_error}.",
+            f"Failed strict LM Studio loaded-instance preflight against {endpoint}: {request_error}.",
         )
     except json.JSONDecodeError as parse_error:
         return (
             False,
-            f"LM Studio /v1/models returned non-JSON payload from {endpoint}: {parse_error}.",
+            f"LM Studio native models endpoint returned non-JSON payload from {endpoint}: {parse_error}.",
         )
 
-    available_model_ids = []
-    for entry in payload.get("data", []) if isinstance(payload, dict) else []:
-        if isinstance(entry, dict) and entry.get("id"):
-            available_model_ids.append(str(entry["id"]))
+    loaded_instance_ids = []
+    matched_but_not_loaded = []
+    for entry in payload.get("models", []) if isinstance(payload, dict) else []:
+        if not isinstance(entry, dict):
+            continue
+        entry_key = str(entry.get("key", "")).strip()
+        key_matches = any(_matches_loaded_model(entry_key, alias) for alias in aliases)
+        loaded_instances = entry.get("loaded_instances", [])
+        if not isinstance(loaded_instances, list):
+            loaded_instances = []
 
-    for loaded_model_id in available_model_ids:
-        if any(_matches_loaded_model(loaded_model_id, alias) for alias in aliases):
-            return True, loaded_model_id
+        for instance in loaded_instances:
+            if not isinstance(instance, dict):
+                continue
+            loaded_model_id = str(instance.get("id", "")).strip()
+            if loaded_model_id:
+                loaded_instance_ids.append(loaded_model_id)
+            if any(
+                _matches_loaded_model(loaded_model_id, alias) or _matches_loaded_model(entry_key, alias)
+                for alias in aliases
+            ):
+                return True, loaded_model_id or entry_key
+
+        if key_matches:
+            matched_but_not_loaded.append(entry_key or "<unknown>")
+
+    if matched_but_not_loaded:
+        matched_msg = ", ".join(dict.fromkeys(matched_but_not_loaded))
+        return (
+            False,
+            "LM Studio loaded-instance preflight failed. "
+            f"Found installed model entries [{matched_msg}] but they currently have no loaded_instances. "
+            "Open the model once in LM Studio before running generations.",
+        )
 
     alias_msg = ", ".join(dict.fromkeys(aliases))
-    available_msg = ", ".join(available_model_ids) if available_model_ids else "<none>"
+    available_msg = ", ".join(loaded_instance_ids) if loaded_instance_ids else "<none>"
     return (
         False,
-        "LM Studio model preflight failed. "
+        "LM Studio loaded-instance preflight failed. "
         f"Requested model-id '{model_id}' expects one of [{alias_msg}] to already be loaded, "
-        f"but /v1/models returned [{available_msg}].",
+        f"but /api/v1/models returned loaded instances [{available_msg}].",
     )
 
 
@@ -321,7 +356,11 @@ def main() -> int:
         print("Check-only mode: validation passed; no generation executed.")
         return 0
 
-    completed = subprocess.run(command, cwd=str(runtime_root))
+    child_env = os.environ.copy()
+    if args.allow_lmstudio_autoload:
+        child_env["LMSTUDIO_ALLOW_AUTOLOAD"] = "1"
+
+    completed = subprocess.run(command, cwd=str(runtime_root), env=child_env)
     return completed.returncode
 
 

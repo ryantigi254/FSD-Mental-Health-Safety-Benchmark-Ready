@@ -66,7 +66,7 @@ python scripts/dev/run_generation_auto.py --study study_a_invariance --model-id 
 ## Direct Runner
 
 ```powershell
-python hf-local-scripts/run_invariance_generate_only.py --study study_a_invariance --model-id gpt_oss --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --max-samples 5 --max-tokens 32000 --workers 2
+python hf-local-scripts/run_invariance_generate_only.py --study study_a_invariance --model-id gpt_oss --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --max-samples 5 --max-tokens 64000 --workers 2
 ```
 
 ## Checks

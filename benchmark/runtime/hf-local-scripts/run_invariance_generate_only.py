@@ -24,10 +24,10 @@ INVARIANCE_STUDIES = (
     "study_c_invariance",
 )
 DEFAULT_MAX_TOKENS = {
-    "study_a_invariance": 32000,
-    "study_b_invariance": 16384,
-    "study_b_multi_turn_invariance": 16384,
-    "study_c_invariance": 16384,
+    "study_a_invariance": 64000,
+    "study_b_invariance": 64000,
+    "study_b_multi_turn_invariance": 64000,
+    "study_c_invariance": 64000,
 }
 SPLIT_FILE_NAMES = {
     "study_a_invariance": "study_a_test.json",

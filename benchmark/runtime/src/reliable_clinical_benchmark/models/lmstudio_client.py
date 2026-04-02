@@ -1,22 +1,20 @@
 """
-Shared LM Studio HTTP client for all locally-hosted models.
+Shared LM Studio HTTP client for locally-hosted models.
 
-This module provides a single, unified interface for communicating with
-LM Studio's local server API. All models running via LM Studio (PsyLLM,
-and potentially others like QwQ-32B, DeepSeek-R1-14B if loaded locally)
-should use this client to ensure consistent error handling and timeout management.
-
-For this dissertation, PsyLLM is the primary model evaluated, running
-locally via LM Studio. Other models (QwQ, DeepSeek-R1, etc.) are configured
-as remote API runners for spec completeness, but the actual evaluation
-focuses on local PsyLLM inference.
+This module centralizes LM Studio request handling so all LM Studio-backed
+models get consistent load checks, retry logic, and response parsing.
 """
 
+from __future__ import annotations
+
 import json
-import time
-import requests
-from typing import Dict, Any, List, Tuple, Union, Optional
 import logging
+import os
+import time
+from typing import Any, Dict, List, Optional, Tuple, Union
+
+import requests
+
 
 logger = logging.getLogger(__name__)
 
@@ -40,23 +38,71 @@ def _model_ids_match(requested_model: str, loaded_model: str) -> bool:
     )
 
 
-def is_model_loaded(api_base: str, model: str, timeout: int = 10) -> bool:
-    """Check whether *model* is already loaded in LM Studio."""
+def _native_api_base(api_base: str) -> str:
+    base = (api_base or "").rstrip("/")
+    if base.endswith("/api/v1"):
+        return base
+    if base.endswith("/v1"):
+        return f"{base[:-3]}/api/v1"
+    return f"{base}/api/v1"
+
+
+def _autoload_allowed() -> bool:
+    value = os.getenv("LMSTUDIO_ALLOW_AUTOLOAD", "")
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
+def get_model_load_state(
+    api_base: str,
+    model: str,
+    timeout: int = 10,
+) -> Tuple[Optional[bool], str]:
+    """
+    Check whether *model* is already loaded in LM Studio.
+
+    Returns:
+        (True, loaded_id) when the model has a loaded instance in ``/api/v1/models``.
+        (False, "") when the check succeeded and the model is not present.
+        (None, error_message) when the check itself failed.
+    """
     try:
-        resp = requests.get(
-            f"{api_base}/models",
-            timeout=timeout,
-        )
+        endpoint = f"{_native_api_base(api_base)}/models"
+        resp = requests.get(endpoint, timeout=timeout)
         resp.raise_for_status()
-        data = resp.json().get("data", [])
-        loaded_ids = [
-            str(m.get("id", "")).strip()
-            for m in data
-            if isinstance(m, dict) and m.get("id")
-        ]
-        return any(_model_ids_match(model, loaded_id) for loaded_id in loaded_ids)
-    except Exception:
-        return False
+        data = resp.json().get("models", [])
+        model_known = False
+        for entry in data if isinstance(data, list) else []:
+            if not isinstance(entry, dict):
+                continue
+            model_key = str(entry.get("key", "")).strip()
+            if model_key and _model_ids_match(model, model_key):
+                model_known = True
+
+            loaded_instances = entry.get("loaded_instances", [])
+            if not isinstance(loaded_instances, list):
+                continue
+
+            for instance in loaded_instances:
+                if not isinstance(instance, dict):
+                    continue
+                loaded_id = str(instance.get("id", "")).strip()
+                if (
+                    (loaded_id and _model_ids_match(model, loaded_id))
+                    or (model_key and _model_ids_match(model, model_key))
+                ):
+                    return True, loaded_id or model_key
+
+        if model_known:
+            return False, ""
+        return False, ""
+    except Exception as exc:
+        return None, str(exc)
+
+
+def is_model_loaded(api_base: str, model: str, timeout: int = 10) -> bool:
+    """Backward-compatible loaded-model predicate."""
+    is_loaded, _ = get_model_load_state(api_base, model, timeout=timeout)
+    return is_loaded is True
 
 
 def _wait_for_model(
@@ -65,10 +111,11 @@ def _wait_for_model(
     poll_interval: float = 3.0,
     max_wait: float = 120.0,
 ) -> bool:
-    """Poll ``/v1/models`` until *model* appears or *max_wait* elapses."""
+    """Poll ``/api/v1/models`` until *model* appears or *max_wait* elapses."""
     deadline = time.monotonic() + max_wait
     while time.monotonic() < deadline:
-        if is_model_loaded(api_base, model):
+        is_loaded, _ = get_model_load_state(api_base, model)
+        if is_loaded is True:
             return True
         time.sleep(poll_interval)
     return False
@@ -76,10 +123,7 @@ def _wait_for_model(
 
 def _flatten_content(content: Any) -> str:
     """
-    Normalise LM Studio / OpenAI-style mixed content:
-    - str -> as-is
-    - list of blocks -> join text/content fields
-    - fallback -> repr for debugging
+    Normalize mixed LM Studio/OpenAI content.
     """
     if isinstance(content, str):
         return content
@@ -101,8 +145,7 @@ def _flatten_content(content: Any) -> str:
 
 def _split_content_and_reasoning(content: Any) -> Tuple[str, str]:
     """
-    Split mixed content into (text, reasoning) to preserve think traces.
-    Handles LM Studio/OpenAI-style blocks where reasoning may appear as its own type.
+    Split mixed content into (text, reasoning).
     """
     text_parts: List[str] = []
     reasoning_parts: List[str] = []
@@ -136,6 +179,24 @@ def _split_content_and_reasoning(content: Any) -> Tuple[str, str]:
     return "".join(text_parts), "".join(reasoning_parts)
 
 
+def _format_http_error(exc: requests.exceptions.HTTPError) -> str:
+    """Include status code and a short response body when available."""
+    response = exc.response
+    if response is None:
+        return str(exc)
+
+    try:
+        body = (response.text or "").strip()
+    except Exception:
+        body = ""
+
+    if body:
+        if len(body) > 400:
+            body = body[:400].rstrip() + "...<truncated>"
+        return f"{exc} | response={body}"
+    return str(exc)
+
+
 def _do_chat_request(
     endpoint: str,
     payload: Dict[str, Any],
@@ -162,14 +223,10 @@ def _do_chat_request(
     result = response.json()
 
     choice = result["choices"][0]["message"]
-    content_text, content_reasoning = _split_content_and_reasoning(
-        choice.get("content", "")
-    )
+    content_text, content_reasoning = _split_content_and_reasoning(choice.get("content", ""))
 
-    # Preserve reasoning if LM Studio returns it alongside content
     reasoning_field = choice.get("reasoning")
     if not reasoning_field:
-        # LM Studio commonly emits reasoning as `reasoning_content`.
         reasoning_field = choice.get("reasoning_content")
     reasoning_parts: List[str] = []
     if isinstance(reasoning_field, str) and reasoning_field.strip():
@@ -178,9 +235,7 @@ def _do_chat_request(
         reasoning_parts.append(content_reasoning.strip())
 
     combined_reasoning = "\n".join(reasoning_parts).strip()
-    content = content_text if content_text is not None else _flatten_content(
-        choice.get("content", "")
-    )
+    content = content_text if content_text is not None else _flatten_content(choice.get("content", ""))
     if combined_reasoning:
         content = f"<think>{combined_reasoning}</think>\n{content}"
 
@@ -200,35 +255,15 @@ def chat_completion(
     max_retries: int = 3,
 ) -> str:
     """
-    Single shared helper for LM Studio /v1/chat/completions endpoint.
+    Shared helper for LM Studio ``/v1/chat/completions``.
 
-    Before making a request the function verifies the model is loaded via
-    ``/v1/models``.  On transient errors (HTTP 4xx/5xx, connection resets)
-    it re-checks model availability and retries up to *max_retries* times
-    instead of blindly re-sending — this prevents LM Studio from spawning
-    duplicate model-load operations.
-
-    Args:
-        api_base: Base URL for LM Studio API (e.g., "http://localhost:1234/v1")
-        model: Model name/identifier as recognised by LM Studio
-        messages: List of message dicts with "role" and "content" keys
-        temperature: Sampling temperature (0.0-2.0)
-        max_tokens: Maximum tokens to generate. If None, omit the field and
-            let LM Studio apply its own server/model default.
-        top_p: Nucleus sampling parameter
-        timeout: Request timeout in seconds. If None, no timeout (default: None).
-                 Can be a tuple (connect_timeout, read_timeout) for fine-grained control.
-                 For long-running generations, use None or a large read_timeout.
-        max_retries: Maximum number of retry attempts after transient errors.
-
-    Returns:
-        Generated text content from the model
-
-    Raises:
-        TimeoutError: If request exceeds timeout
-        requests.exceptions.RequestException: For other HTTP/connection errors
+    Before making a request this checks ``/api/v1/models`` for a loaded instance.
+    By default it refuses to send a request when loaded state cannot be confirmed,
+    which avoids accidentally triggering LM Studio JIT autoload after a failure.
+    Set ``LMSTUDIO_ALLOW_AUTOLOAD=1`` to opt back into LM Studio lazy-loading.
     """
     endpoint = f"{api_base}/chat/completions"
+    allow_autoload = _autoload_allowed()
 
     payload: Dict[str, Any] = {
         "model": model,
@@ -240,76 +275,154 @@ def chat_completion(
     if max_tokens is not None:
         payload["max_tokens"] = max_tokens
 
-    # Use tuple timeout: (connect_timeout, read_timeout)
-    # Connect timeout: 30s to fail fast if server is down
-    # Read timeout: None (no limit) to allow long generations
     if timeout is None:
-        request_timeout = (30, None)  # 30s connect, no read timeout
+        request_timeout = (30, None)
     elif isinstance(timeout, tuple):
         request_timeout = timeout
     else:
-        # If single int provided, use it for both (backward compatibility)
-        # But prefer no read timeout for long generations
         request_timeout = (30, timeout) if timeout > 60 else (timeout, timeout)
 
-    # ── Pre-flight: verify model is loaded ──────────────────────────
-    if not is_model_loaded(api_base, model):
+    preflight_loaded, preflight_detail = get_model_load_state(api_base, model)
+    if preflight_loaded is False:
+        if not allow_autoload:
+            raise RuntimeError(
+                f"Model {model!r} is not currently loaded in LM Studio /api/v1/models. "
+                "Load it once in LM Studio before running generations."
+            )
         logger.info(
-            "Model %s not yet visible in /v1/models — waiting up to 120 s",
+            "Model %s not currently loaded; autoload is enabled, so continuing.",
             model,
         )
-        if not _wait_for_model(api_base, model, max_wait=120.0):
+    elif preflight_loaded is None:
+        if not allow_autoload:
             raise RuntimeError(
-                f"Model {model!r} never appeared in LM Studio /v1/models. "
-                "Load it manually in LM Studio before running generations."
+                f"Could not verify whether model {model!r} is already loaded in LM Studio "
+                f"({preflight_detail}). Refusing to send a request because that may trigger "
+                "an unintended autoload."
             )
+        logger.warning(
+            "Could not verify whether model %s is loaded (%s). "
+            "Proceeding because LMSTUDIO_ALLOW_AUTOLOAD is enabled.",
+            model,
+            preflight_detail,
+        )
 
-    # ── Request with retry ──────────────────────────────────────────
     last_exc: Optional[Exception] = None
     for attempt in range(1, max_retries + 1):
         try:
             return _do_chat_request(
-                endpoint, payload, request_timeout, model, timeout,
-                api_key=api_key, extra_headers=extra_headers,
+                endpoint,
+                payload,
+                request_timeout,
+                model,
+                timeout,
+                api_key=api_key,
+                extra_headers=extra_headers,
             )
 
         except requests.exceptions.Timeout:
             timeout_str = f"{timeout}s" if timeout else "no timeout set"
             logger.error(
-                "LM Studio request timed out (%s) for model %s", timeout_str, model,
+                "LM Studio request timed out (%s) for model %s",
+                timeout_str,
+                model,
             )
             raise TimeoutError(f"Generation timed out ({timeout_str})")
 
-        except (requests.exceptions.HTTPError, requests.exceptions.RequestException) as exc:
+        except requests.exceptions.HTTPError as exc:
             last_exc = exc
             logger.warning(
                 "LM Studio error on attempt %d/%d for %s: %s",
-                attempt, max_retries, model, exc,
+                attempt,
+                max_retries,
+                model,
+                _format_http_error(exc),
             )
             if attempt >= max_retries:
                 break
 
-            # Check model is still loaded before retrying — avoids
-            # triggering a redundant model-load in LM Studio.
-            if not is_model_loaded(api_base, model):
+            model_loaded, load_detail = get_model_load_state(api_base, model)
+            if model_loaded is False:
+                if not allow_autoload:
+                    raise RuntimeError(
+                        f"Model {model!r} is no longer loaded after an LM Studio error. "
+                        "Aborting retries to avoid triggering an unintended reload."
+                    ) from exc
                 logger.info(
-                    "Model %s disappeared from /v1/models — waiting for it to reload",
+                    "Model %s disappeared from LM Studio; waiting for it to reappear",
                     model,
                 )
                 if not _wait_for_model(api_base, model, max_wait=120.0):
                     raise RuntimeError(
-                        f"Model {model!r} not available after error; "
-                        "check LM Studio."
+                        f"Model {model!r} not available after error; check LM Studio."
                     ) from exc
+            elif model_loaded is None:
+                if not allow_autoload:
+                    raise RuntimeError(
+                        f"Could not verify whether model {model!r} remained loaded after an LM "
+                        f"Studio error ({load_detail}). Aborting retries to avoid an unintended "
+                        "autoload."
+                    ) from exc
+                logger.warning(
+                    "Could not verify model load state after LM Studio error for %s (%s). "
+                    "Backing off because autoload is enabled.",
+                    model,
+                    load_detail,
+                )
+                time.sleep(2 * attempt)
             else:
-                # Model is loaded; brief back-off before retry.
+                time.sleep(2 * attempt)
+
+        except requests.exceptions.RequestException as exc:
+            last_exc = exc
+            logger.warning(
+                "LM Studio transport error on attempt %d/%d for %s: %s",
+                attempt,
+                max_retries,
+                model,
+                exc,
+            )
+            if attempt >= max_retries:
+                break
+
+            model_loaded, load_detail = get_model_load_state(api_base, model)
+            if model_loaded is False:
+                if not allow_autoload:
+                    raise RuntimeError(
+                        f"Model {model!r} is no longer loaded after a transport error. "
+                        "Aborting retries to avoid triggering an unintended reload."
+                    ) from exc
+                logger.info(
+                    "Model %s disappeared from LM Studio; waiting for it to reappear",
+                    model,
+                )
+                if not _wait_for_model(api_base, model, max_wait=120.0):
+                    raise RuntimeError(
+                        f"Model {model!r} not available after error; check LM Studio."
+                    ) from exc
+            elif model_loaded is None:
+                if not allow_autoload:
+                    raise RuntimeError(
+                        f"Could not verify whether model {model!r} remained loaded after a "
+                        f"transport error ({load_detail}). Aborting retries to avoid an "
+                        "unintended autoload."
+                    ) from exc
+                logger.warning(
+                    "Could not verify model load state after LM Studio transport error for %s (%s). "
+                    "Backing off because autoload is enabled.",
+                    model,
+                    load_detail,
+                )
+                time.sleep(2 * attempt)
+            else:
                 time.sleep(2 * attempt)
 
         except (KeyError, IndexError) as exc:
             logger.error(
-                "LM Studio response parsing error for model %s: %s", model, exc,
+                "LM Studio response parsing error for model %s: %s",
+                model,
+                exc,
             )
             raise ValueError(f"Unexpected response format from LM Studio: {exc}") from exc
 
-    # All retries exhausted — raise the last captured exception.
     raise last_exc  # type: ignore[misc]

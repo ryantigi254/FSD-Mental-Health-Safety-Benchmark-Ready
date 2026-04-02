@@ -16,7 +16,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--data-dir", type=str, default=None)
     parser.add_argument("--output-dir", type=str, default=None)
     parser.add_argument("--max-cases", type=int, default=None)
-    parser.add_argument("--max-tokens", type=int, default=16384)
+    parser.add_argument("--max-tokens", type=int, default=64000)
     parser.add_argument("--cache-out", type=str, default=None)
     parser.add_argument("--variant-tag", type=str, default=None)
     return parser.parse_args()
