@@ -42,7 +42,7 @@ python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --mode
 ## Direct Runner
 
 ```powershell
-python hf-local-scripts/run_study_a_bias_generate_only.py --study-name study_a_bias_invariance --model-id gpt_oss --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --max-cases 5 --max-tokens 32000 --workers 2
+python hf-local-scripts/run_study_a_bias_generate_only.py --study-name study_a_bias_invariance --model-id gpt_oss --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --max-cases 5 --max-tokens 64000 --workers 2
 ```
 
 ## Checks

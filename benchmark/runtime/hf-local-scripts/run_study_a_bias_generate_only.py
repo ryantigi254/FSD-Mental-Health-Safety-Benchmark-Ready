@@ -427,9 +427,9 @@ def _parse_args() -> argparse.Namespace:
 
         type=int,
 
-        default=24576,
+        default=64000,
 
-        help="Max new tokens per generation (default: 24576 for very long reasoning).",
+        help="Max new tokens per generation (default: 64000 to match LM Studio runs).",
 
     )
 
