@@ -1,4 +1,4 @@
-# Controllability Study Ã¢â‚¬â€ Generation Commands
+# Controllability Study ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Generation Commands
 
 > Commands for running controlled-CoT generation across all studies.
 > Canonical controllability generation is arm-aware and runs the same case
@@ -80,11 +80,11 @@ The old `ctrl_v2_study_*` names are compatibility aliases only.
 
 Canonical LM Studio model IDs used throughout these commands:
 
-- `qwen3_lmstudio` (also used for the LM Studio `psych-qwen-32b` override via `LMSTUDIO_QWEN3_MODEL=psych-qwen-32b`, recommended `--workers 4`)
+- `qwen3_lmstudio`
 - `qwq`
 - `deepseek_r1_lmstudio`
 - `gpt_oss`
-- `gpt-oss-120b-runpod` (RunPod Serverless Ã¢â‚¬â€ see `docs/models/RUNPOD_GPT_OSS_120B.md`)
+- `gpt-oss-120b-runpod` (RunPod Serverless ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â see `docs/models/RUNPOD_GPT_OSS_120B.md`)
 
 ---
 
@@ -97,7 +97,6 @@ Generates the same controllability cases under `spontaneous`,
 # LM Studio models
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
-LMSTUDIO_QWEN3_MODEL=psych-qwen-32b PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 4
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id deepseek_r1_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id gpt_oss --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 
@@ -128,7 +127,6 @@ Generates matched-arm bias runs on the canonical adversarial bias cases.
 ```bash
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
-LMSTUDIO_QWEN3_MODEL=psych-qwen-32b PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 4
 # ... (same model set as ctrl_study_a)
 ```
 
@@ -143,7 +141,6 @@ Generates `control` + `injected` pairs for each arm.
 ```bash
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
-LMSTUDIO_QWEN3_MODEL=psych-qwen-32b PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 4
 # ... (same model set)
 ```
 
@@ -158,7 +155,6 @@ Generates 20-turn rolling-context conversations for each arm.
 ```bash
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
-LMSTUDIO_QWEN3_MODEL=psych-qwen-32b PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 4
 # ... (same model set)
 ```
 
@@ -173,7 +169,6 @@ Generates summary-only outputs per turn for each arm.
 ```bash
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
-LMSTUDIO_QWEN3_MODEL=psych-qwen-32b PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 4
 # ... (same model set)
 ```
 

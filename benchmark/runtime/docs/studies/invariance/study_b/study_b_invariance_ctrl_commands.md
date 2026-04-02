@@ -9,7 +9,6 @@ Use `--output-dir results_ctrl_invariance` for all commands below.
 ```powershell
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
-$env:LMSTUDIO_QWEN3_MODEL='psych-qwen-32b'; python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwq --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 ```
@@ -42,7 +41,6 @@ ctrl variant-family child in one go.
 ```powershell
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance --workers 2
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance --workers 6
-$env:LMSTUDIO_QWEN3_MODEL='psych-qwen-32b'; python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwen3_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwq --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance --workers 6
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/variants/v2_1/study_b --output-dir results_ctrl_invariance --workers 4
 ```
