@@ -100,7 +100,18 @@ Ctrl invariance commands (using `data/invariance/ctrl/base/v2_1` and
 ## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
 
 LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
-See per-study invariance command files for specific commands.
+
+### Windows (PC)
+
+```powershell
+python scripts/dev/run_generation_auto.py --study study_a_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 8
+```
+
+See per-study invariance command files for macOS/direct-runner variants.
 
 ## MedGemma 27B Text (`google.medgemma-27b-text-it`)
 
