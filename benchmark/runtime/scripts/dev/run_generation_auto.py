@@ -17,6 +17,7 @@ from pathlib import Path
 BASE_MODEL_IDS = {
     "qwen3_lmstudio",
     "medgemma_lmstudio",
+    "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
     "qwq",
     "deepseek_r1_lmstudio",
     "gpt_oss",
@@ -69,6 +70,17 @@ LMSTUDIO_MODEL_PREFLIGHT = {
         "env_var": "LMSTUDIO_MEDGEMMA_MODEL",
         "default": "google/medgemma-27b-it",
         "aliases": ("google.medgemma-27b-text-it", "google/medgemma-27b-it"),
+    },
+    "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0": {
+        "env_var": "LMSTUDIO_QWEN35_DISTILLED_MODEL",
+        "default": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
+        "aliases": (
+            "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
+            "qwen3.5-distilled",
+            "qwen3.5-27b-distilled",
+            "qwen3_5_distilled_lmstudio",
+            "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
+        ),
     },
 }
 
@@ -271,6 +283,24 @@ def main() -> int:
             default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
             default_output_dir = "results_invariance"
             default_study_name = "study_a_bias"
+
+        # Bias runner only accepts --data-path (to biased_vignettes.json). Map a split
+        # root directory to the standard layout, and drop stray --data-dir when
+        # --data-path is already set.
+        has_data_path = any(t == "--data-path" for t in passthrough)
+        normalised: list[str] = []
+        i = 0
+        while i < len(passthrough):
+            if passthrough[i] == "--data-dir":
+                dir_val, i = _consume_flag_value(passthrough, i, "")
+                if not has_data_path:
+                    rel = Path(dir_val) / "adversarial_bias" / "biased_vignettes.json"
+                    normalised.extend(["--data-path", rel.as_posix()])
+                    has_data_path = True
+                continue
+            normalised.append(passthrough[i])
+            i += 1
+        passthrough = normalised
 
         out: list[str] = []
         i = 0

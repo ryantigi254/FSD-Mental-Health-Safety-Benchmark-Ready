@@ -189,6 +189,7 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 ### Windows (PC)
 ```powershell
 python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --workers 8
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance_reverse --workers 8
 ```
 
 ## MedGemma 27B Text (`google.medgemma-27b-text-it`)

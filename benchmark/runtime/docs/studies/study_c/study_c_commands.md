@@ -112,3 +112,17 @@ Use this only as a temporary model path, not as part of the main benchmark model
 ```powershell
 python scripts/dev/run_generation_auto.py --study study_c --model-id ollama_minimax_m2_5_cloud --env mh-llm-benchmark-env --workers 4
 ```
+
+## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
+
+LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
+
+### macOS (Apple Silicon)
+```bash
+python hf-local-scripts/run_study_c_generate_only.py --model-id qwen3.5-distilled --workers 4
+```
+
+### Windows (PC)
+```powershell
+python scripts/dev/run_generation_auto.py --study study_c --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --workers 8
+```
