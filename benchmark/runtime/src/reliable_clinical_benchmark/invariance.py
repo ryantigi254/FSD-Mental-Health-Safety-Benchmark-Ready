@@ -25,6 +25,7 @@ from reliable_clinical_benchmark.metrics.faithfulness import (
     calculate_step_f1,
     extract_reasoning_steps,
 )
+from reliable_clinical_benchmark.metrics.sycophancy import analyse_multiturn_pressure_case
 
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[2]
@@ -542,7 +543,7 @@ _STUDY_METRIC_NAMES: Dict[str, Tuple[str, ...]] = {
         "injected_agreement_rate",
         "turn_of_flip_proxy",
     ),
-    "study_b_multi_turn": ("turn_of_flip",),
+    "study_b_multi_turn": ("turn_of_flip", "stance_shift_slope", "sycophancy_auc", "soften_before_flip"),
     "study_c": ("entity_recall_t10", "knowledge_conflict_rate"),
     "study_a_bias": ("silent_bias_rate",),
 }
@@ -1197,8 +1198,7 @@ def _study_b_case_metrics(cache_path: Path, root: Path) -> Dict[str, Dict[str, f
 
 
 def _study_b_multi_turn_case_metrics(cache_path: Path, root: Path) -> Dict[str, Dict[str, float]]:
-    module = _load_study_b_metrics_script()
-    payload = _load_json(_study_file(root, "study_b_multi_turn_test.json"))
+    payload = _load_json(_study_file(root, "study_b_multi_turn_test.json", "study_b_multi_turn_controllability_test.json"))
     rows = payload if isinstance(payload, list) else payload.get("multi_turn_cases", [])
     cases_by_id = {str(row.get("id", "")): row for row in rows if row.get("id")}
 
@@ -1215,22 +1215,38 @@ def _study_b_multi_turn_case_metrics(cache_path: Path, root: Path) -> Dict[str, 
         if not turns or case_id not in by_case_turn:
             continue
 
-        gold_answer = str(case.get("gold_answer", "") or "")
-        condition_phrase = str((case.get("metadata") or {}).get("condition_phrase", "") or "").strip()
-        turn_of_flip = float(len(turns) + 1)
+        cached_turns: List[Dict[str, Any]] = []
         for turn_num, _turn in enumerate(turns, start=1):
             entry = by_case_turn[case_id].get(turn_num)
             if not entry:
                 break
-            response = str(entry.get("response_text", "") or entry.get("output_text", "") or "")
-            is_correct = module.is_correct_diagnosis(response, gold_answer)
-            if (not is_correct) and condition_phrase:
-                is_correct = module.is_correct_diagnosis(response, condition_phrase)
-            if not is_correct:
-                turn_of_flip = float(turn_num)
-                break
+            cached_turns.append(
+                {
+                    "turn_num": turn_num,
+                    "response_text": str(entry.get("response_text", "") or entry.get("output_text", "") or ""),
+                }
+            )
+        if not cached_turns:
+            continue
 
-        metrics_by_id[case_id] = {"turn_of_flip": turn_of_flip}
+        diagnostics = analyse_multiturn_pressure_case(
+            gold_answer=str(case.get("gold_answer", "") or ""),
+            incorrect_opinion=str(case.get("incorrect_opinion", "") or ""),
+            condition_phrase=str((case.get("metadata") or {}).get("condition_phrase", "") or "").strip(),
+            turns=cached_turns,
+        )
+        if diagnostics is None:
+            continue
+
+        metrics: Dict[str, float] = {"turn_of_flip": float(diagnostics["turn_of_flip"])}
+        if diagnostics.get("stance_shift_slope") is not None:
+            metrics["stance_shift_slope"] = float(diagnostics["stance_shift_slope"])
+        if diagnostics.get("sycophancy_auc") is not None:
+            metrics["sycophancy_auc"] = float(diagnostics["sycophancy_auc"])
+        if diagnostics.get("flipped"):
+            metrics["soften_before_flip"] = 1.0 if diagnostics.get("softened_before_flip") else 0.0
+
+        metrics_by_id[case_id] = metrics
     return metrics_by_id
 
 

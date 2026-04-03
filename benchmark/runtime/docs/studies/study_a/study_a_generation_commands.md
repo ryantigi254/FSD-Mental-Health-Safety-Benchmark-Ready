@@ -88,7 +88,7 @@ conda run -n mh-llm-benchmark-env env PYTHONPATH=src python scripts/studies/stud
 
 ## Workers
 `study_a` generation supports `--workers`. If not passed, default is auto:
-- `4` for LM Studio models (`qwen3_lmstudio`, `qwq`, `deepseek_r1_lmstudio`, `gpt_oss`)
+- `4` for LM Studio models (`qwen3_lmstudio`, `medgemma_lmstudio`, `qwq`, `deepseek_r1_lmstudio`, `gpt_oss`)
 - `1` for non-LM Studio/local HF models
 
 ## Useful Checks
@@ -102,4 +102,22 @@ Use this only as a temporary model path, not as part of the main benchmark model
 
 ```powershell
 python scripts/dev/run_generation_auto.py --study study_a --model-id ollama_minimax_m2_5_cloud --env mh-llm-benchmark-env --workers 4
+```
+
+## MedGemma 27B (LM Studio)
+
+Use `--workers 4` for full benchmark generations (best throughput in a 1–4 worker sweep on the local LM Studio setup; VRAM stayed ~22.5 GB).
+
+From `benchmark/runtime` (same pattern as the Qwen LM Studio commands above):
+
+```powershell
+python scripts/dev/run_generation_auto.py --study study_a --model-id medgemma_lmstudio --env mh-llm-benchmark-env --workers 4
+```
+
+Helper and smoke scripts:
+
+```powershell
+python lmstudio-scripts/chat_medgemma_27b.py "Give one calming grounding step."
+python hf-local-scripts/run_medgemma_lmstudio.py prompt "Reply briefly and safely." --mode cot
+python lmstudio-scripts/benchmark_medgemma_workers.py --min-workers 1 --max-workers 4 --requests-per-round 4
 ```

@@ -12,6 +12,7 @@ from pathlib import Path
 
 BASE_MODEL_IDS = {
     "qwen3_lmstudio",
+    "medgemma_lmstudio",
     "qwq",
     "deepseek_r1_lmstudio",
     "gpt_oss",

@@ -231,8 +231,50 @@ def study_notebook(*, title: str, filename: str, study_key: str, metric_hint: st
                 display(delta_df.sort_values(["model", "from_arm", "to_arm"]))
             """
         ),
-        markdown_cell(f"Primary metric hint: `{metric_hint}`."),
     ]
+    if study_key == "B_multi_turn":
+        cells.extend(
+            [
+                markdown_cell(
+                    """
+                    ## Diagnostic companions
+
+                    These scalar pressure-response diagnostics refine the multi-turn picture without
+                    replacing `no_flip_rate` as the governing controllability metric.
+                    """
+                ),
+                code_cell(
+                    """
+                    if not arm_df.empty:
+                        diagnostic_cols = [
+                            "model",
+                            "arm",
+                            "task_stance_shift_slope_mean",
+                            "task_sycophancy_auc_mean",
+                            "task_soften_before_flip_rate",
+                            "count_n_cases_scored",
+                            "count_n_cases_flipped",
+                        ]
+                        available_cols = [col for col in diagnostic_cols if col in arm_df.columns]
+                        display(arm_df[available_cols].sort_values(["model", "arm"]))
+
+                        for metric_col in [
+                            "task_stance_shift_slope_mean",
+                            "task_sycophancy_auc_mean",
+                            "task_soften_before_flip_rate",
+                        ]:
+                            if metric_col not in arm_df.columns:
+                                continue
+                            metric_df = arm_df.dropna(subset=[metric_col]).sort_values([metric_col], ascending=False)
+                            if metric_df.empty:
+                                continue
+                            print(metric_col)
+                            display(metric_df[["model", "arm", metric_col]])
+                    """
+                ),
+            ]
+        )
+    cells.append(markdown_cell(f"Primary metric hint: `{metric_hint}`."))
     write_notebook(NOTEBOOK_DIR / filename, cells)
 
 

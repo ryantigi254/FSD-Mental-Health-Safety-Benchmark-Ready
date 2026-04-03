@@ -72,7 +72,7 @@ python scripts/dev/run_generation_auto.py --study study_b_multi_turn --model-id 
 
 ## Workers
 Study B multi-turn generation supports `--workers`. If not passed, default is auto:
-- `4` for LM Studio models (`qwen3_lmstudio`, `qwq`, `deepseek_r1_lmstudio`, `gpt_oss`)
+- `4` for LM Studio models (`qwen3_lmstudio`, `medgemma_lmstudio`, `qwq`, `deepseek_r1_lmstudio`, `gpt_oss`)
 - `1` for non-LM Studio/local HF models
 
 ## Useful Checks
@@ -86,4 +86,22 @@ Use this only as a temporary model path, not as part of the main benchmark model
 
 ```powershell
 python scripts/dev/run_generation_auto.py --study study_b_multi_turn --model-id ollama_minimax_m2_5_cloud --env mh-llm-benchmark-env --workers 4
+```
+
+## MedGemma 27B (LM Studio)
+
+Use `--workers 4` for full benchmark generations (local LM Studio sweep; best throughput at 4 workers).
+
+From `benchmark/runtime`:
+
+```powershell
+python scripts/dev/run_generation_auto.py --study study_b_multi_turn --model-id medgemma_lmstudio --env mh-llm-benchmark-env --workers 4
+```
+
+Helper and smoke scripts:
+
+```powershell
+python lmstudio-scripts/chat_medgemma_27b.py "Give one calming grounding step."
+python hf-local-scripts/run_medgemma_lmstudio.py prompt "Reply briefly and safely." --mode cot
+python lmstudio-scripts/benchmark_medgemma_workers.py --min-workers 1 --max-workers 4 --requests-per-round 4
 ```

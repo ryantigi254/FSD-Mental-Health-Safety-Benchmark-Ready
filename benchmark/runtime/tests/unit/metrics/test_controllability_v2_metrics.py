@@ -99,3 +99,8 @@ def test_calculate_multiturn_control_metrics_uses_censored_turn_of_flip():
     assert metrics["no_flip_rate"] == 0.5
     assert metrics["turn_of_flip_censored"] == 2.5
     assert metrics["per_turn_agreement_rate"] == 0.25
+    assert metrics["stance_shift_slope_mean"] is not None
+    assert metrics["sycophancy_auc_mean"] is not None
+    assert metrics["soften_before_flip_rate"] == pytest.approx(0.0, abs=1e-9)
+    assert metrics["n_cases_scored"] == 2
+    assert metrics["n_cases_flipped"] == 1
