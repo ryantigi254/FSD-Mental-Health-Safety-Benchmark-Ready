@@ -159,6 +159,7 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "qwen3_5_distilled_lmstudio": "qwen3.5-distilled",
         "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0": "qwen3.5-distilled",
         "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2": "qwen3.5-distilled",
+        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0": "qwen3.5-distilled",
     }
     return canonical_names.get(model_id_lower, model_id)
 
@@ -797,6 +798,7 @@ def main() -> int:
         "qwen3.5-distilled",
         "qwen3.5-27b-distilled",
         "qwen3_5_distilled_lmstudio",
+        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
     }
     vllm_model_ids = {
         "psyllm_gml_vllm",
