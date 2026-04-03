@@ -70,11 +70,11 @@ PYTHONPATH=src python scripts/evaluation/run_invariance_comparison.py \
 
 Per-study notes:
 
-- `docs/studies/invariance/study_a/study_a_ctrl_invariance_commands.md`
-- `docs/studies/invariance/study_a/study_a_bias_ctrl_invariance_commands.md`
-- `docs/studies/invariance/study_b/study_b_ctrl_invariance_commands.md`
-- `docs/studies/invariance/study_b/study_b_multi_turn_ctrl_invariance_commands.md`
-- `docs/studies/invariance/study_c/study_c_ctrl_invariance_commands.md`
+- `docs/studies/invariance/study_a/study_a_invariance_ctrl_commands.md`
+- `docs/studies/invariance/study_a/study_a_bias_invariance_ctrl_commands.md`
+- `docs/studies/invariance/study_b/study_b_invariance_ctrl_commands.md`
+- `docs/studies/invariance/study_b/study_b_multi_turn_invariance_ctrl_commands.md`
+- `docs/studies/invariance/study_c/study_c_invariance_ctrl_commands.md`
 
 ## Forward Evaluation (Invariance → Controllability)
 
@@ -104,7 +104,18 @@ Full commands: [`invariance_reverse_commands.md`](invariance_reverse_commands.md
 ## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
 
 LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
-See per-study invariance command files for specific commands.
+
+### Windows (PC)
+
+```powershell
+python scripts/dev/run_generation_auto.py --study study_a_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+```
+
+See per-study invariance command files for macOS/direct-runner variants.
 
 ## MedGemma 27B Text (`google.medgemma-27b-text-it`)
 

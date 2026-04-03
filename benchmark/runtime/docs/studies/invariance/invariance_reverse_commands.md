@@ -210,7 +210,18 @@ Each output JSON contains per-variant controllability deltas. Key questions:
 ## Qwen 3.5 27B Distilled (mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2)
 
 LM Studio model via Apple Silicon MLX. Recommended max 4 workers on 48 GB.
-See per-study reverse invariance command files for specific commands.
+
+### Windows (PC)
+
+```powershell
+python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 8
+```
+
+See per-study reverse invariance command files for the paired forward/reverse study commands.
 
 ## MedGemma 27B Text (`google.medgemma-27b-text-it`)
 
