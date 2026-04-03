@@ -69,6 +69,10 @@ scripts/*.sh
 
 # Local Codex run history
 codex_logs/
+state/
+WARNING/
+pairwise-secondary-eval-plan.md
+.gitignore.bak
 
 # Local PGFPlots test drafts
 benchmark/runtime/tests/unit/test_generate_pgfplots.py
