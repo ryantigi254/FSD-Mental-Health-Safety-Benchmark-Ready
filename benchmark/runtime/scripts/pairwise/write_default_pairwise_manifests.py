@@ -6,10 +6,16 @@ Write the canonical pairwise judge manifest and default run configs.
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 
 RUNTIME_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(RUNTIME_ROOT / "src"))
+
+from reliable_clinical_benchmark.pairwise.manifest_builder import build_case_manifest  # noqa: E402
+
+
 PAIRWISE_ROOT = RUNTIME_ROOT / "metric-results" / "pairwise" / "manifests"
 CONFIG_ROOT = PAIRWISE_ROOT / "configs"
 
@@ -71,6 +77,28 @@ def main() -> int:
     judge_manifest_path = PAIRWISE_ROOT / "judge_panel.v1.json"
     judge_manifest_path.write_text(json.dumps(JUDGE_MANIFEST, indent=2), encoding="utf-8")
 
+    built_manifests = []
+    skipped_manifests = []
+    for slice_id, _layer, _rubric_family in RUN_SPECS:
+        manifest_path = PAIRWISE_ROOT / f"{slice_id}_case_manifest.json"
+        should_build = True
+        if manifest_path.exists():
+            try:
+                existing_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+                if existing_manifest.get("status") == "ready":
+                    should_build = False
+            except json.JSONDecodeError:
+                should_build = True
+        if should_build:
+            build_case_manifest(
+                slice_id=slice_id,
+                runtime_root=RUNTIME_ROOT,
+                output_path=manifest_path,
+            )
+            built_manifests.append(str(manifest_path))
+        else:
+            skipped_manifests.append(str(manifest_path))
+
     for slice_id, layer, rubric_family in RUN_SPECS:
         payload = {
             "run_id": f"pairwise_{slice_id}_v1",
@@ -88,7 +116,17 @@ def main() -> int:
         target = CONFIG_ROOT / f"{slice_id}.run_config.json"
         target.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
-    print(json.dumps({"judge_manifest": str(judge_manifest_path), "configs_written": len(RUN_SPECS)}, indent=2))
+    print(
+        json.dumps(
+            {
+                "judge_manifest": str(judge_manifest_path),
+                "case_manifests_written": len(built_manifests),
+                "case_manifests_skipped": len(skipped_manifests),
+                "configs_written": len(RUN_SPECS),
+            },
+            indent=2,
+        )
+    )
     return 0
 
 
