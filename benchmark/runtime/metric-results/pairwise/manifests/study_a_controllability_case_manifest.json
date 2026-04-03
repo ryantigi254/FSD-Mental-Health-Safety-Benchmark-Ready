@@ -1,0 +1,13 @@
+{
+  "manifest_version": "pairwise.cases.v1",
+  "slice_id": "study_a_controllability",
+  "layer": "controllability",
+  "status": "missing_inputs",
+  "built_at": "2026-04-03T03:50:30.775735+00:00",
+  "systems": [],
+  "cases": [],
+  "boundary_notes": [
+    "Awaiting controllability caches in this branch."
+  ],
+  "source_paths": []
+}

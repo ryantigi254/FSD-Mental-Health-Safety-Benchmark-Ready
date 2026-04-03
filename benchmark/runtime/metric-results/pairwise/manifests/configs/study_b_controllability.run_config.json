@@ -1,0 +1,16 @@
+{
+  "run_id": "pairwise_study_b_controllability_v1",
+  "layer": "controllability",
+  "slice_id": "study_b_controllability",
+  "case_manifest_path": "../study_b_controllability_case_manifest.json",
+  "judge_manifest_path": "../judge_panel.v1.json",
+  "rubric_family": "controllability",
+  "allow_ties": true,
+  "orders": [
+    "AB",
+    "BA"
+  ],
+  "max_retries_per_invalid_parse": 3,
+  "output_root": "../../",
+  "pooled_requires_all_judges": true
+}

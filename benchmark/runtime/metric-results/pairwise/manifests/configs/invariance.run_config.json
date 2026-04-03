@@ -1,0 +1,16 @@
+{
+  "run_id": "pairwise_invariance_v1",
+  "layer": "invariance",
+  "slice_id": "invariance",
+  "case_manifest_path": "../invariance_case_manifest.json",
+  "judge_manifest_path": "../judge_panel.v1.json",
+  "rubric_family": "invariance",
+  "allow_ties": true,
+  "orders": [
+    "AB",
+    "BA"
+  ],
+  "max_retries_per_invalid_parse": 3,
+  "output_root": "../../",
+  "pooled_requires_all_judges": true
+}

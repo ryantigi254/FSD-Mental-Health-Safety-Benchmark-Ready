@@ -1,0 +1,13 @@
+{
+  "manifest_version": "pairwise.cases.v1",
+  "slice_id": "control_under_invariance",
+  "layer": "invariance",
+  "status": "missing_inputs",
+  "built_at": "2026-04-03T03:50:31.280884+00:00",
+  "systems": [],
+  "cases": [],
+  "boundary_notes": [
+    "Awaiting control-under-invariance caches in this branch."
+  ],
+  "source_paths": []
+}
