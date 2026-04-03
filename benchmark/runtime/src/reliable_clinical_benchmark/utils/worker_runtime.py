@@ -67,6 +67,29 @@ def resolve_worker_count(
         )
         return 1
 
+    if is_lmstudio_runner(runner):
+        try:
+            from reliable_clinical_benchmark.models.lmstudio_client import (
+                get_loaded_model_runtime_limits,
+            )
+
+            runtime_limits = get_loaded_model_runtime_limits(
+                getattr(runner, "api_base"),
+                getattr(runner, "model_name"),
+                timeout=5,
+            )
+            loaded_parallel = runtime_limits.get("parallel")
+            if isinstance(loaded_parallel, int) and loaded_parallel > 0 and worker_count > loaded_parallel:
+                target_log.info(
+                    "Capping LM Studio workers from %d to loaded parallel=%d for %s.",
+                    worker_count,
+                    loaded_parallel,
+                    getattr(runner, "model_name", "<unknown>"),
+                )
+                worker_count = loaded_parallel
+        except Exception as error:
+            target_log.debug("Could not inspect LM Studio loaded parallel setting: %s", error)
+
     return max(1, worker_count)
 
 

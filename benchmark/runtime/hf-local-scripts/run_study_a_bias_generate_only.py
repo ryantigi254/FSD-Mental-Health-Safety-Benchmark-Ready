@@ -260,6 +260,7 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "piaget_vllm": "piaget-8b-local",
         "psyche_r1_vllm": "psyche-r1-local",
         "psych_qwen_vllm": "psych-qwen-32b-local",
+        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0": "qwen3.5-27b-distilled-q8_0",
     }
     return canonical_names.get(model_id_lower, model_id)
 

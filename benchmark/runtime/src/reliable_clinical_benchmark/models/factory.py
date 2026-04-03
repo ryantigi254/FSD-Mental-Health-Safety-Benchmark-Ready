@@ -1,37 +1,20 @@
 """Factory for creating model runners."""
 
+from __future__ import annotations
+
 import logging
 from pathlib import Path
 from typing import Optional
 
-from .base import ModelRunner, GenerationConfig
-from .psyllm import PsyLLMRunner
-from .psyllm_local import PsyLLMLocalRunner
-from .psyllm_gml_local import PsyLLMGMLLocalRunner
-from .deepseek_r1 import DeepSeekR1Runner
-from .lmstudio_deepseek_r1 import DeepSeekR1LMStudioRunner
-from .qwen3 import Qwen3Runner
-from .gpt_oss import GPTOSSRunner
-from .piaget import Piaget8BRunner
-from .piaget_local import Piaget8BLocalRunner
-from .psyche_r1 import PsycheR1Runner
-from .psyche_r1_local import PsycheR1LocalRunner
-from .psych_qwen import PsychQwen32BRunner
-from .psych_qwen_local import PsychQwen32BLocalRunner
-from .lmstudio_qwq import QwQLMStudioRunner
-from .lmstudio_gpt_oss import GPTOSSLMStudioRunner
-from .lmstudio_qwen3 import Qwen3LMStudioRunner
-from .lmstudio_medgemma import MedGemmaLMStudioRunner
-try:
-    from .ollama_cloud import OllamaCloudRunner
-except ImportError:  # pragma: no cover - optional dependency in this checkout
-    OllamaCloudRunner = None
-from .vllm_runner import VLLMRunner
+from .base import GenerationConfig, ModelRunner
 
 logger = logging.getLogger(__name__)
 
-# External models root: weights live here (downloaded via Uni-setup), not in runtime/models/.
-EXTERNAL_MODELS_ROOT = Path(r"E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setup\models")
+# External models root: weights live here (downloaded via Uni-setup), not in
+# runtime/models/.
+EXTERNAL_MODELS_ROOT = Path(
+    r"E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setup\models"
+)
 
 
 def _resolve_local_model_path(model_name: str) -> str:
@@ -52,20 +35,27 @@ def get_model_runner(
     Args:
         model_id: Model identifier ('psyllm', 'qwq', 'deepseek_r1', 'gpt_oss', 'qwen3')
         config: Optional generation configuration
-
-    Returns:
-        ModelRunner instance
-
-    Raises:
-        ValueError: If model_id is not recognised
     """
     model_id_lower = model_id.lower()
 
     if model_id_lower == "psyllm":
+        from .psyllm import PsyLLMRunner
+
         return PsyLLMRunner(config=config)
-    elif model_id_lower in ("psyllm_local", "psyllm-8b-local", "psyllm-local-hf"):
+
+    if model_id_lower in ("psyllm_local", "psyllm-8b-local", "psyllm-local-hf"):
+        from .psyllm_local import PsyLLMLocalRunner
+
         return PsyLLMLocalRunner(config=config)
-    elif model_id_lower in ("psyllm_gml_local", "psyllm-gml-local", "psyllm-gmlhuhe-local", "gmlhuhe_psyllm_local"):
+
+    if model_id_lower in (
+        "psyllm_gml_local",
+        "psyllm-gml-local",
+        "psyllm-gmlhuhe-local",
+        "gmlhuhe_psyllm_local",
+    ):
+        from .psyllm_gml_local import PsyLLMGMLLocalRunner
+
         return PsyLLMGMLLocalRunner(model_name=_resolve_local_model_path("PsyLLM"), config=config)
 
     if model_id_lower in ("qwq", "qwq-32b", "qwq_lmstudio", "qwq-lmstudio", "qwq-32b-lmstudio"):
@@ -118,7 +108,8 @@ def get_model_runner(
         from .lmstudio_qwen3 import Qwen3LMStudioRunner
 
         return Qwen3LMStudioRunner(config=config)
-    elif model_id_lower in (
+
+    if model_id_lower in (
         "medgemma_lmstudio",
         "medgemma-lmstudio",
         "medgemma_27b_lmstudio",
@@ -126,8 +117,36 @@ def get_model_runner(
         "google/medgemma-27b-it",
         "google.medgemma-27b-text-it",
     ):
+        from .lmstudio_medgemma import MedGemmaLMStudioRunner
+
         return MedGemmaLMStudioRunner(config=config)
-    elif model_id_lower in ("piaget", "piaget-8b"):
+
+    if model_id_lower in (
+        "psych_qwen_32b-mlx",
+        "psych-qwen-32b-mlx",
+    ):
+        from .lmstudio_psych_qwen import PsychQwen32bLMStudioRunner
+
+        return PsychQwen32bLMStudioRunner(config=config)
+
+    if model_id_lower in (
+        "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
+        "qwen3.5-distilled",
+        "qwen3.5-27b-distilled",
+        "qwen3_5_distilled_lmstudio",
+        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
+    ):
+        from .lmstudio_qwen3_5_distilled import Qwen35DistilledLMStudioRunner
+
+        if model_id_lower == "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0":
+            return Qwen35DistilledLMStudioRunner(
+                model_name="qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
+                config=config,
+            )
+        return Qwen35DistilledLMStudioRunner(config=config)
+
+    if model_id_lower in ("piaget", "piaget-8b"):
+        from .piaget import Piaget8BRunner
         return Piaget8BRunner(config=config)
 
     if model_id_lower in ("piaget_local", "piaget-8b-local", "piaget8b-local"):
@@ -164,8 +183,10 @@ def get_model_runner(
         "minimax-m2.5-cloud",
         "minimax-m2.5:cloud",
     ):
-        if OllamaCloudRunner is None:
-            raise ValueError("OllamaCloudRunner is unavailable in this checkout.")
+        try:
+            from .ollama_cloud import OllamaCloudRunner
+        except ImportError as exc:  # pragma: no cover - optional dependency in this checkout
+            raise ValueError("OllamaCloudRunner is unavailable in this checkout.") from exc
         return OllamaCloudRunner(model_name="minimax-m2.5:cloud", config=config)
 
     if model_id_lower in ("psyllm_gml_vllm", "psyllm-gml-vllm", "psyllm-vllm"):
@@ -187,9 +208,10 @@ def get_model_runner(
         from .vllm_runner import VLLMRunner
 
         return VLLMRunner(model_name="Compumacy/Psych_Qwen_32B", port=8104, config=config)
-    else:
-        raise ValueError(
-            f"Unknown model ID: {model_id}. "
-            f"Supported models: psyllm, qwq, deepseek_r1, gpt_oss, qwen3, "
-            f"medgemma_lmstudio, ollama_minimax_m2_5_cloud, piaget, psyche_r1, psych_qwen"
-        )
+
+    raise ValueError(
+        f"Unknown model ID: {model_id}. "
+        "Supported models: psyllm, qwq, deepseek_r1, gpt_oss, qwen3, "
+        "medgemma_lmstudio, ollama_minimax_m2_5_cloud, piaget, psyche_r1, psych_qwen, "
+        "psych_qwen_32b-mlx, qwen3.5-distilled"
+    )
