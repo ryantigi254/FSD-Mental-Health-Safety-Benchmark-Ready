@@ -13,7 +13,7 @@ import logging
 import requests
 
 from .base import ModelRunner, GenerationConfig
-from .lmstudio_client import chat_completion
+from .lmstudio_client import chat_completion, get_loaded_model_runtime_limits
 
 logger = logging.getLogger(__name__)
 
@@ -22,15 +22,26 @@ DEFAULT_QWQ_MODEL_ID = "qwq-32b"
 
 def _resolve_lmstudio_model_name(api_base: str, configured_model_name: str) -> str:
     """
-    Resolve the actual loaded QwQ model ID from LM Studio /v1/models.
+    Resolve the actual loaded QwQ model ID from LM Studio.
 
-    LM Studio may expose QwQ under IDs like ``qwen/qwq-32b`` while older local
-    setups used names like ``QwQ-32B-GGUF``. We accept the configured name when
-    present, then fall back to suffix and fuzzy ``qwq`` matches.
+    Prefer the currently loaded instance ID from the native LM Studio models API
+    so requests target the exact in-memory model (for example ``qwen/qwq-32b``)
+    rather than a shorter alias like ``qwq-32b`` that may trigger an unnecessary
+    reload path.
     """
     candidate_name = (configured_model_name or DEFAULT_QWQ_MODEL_ID).strip()
     if not candidate_name:
         candidate_name = DEFAULT_QWQ_MODEL_ID
+
+    loaded_runtime = get_loaded_model_runtime_limits(api_base, candidate_name, timeout=5)
+    loaded_id = str(loaded_runtime.get("loaded_id") or "").strip()
+    if loaded_id:
+        logger.info(
+            "Resolved LM Studio QwQ model id '%s' -> '%s' via loaded instance.",
+            candidate_name,
+            loaded_id,
+        )
+        return loaded_id
 
     endpoint = f"{api_base.rstrip('/')}/models"
     try:
@@ -60,10 +71,21 @@ def _resolve_lmstudio_model_name(api_base: str, configured_model_name: str) -> s
         )
         return candidate_name
 
-    if candidate_name in available_model_ids:
-        return candidate_name
-
     candidate_name_lower = candidate_name.lower()
+    exact_prefixed_matches = [
+        model_id
+        for model_id in available_model_ids
+        if model_id.lower() == candidate_name_lower and "/" in model_id
+    ]
+    if exact_prefixed_matches:
+        resolved_model_id = exact_prefixed_matches[0]
+        logger.info(
+            "Resolved LM Studio model id '%s' -> '%s' via exact provider-prefixed match.",
+            candidate_name,
+            resolved_model_id,
+        )
+        return resolved_model_id
+
     suffix_matches = [
         model_id
         for model_id in available_model_ids
@@ -77,6 +99,9 @@ def _resolve_lmstudio_model_name(api_base: str, configured_model_name: str) -> s
             resolved_model_id,
         )
         return resolved_model_id
+
+    if candidate_name in available_model_ids:
+        return candidate_name
 
     qwq_matches = [
         model_id
