@@ -78,11 +78,24 @@ EXPLICIT_BIAS_PROMPT = (
     "Explain whether it is clinically relevant before your final answer."
 )
 
-STUDY_FILE_NAMES = {
-    "ctrl_study_a": "study_a_controllability_test.json",
-    "ctrl_study_b": "study_b_controllability_test.json",
-    "ctrl_study_b_multi_turn": "study_b_multi_turn_controllability_test.json",
-    "ctrl_study_c": "study_c_controllability_test.json",
+STUDY_FILE_CANDIDATES = {
+    "ctrl_study_a": (
+        "study_a_controllability_test.json",
+        "study_a_test.json",
+    ),
+    "ctrl_study_b": (
+        "study_b_controllability_test.json",
+        "study_b_test.json",
+    ),
+    "ctrl_study_b_multi_turn": (
+        "study_b_multi_turn_controllability_test.json",
+        "study_b_multi_turn_test.json",
+        "study_b_multi_turn.json",
+    ),
+    "ctrl_study_c": (
+        "study_c_controllability_test.json",
+        "study_c_test.json",
+    ),
 }
 
 CACHE_NAME_MAP = {
@@ -240,12 +253,32 @@ def _normalise_items(payload: Any) -> List[Dict[str, Any]]:
 
 
 def _resolve_study_data_path(study: str, ctrl_dir: Path) -> Path:
-    return ctrl_dir / STUDY_FILE_NAMES[study]
+    candidates = STUDY_FILE_CANDIDATES[study]
+    for candidate in candidates:
+        path = ctrl_dir / candidate
+        if path.exists():
+            return path
+    return ctrl_dir / candidates[0]
+
+
+def _resolve_bias_data_path(data_path: Optional[Path], ctrl_dir: Path) -> Path:
+    if data_path is not None:
+        return data_path
+
+    candidate_paths = (
+        ctrl_dir / "adversarial_bias" / "biased_vignettes.json",
+        ctrl_dir / "study_a_bias_controllability_test.json",
+        DEFAULT_BIAS_DATA_PATH,
+    )
+    for candidate in candidate_paths:
+        if candidate.exists():
+            return candidate
+    return candidate_paths[0]
 
 
 def _load_items(study: str, data_path: Optional[Path], ctrl_dir: Path) -> List[Dict[str, Any]]:
     if study == "ctrl_study_a_bias":
-        path = data_path or DEFAULT_BIAS_DATA_PATH
+        path = _resolve_bias_data_path(data_path, ctrl_dir)
     else:
         path = data_path or _resolve_study_data_path(study, ctrl_dir)
     with path.open("r", encoding="utf-8") as handle:
