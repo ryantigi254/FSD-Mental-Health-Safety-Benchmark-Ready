@@ -13,11 +13,26 @@ focuses on local PsyLLM inference.
 """
 
 import json
+import os
 import requests
 from typing import Dict, Any, List, Tuple, Union, Optional
 import logging
 
 logger = logging.getLogger(__name__)
+
+
+def _default_lmstudio_read_timeout() -> Optional[int]:
+    """Return the default LM Studio read timeout in seconds."""
+    raw_value = os.environ.get("LMSTUDIO_READ_TIMEOUT_SECONDS", "600").strip()
+    try:
+        seconds = int(raw_value)
+    except ValueError:
+        logger.warning(
+            "Invalid LMSTUDIO_READ_TIMEOUT_SECONDS=%r; falling back to 600 seconds.",
+            raw_value,
+        )
+        seconds = 600
+    return None if seconds <= 0 else seconds
 
 
 def _flatten_content(content: Any) -> str:
@@ -87,7 +102,7 @@ def chat_completion(
     model: str,
     messages: List[Dict[str, str]],
     temperature: float,
-    max_tokens: int,
+    max_tokens: Optional[int],
     top_p: float,
     timeout: Optional[Union[int, Tuple[int, Optional[int]]]] = None,
 ) -> str:
@@ -104,7 +119,7 @@ def chat_completion(
         model: Model name/identifier as recognised by LM Studio
         messages: List of message dicts with "role" and "content" keys
         temperature: Sampling temperature (0.0-2.0)
-        max_tokens: Maximum tokens to generate
+        max_tokens: Maximum tokens to generate. If None, rely on LM Studio's server-side default.
         top_p: Nucleus sampling parameter
         timeout: Request timeout in seconds. If None, no timeout (default: None).
                  Can be a tuple (connect_timeout, read_timeout) for fine-grained control.
@@ -134,16 +149,17 @@ def chat_completion(
         "model": model,
         "messages": messages,
         "temperature": temperature,
-        "max_tokens": max_tokens,
         "top_p": top_p,
         "tool_choice": "none",
     }
+    if max_tokens is not None:
+        payload["max_tokens"] = max_tokens
 
     # Use tuple timeout: (connect_timeout, read_timeout)
     # Connect timeout: 30s to fail fast if server is down
-    # Read timeout: None (no limit) to allow long generations
+    # Read timeout: bounded by default so stalled LM Studio requests don't hang forever
     if timeout is None:
-        request_timeout = (30, None)  # 30s connect, no read timeout
+        request_timeout = (30, _default_lmstudio_read_timeout())
     elif isinstance(timeout, tuple):
         request_timeout = timeout
     else:

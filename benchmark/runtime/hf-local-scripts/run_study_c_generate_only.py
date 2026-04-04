@@ -1,10 +1,15 @@
 import argparse
+import logging
 import os
 import sys
 from pathlib import Path
 
 # Set PyTorch CUDA allocator config to reduce memory fragmentation.
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+logging.basicConfig(
+    level=os.environ.get("BENCHMARK_LOG_LEVEL", "INFO").upper(),
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
 
 
 def _ensure_src_on_path(runtime_root: Path) -> None:
@@ -37,9 +42,10 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument(
         "--max-tokens",
         type=int,
-        default=16384,
+        default=None,
         help=(
-            "Max new tokens per generation (default: 16384 for long turns without truncation). "
+            "Max new tokens per generation. "
+            "Defaults to LM Studio server settings for gpt_oss/qwen3_lmstudio, otherwise 16384. "
             "GPU cache is cleared after each generation to prevent memory buildup. Can be reduced if memory is tight."
         ),
     )
@@ -65,6 +71,14 @@ def _parse_args() -> argparse.Namespace:
         help="Heartbeat interval for progress logging while waiting for workers.",
     )
     return p.parse_args()
+
+
+def _resolve_max_tokens(model_id: str, explicit_max_tokens: int | None, fallback: int) -> int | None:
+    if explicit_max_tokens is not None:
+        return explicit_max_tokens
+    if model_id.lower() in {"gpt_oss", "gpt_oss_lmstudio", "gpt-oss-lmstudio", "gpt-oss-20b", "qwen3_lmstudio", "qwen3-lmstudio", "qwen3-8b-lmstudio"}:
+        return 4096
+    return fallback
 
 
 def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
@@ -127,7 +141,7 @@ def main() -> None:
     if not ok:
         raise SystemExit("Study C split validation failed:\n- " + "\n- ".join(errors[:30]))
 
-    config = GenerationConfig(max_tokens=args.max_tokens)
+    config = GenerationConfig(max_tokens=_resolve_max_tokens(args.model_id, args.max_tokens, 16384))
     runner = get_model_runner(args.model_id, config)
 
     normalized_model_id = _normalize_model_id_for_path(args.model_id, output_dir)
