@@ -49,14 +49,12 @@ from ..utils.worker_runtime import (
 
 
 SENT_SPLIT = re.compile(r"(?<=[.!?])\s+")
-
 # Strip reasoning / think blocks from rolling conversation history so they
 # don't inflate context size on subsequent turns.
 THINK_BLOCK_RE = re.compile(
     r"<(?:think|redacted_reasoning)>.*?</(?:think|redacted_reasoning)>",
-    re.DOTALL,
+    re.IGNORECASE | re.DOTALL,
 )
-
 # Maximum character length for an assistant response kept in rolling context.
 # Raw saved outputs are never truncated.
 MAX_CONTEXT_RESPONSE_CHARS = 2000
@@ -187,6 +185,36 @@ def _clean_for_context(text: str, min_repeat_length: int = 10, min_repeats: int 
     except Exception as exc:
         logger.warning(f"Context cleaning failed, using raw response: {exc}")
         return text
+
+
+def _prepare_response_for_context(
+    text: str,
+    *,
+    context_cleaner: str = "scan",
+    min_repeat_length: int = 10,
+    min_repeats: int = 2,
+) -> str:
+    """Prepare assistant text for rolling Study C history without mutating saved outputs."""
+    prepared = THINK_BLOCK_RE.sub("", text or "").strip()
+    if not prepared:
+        return ""
+
+    if len(prepared) > MAX_CONTEXT_RESPONSE_CHARS:
+        prepared = prepared[:MAX_CONTEXT_RESPONSE_CHARS].rstrip() + "\n...[truncated for context]"
+
+    if context_cleaner == "none":
+        return prepared
+    if context_cleaner == "scan":
+        return _scan_mode_clean(
+            prepared,
+            min_repeat_length=min_repeat_length,
+            min_repeats=min_repeats,
+        )
+    return _clean_for_context(
+        prepared,
+        min_repeat_length=min_repeat_length,
+        min_repeats=min_repeats,
+    )
 
 
 def _should_clean_context(turn_num: int, start_turn: int = 4) -> bool:
@@ -677,6 +705,7 @@ def run_study_c(
         use_nli: Whether to compute knowledge conflict (requires NLI model)
         generate_only: If True, write generations JSONL only (no metrics).
         cache_out: Path to write cached generations JSONL when using generate_only.
+        context_cleaner: Rolling-history cleaner mode for Study C dialogue reuse.
         workers: Parallel worker count for generation-only execution.
         progress_interval_seconds: Heartbeat interval for worker progress logs.
 
@@ -768,6 +797,7 @@ def run_study_c(
                 if existing.get(case.id, {}).get(turn.turn, {}).get("summary"):
                     logger.debug("Skipping case %s turn %d variant summary (already cached)", case.id, turn.turn)
                 else:
+                    logger.info("Study C summary start case=%s turn=%d", case.id, turn.turn)
                     status = "ok"
                     summary_text = ""
                     error_message = ""
@@ -821,6 +851,7 @@ def run_study_c(
                         }
                     )
                     _persist_generated_entry(generated_entries[-1])
+                    logger.info("Study C summary saved case=%s turn=%d", case.id, turn.turn)
 
                 conversation_history.append({"role": "user", "content": turn.message})
                 if existing.get(case.id, {}).get(turn.turn, {}).get("dialogue"):
@@ -831,6 +862,7 @@ def run_study_c(
                         cleaned_response = _prepare_response_for_context(cached_response_text)
                         conversation_history.append({"role": "assistant", "content": cleaned_response})
                 else:
+                    logger.info("Study C dialogue start case=%s turn=%d", case.id, turn.turn)
                     status = "ok"
                     response_text = ""
                     error_message = ""
@@ -849,8 +881,11 @@ def run_study_c(
 
                             if attempt > 0 and model.config.max_tokens is not None:
                                 current_max = model.config.max_tokens
-                                reduced_tokens = max(256, current_max // (2 ** attempt))
-                                if reduced_tokens < current_max:
+                                if isinstance(current_max, int):
+                                    reduced_tokens = max(256, current_max // (2 ** attempt))
+                                else:
+                                    reduced_tokens = None
+                                if isinstance(current_max, int) and reduced_tokens is not None and reduced_tokens < current_max:
                                     logger.info(
                                         "Reducing max_tokens from %d to %d for retry attempt %d/%d",
                                         current_max,
@@ -864,10 +899,11 @@ def run_study_c(
                             cleaned_response = _prepare_response_for_context(response_text)
                             if cleaned_response != response_text:
                                 logger.info(
-                                    "Compacted %d chars → %d chars for turn %d rolling context",
+                                    "Prepared Study C context for case=%s turn=%d (raw_chars=%d, context_chars=%d)",
+                                    case.id,
+                                    turn.turn,
                                     len(response_text),
                                     len(cleaned_response),
-                                    turn.turn,
                                 )
 
                             conversation_history.append({"role": "assistant", "content": cleaned_response})
@@ -934,6 +970,7 @@ def run_study_c(
                         }
                     )
                     _persist_generated_entry(generated_entries[-1])
+                    logger.info("Study C dialogue saved case=%s turn=%d", case.id, turn.turn)
             return generated_entries
 
         for _ in iter_threaded_results(
