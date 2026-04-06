@@ -50,6 +50,38 @@ from ..utils.worker_runtime import (
 
 SENT_SPLIT = re.compile(r"(?<=[.!?])\s+")
 
+# Strip reasoning / think blocks from rolling conversation history so they
+# don't inflate context size on subsequent turns.
+THINK_BLOCK_RE = re.compile(
+    r"<(?:think|redacted_reasoning)>.*?</(?:think|redacted_reasoning)>",
+    re.DOTALL,
+)
+
+# Maximum character length for an assistant response kept in rolling context.
+# Raw saved outputs are never truncated.
+MAX_CONTEXT_RESPONSE_CHARS = 2000
+
+
+def _prepare_response_for_context(text: str) -> str:
+    """Compact an assistant response before inserting it into rolling history.
+
+    1. Strip ``<think>`` / ``<redacted_reasoning>`` blocks.
+    2. Truncate to *MAX_CONTEXT_RESPONSE_CHARS* characters.
+    3. Apply cheap scan-mode cleaning (no expensive fuzzy path).
+
+    The raw response saved to the JSONL cache is **never** modified.
+    """
+    if not text:
+        return text
+    # 1 – remove reasoning blocks
+    compacted = THINK_BLOCK_RE.sub("", text).strip()
+    # 2 – hard-truncate for context only
+    if len(compacted) > MAX_CONTEXT_RESPONSE_CHARS:
+        compacted = compacted[:MAX_CONTEXT_RESPONSE_CHARS].rstrip() + " [truncated for context]"
+    # 3 – cheap scan dedup (no fuzzy)
+    compacted = _scan_mode_clean(compacted)
+    return compacted
+
 
 def _scan_mode_clean(text: str, min_repeat_length: int = 10, min_repeats: int = 2) -> str:
     """
@@ -796,9 +828,7 @@ def run_study_c(
                     cached_dialogue = existing[case.id][turn.turn]["dialogue"]
                     cached_response_text = cached_dialogue.get("response_text", "")
                     if cached_response_text:
-                        cleaned_response = cached_response_text
-                        if context_cleaner != "none" and _should_clean_context(turn.turn, context_clean_start_turn):
-                            cleaned_response = _clean_for_context(cached_response_text)
+                        cleaned_response = _prepare_response_for_context(cached_response_text)
                         conversation_history.append({"role": "assistant", "content": cleaned_response})
                 else:
                     status = "ok"
@@ -817,7 +847,7 @@ def run_study_c(
                                 torch.cuda.synchronize()
                                 torch.cuda.reset_peak_memory_stats(0)
 
-                            if attempt > 0:
+                            if attempt > 0 and model.config.max_tokens is not None:
                                 current_max = model.config.max_tokens
                                 reduced_tokens = max(256, current_max // (2 ** attempt))
                                 if reduced_tokens < current_max:
@@ -831,14 +861,12 @@ def run_study_c(
                                     model.config.max_tokens = reduced_tokens
 
                             response_text = model.chat(conversation_history, mode="default")
-                            cleaned_response = response_text
-                            if context_cleaner != "none" and _should_clean_context(turn.turn, context_clean_start_turn):
-                                cleaned_response = _clean_for_context(response_text)
+                            cleaned_response = _prepare_response_for_context(response_text)
                             if cleaned_response != response_text:
                                 logger.info(
-                                    "Cleaned %d characters of repetition from turn %d response before adding "
-                                    "to conversation history",
-                                    len(response_text) - len(cleaned_response),
+                                    "Compacted %d chars → %d chars for turn %d rolling context",
+                                    len(response_text),
+                                    len(cleaned_response),
                                     turn.turn,
                                 )
 
@@ -1020,10 +1048,8 @@ def run_study_c(
                     )
                     resp = ""
                 responses.append(resp)  # Save raw response for metrics
-                # Clean repetitive text before adding to conversation history
-                cleaned_resp = resp
-                if context_cleaner != "none" and _should_clean_context(turn.turn, context_clean_start_turn):
-                    cleaned_resp = _clean_for_context(resp)
+                # Compact for rolling context (strip think blocks, truncate, cheap scan)
+                cleaned_resp = _prepare_response_for_context(resp)
                 conversation_history.append({"role": "assistant", "content": cleaned_resp})
             responses_by_case_id[case.id] = responses
 

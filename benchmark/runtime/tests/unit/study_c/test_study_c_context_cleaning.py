@@ -70,5 +70,6 @@ def test_context_cleaning_starts_from_turn_4(tmp_path: Path) -> None:
 
     repeated_line = "REPEAT ME " * 10
     occurrences = dialogue_turn_5["conversation_text"].count(repeated_line)
-    # Turns 1-3 are uncleaned (4 repeats each), turn 4 cleaned (1 repeat)
-    assert occurrences == 13
+    # _prepare_response_for_context applies scan-mode dedup to ALL turns,
+    # so each turn keeps only 1 copy of the repeated line.
+    assert occurrences == 4
