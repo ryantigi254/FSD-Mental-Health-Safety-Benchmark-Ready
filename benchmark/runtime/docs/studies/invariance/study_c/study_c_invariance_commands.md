@@ -92,7 +92,7 @@ python hf-local-scripts/run_invariance_generate_only.py \
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 8
+python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 1
 ```
 
 ## MedGemma 27B Text (`google.medgemma-27b-text-it`)

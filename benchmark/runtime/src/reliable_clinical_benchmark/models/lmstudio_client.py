@@ -18,6 +18,21 @@ import requests
 
 
 logger = logging.getLogger(__name__)
+DEFAULT_LMSTUDIO_READ_TIMEOUT_SECONDS = 600
+
+
+def _default_read_timeout_seconds() -> int:
+    raw_value = os.getenv("LMSTUDIO_READ_TIMEOUT_SECONDS", str(DEFAULT_LMSTUDIO_READ_TIMEOUT_SECONDS)).strip()
+    try:
+        parsed = int(raw_value)
+    except ValueError:
+        logger.warning(
+            "Invalid LMSTUDIO_READ_TIMEOUT_SECONDS=%r; using default %d",
+            raw_value,
+            DEFAULT_LMSTUDIO_READ_TIMEOUT_SECONDS,
+        )
+        return DEFAULT_LMSTUDIO_READ_TIMEOUT_SECONDS
+    return max(1, parsed)
 
 
 def _normalise_model_id(model: str) -> str:
@@ -350,7 +365,7 @@ def chat_completion(
         payload["max_tokens"] = requested_max_tokens
 
     if timeout is None:
-        request_timeout = (30, None)
+        request_timeout = (30, _default_read_timeout_seconds())
     elif isinstance(timeout, tuple):
         request_timeout = timeout
     else:
@@ -396,7 +411,8 @@ def chat_completion(
             )
 
         except requests.exceptions.Timeout:
-            timeout_str = f"{timeout}s" if timeout else "no timeout set"
+            read_timeout = request_timeout[1] if isinstance(request_timeout, tuple) else request_timeout
+            timeout_str = f"{read_timeout}s" if read_timeout is not None else "no timeout set"
             logger.error(
                 "LM Studio request timed out (%s) for model %s",
                 timeout_str,
