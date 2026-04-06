@@ -20,6 +20,7 @@ BASE_MODEL_IDS = {
     "qwq",
     "deepseek_r1_lmstudio",
     "gpt_oss",
+    "psych_qwen_32b",
     "ollama_minimax_m2_5_cloud",
     "psyllm_gml_local",
     "piaget_local",
@@ -69,6 +70,11 @@ LMSTUDIO_MODEL_PREFLIGHT = {
         "env_var": "LMSTUDIO_MEDGEMMA_MODEL",
         "default": "google/medgemma-27b-it",
         "aliases": ("google.medgemma-27b-text-it", "google/medgemma-27b-it"),
+    },
+    "psych_qwen_32b": {
+        "env_var": "LMSTUDIO_PSYCH_QWEN_MODEL",
+        "default": "psych_qwen_32b",
+        "aliases": ("psych_qwen_32b",),
     },
 }
 

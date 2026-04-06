@@ -21,6 +21,8 @@ CANONICAL_MODEL_DIRS = {
     "deepseek-r1-lmstudio": "deepseek-r1-lmstudio",
     "piaget_local": "piaget-8b-local",
     "piaget_vllm": "piaget-8b-local",
+    "psych_qwen_32b": "psych-qwen-32b-local",
+    "psych-qwen-32b": "psych-qwen-32b-local",
     "psych_qwen_local": "psych-qwen-32b-local",
     "psych_qwen_vllm": "psych-qwen-32b-local",
     "psyllm_gml_local": "psyllm-gml-local",

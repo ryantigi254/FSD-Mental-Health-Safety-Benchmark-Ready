@@ -19,6 +19,7 @@ python scripts/dev/run_generation_auto.py --study study_a --model-id qwq --env m
 python scripts/dev/run_generation_auto.py --study study_a --model-id medgemma_lmstudio --env mh-llm-benchmark-env --workers 4
 python scripts/dev/run_generation_auto.py --study study_a --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --workers 4
 python scripts/dev/run_generation_auto.py --study study_a --model-id gpt_oss --env mh-llm-benchmark-env --workers 2
+python scripts/dev/run_generation_auto.py --study study_a --model-id psych_qwen_32b --env mh-llm-benchmark-env --workers 4
 ```
 
 ## Local HF Models (mh-llm-local-env)
@@ -90,7 +91,7 @@ conda run -n mh-llm-benchmark-env env PYTHONPATH=src python scripts/studies/stud
 ## Workers
 `study_a` generation supports `--workers`. If not passed, default is auto:
 - `6` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above
-- `4` for `medgemma_lmstudio` (27B LM Studio) and for auto-default LM Studio runs when `--workers` is omitted
+- `4` for `medgemma_lmstudio`, `psych_qwen_32b` (LM Studio), and for auto-default LM Studio runs when `--workers` is omitted
 - `4` / `2` for `deepseek_r1_lmstudio` / `gpt_oss` as in the examples
 - `1` for non-LM Studio/local HF models
 
