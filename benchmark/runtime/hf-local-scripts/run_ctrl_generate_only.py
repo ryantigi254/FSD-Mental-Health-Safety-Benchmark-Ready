@@ -109,17 +109,24 @@ EXPLICIT_BIAS_PROMPT = (
     "Explain whether it is clinically relevant before your final answer."
 )
 
-# Filenames per study, in the same order as
-# `reliable_clinical_benchmark.invariance._study_file`: materialised invariance trees
-# use `*_test.json`; legacy controllability split dirs use `*_controllability_test.json`.
-CTRL_STUDY_DATA_CANDIDATES: Dict[str, tuple[str, ...]] = {
-    "ctrl_study_a": ("study_a_test.json", "study_a_controllability_test.json"),
-    "ctrl_study_b": ("study_b_test.json", "study_b_controllability_test.json"),
-    "ctrl_study_b_multi_turn": (
-        "study_b_multi_turn_test.json",
-        "study_b_multi_turn_controllability_test.json",
+STUDY_FILE_CANDIDATES = {
+    "ctrl_study_a": (
+        "study_a_controllability_test.json",
+        "study_a_test.json",
     ),
-    "ctrl_study_c": ("study_c_test.json", "study_c_controllability_test.json"),
+    "ctrl_study_b": (
+        "study_b_controllability_test.json",
+        "study_b_test.json",
+    ),
+    "ctrl_study_b_multi_turn": (
+        "study_b_multi_turn_controllability_test.json",
+        "study_b_multi_turn_test.json",
+        "study_b_multi_turn.json",
+    ),
+    "ctrl_study_c": (
+        "study_c_controllability_test.json",
+        "study_c_test.json",
+    ),
 }
 
 CACHE_NAME_MAP = {
@@ -277,29 +284,32 @@ def _normalise_items(payload: Any) -> List[Dict[str, Any]]:
 
 
 def _resolve_study_data_path(study: str, ctrl_dir: Path) -> Path:
-    names = CTRL_STUDY_DATA_CANDIDATES.get(study)
-    if not names:
-        raise KeyError(f"Unknown ctrl study: {study}")
-    tried: List[Path] = []
-    for filename in names:
-        path = ctrl_dir / filename
-        tried.append(path)
+    candidates = STUDY_FILE_CANDIDATES[study]
+    for candidate in candidates:
+        path = ctrl_dir / candidate
         if path.exists():
             return path
-        if filename.endswith(".json") and "controllability" not in filename:
-            alt = ctrl_dir / "openr1_psy_splits" / filename
-            tried.append(alt)
-            if alt.exists():
-                return alt
-    raise FileNotFoundError(
-        f"No study data JSON for {study!r} under {ctrl_dir}. Tried: "
-        + ", ".join(str(p) for p in tried)
+    return ctrl_dir / candidates[0]
+
+
+def _resolve_bias_data_path(data_path: Optional[Path], ctrl_dir: Path) -> Path:
+    if data_path is not None:
+        return data_path
+
+    candidate_paths = (
+        ctrl_dir / "adversarial_bias" / "biased_vignettes.json",
+        ctrl_dir / "study_a_bias_controllability_test.json",
+        DEFAULT_BIAS_DATA_PATH,
     )
+    for candidate in candidate_paths:
+        if candidate.exists():
+            return candidate
+    return candidate_paths[0]
 
 
 def _load_items(study: str, data_path: Optional[Path], ctrl_dir: Path) -> List[Dict[str, Any]]:
     if study == "ctrl_study_a_bias":
-        path = data_path or DEFAULT_BIAS_DATA_PATH
+        path = _resolve_bias_data_path(data_path, ctrl_dir)
     else:
         path = data_path or _resolve_study_data_path(study, ctrl_dir)
     with path.open("r", encoding="utf-8") as handle:
