@@ -21,6 +21,7 @@ from .psych_qwen_local import PsychQwen32BLocalRunner
 from .lmstudio_qwq import QwQLMStudioRunner
 from .lmstudio_gpt_oss import GPTOSSLMStudioRunner
 from .lmstudio_qwen3 import Qwen3LMStudioRunner
+from .lmstudio_psych_qwen import PsychQwen32BLMStudioRunner
 from .lmstudio_medgemma import MedGemmaLMStudioRunner
 try:
     from .ollama_cloud import OllamaCloudRunner
@@ -145,10 +146,13 @@ def get_model_runner(
 
         return PsycheR1LocalRunner(model_name=_resolve_local_model_path("Psyche-R1"), config=config)
 
-    if model_id_lower in ("psych_qwen", "psych_qwen_32b", "psych-qwen-32b"):
+    if model_id_lower in ("psych_qwen",):
         from .psych_qwen import PsychQwen32BRunner
 
         return PsychQwen32BRunner(config=config)
+
+    if model_id_lower in ("psych_qwen_32b", "psych-qwen-32b", "psych_qwen_32b_lmstudio", "psych-qwen-32b-lmstudio"):
+        return PsychQwen32BLMStudioRunner(config=config)
 
     if model_id_lower in ("psych_qwen_local", "psych-qwen-32b-local", "psych-qwen-local-hf"):
         from .psych_qwen_local import PsychQwen32BLocalRunner

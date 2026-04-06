@@ -146,6 +146,10 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
 
         "deepseek_r1_lmstudio": "deepseek-r1-lmstudio",
 
+        "psych_qwen_32b": "psych-qwen-32b-local",
+
+        "psych-qwen-32b": "psych-qwen-32b-local",
+
         "piaget_local": "piaget-8b-local",
 
         "psych_qwen_local": "psych-qwen-32b-local",
