@@ -9,6 +9,7 @@ import os
 import shlex
 import subprocess
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -17,6 +18,7 @@ from pathlib import Path
 BASE_MODEL_IDS = {
     "qwen3_lmstudio",
     "medgemma_lmstudio",
+    "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
     "qwq",
     "deepseek_r1_lmstudio",
     "gpt_oss",
@@ -75,6 +77,17 @@ LMSTUDIO_MODEL_PREFLIGHT = {
         "env_var": "LMSTUDIO_PSYCH_QWEN_MODEL",
         "default": "psych_qwen_32b",
         "aliases": ("psych_qwen_32b",),
+    },
+    "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0": {
+        "env_var": "LMSTUDIO_QWEN35_DISTILLED_MODEL",
+        "default": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
+        "aliases": (
+            "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
+            "qwen3.5-distilled",
+            "qwen3.5-27b-distilled",
+            "qwen3_5_distilled_lmstudio",
+            "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
+        ),
     },
 }
 
@@ -170,62 +183,67 @@ def _check_lmstudio_model_loaded(model_id: str) -> tuple[bool, str]:
     aliases = [resolved_model, *preflight_cfg["aliases"]]
     api_base = os.getenv("LMSTUDIO_API_BASE", "http://127.0.0.1:1234/v1").rstrip("/")
     endpoint = _lmstudio_native_models_endpoint(api_base)
-    try:
-        with urllib.request.urlopen(endpoint, timeout=5) as response:
-            payload = json.loads(response.read().decode("utf-8"))
-    except urllib.error.URLError as request_error:
-        return (
-            False,
-            f"Failed strict LM Studio loaded-instance preflight against {endpoint}: {request_error}.",
-        )
-    except json.JSONDecodeError as parse_error:
-        return (
-            False,
-            f"LM Studio native models endpoint returned non-JSON payload from {endpoint}: {parse_error}.",
-        )
+    last_failure = ""
+    for attempt in range(1, 4):
+        try:
+            with urllib.request.urlopen(endpoint, timeout=5) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+        except urllib.error.URLError as request_error:
+            last_failure = (
+                f"Failed strict LM Studio loaded-instance preflight against {endpoint}: {request_error}."
+            )
+        except json.JSONDecodeError as parse_error:
+            last_failure = (
+                f"LM Studio native models endpoint returned non-JSON payload from {endpoint}: {parse_error}."
+            )
+        else:
+            loaded_instance_ids = []
+            matched_but_not_loaded = []
+            for entry in payload.get("models", []) if isinstance(payload, dict) else []:
+                if not isinstance(entry, dict):
+                    continue
+                entry_key = str(entry.get("key", "")).strip()
+                key_matches = any(_matches_loaded_model(entry_key, alias) for alias in aliases)
+                loaded_instances = entry.get("loaded_instances", [])
+                if not isinstance(loaded_instances, list):
+                    loaded_instances = []
 
-    loaded_instance_ids = []
-    matched_but_not_loaded = []
-    for entry in payload.get("models", []) if isinstance(payload, dict) else []:
-        if not isinstance(entry, dict):
-            continue
-        entry_key = str(entry.get("key", "")).strip()
-        key_matches = any(_matches_loaded_model(entry_key, alias) for alias in aliases)
-        loaded_instances = entry.get("loaded_instances", [])
-        if not isinstance(loaded_instances, list):
-            loaded_instances = []
+                for instance in loaded_instances:
+                    if not isinstance(instance, dict):
+                        continue
+                    loaded_model_id = str(instance.get("id", "")).strip()
+                    if loaded_model_id:
+                        loaded_instance_ids.append(loaded_model_id)
+                    if any(
+                        _matches_loaded_model(loaded_model_id, alias) or _matches_loaded_model(entry_key, alias)
+                        for alias in aliases
+                    ):
+                        return True, loaded_model_id or entry_key
 
-        for instance in loaded_instances:
-            if not isinstance(instance, dict):
-                continue
-            loaded_model_id = str(instance.get("id", "")).strip()
-            if loaded_model_id:
-                loaded_instance_ids.append(loaded_model_id)
-            if any(
-                _matches_loaded_model(loaded_model_id, alias) or _matches_loaded_model(entry_key, alias)
-                for alias in aliases
-            ):
-                return True, loaded_model_id or entry_key
+                if key_matches:
+                    matched_but_not_loaded.append(entry_key or "<unknown>")
 
-        if key_matches:
-            matched_but_not_loaded.append(entry_key or "<unknown>")
+            if matched_but_not_loaded:
+                matched_msg = ", ".join(dict.fromkeys(matched_but_not_loaded))
+                last_failure = (
+                    "LM Studio loaded-instance preflight failed. "
+                    f"Found installed model entries [{matched_msg}] but they currently have no loaded_instances."
+                )
+            else:
+                alias_msg = ", ".join(dict.fromkeys(aliases))
+                available_msg = ", ".join(loaded_instance_ids) if loaded_instance_ids else "<none>"
+                last_failure = (
+                    "LM Studio loaded-instance preflight failed. "
+                    f"Requested model-id '{model_id}' expects one of [{alias_msg}] to already be loaded, "
+                    f"but /api/v1/models returned loaded instances [{available_msg}]."
+                )
 
-    if matched_but_not_loaded:
-        matched_msg = ", ".join(dict.fromkeys(matched_but_not_loaded))
-        return (
-            False,
-            "LM Studio loaded-instance preflight failed. "
-            f"Found installed model entries [{matched_msg}] but they currently have no loaded_instances. "
-            "Open the model once in LM Studio before running generations.",
-        )
+        if attempt < 3:
+            time.sleep(2)
 
-    alias_msg = ", ".join(dict.fromkeys(aliases))
-    available_msg = ", ".join(loaded_instance_ids) if loaded_instance_ids else "<none>"
     return (
         False,
-        "LM Studio loaded-instance preflight failed. "
-        f"Requested model-id '{model_id}' expects one of [{alias_msg}] to already be loaded, "
-        f"but /api/v1/models returned loaded instances [{available_msg}].",
+        f"{last_failure} Open the model once in LM Studio before running generations.",
     )
 
 
@@ -277,6 +295,24 @@ def main() -> int:
             default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
             default_output_dir = "results_invariance"
             default_study_name = "study_a_bias"
+
+        # Bias runner only accepts --data-path (to biased_vignettes.json). Map a split
+        # root directory to the standard layout, and drop stray --data-dir when
+        # --data-path is already set.
+        has_data_path = any(t == "--data-path" for t in passthrough)
+        normalised: list[str] = []
+        i = 0
+        while i < len(passthrough):
+            if passthrough[i] == "--data-dir":
+                dir_val, i = _consume_flag_value(passthrough, i, "")
+                if not has_data_path:
+                    rel = Path(dir_val) / "adversarial_bias" / "biased_vignettes.json"
+                    normalised.extend(["--data-path", rel.as_posix()])
+                    has_data_path = True
+                continue
+            normalised.append(passthrough[i])
+            i += 1
+        passthrough = normalised
 
         out: list[str] = []
         i = 0

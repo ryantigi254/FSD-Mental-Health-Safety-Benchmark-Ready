@@ -184,5 +184,5 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id medgemma_lmstudio `
   --study ctrl_study_c `
-  --workers 4
+  --workers 8
 ```

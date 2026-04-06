@@ -13,8 +13,10 @@ Generation caches for each reverse study should be saved under `results_reverse/
 
 ### LM Studio
 
+Use `--workers 1` for `gpt_oss` unless you have verified stability: LM Studio often returns HTTP 400 with “model has crashed” when the GPT-OSS backend receives concurrent `/v1/chat/completions` calls. The runtime caps GPT-OSS LM Studio workers to 1 by default; set `LMSTUDIO_GPT_OSS_MAX_WORKERS` to raise that cap if your stack is stable under load.
+
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --workers 1
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --workers 6
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --workers 6
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id deepseek_r1_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --workers 4
@@ -48,7 +50,7 @@ ctrl variant-family child in one go.
 ### LM Studio
 
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/variants/v2_1/study_c --output-dir results_reverse --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/variants/v2_1/study_c --output-dir results_reverse --workers 1
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/variants/v2_1/study_c --output-dir results_reverse --workers 6
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --ctrl-dir data/invariance/ctrl/variants/v2_1/study_c --output-dir results_reverse --workers 6
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id deepseek_r1_lmstudio --ctrl-dir data/invariance/ctrl/variants/v2_1/study_c --output-dir results_reverse --workers 4
@@ -77,14 +79,14 @@ python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psych_
 ## Direct Runner
 
 ```powershell
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --max-cases 3 --workers 2
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --max-cases 3 --workers 1
 ```
 
 ## Checks
 
 ```powershell
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --check-only
-python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --workers 2 --max-cases 3
+python hf-local-scripts/run_ctrl_generate_only.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --workers 1 --max-cases 3
 ```
 
 ---
@@ -173,7 +175,7 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 
 ### Windows (PC)
 ```powershell
-python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --workers 1
 ```
 
 ## Qwen3-8B
@@ -250,6 +252,7 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 ### Windows (PC)
 ```powershell
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_reverse --workers 8
+python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance_reverse --workers 1
 ```
 
 ## MedGemma 27B Text (`google.medgemma-27b-text-it`)
