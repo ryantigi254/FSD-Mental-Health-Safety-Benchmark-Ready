@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Optional
+from unittest.mock import patch
 
 import pytest
 
@@ -51,6 +52,23 @@ def test_worker_count_allows_parallel_for_lm_runner() -> None:
     assert supports_parallel_workers(runner)
     assert resolve_worker_count(4, runner) == 4
     assert resolve_worker_count(None, runner) == 4
+
+
+@pytest.mark.unit
+def test_worker_count_caps_gpt_oss_lmstudio_parallelism(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("LMSTUDIO_GPT_OSS_MAX_WORKERS", raising=False)
+    from reliable_clinical_benchmark.models.lmstudio_gpt_oss import GPTOSSLMStudioRunner
+
+    with patch("reliable_clinical_benchmark.models.lmstudio_gpt_oss.requests.get") as mock_get:
+        mock_resp = mock_get.return_value
+        mock_resp.raise_for_status = lambda: None
+        mock_resp.json.return_value = {"data": [{"id": "gpt-oss-20b"}]}
+        runner = GPTOSSLMStudioRunner()
+
+    assert resolve_worker_count(4, runner) == 1
+
+    monkeypatch.setenv("LMSTUDIO_GPT_OSS_MAX_WORKERS", "2")
+    assert resolve_worker_count(4, runner) == 2
 
 
 @pytest.mark.unit

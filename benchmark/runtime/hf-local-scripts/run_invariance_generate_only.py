@@ -4,7 +4,15 @@
 from __future__ import annotations
 
 import argparse
+import logging
+import os
 from pathlib import Path
+
+logging.basicConfig(
+    level=getattr(logging, os.environ.get("BENCHMARK_LOG_LEVEL", "WARNING").upper(), logging.WARNING),
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
+logger = logging.getLogger(__name__)
 
 from _invariance_runner_common import (
     DEFAULT_INVARIANCE_DATA_DIR,
@@ -27,7 +35,7 @@ DEFAULT_MAX_TOKENS = {
     "study_a_invariance": 64000,
     "study_b_invariance": 64000,
     "study_b_multi_turn_invariance": 64000,
-    "study_c_invariance": 64000,
+    "study_c_invariance": 16384,
 }
 SPLIT_FILE_NAMES = {
     "study_a_invariance": "study_a_test.json",
@@ -58,6 +66,27 @@ LEGACY_VARIANT_PREFIXES = {
     "study_b_invariance": "study_b_",
     "study_b_multi_turn_invariance": "study_b_multi_turn_",
     "study_c_invariance": "study_c_",
+}
+STUDY_C_LMSTUDIO_MAX_TOKENS = 4096
+# LM Studio / vLLM model IDs that should defer max_tokens to the server
+# unless explicitly overridden.  Mirrors the set in run_ctrl_generate_only.py.
+_SERVER_SIDE_TOKEN_MODEL_IDS = {
+    "qwen3_lmstudio", "qwen3-lmstudio", "qwen3-8b-lmstudio",
+    "qwq", "qwq_lmstudio", "qwq-lmstudio", "qwq-32b-lmstudio",
+    "deepseek_r1_lmstudio", "deepseek-r1-lmstudio", "deepseek-r1-14b-lmstudio",
+    "gpt_oss_lmstudio", "gpt_oss", "gpt-oss-lmstudio", "gpt-oss-20b",
+    "psych_qwen_32b-mlx", "psych-qwen-32b-mlx",
+    "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
+    "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
+    "qwen3.5-distilled", "qwen3.5-27b-distilled", "qwen3_5_distilled_lmstudio",
+    "psyllm_gml_vllm", "piaget_vllm", "psyche_r1_vllm", "psych_qwen_vllm",
+}
+STUDY_C_QWEN35_MODEL_IDS = {
+    "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
+    "qwen3.5-distilled",
+    "qwen3.5-27b-distilled",
+    "qwen3_5_distilled_lmstudio",
+    "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
 }
 
 
@@ -157,10 +186,36 @@ def _resolve_cache_out(
     )
 
 
-def _resolve_max_tokens(study: str, max_tokens: int | None) -> int:
+def _resolve_max_tokens(study: str, model_id: str, max_tokens: int | None) -> int | None:
+    """Resolve effective max_tokens with LM Studio / vLLM awareness.
+
+    - Explicit ``--max-tokens`` always wins.
+    - study_c_invariance + LM Studio/vLLM: cap at STUDY_C_LMSTUDIO_MAX_TOKENS
+      (responses feed back into rolling history).
+    - Other studies + LM Studio/vLLM: ``None`` (defer to server).
+    - Non-server models: use DEFAULT_MAX_TOKENS.
+    """
     if max_tokens is not None:
         return max_tokens
+    if str(model_id or "").strip().lower() in _SERVER_SIDE_TOKEN_MODEL_IDS:
+        if study == "study_c_invariance":
+            return STUDY_C_LMSTUDIO_MAX_TOKENS
+        return None
     return DEFAULT_MAX_TOKENS[study]
+
+
+def _resolve_workers(study: str, model_id: str, workers: int | None) -> int | None:
+    model_key = str(model_id or "").strip().lower()
+    if study == "study_c_invariance" and model_key in STUDY_C_QWEN35_MODEL_IDS:
+        if workers is None:
+            return 1
+        if workers > 1:
+            logging.getLogger(__name__).warning(
+                "Study C invariance with Qwen 3.5 distilled was validated most reliably at --workers 1; "
+                "continuing with requested --workers %d.",
+                workers,
+            )
+    return workers
 
 
 def _validate_args(args: argparse.Namespace) -> None:
@@ -173,6 +228,11 @@ def _validate_args(args: argparse.Namespace) -> None:
 def main() -> None:
     args = _parse_args()
     _validate_args(args)
+
+    logging.basicConfig(
+        level=getattr(logging, os.getenv("BENCHMARK_LOG_LEVEL", "INFO").upper(), logging.INFO),
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    )
 
     ensure_src_on_path(RUNTIME_ROOT)
 
@@ -193,7 +253,11 @@ def main() -> None:
             "Point --data-dir at one child variant folder or omit --cache-out."
         )
 
-    max_tokens = _resolve_max_tokens(args.study, args.max_tokens)
+    max_tokens = _resolve_max_tokens(args.study, args.model_id, args.max_tokens)
+    logger.info(
+        "Invariance run: study=%s model=%s effective_max_tokens=%s",
+        args.study, args.model_id, max_tokens,
+    )
 
     config = GenerationConfig(max_tokens=max_tokens)
     runner = get_model_runner(args.model_id, config)
@@ -243,7 +307,7 @@ def main() -> None:
                 cache_out=cache_out,
                 do_single_turn=True,
                 do_multi_turn=False,
-                workers=args.workers,
+                workers=_resolve_workers(args.study, args.model_id, args.workers),
                 progress_interval_seconds=args.progress_interval_seconds,
             )
         elif args.study == "study_b_multi_turn_invariance":
@@ -262,7 +326,7 @@ def main() -> None:
                 cache_out=cache_out,
                 do_single_turn=False,
                 do_multi_turn=True,
-                workers=args.workers,
+                workers=_resolve_workers(args.study, args.model_id, args.workers),
                 progress_interval_seconds=args.progress_interval_seconds,
             )
         else:
@@ -279,7 +343,7 @@ def main() -> None:
                 use_nli=False,
                 generate_only=True,
                 cache_out=cache_out,
-                workers=args.workers,
+                workers=_resolve_workers(args.study, args.model_id, args.workers),
                 progress_interval_seconds=args.progress_interval_seconds,
             )
 

@@ -169,7 +169,7 @@ python hf-local-scripts/run_ctrl_generate_only.py \
 python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0" `
   --study ctrl_study_b_multi_turn `
-  --workers 4
+  --workers 8
 ```
 
 ## MedGemma 27B Text (`google.medgemma-27b-text-it`)

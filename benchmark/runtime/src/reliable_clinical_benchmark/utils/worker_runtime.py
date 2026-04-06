@@ -34,6 +34,15 @@ def is_vllm_runner(runner: object) -> bool:
         return False
 
 
+def _gpt_oss_lmstudio_max_workers() -> int:
+    """Upper bound for GPT-OSS via LM Studio (concurrent chat often crashes the engine)."""
+    raw = os.getenv("LMSTUDIO_GPT_OSS_MAX_WORKERS", "1").strip()
+    try:
+        return max(1, int(raw))
+    except ValueError:
+        return 1
+
+
 def supports_parallel_workers(runner: object) -> bool:
     """Return True when client-side thread parallelism is safe for this runner.
 
@@ -66,6 +75,46 @@ def resolve_worker_count(
             "(not vLLM). Falling back to 1 worker."
         )
         return 1
+
+    if is_lmstudio_runner(runner):
+        try:
+            from reliable_clinical_benchmark.models.lmstudio_gpt_oss import GPTOSSLMStudioRunner
+
+            if isinstance(runner, GPTOSSLMStudioRunner):
+                gpt_oss_cap = _gpt_oss_lmstudio_max_workers()
+                if worker_count > gpt_oss_cap:
+                    target_log.info(
+                        "Capping LM Studio workers from %d to %d for GPT-OSS "
+                        "(concurrent requests often crash the backend; set "
+                        "LMSTUDIO_GPT_OSS_MAX_WORKERS to raise this cap).",
+                        worker_count,
+                        gpt_oss_cap,
+                    )
+                    worker_count = gpt_oss_cap
+        except ImportError:
+            pass
+
+        try:
+            from reliable_clinical_benchmark.models.lmstudio_client import (
+                get_loaded_model_runtime_limits,
+            )
+
+            runtime_limits = get_loaded_model_runtime_limits(
+                getattr(runner, "api_base"),
+                getattr(runner, "model_name"),
+                timeout=5,
+            )
+            loaded_parallel = runtime_limits.get("parallel")
+            if isinstance(loaded_parallel, int) and loaded_parallel > 0 and worker_count > loaded_parallel:
+                target_log.info(
+                    "Capping LM Studio workers from %d to loaded parallel=%d for %s.",
+                    worker_count,
+                    loaded_parallel,
+                    getattr(runner, "model_name", "<unknown>"),
+                )
+                worker_count = loaded_parallel
+        except Exception as error:
+            target_log.debug("Could not inspect LM Studio loaded parallel setting: %s", error)
 
     return max(1, worker_count)
 

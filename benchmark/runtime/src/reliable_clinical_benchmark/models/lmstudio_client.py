@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import logging
+import math
 import os
 import time
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -17,6 +18,21 @@ import requests
 
 
 logger = logging.getLogger(__name__)
+DEFAULT_LMSTUDIO_READ_TIMEOUT_SECONDS = 600
+
+
+def _default_read_timeout_seconds() -> int:
+    raw_value = os.getenv("LMSTUDIO_READ_TIMEOUT_SECONDS", str(DEFAULT_LMSTUDIO_READ_TIMEOUT_SECONDS)).strip()
+    try:
+        parsed = int(raw_value)
+    except ValueError:
+        logger.warning(
+            "Invalid LMSTUDIO_READ_TIMEOUT_SECONDS=%r; using default %d",
+            raw_value,
+            DEFAULT_LMSTUDIO_READ_TIMEOUT_SECONDS,
+        )
+        return DEFAULT_LMSTUDIO_READ_TIMEOUT_SECONDS
+    return max(1, parsed)
 
 
 def _normalise_model_id(model: str) -> str:
@@ -52,6 +68,73 @@ def _autoload_allowed() -> bool:
     return value.strip().lower() in {"1", "true", "yes", "on"}
 
 
+def _estimate_message_tokens(messages: List[Dict[str, str]]) -> int:
+    """Heuristic token estimate for chat payload sizing."""
+    total_chars = 0
+    for message in messages:
+        role = str(message.get("role", "") or "")
+        content = str(message.get("content", "") or "")
+        total_chars += len(role) + len(content) + 8
+    return max(1, math.ceil(total_chars / 4))
+
+
+def _extract_loaded_model_details(
+    api_base: str,
+    model: str,
+    timeout: int = 10,
+) -> Tuple[Optional[Dict[str, Any]], str]:
+    """Return loaded-instance details for *model* from LM Studio /api/v1/models."""
+    endpoint = f"{_native_api_base(api_base)}/models"
+    last_error = ""
+    for attempt in range(1, 4):
+        try:
+            resp = requests.get(endpoint, timeout=timeout)
+            resp.raise_for_status()
+            data = resp.json().get("models", [])
+            for entry in data if isinstance(data, list) else []:
+                if not isinstance(entry, dict):
+                    continue
+                model_key = str(entry.get("key", "")).strip()
+                loaded_instances = entry.get("loaded_instances", [])
+                if not isinstance(loaded_instances, list):
+                    continue
+
+                for instance in loaded_instances:
+                    if not isinstance(instance, dict):
+                        continue
+                    loaded_id = str(instance.get("id", "")).strip()
+                    if (
+                        (loaded_id and _model_ids_match(model, loaded_id))
+                        or (model_key and _model_ids_match(model, model_key))
+                    ):
+                        config = instance.get("config", {})
+                        if not isinstance(config, dict):
+                            config = {}
+                        return {
+                            "loaded_id": loaded_id or model_key,
+                            "model_key": model_key,
+                            "context_length": config.get("context_length"),
+                            "parallel": config.get("parallel"),
+                        }, ""
+        except Exception as exc:
+            last_error = str(exc)
+
+        if attempt < 3:
+            time.sleep(2)
+
+    return None, last_error
+
+
+def get_loaded_model_runtime_limits(
+    api_base: str,
+    model: str,
+    timeout: int = 10,
+) -> Dict[str, Any]:
+    """Best-effort runtime metadata for a loaded LM Studio model."""
+    details, _ = _extract_loaded_model_details(api_base, model, timeout=timeout)
+    return details or {}
+
+
 def get_model_load_state(
     api_base: str,
     model: str,
@@ -65,38 +148,26 @@ def get_model_load_state(
         (False, "") when the check succeeded and the model is not present.
         (None, error_message) when the check itself failed.
     """
+    details, last_error = _extract_loaded_model_details(api_base, model, timeout=timeout)
+    if details:
+        return True, str(details.get("loaded_id") or details.get("model_key") or "")
+
+    endpoint = f"{_native_api_base(api_base)}/models"
     try:
-        endpoint = f"{_native_api_base(api_base)}/models"
         resp = requests.get(endpoint, timeout=timeout)
         resp.raise_for_status()
         data = resp.json().get("models", [])
-        model_known = False
         for entry in data if isinstance(data, list) else []:
             if not isinstance(entry, dict):
                 continue
             model_key = str(entry.get("key", "")).strip()
             if model_key and _model_ids_match(model, model_key):
-                model_known = True
-
-            loaded_instances = entry.get("loaded_instances", [])
-            if not isinstance(loaded_instances, list):
-                continue
-
-            for instance in loaded_instances:
-                if not isinstance(instance, dict):
-                    continue
-                loaded_id = str(instance.get("id", "")).strip()
-                if (
-                    (loaded_id and _model_ids_match(model, loaded_id))
-                    or (model_key and _model_ids_match(model, model_key))
-                ):
-                    return True, loaded_id or model_key
-
-        if model_known:
-            return False, ""
+                return False, ""
         return False, ""
     except Exception as exc:
-        return None, str(exc)
+        if not last_error:
+            last_error = str(exc)
+        return None, last_error
 
 
 def is_model_loaded(api_base: str, model: str, timeout: int = 10) -> bool:
@@ -264,6 +335,24 @@ def chat_completion(
     """
     endpoint = f"{api_base}/chat/completions"
     allow_autoload = _autoload_allowed()
+    runtime_limits = get_loaded_model_runtime_limits(api_base, model)
+    requested_max_tokens = max_tokens
+
+    if requested_max_tokens is not None and runtime_limits.get("context_length"):
+        context_length = int(runtime_limits["context_length"])
+        estimated_prompt_tokens = _estimate_message_tokens(messages)
+        safe_budget = max(256, context_length - estimated_prompt_tokens - 1024)
+        if requested_max_tokens > safe_budget:
+            logger.info(
+                "Reducing LM Studio max_tokens for %s from %d to %d based on loaded context_length=%d "
+                "and estimated prompt tokens=%d.",
+                model,
+                requested_max_tokens,
+                safe_budget,
+                context_length,
+                estimated_prompt_tokens,
+            )
+            requested_max_tokens = safe_budget
 
     payload: Dict[str, Any] = {
         "model": model,
@@ -272,17 +361,18 @@ def chat_completion(
         "top_p": top_p,
         "tool_choice": "none",
     }
-    if max_tokens is not None:
-        payload["max_tokens"] = max_tokens
+    if requested_max_tokens is not None:
+        payload["max_tokens"] = requested_max_tokens
 
     if timeout is None:
-        request_timeout = (30, None)
+        request_timeout = (30, _default_read_timeout_seconds())
     elif isinstance(timeout, tuple):
         request_timeout = timeout
     else:
         request_timeout = (30, timeout) if timeout > 60 else (timeout, timeout)
 
     preflight_loaded, preflight_detail = get_model_load_state(api_base, model)
+    preflight_confirmed_loaded = preflight_loaded is True
     if preflight_loaded is False:
         if not allow_autoload:
             raise RuntimeError(
@@ -321,7 +411,8 @@ def chat_completion(
             )
 
         except requests.exceptions.Timeout:
-            timeout_str = f"{timeout}s" if timeout else "no timeout set"
+            read_timeout = request_timeout[1] if isinstance(request_timeout, tuple) else request_timeout
+            timeout_str = f"{read_timeout}s" if read_timeout is not None else "no timeout set"
             logger.error(
                 "LM Studio request timed out (%s) for model %s",
                 timeout_str,
@@ -331,15 +422,31 @@ def chat_completion(
 
         except requests.exceptions.HTTPError as exc:
             last_exc = exc
+            error_text = _format_http_error(exc)
             logger.warning(
                 "LM Studio error on attempt %d/%d for %s: %s",
                 attempt,
                 max_retries,
                 model,
-                _format_http_error(exc),
+                error_text,
             )
             if attempt >= max_retries:
                 break
+
+            if "context size has been exceeded" in error_text.lower():
+                current_max_tokens = payload.get("max_tokens")
+                if isinstance(current_max_tokens, int) and current_max_tokens > 256:
+                    reduced_tokens = max(256, current_max_tokens // 2)
+                    if reduced_tokens < current_max_tokens:
+                        logger.info(
+                            "Retrying LM Studio request for %s with reduced max_tokens %d -> %d after context overflow.",
+                            model,
+                            current_max_tokens,
+                            reduced_tokens,
+                        )
+                        payload["max_tokens"] = reduced_tokens
+                time.sleep(1.0)
+                continue
 
             model_loaded, load_detail = get_model_load_state(api_base, model)
             if model_loaded is False:
@@ -357,7 +464,15 @@ def chat_completion(
                         f"Model {model!r} not available after error; check LM Studio."
                     ) from exc
             elif model_loaded is None:
-                if not allow_autoload:
+                if preflight_confirmed_loaded and not allow_autoload:
+                    logger.warning(
+                        "Could not verify model load state after LM Studio error for %s (%s). "
+                        "Using cached confirmation that the model was loaded earlier and backing off.",
+                        model,
+                        load_detail,
+                    )
+                    time.sleep(2 * attempt)
+                elif not allow_autoload:
                     raise RuntimeError(
                         f"Could not verify whether model {model!r} remained loaded after an LM "
                         f"Studio error ({load_detail}). Aborting retries to avoid an unintended "
@@ -401,7 +516,15 @@ def chat_completion(
                         f"Model {model!r} not available after error; check LM Studio."
                     ) from exc
             elif model_loaded is None:
-                if not allow_autoload:
+                if preflight_confirmed_loaded and not allow_autoload:
+                    logger.warning(
+                        "Could not verify model load state after LM Studio transport error for %s (%s). "
+                        "Using cached confirmation that the model was loaded earlier and backing off.",
+                        model,
+                        load_detail,
+                    )
+                    time.sleep(2 * attempt)
+                elif not allow_autoload:
                     raise RuntimeError(
                         f"Could not verify whether model {model!r} remained loaded after a "
                         f"transport error ({load_detail}). Aborting retries to avoid an "
