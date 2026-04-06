@@ -22,12 +22,43 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import os
+import re
 import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, List, Optional, Set
+
+logging.basicConfig(
+    level=getattr(logging, os.environ.get("BENCHMARK_LOG_LEVEL", "WARNING").upper(), logging.WARNING),
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
+logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Rolling-history compaction helpers (mirrors study_c.py stabilisation)
+# ---------------------------------------------------------------------------
+_THINK_BLOCK_RE = re.compile(
+    r"<(?:think|redacted_reasoning)>.*?</(?:think|redacted_reasoning)>",
+    re.DOTALL,
+)
+_MAX_CONTEXT_RESPONSE_CHARS = 2000
+
+
+def _prepare_response_for_context(text: str) -> str:
+    """Compact an assistant response before re-inserting into rolling history.
+
+    1. Strip ``<think>`` / ``<redacted_reasoning>`` blocks.
+    2. Truncate to *_MAX_CONTEXT_RESPONSE_CHARS* characters.
+    """
+    if not text:
+        return text
+    compacted = _THINK_BLOCK_RE.sub("", text).strip()
+    if len(compacted) > _MAX_CONTEXT_RESPONSE_CHARS:
+        compacted = compacted[:_MAX_CONTEXT_RESPONSE_CHARS].rstrip() + " [truncated for context]"
+    return compacted
 
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[1]
@@ -78,11 +109,17 @@ EXPLICIT_BIAS_PROMPT = (
     "Explain whether it is clinically relevant before your final answer."
 )
 
-STUDY_FILE_NAMES = {
-    "ctrl_study_a": "study_a_controllability_test.json",
-    "ctrl_study_b": "study_b_controllability_test.json",
-    "ctrl_study_b_multi_turn": "study_b_multi_turn_controllability_test.json",
-    "ctrl_study_c": "study_c_controllability_test.json",
+# Filenames per study, in the same order as
+# `reliable_clinical_benchmark.invariance._study_file`: materialised invariance trees
+# use `*_test.json`; legacy controllability split dirs use `*_controllability_test.json`.
+CTRL_STUDY_DATA_CANDIDATES: Dict[str, tuple[str, ...]] = {
+    "ctrl_study_a": ("study_a_test.json", "study_a_controllability_test.json"),
+    "ctrl_study_b": ("study_b_test.json", "study_b_controllability_test.json"),
+    "ctrl_study_b_multi_turn": (
+        "study_b_multi_turn_test.json",
+        "study_b_multi_turn_controllability_test.json",
+    ),
+    "ctrl_study_c": ("study_c_test.json", "study_c_controllability_test.json"),
 }
 
 CACHE_NAME_MAP = {
@@ -240,7 +277,24 @@ def _normalise_items(payload: Any) -> List[Dict[str, Any]]:
 
 
 def _resolve_study_data_path(study: str, ctrl_dir: Path) -> Path:
-    return ctrl_dir / STUDY_FILE_NAMES[study]
+    names = CTRL_STUDY_DATA_CANDIDATES.get(study)
+    if not names:
+        raise KeyError(f"Unknown ctrl study: {study}")
+    tried: List[Path] = []
+    for filename in names:
+        path = ctrl_dir / filename
+        tried.append(path)
+        if path.exists():
+            return path
+        if filename.endswith(".json") and "controllability" not in filename:
+            alt = ctrl_dir / "openr1_psy_splits" / filename
+            tried.append(alt)
+            if alt.exists():
+                return alt
+    raise FileNotFoundError(
+        f"No study data JSON for {study!r} under {ctrl_dir}. Tried: "
+        + ", ".join(str(p) for p in tried)
+    )
 
 
 def _load_items(study: str, data_path: Optional[Path], ctrl_dir: Path) -> List[Dict[str, Any]]:
@@ -535,6 +589,13 @@ def generate_study_b_multi(
     print(f"Pending Study B multi-turn controllability cases: {len(case_jobs)} (workers={worker_count})")
     get_runner = _make_runner_provider(runner, worker_count, runner_factory)
 
+    import threading
+    persist_lock = threading.Lock()
+
+    def _persist_now(entry: Dict[str, Any]) -> None:
+        with persist_lock:
+            _persist_entry_with_retry(cache_path, entry)
+
     def _generate_case_entries(case: Dict[str, Any]) -> List[Dict[str, Any]]:
         case_id = str(case["id"])
         gold_answer = str(case.get("gold_answer", "") or "")
@@ -560,7 +621,7 @@ def generate_study_b_multi(
                     cached_entry = existing_entries.get(resume_key, {})
                     cached_response = str(cached_entry.get("response_text", "") or "")
                     if cached_response:
-                        history.append({"role": "assistant", "content": cached_response})
+                        history.append({"role": "assistant", "content": _prepare_response_for_context(cached_response)})
                     continue
 
                 status = "ok"
@@ -569,30 +630,34 @@ def generate_study_b_multi(
                 t0 = time.perf_counter()
                 try:
                     response_text = case_runner.chat(history, mode="default")
-                    history.append({"role": "assistant", "content": response_text})
+                    history.append({"role": "assistant", "content": _prepare_response_for_context(response_text)})
                 except Exception as exc:
                     status = "error"
                     error_message = str(exc)
                 latency_ms = int((time.perf_counter() - t0) * 1000)
-                generated_entries.append(
-                    {
-                        "case_id": case_id,
-                        "turn_num": turn_num,
-                        "variant": "multi_turn",
-                        "arm": arm,
-                        "response_text": response_text,
-                        "status": status,
-                        "error_message": error_message,
-                        "timestamp": _now_iso(),
-                        "run_id": run_id,
-                        "model_name": model_id,
-                        "control_prompt_id": control_id,
-                        "control_prompt_text": control_text,
-                        "gold_answer": gold_answer,
-                        "incorrect_opinion": incorrect_opinion,
-                        "metadata": case.get("metadata", {}),
-                        "meta": {"latency_ms": latency_ms, "pressure_level": turn.get("pressure_level")},
-                    }
+                entry = {
+                    "case_id": case_id,
+                    "turn_num": turn_num,
+                    "variant": "multi_turn",
+                    "arm": arm,
+                    "response_text": response_text,
+                    "status": status,
+                    "error_message": error_message,
+                    "timestamp": _now_iso(),
+                    "run_id": run_id,
+                    "model_name": model_id,
+                    "control_prompt_id": control_id,
+                    "control_prompt_text": control_text,
+                    "gold_answer": gold_answer,
+                    "incorrect_opinion": incorrect_opinion,
+                    "metadata": case.get("metadata", {}),
+                    "meta": {"latency_ms": latency_ms, "pressure_level": turn.get("pressure_level")},
+                }
+                _persist_now(entry)
+                generated_entries.append(entry)
+                logger.info(
+                    "ctrl_b_multi saved case=%s turn=%d arm=%s latency=%dms",
+                    case_id, turn_num, arm, latency_ms,
                 )
 
         return generated_entries
@@ -606,8 +671,6 @@ def generate_study_b_multi(
         progress_interval_seconds=progress_interval_seconds,
         progress_label="ctrl_study_b_multi_turn",
     ):
-        for entry in generated_entries:
-            _persist_entry_with_retry(cache_path, entry)
         completed += 1
         print(f"  [{completed}/{total_jobs}] {case['id']} wrote {len(generated_entries)} entry(s)")
 
@@ -641,6 +704,13 @@ def generate_study_c(
     print(f"Pending Study C controllability cases: {len(case_jobs)} (workers={worker_count})")
     get_runner = _make_runner_provider(runner, worker_count, runner_factory)
 
+    import threading
+    persist_lock_c = threading.Lock()
+
+    def _persist_now_c(entry: Dict[str, Any]) -> None:
+        with persist_lock_c:
+            _persist_entry_with_retry(cache_path, entry)
+
     def _generate_case_entries(case: Dict[str, Any]) -> List[Dict[str, Any]]:
         case_id = str(case["id"])
         explicit_text = str(case.get("cot_controlled_constraint", "") or "")
@@ -670,25 +740,29 @@ def generate_study_c(
                     status = "error"
                     error_message = str(exc)
                 latency_ms = int((time.perf_counter() - t0) * 1000)
-                generated_entries.append(
-                    {
-                        "case_id": case_id,
-                        "turn_num": turn_num,
-                        "variant": "summary",
-                        "arm": arm,
-                        "prompt": summary_prompt,
-                        "response_text": response_text,
-                        "status": status,
-                        "error_message": error_message,
-                        "timestamp": _now_iso(),
-                        "run_id": run_id,
-                        "model_name": model_id,
-                        "control_prompt_id": control_id,
-                        "control_prompt_text": control_text,
-                        "critical_entities": case.get("critical_entities", []),
-                        "metadata": case.get("metadata", {}),
-                        "meta": {"latency_ms": latency_ms},
-                    }
+                entry = {
+                    "case_id": case_id,
+                    "turn_num": turn_num,
+                    "variant": "summary",
+                    "arm": arm,
+                    "prompt": summary_prompt,
+                    "response_text": response_text,
+                    "status": status,
+                    "error_message": error_message,
+                    "timestamp": _now_iso(),
+                    "run_id": run_id,
+                    "model_name": model_id,
+                    "control_prompt_id": control_id,
+                    "control_prompt_text": control_text,
+                    "critical_entities": case.get("critical_entities", []),
+                    "metadata": case.get("metadata", {}),
+                    "meta": {"latency_ms": latency_ms},
+                }
+                _persist_now_c(entry)
+                generated_entries.append(entry)
+                logger.info(
+                    "ctrl_c saved case=%s turn=%d arm=%s latency=%dms",
+                    case_id, turn_num, arm, latency_ms,
                 )
 
         return generated_entries
@@ -702,8 +776,6 @@ def generate_study_c(
         progress_interval_seconds=progress_interval_seconds,
         progress_label="ctrl_study_c",
     ):
-        for entry in generated_entries:
-            _persist_entry_with_retry(cache_path, entry)
         completed += 1
         print(f"  [{completed}/{total_jobs}] {case['id']} wrote {len(generated_entries)} entry(s)")
 
@@ -754,7 +826,8 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help=(
             "Number of parallel generation workers. "
-            "Default is auto: 4 for LM Studio runners, 1 for vLLM and local HF runners."
+            "Default is auto: 4 for LM Studio runners, 1 for vLLM and local HF runners. "
+            "GPT-OSS via LM Studio is capped to 1 unless LMSTUDIO_GPT_OSS_MAX_WORKERS is set."
         ),
     )
     parser.add_argument(
@@ -807,9 +880,16 @@ def main() -> int:
         "psych_qwen_vllm",
     }
     uses_server_side_token_limits = args.model_id.lower() in (lmstudio_model_ids | vllm_model_ids)
-    effective_max_tokens = (
-        args.max_tokens if args.max_tokens is not None else (None if uses_server_side_token_limits else 8192)
-    )
+    if args.max_tokens is not None:
+        effective_max_tokens = args.max_tokens
+    elif study == "ctrl_study_c" and uses_server_side_token_limits:
+        # Study C multi-turn: cap at 4096 for LM Studio stability (responses
+        # feed back into rolling history; large outputs compound stalls).
+        effective_max_tokens = 4096
+    elif uses_server_side_token_limits:
+        effective_max_tokens = None  # defer to server
+    else:
+        effective_max_tokens = 8192
 
     def _runner_factory() -> Any:
         return get_model_runner(args.model_id, GenerationConfig(max_tokens=effective_max_tokens))

@@ -4,7 +4,15 @@
 from __future__ import annotations
 
 import argparse
+import logging
+import os
 from pathlib import Path
+
+logging.basicConfig(
+    level=getattr(logging, os.environ.get("BENCHMARK_LOG_LEVEL", "WARNING").upper(), logging.WARNING),
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
+logger = logging.getLogger(__name__)
 
 from _invariance_runner_common import (
     DEFAULT_INVARIANCE_DATA_DIR,
@@ -157,9 +165,36 @@ def _resolve_cache_out(
     )
 
 
-def _resolve_max_tokens(study: str, max_tokens: int | None) -> int:
+# LM Studio / vLLM model IDs that should defer max_tokens to the server
+# unless explicitly overridden.  Mirrors the set in run_ctrl_generate_only.py.
+_SERVER_SIDE_TOKEN_MODEL_IDS = {
+    "qwen3_lmstudio", "qwen3-lmstudio", "qwen3-8b-lmstudio",
+    "qwq", "qwq_lmstudio", "qwq-lmstudio", "qwq-32b-lmstudio",
+    "deepseek_r1_lmstudio", "deepseek-r1-lmstudio", "deepseek-r1-14b-lmstudio",
+    "gpt_oss_lmstudio", "gpt_oss", "gpt-oss-lmstudio", "gpt-oss-20b",
+    "psych_qwen_32b-mlx", "psych-qwen-32b-mlx",
+    "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
+    "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
+    "qwen3.5-distilled", "qwen3.5-27b-distilled", "qwen3_5_distilled_lmstudio",
+    "psyllm_gml_vllm", "piaget_vllm", "psyche_r1_vllm", "psych_qwen_vllm",
+}
+
+
+def _resolve_max_tokens(study: str, max_tokens: int | None, model_id: str) -> int | None:
+    """Resolve effective max_tokens with LM Studio / vLLM awareness.
+
+    - Explicit ``--max-tokens`` always wins.
+    - study_c_invariance + LM Studio/vLLM: cap at 4096 (same rationale as
+      main Study C — responses feed back into rolling history).
+    - Other studies + LM Studio/vLLM: ``None`` (defer to server).
+    - Non-server models: use DEFAULT_MAX_TOKENS.
+    """
     if max_tokens is not None:
         return max_tokens
+    if model_id.lower() in _SERVER_SIDE_TOKEN_MODEL_IDS:
+        if study == "study_c_invariance":
+            return 4096
+        return None
     return DEFAULT_MAX_TOKENS[study]
 
 
@@ -193,7 +228,11 @@ def main() -> None:
             "Point --data-dir at one child variant folder or omit --cache-out."
         )
 
-    max_tokens = _resolve_max_tokens(args.study, args.max_tokens)
+    max_tokens = _resolve_max_tokens(args.study, args.max_tokens, args.model_id)
+    logger.info(
+        "Invariance run: study=%s model=%s effective_max_tokens=%s",
+        args.study, args.model_id, max_tokens,
+    )
 
     config = GenerationConfig(max_tokens=max_tokens)
     runner = get_model_runner(args.model_id, config)
