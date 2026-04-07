@@ -102,6 +102,7 @@ def test_study_b_generate_only_writes_jsonl(tmp_path: Path) -> None:
         # Multi-turn rows must have case_id + turn_num + conversation_text
         if row["variant"] == "multi_turn":
             assert "case_id" in row
+            assert isinstance(row.get("persona_id"), str) and row["persona_id"] == "aisha"
             assert isinstance(row.get("turn_num"), int) and row["turn_num"] >= 1
             assert isinstance(row.get("conversation_text"), str) and row["conversation_text"]
             assert isinstance(row.get("response_text"), str)
