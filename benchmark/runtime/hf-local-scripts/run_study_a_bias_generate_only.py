@@ -311,8 +311,8 @@ def _parse_args() -> argparse.Namespace:
 
         "--max-tokens",
         type=int,
-        default=8192,
-        help="Max new tokens per generation (default: 8192).",
+        default=None,
+        help="Max new tokens per generation. Defaults to LM Studio server settings for gpt_oss/qwen3_lmstudio, otherwise 8192.",
 
     )
 
@@ -404,6 +404,14 @@ def _parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
+def _resolve_max_tokens(model_id: str, explicit_max_tokens: int | None, fallback: int) -> int | None:
+    if explicit_max_tokens is not None:
+        return explicit_max_tokens
+    if model_id.lower() in {"gpt_oss", "gpt_oss_lmstudio", "gpt-oss-lmstudio", "gpt-oss-20b", "qwen3_lmstudio", "qwen3-lmstudio", "qwen3-8b-lmstudio"}:
+        return None
+    return fallback
+
+
 
 
 
@@ -435,6 +443,8 @@ def main() -> None:
 
     
 
+    resolved_max_tokens = _resolve_max_tokens(args.model_id, args.max_tokens, 8192)
+
     # For local HF models, instantiate directly (like main Study A scripts)
 
     # This ensures proper model path and quantization settings
@@ -457,7 +467,7 @@ def main() -> None:
 
             model_name=model_path,
 
-            config=GenerationConfig(max_tokens=args.max_tokens),
+            config=GenerationConfig(max_tokens=resolved_max_tokens),
 
         )
 
@@ -471,7 +481,7 @@ def main() -> None:
 
             model_name=model_path,
 
-            config=GenerationConfig(max_tokens=args.max_tokens),
+            config=GenerationConfig(max_tokens=resolved_max_tokens),
 
         )
 
@@ -485,7 +495,7 @@ def main() -> None:
 
             model_name=model_path,
 
-            config=GenerationConfig(max_tokens=args.max_tokens),
+            config=GenerationConfig(max_tokens=resolved_max_tokens),
 
         )
 
@@ -515,7 +525,7 @@ def main() -> None:
 
             offload_folder=args.offload_folder,
 
-            config=GenerationConfig(max_tokens=args.max_tokens),
+            config=GenerationConfig(max_tokens=resolved_max_tokens),
 
         )
 
@@ -527,7 +537,7 @@ def main() -> None:
 
     if runner is None:
 
-        config = GenerationConfig(max_tokens=args.max_tokens)
+        config = GenerationConfig(max_tokens=resolved_max_tokens)
 
         runner = get_model_runner(args.model_id, config)
 

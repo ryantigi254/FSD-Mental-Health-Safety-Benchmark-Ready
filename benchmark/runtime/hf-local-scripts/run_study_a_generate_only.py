@@ -139,8 +139,8 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--max-tokens",
         type=int,
-        default=32000,
-        help="Max new tokens per generation (default: 32000 for long reasoning traces).",
+        default=None,
+        help="Max new tokens per generation. Defaults to LM Studio server settings for gpt_oss/qwen3_lmstudio, otherwise 32000.",
     )
     parser.add_argument(
         "--cache-out",
@@ -170,6 +170,14 @@ def _parse_args() -> argparse.Namespace:
         help="Quantization mode for local models (e.g., '4bit', '8bit', 'none').",
     )
     return parser.parse_args()
+
+
+def _resolve_max_tokens(model_id: str, explicit_max_tokens: int | None, fallback: int) -> int | None:
+    if explicit_max_tokens is not None:
+        return explicit_max_tokens
+    if model_id.lower() in {"gpt_oss", "gpt_oss_lmstudio", "gpt-oss-lmstudio", "gpt-oss-20b", "qwen3_lmstudio", "qwen3-lmstudio", "qwen3-8b-lmstudio"}:
+        return None
+    return fallback
 
 
 def main() -> None:
@@ -208,7 +216,7 @@ def main() -> None:
 
 
 
-    config = GenerationConfig(max_tokens=args.max_tokens)
+    config = GenerationConfig(max_tokens=_resolve_max_tokens(args.model_id, args.max_tokens, 32000))
 
     runner = get_model_runner(args.model_id, config, quantization=args.quantization)
 

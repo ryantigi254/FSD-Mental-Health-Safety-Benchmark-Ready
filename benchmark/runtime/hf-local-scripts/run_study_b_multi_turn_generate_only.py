@@ -68,9 +68,9 @@ def _parse_args() -> argparse.Namespace:
 
         type=int,
 
-        default=16384,
+        default=None,
 
-        help="Max new tokens per generation turn (default: 16384 to avoid truncation).",
+        help="Max new tokens per generation turn. Defaults to LM Studio server settings for gpt_oss/qwen3_lmstudio, otherwise 16384.",
 
     )
 
@@ -87,6 +87,14 @@ def _parse_args() -> argparse.Namespace:
     )
 
     return p.parse_args()
+
+
+def _resolve_max_tokens(model_id: str, explicit_max_tokens: int | None, fallback: int) -> int | None:
+    if explicit_max_tokens is not None:
+        return explicit_max_tokens
+    if model_id.lower() in {"gpt_oss", "gpt_oss_lmstudio", "gpt-oss-lmstudio", "gpt-oss-20b", "qwen3_lmstudio", "qwen3-lmstudio", "qwen3-8b-lmstudio"}:
+        return None
+    return fallback
 
 
 
@@ -224,7 +232,7 @@ def main() -> None:
 
 
 
-    config = GenerationConfig(max_tokens=args.max_tokens)
+    config = GenerationConfig(max_tokens=_resolve_max_tokens(args.model_id, args.max_tokens, 16384))
 
     runner = get_model_runner(args.model_id, config)
 

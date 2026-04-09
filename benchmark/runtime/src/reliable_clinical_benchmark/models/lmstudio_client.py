@@ -21,6 +21,20 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+def _default_lmstudio_read_timeout() -> Optional[int]:
+    """Return the default LM Studio read timeout in seconds."""
+    raw_value = os.environ.get("LMSTUDIO_READ_TIMEOUT_SECONDS", "600").strip()
+    try:
+        seconds = int(raw_value)
+    except ValueError:
+        logger.warning(
+            "Invalid LMSTUDIO_READ_TIMEOUT_SECONDS=%r; falling back to 600 seconds.",
+            raw_value,
+        )
+        seconds = 600
+    return None if seconds <= 0 else seconds
+
+
 def _flatten_content(content: Any) -> str:
     """
     Normalise LM Studio / OpenAI-style mixed content:
@@ -83,14 +97,6 @@ def _split_content_and_reasoning(content: Any) -> Tuple[str, str]:
     return "".join(text_parts), "".join(reasoning_parts)
 
 
-def _default_read_timeout_seconds() -> int:
-    raw = os.environ.get("LMSTUDIO_READ_TIMEOUT_SECONDS", "600")
-    try:
-        return max(1, int(raw))
-    except ValueError:
-        return 600
-
-
 def chat_completion(
     api_base: str,
     model: str,
@@ -113,12 +119,12 @@ def chat_completion(
         model: Model name/identifier as recognised by LM Studio
         messages: List of message dicts with "role" and "content" keys
         temperature: Sampling temperature (0.0-2.0)
-        max_tokens: Maximum tokens to generate. If None, ``max_tokens`` is omitted from the
-            request payload so LM Studio applies its server-side default.
+        max_tokens: Maximum tokens to generate. If None, omit ``max_tokens`` so
+            LM Studio applies its server-side default.
         top_p: Nucleus sampling parameter
         timeout: Request timeout. If None, uses (30s connect, read timeout from
-            ``LMSTUDIO_READ_TIMEOUT_SECONDS``, default 600s). Pass a tuple ``(connect, read)``
-            for full control; pass a single int for legacy behaviour.
+            ``LMSTUDIO_READ_TIMEOUT_SECONDS``, default 600s, unlimited when <= 0).
+            Pass a tuple ``(connect_timeout, read_timeout)`` for full control.
 
     Returns:
         Generated text content from the model
@@ -152,9 +158,9 @@ def chat_completion(
 
     # Use tuple timeout: (connect_timeout, read_timeout)
     # Connect timeout: 30s to fail fast if server is down
-    # Read timeout: bounded by default (LMSTUDIO_READ_TIMEOUT_SECONDS, default 600s) when caller passes timeout=None
+    # Read timeout: bounded by default so stalled LM Studio requests don't hang forever
     if timeout is None:
-        request_timeout = (30, _default_read_timeout_seconds())
+        request_timeout = (30, _default_lmstudio_read_timeout())
     elif isinstance(timeout, tuple):
         request_timeout = timeout
     else:
@@ -193,7 +199,7 @@ def chat_completion(
         return content
 
     except requests.exceptions.Timeout:
-        timeout_str = f"{timeout}s" if timeout else "no timeout set"
+        timeout_str = str(request_timeout)
         logger.error(f"LM Studio request timed out ({timeout_str}) for model {model}")
         raise TimeoutError(f"Generation timed out ({timeout_str})")
 

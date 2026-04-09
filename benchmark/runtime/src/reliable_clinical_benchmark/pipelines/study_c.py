@@ -1,10 +1,12 @@
 """Study C: Longitudinal Drift Evaluation Pipeline."""
 
+import copy
 import json
 import re
 import shutil
 import threading
 import time
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, Any, Iterable, List
@@ -50,57 +52,12 @@ from ..utils.worker_runtime import (
 
 
 SENT_SPLIT = re.compile(r"(?<=[.!?])\s+")
-
-# Strip model reasoning wrappers from text reused in rolling dialogue history only.
 THINK_BLOCK_RE = re.compile(
-    r"<(?:redacted_thinking|redacted_reasoning)>\s*.*?\s*</(?:redacted_thinking|redacted_reasoning)>\s*",
+    r"<(?:think|redacted_thinking|redacted_reasoning)>\s*.*?\s*</(?:think|redacted_thinking|redacted_reasoning)>\s*",
     re.DOTALL | re.IGNORECASE,
 )
-
-# Cap assistant text length when re-injecting into multi-turn context (not saved JSONL rows).
 MAX_CONTEXT_RESPONSE_CHARS = 2000
-
-
-def _strip_reasoning_blocks(text: str) -> str:
-    if not text:
-        return text
-    return THINK_BLOCK_RE.sub("", text).strip()
-
-
-def _truncate_for_context(text: str, max_chars: int = MAX_CONTEXT_RESPONSE_CHARS) -> str:
-    if not text or len(text) <= max_chars:
-        return text
-    return text[:max_chars].rstrip() + "\n[Context truncated for stability]"
-
-
-def _prepare_response_for_context(
-    raw_response: str,
-    *,
-    context_cleaner: str,
-    turn_num: int,
-    context_clean_start_turn: int,
-) -> str:
-    """
-    Cheap path for rolling chat history: strip reasoning, truncate, then scan-clean only.
-
-    Avoids _clean_for_context -> _remove_repetition_rapidfuzz on long outputs (can stall CPU).
-    Raw generations for JSONL remain unchanged; this affects in-memory history only.
-    """
-    text = (raw_response or "").strip()
-    text = _strip_reasoning_blocks(text)
-    text = _truncate_for_context(text)
-    if context_cleaner == "none":
-        return text
-    if not _should_clean_context(turn_num, context_clean_start_turn):
-        return text
-    if context_cleaner == "fuzzy":
-        return _clean_for_context(text)
-    if context_cleaner != "scan":
-        logger.warning(
-            "Unknown context_cleaner=%r; using scan cleaner (not fuzzy)",
-            context_cleaner,
-        )
-    return _scan_mode_clean(text)
+MIN_DEGENERATE_RESPONSE_CHARS = 128
 
 
 def _scan_mode_clean(text: str, min_repeat_length: int = 10, min_repeats: int = 2) -> str:
@@ -211,6 +168,100 @@ def _clean_for_context(text: str, min_repeat_length: int = 10, min_repeats: int 
 
 def _should_clean_context(turn_num: int, start_turn: int = 4) -> bool:
     return turn_num >= start_turn
+
+
+def _prepare_response_for_context(
+    text: str,
+    turn_num: int,
+    context_cleaner: str,
+    context_clean_start_turn: int,
+    max_chars: int = MAX_CONTEXT_RESPONSE_CHARS,
+) -> str:
+    """
+    Prepare assistant text for rolling conversation history only.
+
+    Raw generations are still written to disk unchanged; this helper keeps the
+    in-memory chat history from ballooning and stalling later Study C turns.
+    Keep this path cheap: Study C can call it many times per run.
+    """
+    prepared = THINK_BLOCK_RE.sub("", text or "").strip()
+    if max_chars > 0 and len(prepared) > max_chars:
+        prepared = prepared[:max_chars].rstrip() + "\n[Context truncated for stability]"
+    if context_cleaner == "none":
+        return prepared or (text or "")
+    if _should_clean_context(turn_num, context_clean_start_turn):
+        if context_cleaner == "scan":
+            prepared = _scan_mode_clean(prepared)
+        elif context_cleaner == "fuzzy":
+            prepared = _clean_for_context(prepared)
+        else:
+            logger.warning(
+                "Unknown context_cleaner=%r; using scan cleaner (not fuzzy)",
+                context_cleaner,
+            )
+            prepared = _scan_mode_clean(prepared)
+    return prepared or (text or "")
+
+
+def _degenerate_response_reason(text: str) -> Optional[str]:
+    """
+    Detect clearly broken generations that should not be treated as valid cache rows.
+
+    The main production failure observed here was LM Studio returning long runs of
+    `?` characters while still reporting HTTP success. Those rows were previously
+    cached as status=ok and then reused forever on resume.
+    """
+    stripped = (text or "").strip()
+    if not stripped:
+        return "empty response"
+
+    compact = "".join(ch for ch in stripped if not ch.isspace())
+    if len(compact) < MIN_DEGENERATE_RESPONSE_CHARS:
+        return None
+
+    unique_chars = set(compact)
+    if len(unique_chars) == 1:
+        repeated = next(iter(unique_chars))
+        if not repeated.isalnum():
+            return f"repeated non-alphanumeric character {repeated!r}"
+
+    counts = Counter(compact)
+    dominant_char, dominant_count = counts.most_common(1)[0]
+    dominant_ratio = dominant_count / len(compact)
+    alpha_ratio = sum(ch.isalpha() for ch in compact) / len(compact)
+
+    if dominant_ratio >= 0.9 and alpha_ratio < 0.05 and not dominant_char.isalnum():
+        return (
+            f"dominant non-alphanumeric character {dominant_char!r} "
+            f"({dominant_ratio:.1%} of compact output)"
+        )
+
+    return None
+
+
+def _is_valid_ok_entry(entry: Dict[str, Any]) -> bool:
+    """Return True only for OK cache rows whose response text looks usable."""
+    if entry.get("status") != "ok":
+        return False
+    response_text = entry.get("response_text", "")
+    if not isinstance(response_text, str):
+        return False
+    return _degenerate_response_reason(response_text) is None
+
+
+def _clone_runner_for_worker(model: ModelRunner, isolate_state: bool) -> ModelRunner:
+    """Clone the runner when threaded workers would otherwise share mutable config."""
+    if not isolate_state:
+        return model
+    try:
+        return copy.deepcopy(model)
+    except Exception as exc:
+        logger.warning(
+            "Could not clone Study C model runner for worker isolation; "
+            "reusing shared runner instead: %s",
+            exc,
+        )
+        return model
 
 
 def _remove_repetition(text: str, max_repetition_ratio: float = 0.3, min_repeat_length: int = 50) -> str:
@@ -627,14 +678,16 @@ def _compact_cache(cache_path: Path, make_backup: bool = True) -> None:
         if current is None:
             best[case_key][turn_key][variant_key] = e
             continue
-        if current.get("status") == "ok":
-            if e.get("status") == "ok" and e.get("timestamp", "") > current.get("timestamp", ""):
-                best[case_key][turn_key][variant_key] = e
-        else:
-            if e.get("status") == "ok":
-                best[case_key][turn_key][variant_key] = e
-            elif e.get("timestamp", "") > current.get("timestamp", ""):
-                best[case_key][turn_key][variant_key] = e
+
+        def _entry_rank(entry: Dict[str, Any]) -> tuple[int, str]:
+            if _is_valid_ok_entry(entry):
+                return (2, entry.get("timestamp", ""))
+            if entry.get("status") == "ok":
+                return (1, entry.get("timestamp", ""))
+            return (0, entry.get("timestamp", ""))
+
+        if _entry_rank(e) > _entry_rank(current):
+            best[case_key][turn_key][variant_key] = e
 
     cache_path.unlink(missing_ok=True)
     cache_path.parent.mkdir(parents=True, exist_ok=True)
@@ -653,7 +706,7 @@ def _existing_ok(entries: Iterable[Dict[str, Any]]) -> Dict[str, Dict[int, Dict[
     """
     out: Dict[str, Dict[int, Dict[str, Dict[str, Any]]]] = {}
     for e in entries:
-        if e.get("status") != "ok":
+        if not _is_valid_ok_entry(e):
             continue
         case_id = e.get("case_id")
         turn_num = e.get("turn_num")
@@ -732,14 +785,25 @@ def run_study_c(
         logger.info(f"Generation-only mode. Writing Study C cache to {cache_path}")
         
         _compact_cache(cache_path, make_backup=True)
+        cache_write_lock = threading.Lock()
         existing: Dict[str, Dict[int, Dict[str, Dict[str, Any]]]] = {}
         if cache_path.exists():
             entries = _read_cache(cache_path)
             existing = _existing_ok(entries)
+            ignored_invalid = sum(
+                1
+                for entry in entries
+                if entry.get("status") == "ok" and not _is_valid_ok_entry(entry)
+            )
             total_cached = sum(
                 len(variants) for case_dict in existing.values() for variants in case_dict.values()
             )
             logger.info(f"Resume enabled: found {total_cached} cached (case, turn, variant) entry/entries")
+            if ignored_invalid:
+                logger.warning(
+                    "Ignoring %d cached Study C row(s) with degenerate outputs; they will be regenerated.",
+                    ignored_invalid,
+                )
 
         worker_count = resolve_worker_count(
             requested_workers=workers,
@@ -762,24 +826,19 @@ def run_study_c(
         case_jobs = [case for case in cases if _case_has_pending_rows(case)]
         logger.info("Pending Study C case jobs: %d", len(case_jobs))
 
-        cache_write_lock = threading.Lock()
-
-        def _persist_cache_row(entry: Dict[str, Any]) -> None:
+        def _persist_generated_entry(entry: Dict[str, Any]) -> bool:
             with cache_write_lock:
-                ok = append_jsonl_with_retry(cache_path, entry, log=logger)
-            if not ok:
-                logger.error(
-                    "Failed to persist Study C row for %s turn %s variant %s",
-                    entry.get("case_id"),
-                    entry.get("turn_num"),
-                    entry.get("variant"),
-                )
+                return append_jsonl_with_retry(cache_path, entry, log=logger)
 
-        def _generate_case_entries(case: Any) -> List[Dict[str, Any]]:
+        def _generate_case_entries(case: Any) -> int:
+            worker_model = _clone_runner_for_worker(
+                model,
+                isolate_state=worker_count > 1 and lmstudio_mode,
+            )
             persona_id = (case.metadata or {}).get("persona_id")
             context_for_summary = case.patient_summary
             conversation_history: List[Dict[str, str]] = []
-            generated_entries: List[Dict[str, Any]] = []
+            generated_entries = 0
 
             for turn in case.turns:
                 context_for_summary += "\n" + turn.message
@@ -790,7 +849,7 @@ def run_study_c(
                 if existing.get(case.id, {}).get(turn.turn, {}).get("summary"):
                     logger.debug("Skipping case %s turn %d variant summary (already cached)", case.id, turn.turn)
                 else:
-                    logger.info("Study C summary start case=%s turn=%d", case.id, turn.turn)
+                    logger.info("Study C summary start: case=%s turn=%d", case.id, turn.turn)
                     status = "ok"
                     summary_text = ""
                     error_message = ""
@@ -799,7 +858,13 @@ def run_study_c(
                     retry_delay = 2.0
                     for attempt in range(max_retries):
                         try:
-                            summary_text = model.generate(summary_prompt, mode="summary")
+                            candidate_summary = worker_model.generate(summary_prompt, mode="summary")
+                            degenerate_reason = _degenerate_response_reason(candidate_summary)
+                            if degenerate_reason:
+                                raise ValueError(
+                                    f"Degenerate Study C summary output: {degenerate_reason}"
+                                )
+                            summary_text = candidate_summary
                             break
                         except Exception as error:
                             if attempt < max_retries - 1:
@@ -827,7 +892,7 @@ def run_study_c(
                                 )
                     latency_ms = int((time.perf_counter() - t0) * 1000)
 
-                    entry_summary = {
+                    entry = {
                         "case_id": case.id,
                         "persona_id": persona_id,
                         "turn_num": turn.turn,
@@ -841,9 +906,16 @@ def run_study_c(
                         "model_name": model_name,
                         "meta": {"latency_ms": latency_ms},
                     }
-                    generated_entries.append(entry_summary)
-                    _persist_cache_row(entry_summary)
-                    logger.info("Study C summary saved case=%s turn=%d", case.id, turn.turn)
+                    if _persist_generated_entry(entry):
+                        generated_entries += 1
+                        logger.info("Study C summary saved: case=%s turn=%d", case.id, turn.turn)
+                    else:
+                        logger.error(
+                            "Failed to persist Study C row for %s turn %s variant %s",
+                            entry.get("case_id"),
+                            entry.get("turn_num"),
+                            entry.get("variant"),
+                        )
 
                 conversation_history.append({"role": "user", "content": turn.message})
                 if existing.get(case.id, {}).get(turn.turn, {}).get("dialogue"):
@@ -853,16 +925,18 @@ def run_study_c(
                     if cached_response_text:
                         cleaned_response = _prepare_response_for_context(
                             cached_response_text,
-                            context_cleaner=context_cleaner,
-                            turn_num=turn.turn,
-                            context_clean_start_turn=context_clean_start_turn,
+                            turn.turn,
+                            context_cleaner,
+                            context_clean_start_turn,
                         )
                         conversation_history.append({"role": "assistant", "content": cleaned_response})
                 else:
                     logger.info(
-                        "Study C dialogue start case=%s turn=%d variant=dialogue",
+                        "Study C dialogue start: case=%s turn=%d history_messages=%d max_tokens=%s",
                         case.id,
                         turn.turn,
+                        len(conversation_history),
+                        worker_model.config.max_tokens,
                     )
                     status = "ok"
                     response_text = ""
@@ -870,7 +944,7 @@ def run_study_c(
                     t0 = time.perf_counter()
                     max_retries = 3
                     retry_delay = 2.0
-                    original_max_tokens = model.config.max_tokens
+                    original_max_tokens = worker_model.config.max_tokens
                     use_cuda_recovery = (not lmstudio_mode) and TORCH_AVAILABLE and torch.cuda.is_available()
 
                     for attempt in range(max_retries):
@@ -881,39 +955,47 @@ def run_study_c(
                                 torch.cuda.reset_peak_memory_stats(0)
 
                             if attempt > 0:
-                                current_max = model.config.max_tokens
+                                current_max = worker_model.config.max_tokens
                                 if current_max is not None:
                                     reduced_tokens = max(256, current_max // (2 ** attempt))
-                                    if reduced_tokens < current_max:
-                                        logger.info(
-                                            "Reducing max_tokens from %d to %d for retry attempt %d/%d",
-                                            current_max,
-                                            reduced_tokens,
-                                            attempt + 1,
-                                            max_retries,
-                                        )
-                                        model.config.max_tokens = reduced_tokens
+                                else:
+                                    reduced_tokens = None
+                                if reduced_tokens is not None and reduced_tokens < current_max:
+                                    logger.info(
+                                        "Reducing max_tokens from %d to %d for retry attempt %d/%d",
+                                        current_max,
+                                        reduced_tokens,
+                                        attempt + 1,
+                                        max_retries,
+                                    )
+                                    worker_model.config.max_tokens = reduced_tokens
 
-                            response_text = model.chat(conversation_history, mode="default")
+                            candidate_response = worker_model.chat(conversation_history, mode="default")
+                            degenerate_reason = _degenerate_response_reason(candidate_response)
+                            if degenerate_reason:
+                                raise ValueError(
+                                    f"Degenerate Study C dialogue output: {degenerate_reason}"
+                                )
+                            response_text = candidate_response
                             cleaned_response = _prepare_response_for_context(
                                 response_text,
-                                context_cleaner=context_cleaner,
-                                turn_num=turn.turn,
-                                context_clean_start_turn=context_clean_start_turn,
+                                turn.turn,
+                                context_cleaner,
+                                context_clean_start_turn,
                             )
                             if cleaned_response != response_text:
                                 logger.info(
-                                    "Cleaned %d characters of repetition from turn %d response before adding "
+                                    "Compacted %d characters from turn %d response before adding "
                                     "to conversation history",
                                     len(response_text) - len(cleaned_response),
                                     turn.turn,
                                 )
 
                             conversation_history.append({"role": "assistant", "content": cleaned_response})
-                            model.config.max_tokens = original_max_tokens
+                            worker_model.config.max_tokens = original_max_tokens
                             break
                         except Exception as error:
-                            model.config.max_tokens = original_max_tokens
+                            worker_model.config.max_tokens = original_max_tokens
                             error_str = str(error).lower()
                             is_cuda_oom = "cuda" in error_str and (
                                 "out of memory" in error_str or "oom" in error_str
@@ -956,7 +1038,7 @@ def run_study_c(
                     conversation_text = "\n".join(
                         [f"{message['role']}: {message['content']}" for message in conversation_history[:-1]]
                     )
-                    entry_dialogue = {
+                    entry = {
                         "case_id": case.id,
                         "persona_id": persona_id,
                         "turn_num": turn.turn,
@@ -970,12 +1052,19 @@ def run_study_c(
                         "model_name": model_name,
                         "meta": {"latency_ms": latency_ms},
                     }
-                    generated_entries.append(entry_dialogue)
-                    _persist_cache_row(entry_dialogue)
-                    logger.info("Study C dialogue saved case=%s turn=%d", case.id, turn.turn)
+                    if _persist_generated_entry(entry):
+                        generated_entries += 1
+                        logger.info("Study C dialogue saved: case=%s turn=%d", case.id, turn.turn)
+                    else:
+                        logger.error(
+                            "Failed to persist Study C row for %s turn %s variant %s",
+                            entry.get("case_id"),
+                            entry.get("turn_num"),
+                            entry.get("variant"),
+                        )
             return generated_entries
 
-        for _job, case_entries in iter_threaded_results(
+        for case, case_entry_count in iter_threaded_results(
             jobs=case_jobs,
             worker_count=worker_count,
             worker_fn=_generate_case_entries,
@@ -983,10 +1072,10 @@ def run_study_c(
             progress_label="study_c",
             log=logger,
         ):
-            logger.debug(
-                "Study C case job finished: %s (%d new rows this batch)",
-                getattr(_job, "id", "?"),
-                len(case_entries),
+            logger.info(
+                "Completed Study C case %s with %d newly persisted row(s).",
+                getattr(case, "id", "<unknown>"),
+                case_entry_count,
             )
 
         logger.info("Study C generation-only complete; skipping metrics.")
@@ -1091,11 +1180,12 @@ def run_study_c(
                     )
                     resp = ""
                 responses.append(resp)  # Save raw response for metrics
+                # Clean repetitive text before adding to conversation history
                 cleaned_resp = _prepare_response_for_context(
                     resp,
-                    context_cleaner=context_cleaner,
-                    turn_num=turn.turn,
-                    context_clean_start_turn=context_clean_start_turn,
+                    turn.turn,
+                    context_cleaner,
+                    context_clean_start_turn,
                 )
                 conversation_history.append({"role": "assistant", "content": cleaned_resp})
             responses_by_case_id[case.id] = responses

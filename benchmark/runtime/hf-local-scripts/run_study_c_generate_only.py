@@ -3,13 +3,13 @@ import logging
 import os
 import sys
 from pathlib import Path
-from typing import Optional
 
 # Set PyTorch CUDA allocator config to reduce memory fragmentation.
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
-
-_LOG_LEVEL = getattr(logging, (os.environ.get("BENCHMARK_LOG_LEVEL") or "INFO").upper(), logging.INFO)
-logging.basicConfig(level=_LOG_LEVEL, format="%(levelname)s %(name)s: %(message)s")
+logging.basicConfig(
+    level=os.environ.get("BENCHMARK_LOG_LEVEL", "INFO").upper(),
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
 
 
 def _ensure_src_on_path(runtime_root: Path) -> None:
@@ -44,8 +44,10 @@ def _parse_args() -> argparse.Namespace:
         type=int,
         default=None,
         help=(
-            "Max new tokens per generation. When omitted, a study-specific default is applied "
-            "(4096 for LM Studio gpt_oss, qwen3_lmstudio, and deepseek_r1_lmstudio; 16384 otherwise)."
+            "Max new tokens per generation. "
+            "When omitted, a Study C default is applied "
+            "(4096 for LM Studio gpt_oss, qwen3_lmstudio, and deepseek_r1_lmstudio; 16384 otherwise). "
+            "GPU cache is cleared after each generation to prevent memory buildup. Can be reduced if memory is tight."
         ),
     )
     p.add_argument(
@@ -70,6 +72,25 @@ def _parse_args() -> argparse.Namespace:
         help="Heartbeat interval for progress logging while waiting for workers.",
     )
     return p.parse_args()
+
+
+def _resolve_max_tokens(model_id: str, explicit_max_tokens: int | None, fallback: int) -> int | None:
+    if explicit_max_tokens is not None:
+        return explicit_max_tokens
+    if model_id.lower() in {
+        "gpt_oss",
+        "gpt_oss_lmstudio",
+        "gpt-oss-lmstudio",
+        "gpt-oss-20b",
+        "qwen3_lmstudio",
+        "qwen3-lmstudio",
+        "qwen3-8b-lmstudio",
+        "deepseek_r1_lmstudio",
+        "deepseek-r1-lmstudio",
+        "deepseek-r1-14b",
+    }:
+        return 4096
+    return fallback
 
 
 def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
@@ -113,16 +134,6 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
     return model_id.replace("_", "-").lower()
 
 
-def _resolve_max_tokens(model_id: str, cli_max_tokens: Optional[int]) -> int:
-    """Study C multi-turn: moderate caps for LM Studio models to stabilise rolling history."""
-    if cli_max_tokens is not None:
-        return cli_max_tokens
-    mid = (model_id or "").strip().lower()
-    if mid in {"gpt_oss", "qwen3_lmstudio", "deepseek_r1_lmstudio"}:
-        return 4096
-    return 16384
-
-
 def main() -> None:
     runtime_root = Path(__file__).resolve().parents[1]
     _ensure_src_on_path(runtime_root)
@@ -142,7 +153,7 @@ def main() -> None:
     if not ok:
         raise SystemExit("Study C split validation failed:\n- " + "\n- ".join(errors[:30]))
 
-    resolved_tokens = _resolve_max_tokens(args.model_id, args.max_tokens)
+    resolved_tokens = _resolve_max_tokens(args.model_id, args.max_tokens, 16384)
     logging.getLogger(__name__).info(
         "Study C max_tokens=%s (model_id=%s, cli=%s)",
         resolved_tokens,
