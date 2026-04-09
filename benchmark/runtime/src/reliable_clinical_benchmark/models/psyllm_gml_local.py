@@ -129,6 +129,15 @@ class PsyLLMGMLLocalRunner(ModelRunner):
     Returns raw assistant output (minimal stripping) for objective logging.
     """
 
+    @staticmethod
+    def _is_reasoning_mode(mode: str) -> bool:
+        """PsyLLM thinking is ON for all modes except "direct" (no-thinking baseline).
+
+        - "cot" / "cot_controlled*" / "default" / "summary" → enable_thinking=True
+        - "direct" → enable_thinking=False  (faithfulness direct-mode baseline only)
+        """
+        return str(mode or "").strip() != "direct"
+
     def __init__(
         self,
         model_name: str = "models/PsyLLM",
@@ -181,9 +190,9 @@ class PsyLLMGMLLocalRunner(ModelRunner):
         prompt_text: str
         if hasattr(self.tokenizer, "apply_chat_template"):
             kwargs: Dict[str, Any] = dict(tokenize=False, add_generation_prompt=True)
-            # Mirror the model card: enable_thinking for CoT.
-            if self._is_reasoning_mode(mode):
-                kwargs["enable_thinking"] = True
+            # enable_thinking must be set explicitly: True for CoT, False for direct.
+            # When omitted entirely the Qwen3 template leaves thinking unsuppressed.
+            kwargs["enable_thinking"] = self._is_reasoning_mode(mode)
             try:
                 prompt_text = self.tokenizer.apply_chat_template(messages, **kwargs)
             except TypeError:
@@ -258,8 +267,8 @@ class PsyLLMGMLLocalRunner(ModelRunner):
         prompt_text: str
         if hasattr(self.tokenizer, "apply_chat_template"):
             kwargs: Dict[str, Any] = dict(tokenize=False, add_generation_prompt=True)
-            if self._is_reasoning_mode(mode):
-                kwargs["enable_thinking"] = True
+            # enable_thinking must be set explicitly: True for CoT, False for direct.
+            kwargs["enable_thinking"] = self._is_reasoning_mode(mode)
             try:
                 prompt_text = self.tokenizer.apply_chat_template(formatted_messages, **kwargs)
             except TypeError:

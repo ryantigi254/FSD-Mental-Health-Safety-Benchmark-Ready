@@ -58,6 +58,11 @@ json-render-3d-test/
 models/
 /scripts/
 
+# PsyLLM GGUF tooling (large / generated)
+tools/llama.cpp/
+tools/llama-cpp-bin/
+tools/hf_models/
+
 # Symphony local runtime state
 .codex/symphony/workspaces/
 .codex/symphony/logs/
