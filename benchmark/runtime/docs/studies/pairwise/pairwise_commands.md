@@ -35,6 +35,24 @@ python3 scripts/pairwise/run_pairwise.py \
   --config metric-results/pairwise/manifests/configs/study_a.run_config.json
 ```
 
+## Run one slice in exhaustive audit mode
+
+```bash
+python3 scripts/pairwise/run_pairwise.py \
+  --config metric-results/pairwise/manifests/configs/study_a.run_config.json \
+  --dry-run
+```
+
+Then copy the config, change `"run_mode": "all_judges"`, and rerun for a full four-judge audit pass.
+
+## Run the judge-audit summary
+
+```bash
+python3 scripts/pairwise/run_judge_audit.py \
+  --manifest metric-results/pairwise/judge_audit/manifests/gold_audit_slice.v1.json \
+  --parsed-dir metric-results/pairwise/parsed/pairwise_study_a_v2
+```
+
 ## Generate the dedicated notebook family
 
 ```bash

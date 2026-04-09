@@ -2,6 +2,26 @@
 
 This directory documents the notebook-driven pairwise layer for secondary communication-quality analysis.
 
+## Canonical execution mode
+
+The default run mode is `stacked`, not “all judges all the time”.
+
+Stacked execution uses the fixed panel as an uncertainty-and-audit stack:
+
+- `primary`: `Jackrong/Qwopus3.5-27B-v3-GGUF`
+- `audit`: `TeichAI/GLM-4.7-Flash-Claude-Opus-4.5-High-Reasoning-Distill`
+- `escalation_1`: `TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF`
+- `escalation_2`: `google/gemma-4-31B-it`
+
+Routine flow:
+
+1. Run the primary and audit judges on every pair in both `AB` and `BA`.
+2. Accept routine secondary evidence only when they agree after order normalisation.
+3. Escalate to the two escalation judges when there is disagreement, tie, invalid output, swap failure, or a configured high-risk tag.
+4. Mark the case `uncertain` if escalation does not produce a clean unanimous decisive outcome.
+
+`all_judges` remains available as an explicit audit/debug override only.
+
 ## What pairwise is allowed to evaluate
 
 - clarity and comprehensibility
@@ -35,6 +55,8 @@ Those remain in the primary benchmark metrics and rule-based safety analyses.
 
 The panel is fixed so cross-judge disagreement is measurable rather than silently drifting with judge choice.
 
+Pooled summaries are secondary views. Per-judge outputs, escalation rates, and persistent disagreement cases are the primary reporting surfaces.
+
 ## Canonical outputs
 
 - manifests: `metric-results/pairwise/manifests/`
@@ -42,5 +64,20 @@ The panel is fixed so cross-judge disagreement is measurable rather than silentl
 - parsed judgements: `metric-results/pairwise/parsed/<run_id>/`
 - aggregate JSON: `metric-results/pairwise/aggregates/<run_id>/`
 - final report JSON and CSV mirrors: `metric-results/pairwise/reports/<run_id>/`
+- judge-audit manifests: `metric-results/pairwise/judge_audit/manifests/`
+- judge-audit reports: `metric-results/pairwise/judge_audit/reports/`
 
 Notebooks read only the canonical report files.
+
+## Judge-audit layer
+
+The pairwise subsystem also carries a separate judge meta-evaluation layer. It does not treat the judges as ground truth. Instead it scores each judge against a small labelled audit slice on:
+
+- gold agreement
+- swap consistency
+- prompt invariance
+- sensitivity on clearly separated cases
+- repeat-run stability
+- calibration proxy on ambiguous versus easy cases
+
+Judge-audit outputs justify the current primary/audit/escalation role assignment and provide the evidence needed to revisit it later.

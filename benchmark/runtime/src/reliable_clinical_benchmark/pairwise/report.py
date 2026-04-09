@@ -30,17 +30,23 @@ class PairwiseReportBuilder:
         report_path = self.report_dir / f"{slice_id}__pairwise_secondary_results.json"
         win_rates_path = self.report_dir / f"{slice_id}__win_rates.csv"
         bt_path = self.report_dir / f"{slice_id}__bradley_terry.csv"
+        execution_path = self.report_dir / f"{slice_id}__execution_summary.csv"
+        disagreement_path = self.report_dir / f"{slice_id}__persistent_disagreement_cases.csv"
 
         aggregate_path.write_text(json.dumps(aggregate_blob, indent=2), encoding="utf-8")
         report_path.write_text(json.dumps(aggregate_blob, indent=2), encoding="utf-8")
         self._write_win_rates_csv(win_rates_path, aggregate_blob)
         self._write_bradley_terry_csv(bt_path, aggregate_blob)
+        self._write_execution_csv(execution_path, aggregate_blob)
+        self._write_disagreement_csv(disagreement_path, aggregate_blob)
 
         return {
             "aggregate_path": aggregate_path,
             "report_path": report_path,
             "win_rates_csv_path": win_rates_path,
             "bradley_terry_csv_path": bt_path,
+            "execution_summary_csv_path": execution_path,
+            "persistent_disagreement_csv_path": disagreement_path,
         }
 
     def _write_win_rates_csv(self, path: Path, aggregate_blob: Dict[str, Any]) -> None:
@@ -85,6 +91,53 @@ class PairwiseReportBuilder:
             "decisive_total",
         ]
         self._write_csv(path, fieldnames, rows)
+
+    def _write_execution_csv(self, path: Path, aggregate_blob: Dict[str, Any]) -> None:
+        rows = list(aggregate_blob.get("execution_summary", {}).get("comparison_rows", []))
+        fieldnames = [
+            "comparison_key",
+            "case_id",
+            "criterion_id",
+            "canonical_pair_key",
+            "judge_stage",
+            "comparison_outcome",
+            "high_risk_forced",
+            "escalation_reason",
+            "judge_count",
+        ]
+        normalised = []
+        for row in rows:
+            normalised.append(
+                {
+                    **row,
+                    "escalation_reason": "|".join(row.get("escalation_reason", [])),
+                }
+            )
+        self._write_csv(path, fieldnames, normalised)
+
+    def _write_disagreement_csv(self, path: Path, aggregate_blob: Dict[str, Any]) -> None:
+        rows = list(
+            aggregate_blob.get("execution_summary", {}).get("persistent_disagreement_cases", [])
+        )
+        fieldnames = [
+            "comparison_key",
+            "case_id",
+            "criterion_id",
+            "canonical_pair_key",
+            "escalation_reason",
+            "high_risk_forced",
+            "judge_winners",
+        ]
+        normalised = []
+        for row in rows:
+            normalised.append(
+                {
+                    **row,
+                    "escalation_reason": "|".join(row.get("escalation_reason", [])),
+                    "judge_winners": json.dumps(row.get("judge_winners", {}), sort_keys=True),
+                }
+            )
+        self._write_csv(path, fieldnames, normalised)
 
     @staticmethod
     def _iter_scope_payloads(aggregate_blob: Dict[str, Any]) -> Iterable[tuple[str, Dict[str, Any]]]:

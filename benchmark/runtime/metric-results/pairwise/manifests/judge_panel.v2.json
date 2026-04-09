@@ -1,11 +1,12 @@
 {
-  "manifest_version": "pairwise.judges.v1",
+  "manifest_version": "pairwise.judges.v2",
   "judges": [
     {
       "judge_id": "jackrong_qwopus35_27b_v3",
       "display_name": "Qwopus 3.5 27B v3",
       "hf_source": "Jackrong/Qwopus3.5-27B-v3-GGUF",
       "local_model_id": "Jackrong/Qwopus3.5-27B-v3-GGUF",
+      "role": "primary",
       "generation_params": {
         "temperature": 0.1,
         "max_tokens": 1024,
@@ -17,6 +18,7 @@
       "display_name": "GLM 4.7 Flash Claude Opus 4.5 Distill",
       "hf_source": "TeichAI/GLM-4.7-Flash-Claude-Opus-4.5-High-Reasoning-Distill",
       "local_model_id": "TeichAI/GLM-4.7-Flash-Claude-Opus-4.5-High-Reasoning-Distill",
+      "role": "audit",
       "generation_params": {
         "temperature": 0.1,
         "max_tokens": 1024,
@@ -28,6 +30,8 @@
       "display_name": "Qwen 3 14B GPT 5.2 Distill",
       "hf_source": "TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF",
       "local_model_id": "TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF",
+      "role": "escalation",
+      "escalation_rank": 1,
       "generation_params": {
         "temperature": 0.1,
         "max_tokens": 1024,
@@ -39,6 +43,8 @@
       "display_name": "Gemma 4 31B IT",
       "hf_source": "google/gemma-4-31B-it",
       "local_model_id": "google/gemma-4-31B-it",
+      "role": "escalation",
+      "escalation_rank": 2,
       "generation_params": {
         "temperature": 0.1,
         "max_tokens": 1024,

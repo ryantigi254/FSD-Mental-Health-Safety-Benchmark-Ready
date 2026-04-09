@@ -40,7 +40,7 @@ def main() -> int:
         )
 
     runner = PairwiseRunner(run_spec=run_spec, case_manifest=case_manifest, api_base=args.api_base)
-    planned = runner.planned_calls()
+    planned_bounds = runner.planned_call_bounds()
 
     if args.dry_run:
         print(
@@ -49,10 +49,19 @@ def main() -> int:
                     "run_id": run_spec.config.run_id,
                     "layer": run_spec.config.layer,
                     "slice_id": run_spec.config.slice_id,
-                    "planned_calls": planned,
+                    "run_mode": run_spec.config.run_mode,
+                    "planned_calls_min": planned_bounds["min"],
+                    "planned_calls_max": planned_bounds["max"],
                     "case_count": len(case_manifest.get("cases", [])),
-                    "judges": [judge.judge_id for judge in run_spec.judge_manifest.judges],
+                    "judges": [
+                        {
+                            "judge_id": judge.judge_id,
+                            "role": judge.role or "panel",
+                        }
+                        for judge in run_spec.judge_manifest.judges
+                    ],
                     "criteria": run_spec.criteria,
+                    "high_risk_tags": run_spec.config.high_risk_tags,
                     "output_root": run_spec.config.output_root,
                 },
                 indent=2,
@@ -67,7 +76,9 @@ def main() -> int:
     print(
         json.dumps(
             {
-                "planned_calls": planned,
+                "run_mode": run_spec.config.run_mode,
+                "planned_calls_min": planned_bounds["min"],
+                "planned_calls_max": planned_bounds["max"],
                 "raw_records": len(raw_records),
                 "parsed_records": len(parsed_records),
                 "aggregate_path": str(written["aggregate_path"]),

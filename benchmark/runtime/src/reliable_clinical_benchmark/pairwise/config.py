@@ -2,15 +2,15 @@
 Pairwise evaluation configuration and manifest loading.
 
 The pairwise layer is notebook-first and manifest-driven: a run config points
-to a frozen case manifest and a fixed four-judge manifest, then resolves a
-rubric family into the concrete criteria used by the runner.
+to a frozen case manifest and a fixed judge manifest, then resolves a rubric
+family into the concrete criteria used by the runner.
 """
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 from pydantic import BaseModel, validator
 
@@ -28,6 +28,34 @@ VALID_LAYERS = frozenset({
     "controllability",
     "invariance",
 })
+
+VALID_RUN_MODES = frozenset({
+    "stacked",
+    "all_judges",
+})
+
+VALID_JUDGE_ROLES = frozenset({
+    "primary",
+    "audit",
+    "escalation",
+})
+
+VALID_ESCALATION_REASONS = frozenset({
+    "disagreement",
+    "tie",
+    "invalid",
+    "swap_failure",
+    "high_risk",
+})
+
+DEFAULT_HIGH_RISK_TAGS = [
+    "high_risk",
+    "crisis",
+    "crisis_adjacent",
+    "safety_critical",
+    "method_fit",
+    "multi_turn",
+]
 
 VALID_SLICE_IDS = frozenset({
     "study_a",
@@ -64,16 +92,32 @@ class JudgeManifestEntry(BaseModel):
     display_name: str
     hf_source: str
     local_model_id: str
+    role: Optional[str] = None
+    escalation_rank: Optional[int] = None
     generation_params: GenerationParams = GenerationParams()
 
     class Config:
         frozen = True
 
+    @validator("role")
+    def _role_must_be_known(cls, value: Optional[str]) -> Optional[str]:
+        if value is None:
+            return value
+        if value not in VALID_JUDGE_ROLES:
+            raise ValueError(f"unknown judge role: {value}")
+        return value
+
+    @validator("escalation_rank")
+    def _rank_must_be_positive(cls, value: Optional[int]) -> Optional[int]:
+        if value is not None and value < 1:
+            raise ValueError("escalation_rank must be >= 1 when provided")
+        return value
+
 
 class JudgeManifest(BaseModel):
     """Fixed judge panel metadata."""
 
-    manifest_version: str = "pairwise.judges.v1"
+    manifest_version: str = "pairwise.judges.v2"
     judges: List[JudgeManifestEntry]
 
     class Config:
@@ -90,7 +134,53 @@ class JudgeManifest(BaseModel):
         ids = [judge.judge_id for judge in value]
         if len(ids) != len(set(ids)):
             raise ValueError("judge manifest contains duplicate judge_id values")
+
+        roles = [judge.role for judge in value]
+        if all(role is None for role in roles):
+            return value
+        if any(role is None for role in roles):
+            raise ValueError(
+                "judge manifest must either define roles for all judges or none"
+            )
+
+        primary = [judge for judge in value if judge.role == "primary"]
+        audit = [judge for judge in value if judge.role == "audit"]
+        escalation = [judge for judge in value if judge.role == "escalation"]
+        if len(primary) != 1:
+            raise ValueError("judge manifest must define exactly one primary judge")
+        if len(audit) != 1:
+            raise ValueError("judge manifest must define exactly one audit judge")
+        if len(escalation) != 2:
+            raise ValueError(
+                "judge manifest must define exactly two escalation judges"
+            )
+
+        escalation_ranks = sorted(
+            judge.escalation_rank for judge in escalation if judge.escalation_rank is not None
+        )
+        if len(escalation_ranks) != 2:
+            raise ValueError("all escalation judges must define escalation_rank")
+        if escalation_ranks != [1, 2]:
+            raise ValueError("escalation judges must use escalation_rank values 1 and 2")
+
+        for judge in primary + audit:
+            if judge.escalation_rank is not None:
+                raise ValueError(
+                    "primary and audit judges must not define escalation_rank"
+                )
         return value
+
+    def primary_judge(self) -> Optional[JudgeManifestEntry]:
+        return next((judge for judge in self.judges if judge.role == "primary"), None)
+
+    def audit_judge(self) -> Optional[JudgeManifestEntry]:
+        return next((judge for judge in self.judges if judge.role == "audit"), None)
+
+    def escalation_judges(self) -> List[JudgeManifestEntry]:
+        return sorted(
+            [judge for judge in self.judges if judge.role == "escalation"],
+            key=lambda judge: judge.escalation_rank or 99,
+        )
 
 
 class PairwiseConfig(BaseModel):
@@ -102,10 +192,20 @@ class PairwiseConfig(BaseModel):
     case_manifest_path: str
     judge_manifest_path: str
     rubric_family: str
+    run_mode: str = "stacked"
     allow_ties: bool = True
     orders: List[str] = ["AB", "BA"]
     max_retries_per_invalid_parse: int = 3
     output_root: str = "metric-results/pairwise"
+    high_risk_tags: List[str] = DEFAULT_HIGH_RISK_TAGS
+    escalate_on: List[str] = [
+        "disagreement",
+        "tie",
+        "invalid",
+        "swap_failure",
+        "high_risk",
+    ]
+    persistent_disagreement_policy: str = "mark_uncertain"
     pooled_requires_all_judges: bool = True
 
     class Config:
@@ -123,11 +223,33 @@ class PairwiseConfig(BaseModel):
             raise ValueError(f"unknown slice_id: {value}")
         return value
 
+    @validator("run_mode")
+    def _run_mode_must_be_known(cls, value: str) -> str:
+        if value not in VALID_RUN_MODES:
+            raise ValueError(f"unknown run_mode: {value}")
+        return value
+
     @validator("orders")
     def _orders_must_be_exact(cls, value: List[str]) -> List[str]:
         if set(value) != {"AB", "BA"}:
             raise ValueError("orders must contain exactly AB and BA")
         return value
+
+    @validator("escalate_on")
+    def _escalation_reasons_must_be_known(cls, value: List[str]) -> List[str]:
+        unknown = sorted(set(value) - VALID_ESCALATION_REASONS)
+        if unknown:
+            raise ValueError(f"unknown escalate_on values: {unknown}")
+        return value
+
+    @validator("persistent_disagreement_policy")
+    def _persistent_policy_must_be_known(cls, value: str) -> str:
+        if value != "mark_uncertain":
+            raise ValueError(
+                "persistent_disagreement_policy must be mark_uncertain"
+            )
+        return value
+
 
 class PairwiseRunSpec(BaseModel):
     """Resolved runtime spec combining config, judges, and criteria."""
@@ -171,6 +293,19 @@ def load_pairwise_run_spec(config_path: str | Path) -> PairwiseRunSpec:
         Path(config.judge_manifest_path).read_text(encoding="utf-8")
     )
     judge_manifest = JudgeManifest.parse_obj(judge_payload)
+
+    if (
+        judge_manifest.manifest_version == "pairwise.judges.v1"
+        and config.run_mode != "all_judges"
+    ):
+        raise ValueError(
+            "judge_panel.v1 manifests are only valid with run_mode=all_judges"
+        )
+    if config.run_mode == "stacked":
+        if judge_manifest.primary_judge() is None or judge_manifest.audit_judge() is None:
+            raise ValueError("stacked mode requires primary and audit judge roles")
+        if len(judge_manifest.escalation_judges()) != 2:
+            raise ValueError("stacked mode requires exactly two escalation judges")
 
     # Import lazily to avoid a config/rubric import cycle.
     from .rubric import criteria_for_family

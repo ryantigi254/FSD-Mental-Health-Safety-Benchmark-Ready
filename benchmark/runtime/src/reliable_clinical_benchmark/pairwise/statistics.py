@@ -12,6 +12,8 @@ from typing import Any, Dict, Iterable, List, Sequence, Tuple
 import numpy as np
 from scipy import optimize, stats as sp_stats
 
+from .runner import summarise_judge_orders
+
 
 Record = Dict[str, Any]
 
@@ -50,10 +52,12 @@ def compute_slice_statistics(
         "run_id": run_spec.config.run_id,
         "layer": run_spec.config.layer,
         "slice_id": run_spec.config.slice_id,
+        "run_mode": run_spec.config.run_mode,
         "criteria": run_spec.criteria,
         "judge_panel": [
             {
                 "judge_id": judge.judge_id,
+                "role": judge.role,
                 "hf_source": judge.hf_source,
                 "local_model_id": judge.local_model_id,
             }
@@ -67,6 +71,7 @@ def compute_slice_statistics(
         "pooled_complete": pooled_complete,
         "pooled": pooled,
         "judge_agreement": compute_judge_agreement(records),
+        "execution_summary": compute_execution_summary(records, run_spec=run_spec),
     }
 
 
@@ -362,6 +367,136 @@ def compute_judge_agreement(records: List[Record]) -> Dict[str, Any]:
     return {
         "pairwise_kappa": pairwise,
         "overall_agreement_rate": round(agreement_total / comparison_total, 6) if comparison_total else 0.0,
+    }
+
+
+def compute_execution_summary(records: List[Record], *, run_spec) -> Dict[str, Any]:
+    if run_spec.config.run_mode != "stacked":
+        return {
+            "mode": run_spec.config.run_mode,
+            "routine_two_judge_results": {"count": 0},
+            "escalated_four_judge_results": {"count": 0},
+            "persistent_disagreement_cases": [],
+            "uncertain_case_count": 0,
+            "escalation_summary": {},
+            "primary_audit_agreement": {"n": 0, "agreement_rate": 0.0},
+            "all_judge_agreement": {"n": 0, "agreement_rate": 0.0},
+            "comparison_rows": [],
+        }
+
+    grouped: Dict[str, List[Record]] = defaultdict(list)
+    for record in records:
+        grouped[record["comparison_key"]].append(record)
+
+    primary_id = run_spec.judge_manifest.primary_judge().judge_id
+    audit_id = run_spec.judge_manifest.audit_judge().judge_id
+    escalation_ids = [judge.judge_id for judge in run_spec.judge_manifest.escalation_judges()]
+    escalation_counter: Counter[str] = Counter()
+    comparison_rows: List[Dict[str, Any]] = []
+    persistent_cases: List[Dict[str, Any]] = []
+    routine_count = 0
+    escalated_count = 0
+    resolved_escalated = 0
+    uncertain_count = 0
+    primary_audit_agree = 0
+    primary_audit_total = 0
+    all_judge_agree = 0
+    all_judge_total = 0
+
+    for comparison_key, bucket in sorted(grouped.items()):
+        per_judge_records: Dict[str, List[Record]] = defaultdict(list)
+        for record in bucket:
+            per_judge_records[record["judge_id"]].append(record)
+        judge_summaries = {
+            judge_id: summarise_judge_orders(judge_bucket)
+            for judge_id, judge_bucket in per_judge_records.items()
+        }
+        stage = "escalated" if any(record.get("judge_stage") == "escalated" for record in bucket) else "routine"
+        outcome = bucket[0].get("comparison_outcome", "unknown")
+        reasons = sorted({reason for record in bucket for reason in record.get("escalation_reason", [])})
+        for reason in reasons:
+            escalation_counter[reason] += 1
+        high_risk_forced = any(record.get("high_risk_forced") for record in bucket)
+        example = bucket[0]
+        judge_winners = {
+            judge_id: summary.get("winner") or summary.get("status")
+            for judge_id, summary in judge_summaries.items()
+        }
+
+        primary_summary = judge_summaries.get(primary_id)
+        audit_summary = judge_summaries.get(audit_id)
+        if primary_summary and audit_summary:
+            if primary_summary["status"] == "decisive" and audit_summary["status"] == "decisive":
+                primary_audit_total += 1
+                if primary_summary["winner"] == audit_summary["winner"]:
+                    primary_audit_agree += 1
+
+        if stage == "routine":
+            routine_count += 1
+        else:
+            escalated_count += 1
+            if all(judge_id in judge_summaries for judge_id in [primary_id, audit_id, *escalation_ids]):
+                all_judge_total += 1
+                decisive = [
+                    judge_summaries[judge_id]
+                    for judge_id in [primary_id, audit_id, *escalation_ids]
+                ]
+                if all(summary["status"] == "decisive" for summary in decisive):
+                    winners = {summary["winner"] for summary in decisive}
+                    if len(winners) == 1:
+                        all_judge_agree += 1
+            if outcome == "resolved_escalated":
+                resolved_escalated += 1
+            if outcome == "uncertain":
+                uncertain_count += 1
+                persistent_cases.append(
+                    {
+                        "comparison_key": comparison_key,
+                        "case_id": example["case_id"],
+                        "criterion_id": example["criterion_id"],
+                        "canonical_pair_key": example["canonical_pair_key"],
+                        "escalation_reason": reasons,
+                        "high_risk_forced": high_risk_forced,
+                        "judge_winners": judge_winners,
+                    }
+                )
+
+        comparison_rows.append(
+            {
+                "comparison_key": comparison_key,
+                "case_id": example["case_id"],
+                "criterion_id": example["criterion_id"],
+                "canonical_pair_key": example["canonical_pair_key"],
+                "judge_stage": stage,
+                "comparison_outcome": outcome,
+                "high_risk_forced": high_risk_forced,
+                "escalation_reason": reasons,
+                "judge_count": len(judge_summaries),
+            }
+        )
+
+    return {
+        "mode": "stacked",
+        "routine_two_judge_results": {
+            "count": routine_count,
+        },
+        "escalated_four_judge_results": {
+            "count": escalated_count,
+            "resolved_count": resolved_escalated,
+            "uncertain_count": uncertain_count,
+        },
+        "persistent_disagreement_cases": persistent_cases,
+        "uncertain_case_count": uncertain_count,
+        "escalation_summary": dict(sorted(escalation_counter.items())),
+        "primary_audit_agreement": {
+            "n": primary_audit_total,
+            "agreement_rate": round(primary_audit_agree / primary_audit_total, 6) if primary_audit_total else 0.0,
+        },
+        "all_judge_agreement": {
+            "n": all_judge_total,
+            "agreement_rate": round(all_judge_agree / all_judge_total, 6) if all_judge_total else 0.0,
+        },
+        "comparison_rows": comparison_rows,
     }
 
 
