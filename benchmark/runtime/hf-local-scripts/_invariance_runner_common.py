@@ -20,6 +20,7 @@ CANONICAL_MODEL_DIRS = {
     "psych_qwen_vllm": "psych-qwen-32b-local",
     "psyllm_gml_local": "psyllm-gml-local",
     "psyllm_gml_vllm": "psyllm-gml-local",
+    "psyllm_lmstudio": "psyllm-lmstudio",
     "psyche_r1_local": "psyche-r1-local",
     "psyche_r1_vllm": "psyche-r1-local",
     "qwen3_lmstudio": "qwen3-lmstudio",

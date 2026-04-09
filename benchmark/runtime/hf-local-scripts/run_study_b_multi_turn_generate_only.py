@@ -144,6 +144,8 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
 
         "psyllm_gml_local": "psyllm-gml-local",
 
+        "psyllm_lmstudio": "psyllm-lmstudio",
+
         "psyche_r1_local": "psyche-r1-local",
         "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
         "minimax_m2_5_cloud": "minimax-m2.5-cloud",

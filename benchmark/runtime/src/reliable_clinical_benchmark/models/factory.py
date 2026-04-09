@@ -21,6 +21,7 @@ from .psych_qwen_local import PsychQwen32BLocalRunner
 from .lmstudio_qwq import QwQLMStudioRunner
 from .lmstudio_gpt_oss import GPTOSSLMStudioRunner
 from .lmstudio_qwen3 import Qwen3LMStudioRunner
+from .lmstudio_psyllm import PsyLLMLMStudioRunner
 from .lmstudio_medgemma import MedGemmaLMStudioRunner
 try:
     from .ollama_cloud import OllamaCloudRunner
@@ -102,6 +103,8 @@ def get_model_runner(
         from .lmstudio_qwen3 import Qwen3LMStudioRunner
 
         return Qwen3LMStudioRunner(config=config)
+    elif model_id_lower in ("psyllm_lmstudio", "psyllm-lmstudio", "psyllm-8b-lmstudio", "psyllm-8b"):
+        return PsyLLMLMStudioRunner(config=config)
     elif model_id_lower in (
         "medgemma_lmstudio",
         "medgemma-lmstudio",
@@ -175,5 +178,5 @@ def get_model_runner(
         raise ValueError(
             f"Unknown model ID: {model_id}. "
             f"Supported models: psyllm, qwq, deepseek_r1, gpt_oss, qwen3, "
-            f"medgemma_lmstudio, ollama_minimax_m2_5_cloud, piaget, psyche_r1, psych_qwen"
+            f"psyllm_lmstudio, medgemma_lmstudio, ollama_minimax_m2_5_cloud, piaget, psyche_r1, psych_qwen"
         )
