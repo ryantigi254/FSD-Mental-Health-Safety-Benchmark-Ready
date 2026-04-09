@@ -70,5 +70,6 @@ def test_context_cleaning_starts_from_turn_4(tmp_path: Path) -> None:
 
     repeated_line = "REPEAT ME " * 10
     occurrences = dialogue_turn_5["conversation_text"].count(repeated_line)
-    # Turns 1-3 are uncleaned (4 repeats each), turn 4 cleaned (1 repeat)
-    assert occurrences == 13
+    # Turns 1-3: no scan clean (start_turn=4), but reasoning strip + truncation still run.
+    # Turn 4+: scan-mode line/sentence de-duplication (no rapidfuzz hot path).
+    assert occurrences == 10
