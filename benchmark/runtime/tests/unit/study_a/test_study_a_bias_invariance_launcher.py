@@ -71,6 +71,35 @@ def test_study_a_bias_invariance_launcher_accepts_gpt_oss_alias(monkeypatch, cap
     assert "--study-name study_a_bias_invariance" in captured.out
 
 
+def test_study_a_bias_invariance_launcher_accepts_piaget_lmstudio_alias(
+    monkeypatch, capsys
+) -> None:
+    module = _load_module("run_generation_auto_piaget_lmstudio_test_module", AUTO_SCRIPT_PATH)
+    monkeypatch.setattr(module, "_check_lmstudio_model_loaded", lambda model_id: (True, "piaget-8b"))
+
+    monkeypatch.setattr(
+        module.sys,
+        "argv",
+        [
+            "run_generation_auto.py",
+            "--study",
+            "study_a_bias_invariance",
+            "--model-id",
+            "piaget_lmstudio",
+            "--env",
+            "mh-llm-benchmark-env",
+            "--check-only",
+        ],
+    )
+
+    exit_code = module.main()
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert "--model-id piaget_lmstudio" in captured.out
+    assert "LM Studio preflight matched loaded model: piaget-8b" in captured.out
+
+
 def test_study_a_bias_invariance_uses_dedicated_cache_name() -> None:
     module = _load_module("run_study_a_bias_generate_only_test_module", BIAS_SCRIPT_PATH)
 

@@ -42,6 +42,11 @@ python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id gpt_os
 python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
 python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id piaget_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id piaget_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id piaget_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id piaget_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id piaget_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 ```
 
 ## Local HF

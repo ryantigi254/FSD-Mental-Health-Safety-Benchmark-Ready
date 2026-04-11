@@ -246,6 +246,8 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "qwq": "qwq",
         "qwq_lmstudio": "qwq",
         "qwq-lmstudio": "qwq",
+        "piaget_lmstudio": "piaget-8b-local",
+        "piaget-lmstudio": "piaget-8b-local",
         "psych_qwen_32b": "psych-qwen-32b-local",
         "psych-qwen-32b": "psych-qwen-32b-local",
         "piaget_local": "piaget-8b-local",

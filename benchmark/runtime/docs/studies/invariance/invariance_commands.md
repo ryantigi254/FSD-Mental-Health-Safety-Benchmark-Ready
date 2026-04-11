@@ -24,6 +24,11 @@ python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id 
 python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 2
 python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 2
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id gpt_oss --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 2
+python scripts/dev/run_generation_auto.py --study study_a_invariance --model-id piaget_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id piaget_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_b_multi_turn_invariance --model-id piaget_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_c_invariance --model-id piaget_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id piaget_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 4
 ```
 
 ## Local HF
