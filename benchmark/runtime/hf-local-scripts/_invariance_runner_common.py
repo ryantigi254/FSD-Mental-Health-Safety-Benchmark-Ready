@@ -19,6 +19,8 @@ CANONICAL_MODEL_DIRS = {
     "gpt_oss_120b_remote": "gpt-oss-120b",
     "deepseek_r1_lmstudio": "deepseek-r1-lmstudio",
     "deepseek-r1-lmstudio": "deepseek-r1-lmstudio",
+    "piaget_lmstudio": "piaget-8b-local",
+    "piaget-lmstudio": "piaget-8b-local",
     "piaget_local": "piaget-8b-local",
     "piaget_vllm": "piaget-8b-local",
     "psych_qwen_32b": "psych-qwen-32b-local",

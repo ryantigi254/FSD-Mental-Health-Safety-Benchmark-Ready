@@ -121,6 +121,11 @@ def get_model_runner(
 
         return MedGemmaLMStudioRunner(config=config)
 
+    if model_id_lower in ("piaget_lmstudio", "piaget-lmstudio", "piaget-8b-lmstudio"):
+        from .lmstudio_piaget import PiagetLMStudioRunner
+
+        return PiagetLMStudioRunner(config=config)
+
     if model_id_lower in (
         "psych_qwen_32b-mlx",
         "psych-qwen-32b-mlx",

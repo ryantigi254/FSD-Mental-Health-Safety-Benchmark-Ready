@@ -14,6 +14,7 @@ cd "E:\22837352\NLP\NLP-Module\Assignment 2\reliable_clinical_benchmark\Uni-setu
 python scripts/dev/run_generation_auto.py --study study_b_multi_turn --model-id qwen3_lmstudio --env mh-llm-benchmark-env --workers 6
 python scripts/dev/run_generation_auto.py --study study_b_multi_turn --model-id qwq --env mh-llm-benchmark-env --workers 6
 python scripts/dev/run_generation_auto.py --study study_b_multi_turn --model-id medgemma_lmstudio --env mh-llm-benchmark-env --workers 4
+python scripts/dev/run_generation_auto.py --study study_b_multi_turn --model-id piaget_lmstudio --env mh-llm-benchmark-env --workers 4
 python scripts/dev/run_generation_auto.py --study study_b_multi_turn --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --workers 4
 python scripts/dev/run_generation_auto.py --study study_b_multi_turn --model-id gpt_oss --env mh-llm-benchmark-env --workers 2
 ```
@@ -74,7 +75,7 @@ python scripts/dev/run_generation_auto.py --study study_b_multi_turn --model-id 
 ## Workers
 Study B multi-turn generation supports `--workers`. If not passed, default is auto:
 - `6` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above
-- `4` for `medgemma_lmstudio` and for auto-default LM Studio runs when `--workers` is omitted
+- `4` for `piaget_lmstudio`, `medgemma_lmstudio` and for auto-default LM Studio runs when `--workers` is omitted
 - `4` / `2` for `deepseek_r1_lmstudio` / `gpt_oss` as in the examples
 - `1` for non-LM Studio/local HF models
 

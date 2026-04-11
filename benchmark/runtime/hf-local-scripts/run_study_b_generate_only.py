@@ -132,6 +132,7 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
 
         # HF local naming vs existing results folders
 
+        "piaget_lmstudio": "piaget-8b-local",
         "piaget_local": "piaget-8b-local",
 
         "psych_qwen_local": "psych-qwen-32b-local",

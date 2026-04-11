@@ -120,3 +120,14 @@ def test_gpt_oss_lmstudio_normalizes_to_canonical_results_dir_even_without_exist
     normalized = module.normalize_model_id_for_path("gpt_oss_lmstudio", tmp_path)
 
     assert normalized == "gpt-oss-20b"
+
+
+def test_piaget_lmstudio_normalizes_to_piaget_local_results_dir(tmp_path: Path) -> None:
+    module = _load_module("invariance_runner_common_piaget_model_dir_test_module", COMMON_PATH)
+
+    legacy_dir = tmp_path / "piaget-8b-local"
+    legacy_dir.mkdir()
+
+    normalized = module.normalize_model_id_for_path("piaget_lmstudio", tmp_path)
+
+    assert normalized == "piaget-8b-local"

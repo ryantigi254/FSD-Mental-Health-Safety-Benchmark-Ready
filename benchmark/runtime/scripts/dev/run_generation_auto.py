@@ -17,6 +17,7 @@ from pathlib import Path
 
 BASE_MODEL_IDS = {
     "qwen3_lmstudio",
+    "piaget_lmstudio",
     "medgemma_lmstudio",
     "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
     "qwq",
@@ -62,6 +63,11 @@ LMSTUDIO_MODEL_PREFLIGHT = {
         "env_var": "LMSTUDIO_QWEN3_MODEL",
         "default": "qwen3-8b",
         "aliases": ("qwen/qwen3-8b", "qwen3-8b"),
+    },
+    "piaget_lmstudio": {
+        "env_var": "LMSTUDIO_PIAGET_MODEL",
+        "default": "piaget-8b",
+        "aliases": ("piaget-8b",),
     },
     "deepseek_r1_lmstudio": {
         "env_var": "LMSTUDIO_DEEPSEEK_R1_MODEL",

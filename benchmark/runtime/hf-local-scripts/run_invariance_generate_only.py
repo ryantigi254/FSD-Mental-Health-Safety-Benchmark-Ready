@@ -75,6 +75,7 @@ _SERVER_SIDE_TOKEN_MODEL_IDS = {
     "qwq", "qwq_lmstudio", "qwq-lmstudio", "qwq-32b-lmstudio",
     "deepseek_r1_lmstudio", "deepseek-r1-lmstudio", "deepseek-r1-14b-lmstudio",
     "gpt_oss_lmstudio", "gpt_oss", "gpt-oss-lmstudio", "gpt-oss-20b",
+    "piaget_lmstudio", "piaget-lmstudio", "piaget-8b-lmstudio",
     "psych_qwen_32b-mlx", "psych-qwen-32b-mlx",
     "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
     "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
