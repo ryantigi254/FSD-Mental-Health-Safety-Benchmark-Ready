@@ -23,6 +23,7 @@ through transformers chat templates or LM Studio chat completion APIs.
 """
 
 import json
+import re
 import shutil
 import time
 import math
@@ -52,6 +53,26 @@ from ..utils.worker_runtime import (
 )
 
 logger = logging.getLogger(__name__)
+
+THINK_BLOCK_RE = re.compile(
+    r"<(?:think|redacted_thinking|redacted_reasoning)>\s*.*?\s*</(?:think|redacted_thinking|redacted_reasoning)>\s*",
+    re.DOTALL | re.IGNORECASE,
+)
+MAX_CONTEXT_RESPONSE_CHARS = 2000
+
+
+def _prepare_response_for_context(text: str, max_chars: int = MAX_CONTEXT_RESPONSE_CHARS) -> str:
+    """
+    Prepare assistant text for rolling Study B history only.
+
+    Raw generations are still written to disk unchanged. This strips verbose
+    reasoning blocks and caps the assistant text kept in-memory so later turns
+    do not blow the LM Studio context budget.
+    """
+    prepared = THINK_BLOCK_RE.sub("", text or "").strip()
+    if max_chars > 0 and len(prepared) > max_chars:
+        prepared = prepared[:max_chars].rstrip() + "\n[Context truncated for stability]"
+    return prepared or (text or "")
 
 
 def _compact_cache(cache_path: Path, make_backup: bool = True) -> None:
@@ -340,7 +361,8 @@ def _generate_multi_turn_study_b(
             if existing_ok and case_id and existing_ok.get(str(case_id), {}).get(int(turn_num)):
                 cached = existing_ok[str(case_id)][int(turn_num)]
                 cached_resp = cached.get("response_text", "")
-                conversation_history.append({"role": "assistant", "content": str(cached_resp)})
+                context_response = _prepare_response_for_context(str(cached_resp))
+                conversation_history.append({"role": "assistant", "content": context_response})
                 continue
 
             status = "ok"
@@ -349,7 +371,8 @@ def _generate_multi_turn_study_b(
             t0 = time.perf_counter()
             try:
                 response_text = model.chat(conversation_history, mode="default")
-                conversation_history.append({"role": "assistant", "content": response_text})
+                context_response = _prepare_response_for_context(response_text)
+                conversation_history.append({"role": "assistant", "content": context_response})
             except Exception as error:
                 status = "error"
                 error_message = str(error)
