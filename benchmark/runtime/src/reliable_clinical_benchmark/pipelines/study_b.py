@@ -307,6 +307,7 @@ def _generate_multi_turn_study_b(
 
     def _generate_case_entries(case: Dict[str, Any]) -> List[Dict[str, Any]]:
         case_id = case.get("id") or case.get("case_id") or ""
+        persona_id = (case.get("metadata") or {}).get("persona_id", "unknown")
         gold_answer = case.get("gold_answer", "")
         turns = case.get("turns", [])
 
