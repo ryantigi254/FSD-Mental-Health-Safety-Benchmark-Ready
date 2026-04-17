@@ -3,6 +3,7 @@ import argparse
 import json
 
 import os
+import shutil
 
 import sys
 
@@ -208,6 +209,71 @@ def _persist_entry_with_retry(cache_path: Path, entry: dict, max_attempts: int =
     return False
 
 
+def _remove_error_rows_from_cache(cache_path: Path) -> int:
+
+    """Drop persisted error rows so resume keeps only successful generations."""
+
+    if not cache_path.exists():
+
+        return 0
+
+    kept_lines: list[str] = []
+
+    removed_count = 0
+
+    with open(cache_path, "r", encoding="utf-8") as f:
+
+        for line in f:
+
+            raw_line = line.rstrip("\n")
+
+            if not raw_line.strip():
+
+                continue
+
+            try:
+
+                entry = json.loads(raw_line)
+
+            except json.JSONDecodeError:
+
+                kept_lines.append(raw_line)
+
+                continue
+
+            if entry.get("status") == "error":
+
+                removed_count += 1
+
+                continue
+
+            kept_lines.append(raw_line)
+
+    if removed_count <= 0:
+
+        return 0
+
+    backup = cache_path.with_suffix(
+
+        cache_path.suffix + f".bak-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
+
+    )
+
+    shutil.copy2(cache_path, backup)
+
+    with open(cache_path, "w", encoding="utf-8") as f:
+
+        for raw_line in kept_lines:
+
+            f.write(raw_line + "\n")
+
+        f.flush()
+
+        os.fsync(f.fileno())
+
+    return removed_count
+
+
 
 
 
@@ -264,7 +330,12 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "piaget_vllm": "piaget-8b-local",
         "psyche_r1_vllm": "psyche-r1-local",
         "psych_qwen_vllm": "psych-qwen-32b-local",
-        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0": "qwen3.5-27b-distilled-q8_0",
+        "qwen3.5-distilled": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
+        "qwen3.5-27b-distilled": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
+        "qwen3_5_distilled_lmstudio": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
+        "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
+        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
+        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
     }
     return canonical_names.get(model_id_lower, model_id)
 
@@ -712,6 +783,11 @@ def main() -> None:
     run_id = datetime.utcnow().strftime("%Y%m%dT%H%M%S%fZ")
 
     cache_path = Path(cache_out)
+
+    removed_error_rows = _remove_error_rows_from_cache(cache_path)
+    if removed_error_rows:
+
+        print(f"Removed {removed_error_rows} cached error row(s) from {cache_path}")
 
 
 

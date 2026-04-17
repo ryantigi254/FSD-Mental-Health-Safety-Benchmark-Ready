@@ -62,6 +62,11 @@ def _prepare_response_for_context(text: str) -> str:
 
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[1]
+CANONICAL_CTRL_OUTPUT_DIR = "results_ctrl_invariance"
+LEGACY_CTRL_OUTPUT_DIR_ALIASES = {
+    "results_reverse",
+    "results_invariance_ctrl",
+}
 DEFAULT_CTRL_DIR = RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits"
 DEFAULT_BIAS_DATA_PATH = (
     RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits" / "study_a_bias_controllability_test.json"
@@ -201,14 +206,29 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "psyche_r1_vllm": "psyche-r1-local",
         "psych_qwen_vllm": "psych-qwen-32b-local",
         "psych_qwen_32b-mlx": "psych-qwen-32b-mlx",
-        "qwen3.5-distilled": "qwen3.5-distilled",
-        "qwen3.5-27b-distilled": "qwen3.5-distilled",
-        "qwen3_5_distilled_lmstudio": "qwen3.5-distilled",
-        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0": "qwen3.5-distilled",
-        "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2": "qwen3.5-distilled",
-        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0": "qwen3.5-distilled",
+        "qwen3.5-distilled": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
+        "qwen3.5-27b-distilled": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
+        "qwen3_5_distilled_lmstudio": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
+        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
+        "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
+        "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
     }
     return canonical_names.get(model_id_lower, model_id)
+
+
+def _resolve_output_dir(output_dir: Optional[str]) -> Path:
+    if output_dir is None:
+        return RUNTIME_ROOT / CANONICAL_CTRL_OUTPUT_DIR
+
+    candidate = Path(output_dir)
+    if candidate.is_absolute():
+        if candidate.name in LEGACY_CTRL_OUTPUT_DIR_ALIASES:
+            return candidate.parent / CANONICAL_CTRL_OUTPUT_DIR
+        return candidate
+
+    if candidate.name in LEGACY_CTRL_OUTPUT_DIR_ALIASES:
+        return RUNTIME_ROOT / CANONICAL_CTRL_OUTPUT_DIR
+    return RUNTIME_ROOT / candidate
 
 
 def _resume_key_from_entry(entry: Dict[str, Any]) -> Optional[str]:
@@ -923,7 +943,7 @@ def main() -> int:
     print(f"Study: {study}, Model: {args.model_id}, Items: {len(items)}")
     print(f"Ctrl dir: {ctrl_dir}")
 
-    output_dir = Path(args.output_dir) if args.output_dir else RUNTIME_ROOT / "results"
+    output_dir = _resolve_output_dir(args.output_dir)
     if args.cache_out:
         cache_path = Path(args.cache_out)
     else:
