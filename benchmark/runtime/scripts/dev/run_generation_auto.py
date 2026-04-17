@@ -299,7 +299,7 @@ def main() -> int:
             default_study_name = "study_a_bias_invariance"
         else:
             default_bias_data = "data/frozen_splits/v4_1_resampled/adversarial_bias/biased_vignettes.json"
-            default_output_dir = "results_invariance"
+            default_output_dir = "results"
             default_study_name = "study_a_bias"
 
         # Bias runner only accepts --data-path (to biased_vignettes.json). Map a split

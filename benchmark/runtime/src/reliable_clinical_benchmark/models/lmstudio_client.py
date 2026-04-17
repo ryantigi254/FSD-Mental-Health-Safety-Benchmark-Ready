@@ -19,10 +19,26 @@ import requests
 
 logger = logging.getLogger(__name__)
 DEFAULT_LMSTUDIO_READ_TIMEOUT_SECONDS = 600
+SLOW_LMSTUDIO_READ_TIMEOUT_SECONDS = 1800
+SLOW_LMSTUDIO_MODEL_IDS = {
+    "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8_0",
+    "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
+    "qwen3.5-distilled",
+    "qwen3.5-27b-distilled",
+    "qwen3_5_distilled_lmstudio",
+    "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
+}
 
 
-def _default_read_timeout_seconds() -> int:
-    raw_value = os.getenv("LMSTUDIO_READ_TIMEOUT_SECONDS", str(DEFAULT_LMSTUDIO_READ_TIMEOUT_SECONDS)).strip()
+def _default_read_timeout_seconds(model: Optional[str] = None) -> Optional[int]:
+    raw_value = os.getenv("LMSTUDIO_READ_TIMEOUT_SECONDS", "").strip()
+    if not raw_value:
+        model_key = _normalise_model_id(model or "")
+        if model_key in SLOW_LMSTUDIO_MODEL_IDS:
+            return SLOW_LMSTUDIO_READ_TIMEOUT_SECONDS
+        return DEFAULT_LMSTUDIO_READ_TIMEOUT_SECONDS
+    if raw_value.lower() in {"0", "none", "off", "disabled", "disable"}:
+        return None
     try:
         parsed = int(raw_value)
     except ValueError:
@@ -365,7 +381,7 @@ def chat_completion(
         payload["max_tokens"] = requested_max_tokens
 
     if timeout is None:
-        request_timeout = (30, _default_read_timeout_seconds())
+        request_timeout = (30, _default_read_timeout_seconds(model))
     elif isinstance(timeout, tuple):
         request_timeout = timeout
     else:

@@ -31,6 +31,8 @@
 - `data/invariance/ctrl/variants/v2_1/study_c`
 
 Use `--output-dir results_ctrl_invariance` throughout.
+Use `results_ctrl_invariance` for control-invariance / reverse controllability caches.
+`results_reverse` is the older alias for the same cache family.
 
 ---
 
