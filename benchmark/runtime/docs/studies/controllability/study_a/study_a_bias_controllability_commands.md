@@ -55,6 +55,11 @@ python hf-local-scripts/run_ctrl_generate_only.py `
   --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `
   --workers 6
 python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id piaget_lmstudio `
+  --study ctrl_study_a_bias `
+  --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `
+  --workers 4
+python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwq `
   --study ctrl_study_a_bias `
   --data-path data/controllability/controllability_splits_v2_1/study_a_bias_controllability_test.json `

@@ -18,6 +18,7 @@ Use `--workers 1` for `gpt_oss` unless you have verified stability: LM Studio of
 ```powershell
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 1
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id piaget_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 6
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id deepseek_r1_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 ```
@@ -52,6 +53,7 @@ ctrl variant-family child in one go.
 ```powershell
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id gpt_oss --ctrl-dir data/invariance/ctrl/variants/v2_1/study_c --output-dir results_ctrl_invariance --workers 1
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio --ctrl-dir data/invariance/ctrl/variants/v2_1/study_c --output-dir results_ctrl_invariance --workers 6
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id piaget_lmstudio --ctrl-dir data/invariance/ctrl/variants/v2_1/study_c --output-dir results_ctrl_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --ctrl-dir data/invariance/ctrl/variants/v2_1/study_c --output-dir results_ctrl_invariance --workers 6
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id deepseek_r1_lmstudio --ctrl-dir data/invariance/ctrl/variants/v2_1/study_c --output-dir results_ctrl_invariance --workers 4
 ```

@@ -40,6 +40,10 @@ python hf-local-scripts/run_ctrl_generate_only.py `
   --study ctrl_study_c `
   --workers 6
 python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id piaget_lmstudio `
+  --study ctrl_study_c `
+  --workers 4
+python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id qwq `
   --study ctrl_study_c `
   --workers 6
