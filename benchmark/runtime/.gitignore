@@ -10,7 +10,7 @@ temp/
 
 # Data and Artifacts (large/derived)
 
-results/
+results/*
 !results/**/study_a_bias*.jsonl
 # Explicitly allow these model result directories (do not ignore)
 !results/psyche-r1-local/
@@ -19,6 +19,8 @@ results/
 !results/psych-qwen-32b-local/**
 !results/piaget-8b-local/
 !results/piaget-8b-local/**
+!results/piaget-lmstudio/
+!results/piaget-lmstudio/ctrl_study*.jsonl
 !results/psyllm-gml-local/
 !results/psyllm-gml-local/**
 processed/*
