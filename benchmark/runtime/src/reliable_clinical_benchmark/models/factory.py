@@ -48,6 +48,11 @@ def get_model_runner(
 
         return PsyLLMLocalRunner(config=config)
 
+    if model_id_lower in ("psyllm_lmstudio", "psyllm-lmstudio", "psyllm-8b-lmstudio", "psyllm-8b"):
+        from .lmstudio_psyllm import PsyLLMLMStudioRunner
+
+        return PsyLLMLMStudioRunner(config=config)
+
     if model_id_lower in (
         "psyllm_gml_local",
         "psyllm-gml-local",
@@ -221,7 +226,7 @@ def get_model_runner(
 
     raise ValueError(
         f"Unknown model ID: {model_id}. "
-        "Supported models: psyllm, qwq, deepseek_r1, gpt_oss, qwen3, "
+        "Supported models: psyllm, psyllm_lmstudio, qwq, deepseek_r1, gpt_oss, qwen3, "
         "medgemma_lmstudio, ollama_minimax_m2_5_cloud, piaget, psyche_r1, psych_qwen, "
         "psych_qwen_32b-mlx, qwen3.5-distilled"
     )
