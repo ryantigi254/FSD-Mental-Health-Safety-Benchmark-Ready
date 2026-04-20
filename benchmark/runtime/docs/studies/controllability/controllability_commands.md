@@ -84,6 +84,7 @@ Canonical LM Studio model IDs used throughout these commands:
 - `qwq`
 - `piaget_lmstudio`
 - `deepseek_r1_lmstudio`
+- `psyche_r1_lmstudio`
 - `gpt_oss`
 - `gpt-oss-120b-runpod` (RunPod Serverless ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â see `docs/models/RUNPOD_GPT_OSS_120B.md`)
 
@@ -100,6 +101,7 @@ PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id piaget_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 4
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id deepseek_r1_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyche_r1_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 5
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id gpt_oss --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 
 # vLLM models
@@ -130,7 +132,8 @@ Generates matched-arm bias runs on the canonical adversarial bias cases.
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id piaget_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 4
-# ... (same model set as ctrl_study_a)
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyche_r1_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 5
+# ... (same LM Studio model set as ctrl_study_a)
 ```
 
 **Output**: `results/<model>/ctrl_study_a_bias_generations.jsonl`
@@ -144,7 +147,8 @@ Generates `control` + `injected` pairs for each arm.
 ```bash
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
-# ... (same model set)
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psyche_r1_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 5
+# ... (same LM Studio model set)
 ```
 
 **Output**: `results/<model>/ctrl_study_b_generations.jsonl`
@@ -158,7 +162,8 @@ Generates 20-turn rolling-context conversations for each arm.
 ```bash
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
-# ... (same model set)
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyche_r1_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 5
+# ... (same LM Studio model set)
 ```
 
 **Output**: `results/<model>/ctrl_study_b_multi_turn_generations.jsonl`
@@ -172,7 +177,8 @@ Generates summary-only outputs per turn for each arm.
 ```bash
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwq --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
 PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id qwen3_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR"
-# ... (same model set)
+PYTHONPATH=src python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyche_r1_lmstudio --ctrl-dir "$CTRL_DIR" --output-dir "$CTRL_RESULTS_DIR" --workers 5
+# ... (same LM Studio model set)
 ```
 
 **Output**: `results/<model>/ctrl_study_c_generations.jsonl`

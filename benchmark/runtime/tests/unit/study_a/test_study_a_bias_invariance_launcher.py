@@ -146,3 +146,34 @@ def test_study_a_bias_invariance_launcher_handles_missing_data_path_value(monkey
     assert "--output-dir results_invariance" in captured.out
     assert "--workers 2" in captured.out
     assert "biased_vignettes.json results_invariance --workers" not in captured.out
+
+
+def test_run_generation_auto_allows_ctrl_study_a_psyche_r1_lmstudio(monkeypatch, capsys) -> None:
+    module = _load_module("run_generation_auto_psyche_r1_ctrl_test_module", AUTO_SCRIPT_PATH)
+
+    monkeypatch.setattr(
+        module.sys,
+        "argv",
+        [
+            "run_generation_auto.py",
+            "--study",
+            "ctrl_study_a",
+            "--model-id",
+            "psyche_r1_lmstudio",
+            "--env",
+            "mh-llm-benchmark-env",
+            "--check-only",
+        ],
+    )
+    monkeypatch.setattr(
+        module,
+        "_check_lmstudio_model_loaded",
+        lambda model_id: (True, "psyche-r1@f16"),
+    )
+
+    exit_code = module.main()
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert "--study ctrl_study_a" in captured.out
+    assert "--model-id psyche_r1_lmstudio" in captured.out
