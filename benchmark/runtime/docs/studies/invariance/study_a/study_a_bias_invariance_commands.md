@@ -21,6 +21,7 @@ python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --mode
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id qwq --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 6
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psych_qwen_32b --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_a_bias_invariance --model-id psyche_r1_lmstudio --env mh-llm-benchmark-env --data-path data/invariance/v5/base/v2_1/adversarial_bias/biased_vignettes.json --output-dir results_invariance --workers 5
 ```
 
 ### Local HF

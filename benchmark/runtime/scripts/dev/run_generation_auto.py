@@ -24,6 +24,7 @@ BASE_MODEL_IDS = {
     "deepseek_r1_lmstudio",
     "gpt_oss",
     "psych_qwen_32b",
+    "psyche_r1_lmstudio",
     "ollama_minimax_m2_5_cloud",
     "psyllm_gml_local",
     "piaget_local",
@@ -73,6 +74,11 @@ LMSTUDIO_MODEL_PREFLIGHT = {
         "env_var": "LMSTUDIO_DEEPSEEK_R1_MODEL",
         "default": "deepseek-r1-distill-qwen-14b",
         "aliases": ("deepseek-r1-distill-qwen-14b",),
+    },
+    "psyche_r1_lmstudio": {
+        "env_var": "LMSTUDIO_PSYCHE_R1_MODEL",
+        "default": "psyche-r1@f16",
+        "aliases": ("psyche-r1@f16",),
     },
     "medgemma_lmstudio": {
         "env_var": "LMSTUDIO_MEDGEMMA_MODEL",

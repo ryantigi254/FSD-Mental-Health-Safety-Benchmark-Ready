@@ -49,6 +49,11 @@ python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id piaget
 python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id piaget_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id piaget_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id piaget_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study ctrl_study_a --model-id psyche_r1_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 5
+python scripts/dev/run_generation_auto.py --study ctrl_study_b --model-id psyche_r1_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 5
+python scripts/dev/run_generation_auto.py --study ctrl_study_b_multi_turn --model-id psyche_r1_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 5
+python scripts/dev/run_generation_auto.py --study ctrl_study_c --model-id psyche_r1_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 5
+python scripts/dev/run_generation_auto.py --study ctrl_study_a_bias --model-id psyche_r1_lmstudio --ctrl-dir data/invariance/ctrl/base/v2_1 --output-dir results_ctrl_invariance --workers 5
 ```
 
 ## Local HF
