@@ -31,6 +31,7 @@ BASE_MODEL_IDS = {
     "psyche_r1_local",
     "psych_qwen_local",
     "psyllm",
+    "psyllm_lmstudio",
     "psyllm_gml_vllm",
     "piaget_vllm",
     "psyche_r1_vllm",
@@ -69,6 +70,11 @@ LMSTUDIO_MODEL_PREFLIGHT = {
         "env_var": "LMSTUDIO_PIAGET_MODEL",
         "default": "piaget-8b",
         "aliases": ("piaget-8b",),
+    },
+    "psyllm_lmstudio": {
+        "env_var": "LMSTUDIO_PSYLLM_MODEL",
+        "default": "psyllm-8b",
+        "aliases": ("psyllm-8b",),
     },
     "deepseek_r1_lmstudio": {
         "env_var": "LMSTUDIO_DEEPSEEK_R1_MODEL",
@@ -351,7 +357,7 @@ def main() -> int:
 
     if args.study == "ctrl_study_a_bias":
         default_bias_data = "data/invariance/ctrl/base/v2_1/adversarial_bias/biased_vignettes.json"
-        default_output_dir = "results_ctrl_invariance"
+        default_output_dir = "results"
 
         out = []
         i = 0
