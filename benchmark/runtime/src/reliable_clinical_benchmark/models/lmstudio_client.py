@@ -94,6 +94,11 @@ def _estimate_message_tokens(messages: List[Dict[str, str]]) -> int:
     return max(1, math.ceil(total_chars / 4))
 
 
+def _safe_completion_budget(context_length: int, estimated_prompt_tokens: int) -> int:
+    """Return a conservative completion budget within the loaded context window."""
+    return max(256, int(context_length) - int(estimated_prompt_tokens) - 256)
+
+
 def _extract_loaded_model_details(
     api_base: str,
     model: str,
@@ -354,11 +359,21 @@ def chat_completion(
     runtime_limits = get_loaded_model_runtime_limits(api_base, model)
     requested_max_tokens = max_tokens
 
-    if requested_max_tokens is not None and runtime_limits.get("context_length"):
+    if runtime_limits.get("context_length"):
         context_length = int(runtime_limits["context_length"])
         estimated_prompt_tokens = _estimate_message_tokens(messages)
-        safe_budget = max(256, context_length - estimated_prompt_tokens - 1024)
-        if requested_max_tokens > safe_budget:
+        safe_budget = _safe_completion_budget(context_length, estimated_prompt_tokens)
+        if requested_max_tokens is None:
+            requested_max_tokens = safe_budget
+            logger.info(
+                "Setting LM Studio max_tokens for %s to %d from loaded context_length=%d "
+                "and estimated prompt tokens=%d.",
+                model,
+                requested_max_tokens,
+                context_length,
+                estimated_prompt_tokens,
+            )
+        elif requested_max_tokens > safe_budget:
             logger.info(
                 "Reducing LM Studio max_tokens for %s from %d to %d based on loaded context_length=%d "
                 "and estimated prompt tokens=%d.",
@@ -451,7 +466,19 @@ def chat_completion(
 
             if "context size has been exceeded" in error_text.lower():
                 current_max_tokens = payload.get("max_tokens")
-                if isinstance(current_max_tokens, int) and current_max_tokens > 256:
+                context_length = runtime_limits.get("context_length")
+                estimated_prompt_tokens = _estimate_message_tokens(messages)
+                if current_max_tokens is None and context_length:
+                    payload["max_tokens"] = _safe_completion_budget(
+                        int(context_length),
+                        estimated_prompt_tokens,
+                    )
+                    logger.info(
+                        "Retrying LM Studio request for %s with derived max_tokens=%d after context overflow.",
+                        model,
+                        payload["max_tokens"],
+                    )
+                elif isinstance(current_max_tokens, int) and current_max_tokens > 256:
                     reduced_tokens = max(256, current_max_tokens // 2)
                     if reduced_tokens < current_max_tokens:
                         logger.info(
