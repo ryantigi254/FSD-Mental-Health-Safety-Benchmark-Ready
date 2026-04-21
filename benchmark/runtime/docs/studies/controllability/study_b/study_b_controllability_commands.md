@@ -52,6 +52,10 @@ python hf-local-scripts/run_ctrl_generate_only.py `
   --study ctrl_study_b `
   --workers 4
 python hf-local-scripts/run_ctrl_generate_only.py `
+  --model-id psyche_r1_lmstudio `
+  --study ctrl_study_b `
+  --workers 5
+python hf-local-scripts/run_ctrl_generate_only.py `
   --model-id gpt_oss `
   --study ctrl_study_b `
   --workers 2
@@ -141,6 +145,7 @@ serving stack control the effective completion limit.
 
 `ctrl_study_b` generation supports `--workers`. If not passed, default is auto:
 - `6` for `qwen3_lmstudio` and `qwq` in the Windows (PC) examples above
+- `5` for `psyche_r1_lmstudio`
 - `4` for `medgemma_lmstudio` and for auto-default LM Studio runs when `--workers` is omitted
 - `4` / `2` for `deepseek_r1_lmstudio` / `gpt_oss` as in the examples
 - `1` for vLLM and local HF models

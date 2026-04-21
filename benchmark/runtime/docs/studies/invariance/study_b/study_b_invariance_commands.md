@@ -12,6 +12,7 @@ python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id 
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id piaget_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwq --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 6
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psyche_r1_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/v5/base/v2_1 --output-dir results_invariance --workers 5
 ```
 
 ### Local HF
@@ -45,6 +46,7 @@ python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id 
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id piaget_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/v5/variants/v2_1/study_b --output-dir results_invariance --workers 4
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id qwq --env mh-llm-benchmark-env --data-dir data/invariance/v5/variants/v2_1/study_b --output-dir results_invariance --workers 6
 python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id deepseek_r1_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/v5/variants/v2_1/study_b --output-dir results_invariance --workers 4
+python scripts/dev/run_generation_auto.py --study study_b_invariance --model-id psyche_r1_lmstudio --env mh-llm-benchmark-env --data-dir data/invariance/v5/variants/v2_1/study_b --output-dir results_invariance --workers 5
 ```
 
 ### Local HF

@@ -18,6 +18,7 @@ from .lmstudio_gpt_oss import GPTOSSLMStudioRunner
 from .lmstudio_qwen3 import Qwen3LMStudioRunner
 from .lmstudio_medgemma import MedGemmaLMStudioRunner
 from .lmstudio_piaget import PiagetLMStudioRunner
+from .lmstudio_psyche_r1 import PsycheR1LMStudioRunner
 from .piaget_local import Piaget8BLocalRunner
 from .psyche_r1_local import PsycheR1LocalRunner
 from .psych_qwen_local import PsychQwen32BLocalRunner
@@ -41,6 +42,7 @@ __all__ = [
     "Qwen3LMStudioRunner",
     "MedGemmaLMStudioRunner",
     "PiagetLMStudioRunner",
+    "PsycheR1LMStudioRunner",
     "GPTOSSRunner",
     "GPTOSSLMStudioRunner",
     "Piaget8BLocalRunner",
