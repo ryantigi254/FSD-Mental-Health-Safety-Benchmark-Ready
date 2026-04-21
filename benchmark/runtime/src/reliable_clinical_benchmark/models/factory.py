@@ -126,6 +126,11 @@ def get_model_runner(
 
         return PiagetLMStudioRunner(config=config)
 
+    if model_id_lower in ("psyllm_lmstudio", "psyllm-lmstudio", "psyllm-8b-lmstudio"):
+        from .lmstudio_psyllm import PsyLLMLMStudioRunner
+
+        return PsyLLMLMStudioRunner(config=config)
+
     if model_id_lower in (
         "psych_qwen_32b-mlx",
         "psych-qwen-32b-mlx",
