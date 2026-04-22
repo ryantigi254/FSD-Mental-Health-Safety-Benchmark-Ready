@@ -1,22 +1,12 @@
 {
-  "manifest_version": "pairwise.judges.v1",
+  "manifest_version": "pairwise.judges.v2",
   "judges": [
-    {
-      "judge_id": "jackrong_qwen35_27b_claude46_opus_v2",
-      "display_name": "Qwen 3.5 27B Claude 4.6 Opus Distill v2",
-      "hf_source": "Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled-v2-GGUF",
-      "local_model_id": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
-      "generation_params": {
-        "temperature": 0.1,
-        "max_tokens": 1024,
-        "top_p": 0.95
-      }
-    },
     {
       "judge_id": "jackrong_qwopus35_27b_v35",
       "display_name": "Qwopus 3.5 27B v3.5",
       "hf_source": "Jackrong/Qwopus3.5-27B-v3.5-GGUF",
       "local_model_id": "qwopus3.5-27b-v3.5",
+      "role": "primary",
       "generation_params": {
         "temperature": 0.1,
         "max_tokens": 1024,
@@ -28,6 +18,20 @@
       "display_name": "GLM 4.7 Flash Claude Opus 4.5 Distill",
       "hf_source": "TeichAI/GLM-4.7-Flash-Claude-Opus-4.5-High-Reasoning-Distill-GGUF",
       "local_model_id": "glm-4.7-flash-claude-opus-4.5-high-reasoning-distill",
+      "role": "audit",
+      "generation_params": {
+        "temperature": 0.1,
+        "max_tokens": 1024,
+        "top_p": 0.95
+      }
+    },
+    {
+      "judge_id": "jackrong_qwen35_27b_claude46_opus_v2",
+      "display_name": "Qwen 3.5 27B Claude 4.6 Opus Distill v2",
+      "hf_source": "Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled-v2-GGUF",
+      "local_model_id": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
+      "role": "escalation",
+      "escalation_rank": 1,
       "generation_params": {
         "temperature": 0.1,
         "max_tokens": 1024,
@@ -39,6 +43,8 @@
       "display_name": "Gemma 4 31B IT Claude Opus Distill",
       "hf_source": "TeichAI/gemma-4-31B-it-Claude-Opus-Distill-GGUF",
       "local_model_id": "gemma-4-31b-it-claude-opus-distill",
+      "role": "escalation",
+      "escalation_rank": 2,
       "generation_params": {
         "temperature": 0.1,
         "max_tokens": 1024,

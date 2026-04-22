@@ -1,9 +1,9 @@
 {
-  "run_id": "pairwise_invariance_under_control_v2",
+  "run_id": "pairwise_invariance_under_control_v3",
   "layer": "invariance",
   "slice_id": "invariance_under_control",
   "case_manifest_path": "../invariance_under_control_case_manifest.json",
-  "judge_manifest_path": "../judge_panel.v2.json",
+  "judge_manifest_path": "../judge_panel.v3.json",
   "rubric_family": "invariance",
   "run_mode": "stacked",
   "allow_ties": true,

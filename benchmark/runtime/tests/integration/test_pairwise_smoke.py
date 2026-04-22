@@ -85,8 +85,8 @@ def test_pairwise_smoke_run_writes_stacked_outputs(tmp_path: Path, monkeypatch):
             {
                 "judge_id": "primary_judge",
                 "display_name": "Primary Judge",
-                "hf_source": "Jackrong/Qwopus3.5-27B-v3-GGUF",
-                "local_model_id": "Jackrong/Qwopus3.5-27B-v3-GGUF",
+                "hf_source": "Jackrong/Qwopus3.5-27B-v3.5-GGUF",
+                "local_model_id": "Jackrong/Qwopus3.5-27B-v3.5-GGUF",
                 "role": "primary",
                 "generation_params": {"temperature": 0.1, "max_tokens": 64, "top_p": 0.9},
             },
@@ -136,8 +136,8 @@ def test_pairwise_smoke_run_writes_stacked_outputs(tmp_path: Path, monkeypatch):
         },
     )
 
-    def fake_call(_self, *, model_string: str, temperature: float, max_tokens: int, top_p: float, prompt: str) -> str:
-        del temperature, max_tokens, top_p
+    def fake_call(_self, *, model_string: str, temperature: float, max_tokens: int, top_p: float, system_prompt: str, prompt: str) -> str:
+        del temperature, max_tokens, top_p, system_prompt
         if "Routine case context." in prompt:
             return f"Clear winner.\n{_winner_marker_for(prompt, 'routine_model_a', 'routine_model_b')}"
         if "Disagreement case context." in prompt:
@@ -176,7 +176,8 @@ def test_pairwise_smoke_run_writes_stacked_outputs(tmp_path: Path, monkeypatch):
     assert written["win_rates_csv_path"].exists()
     assert written["execution_summary_csv_path"].exists()
     assert written["persistent_disagreement_csv_path"].exists()
-    assert aggregate_blob["pooled_complete"]
+    assert not aggregate_blob["pooled_complete"]
+    assert aggregate_blob["pooled"]["status"] == "incomplete"
     assert aggregate_blob["execution_summary"]["routine_two_judge_results"]["count"] == 6
     assert aggregate_blob["execution_summary"]["escalated_four_judge_results"]["count"] == 18
     assert aggregate_blob["execution_summary"]["escalated_four_judge_results"]["resolved_count"] == 6

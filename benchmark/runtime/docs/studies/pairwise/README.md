@@ -2,16 +2,22 @@
 
 This directory documents the notebook-driven pairwise layer for secondary communication-quality analysis.
 
+## Folder layout
+
+- `core/`: one note per core study part
+- `controllability/`: one note per controllability study part
+- `invariance/`: one note for each invariance family
+
 ## Canonical execution mode
 
 The default run mode is `stacked`, not “all judges all the time”.
 
 Stacked execution uses the fixed panel as an uncertainty-and-audit stack:
 
-- `primary`: `Jackrong/Qwopus3.5-27B-v3-GGUF`
+- `primary`: `Jackrong/Qwopus3.5-27B-v3.5-GGUF`
 - `audit`: `TeichAI/GLM-4.7-Flash-Claude-Opus-4.5-High-Reasoning-Distill`
-- `escalation_1`: `TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF`
-- `escalation_2`: `google/gemma-4-31B-it`
+- `escalation_1`: `Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled-v2-GGUF`
+- `escalation_2`: `TeichAI/gemma-4-31B-it-Claude-Opus-Distill-GGUF`
 
 Routine flow:
 
@@ -48,10 +54,10 @@ Those remain in the primary benchmark metrics and rule-based safety analyses.
 
 ## Fixed judge panel
 
-- `google/gemma-4-31B-it`
-- `Jackrong/Qwopus3.5-27B-v3-GGUF`
+- `Jackrong/Qwopus3.5-27B-v3.5-GGUF`
 - `TeichAI/GLM-4.7-Flash-Claude-Opus-4.5-High-Reasoning-Distill`
-- `TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF`
+- `Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled-v2-GGUF`
+- `TeichAI/gemma-4-31B-it-Claude-Opus-Distill-GGUF`
 
 The panel is fixed so cross-judge disagreement is measurable rather than silently drifting with judge choice.
 

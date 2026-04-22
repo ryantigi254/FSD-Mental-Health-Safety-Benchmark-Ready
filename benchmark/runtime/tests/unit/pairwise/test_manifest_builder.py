@@ -127,3 +127,50 @@ def test_manifest_builder_populates_controllability_and_invariance_slices(tmp_pa
         "control_under_invariance_variant",
     ]
     assert len(control_under_invariance["cases"]) == 1
+
+
+def test_manifest_builder_filters_requested_candidate_systems(tmp_path: Path):
+    runtime_root = tmp_path
+
+    _write_jsonl(
+        runtime_root
+        / "processed"
+        / "_archived"
+        / "duplicates"
+        / "study_a_cleaned"
+        / "keep-model"
+        / "study_a_generations.jsonl",
+        [
+            {
+                "id": "a_0001",
+                "prompt": "Prompt",
+                "output_text": "Keep answer",
+            }
+        ],
+    )
+    _write_jsonl(
+        runtime_root
+        / "processed"
+        / "_archived"
+        / "duplicates"
+        / "study_a_cleaned"
+        / "drop-model"
+        / "study_a_generations.jsonl",
+        [
+            {
+                "id": "a_0001",
+                "prompt": "Prompt",
+                "output_text": "Drop answer",
+            }
+        ],
+    )
+
+    manifest = build_case_manifest(
+        slice_id="study_a",
+        runtime_root=runtime_root,
+        include_systems=["keep-model"],
+    )
+
+    assert manifest["status"] == "missing_inputs"
+    assert manifest["systems"] == ["keep-model"]
+    assert manifest["candidate_system_filter"] == ["keep-model"]

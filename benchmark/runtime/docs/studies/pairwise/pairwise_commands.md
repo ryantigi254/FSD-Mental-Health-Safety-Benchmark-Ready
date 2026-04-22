@@ -35,6 +35,16 @@ python3 scripts/pairwise/run_pairwise.py \
   --config metric-results/pairwise/manifests/configs/study_a.run_config.json
 ```
 
+## Run one stacked judge pass at a time in LM Studio
+
+```bash
+python3 scripts/pairwise/run_pairwise.py \
+  --config metric-results/pairwise/manifests/configs/study_a.run_config.json \
+  --judge-id jackrong_qwopus35_27b_v35
+```
+
+Repeat with one loaded LM Studio model at a time. The runner rebuilds the aggregate report from all parsed judge-pass files already on disk after each pass.
+
 ## Run one slice in exhaustive audit mode
 
 ```bash
@@ -50,7 +60,7 @@ Then copy the config, change `"run_mode": "all_judges"`, and rerun for a full fo
 ```bash
 python3 scripts/pairwise/run_judge_audit.py \
   --manifest metric-results/pairwise/judge_audit/manifests/gold_audit_slice.v1.json \
-  --parsed-dir metric-results/pairwise/parsed/pairwise_study_a_v2
+  --parsed-dir metric-results/pairwise/parsed/pairwise_study_a_v3
 ```
 
 ## Generate the dedicated notebook family

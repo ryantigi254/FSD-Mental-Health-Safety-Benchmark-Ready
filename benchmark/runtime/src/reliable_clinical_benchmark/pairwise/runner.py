@@ -4,18 +4,24 @@ Pairwise evaluation runner.
 
 from __future__ import annotations
 
+from collections import defaultdict
 import importlib.util
 import json
 import logging
 from datetime import datetime, timezone
 from itertools import combinations
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Sequence, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 from .config import PairwiseRunSpec
 from .parser import PairwiseParser
-from .prompt_templates import TEMPLATE_VERSION, TEMPLATES
-from .rubric import criteria_for_case
+from .prompt_templates import (
+    PAIRWISE_JUDGE_SYSTEM_PROMPT,
+    SYSTEM_PROMPT_VERSION,
+    TEMPLATES,
+    USER_TEMPLATE_VERSION,
+)
+from .rubric import ALL_CRITERIA, criteria_for_case
 
 logger = logging.getLogger(__name__)
 
@@ -42,10 +48,12 @@ class PairwiseRunner:
         run_spec: PairwiseRunSpec,
         case_manifest: Dict[str, Any],
         api_base: str = _DEFAULT_API_BASE,
+        selected_judge_ids: Optional[Sequence[str]] = None,
     ) -> None:
         self.run_spec = run_spec
         self.case_manifest = case_manifest
         self.api_base = api_base
+        self.selected_judge_ids = set(selected_judge_ids or [])
         self.parser = PairwiseParser()
         self.output_root = Path(run_spec.config.output_root)
         self.raw_dir = self.output_root / "raw" / run_spec.config.run_id
@@ -59,13 +67,30 @@ class PairwiseRunner:
     def planned_call_bounds(self) -> Dict[str, int]:
         group_count = sum(1 for _ in self.iter_comparison_groups())
         orders = len(self.run_spec.config.orders)
+        judge_count = len(self.active_judges())
         if self.run_spec.config.run_mode == "all_judges":
-            total = group_count * orders * len(self.run_spec.judge_manifest.judges)
+            total = group_count * orders * judge_count
+            return {"min": total, "max": total}
+        if self.selected_judge_ids:
+            total = group_count * orders * judge_count
             return {"min": total, "max": total}
         return {
             "min": group_count * orders * 2,
             "max": group_count * orders * 4,
         }
+
+    def active_judges(self) -> List[Any]:
+        judges = list(self.run_spec.judge_manifest.judges)
+        if not self.selected_judge_ids:
+            return judges
+        return [
+            judge
+            for judge in judges
+            if judge.judge_id in self.selected_judge_ids
+        ]
+
+    def comparison_groups(self) -> List[Dict[str, Any]]:
+        return list(self.iter_comparison_groups())
 
     def iter_comparison_groups(self) -> Iterable[Dict[str, Any]]:
         for case in self.case_manifest.get("cases", []):
@@ -122,6 +147,11 @@ class PairwiseRunner:
                 self._persist_records(group_raw, group_parsed)
             return raw_records, parsed_records
 
+        if self.selected_judge_ids:
+            raise ValueError(
+                "selected_judge_ids with stacked mode must use pending_groups_for_judge() and run_groups_for_judge()"
+            )
+
         for comparison in self.iter_comparison_groups():
             group_raw, group_parsed = self._run_group_stacked(comparison)
             raw_records.extend(group_raw)
@@ -135,7 +165,7 @@ class PairwiseRunner:
     ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
         raw_records: List[Dict[str, Any]] = []
         parsed_records: List[Dict[str, Any]] = []
-        for judge in self.run_spec.judge_manifest.judges:
+        for judge in self.active_judges():
             judge_raw, judge_parsed = self._run_orders_for_judge(
                 comparison=comparison,
                 judge=judge,
@@ -235,6 +265,79 @@ class PairwiseRunner:
         parsed_records.extend(routine_parsed + escalation_parsed)
         return raw_records, parsed_records
 
+    def pending_groups_for_judge(
+        self,
+        *,
+        judge,
+        existing_parsed_records: Sequence[Dict[str, Any]],
+    ) -> List[Dict[str, Any]]:
+        records_by_comparison_judge: Dict[tuple[str, str], List[Dict[str, Any]]] = defaultdict(list)
+        for record in existing_parsed_records:
+            if str(record.get("slice_id", "")) != self.run_spec.config.slice_id:
+                continue
+            records_by_comparison_judge[
+                (str(record.get("comparison_key", "")), str(record.get("judge_id", "")))
+            ].append(record)
+
+        primary = self.run_spec.judge_manifest.primary_judge()
+        audit = self.run_spec.judge_manifest.audit_judge()
+        if primary is None or audit is None:
+            return []
+
+        pending: List[Dict[str, Any]] = []
+        for comparison in self.comparison_groups():
+            comparison_key = comparison["comparison_key"]
+            existing_for_target = records_by_comparison_judge[(comparison_key, judge.judge_id)]
+            if _orders_complete(existing_for_target):
+                continue
+
+            if judge.role == "primary":
+                pending.append(comparison)
+                continue
+
+            primary_records = records_by_comparison_judge[(comparison_key, primary.judge_id)]
+            if not _orders_complete(primary_records):
+                continue
+
+            if judge.role == "audit":
+                pending.append(comparison)
+                continue
+
+            audit_records = records_by_comparison_judge[(comparison_key, audit.judge_id)]
+            if not _orders_complete(audit_records):
+                continue
+
+            primary_summary = summarise_judge_orders(primary_records)
+            audit_summary = summarise_judge_orders(audit_records)
+            escalation_reasons = determine_stacked_escalation_reasons(
+                primary_summary=primary_summary,
+                audit_summary=audit_summary,
+                high_risk_forced=self._is_high_risk_case(comparison["case"]),
+                escalate_on=self.run_spec.config.escalate_on,
+            )
+            if escalation_reasons:
+                pending.append(comparison)
+
+        return pending
+
+    def run_groups_for_judge(
+        self,
+        *,
+        comparison_groups: Sequence[Dict[str, Any]],
+        judge,
+    ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+        raw_records: List[Dict[str, Any]] = []
+        parsed_records: List[Dict[str, Any]] = []
+        for comparison in comparison_groups:
+            judge_raw, judge_parsed = self._run_orders_for_judge(
+                comparison=comparison,
+                judge=judge,
+            )
+            raw_records.extend(judge_raw)
+            parsed_records.extend(judge_parsed)
+            self._persist_records(judge_raw, judge_parsed)
+        return raw_records, parsed_records
+
     def _run_orders_for_judge(
         self,
         *,
@@ -269,8 +372,10 @@ class PairwiseRunner:
 
         template = TEMPLATES[order]
         criterion_id = comparison["criterion_id"]
+        criterion = ALL_CRITERIA[criterion_id]
         prompt = template.format(
-            criterion_rubric=self._criterion_prompt(criterion_id),
+            criterion_name=criterion.display_name,
+            criterion_rubric=criterion.rubric_prompt,
             case_context=case.get("context", ""),
             response_a=display_a["text"],
             response_b=display_b["text"],
@@ -284,6 +389,7 @@ class PairwiseRunner:
                 temperature=judge.generation_params.temperature,
                 max_tokens=judge.generation_params.max_tokens,
                 top_p=judge.generation_params.top_p,
+                system_prompt=PAIRWISE_JUDGE_SYSTEM_PROMPT,
                 prompt=prompt,
             )
             parsed = self.parser.parse(
@@ -330,7 +436,10 @@ class PairwiseRunner:
             "display_system_b": display_b["system_id"],
             "response_length_a": _response_length(response_a),
             "response_length_b": _response_length(response_b),
-            "prompt_template_version": TEMPLATE_VERSION,
+            "system_prompt_version": SYSTEM_PROMPT_VERSION,
+            "prompt_template_version": USER_TEMPLATE_VERSION,
+            "system_prompt": PAIRWISE_JUDGE_SYSTEM_PROMPT,
+            "prompt_text": prompt,
             "raw_response": raw_response,
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
@@ -383,11 +492,6 @@ class PairwiseRunner:
                 parsed_record,
             )
 
-    def _criterion_prompt(self, criterion_id: str) -> str:
-        from .rubric import ALL_CRITERIA
-
-        return ALL_CRITERIA[criterion_id].rubric_prompt
-
     def _is_high_risk_case(self, case: Dict[str, Any]) -> bool:
         tags = set(case.get("tags", []))
         return any(tag in tags for tag in self.run_spec.config.high_risk_tags)
@@ -399,13 +503,17 @@ class PairwiseRunner:
         temperature: float,
         max_tokens: int,
         top_p: float,
+        system_prompt: str,
         prompt: str,
     ) -> str:
         try:
             return chat_completion(
                 api_base=self.api_base,
                 model=model_string,
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": prompt},
+                ],
                 temperature=temperature,
                 max_tokens=max_tokens,
                 top_p=top_p,
@@ -487,3 +595,8 @@ def _response_length(response: Dict[str, Any]) -> int:
     if isinstance(word_count, int) and word_count > 0:
         return word_count
     return len(str(response.get("text", "")).split())
+
+
+def _orders_complete(records: Sequence[Dict[str, Any]]) -> bool:
+    orders = {str(record.get("order", "")) for record in records}
+    return {"AB", "BA"}.issubset(orders)

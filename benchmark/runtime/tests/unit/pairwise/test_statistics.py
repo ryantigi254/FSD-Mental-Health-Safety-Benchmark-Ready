@@ -108,6 +108,19 @@ def _stacked_run_spec() -> PairwiseRunSpec:
     )
 
 
+def _case_manifest(*, tags_by_case: dict[str, list[str]] | None = None) -> dict:
+    tags_by_case = tags_by_case or {}
+    return {
+        "cases": [
+            {
+                "case_id": case_id,
+                "tags": tags,
+            }
+            for case_id, tags in sorted(tags_by_case.items())
+        ]
+    }
+
+
 def test_compute_win_rates_and_bradley_terry():
     records = [
         _record(case_id="c1", judge_id="j1", order="AB", winner="model_a"),
@@ -285,13 +298,67 @@ def test_compute_execution_summary_reports_routine_and_escalated_cases():
         ),
     ]
 
-    summary = compute_execution_summary(records, run_spec=run_spec)
+    summary = compute_execution_summary(
+        records,
+        run_spec=run_spec,
+        case_manifest=_case_manifest(),
+    )
 
     assert summary["routine_two_judge_results"]["count"] == 1
     assert summary["escalated_four_judge_results"]["count"] == 1
     assert summary["uncertain_case_count"] == 1
+    assert summary["pending_case_count"] == 0
     assert summary["primary_audit_agreement"]["n"] == 2
     assert summary["primary_audit_agreement"]["agreement_rate"] == 0.5
     assert summary["all_judge_agreement"]["n"] == 1
     assert summary["all_judge_agreement"]["agreement_rate"] == 0.0
     assert len(summary["persistent_disagreement_cases"]) == 1
+
+
+def test_compute_execution_summary_marks_pending_when_escalation_panel_is_incomplete():
+    run_spec = _stacked_run_spec()
+    records = [
+        _record(
+            case_id="c1",
+            judge_id="primary_judge",
+            judge_role="primary",
+            order="AB",
+            winner="model_a",
+            comparison_key="pending_case",
+        ),
+        _record(
+            case_id="c1",
+            judge_id="primary_judge",
+            judge_role="primary",
+            order="BA",
+            winner="model_a",
+            comparison_key="pending_case",
+        ),
+        _record(
+            case_id="c1",
+            judge_id="audit_judge",
+            judge_role="audit",
+            order="AB",
+            winner="model_b",
+            comparison_key="pending_case",
+        ),
+        _record(
+            case_id="c1",
+            judge_id="audit_judge",
+            judge_role="audit",
+            order="BA",
+            winner="model_b",
+            comparison_key="pending_case",
+        ),
+    ]
+
+    summary = compute_execution_summary(
+        records,
+        run_spec=run_spec,
+        case_manifest=_case_manifest(),
+    )
+
+    assert summary["routine_two_judge_results"]["count"] == 0
+    assert summary["escalated_four_judge_results"]["count"] == 0
+    assert summary["pending_case_count"] == 1
+    assert summary["comparison_rows"][0]["comparison_outcome"] == "pending_escalation"

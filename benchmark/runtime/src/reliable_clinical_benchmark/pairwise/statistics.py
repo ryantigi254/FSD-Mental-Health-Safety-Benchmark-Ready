@@ -12,7 +12,12 @@ from typing import Any, Dict, Iterable, List, Sequence, Tuple
 import numpy as np
 from scipy import optimize, stats as sp_stats
 
-from .runner import summarise_judge_orders
+from .rubric import criteria_for_case
+from .runner import (
+    determine_stacked_escalation_reasons,
+    resolve_stacked_outcome,
+    summarise_judge_orders,
+)
 
 
 Record = Dict[str, Any]
@@ -32,7 +37,12 @@ def compute_slice_statistics(
         for judge_id in judges
     }
 
-    pooled_complete = all(per_judge[judge_id]["summary"]["total"] > 0 for judge_id in judges)
+    pooled_complete = _has_complete_panel_coverage(
+        records,
+        judges=judges,
+        run_spec=run_spec,
+        case_manifest=case_manifest,
+    )
     pooled = compute_scope_statistics(records) if pooled_complete else {
         "status": "incomplete",
         "reason": "all four judges did not complete the same cohort",
@@ -71,8 +81,74 @@ def compute_slice_statistics(
         "pooled_complete": pooled_complete,
         "pooled": pooled,
         "judge_agreement": compute_judge_agreement(records),
-        "execution_summary": compute_execution_summary(records, run_spec=run_spec),
+        "execution_summary": compute_execution_summary(
+            records,
+            run_spec=run_spec,
+            case_manifest=case_manifest,
+        ),
     }
+
+
+def _has_complete_panel_coverage(
+    records: List[Record],
+    *,
+    judges: List[str],
+    run_spec,
+    case_manifest: Dict[str, Any],
+) -> bool:
+    if not judges:
+        return False
+    expected = _expected_record_keys(run_spec=run_spec, case_manifest=case_manifest)
+    if not expected:
+        return False
+    coverage: Dict[str, set[tuple[str, str]]] = {judge_id: set() for judge_id in judges}
+    for record in records:
+        judge_id = str(record.get("judge_id", ""))
+        if judge_id not in coverage:
+            continue
+        coverage[judge_id].add(
+            (
+                str(record.get("comparison_key", "")),
+                str(record.get("order", "")),
+            )
+        )
+    return all(coverage[judge_id] == expected for judge_id in judges)
+
+
+def _expected_record_keys(*, run_spec, case_manifest: Dict[str, Any]) -> set[tuple[str, str]]:
+    expected: set[tuple[str, str]] = set()
+    orders = list(run_spec.config.orders)
+    for case in case_manifest.get("cases", []):
+        criteria = [
+            criterion_id
+            for criterion_id in criteria_for_case(
+                run_spec.config.rubric_family,
+                case.get("tags", []),
+            )
+            if criterion_id in run_spec.criteria
+        ]
+        if not criteria:
+            continue
+        response_ids = sorted(
+            response.get("system_id")
+            for response in case.get("responses", [])
+            if response.get("system_id")
+        )
+        pairings = case.get("pairings") or [
+            {"system_a": left, "system_b": right}
+            for left, right in combinations(response_ids, 2)
+        ]
+        for pairing in pairings:
+            canonical_pair_key = "__vs__".join(
+                sorted([pairing["system_a"], pairing["system_b"]])
+            )
+            for criterion_id in criteria:
+                comparison_key = (
+                    f"{case['case_id']}::{criterion_id}::{canonical_pair_key}"
+                )
+                for order in orders:
+                    expected.add((comparison_key, order))
+    return expected
 
 
 def compute_scope_statistics(records: List[Record]) -> Dict[str, Any]:
@@ -370,7 +446,7 @@ def compute_judge_agreement(records: List[Record]) -> Dict[str, Any]:
     }
 
 
-def compute_execution_summary(records: List[Record], *, run_spec) -> Dict[str, Any]:
+def compute_execution_summary(records: List[Record], *, run_spec, case_manifest: Dict[str, Any]) -> Dict[str, Any]:
     if run_spec.config.run_mode != "stacked":
         return {
             "mode": run_spec.config.run_mode,
@@ -378,6 +454,7 @@ def compute_execution_summary(records: List[Record], *, run_spec) -> Dict[str, A
             "escalated_four_judge_results": {"count": 0},
             "persistent_disagreement_cases": [],
             "uncertain_case_count": 0,
+            "pending_case_count": 0,
             "escalation_summary": {},
             "primary_audit_agreement": {"n": 0, "agreement_rate": 0.0},
             "all_judge_agreement": {"n": 0, "agreement_rate": 0.0},
@@ -387,6 +464,10 @@ def compute_execution_summary(records: List[Record], *, run_spec) -> Dict[str, A
     grouped: Dict[str, List[Record]] = defaultdict(list)
     for record in records:
         grouped[record["comparison_key"]].append(record)
+    case_lookup = {
+        str(case.get("case_id", "")): case
+        for case in case_manifest.get("cases", [])
+    }
 
     primary_id = run_spec.judge_manifest.primary_judge().judge_id
     audit_id = run_spec.judge_manifest.audit_judge().judge_id
@@ -398,6 +479,7 @@ def compute_execution_summary(records: List[Record], *, run_spec) -> Dict[str, A
     escalated_count = 0
     resolved_escalated = 0
     uncertain_count = 0
+    pending_count = 0
     primary_audit_agree = 0
     primary_audit_total = 0
     all_judge_agree = 0
@@ -411,12 +493,18 @@ def compute_execution_summary(records: List[Record], *, run_spec) -> Dict[str, A
             judge_id: summarise_judge_orders(judge_bucket)
             for judge_id, judge_bucket in per_judge_records.items()
         }
-        stage = "escalated" if any(record.get("judge_stage") == "escalated" for record in bucket) else "routine"
-        outcome = bucket[0].get("comparison_outcome", "unknown")
-        reasons = sorted({reason for record in bucket for reason in record.get("escalation_reason", [])})
+        case_id = str(bucket[0].get("case_id", ""))
+        case = case_lookup.get(case_id, {})
+        high_risk_forced = any(
+            tag in set(case.get("tags", []))
+            for tag in run_spec.config.high_risk_tags
+        )
+
+        reasons: List[str] = []
+        stage = "partial"
+        outcome = "partial"
         for reason in reasons:
             escalation_counter[reason] += 1
-        high_risk_forced = any(record.get("high_risk_forced") for record in bucket)
         example = bucket[0]
         judge_winners = {
             judge_id: summary.get("winner") or summary.get("status")
@@ -426,40 +514,66 @@ def compute_execution_summary(records: List[Record], *, run_spec) -> Dict[str, A
         primary_summary = judge_summaries.get(primary_id)
         audit_summary = judge_summaries.get(audit_id)
         if primary_summary and audit_summary:
+            reasons = sorted(
+                determine_stacked_escalation_reasons(
+                    primary_summary=primary_summary,
+                    audit_summary=audit_summary,
+                    high_risk_forced=high_risk_forced,
+                    escalate_on=run_spec.config.escalate_on,
+                )
+            )
+            for reason in reasons:
+                escalation_counter[reason] += 1
             if primary_summary["status"] == "decisive" and audit_summary["status"] == "decisive":
                 primary_audit_total += 1
                 if primary_summary["winner"] == audit_summary["winner"]:
                     primary_audit_agree += 1
-
-        if stage == "routine":
-            routine_count += 1
+            if not reasons:
+                stage = "routine"
+                outcome = "resolved_routine"
+                routine_count += 1
+            else:
+                stage = "escalated"
+                if all(judge_id in judge_summaries for judge_id in [primary_id, audit_id, *escalation_ids]):
+                    all_judge_total += 1
+                    decisive = [
+                        judge_summaries[judge_id]
+                        for judge_id in [primary_id, audit_id, *escalation_ids]
+                    ]
+                    if all(summary["status"] == "decisive" for summary in decisive):
+                        winners = {summary["winner"] for summary in decisive}
+                        if len(winners) == 1:
+                            all_judge_agree += 1
+                    outcome = resolve_stacked_outcome(
+                        all_summaries={
+                            primary_id: primary_summary,
+                            audit_id: audit_summary,
+                            escalation_ids[0]: judge_summaries[escalation_ids[0]],
+                            escalation_ids[1]: judge_summaries[escalation_ids[1]],
+                        },
+                        persistent_disagreement_policy=run_spec.config.persistent_disagreement_policy,
+                    )
+                    escalated_count += 1
+                    if outcome == "resolved_escalated":
+                        resolved_escalated += 1
+                    if outcome == "uncertain":
+                        uncertain_count += 1
+                        persistent_cases.append(
+                            {
+                                "comparison_key": comparison_key,
+                                "case_id": example["case_id"],
+                                "criterion_id": example["criterion_id"],
+                                "canonical_pair_key": example["canonical_pair_key"],
+                                "escalation_reason": reasons,
+                                "high_risk_forced": high_risk_forced,
+                                "judge_winners": judge_winners,
+                            }
+                        )
+                else:
+                    outcome = "pending_escalation"
+                    pending_count += 1
         else:
-            escalated_count += 1
-            if all(judge_id in judge_summaries for judge_id in [primary_id, audit_id, *escalation_ids]):
-                all_judge_total += 1
-                decisive = [
-                    judge_summaries[judge_id]
-                    for judge_id in [primary_id, audit_id, *escalation_ids]
-                ]
-                if all(summary["status"] == "decisive" for summary in decisive):
-                    winners = {summary["winner"] for summary in decisive}
-                    if len(winners) == 1:
-                        all_judge_agree += 1
-            if outcome == "resolved_escalated":
-                resolved_escalated += 1
-            if outcome == "uncertain":
-                uncertain_count += 1
-                persistent_cases.append(
-                    {
-                        "comparison_key": comparison_key,
-                        "case_id": example["case_id"],
-                        "criterion_id": example["criterion_id"],
-                        "canonical_pair_key": example["canonical_pair_key"],
-                        "escalation_reason": reasons,
-                        "high_risk_forced": high_risk_forced,
-                        "judge_winners": judge_winners,
-                    }
-                )
+            pending_count += 1
 
         comparison_rows.append(
             {
@@ -487,6 +601,7 @@ def compute_execution_summary(records: List[Record], *, run_spec) -> Dict[str, A
         },
         "persistent_disagreement_cases": persistent_cases,
         "uncertain_case_count": uncertain_count,
+        "pending_case_count": pending_count,
         "escalation_summary": dict(sorted(escalation_counter.items())),
         "primary_audit_agreement": {
             "n": primary_audit_total,

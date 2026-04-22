@@ -101,6 +101,7 @@ def build_case_manifest(
     slice_id: str,
     runtime_root: str | Path,
     output_path: str | Path | None = None,
+    include_systems: Optional[List[str]] = None,
     strict: bool = False,
 ) -> Dict[str, Any]:
     runtime_path = runtime_root_from(runtime_root)
@@ -116,11 +117,19 @@ def build_case_manifest(
             notes=SLICE_METADATA[slice_id]["notes"],
         )
     else:
-        manifest = builder(runtime_path)
+        manifest = builder(
+            runtime_path,
+            include_systems=set(include_systems or []),
+        )
         manifest["slice_id"] = slice_id
         manifest["layer"] = layer
         manifest["manifest_version"] = _MANIFEST_VERSION
         manifest["built_at"] = datetime.now(timezone.utc).isoformat()
+        if include_systems:
+            manifest["candidate_system_filter"] = sorted(dict.fromkeys(include_systems))
+            manifest["boundary_notes"] = list(manifest.get("boundary_notes", [])) + [
+                "Candidate systems were filtered to the requested subset."
+            ]
 
     if strict and manifest["status"] != "ready":
         raise FileNotFoundError(
@@ -155,7 +164,7 @@ def _empty_manifest(*, slice_id: str, layer: str, notes: List[str]) -> Dict[str,
     }
 
 
-def _build_study_a(runtime_root: Path) -> Dict[str, Any]:
+def _build_study_a(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     source_root = runtime_root / "processed" / "_archived" / "duplicates" / "study_a_cleaned"
     return _build_from_jsonl_dirs(
         source_root=source_root,
@@ -166,41 +175,33 @@ def _build_study_a(runtime_root: Path) -> Dict[str, Any]:
         tags_for=lambda _row: [],
         case_extra=lambda _row: {},
         boundary_notes=["Candidate responses are historical runtime panel outputs."],
+        include_systems=include_systems,
     )
 
 
-def _build_study_a_bias(runtime_root: Path) -> Dict[str, Any]:
-    source_root = runtime_root / "processed" / "study_a_bias_pipeline"
-    prompt_catalogue = _load_bias_legacy_catalogue(runtime_root)
-
-    def context_for(row: Dict[str, Any]) -> str:
-        prompt = prompt_catalogue.get(row["id"])
-        if prompt:
-            return prompt
-        return (
-            "Original study_a_bias prompt unavailable in this branch. "
-            f"Bias metadata: feature={row.get('bias_feature')}, label={row.get('bias_label')}."
-        )
-
+def _build_study_a_bias(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
+    source_root = runtime_root / "results"
     return _build_from_jsonl_dirs(
         source_root=source_root,
-        filename="study_a_bias_processed.jsonl",
+        filename="study_a_bias_generations.jsonl",
         case_key=lambda row: row["id"],
-        context_for=context_for,
-        text_for=lambda row: row.get("output_text") or "",
+        context_for=lambda row: row.get("prompt") or "",
+        text_for=lambda row: row.get("output_text") or row.get("response_text") or "",
         tags_for=lambda row: ["bias", f"bias_feature:{row.get('bias_feature', 'unknown')}"],
         case_extra=lambda row: {
             "bias_feature": row.get("bias_feature"),
             "bias_label": row.get("bias_label"),
         },
         boundary_notes=[
-            "Bias prompts were recovered from the legacy 2016 adversarial-bias catalogue.",
+            "Bias prompts are taken from the cached study_a_bias generation files.",
             "Candidate responses are historical runtime panel outputs.",
         ],
+        include_row=lambda row: str(row.get("status") or "").strip().lower() == "ok",
+        include_systems=include_systems,
     )
 
 
-def _build_study_b(runtime_root: Path) -> Dict[str, Any]:
+def _build_study_b(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     source_root = runtime_root / "processed" / "_archived" / "duplicates" / "study_b_cleaned"
     return _build_from_jsonl_dirs(
         source_root=source_root,
@@ -215,14 +216,15 @@ def _build_study_b(runtime_root: Path) -> Dict[str, Any]:
         },
         include_row=lambda row: row.get("variant") in {"control", "injected"},
         boundary_notes=["Candidate responses are historical runtime panel outputs."],
+        include_systems=include_systems,
     )
 
 
-def _build_study_b_multiturn(runtime_root: Path) -> Dict[str, Any]:
-    source_root = runtime_root / "processed" / "_archived" / "duplicates" / "study_b_cleaned"
+def _build_study_b_multiturn(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
+    source_root = runtime_root / "results"
     return _build_from_jsonl_dirs(
         source_root=source_root,
-        filename="study_b_generations.jsonl",
+        filename="study_b_multi_turn_generations.jsonl",
         case_key=_study_b_multiturn_case_key,
         context_for=lambda row: row.get("conversation_text") or "",
         text_for=lambda row: row.get("response_text") or "",
@@ -232,12 +234,16 @@ def _build_study_b_multiturn(runtime_root: Path) -> Dict[str, Any]:
             "turn_num": row.get("turn_num"),
             "gold_answer": row.get("gold_answer"),
         },
-        include_row=lambda row: row.get("variant") == "multi_turn",
+        include_row=lambda row: (
+            row.get("variant") == "multi_turn"
+            and str(row.get("status") or "").strip().lower() == "ok"
+        ),
         boundary_notes=["Candidate responses are historical runtime panel outputs."],
+        include_systems=include_systems,
     )
 
 
-def _build_study_c(runtime_root: Path) -> Dict[str, Any]:
+def _build_study_c(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     source_root = runtime_root / "processed" / "_archived" / "duplicates" / "study_c_cleaned"
     return _build_from_jsonl_dirs(
         source_root=source_root,
@@ -252,10 +258,11 @@ def _build_study_c(runtime_root: Path) -> Dict[str, Any]:
             "turn_num": row.get("turn_num"),
         },
         boundary_notes=["Candidate responses are historical runtime panel outputs."],
+        include_systems=include_systems,
     )
 
 
-def _build_study_a_controllability(runtime_root: Path) -> Dict[str, Any]:
+def _build_study_a_controllability(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     return _build_controllability_manifest(
         runtime_root=runtime_root,
         study_key="study_a",
@@ -269,10 +276,11 @@ def _build_study_a_controllability(runtime_root: Path) -> Dict[str, Any]:
             "model_name": row.get("model_name"),
         },
         boundary_notes=SLICE_METADATA["study_a_controllability"]["notes"],
+        include_systems=include_systems,
     )
 
 
-def _build_study_a_bias_controllability(runtime_root: Path) -> Dict[str, Any]:
+def _build_study_a_bias_controllability(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     return _build_controllability_manifest(
         runtime_root=runtime_root,
         study_key="study_a_bias",
@@ -291,10 +299,11 @@ def _build_study_a_bias_controllability(runtime_root: Path) -> Dict[str, Any]:
             "pair_group_id": row.get("pair_group_id"),
         },
         boundary_notes=SLICE_METADATA["study_a_bias_controllability"]["notes"],
+        include_systems=include_systems,
     )
 
 
-def _build_study_b_controllability(runtime_root: Path) -> Dict[str, Any]:
+def _build_study_b_controllability(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     return _build_controllability_manifest(
         runtime_root=runtime_root,
         study_key="study_b",
@@ -309,10 +318,11 @@ def _build_study_b_controllability(runtime_root: Path) -> Dict[str, Any]:
             "incorrect_opinion": row.get("incorrect_opinion"),
         },
         boundary_notes=SLICE_METADATA["study_b_controllability"]["notes"],
+        include_systems=include_systems,
     )
 
 
-def _build_study_b_multiturn_controllability(runtime_root: Path) -> Dict[str, Any]:
+def _build_study_b_multiturn_controllability(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     return _build_controllability_manifest(
         runtime_root=runtime_root,
         study_key="study_b_multiturn",
@@ -327,10 +337,11 @@ def _build_study_b_multiturn_controllability(runtime_root: Path) -> Dict[str, An
             "pressure_level": (row.get("meta") or {}).get("pressure_level"),
         },
         boundary_notes=SLICE_METADATA["study_b_multiturn_controllability"]["notes"],
+        include_systems=include_systems,
     )
 
 
-def _build_study_c_controllability(runtime_root: Path) -> Dict[str, Any]:
+def _build_study_c_controllability(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     return _build_controllability_manifest(
         runtime_root=runtime_root,
         study_key="study_c",
@@ -345,10 +356,11 @@ def _build_study_c_controllability(runtime_root: Path) -> Dict[str, Any]:
             "persona_id": row.get("persona_id"),
         },
         boundary_notes=SLICE_METADATA["study_c_controllability"]["notes"],
+        include_systems=include_systems,
     )
 
 
-def _build_invariance(runtime_root: Path) -> Dict[str, Any]:
+def _build_invariance(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     return _build_matched_manifest(
         runtime_root=runtime_root,
         slice_id="invariance",
@@ -356,10 +368,11 @@ def _build_invariance(runtime_root: Path) -> Dict[str, Any]:
         system_variant="invariance_variant",
         specs=_benchmark_invariance_specs(runtime_root),
         boundary_notes=SLICE_METADATA["invariance"]["notes"],
+        include_systems=include_systems,
     )
 
 
-def _build_invariance_under_control(runtime_root: Path) -> Dict[str, Any]:
+def _build_invariance_under_control(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     return _build_matched_manifest(
         runtime_root=runtime_root,
         slice_id="invariance_under_control",
@@ -367,10 +380,11 @@ def _build_invariance_under_control(runtime_root: Path) -> Dict[str, Any]:
         system_variant="ctrl_invariance_variant",
         specs=_control_invariance_specs(runtime_root),
         boundary_notes=SLICE_METADATA["invariance_under_control"]["notes"],
+        include_systems=include_systems,
     )
 
 
-def _build_control_under_invariance(runtime_root: Path) -> Dict[str, Any]:
+def _build_control_under_invariance(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     return _build_matched_manifest(
         runtime_root=runtime_root,
         slice_id="control_under_invariance",
@@ -378,6 +392,7 @@ def _build_control_under_invariance(runtime_root: Path) -> Dict[str, Any]:
         system_variant="control_under_invariance_variant",
         specs=_control_invariance_specs(runtime_root),
         boundary_notes=SLICE_METADATA["control_under_invariance"]["notes"],
+        include_systems=include_systems,
     )
 
 
@@ -392,6 +407,7 @@ def _build_from_jsonl_dirs(
     case_extra: Callable[[Dict[str, Any]], Dict[str, Any]],
     boundary_notes: List[str],
     include_row: Optional[Callable[[Dict[str, Any]], bool]] = None,
+    include_systems: Optional[set[str]] = None,
 ) -> Dict[str, Any]:
     if not source_root.exists():
         return {
@@ -407,6 +423,8 @@ def _build_from_jsonl_dirs(
     source_paths: List[str] = []
 
     for model_dir in sorted(path for path in source_root.iterdir() if path.is_dir()):
+        if include_systems and model_dir.name not in include_systems:
+            continue
         source_path = model_dir / filename
         if not source_path.exists():
             continue
@@ -460,6 +478,7 @@ def _build_controllability_manifest(
     tags_for: Callable[[Dict[str, Any]], List[str]],
     case_extra: Callable[[Dict[str, Any]], Dict[str, Any]],
     boundary_notes: List[str],
+    include_systems: Optional[set[str]] = None,
 ) -> Dict[str, Any]:
     source_root = runtime_root / "results"
     if not source_root.exists():
@@ -470,6 +489,8 @@ def _build_controllability_manifest(
     source_paths: List[str] = []
 
     for model_dir in sorted(path for path in source_root.iterdir() if path.is_dir()):
+        if include_systems and model_dir.name not in include_systems:
+            continue
         source_path = model_dir / filename
         if not source_path.exists():
             continue
@@ -522,6 +543,7 @@ def _build_matched_manifest(
     system_variant: str,
     specs: List[Dict[str, Any]],
     boundary_notes: List[str],
+    include_systems: Optional[set[str]] = None,
 ) -> Dict[str, Any]:
     cases: Dict[str, Dict[str, Any]] = {}
     source_paths: List[str] = []
@@ -549,6 +571,8 @@ def _build_matched_manifest(
             continue
 
         for variant_model_dir in sorted(path for path in variant_root.iterdir() if path.is_dir()):
+            if include_systems and variant_model_dir.name not in include_systems:
+                continue
             variant_path = variant_model_dir / variant_filename
             if not variant_path.exists():
                 continue

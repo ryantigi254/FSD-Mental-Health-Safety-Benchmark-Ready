@@ -13,54 +13,94 @@ REPORT_ROOT = RUNTIME_ROOT / "metric-results" / "pairwise" / "reports"
 JUDGE_AUDIT_REPORT_ROOT = (
     RUNTIME_ROOT / "metric-results" / "pairwise" / "judge_audit" / "reports"
 )
+PAIRWISE_RUN_VERSION = "v3"
 
-CORE_SLICES = [
+CORE_NOTEBOOKS = [
+    (
+        "study_a",
+        NOTEBOOK_ROOT / "core" / "core_study_a_pairwise.ipynb",
+    ),
+    (
+        "study_a_bias",
+        NOTEBOOK_ROOT / "core" / "core_study_a_bias_pairwise.ipynb",
+    ),
+    (
+        "study_b",
+        NOTEBOOK_ROOT / "core" / "core_study_b_pairwise.ipynb",
+    ),
+    (
+        "study_b_multiturn",
+        NOTEBOOK_ROOT / "core" / "core_study_b_multiturn_pairwise.ipynb",
+    ),
+    (
+        "study_c",
+        NOTEBOOK_ROOT / "core" / "core_study_c_pairwise.ipynb",
+    ),
+]
+STUDY_PARTS = [
     "study_a",
     "study_a_bias",
     "study_b",
     "study_b_multiturn",
     "study_c",
 ]
-CONTROLLABILITY_SLICES = [
-    "study_a_controllability",
-    "study_a_bias_controllability",
-    "study_b_controllability",
-    "study_b_multiturn_controllability",
-    "study_c_controllability",
+CONTROLLABILITY_NOTEBOOKS = [
+    (
+        "study_a_controllability",
+        NOTEBOOK_ROOT
+        / "controllability"
+        / "study_a_controllability_pairwise.ipynb",
+    ),
+    (
+        "study_a_bias_controllability",
+        NOTEBOOK_ROOT
+        / "controllability"
+        / "study_a_bias_controllability_pairwise.ipynb",
+    ),
+    (
+        "study_b_controllability",
+        NOTEBOOK_ROOT
+        / "controllability"
+        / "study_b_controllability_pairwise.ipynb",
+    ),
+    (
+        "study_b_multiturn_controllability",
+        NOTEBOOK_ROOT
+        / "controllability"
+        / "study_b_multiturn_controllability_pairwise.ipynb",
+    ),
+    (
+        "study_c_controllability",
+        NOTEBOOK_ROOT
+        / "controllability"
+        / "study_c_controllability_pairwise.ipynb",
+    ),
 ]
-INVARIANCE_SLICES = [
-    "invariance",
-    "invariance_under_control",
-    "control_under_invariance",
+INVARIANCE_ARMS = [
+    (
+        "invariance",
+        "invariance",
+        "invariance_pairwise.ipynb",
+    ),
+    (
+        "invariance_under_control",
+        "invariance-controlability",
+        "invariance_under_control_pairwise.ipynb",
+    ),
+    (
+        "control_under_invariance",
+        "controlability-invariance",
+        "control_under_invariance_pairwise.ipynb",
+    ),
 ]
 
 
 def main() -> int:
     NOTEBOOK_ROOT.mkdir(parents=True, exist_ok=True)
 
-    for slice_id in CORE_SLICES:
-        _write_notebook(
-            NOTEBOOK_ROOT / f"core_{slice_id}_pairwise.ipynb",
-            title=f"Pairwise Core Analysis: {slice_id}",
-            slice_id=slice_id,
-            report_glob=f"{REPORT_ROOT}/pairwise_{slice_id}_v2/{slice_id}__pairwise_secondary_results.json",
-        )
-
-    for slice_id in CONTROLLABILITY_SLICES:
-        _write_notebook(
-            NOTEBOOK_ROOT / f"controllability_{slice_id}_pairwise.ipynb",
-            title=f"Pairwise Controllability Analysis: {slice_id}",
-            slice_id=slice_id,
-            report_glob=f"{REPORT_ROOT}/pairwise_{slice_id}_v2/{slice_id}__pairwise_secondary_results.json",
-        )
-
-    for slice_id in INVARIANCE_SLICES:
-        _write_notebook(
-            NOTEBOOK_ROOT / f"invariance_{slice_id}_pairwise.ipynb",
-            title=f"Pairwise Invariance Analysis: {slice_id}",
-            slice_id=slice_id,
-            report_glob=f"{REPORT_ROOT}/pairwise_{slice_id}_v2/{slice_id}__pairwise_secondary_results.json",
-        )
+    _write_slice_notebooks("Core", CORE_NOTEBOOKS)
+    _write_slice_notebooks("Controllability", CONTROLLABILITY_NOTEBOOKS)
+    _write_invariance_notebooks()
 
     _write_summary_notebook(
         NOTEBOOK_ROOT / "pairwise_cross_layer_summary.ipynb",
@@ -89,7 +129,29 @@ def main() -> int:
     return 0
 
 
+def _write_slice_notebooks(title_prefix: str, notebook_specs: list[tuple[str, Path]]) -> None:
+    for slice_id, output_path in notebook_specs:
+        _write_notebook(
+            output_path,
+            title=f"Pairwise {title_prefix} Analysis: {slice_id}",
+            slice_id=slice_id,
+            report_glob=f"{REPORT_ROOT}/pairwise_{slice_id}_{PAIRWISE_RUN_VERSION}/{slice_id}__pairwise_secondary_results.json",
+        )
+
+
+def _write_invariance_notebooks() -> None:
+    for study_id in STUDY_PARTS:
+        for arm_slice_id, folder_name, notebook_name in INVARIANCE_ARMS:
+            _write_invariance_notebook(
+                NOTEBOOK_ROOT / "invariance" / study_id / folder_name / notebook_name,
+                arm_slice_id=arm_slice_id,
+                study_id=study_id,
+                title=f"Pairwise Invariance Analysis: {study_id} / {arm_slice_id}",
+            )
+
+
 def _write_notebook(path: Path, *, title: str, slice_id: str, report_glob: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     notebook = {
         "cells": [
             _markdown_cell(
@@ -125,6 +187,92 @@ def _write_notebook(path: Path, *, title: str, slice_id: str, report_glob: str) 
                 "    print('\\nPooled win rates (secondary view)')\n"
                 "    for row in report.get('pooled', {}).get('win_rates', [])[:20]:\n"
                 "        print(row)\n"
+            ),
+        ],
+        "metadata": {
+            "kernelspec": {
+                "display_name": "Python 3",
+                "language": "python",
+                "name": "python3",
+            },
+            "language_info": {"name": "python", "version": "3.12"},
+        },
+        "nbformat": 4,
+        "nbformat_minor": 5,
+    }
+    path.write_text(json.dumps(notebook, indent=2), encoding="utf-8")
+
+
+def _write_invariance_notebook(
+    path: Path,
+    *,
+    arm_slice_id: str,
+    study_id: str,
+    title: str,
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    report_glob = (
+        f"{REPORT_ROOT}/pairwise_{arm_slice_id}_{PAIRWISE_RUN_VERSION}/"
+        f"{arm_slice_id}__pairwise_secondary_results.json"
+    )
+    manifest_path = (
+        RUNTIME_ROOT
+        / "metric-results"
+        / "pairwise"
+        / "manifests"
+        / f"{arm_slice_id}_case_manifest.json"
+    )
+    notebook = {
+        "cells": [
+            _markdown_cell(
+                f"# {title}\n\nThis notebook inspects the `{study_id}` slice inside the `{arm_slice_id}` invariance arm."
+            ),
+            _code_cell(
+                "from collections import Counter\n"
+                "from pathlib import Path\n"
+                "import json\n\n"
+                f"arm_slice_id = '{arm_slice_id}'\n"
+                f"study_id = '{study_id}'\n"
+                f"report_path = Path(r'''{report_glob}''')\n"
+                f"manifest_path = Path(r'''{manifest_path}''')\n\n"
+                "if report_path.exists():\n"
+                "    report = json.loads(report_path.read_text(encoding='utf-8'))\n"
+                "    print('report_run_id:', report.get('run_id'))\n"
+                "    print('report_slice_id:', report.get('slice_id'))\n"
+                "    print('report_run_mode:', report.get('run_mode'))\n"
+                "    print('report_pooled_complete:', report.get('pooled_complete'))\n"
+                "else:\n"
+                "    print(f'Report not found yet: {report_path}')\n\n"
+                "if manifest_path.exists():\n"
+                "    manifest = json.loads(manifest_path.read_text(encoding='utf-8'))\n"
+                "    cases = [\n"
+                "        case\n"
+                "        for case in manifest.get('cases', [])\n"
+                "        if case.get('case_meta', {}).get('study') == study_id\n"
+                "    ]\n"
+                "    print('manifest_slice_id:', manifest.get('slice_id'))\n"
+                "    print('study_id:', study_id)\n"
+                "    print('matching_cases:', len(cases))\n"
+                "    print('manifest_boundary_notes:', manifest.get('boundary_notes', []))\n"
+                "else:\n"
+                "    print(f'Manifest not found: {manifest_path}')\n"
+            ),
+            _code_cell(
+                "if 'cases' in globals():\n"
+                "    print('\\nModel counts in matching cases')\n"
+                "    print(Counter(case.get('case_meta', {}).get('model_id') for case in cases))\n"
+            ),
+            _code_cell(
+                "if 'cases' in globals():\n"
+                "    print('\\nSample matching cases')\n"
+                "    for case in cases[:10]:\n"
+                "        print(case.get('case_id'), case.get('case_meta', {}))\n"
+            ),
+            _code_cell(
+                "if 'report' in globals():\n"
+                "    print('\\nPer-judge summaries')\n"
+                "    for judge_id, payload in report.get('per_judge', {}).items():\n"
+                "        print(judge_id, payload.get('summary', {}))\n"
             ),
         ],
         "metadata": {
