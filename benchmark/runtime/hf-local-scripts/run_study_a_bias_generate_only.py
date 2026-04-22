@@ -326,8 +326,6 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "psyllm_lmstudio": "psyllm-lmstudio",
         "psyllm-lmstudio": "psyllm-lmstudio",
         "psyllm_gml_local": "psyllm-gml-local",
-        "psyllm_lmstudio": "psyllm-lmstudio",
-        "psyllm-lmstudio": "psyllm-lmstudio",
         "psyllm-gml-local": "psyllm-gml-local",
         # vLLM-served local models → same results folders as HF-local
         "psyllm_gml_vllm": "psyllm-gml-local",

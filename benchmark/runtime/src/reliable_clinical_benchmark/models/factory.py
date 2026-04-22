@@ -48,11 +48,6 @@ def get_model_runner(
 
         return PsyLLMLocalRunner(config=config)
 
-    if model_id_lower in ("psyllm_lmstudio", "psyllm-lmstudio", "psyllm-8b-lmstudio", "psyllm-8b"):
-        from .lmstudio_psyllm import PsyLLMLMStudioRunner
-
-        return PsyLLMLMStudioRunner(config=config)
-
     if model_id_lower in (
         "psyllm_gml_local",
         "psyllm-gml-local",
@@ -131,7 +126,7 @@ def get_model_runner(
 
         return PiagetLMStudioRunner(config=config)
 
-    if model_id_lower in ("psyllm_lmstudio", "psyllm-lmstudio", "psyllm-8b-lmstudio"):
+    if model_id_lower in ("psyllm_lmstudio", "psyllm-lmstudio", "psyllm-8b-lmstudio", "psyllm-8b"):
         from .lmstudio_psyllm import PsyLLMLMStudioRunner
 
         return PsyLLMLMStudioRunner(config=config)
