@@ -62,7 +62,7 @@ def _prepare_response_for_context(text: str) -> str:
 
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[1]
-CANONICAL_CTRL_OUTPUT_DIR = "results_ctrl_invariance"
+CANONICAL_CTRL_OUTPUT_DIR = "results"
 LEGACY_CTRL_OUTPUT_DIR_ALIASES = {
     "results_reverse",
     "results_invariance_ctrl",
@@ -180,6 +180,7 @@ def _canonical_model_output_dir(model_id: str) -> str:
     canonical_names = {
         "gpt_oss": "gpt-oss-20b",
         "gpt_oss_lmstudio": "gpt-oss-20b",
+        "gpt-oss-lmstudio": "gpt-oss-20b",
         "gpt-oss-120b": "gpt-oss-120b",
         "gpt-oss-120b-runpod": "gpt-oss-120b",
         "gpt_oss_120b_runpod": "gpt-oss-120b",
@@ -190,16 +191,28 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "glm47_flash_runpod": "glm-4.7-flash",
         "glm47_flash": "glm-4.7-flash",
         "qwen3_lmstudio": "qwen3-lmstudio",
+        "qwen3-lmstudio": "qwen3-lmstudio",
         "deepseek_r1_lmstudio": "deepseek-r1-lmstudio",
+        "deepseek-r1-lmstudio": "deepseek-r1-lmstudio",
         "qwq": "qwq",
         "qwq_lmstudio": "qwq",
-        "piaget_lmstudio": "piaget-8b-local",
+        "qwq-lmstudio": "qwq",
+        "piaget_lmstudio": "piaget-lmstudio",
+        "piaget-lmstudio": "piaget-lmstudio",
         "piaget_local": "piaget-8b-local",
         "psyche_r1_local": "psyche-r1-local",
-        "psych_qwen_32b": "psych-qwen-32b-local",
-        "psych-qwen-32b": "psych-qwen-32b-local",
+        "psych_qwen_32b": "psych-qwen-32b",
+        "psych-qwen-32b": "psych-qwen-32b",
         "psych_qwen_local": "psych-qwen-32b-local",
+        "medgemma_lmstudio": "medgemma-lmstudio",
+        "medgemma-lmstudio": "medgemma-lmstudio",
+        "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax_m2_5_cloud": "minimax-m2.5-cloud",
+        "minimax-m2.5-cloud": "minimax-m2.5-cloud",
+        "minimax-m2.5:cloud": "minimax-m2.5-cloud",
         "psyllm": "psyllm-gml-local",
+        "psyllm_lmstudio": "psyllm-lmstudio",
+        "psyllm-lmstudio": "psyllm-lmstudio",
         "psyllm_gml_local": "psyllm-gml-local",
         "psyllm_lmstudio": "psyllm-lmstudio",
         "psyllm-lmstudio": "psyllm-lmstudio",
@@ -216,6 +229,21 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "mlx-qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0",
     }
     return canonical_names.get(model_id_lower, model_id)
+
+
+def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
+    """Return the deterministic controllability output folder for a model id.
+
+    For controllability runs we want backend-distinct first-class model ids
+    such as ``piaget_lmstudio`` and ``psych_qwen_32b`` to keep their own
+    result folders instead of collapsing back into local HF folders.
+    """
+
+    _ = output_dir  # kept for call-site compatibility
+    canonical = _canonical_model_output_dir(model_id)
+    if canonical != model_id:
+        return canonical
+    return model_id.replace("_", "-").lower()
 
 
 def _resolve_output_dir(output_dir: Optional[str]) -> Path:
@@ -906,6 +934,9 @@ def main() -> int:
         "piaget_lmstudio",
         "piaget-lmstudio",
         "piaget-8b-lmstudio",
+        "psyllm_lmstudio",
+        "psyllm-lmstudio",
+        "psyllm-8b-lmstudio",
         "psych_qwen_32b",
         "psych-qwen-32b",
         "psych_qwen_32b-mlx",
@@ -953,7 +984,7 @@ def main() -> int:
     if args.cache_out:
         cache_path = Path(args.cache_out)
     else:
-        model_dir = output_dir / _canonical_model_output_dir(args.model_id)
+        model_dir = output_dir / _normalize_model_id_for_path(args.model_id, output_dir)
         model_dir.mkdir(parents=True, exist_ok=True)
         cache_path = model_dir / CACHE_NAME_MAP[study]
 

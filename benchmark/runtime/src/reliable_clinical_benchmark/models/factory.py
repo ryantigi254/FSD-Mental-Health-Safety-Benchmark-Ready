@@ -131,6 +131,11 @@ def get_model_runner(
 
         return PiagetLMStudioRunner(config=config)
 
+    if model_id_lower in ("psyllm_lmstudio", "psyllm-lmstudio", "psyllm-8b-lmstudio"):
+        from .lmstudio_psyllm import PsyLLMLMStudioRunner
+
+        return PsyLLMLMStudioRunner(config=config)
+
     if model_id_lower in (
         "psych_qwen_32b-mlx",
         "psych-qwen-32b-mlx",
@@ -168,6 +173,11 @@ def get_model_runner(
         from .psyche_r1 import PsycheR1Runner
 
         return PsycheR1Runner(config=config)
+
+    if model_id_lower in ("psyche_r1_lmstudio", "psyche-r1-lmstudio"):
+        from .lmstudio_psyche_r1 import PsycheR1LMStudioRunner
+
+        return PsycheR1LMStudioRunner(config=config)
 
     if model_id_lower in ("psyche_r1_local", "psyche-r1-local", "psyche-r1-local-hf"):
         from .psyche_r1_local import PsycheR1LocalRunner
@@ -227,6 +237,6 @@ def get_model_runner(
     raise ValueError(
         f"Unknown model ID: {model_id}. "
         "Supported models: psyllm, psyllm_lmstudio, qwq, deepseek_r1, gpt_oss, qwen3, "
-        "medgemma_lmstudio, ollama_minimax_m2_5_cloud, piaget, psyche_r1, psych_qwen, "
+        "medgemma_lmstudio, ollama_minimax_m2_5_cloud, piaget, psyche_r1, psyche_r1_lmstudio, psych_qwen, "
         "psych_qwen_32b-mlx, qwen3.5-distilled"
     )

@@ -25,12 +25,14 @@ BASE_MODEL_IDS = {
     "deepseek_r1_lmstudio",
     "gpt_oss",
     "psych_qwen_32b",
+    "psyche_r1_lmstudio",
     "ollama_minimax_m2_5_cloud",
     "psyllm_gml_local",
     "piaget_local",
     "psyche_r1_local",
     "psych_qwen_local",
     "psyllm",
+    "psyllm_lmstudio",
     "psyllm_gml_vllm",
     "piaget_vllm",
     "psyche_r1_vllm",
@@ -75,10 +77,20 @@ LMSTUDIO_MODEL_PREFLIGHT = {
         "default": "piaget-8b",
         "aliases": ("piaget-8b",),
     },
+    "psyllm_lmstudio": {
+        "env_var": "LMSTUDIO_PSYLLM_MODEL",
+        "default": "psyllm-8b",
+        "aliases": ("psyllm-8b",),
+    },
     "deepseek_r1_lmstudio": {
         "env_var": "LMSTUDIO_DEEPSEEK_R1_MODEL",
         "default": "deepseek-r1-distill-qwen-14b",
         "aliases": ("deepseek-r1-distill-qwen-14b",),
+    },
+    "psyche_r1_lmstudio": {
+        "env_var": "LMSTUDIO_PSYCHE_R1_MODEL",
+        "default": "psyche-r1@f16",
+        "aliases": ("psyche-r1@f16",),
     },
     "medgemma_lmstudio": {
         "env_var": "LMSTUDIO_MEDGEMMA_MODEL",
@@ -351,7 +363,7 @@ def main() -> int:
 
     if args.study == "ctrl_study_a_bias":
         default_bias_data = "data/invariance/ctrl/base/v2_1/adversarial_bias/biased_vignettes.json"
-        default_output_dir = "results_ctrl_invariance"
+        default_output_dir = "results"
 
         out = []
         i = 0

@@ -323,6 +323,8 @@ def _canonical_model_output_dir(model_id: str) -> str:
         "psych_qwen_local": "psych-qwen-32b-local",
         "psych-qwen-32b-local": "psych-qwen-32b-local",
         "psyllm": "psyllm-gml-local",
+        "psyllm_lmstudio": "psyllm-lmstudio",
+        "psyllm-lmstudio": "psyllm-lmstudio",
         "psyllm_gml_local": "psyllm-gml-local",
         "psyllm_lmstudio": "psyllm-lmstudio",
         "psyllm-lmstudio": "psyllm-lmstudio",
