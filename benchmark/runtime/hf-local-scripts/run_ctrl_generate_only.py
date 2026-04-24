@@ -925,6 +925,7 @@ def main() -> int:
         "gpt_oss",
         "gpt-oss-lmstudio",
         "gpt-oss-20b",
+        "psyllm-8b",
         "piaget_lmstudio",
         "piaget-lmstudio",
         "piaget-8b-lmstudio",

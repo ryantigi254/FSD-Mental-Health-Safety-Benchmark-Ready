@@ -83,6 +83,7 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "piaget_local": "piaget-8b-local",
         "psych_qwen_local": "psych-qwen-32b-local",
         "psyllm_gml_local": "psyllm-gml-local",
+        "psyllm_lmstudio": "psyllm-lmstudio",
         "psyche_r1_local": "psyche-r1-local",
         "psyllm_gml_vllm": "psyllm-gml-local",
         "piaget_vllm": "piaget-8b-local",
