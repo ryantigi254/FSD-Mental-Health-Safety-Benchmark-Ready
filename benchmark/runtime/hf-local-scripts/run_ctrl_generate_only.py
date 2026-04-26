@@ -62,6 +62,9 @@ def _prepare_response_for_context(text: str) -> str:
 
 
 RUNTIME_ROOT = Path(__file__).resolve().parents[1]
+# Ordinary controllability studies write to the same per-model cache family as
+# the main benchmark runs. Reverse-invariance flows should pass an explicit
+# `--output-dir results_ctrl_invariance`.
 CANONICAL_CTRL_OUTPUT_DIR = "results"
 LEGACY_CTRL_OUTPUT_DIR_ALIASES = {
     "results_reverse",

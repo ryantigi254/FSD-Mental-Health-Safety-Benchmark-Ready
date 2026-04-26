@@ -53,6 +53,16 @@ The runnable commands live in:
 
 - `docs/studies/invariance/invariance_commands.md`
 
+Serial batch runner for generation-only sweeps:
+
+- `scripts/dev/run_invariance_batch.py`
+
+Example:
+
+```powershell
+python scripts/dev/run_invariance_batch.py --model-id qwen3_lmstudio --suite all --root-kind both --env mh-llm-benchmark-env
+```
+
 Per-study notes live in:
 
 - `docs/studies/invariance/study_a/study_a_invariance.md`

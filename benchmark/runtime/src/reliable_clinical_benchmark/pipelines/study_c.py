@@ -58,6 +58,9 @@ THINK_BLOCK_RE = re.compile(
 # Maximum character length for an assistant response kept in rolling context.
 # Raw saved outputs are never truncated.
 MAX_CONTEXT_RESPONSE_CHARS = 2000
+DEFAULT_STUDY_C_PROMPT_TOKEN_BUDGET = 12000
+MIN_STUDY_C_PROMPT_TOKEN_BUDGET = 1024
+STUDY_C_CONTEXT_BUFFER_TOKENS = 1024
 
 
 def _prepare_response_for_context(text: str) -> str:
@@ -219,6 +222,263 @@ def _prepare_response_for_context(
 
 def _should_clean_context(turn_num: int, start_turn: int = 4) -> bool:
     return turn_num >= start_turn
+
+
+def _estimate_message_tokens(messages: List[Dict[str, str]]) -> int:
+    """Cheap token estimate used for Study C rolling-history budget checks."""
+    total_chars = 0
+    for message in messages:
+        role = str(message.get("role", "") or "")
+        content = str(message.get("content", "") or "")
+        total_chars += len(role) + len(content) + 8
+    return max(1, (total_chars + 3) // 4)
+
+
+def _resolve_study_c_context_length(model: ModelRunner, model_name: str) -> Optional[int]:
+    """Best-effort runtime context length for LM Studio-backed models."""
+    cached = getattr(model, "_study_c_context_length_cache", None)
+    if cached is not None:
+        return cached
+
+    api_base = getattr(model, "api_base", None)
+    runtime_model_name = str(getattr(model, "model_name", model_name) or model_name).strip()
+    if not api_base or not runtime_model_name:
+        setattr(model, "_study_c_context_length_cache", None)
+        return None
+
+    try:
+        from ..models.lmstudio_client import get_loaded_model_runtime_limits
+
+        runtime_limits = get_loaded_model_runtime_limits(str(api_base), runtime_model_name, timeout=5)
+    except Exception as exc:
+        logger.debug("Study C context-length lookup failed for %s: %s", runtime_model_name, exc)
+        setattr(model, "_study_c_context_length_cache", None)
+        return None
+
+    raw_context_length = runtime_limits.get("context_length")
+    try:
+        context_length = int(raw_context_length)
+    except (TypeError, ValueError):
+        context_length = None
+
+    if context_length is not None and context_length > 0:
+        setattr(model, "_study_c_context_length_cache", context_length)
+        return context_length
+
+    setattr(model, "_study_c_context_length_cache", None)
+    return None
+
+
+def _get_study_c_prompt_token_budget(
+    model: ModelRunner,
+    model_name: str,
+    requested_max_tokens: Optional[int],
+) -> int:
+    """Return a prompt-token budget for Study C chat turns."""
+    context_length = _resolve_study_c_context_length(model, model_name)
+    if context_length is None:
+        return DEFAULT_STUDY_C_PROMPT_TOKEN_BUDGET
+
+    if isinstance(requested_max_tokens, int):
+        completion_reserve = max(512, min(requested_max_tokens, 4096))
+    else:
+        completion_reserve = 2048
+
+    budget = context_length - completion_reserve - STUDY_C_CONTEXT_BUFFER_TOKENS
+    return max(MIN_STUDY_C_PROMPT_TOKEN_BUDGET, budget)
+
+
+def _fit_history_to_token_budget(
+    history: List[Dict[str, str]],
+    prompt_token_budget: int,
+    *,
+    model_name: str = "unknown",
+    reason: str = "context-fit",
+) -> List[Dict[str, str]]:
+    """Trim oldest non-system messages until history fits the prompt budget."""
+    if not history:
+        return history
+
+    original_tokens = _estimate_message_tokens(history)
+    if original_tokens <= prompt_token_budget:
+        return history
+
+    prefix_len = 0
+    while prefix_len < len(history) and history[prefix_len].get("role") == "system":
+        prefix_len += 1
+
+    prefix = history[:prefix_len]
+    tail = history[prefix_len:]
+    min_tail_messages = 1 if tail else 0
+
+    while tail and len(tail) > min_tail_messages:
+        candidate = prefix + tail
+        if _estimate_message_tokens(candidate) <= prompt_token_budget:
+            break
+        drop_count = 2 if len(tail) - 2 >= min_tail_messages else 1
+        tail = tail[drop_count:]
+
+    trimmed = prefix + tail
+    trimmed_tokens = _estimate_message_tokens(trimmed)
+    logger.warning(
+        "Trimmed Study C history for %s from %d to %d messages (~%d -> ~%d tokens, budget=%d, reason=%s).",
+        model_name,
+        len(history),
+        len(trimmed),
+        original_tokens,
+        trimmed_tokens,
+        prompt_token_budget,
+        reason,
+    )
+    return trimmed
+
+
+def _drop_oldest_non_system_messages(
+    history: List[Dict[str, str]],
+    drop_count: int = 2,
+) -> List[Dict[str, str]]:
+    """Force-drop the oldest non-system messages when token estimates miss runtime reality."""
+    if not history:
+        return history
+
+    prefix_len = 0
+    while prefix_len < len(history) and history[prefix_len].get("role") == "system":
+        prefix_len += 1
+
+    tail = history[prefix_len:]
+    if len(tail) <= 1:
+        return history
+
+    max_drop = len(tail) - 1
+    actual_drop = min(max_drop, max(1, drop_count))
+    return history[:prefix_len] + tail[actual_drop:]
+
+
+def _is_context_overflow_error(error: Exception) -> bool:
+    error_text = str(error).lower()
+    return (
+        "context size has been exceeded" in error_text
+        or "maximum context length" in error_text
+        or "context length exceeded" in error_text
+    )
+
+
+def _chat_with_history_recovery(
+    *,
+    model: ModelRunner,
+    conversation_history: List[Dict[str, str]],
+    case_id: str,
+    turn_num: int,
+    model_name: str,
+    context_cleaner: str = "scan",
+    max_retries: int = 3,
+    retry_delay: float = 2.0,
+    lmstudio_mode: bool = False,
+) -> tuple[str, List[Dict[str, str]]]:
+    """Generate one Study C dialogue turn with prompt-budget and overflow recovery."""
+    original_max_tokens = model.config.max_tokens
+    prompt_budget = _get_study_c_prompt_token_budget(model, model_name, original_max_tokens)
+    request_history = _fit_history_to_token_budget(
+        conversation_history,
+        prompt_budget,
+        model_name=model_name,
+        reason="pre-request",
+    )
+    use_cuda_recovery = (not lmstudio_mode) and TORCH_AVAILABLE and torch.cuda.is_available()
+    current_retry_delay = retry_delay
+
+    for attempt in range(max_retries):
+        try:
+            if use_cuda_recovery:
+                torch.cuda.empty_cache()
+                torch.cuda.synchronize()
+                torch.cuda.reset_peak_memory_stats(0)
+
+            if attempt > 0 and model.config.max_tokens is not None:
+                current_max = model.config.max_tokens
+                if isinstance(current_max, int):
+                    reduced_tokens = max(256, current_max // (2 ** attempt))
+                else:
+                    reduced_tokens = None
+                if (
+                    isinstance(current_max, int)
+                    and reduced_tokens is not None
+                    and reduced_tokens < current_max
+                ):
+                    logger.info(
+                        "Reducing max_tokens from %d to %d for Study C case=%s turn=%d retry %d/%d",
+                        current_max,
+                        reduced_tokens,
+                        case_id,
+                        turn_num,
+                        attempt + 1,
+                        max_retries,
+                    )
+                    model.config.max_tokens = reduced_tokens
+
+            response_text = model.chat(request_history, mode="default")
+            cleaned_response = _prepare_response_for_context(
+                response_text,
+                context_cleaner=context_cleaner,
+            )
+            if cleaned_response != response_text:
+                logger.info(
+                    "Prepared Study C context for case=%s turn=%d (raw_chars=%d, context_chars=%d)",
+                    case_id,
+                    turn_num,
+                    len(response_text),
+                    len(cleaned_response),
+                )
+            return response_text, request_history + [{"role": "assistant", "content": cleaned_response}]
+        except Exception as error:
+            error_str = str(error).lower()
+            is_cuda_oom = "cuda" in error_str and ("out of memory" in error_str or "oom" in error_str)
+            if attempt >= max_retries - 1:
+                raise
+
+            if _is_context_overflow_error(error):
+                next_budget = max(MIN_STUDY_C_PROMPT_TOKEN_BUDGET, int(prompt_budget * 0.7))
+                trimmed_history = _fit_history_to_token_budget(
+                    request_history,
+                    next_budget,
+                    model_name=model_name,
+                    reason=f"context-overflow retry {attempt + 2}/{max_retries}",
+                )
+                if trimmed_history == request_history:
+                    trimmed_history = _drop_oldest_non_system_messages(request_history)
+                    if trimmed_history != request_history:
+                        trimmed_history = _fit_history_to_token_budget(
+                            trimmed_history,
+                            next_budget,
+                            model_name=model_name,
+                            reason=f"forced oldest-drop retry {attempt + 2}/{max_retries}",
+                        )
+                request_history = trimmed_history
+                prompt_budget = next_budget
+
+            if is_cuda_oom and use_cuda_recovery:
+                logger.info("Clearing GPU cache aggressively after CUDA OOM error...")
+                torch.cuda.empty_cache()
+                torch.cuda.synchronize()
+                torch.cuda.reset_peak_memory_stats(0)
+                import gc
+
+                gc.collect()
+                torch.cuda.empty_cache()
+
+            logger.warning(
+                "Dialogue generation failed for case %s turn %d (attempt %d/%d): %s. Retrying in %.1fs...",
+                case_id,
+                turn_num,
+                attempt + 1,
+                max_retries,
+                error,
+                current_retry_delay,
+            )
+            time.sleep(current_retry_delay)
+            current_retry_delay *= 2
+        finally:
+            model.config.max_tokens = original_max_tokens
 
 
 def _remove_repetition(text: str, max_repetition_ratio: float = 0.3, min_repeat_length: int = 50) -> str:
@@ -859,7 +1119,10 @@ def run_study_c(
                     cached_dialogue = existing[case.id][turn.turn]["dialogue"]
                     cached_response_text = cached_dialogue.get("response_text", "")
                     if cached_response_text:
-                        cleaned_response = _prepare_response_for_context(cached_response_text)
+                        cleaned_response = _prepare_response_for_context(
+                            cached_response_text,
+                            context_cleaner=context_cleaner,
+                        )
                         conversation_history.append({"role": "assistant", "content": cleaned_response})
                 else:
                     logger.info("Study C dialogue start case=%s turn=%d", case.id, turn.turn)
@@ -867,91 +1130,37 @@ def run_study_c(
                     response_text = ""
                     error_message = ""
                     t0 = time.perf_counter()
-                    max_retries = 3
-                    retry_delay = 2.0
-                    original_max_tokens = model.config.max_tokens
-                    use_cuda_recovery = (not lmstudio_mode) and TORCH_AVAILABLE and torch.cuda.is_available()
-
-                    for attempt in range(max_retries):
-                        try:
-                            if use_cuda_recovery:
-                                torch.cuda.empty_cache()
-                                torch.cuda.synchronize()
-                                torch.cuda.reset_peak_memory_stats(0)
-
-                            if attempt > 0 and model.config.max_tokens is not None:
-                                current_max = model.config.max_tokens
-                                if isinstance(current_max, int):
-                                    reduced_tokens = max(256, current_max // (2 ** attempt))
-                                else:
-                                    reduced_tokens = None
-                                if isinstance(current_max, int) and reduced_tokens is not None and reduced_tokens < current_max:
-                                    logger.info(
-                                        "Reducing max_tokens from %d to %d for retry attempt %d/%d",
-                                        current_max,
-                                        reduced_tokens,
-                                        attempt + 1,
-                                        max_retries,
-                                    )
-                                    model.config.max_tokens = reduced_tokens
-
-                            response_text = model.chat(conversation_history, mode="default")
-                            cleaned_response = _prepare_response_for_context(response_text)
-                            if cleaned_response != response_text:
-                                logger.info(
-                                    "Prepared Study C context for case=%s turn=%d (raw_chars=%d, context_chars=%d)",
-                                    case.id,
-                                    turn.turn,
-                                    len(response_text),
-                                    len(cleaned_response),
-                                )
-
-                            conversation_history.append({"role": "assistant", "content": cleaned_response})
-                            model.config.max_tokens = original_max_tokens
-                            break
-                        except Exception as error:
-                            model.config.max_tokens = original_max_tokens
-                            error_str = str(error).lower()
-                            is_cuda_oom = "cuda" in error_str and (
-                                "out of memory" in error_str or "oom" in error_str
-                            )
-                            if attempt < max_retries - 1:
-                                if is_cuda_oom and use_cuda_recovery:
-                                    logger.info("Clearing GPU cache aggressively after CUDA OOM error...")
-                                    torch.cuda.empty_cache()
-                                    torch.cuda.synchronize()
-                                    torch.cuda.reset_peak_memory_stats(0)
-                                    import gc
-
-                                    gc.collect()
-                                    torch.cuda.empty_cache()
-
-                                logger.warning(
-                                    "Dialogue generation failed for case %s turn %d (attempt %d/%d): %s. "
-                                    "Retrying in %.1fs...",
-                                    case.id,
-                                    turn.turn,
-                                    attempt + 1,
-                                    max_retries,
-                                    error,
-                                    retry_delay,
-                                )
-                                time.sleep(retry_delay)
-                                retry_delay *= 2
-                            else:
-                                status = "error"
-                                error_message = str(error)
-                                logger.error(
-                                    "Dialogue generation failed for case %s turn %d after %d attempts: %s",
-                                    case.id,
-                                    turn.turn,
-                                    max_retries,
-                                    error,
-                                )
+                    try:
+                        response_text, conversation_history = _chat_with_history_recovery(
+                            model=model,
+                            conversation_history=conversation_history,
+                            case_id=case.id,
+                            turn_num=turn.turn,
+                            model_name=model_name,
+                            context_cleaner=context_cleaner,
+                            max_retries=3,
+                            retry_delay=2.0,
+                            lmstudio_mode=lmstudio_mode,
+                        )
+                    except Exception as error:
+                        status = "error"
+                        error_message = str(error)
+                        logger.error(
+                            "Dialogue generation failed for case %s turn %d after %d attempts: %s",
+                            case.id,
+                            turn.turn,
+                            3,
+                            error,
+                        )
 
                     latency_ms = int((time.perf_counter() - t0) * 1000)
+                    history_for_entry = (
+                        conversation_history[:-1]
+                        if conversation_history and conversation_history[-1].get("role") == "assistant"
+                        else conversation_history
+                    )
                     conversation_text = "\n".join(
-                        [f"{message['role']}: {message['content']}" for message in conversation_history[:-1]]
+                        [f"{message['role']}: {message['content']}" for message in history_for_entry]
                     )
                     generated_entries.append(
                         {
@@ -1078,16 +1287,24 @@ def run_study_c(
             for turn in case.turns:
                 conversation_history.append({"role": "user", "content": turn.message})
                 try:
-                    resp = model.chat(conversation_history, mode="default")
+                    resp, conversation_history = _chat_with_history_recovery(
+                        model=model,
+                        conversation_history=conversation_history,
+                        case_id=case.id,
+                        turn_num=turn.turn,
+                        model_name=model_name,
+                        context_cleaner=context_cleaner,
+                        max_retries=3,
+                        retry_delay=2.0,
+                        lmstudio_mode=is_lmstudio_runner(model),
+                    )
                 except Exception as e:
                     logger.warning(
                         f"Dialogue generation failed for continuity/K_Conflict case {case.id} turn {turn.turn}: {e}"
                     )
                     resp = ""
+                    conversation_history.append({"role": "assistant", "content": ""})
                 responses.append(resp)  # Save raw response for metrics
-                # Compact for rolling context (strip think blocks, truncate, cheap scan)
-                cleaned_resp = _prepare_response_for_context(resp)
-                conversation_history.append({"role": "assistant", "content": cleaned_resp})
             responses_by_case_id[case.id] = responses
 
     # Calculate knowledge conflict rate

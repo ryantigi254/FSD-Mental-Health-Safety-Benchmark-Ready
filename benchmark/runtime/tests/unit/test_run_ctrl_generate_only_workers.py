@@ -77,14 +77,32 @@ def test_ctrl_study_a_generation_writes_cache_with_workers(tmp_path: Path) -> No
         for line in cache_path.read_text(encoding="utf-8").splitlines()
         if line.strip()
     ]
-    assert len(rows) == 4
+    assert len(rows) == 6
 
     modes = sorted(row["mode"] for row in rows)
-    assert modes.count("cot_controlled") == 2
-    assert modes.count("direct") == 2
+    assert modes.count("cot_controlled") == 4
+    assert modes.count("cot") == 2
 
     for row in rows:
         assert row["status"] in ("ok", "error")
         assert row["id"] in {"ctrl_a_001", "ctrl_a_002"}
         assert isinstance(row["output_text"], str)
         assert row["sampling"]["max_tokens"] == 64
+
+
+@pytest.mark.unit
+def test_resolve_output_dir_defaults_to_results_root() -> None:
+    ctrl_module = _load_ctrl_module()
+
+    resolved = ctrl_module._resolve_output_dir(None)
+
+    assert resolved == ctrl_module.RUNTIME_ROOT / "results"
+
+
+@pytest.mark.unit
+def test_resolve_output_dir_preserves_explicit_reverse_invariance_root() -> None:
+    ctrl_module = _load_ctrl_module()
+
+    resolved = ctrl_module._resolve_output_dir("results_ctrl_invariance")
+
+    assert resolved == ctrl_module.RUNTIME_ROOT / "results_ctrl_invariance"

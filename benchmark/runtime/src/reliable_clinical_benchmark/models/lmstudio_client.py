@@ -468,7 +468,15 @@ def chat_completion(
                 current_max_tokens = payload.get("max_tokens")
                 context_length = runtime_limits.get("context_length")
                 estimated_prompt_tokens = _estimate_message_tokens(messages)
-                if current_max_tokens is None and context_length:
+                # Only retry when max_tokens wasn't set and the prompt actually
+                # fits — this means only the completion budget was the problem.
+                # When the prompt itself is too long, re-raise immediately so
+                # the caller (e.g. study_b pipeline) can trim the history.
+                if (
+                    current_max_tokens is None
+                    and context_length
+                    and estimated_prompt_tokens < int(context_length)
+                ):
                     payload["max_tokens"] = _safe_completion_budget(
                         int(context_length),
                         estimated_prompt_tokens,
@@ -478,18 +486,9 @@ def chat_completion(
                         model,
                         payload["max_tokens"],
                     )
-                elif isinstance(current_max_tokens, int) and current_max_tokens > 256:
-                    reduced_tokens = max(256, current_max_tokens // 2)
-                    if reduced_tokens < current_max_tokens:
-                        logger.info(
-                            "Retrying LM Studio request for %s with reduced max_tokens %d -> %d after context overflow.",
-                            model,
-                            current_max_tokens,
-                            reduced_tokens,
-                        )
-                        payload["max_tokens"] = reduced_tokens
-                time.sleep(1.0)
-                continue
+                    time.sleep(1.0)
+                    continue
+                break
 
             model_loaded, load_detail = get_model_load_state(api_base, model)
             if model_loaded is False:

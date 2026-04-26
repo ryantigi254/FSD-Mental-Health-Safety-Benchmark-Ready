@@ -4,6 +4,9 @@
 Study C controllability generation writes to `results/<model-folder>/ctrl_study_c_generations.jsonl`.
 Canonical Study C generation is arm-aware. Each case is evaluated across
 `spontaneous`, `generic_control`, and `explicit_control`.
+Unless you explicitly pass `--output-dir`, the direct runner now writes to
+`results/<model-folder>/...`. Reserve `results_ctrl_invariance` for the reverse
+invariance commands only.
 
 ## Data Directory
 

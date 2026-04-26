@@ -23,6 +23,8 @@ results/*
 !results/piaget-lmstudio/ctrl_study*.jsonl
 !results/psyllm-gml-local/
 !results/psyllm-gml-local/**
+!results/qwen3-lmstudio/
+!results/qwen3-lmstudio/**
 processed/*
 !processed/study_a_bias_cleaned_optimized/
 !processed/study_a_bias_pipeline/
