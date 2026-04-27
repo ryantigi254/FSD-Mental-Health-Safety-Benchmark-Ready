@@ -26,6 +26,7 @@ import json
 import shutil
 import time
 import math
+import re
 from datetime import datetime
 from pathlib import Path
 from threading import Lock
@@ -52,6 +53,163 @@ from ..utils.worker_runtime import (
 )
 
 logger = logging.getLogger(__name__)
+
+THINK_BLOCK_RE = re.compile(
+    r"<(?:think|redacted_reasoning)>.*?</(?:think|redacted_reasoning)>",
+    re.IGNORECASE | re.DOTALL,
+)
+MAX_CONTEXT_RESPONSE_CHARS = 2000
+DEFAULT_STUDY_B_PROMPT_TOKEN_BUDGET = 12000
+MIN_STUDY_B_PROMPT_TOKEN_BUDGET = 1024
+STUDY_B_CONTEXT_BUFFER_TOKENS = 1024
+
+
+def _prepare_response_for_context(text: str) -> str:
+    """Compact assistant text before reusing it in rolling multi-turn history."""
+    prepared = THINK_BLOCK_RE.sub("", text or "").strip()
+    if not prepared:
+        return ""
+    if len(prepared) > MAX_CONTEXT_RESPONSE_CHARS:
+        prepared = prepared[:MAX_CONTEXT_RESPONSE_CHARS].rstrip() + " [truncated for context]"
+    return prepared
+
+
+def _estimate_message_tokens(messages: List[Dict[str, str]]) -> int:
+    """Cheap token estimate used for Study B rolling-history budget checks.
+
+    Uses chars/2 (not chars/4) because medical text and reasoning-model
+    outputs tokenize denser than standard English, and over-trimming is
+    far safer than context overflow.
+    """
+    total_chars = 0
+    for message in messages:
+        role = str(message.get("role", "") or "")
+        content = str(message.get("content", "") or "")
+        total_chars += len(role) + len(content) + 8
+    return max(1, (total_chars + 1) // 2)
+
+
+def _resolve_study_b_context_length(model: ModelRunner, model_name: str) -> Optional[int]:
+    """Best-effort runtime context length for LM Studio-backed models."""
+    cached = getattr(model, "_study_b_context_length_cache", None)
+    if cached is not None:
+        return cached
+
+    api_base = getattr(model, "api_base", None)
+    runtime_model_name = str(getattr(model, "model_name", model_name) or model_name).strip()
+    if not api_base or not runtime_model_name:
+        setattr(model, "_study_b_context_length_cache", None)
+        return None
+
+    try:
+        from ..models.lmstudio_client import get_loaded_model_runtime_limits
+
+        runtime_limits = get_loaded_model_runtime_limits(str(api_base), runtime_model_name, timeout=5)
+    except Exception as exc:
+        logger.debug("Study B context-length lookup failed for %s: %s", runtime_model_name, exc)
+        setattr(model, "_study_b_context_length_cache", None)
+        return None
+
+    raw_context_length = runtime_limits.get("context_length")
+    try:
+        context_length = int(raw_context_length)
+    except (TypeError, ValueError):
+        context_length = None
+
+    if context_length is not None and context_length > 0:
+        setattr(model, "_study_b_context_length_cache", context_length)
+        return context_length
+
+    setattr(model, "_study_b_context_length_cache", None)
+    return None
+
+
+def _get_study_b_prompt_token_budget(
+    model: ModelRunner,
+    model_name: str,
+    requested_max_tokens: Optional[int],
+) -> int:
+    """Return a prompt-token budget for Study B multi-turn chat requests."""
+    context_length = _resolve_study_b_context_length(model, model_name)
+    if context_length is None:
+        return DEFAULT_STUDY_B_PROMPT_TOKEN_BUDGET
+
+    if isinstance(requested_max_tokens, int):
+        completion_reserve = max(512, min(requested_max_tokens, 4096))
+    else:
+        completion_reserve = 2048
+    budget = context_length - completion_reserve - STUDY_B_CONTEXT_BUFFER_TOKENS
+    return max(MIN_STUDY_B_PROMPT_TOKEN_BUDGET, budget)
+
+
+def _fit_history_to_token_budget(
+    history: List[Dict[str, str]],
+    prompt_token_budget: int,
+    *,
+    model_name: str = "unknown",
+    reason: str = "context-fit",
+) -> List[Dict[str, str]]:
+    """Trim oldest non-system messages until history fits the prompt budget."""
+    if not history:
+        return history
+
+    original_tokens = _estimate_message_tokens(history)
+    if original_tokens <= prompt_token_budget:
+        return history
+
+    prefix_len = 0
+    while prefix_len < len(history) and history[prefix_len].get("role") == "system":
+        prefix_len += 1
+    prefix = history[:prefix_len]
+    tail = history[prefix_len:]
+    min_tail_messages = 1 if tail else 0
+
+    while tail and len(tail) > min_tail_messages:
+        candidate = prefix + tail
+        if _estimate_message_tokens(candidate) <= prompt_token_budget:
+            break
+        drop_count = 2 if len(tail) - 2 >= min_tail_messages else 1
+        tail = tail[drop_count:]
+
+    trimmed = prefix + tail
+    logger.warning(
+        "Trimmed Study B history for %s from %d to %d messages (~%d -> ~%d tokens, budget=%d, reason=%s).",
+        model_name,
+        len(history),
+        len(trimmed),
+        original_tokens,
+        _estimate_message_tokens(trimmed),
+        prompt_token_budget,
+        reason,
+    )
+    return trimmed
+
+
+def _drop_oldest_non_system_messages(
+    history: List[Dict[str, str]],
+    drop_count: int = 2,
+) -> List[Dict[str, str]]:
+    """Force-drop oldest non-system messages when token estimates miss runtime reality."""
+    if not history:
+        return history
+    prefix_len = 0
+    while prefix_len < len(history) and history[prefix_len].get("role") == "system":
+        prefix_len += 1
+    tail = history[prefix_len:]
+    if len(tail) <= 1:
+        return history
+    max_drop = len(tail) - 1
+    actual_drop = min(max_drop, max(1, drop_count))
+    return history[:prefix_len] + tail[actual_drop:]
+
+
+def _is_context_overflow_error(error: Exception) -> bool:
+    error_text = str(error).lower()
+    return (
+        "context size has been exceeded" in error_text
+        or "maximum context length" in error_text
+        or "context length exceeded" in error_text
+    )
 
 
 def _compact_cache(cache_path: Path, make_backup: bool = True) -> None:
@@ -340,7 +498,9 @@ def _generate_multi_turn_study_b(
             if existing_ok and case_id and existing_ok.get(str(case_id), {}).get(int(turn_num)):
                 cached = existing_ok[str(case_id)][int(turn_num)]
                 cached_resp = cached.get("response_text", "")
-                conversation_history.append({"role": "assistant", "content": str(cached_resp)})
+                conversation_history.append(
+                    {"role": "assistant", "content": _prepare_response_for_context(str(cached_resp))}
+                )
                 continue
 
             status = "ok"
@@ -348,8 +508,65 @@ def _generate_multi_turn_study_b(
             error_message = ""
             t0 = time.perf_counter()
             try:
-                response_text = model.chat(conversation_history, mode="default")
-                conversation_history.append({"role": "assistant", "content": response_text})
+                original_max_tokens = model.config.max_tokens
+                try:
+                    prompt_budget = _get_study_b_prompt_token_budget(model, model_name, original_max_tokens)
+                    request_history = _fit_history_to_token_budget(
+                        conversation_history,
+                        prompt_budget,
+                        model_name=model_name,
+                        reason="pre-request",
+                    )
+                    max_retries = 3
+                    for attempt in range(max_retries):
+                        try:
+                            response_text = model.chat(request_history, mode="default")
+                            cleaned_response = _prepare_response_for_context(response_text)
+                            if cleaned_response != response_text:
+                                logger.info(
+                                    "Prepared Study B context for case=%s turn=%d (raw_chars=%d, context_chars=%d)",
+                                    case_id,
+                                    turn_num,
+                                    len(response_text),
+                                    len(cleaned_response),
+                                )
+                            conversation_history = request_history + [
+                                {"role": "assistant", "content": cleaned_response}
+                            ]
+                            break
+                        except Exception as attempt_error:
+                            if attempt >= max_retries - 1:
+                                raise
+                            if _is_context_overflow_error(attempt_error):
+                                next_budget = max(MIN_STUDY_B_PROMPT_TOKEN_BUDGET, int(prompt_budget * 0.4))
+                                trimmed_history = _fit_history_to_token_budget(
+                                    request_history,
+                                    next_budget,
+                                    model_name=model_name,
+                                    reason=f"context-overflow retry {attempt + 2}/{max_retries}",
+                                )
+                                if trimmed_history == request_history:
+                                    trimmed_history = _drop_oldest_non_system_messages(request_history)
+                                    if trimmed_history != request_history:
+                                        trimmed_history = _fit_history_to_token_budget(
+                                            trimmed_history,
+                                            next_budget,
+                                            model_name=model_name,
+                                            reason=f"forced oldest-drop retry {attempt + 2}/{max_retries}",
+                                        )
+                                request_history = trimmed_history
+                                prompt_budget = next_budget
+                            logger.warning(
+                                "Study B multi-turn retry for case %s turn %d (attempt %d/%d): %s",
+                                case_id,
+                                turn_num,
+                                attempt + 1,
+                                max_retries,
+                                attempt_error,
+                            )
+                            time.sleep(2 * (attempt + 1))
+                finally:
+                    model.config.max_tokens = original_max_tokens
             except Exception as error:
                 status = "error"
                 error_message = str(error)
