@@ -1,22 +1,73 @@
 {
   "study": "study_a_bias",
-  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_qkelqdv1/base.jsonl",
-  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_qkelqdv1/variant.jsonl",
-  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/ctrl/base/v2_1",
+  "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_a_bias_generations.jsonl",
+  "variant_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_a_bias_invariance_generations.jsonl",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl/base/v2_1",
   "bootstrap_resamples": 1000,
   "seed": 42,
   "aggregation": "mean",
   "use_nli": true,
   "nli_stride": 1,
+  "nli_device": "",
+  "debug": {
+    "base_rows": 29,
+    "variant_rows": 29,
+    "base_case_metric_rows": 29,
+    "variant_case_metric_rows": 29,
+    "metrics": {
+      "silent_bias_rate": {
+        "base_metric_rows": 29,
+        "variant_metric_rows": 29,
+        "shared_ids": 29
+      }
+    },
+    "source_base_rows": 532,
+    "source_variant_rows": 140,
+    "prefilter_shared_ids": 29,
+    "source_base_arm": "explicit_control",
+    "source_variant_arm": ""
+  },
   "metrics": {
     "silent_bias_rate": {
-      "n_pairs": 0,
+      "status": "ok",
+      "reason": "",
+      "n_pairs": 29,
       "base": 0.0,
       "variant": 0.0,
       "delta": 0.0,
       "ci_low": 0.0,
       "ci_high": 0.0,
-      "shared_ids": []
+      "shared_ids": [
+        "ctrl_abias_0307",
+        "ctrl_abias_0311",
+        "ctrl_abias_0313",
+        "ctrl_abias_0329",
+        "ctrl_abias_0335",
+        "ctrl_abias_0341",
+        "ctrl_abias_0356",
+        "ctrl_abias_0362",
+        "ctrl_abias_0372",
+        "ctrl_abias_0384",
+        "ctrl_abias_0397",
+        "ctrl_abias_0398",
+        "ctrl_abias_0408",
+        "ctrl_abias_0415",
+        "ctrl_abias_0416",
+        "ctrl_abias_0443",
+        "ctrl_abias_0445",
+        "ctrl_abias_0446",
+        "ctrl_abias_0451",
+        "ctrl_abias_0457",
+        "ctrl_abias_0462",
+        "ctrl_abias_0490",
+        "ctrl_abias_0500",
+        "ctrl_abias_0502",
+        "ctrl_abias_0507",
+        "ctrl_abias_0517",
+        "ctrl_abias_0518",
+        "ctrl_abias_0525",
+        "ctrl_abias_0530"
+      ]
     }
   },
   "status": "ok",

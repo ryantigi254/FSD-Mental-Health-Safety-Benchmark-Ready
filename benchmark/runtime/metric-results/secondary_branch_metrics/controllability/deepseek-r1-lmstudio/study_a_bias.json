@@ -3,12 +3,19 @@
   "study": "study_a_bias",
   "control_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl",
   "base_arm": "spontaneous",
-  "data_root": "/private/tmp/nlp-ready-controllability/benchmark/runtime/data/controllability/misc/controllability_splits_large/base",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability/misc/controllability_splits_large_resolved_v2_1",
   "bootstrap_resamples": 1000,
   "seed": 42,
   "aggregation": "mean",
   "use_nli": true,
   "nli_stride": 1,
+  "nli_device": "",
+  "debug": {
+    "control_rows": 300,
+    "arm_counts": {
+      "spontaneous": 300
+    }
+  },
   "variants": [
     {
       "tag": "generic_control",

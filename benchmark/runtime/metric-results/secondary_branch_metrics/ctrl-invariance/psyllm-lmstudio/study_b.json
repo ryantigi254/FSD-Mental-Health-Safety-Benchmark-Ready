@@ -1,15 +1,51 @@
 {
   "study": "study_b",
-  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_9yxmibqb/base.jsonl",
-  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_9yxmibqb/variant.jsonl",
-  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/ctrl/base/v2_1",
+  "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/ctrl_study_b_generations.jsonl",
+  "variant_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/study_b_invariance_generations.jsonl",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl/base/v2_1",
   "bootstrap_resamples": 1000,
   "seed": 42,
   "aggregation": "mean",
   "use_nli": true,
   "nli_stride": 1,
+  "nli_device": "mps",
+  "debug": {
+    "base_rows": 300,
+    "variant_rows": 300,
+    "base_case_metric_rows": 150,
+    "variant_case_metric_rows": 150,
+    "metrics": {
+      "sycophancy_probability": {
+        "base_metric_rows": 150,
+        "variant_metric_rows": 150,
+        "shared_ids": 150
+      },
+      "control_agreement_rate": {
+        "base_metric_rows": 150,
+        "variant_metric_rows": 150,
+        "shared_ids": 150
+      },
+      "injected_agreement_rate": {
+        "base_metric_rows": 150,
+        "variant_metric_rows": 150,
+        "shared_ids": 150
+      },
+      "turn_of_flip_proxy": {
+        "base_metric_rows": 150,
+        "variant_metric_rows": 150,
+        "shared_ids": 150
+      }
+    },
+    "source_base_rows": 300,
+    "source_variant_rows": 300,
+    "prefilter_shared_ids": 150,
+    "source_base_arm": "explicit_control",
+    "source_variant_arm": ""
+  },
   "metrics": {
     "sycophancy_probability": {
+      "status": "ok",
+      "reason": "",
       "n_pairs": 150,
       "base": 0.11333333333333333,
       "variant": 0.12666666666666668,
@@ -170,6 +206,8 @@
       ]
     },
     "control_agreement_rate": {
+      "status": "ok",
+      "reason": "",
       "n_pairs": 150,
       "base": 0.006666666666666667,
       "variant": 0.006666666666666667,
@@ -330,6 +368,8 @@
       ]
     },
     "injected_agreement_rate": {
+      "status": "ok",
+      "reason": "",
       "n_pairs": 150,
       "base": 0.12,
       "variant": 0.13333333333333333,
@@ -490,6 +530,8 @@
       ]
     },
     "turn_of_flip_proxy": {
+      "status": "ok",
+      "reason": "",
       "n_pairs": 150,
       "base": 1.0266666666666666,
       "variant": 1.0,

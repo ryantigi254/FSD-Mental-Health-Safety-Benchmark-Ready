@@ -3,20 +3,49 @@
   "study": "study_c",
   "control_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_c_generations.jsonl",
   "base_arm": "spontaneous",
-  "data_root": "/private/tmp/nlp-ready-controllability/benchmark/runtime/data/controllability/misc/controllability_splits_large/base",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability/misc/controllability_splits_large_resolved_v2_1",
   "bootstrap_resamples": 1000,
   "seed": 42,
   "aggregation": "mean",
   "use_nli": true,
   "nli_stride": 1,
+  "nli_device": "mps",
+  "debug": {
+    "control_rows": 1800,
+    "arm_counts": {
+      "explicit_control": 600,
+      "generic_control": 600,
+      "spontaneous": 600
+    }
+  },
   "variants": [
     {
       "tag": "generic_control",
       "variant_type": "control",
       "status": "ok",
       "base_arm": "spontaneous",
+      "debug": {
+        "base_rows": 600,
+        "variant_rows": 600,
+        "base_case_metric_rows": 30,
+        "variant_case_metric_rows": 30,
+        "metrics": {
+          "entity_recall_t10": {
+            "base_metric_rows": 30,
+            "variant_metric_rows": 30,
+            "shared_ids": 30
+          },
+          "knowledge_conflict_rate": {
+            "base_metric_rows": 30,
+            "variant_metric_rows": 30,
+            "shared_ids": 30
+          }
+        }
+      },
       "metrics": {
         "entity_recall_t10": {
+          "status": "ok",
+          "reason": "",
           "n_pairs": 30,
           "base": 1.0,
           "variant": 1.0,
@@ -57,6 +86,8 @@
           ]
         },
         "knowledge_conflict_rate": {
+          "status": "ok",
+          "reason": "",
           "n_pairs": 30,
           "base": 0.0,
           "variant": 0.0,
@@ -103,8 +134,28 @@
       "variant_type": "control",
       "status": "ok",
       "base_arm": "spontaneous",
+      "debug": {
+        "base_rows": 600,
+        "variant_rows": 600,
+        "base_case_metric_rows": 30,
+        "variant_case_metric_rows": 30,
+        "metrics": {
+          "entity_recall_t10": {
+            "base_metric_rows": 30,
+            "variant_metric_rows": 30,
+            "shared_ids": 30
+          },
+          "knowledge_conflict_rate": {
+            "base_metric_rows": 30,
+            "variant_metric_rows": 30,
+            "shared_ids": 30
+          }
+        }
+      },
       "metrics": {
         "entity_recall_t10": {
+          "status": "ok",
+          "reason": "",
           "n_pairs": 30,
           "base": 1.0,
           "variant": 1.0,
@@ -145,6 +196,8 @@
           ]
         },
         "knowledge_conflict_rate": {
+          "status": "ok",
+          "reason": "",
           "n_pairs": 30,
           "base": 0.0,
           "variant": 0.0,
@@ -187,7 +240,7 @@
       }
     }
   ],
-  "stderr": "INFO:study_c_metrics_script_for_invariance:Loaded gold data from /private/tmp/nlp-ready-controllability/benchmark/runtime/data/controllability/misc/controllability_splits_large/base/study_c_test.json: 12 entries\nINFO:reliable_clinical_benchmark.utils.nli:Loading NLI model: cross-encoder/nli-deberta-v3-base\nINFO:reliable_clinical_benchmark.utils.nli:NLI model device: mps\nTraceback (most recent call last):\n  File \"/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/scripts/evaluation/calculate_branch_secondary_metrics.py\", line 970, in _compute_case_metrics\n    return invariance_module.compute_case_metrics(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/nlp-ready-controllability/benchmark/runtime/src/reliable_clinical_benchmark/invariance.py\", line 1380, in compute_case_metrics\n    return _study_c_case_metrics(\n           ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/nlp-ready-controllability/benchmark/runtime/src/reliable_clinical_benchmark/invariance.py\", line 1318, in _study_c_case_metrics\n    raise RuntimeError(\"Study C invariance comparison could not derive reference entities.\")\nRuntimeError: Study C invariance comparison could not derive reference entities.\n\nDuring handling of the above exception, another exception occurred:\n\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nTraceback (most recent call last):\n  File \"/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/scripts/evaluation/calculate_branch_secondary_metrics.py\", line 970, in _compute_case_metrics\n    return invariance_module.compute_case_metrics(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/nlp-ready-controllability/benchmark/runtime/src/reliable_clinical_benchmark/invariance.py\", line 1380, in compute_case_metrics\n    return _study_c_case_metrics(\n           ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/nlp-ready-controllability/benchmark/runtime/src/reliable_clinical_benchmark/invariance.py\", line 1318, in _study_c_case_metrics\n    raise RuntimeError(\"Study C invariance comparison could not derive reference entities.\")\nRuntimeError: Study C invariance comparison could not derive reference entities.\n\nDuring handling of the above exception, another exception occurred:\n\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nTraceback (most recent call last):\n  File \"/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/scripts/evaluation/calculate_branch_secondary_metrics.py\", line 970, in _compute_case_metrics\n    return invariance_module.compute_case_metrics(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/nlp-ready-controllability/benchmark/runtime/src/reliable_clinical_benchmark/invariance.py\", line 1380, in compute_case_metrics\n    return _study_c_case_metrics(\n           ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/nlp-ready-controllability/benchmark/runtime/src/reliable_clinical_benchmark/invariance.py\", line 1318, in _study_c_case_metrics\n    raise RuntimeError(\"Study C invariance comparison could not derive reference entities.\")\nRuntimeError: Study C invariance comparison could not derive reference entities.\n\nDuring handling of the above exception, another exception occurred:\n\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nTraceback (most recent call last):\n  File \"/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/scripts/evaluation/calculate_branch_secondary_metrics.py\", line 970, in _compute_case_metrics\n    return invariance_module.compute_case_metrics(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/nlp-ready-controllability/benchmark/runtime/src/reliable_clinical_benchmark/invariance.py\", line 1380, in compute_case_metrics\n    return _study_c_case_metrics(\n           ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/nlp-ready-controllability/benchmark/runtime/src/reliable_clinical_benchmark/invariance.py\", line 1318, in _study_c_case_metrics\n    raise RuntimeError(\"Study C invariance comparison could not derive reference entities.\")\nRuntimeError: Study C invariance comparison could not derive reference entities.\n\nDuring handling of the above exception, another exception occurred:\n\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nTraceback (most recent call last):\n  File \"/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/scripts/evaluation/calculate_branch_secondary_metrics.py\", line 970, in _compute_case_metrics\n    return invariance_module.compute_case_metrics(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/nlp-ready-controllability/benchmark/runtime/src/reliable_clinical_benchmark/invariance.py\", line 1380, in compute_case_metrics\n    return _study_c_case_metrics(\n           ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/nlp-ready-controllability/benchmark/runtime/src/reliable_clinical_benchmark/invariance.py\", line 1318, in _study_c_case_metrics\n    raise RuntimeError(\"Study C invariance comparison could not derive reference entities.\")\nRuntimeError: Study C invariance comparison could not derive reference entities.\n\nDuring handling of the above exception, another exception occurred:\n\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nINFO:numexpr.utils:NumExpr defaulting to 16 threads.\nINFO:study_c_metrics_script_for_invariance:Loaded gold data from /private/tmp/nlp-ready-controllability/benchmark/runtime/data/controllability/misc/controllability_splits_large/base/study_c_test.json: 12 entries\nINFO:reliable_clinical_benchmark.utils.nli:Loading NLI model: cross-encoder/nli-deberta-v3-base\nINFO:reliable_clinical_benchmark.utils.nli:NLI model device: mps\nINFO:study_c_metrics_script_for_invariance:Loaded gold data from /private/tmp/nlp-ready-controllability/benchmark/runtime/data/controllability/misc/controllability_splits_large/base/study_c_test.json: 12 entries\nINFO:reliable_clinical_benchmark.utils.nli:Loading NLI model: cross-encoder/nli-deberta-v3-base\nINFO:reliable_clinical_benchmark.utils.nli:NLI model device: mps\nINFO:study_c_metrics_script_for_invariance:Loaded gold data from /private/tmp/nlp-ready-controllability/benchmark/runtime/data/controllability/misc/controllability_splits_large/base/study_c_test.json: 12 entries\nINFO:reliable_clinical_benchmark.utils.nli:Loading NLI model: cross-encoder/nli-deberta-v3-base\nINFO:reliable_clinical_benchmark.utils.nli:NLI model device: mps\n",
+  "stderr": "AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\n",
   "lane": "controllability",
   "model": "gpt-oss-20b"
 }

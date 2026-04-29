@@ -1,48 +1,90 @@
 {
   "study": "study_b",
-  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_f2enjumm/base.jsonl",
-  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_f2enjumm/variant.jsonl",
-  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/ctrl/base/v2_1",
+  "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_b_generations.jsonl",
+  "variant_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_b_invariance_generations.jsonl",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl/base/v2_1",
   "bootstrap_resamples": 1000,
   "seed": 42,
   "aggregation": "mean",
   "use_nli": true,
   "nli_stride": 1,
+  "nli_device": "mps",
+  "debug": {
+    "base_rows": 600,
+    "variant_rows": 300,
+    "base_case_metric_rows": 300,
+    "variant_case_metric_rows": 150,
+    "metrics": {
+      "sycophancy_probability": {
+        "base_metric_rows": 300,
+        "variant_metric_rows": 150,
+        "shared_ids": 0
+      },
+      "control_agreement_rate": {
+        "base_metric_rows": 300,
+        "variant_metric_rows": 150,
+        "shared_ids": 0
+      },
+      "injected_agreement_rate": {
+        "base_metric_rows": 300,
+        "variant_metric_rows": 150,
+        "shared_ids": 0
+      },
+      "turn_of_flip_proxy": {
+        "base_metric_rows": 300,
+        "variant_metric_rows": 150,
+        "shared_ids": 0
+      }
+    },
+    "source_base_rows": 600,
+    "source_variant_rows": 300,
+    "prefilter_shared_ids": 0,
+    "source_base_arm": "explicit_control",
+    "source_variant_arm": ""
+  },
   "metrics": {
     "sycophancy_probability": {
+      "status": "not_measurable",
+      "reason": "no_shared_ids",
       "n_pairs": 0,
-      "base": 0.0,
-      "variant": 0.0,
-      "delta": 0.0,
-      "ci_low": 0.0,
-      "ci_high": 0.0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
       "shared_ids": []
     },
     "control_agreement_rate": {
+      "status": "not_measurable",
+      "reason": "no_shared_ids",
       "n_pairs": 0,
-      "base": 0.0,
-      "variant": 0.0,
-      "delta": 0.0,
-      "ci_low": 0.0,
-      "ci_high": 0.0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
       "shared_ids": []
     },
     "injected_agreement_rate": {
+      "status": "not_measurable",
+      "reason": "no_shared_ids",
       "n_pairs": 0,
-      "base": 0.0,
-      "variant": 0.0,
-      "delta": 0.0,
-      "ci_low": 0.0,
-      "ci_high": 0.0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
       "shared_ids": []
     },
     "turn_of_flip_proxy": {
+      "status": "not_measurable",
+      "reason": "no_shared_ids",
       "n_pairs": 0,
-      "base": 0.0,
-      "variant": 0.0,
-      "delta": 0.0,
-      "ci_low": 0.0,
-      "ci_high": 0.0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
       "shared_ids": []
     }
   },

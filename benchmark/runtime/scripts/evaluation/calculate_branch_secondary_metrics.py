@@ -116,6 +116,42 @@ DEFAULT_METRIC_NAMES: Dict[str, Tuple[str, ...]] = {
     "study_c": ("entity_recall_t10", "knowledge_conflict_rate"),
 }
 
+CONTROLLABILITY_DATA_ROOT_CANDIDATES = (
+    RUNTIME_ROOT / "data" / "controllability" / "controllability_splits_v2_1",
+    RUNTIME_ROOT / "data" / "controllability" / "misc" / "controllability_splits_v2_1",
+    RUNTIME_ROOT
+    / "data"
+    / "controllability"
+    / "misc"
+    / "controllability_splits_large_resolved_v2_1",
+    RUNTIME_ROOT
+    / "data"
+    / "controllability"
+    / "misc"
+    / "controllability_splits_large"
+    / "base",
+)
+
+INVARIANCE_DATA_ROOT = RUNTIME_ROOT / "data" / "invariance" / "v5" / "base" / "v2_1"
+CTRL_INVARIANCE_DATA_ROOT = (
+    RUNTIME_ROOT / "data" / "invariance" / "ctrl" / "base" / "v2_1"
+)
+
+CONTROL_STUDY_FILE_CANDIDATES: Dict[str, Tuple[str, ...]] = {
+    "study_a": ("study_a_controllability_test.json", "study_a_test.json"),
+    "study_a_bias": (
+        "study_a_bias_controllability_test.json",
+        "study_a_bias_test.json",
+    ),
+    "study_b": ("study_b_controllability_test.json", "study_b_test.json"),
+    "study_b_multi_turn": (
+        "study_b_multi_turn_controllability_test.json",
+        "study_b_multi_turn_test.json",
+        "study_b_multi_turn.json",
+    ),
+    "study_c": ("study_c_controllability_test.json", "study_c_test.json"),
+}
+
 
 def _json_default(value: Any) -> Any:
     if isinstance(value, Path):
@@ -132,6 +168,124 @@ def _read_jsonl(path: Path) -> List[Dict[str, Any]]:
                 continue
             rows.append(json.loads(line))
     return rows
+
+
+def _load_json_rows(path: Path) -> List[Dict[str, Any]]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if isinstance(payload, list):
+        return [row for row in payload if isinstance(row, dict)]
+    if isinstance(payload, dict):
+        for key in ("cases", "samples", "items", "rows", "data"):
+            rows = payload.get(key)
+            if isinstance(rows, list):
+                return [row for row in rows if isinstance(row, dict)]
+        if all(isinstance(value, dict) for value in payload.values()):
+            return [dict(value, id=key) if "id" not in value else value for key, value in payload.items()]
+    return []
+
+
+def _row_id(row: Mapping[str, Any]) -> str:
+    return str(row.get("id") or row.get("case_id") or row.get("base_id") or "").strip()
+
+
+def _pairing_id(row: Mapping[str, Any]) -> str:
+    row_id = _row_id(row)
+    if not row_id:
+        return ""
+    return (
+        row_id.replace("_control", "")
+        .replace("_injected", "")
+        .replace("__control", "")
+        .replace("__injected", "")
+    )
+
+
+def _cache_ids(path: Path, study: str) -> set[str]:
+    if not path.exists():
+        return set()
+    ids: set[str] = set()
+    for row in _read_jsonl(path):
+        row_id = _row_id(row)
+        if not row_id and study == "study_b":
+            row_id = str(row.get("id") or "").replace("_control", "").replace("_injected", "")
+        if row_id:
+            ids.add(row_id)
+    return ids
+
+
+def _filter_rows_to_pairing_ids(
+    rows: Sequence[Mapping[str, Any]], shared_ids: set[str]
+) -> List[Dict[str, Any]]:
+    if not shared_ids:
+        return [dict(row) for row in rows]
+    return [dict(row) for row in rows if _pairing_id(row) in shared_ids]
+
+
+def _data_root_ids(root: Path, study: str) -> set[str]:
+    for filename in CONTROL_STUDY_FILE_CANDIDATES.get(study, (f"{study}_test.json",)):
+        path = root / filename
+        if path.exists():
+            return {_row_id(row) for row in _load_json_rows(path) if _row_id(row)}
+    return set()
+
+
+def _select_controllability_data_root(
+    *,
+    runtime_root: Path,
+    studies: Sequence[str],
+    models: Sequence[str],
+) -> Path:
+    candidates = [path for path in CONTROLLABILITY_DATA_ROOT_CANDIDATES if path.exists()]
+    if not candidates:
+        return CONTROLLABILITY_DATA_ROOT_CANDIDATES[0]
+
+    cache_ids_by_study: Dict[str, set[str]] = {}
+    for study in studies:
+        study_ids: set[str] = set()
+        for model in models:
+            cache = _control_path_for_model(
+                model=model,
+                study=study,
+                runtime_root=runtime_root,
+            )
+            if cache is not None:
+                study_ids.update(_cache_ids(cache, study))
+        cache_ids_by_study[study] = study_ids
+
+    def score(root: Path) -> Tuple[int, int]:
+        overlap = 0
+        available = 0
+        for study, cache_ids in cache_ids_by_study.items():
+            root_ids = _data_root_ids(root, study)
+            available += len(root_ids)
+            overlap += len(cache_ids.intersection(root_ids))
+        return overlap, available
+
+    return max(candidates, key=score)
+
+
+def _nli_device_label() -> str:
+    try:
+        import torch
+
+        if torch.backends.mps.is_available():
+            return "mps"
+        if torch.cuda.is_available():
+            return "cuda"
+        return "cpu"
+    except Exception:
+        return "unavailable"
+
+
+def _load_current_nli_model_class() -> Any:
+    module_name = "current_checkout_nli_for_secondary_metrics"
+    module_path = RUNTIME_ROOT / "src" / "reliable_clinical_benchmark" / "utils" / "nli.py"
+    spec = importlib.util.spec_from_file_location(module_name, module_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Unable to load current NLI module from {module_path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.NLIModel
 
 
 def _write_jsonl(path: Path, rows: Iterable[Mapping[str, Any]]) -> None:
@@ -194,27 +348,23 @@ def _default_data_root_for_lane(
     runtime_root: Path,
     branch_root: Optional[Path],
 ) -> Path:
-    roots = _candidate_data_roots(runtime_root)
-
-    # Keep metric data inputs on the current checkout only. Branch roots are
-    # script/code references, not sources for generation caches or data files.
+    # Branch roots are code references only. Metric data and golds must be
+    # durable files in the current checkout so regenerated outputs never point
+    # at deleted temporary worktrees.
     _ = branch_root
 
-    if lane in {"controllability", "ctrl-invariance"}:
-        candidates: List[Path] = [
-            roots["controllability_splits"],
-            roots["controllability_base"],
-            roots["controllability"],
-        ]
-        for candidate in candidates:
+    if lane == "invariance":
+        return INVARIANCE_DATA_ROOT
+    if lane == "ctrl-invariance":
+        return CTRL_INVARIANCE_DATA_ROOT
+    if lane == "controllability":
+        for candidate in CONTROLLABILITY_DATA_ROOT_CANDIDATES:
             if candidate.exists():
                 return candidate
+        return CONTROLLABILITY_DATA_ROOT_CANDIDATES[0]
 
-    for candidate in (roots["latest_release"], roots["working_data"]):
-        if candidate.exists():
-            return candidate
-
-    return roots["latest_release"]
+    roots = _candidate_data_roots(runtime_root)
+    return roots["latest_release"] if roots["latest_release"].exists() else roots["working_data"]
 
 
 def _path_if_exists(*paths: Path) -> Optional[Path]:
@@ -332,13 +482,21 @@ def _paired_bootstrap_summary(
     ]
 
     if not pairs:
+        if not base_values and not variant_values:
+            reason = "branch_metric_empty"
+        elif not base_values or not variant_values:
+            reason = "metric_not_applicable"
+        else:
+            reason = "no_shared_ids"
         return {
+            "status": "not_measurable",
+            "reason": reason,
             "n_pairs": 0,
-            "base": 0.0,
-            "variant": 0.0,
-            "delta": 0.0,
-            "ci_low": 0.0,
-            "ci_high": 0.0,
+            "base": None,
+            "variant": None,
+            "delta": None,
+            "ci_low": None,
+            "ci_high": None,
             "shared_ids": [],
         }
 
@@ -374,6 +532,8 @@ def _paired_bootstrap_summary(
         ci_high = delta_point
 
     return {
+        "status": "ok",
+        "reason": "",
         "n_pairs": len(shared_ids),
         "base": base_point,
         "variant": variant_point,
@@ -465,8 +625,7 @@ def _bias_case_metrics(
             mentioned_feature = bool(bias_feature and bias_feature in output)
             is_silent = is_biased and not mentioned_feature
 
-        if is_biased:
-            by_id[row_id] = {"silent_bias_rate": 1.0 if is_silent else 0.0}
+        by_id[row_id] = {"silent_bias_rate": 1.0 if (is_biased and is_silent) else 0.0}
 
     return by_id
 
@@ -503,6 +662,45 @@ def _load_current_study_c_gold(data_root: Path) -> Dict[str, Dict[str, Any]]:
             if row.get("id") or row.get("case_id")
         }
 
+    return {}
+
+
+def _load_study_c_entity_evidence(data_root: Path) -> Dict[str, List[str]]:
+    candidates = [
+        data_root / "study_c" / "entity_evidence_map.json",
+        data_root / "entity_evidence_map.json",
+        data_root / "study_c" / "target_plans.json",
+        data_root / "study_c" / "study_c_target_plans.json",
+        data_root / "study_c_target_plans.json",
+    ]
+    for candidate in candidates:
+        if not candidate.exists():
+            continue
+        payload = json.loads(candidate.read_text(encoding="utf-8"))
+        if not isinstance(payload, dict):
+            continue
+        out: Dict[str, List[str]] = {}
+        for key, value in payload.items():
+            if isinstance(value, list):
+                out[str(key)] = [str(item) for item in value if str(item).strip()]
+            elif isinstance(value, dict):
+                entities = (
+                    value.get("critical_entities")
+                    or value.get("entities")
+                    or value.get("evidence")
+                    or value.get("target_entities")
+                    or []
+                )
+                if isinstance(entities, list):
+                    out[str(key)] = [
+                        str(item) for item in entities if str(item).strip()
+                    ]
+                elif isinstance(entities, str) and entities.strip():
+                    out[str(key)] = [entities]
+            elif isinstance(value, str) and value.strip():
+                out[str(key)] = [value]
+        if out:
+            return out
     return {}
 
 
@@ -564,6 +762,28 @@ def _entity_recall(
     return len(reference.intersection(current)) / len(reference)
 
 
+def _load_study_a_gold_by_id(data_root: Path) -> Dict[str, Dict[str, Any]]:
+    candidates = [
+        data_root / "study_a_controllability_test.json",
+        data_root / "study_a_test.json",
+        data_root / "openr1_psy_splits" / "study_a_test.json",
+        RUNTIME_ROOT
+        / "data"
+        / "releases"
+        / "clinician_readiness_v4_2026-02-22"
+        / "openr1_psy_splits"
+        / "study_a_test.json",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return {
+                _row_id(row): row
+                for row in _load_json_rows(candidate)
+                if _row_id(row)
+            }
+    return {}
+
+
 def _study_c_case_metrics_current_branch(
     *,
     cache_path: Path,
@@ -583,6 +803,7 @@ def _study_c_case_metrics_current_branch(
     """
 
     gold_by_case = _load_current_study_c_gold(data_root)
+    evidence_by_case = _load_study_c_entity_evidence(data_root)
     rows_by_case: Dict[str, List[Dict[str, Any]]] = {}
     for row in _read_jsonl(cache_path):
         case_id = str(row.get("case_id") or row.get("id", "").split("_")[0]).strip()
@@ -597,13 +818,12 @@ def _study_c_case_metrics_current_branch(
             from reliable_clinical_benchmark.metrics.drift import (
                 _extract_advice as branch_extract_advice,
             )
-            from reliable_clinical_benchmark.utils.nli import NLIModel
 
+            NLIModel = _load_current_nli_model_class()
             extract_advice = branch_extract_advice
             nli_model = NLIModel()
-        except Exception:
-            nli_model = None
-            extract_advice = None
+        except Exception as exc:
+            raise RuntimeError(f"Study C NLI requested but unavailable: {exc}") from exc
 
     metrics_by_id: Dict[str, Dict[str, float]] = {}
     for case_id, rows in rows_by_case.items():
@@ -643,7 +863,9 @@ def _study_c_case_metrics_current_branch(
 
         reference_entities = (
             summary_turns[0].get("critical_entities")
+            or evidence_by_case.get(case_id)
             or case_gold.get("critical_entities")
+            or case_gold.get("entities")
             or []
         )
         if not reference_entities:
@@ -684,23 +906,21 @@ def _study_c_case_metrics_current_branch(
         ):
             previous_advice = ""
             pair_index = 0
-            case_conflicts = 0
-            case_turn_pairs = 0
+            nli_pairs: List[Tuple[str, str]] = []
             for row in dialogue_turns:
                 response = row.get("response_text") or row.get("output_text") or ""
                 current_advice = extract_advice(_strip_thinking_blocks(response))
                 if previous_advice and current_advice:
                     if pair_index % max(1, nli_stride) == 0:
-                        case_turn_pairs += 1
-                        verdict = nli_model.predict(
-                            premise=previous_advice, hypothesis=current_advice
-                        )
-                        if verdict == "contradiction":
-                            case_conflicts += 1
+                        nli_pairs.append((previous_advice, current_advice))
                     pair_index += 1
                 previous_advice = current_advice
-            if case_turn_pairs:
-                conflict_rate = case_conflicts / case_turn_pairs
+            if nli_pairs:
+                verdicts = nli_model.batch_predict(nli_pairs)
+                case_conflicts = sum(
+                    1 for verdict in verdicts if verdict == "contradiction"
+                )
+                conflict_rate = case_conflicts / len(nli_pairs)
 
         metrics_by_id[case_id] = {
             "entity_recall_t10": float(
@@ -715,6 +935,7 @@ def _study_c_case_metrics_current_branch(
 def _study_a_case_metrics_current_rows(
     *,
     cache_path: Path,
+    data_root: Path,
     branch_root: Optional[Path],
 ) -> Dict[str, Dict[str, float]]:
     """Current-row fallback for Study A-style control caches.
@@ -725,6 +946,7 @@ def _study_a_case_metrics_current_rows(
     """
 
     invariance_module = _load_branch_invariance(branch_root)
+    gold_by_id = _load_study_a_gold_by_id(data_root)
     grouped: Dict[str, Dict[str, Dict[str, Any]]] = {}
 
     for row in _read_jsonl(cache_path):
@@ -746,10 +968,14 @@ def _study_a_case_metrics_current_rows(
     for row_id, modes in grouped.items():
         metric_row: Dict[str, float] = {}
         exemplar = next(iter(modes.values()))
+        gold_row = gold_by_id.get(row_id, {})
         metadata = exemplar.get("metadata") or {}
         gold_label = _normalise_entity(
             exemplar.get("gold_answer")
             or exemplar.get("gold_diagnosis_label")
+            or gold_row.get("gold_answer")
+            or gold_row.get("gold_diagnosis_label")
+            or (gold_row.get("metadata") or {}).get("inferred_condition")
             or metadata.get("inferred_condition")
         )
 
@@ -792,7 +1018,7 @@ def _study_a_case_metrics_current_rows(
             )
 
         if cot_entry is not None:
-            gold_steps = exemplar.get("gold_reasoning") or []
+            gold_steps = exemplar.get("gold_reasoning") or gold_row.get("gold_reasoning") or []
             if gold_steps:
                 cot_text = str(
                     cot_entry.get("output_text") or cot_entry.get("response_text") or ""
@@ -945,6 +1171,7 @@ def _compute_case_metrics(
             metrics = {}
         return metrics or _study_a_case_metrics_current_rows(
             cache_path=cache_path,
+            data_root=data_root,
             branch_root=branch_root,
         )
 
@@ -1032,6 +1259,7 @@ def _compare_metric_sets(
     )
 
     metrics: Dict[str, Any] = {}
+    debug_metrics: Dict[str, Any] = {}
     for metric_name in metric_names:
         base_values = {
             row_id: float(values[metric_name])
@@ -1050,6 +1278,11 @@ def _compare_metric_sets(
             seed=seed,
             aggregation=aggregation,
         )
+        debug_metrics[metric_name] = {
+            "base_metric_rows": len(base_values),
+            "variant_metric_rows": len(variant_values),
+            "shared_ids": len(set(base_values).intersection(variant_values)),
+        }
 
     return {
         "study": study,
@@ -1061,6 +1294,14 @@ def _compare_metric_sets(
         "aggregation": aggregation,
         "use_nli": use_nli,
         "nli_stride": nli_stride,
+        "nli_device": _nli_device_label() if use_nli and study in {"study_b", "study_c"} else "",
+        "debug": {
+            "base_rows": len(_read_jsonl(base_cache)),
+            "variant_rows": len(_read_jsonl(variant_cache)),
+            "base_case_metric_rows": len(base_case_metrics),
+            "variant_case_metric_rows": len(variant_case_metrics),
+            "metrics": debug_metrics,
+        },
         "metrics": metrics,
     }
 
@@ -1118,17 +1359,34 @@ def _worker_pair(job: Mapping[str, Any]) -> Dict[str, Any]:
     branch_root = _locate_branch_root(job.get("branch_root"))
     with tempfile.TemporaryDirectory(prefix="branch_pair_inputs_") as temp_name:
         temp_dir = Path(temp_name)
+        source_base_rows = _read_jsonl(Path(str(job["base_cache"])))
+        source_variant_rows = _read_jsonl(Path(str(job["variant_cache"])))
+        shared_pairing_ids = {
+            _pairing_id(row) for row in source_base_rows if _pairing_id(row)
+        }.intersection(
+            {_pairing_id(row) for row in source_variant_rows if _pairing_id(row)}
+        )
+        prefiltered_base = temp_dir / "prefiltered_base.jsonl"
+        prefiltered_variant = temp_dir / "prefiltered_variant.jsonl"
+        _write_jsonl(
+            prefiltered_base,
+            _filter_rows_to_pairing_ids(source_base_rows, shared_pairing_ids),
+        )
+        _write_jsonl(
+            prefiltered_variant,
+            _filter_rows_to_pairing_ids(source_variant_rows, shared_pairing_ids),
+        )
         base_cache = _sanitise_jsonl_for_branch(
-            Path(str(job["base_cache"])),
+            prefiltered_base,
             temp_dir,
             "base",
         )
         variant_cache = _sanitise_jsonl_for_branch(
-            Path(str(job["variant_cache"])),
+            prefiltered_variant,
             temp_dir,
             "variant",
         )
-        return _compare_metric_sets(
+        payload = _compare_metric_sets(
             branch_root=branch_root,
             study=str(job["study"]),
             base_cache=base_cache,
@@ -1140,6 +1398,21 @@ def _worker_pair(job: Mapping[str, Any]) -> Dict[str, Any]:
             nli_stride=int(job["nli_stride"]),
             aggregation=str(job.get("aggregation") or "mean"),
         )
+        payload["base_cache"] = str(job.get("source_base_cache") or job["base_cache"])
+        payload["variant_cache"] = str(
+            job.get("source_variant_cache") or job["variant_cache"]
+        )
+        payload.setdefault("debug", {})
+        payload["debug"].update(
+            {
+                "source_base_rows": len(source_base_rows),
+                "source_variant_rows": len(source_variant_rows),
+                "prefilter_shared_ids": len(shared_pairing_ids),
+                "source_base_arm": str(job.get("source_base_arm") or ""),
+                "source_variant_arm": str(job.get("source_variant_arm") or ""),
+            }
+        )
+        return payload
 
 
 def _worker_controllability(job: Mapping[str, Any]) -> Dict[str, Any]:
@@ -1153,6 +1426,9 @@ def _worker_controllability(job: Mapping[str, Any]) -> Dict[str, Any]:
             output_dir=Path(temp_name),
             study=study,
         )
+        arm_counts = {
+            arm: len(_read_jsonl(path)) for arm, path in sorted(split_paths.items())
+        }
 
         base_arm = str(job.get("base_arm") or "spontaneous")
         variant_arms = list(
@@ -1198,8 +1474,17 @@ def _worker_controllability(job: Mapping[str, Any]) -> Dict[str, Any]:
                 {
                     "tag": variant_arm,
                     "variant_type": "control",
-                    "status": "ok",
+                    "status": (
+                        "not_measurable"
+                        if comparison["metrics"]
+                        and all(
+                            metric.get("status") == "not_measurable"
+                            for metric in comparison["metrics"].values()
+                        )
+                        else "ok"
+                    ),
                     "base_arm": base_arm,
+                    "debug": comparison.get("debug", {}),
                     "metrics": comparison["metrics"],
                 }
             )
@@ -1215,6 +1500,13 @@ def _worker_controllability(job: Mapping[str, Any]) -> Dict[str, Any]:
         "aggregation": str(job.get("aggregation") or "mean"),
         "use_nli": bool(job["use_nli"]),
         "nli_stride": int(job["nli_stride"]),
+        "nli_device": _nli_device_label()
+        if bool(job["use_nli"]) and study in {"study_b", "study_c"}
+        else "",
+        "debug": {
+            "control_rows": len(_read_jsonl(source_path)),
+            "arm_counts": arm_counts,
+        },
         "variants": variants,
     }
 
@@ -1257,8 +1549,8 @@ def _study_paths_for_pair_lane(
 
     if lane == "ctrl-invariance":
         base = _path_if_exists(
-            runtime_root / "results" / model / spec["ctrl"],
             runtime_root / "results_ctrl_invariance" / model / spec["ctrl"],
+            runtime_root / "results" / model / spec["ctrl"],
         )
         variant = runtime_root / "results_ctrl_invariance" / model / spec["invariance"]
         return (base, variant if variant.exists() else None)
@@ -1293,52 +1585,115 @@ def _write_outputs(
     )
 
     rows: List[Dict[str, Any]] = []
+    coverage_rows: List[Dict[str, Any]] = []
+
+    def metric_value(metric: Mapping[str, Any], key: str) -> Any:
+        value = metric.get(key)
+        return "" if value is None else value
+
+    def append_coverage(
+        payload: Mapping[str, Any],
+        lane: str,
+        model: str,
+        study: str,
+        status: str,
+        metric_statuses: Sequence[str],
+    ) -> None:
+        if status == "missing_cache":
+            coverage_status = "missing_cache"
+        elif status == "error":
+            coverage_status = "error"
+        elif metric_statuses and any(item == "ok" for item in metric_statuses):
+            coverage_status = "ok"
+        elif metric_statuses and all(item == "not_measurable" for item in metric_statuses):
+            coverage_status = "not_measurable"
+        elif status:
+            coverage_status = status
+        else:
+            coverage_status = "unknown"
+        job_path = output_root / lane / model / f"{study}.json"
+        try:
+            path_label = str(job_path.relative_to(REPO_ROOT)) if job_path.exists() else ""
+        except ValueError:
+            path_label = str(job_path) if job_path.exists() else ""
+        coverage_rows.append(
+            {
+                "lane": lane,
+                "model": model,
+                "study": study,
+                "status": coverage_status,
+                "path": path_label,
+                "use_nli": payload.get("use_nli", ""),
+                "nli_stride": payload.get("nli_stride", ""),
+                "nli_device": payload.get("nli_device", ""),
+                "data_root": payload.get("data_root", ""),
+            }
+        )
+
     for payload in payloads:
         lane = str(payload.get("lane") or "")
         model = str(payload.get("model") or "")
         study = str(payload.get("study") or "")
         status = str(payload.get("status") or "")
+        metric_statuses: List[str] = []
 
         if lane == "controllability":
             for variant in payload.get("variants", []) or []:
                 variant_tag = str(variant.get("tag") or "")
                 variant_status = str(variant.get("status") or status)
                 for metric_name, metric in (variant.get("metrics", {}) or {}).items():
+                    metric_status = str(metric.get("status") or variant_status)
                     rows.append(
                         {
                             "lane": lane,
                             "model": model,
                             "study": study,
                             "variant": variant_tag,
-                            "status": variant_status,
+                            "status": metric_status,
+                            "reason": metric.get("reason", ""),
                             "metric": metric_name,
                             "n_pairs": metric.get("n_pairs", 0),
-                            "base": metric.get("base", 0.0),
-                            "variant_value": metric.get("variant", 0.0),
-                            "delta": metric.get("delta", 0.0),
-                            "ci_low": metric.get("ci_low", 0.0),
-                            "ci_high": metric.get("ci_high", 0.0),
+                            "base_value": metric_value(metric, "base"),
+                            "variant_value": metric_value(metric, "variant"),
+                            "delta": metric_value(metric, "delta"),
+                            "ci_low": metric_value(metric, "ci_low"),
+                            "ci_high": metric_value(metric, "ci_high"),
+                            "use_nli": payload.get("use_nli", ""),
+                            "nli_stride": payload.get("nli_stride", ""),
+                            "nli_device": payload.get("nli_device", ""),
+                            "data_root": payload.get("data_root", ""),
                         }
                     )
+                    metric_statuses.append(metric_status)
+            append_coverage(payload, lane, model, study, status, metric_statuses)
             continue
 
         for metric_name, metric in (payload.get("metrics", {}) or {}).items():
+            metric_status = str(metric.get("status") or status)
             rows.append(
                 {
                     "lane": lane,
                     "model": model,
                     "study": study,
                     "variant": payload.get("variant_tag", "variant"),
-                    "status": status,
+                    "status": metric_status,
+                    "reason": metric.get("reason", ""),
                     "metric": metric_name,
                     "n_pairs": metric.get("n_pairs", 0),
-                    "base": metric.get("base", 0.0),
-                    "variant_value": metric.get("variant", 0.0),
-                    "delta": metric.get("delta", 0.0),
-                    "ci_low": metric.get("ci_low", 0.0),
-                    "ci_high": metric.get("ci_high", 0.0),
+                    "base_value": metric_value(metric, "base"),
+                    "variant_value": metric_value(metric, "variant"),
+                    "delta": metric_value(metric, "delta"),
+                    "ci_low": metric_value(metric, "ci_low"),
+                    "ci_high": metric_value(metric, "ci_high"),
+                    "use_nli": payload.get("use_nli", ""),
+                    "nli_stride": payload.get("nli_stride", ""),
+                    "nli_device": payload.get("nli_device", ""),
+                    "data_root": payload.get("data_root", ""),
                 }
             )
+            metric_statuses.append(metric_status)
+
+        append_coverage(payload, lane, model, study, status, metric_statuses)
 
     csv_path = output_root / "all_secondary_metrics_flat.csv"
     with csv_path.open("w", newline="", encoding="utf-8") as handle:
@@ -1348,17 +1703,49 @@ def _write_outputs(
             "study",
             "variant",
             "status",
+            "reason",
             "metric",
             "n_pairs",
-            "base",
+            "base_value",
             "variant_value",
             "delta",
             "ci_low",
             "ci_high",
+            "use_nli",
+            "nli_stride",
+            "nli_device",
+            "data_root",
         ]
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
+
+    coverage_path = output_root / "secondary_coverage.csv"
+    with coverage_path.open("w", newline="", encoding="utf-8") as handle:
+        fieldnames = [
+            "lane",
+            "model",
+            "study",
+            "status",
+            "path",
+            "use_nli",
+            "nli_stride",
+            "nli_device",
+            "data_root",
+        ]
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(coverage_rows)
+
+    coverage_summary: Dict[str, Dict[str, int]] = {}
+    for row in coverage_rows:
+        lane_summary = coverage_summary.setdefault(str(row["lane"]), {})
+        key = str(row["status"])
+        lane_summary[key] = lane_summary.get(key, 0) + 1
+    (output_root / "secondary_coverage_summary.json").write_text(
+        json.dumps(coverage_summary, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
 
     md_path = output_root / "all_secondary_metrics_flat.md"
     lines = [
@@ -1366,20 +1753,31 @@ def _write_outputs(
         "|---|---|---|---|---:|---:|---:|---:|---:|---|",
     ]
     for row in rows:
+        md_row = {
+            **row,
+            "base_md": (
+                "" if row["base_value"] == "" else f"{float(row['base_value']):.4f}"
+            ),
+            "variant_md": (
+                ""
+                if row["variant_value"] == ""
+                else f"{float(row['variant_value']):.4f}"
+            ),
+            "delta_md": "" if row["delta"] == "" else f"{float(row['delta']):.4f}",
+            "ci_md": (
+                ""
+                if row["ci_low"] == "" or row["ci_high"] == ""
+                else f"[{float(row['ci_low']):.4f}, {float(row['ci_high']):.4f}]"
+            ),
+        }
         lines.append(
             "| {lane} | {model} | {study} | {variant} | {metric} | {n_pairs} | "
-            "{base:.4f} | {variant_value:.4f} | {delta:.4f} | [{ci_low:.4f}, {ci_high:.4f}] |".format(
-                **{
-                    **row,
-                    "base": float(row["base"]),
-                    "variant_value": float(row["variant_value"]),
-                    "delta": float(row["delta"]),
-                    "ci_low": float(row["ci_low"]),
-                    "ci_high": float(row["ci_high"]),
-                }
-            )
+            "{base_md} | {variant_md} | {delta_md} | {ci_md} |".format(**md_row)
         )
     md_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (output_root / "all_secondary_metrics.md").write_text(
+        "\n".join(lines) + "\n", encoding="utf-8"
+    )
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -1517,10 +1915,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     controllability_data_root = (
         args.controllability_data_root.resolve()
         if args.controllability_data_root is not None
-        else _default_data_root_for_lane(
-            lane="controllability",
+        else _select_controllability_data_root(
             runtime_root=runtime_root,
-            branch_root=control_branch_root,
+            studies=args.studies,
+            models=args.models,
         )
     )
 
@@ -1602,7 +2000,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     continue
 
                 if lane == "ctrl-invariance":
-                    data_root = controllability_data_root
+                    data_root = CTRL_INVARIANCE_DATA_ROOT
                     branch_root = metric_branch_root
                     variant_tag = "ctrl_invariance_variant"
                 else:
@@ -1648,6 +2046,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                                 "study": study,
                                 "base_cache": str(temp_base),
                                 "variant_cache": str(variant_cache),
+                                "source_base_cache": str(base_cache),
+                                "source_variant_cache": str(variant_cache),
+                                "source_base_arm": "explicit_control",
                                 "data_root": str(data_root),
                                 "n_resamples": args.bootstrap_resamples,
                                 "seed": args.seed,

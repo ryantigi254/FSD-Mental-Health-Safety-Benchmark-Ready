@@ -1,15 +1,41 @@
 {
   "study": "study_c",
-  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_gj43csox/base.jsonl",
-  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_gj43csox/variant.jsonl",
-  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/v5/base/v2_1",
+  "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/qwen3-lmstudio/study_c_generations.jsonl",
+  "variant_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_invariance/qwen3-lmstudio/study_c_invariance_generations.jsonl",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/v5/base/v2_1",
   "bootstrap_resamples": 1000,
   "seed": 42,
   "aggregation": "mean",
   "use_nli": true,
   "nli_stride": 1,
+  "nli_device": "mps",
+  "debug": {
+    "base_rows": 600,
+    "variant_rows": 600,
+    "base_case_metric_rows": 15,
+    "variant_case_metric_rows": 15,
+    "metrics": {
+      "entity_recall_t10": {
+        "base_metric_rows": 15,
+        "variant_metric_rows": 15,
+        "shared_ids": 15
+      },
+      "knowledge_conflict_rate": {
+        "base_metric_rows": 15,
+        "variant_metric_rows": 15,
+        "shared_ids": 15
+      }
+    },
+    "source_base_rows": 4000,
+    "source_variant_rows": 600,
+    "prefilter_shared_ids": 15,
+    "source_base_arm": "",
+    "source_variant_arm": ""
+  },
   "metrics": {
     "entity_recall_t10": {
+      "status": "ok",
+      "reason": "",
       "n_pairs": 15,
       "base": 0.5722222222222223,
       "variant": 0.5611111111111111,
@@ -35,6 +61,8 @@
       ]
     },
     "knowledge_conflict_rate": {
+      "status": "ok",
+      "reason": "",
       "n_pairs": 15,
       "base": 0.003508771929824561,
       "variant": 0.007017543859649122,

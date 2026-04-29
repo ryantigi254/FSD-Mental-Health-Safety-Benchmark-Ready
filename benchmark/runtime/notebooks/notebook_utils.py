@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
+from matplotlib.patches import Rectangle
 
 
 MODEL_COLOURS = {
@@ -149,13 +150,20 @@ def model_colour_map(models: Iterable[str]) -> dict[str, str]:
     return {model: model_colour(str(model)) for model in models}
 
 
-def add_model_legend(ax, models: Iterable[str], *, title: str = "Model", loc: str = "best") -> None:
+def add_model_legend(
+    ax,
+    models: Iterable[str],
+    *,
+    title: str = "Model",
+    loc: str = "best",
+    bbox_to_anchor=None,
+) -> None:
     seen = list(dict.fromkeys(str(model) for model in models))
     handles = [
         Line2D([0], [0], marker="o", color="none", markerfacecolor=model_colour(model), markeredgecolor="black", label=model, markersize=10)
         for model in seen
     ]
-    ax.legend(handles=handles, title=title, loc=loc)
+    ax.legend(handles=handles, title=title, loc=loc, bbox_to_anchor=bbox_to_anchor)
 
 
 def format_model_axis(ax, models: Iterable[str], rotation: int = 35) -> None:
@@ -647,10 +655,29 @@ def secondary_missing_table(coverage: pd.DataFrame) -> pd.DataFrame:
     return missing.sort_values(["lane", "model", "study"]).reset_index(drop=True)
 
 
+def secondary_not_measurable_table(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty or "status" not in df:
+        return pd.DataFrame()
+    out = df[df["status"].fillna("") == "not_measurable"].copy()
+    cols = [
+        "lane",
+        "model",
+        "study",
+        "variant",
+        "metric",
+        "reason",
+        "n_pairs",
+    ]
+    return out[[col for col in cols if col in out]].sort_values(
+        [col for col in ["lane", "study", "model", "metric"] if col in out]
+    ).reset_index(drop=True)
+
+
 def annotate_secondary_reportability(df: pd.DataFrame) -> pd.DataFrame:
     result = df.copy()
     if result.empty:
         return result
+    result["is_measured"] = (result.get("status", "ok") == "ok") & result["delta"].notna() & (result["n_pairs"].fillna(0) > 0)
     result["ci_width"] = result["ci_high"] - result["ci_low"]
     result["ci_crosses_zero"] = (result["ci_low"] <= 0.0) & (result["ci_high"] >= 0.0)
     result["effect_direction"] = np.select(
@@ -658,10 +685,16 @@ def annotate_secondary_reportability(df: pd.DataFrame) -> pd.DataFrame:
         ["increase", "decrease"],
         default="no_change",
     )
-    result["threshold_claim"] = np.where(
-        result["ci_crosses_zero"],
-        "CI overlaps zero; descriptive only",
-        "CI excludes zero; reportable paired shift",
+    result["threshold_claim"] = np.select(
+        [
+            ~result["is_measured"],
+            result["ci_crosses_zero"],
+        ],
+        [
+            "Not measurable from available paired rows",
+            "CI overlaps zero; descriptive only",
+        ],
+        default="CI excludes zero; reportable paired shift",
     )
     result["abs_delta"] = result["delta"].abs()
     return result
@@ -675,7 +708,8 @@ def plot_secondary_delta_ci(
     max_rows: int = 18,
     zero_label: str = "No paired shift",
 ) -> None:
-    plot_df = annotate_secondary_reportability(df).dropna(subset=["delta"]).copy()
+    plot_df = annotate_secondary_reportability(df)
+    plot_df = plot_df[plot_df["is_measured"]].dropna(subset=["delta"]).copy()
     if plot_df.empty:
         ax.text(0.5, 0.5, "No metric rows available", ha="center", va="center", transform=ax.transAxes)
         ax.set_axis_off()
@@ -683,7 +717,7 @@ def plot_secondary_delta_ci(
     plot_df = plot_df.sort_values("abs_delta", ascending=False).head(max_rows)
     plot_df = plot_df.sort_values("delta")
     labels = [
-        f"{row.model}\\n{row.study} · {row.metric}"
+        f"{row.model}\n{row.variant} · {row.metric}"
         for row in plot_df.itertuples()
     ]
     y = np.arange(len(plot_df))
@@ -721,7 +755,7 @@ def plot_secondary_delta_ci(
     values = pd.concat([plot_df["ci_low"], plot_df["ci_high"], plot_df["delta"]])
     lo, hi = padded_limits(values, pad_fraction=0.18)
     ax.set_xlim(lo, hi)
-    add_model_legend(ax, plot_df["model"], loc="upper left")
+    add_model_legend(ax, plot_df["model"], loc="upper left", bbox_to_anchor=(1.02, 1.0))
 
 
 def plot_secondary_model_heatmap(
@@ -731,14 +765,17 @@ def plot_secondary_model_heatmap(
     title: str,
     value_col: str = "delta",
 ) -> None:
+    df = annotate_secondary_reportability(df)
+    df = df[df["is_measured"]].copy()
     if df.empty:
         ax.text(0.5, 0.5, "No metric rows available", ha="center", va="center", transform=ax.transAxes)
         ax.set_axis_off()
         return
+    column_field = "metric" if df["study"].nunique(dropna=False) <= 1 else "study"
     pivot = (
-        df.groupby(["model", "study"], dropna=False)[value_col]
+        df.groupby(["model", column_field], dropna=False)[value_col]
         .median()
-        .unstack("study")
+        .unstack(column_field)
         .reindex(index=[m for m in SECONDARY_MODELS if m in set(df["model"])])
     )
     if pivot.empty:
@@ -747,16 +784,96 @@ def plot_secondary_model_heatmap(
         return
     vmax = float(np.nanmax(np.abs(pivot.to_numpy()))) if np.isfinite(pivot.to_numpy()).any() else 1.0
     vmax = max(vmax, 1e-6)
-    im = ax.imshow(pivot.to_numpy(dtype=float), aspect="auto", cmap="coolwarm", vmin=-vmax, vmax=vmax)
+    values = pivot.to_numpy(dtype=float)
+    im = ax.imshow(values, aspect="auto", cmap="coolwarm", vmin=-vmax, vmax=vmax)
     ax.set_xticks(np.arange(len(pivot.columns)))
     ax.set_xticklabels(pivot.columns, rotation=35, ha="right")
     ax.set_yticks(np.arange(len(pivot.index)))
     ax.set_yticklabels(pivot.index)
     ax.set_title(title)
     for i, model in enumerate(pivot.index):
-        ax.get_yticklabels()[i].set_color(model_colour(model))
+        ax.add_patch(
+            Rectangle(
+                (-0.49, i - 0.46),
+                0.05,
+                0.92,
+                facecolor=model_colour(model),
+                edgecolor="none",
+                clip_on=False,
+            )
+        )
+    for i in range(values.shape[0]):
+        for j in range(values.shape[1]):
+            value = values[i, j]
+            if np.isfinite(value):
+                text_colour = "white" if abs(value) > (0.55 * vmax) else "black"
+                ax.text(j, i, f"{value:+.3f}", ha="center", va="center", fontsize=7, color=text_colour)
+    ax.set_ylabel("Model (left strip = model colour)")
     cbar = ax.figure.colorbar(im, ax=ax, shrink=0.82)
     cbar.set_label(f"Median {value_col}")
+
+
+def plot_secondary_per_model_heatmaps(
+    df: pd.DataFrame,
+    *,
+    axes,
+    title: str,
+    value_col: str = "delta",
+) -> None:
+    measured = annotate_secondary_reportability(df)
+    measured = measured[measured["is_measured"]].copy()
+    axes = np.atleast_1d(axes).ravel()
+    if measured.empty:
+        axes[0].text(0.5, 0.5, "No measured metric rows", ha="center", va="center", transform=axes[0].transAxes)
+        axes[0].set_axis_off()
+        for ax in axes[1:]:
+            ax.set_axis_off()
+        return
+
+    models = [model for model in SECONDARY_MODELS if model in set(measured["model"])]
+    variants = [variant for variant in sorted(measured["variant"].dropna().unique())]
+    metrics = [metric for metric in sorted(measured["metric"].dropna().unique())]
+    all_values = measured[value_col].dropna()
+    vmax = float(np.nanmax(np.abs(all_values.to_numpy()))) if not all_values.empty else 1.0
+    vmax = max(vmax, 1e-6)
+
+    for ax, model in zip(axes, models):
+        model_df = measured[measured["model"] == model]
+        pivot = (
+            model_df.pivot_table(index="variant", columns="metric", values=value_col, aggfunc="median")
+            .reindex(index=variants, columns=metrics)
+        )
+        values = pivot.to_numpy(dtype=float)
+        ax.imshow(values, aspect="auto", cmap="coolwarm", vmin=-vmax, vmax=vmax)
+        ax.set_title(model, color=model_colour(model), loc="left", fontsize=10)
+        ax.add_patch(
+            Rectangle(
+                (-0.49, -0.5),
+                0.05,
+                max(1, len(pivot.index)),
+                facecolor=model_colour(model),
+                edgecolor="none",
+                clip_on=False,
+            )
+        )
+        ax.set_xticks(np.arange(len(metrics)))
+        ax.set_xticklabels(metrics, rotation=35, ha="right", fontsize=8)
+        ax.set_yticks(np.arange(len(variants)))
+        ax.set_yticklabels(variants, fontsize=8)
+        for i in range(values.shape[0]):
+            for j in range(values.shape[1]):
+                value = values[i, j]
+                if np.isfinite(value):
+                    text_colour = "white" if abs(value) > (0.55 * vmax) else "black"
+                    ax.text(j, i, f"{value:+.3f}", ha="center", va="center", fontsize=7, color=text_colour)
+        ax.grid(False)
+    for ax in axes[len(models):]:
+        ax.set_axis_off()
+    if len(axes):
+        axes[0].figure.suptitle(title, fontsize=13, fontweight="semibold")
+        sm = plt.cm.ScalarMappable(cmap="coolwarm", norm=plt.Normalize(vmin=-vmax, vmax=vmax))
+        sm.set_array([])
+        axes[0].figure.colorbar(sm, ax=list(axes[: len(models)]), shrink=0.82, label=f"Median {value_col}")
 
 
 def secondary_threshold_audit(df: pd.DataFrame) -> pd.DataFrame:
@@ -778,6 +895,106 @@ def secondary_threshold_audit(df: pd.DataFrame) -> pd.DataFrame:
         "threshold_claim",
     ]
     return audit[cols].sort_values(["lane", "study", "metric", "model"]).reset_index(drop=True)
+
+
+def secondary_metric_headline(df: pd.DataFrame) -> pd.DataFrame:
+    measured = annotate_secondary_reportability(df)
+    if measured.empty:
+        return pd.DataFrame()
+    grouped = (
+        measured.groupby(["lane", "study", "metric"], dropna=False)
+        .agg(
+            measured_rows=("is_measured", "sum"),
+            not_measurable_rows=("is_measured", lambda s: int((~s).sum())),
+            median_delta=("delta", "median"),
+            median_abs_delta=("abs_delta", "median"),
+            max_abs_delta=("abs_delta", "max"),
+            median_n_pairs=("n_pairs", "median"),
+            reportable_rows=(
+                "threshold_claim",
+                lambda values: int(sum("reportable paired shift" in str(v) for v in values)),
+            ),
+        )
+        .reset_index()
+    )
+    return grouped.sort_values(["lane", "study", "max_abs_delta"], ascending=[True, True, False])
+
+
+def plot_secondary_coverage_heatmap(
+    coverage: pd.DataFrame,
+    *,
+    ax,
+    title: str,
+) -> None:
+    if coverage.empty:
+        ax.text(0.5, 0.5, "No coverage rows", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        return
+    status_score = {"ok": 2.0, "not_measurable": 1.0, "missing_cache": 0.0, "error": -1.0}
+    cov = coverage.copy()
+    cov["score"] = cov["status"].map(status_score).fillna(0.0)
+    pivot = cov.pivot_table(index="model", columns="study", values="score", aggfunc="max")
+    pivot = pivot.reindex(index=[model for model in SECONDARY_MODELS if model in set(cov["model"])])
+    pivot = pivot.reindex(columns=[study for study in SECONDARY_STUDIES if study in set(cov["study"])])
+    status_cmap = plt.get_cmap("Greys")
+    im = ax.imshow(pivot.to_numpy(dtype=float), aspect="auto", cmap=status_cmap, vmin=-1.0, vmax=2.0)
+    ax.set_xticks(np.arange(len(pivot.columns)))
+    ax.set_xticklabels(pivot.columns, rotation=35, ha="right")
+    ax.set_yticks(np.arange(len(pivot.index)))
+    ax.set_yticklabels(pivot.index)
+    for i, model in enumerate(pivot.index):
+        ax.add_patch(
+            Rectangle(
+                (-0.49, i - 0.46),
+                0.05,
+                0.92,
+                facecolor=model_colour(model),
+                edgecolor="none",
+                clip_on=False,
+            )
+        )
+    for i in range(pivot.shape[0]):
+        for j in range(pivot.shape[1]):
+            value = pivot.iat[i, j]
+            label = "ok" if value == 2.0 else "n/m" if value == 1.0 else "miss" if value == 0.0 else "err"
+            ax.text(j, i, label, ha="center", va="center", fontsize=8, color="white" if value >= 1.8 else "black")
+    ax.set_title(title)
+    ax.set_ylabel("Model (left strip = model colour)")
+    cbar = ax.figure.colorbar(im, ax=ax, shrink=0.82)
+    cbar.set_label("coverage status: err < missing < not measurable < ok")
+
+
+def plot_secondary_arm_values(
+    df: pd.DataFrame,
+    *,
+    ax,
+    title: str,
+    max_rows: int = 24,
+) -> None:
+    measured = annotate_secondary_reportability(df)
+    measured = measured[measured["is_measured"]].dropna(subset=["base_value", "variant_value"]).copy()
+    if measured.empty:
+        ax.text(0.5, 0.5, "No measured arm values", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        return
+    measured["abs_delta"] = measured["delta"].abs()
+    plot_df = measured.sort_values("abs_delta", ascending=False).head(max_rows)
+    plot_df = plot_df.sort_values(["metric", "model", "variant"]).reset_index(drop=True)
+    y = np.arange(len(plot_df))
+    labels = [f"{r.model}\n{r.metric} · {r.variant}" for r in plot_df.itertuples()]
+    ax.scatter(plot_df["base_value"], y - 0.12, marker="o", s=70, c=[model_colour(m) for m in plot_df["model"]], edgecolor="black", linewidth=0.6, label="base")
+    ax.scatter(plot_df["variant_value"], y + 0.12, marker="D", s=60, c=[model_colour(m) for m in plot_df["model"]], edgecolor="black", linewidth=0.6, label="variant")
+    for _, row in plot_df.iterrows():
+        yi = plot_df.index.get_loc(row.name)
+        ax.plot([row["base_value"], row["variant_value"]], [yi - 0.12, yi + 0.12], color="0.55", linewidth=1.0, alpha=0.7)
+    ax.set_yticks(y)
+    ax.set_yticklabels(labels, fontsize=8)
+    ax.set_title(title)
+    ax.set_xlabel("Metric value")
+    values = pd.concat([plot_df["base_value"], plot_df["variant_value"]])
+    ax.set_xlim(*padded_limits(values, pad_fraction=0.18))
+    ax.grid(axis="x", alpha=0.25)
+    ax.legend(loc="upper left", bbox_to_anchor=(1.02, 1.0), borderaxespad=0.0)
 
 
 CROSS_ARM_STUDY_CONFIG = {

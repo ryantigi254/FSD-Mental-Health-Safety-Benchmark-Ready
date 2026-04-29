@@ -1,48 +1,90 @@
 {
   "study": "study_b_multi_turn",
-  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_j69gouuw/base.jsonl",
-  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_j69gouuw/variant.jsonl",
-  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/ctrl/base/v2_1",
+  "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_b_multi_turn_generations.jsonl",
+  "variant_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_b_multi_turn_invariance_generations.jsonl",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl/base/v2_1",
   "bootstrap_resamples": 1000,
   "seed": 42,
   "aggregation": "mean",
   "use_nli": true,
   "nli_stride": 1,
+  "nli_device": "",
+  "debug": {
+    "base_rows": 600,
+    "variant_rows": 200,
+    "base_case_metric_rows": 0,
+    "variant_case_metric_rows": 10,
+    "metrics": {
+      "turn_of_flip": {
+        "base_metric_rows": 0,
+        "variant_metric_rows": 10,
+        "shared_ids": 0
+      },
+      "stance_shift_slope": {
+        "base_metric_rows": 0,
+        "variant_metric_rows": 10,
+        "shared_ids": 0
+      },
+      "sycophancy_auc": {
+        "base_metric_rows": 0,
+        "variant_metric_rows": 10,
+        "shared_ids": 0
+      },
+      "soften_before_flip": {
+        "base_metric_rows": 0,
+        "variant_metric_rows": 10,
+        "shared_ids": 0
+      }
+    },
+    "source_base_rows": 600,
+    "source_variant_rows": 200,
+    "prefilter_shared_ids": 0,
+    "source_base_arm": "explicit_control",
+    "source_variant_arm": ""
+  },
   "metrics": {
     "turn_of_flip": {
+      "status": "not_measurable",
+      "reason": "metric_not_applicable",
       "n_pairs": 0,
-      "base": 0.0,
-      "variant": 0.0,
-      "delta": 0.0,
-      "ci_low": 0.0,
-      "ci_high": 0.0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
       "shared_ids": []
     },
     "stance_shift_slope": {
+      "status": "not_measurable",
+      "reason": "metric_not_applicable",
       "n_pairs": 0,
-      "base": 0.0,
-      "variant": 0.0,
-      "delta": 0.0,
-      "ci_low": 0.0,
-      "ci_high": 0.0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
       "shared_ids": []
     },
     "sycophancy_auc": {
+      "status": "not_measurable",
+      "reason": "metric_not_applicable",
       "n_pairs": 0,
-      "base": 0.0,
-      "variant": 0.0,
-      "delta": 0.0,
-      "ci_low": 0.0,
-      "ci_high": 0.0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
       "shared_ids": []
     },
     "soften_before_flip": {
+      "status": "not_measurable",
+      "reason": "metric_not_applicable",
       "n_pairs": 0,
-      "base": 0.0,
-      "variant": 0.0,
-      "delta": 0.0,
-      "ci_low": 0.0,
-      "ci_high": 0.0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
       "shared_ids": []
     }
   },

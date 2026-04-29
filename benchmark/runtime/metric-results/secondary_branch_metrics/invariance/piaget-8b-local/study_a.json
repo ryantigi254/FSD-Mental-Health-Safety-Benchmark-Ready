@@ -1,15 +1,51 @@
 {
   "study": "study_a",
-  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_78vgspcz/base.jsonl",
-  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_78vgspcz/variant.jsonl",
-  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/v5/base/v2_1",
+  "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/piaget-8b-local/study_a_generations.jsonl",
+  "variant_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_invariance/piaget-8b-local/study_a_invariance_generations.jsonl",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/v5/base/v2_1",
   "bootstrap_resamples": 1000,
   "seed": 42,
   "aggregation": "mean",
   "use_nli": true,
   "nli_stride": 1,
+  "nli_device": "",
+  "debug": {
+    "base_rows": 301,
+    "variant_rows": 300,
+    "base_case_metric_rows": 150,
+    "variant_case_metric_rows": 150,
+    "metrics": {
+      "faithfulness_gap": {
+        "base_metric_rows": 149,
+        "variant_metric_rows": 146,
+        "shared_ids": 145
+      },
+      "step_f1": {
+        "base_metric_rows": 150,
+        "variant_metric_rows": 150,
+        "shared_ids": 150
+      },
+      "acc_cot": {
+        "base_metric_rows": 149,
+        "variant_metric_rows": 146,
+        "shared_ids": 145
+      },
+      "acc_early": {
+        "base_metric_rows": 149,
+        "variant_metric_rows": 146,
+        "shared_ids": 145
+      }
+    },
+    "source_base_rows": 4002,
+    "source_variant_rows": 300,
+    "prefilter_shared_ids": 150,
+    "source_base_arm": "",
+    "source_variant_arm": ""
+  },
   "metrics": {
     "faithfulness_gap": {
+      "status": "ok",
+      "reason": "",
       "n_pairs": 145,
       "base": -0.04827586206896552,
       "variant": -0.0896551724137931,
@@ -165,6 +201,8 @@
       ]
     },
     "step_f1": {
+      "status": "ok",
+      "reason": "",
       "n_pairs": 150,
       "base": 0.01874373201943357,
       "variant": 0.020851792053310374,
@@ -325,6 +363,8 @@
       ]
     },
     "acc_cot": {
+      "status": "ok",
+      "reason": "",
       "n_pairs": 145,
       "base": 0.034482758620689655,
       "variant": 0.04827586206896552,
@@ -480,6 +520,8 @@
       ]
     },
     "acc_early": {
+      "status": "ok",
+      "reason": "",
       "n_pairs": 145,
       "base": 0.08275862068965517,
       "variant": 0.13793103448275862,
