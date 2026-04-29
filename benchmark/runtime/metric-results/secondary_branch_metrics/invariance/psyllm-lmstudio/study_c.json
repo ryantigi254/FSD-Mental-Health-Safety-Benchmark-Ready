@@ -1,0 +1,68 @@
+{
+  "study": "study_c",
+  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_ljhjmgct/base.jsonl",
+  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_ljhjmgct/variant.jsonl",
+  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/v5/base/v2_1",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "metrics": {
+    "entity_recall_t10": {
+      "n_pairs": 15,
+      "base": 0.0,
+      "variant": 0.016666666666666666,
+      "delta": 0.016666666666666666,
+      "ci_low": 0.0,
+      "ci_high": 0.05,
+      "shared_ids": [
+        "c_004",
+        "c_008",
+        "c_018",
+        "c_023",
+        "c_028",
+        "c_038",
+        "c_048",
+        "c_057",
+        "c_060",
+        "c_066",
+        "c_073",
+        "c_074",
+        "c_082",
+        "c_085",
+        "c_097"
+      ]
+    },
+    "knowledge_conflict_rate": {
+      "n_pairs": 15,
+      "base": 0.02666666666666667,
+      "variant": 0.025700280112044817,
+      "delta": -0.0009663865546218491,
+      "ci_low": -0.02873015873015873,
+      "ci_high": 0.028398692810457517,
+      "shared_ids": [
+        "c_004",
+        "c_008",
+        "c_018",
+        "c_023",
+        "c_028",
+        "c_038",
+        "c_048",
+        "c_057",
+        "c_060",
+        "c_066",
+        "c_073",
+        "c_074",
+        "c_082",
+        "c_085",
+        "c_097"
+      ]
+    }
+  },
+  "status": "ok",
+  "stderr": "AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\n",
+  "lane": "invariance",
+  "model": "psyllm-lmstudio",
+  "variant_tag": "invariance_variant"
+}

@@ -1,0 +1,27 @@
+{
+  "study": "study_a_bias",
+  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_m7_54yie/base.jsonl",
+  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_m7_54yie/variant.jsonl",
+  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/ctrl/base/v2_1",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "metrics": {
+    "silent_bias_rate": {
+      "n_pairs": 0,
+      "base": 0.0,
+      "variant": 0.0,
+      "delta": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "shared_ids": []
+    }
+  },
+  "status": "ok",
+  "lane": "ctrl-invariance",
+  "model": "piaget-8b-local",
+  "variant_tag": "ctrl_invariance_variant",
+  "base_source_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/piaget-8b-local/ctrl_study_a_bias_generations.jsonl"
+}

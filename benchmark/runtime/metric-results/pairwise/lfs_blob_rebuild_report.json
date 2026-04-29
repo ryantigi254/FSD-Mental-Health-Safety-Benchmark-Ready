@@ -1,0 +1,168 @@
+{
+  "skipped_count": 32,
+  "rebuilt_count": 32,
+  "still_missing_count": 0,
+  "rebuilt": [
+    {
+      "destination": "benchmark/runtime/results/gpt-oss-20b/ctrl_study_a_bias_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 7488088
+    },
+    {
+      "destination": "benchmark/runtime/results/gpt-oss-20b/ctrl_study_a_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 4410088
+    },
+    {
+      "destination": "benchmark/runtime/results/gpt-oss-20b/ctrl_study_b_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 7725532
+    },
+    {
+      "destination": "benchmark/runtime/results/gpt-oss-20b/ctrl_study_b_multi_turn_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 8495942
+    },
+    {
+      "destination": "benchmark/runtime/results/gpt-oss-20b/ctrl_study_c_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 6596061
+    },
+    {
+      "destination": "benchmark/runtime/results/medgemma-lmstudio/study_a_bias_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 16357076
+    },
+    {
+      "destination": "benchmark/runtime/results/medgemma-lmstudio/study_a_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 16991234
+    },
+    {
+      "destination": "benchmark/runtime/results/piaget-8b-local/ctrl_study_a_bias_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 5288141
+    },
+    {
+      "destination": "benchmark/runtime/results/piaget-8b-local/ctrl_study_a_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 5679460
+    },
+    {
+      "destination": "benchmark/runtime/results/piaget-8b-local/ctrl_study_b_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 9107435
+    },
+    {
+      "destination": "benchmark/runtime/results/piaget-8b-local/ctrl_study_b_multi_turn_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 8192292
+    },
+    {
+      "destination": "benchmark/runtime/results/piaget-8b-local/ctrl_study_c_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 12309773
+    },
+    {
+      "destination": "benchmark/runtime/results/piaget-8b-local/study_a_bias_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 17436746
+    },
+    {
+      "destination": "benchmark/runtime/results/piaget-8b-local/study_a_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 23569230
+    },
+    {
+      "destination": "benchmark/runtime/results/piaget-8b-local/study_b_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 27581483
+    },
+    {
+      "destination": "benchmark/runtime/results/psych-qwen-32b-local/study_a_bias_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 14030239
+    },
+    {
+      "destination": "benchmark/runtime/results/psych-qwen-32b-local/study_a_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 18226950
+    },
+    {
+      "destination": "benchmark/runtime/results/psych-qwen-32b-local/study_b_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 5008421
+    },
+    {
+      "destination": "benchmark/runtime/results/psyche-r1-local/study_a_bias_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 7332676
+    },
+    {
+      "destination": "benchmark/runtime/results/psyche-r1-local/study_a_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 7377489
+    },
+    {
+      "destination": "benchmark/runtime/results/psyche-r1-local/study_b_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 11675658
+    },
+    {
+      "destination": "benchmark/runtime/results/psyche-r1-local/study_b_multi_turn_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 35751020
+    },
+    {
+      "destination": "benchmark/runtime/results/psyche-r1-local/study_c_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 21836834
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3-lmstudio/ctrl_study_a_bias_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 9948406
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3-lmstudio/ctrl_study_a_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 6105915
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3-lmstudio/ctrl_study_b_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 9590955
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3-lmstudio/ctrl_study_b_multi_turn_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 9385816
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3-lmstudio/ctrl_study_c_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 9929330
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3.5-27b-distilled/study_a_bias_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 13637522
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3.5-27b-distilled/study_a_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 18192777
+    },
+    {
+      "destination": "benchmark/runtime/results/qwq/study_a_bias_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 24037769
+    },
+    {
+      "destination": "benchmark/runtime/results/qwq/study_a_generations.jsonl",
+      "method": "already_materialised",
+      "bytes": 24745119
+    }
+  ],
+  "still_missing": []
+}

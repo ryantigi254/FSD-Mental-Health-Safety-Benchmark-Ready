@@ -1,0 +1,42 @@
+{
+  "study": "study_c",
+  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_max9w4oe/base.jsonl",
+  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_max9w4oe/variant.jsonl",
+  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/v5/base/v2_1",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "metrics": {
+    "entity_recall_t10": {
+      "n_pairs": 2,
+      "base": 0.875,
+      "variant": 0.75,
+      "delta": -0.125,
+      "ci_low": -0.25,
+      "ci_high": 0.0,
+      "shared_ids": [
+        "c_004",
+        "c_008"
+      ]
+    },
+    "knowledge_conflict_rate": {
+      "n_pairs": 2,
+      "base": 0.0,
+      "variant": 0.0,
+      "delta": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "shared_ids": [
+        "c_004",
+        "c_008"
+      ]
+    }
+  },
+  "status": "ok",
+  "stderr": "AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\n",
+  "lane": "invariance",
+  "model": "gpt-oss-20b",
+  "variant_tag": "invariance_variant"
+}

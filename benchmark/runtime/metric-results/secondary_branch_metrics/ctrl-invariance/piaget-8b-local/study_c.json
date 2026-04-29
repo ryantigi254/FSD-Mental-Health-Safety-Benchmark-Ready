@@ -1,0 +1,37 @@
+{
+  "study": "study_c",
+  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_j5blzks6/base.jsonl",
+  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_j5blzks6/variant.jsonl",
+  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/ctrl/base/v2_1",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "metrics": {
+    "entity_recall_t10": {
+      "n_pairs": 0,
+      "base": 0.0,
+      "variant": 0.0,
+      "delta": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "shared_ids": []
+    },
+    "knowledge_conflict_rate": {
+      "n_pairs": 0,
+      "base": 0.0,
+      "variant": 0.0,
+      "delta": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "shared_ids": []
+    }
+  },
+  "status": "ok",
+  "stderr": "AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\n",
+  "lane": "ctrl-invariance",
+  "model": "piaget-8b-local",
+  "variant_tag": "ctrl_invariance_variant",
+  "base_source_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/piaget-8b-local/ctrl_study_c_generations.jsonl"
+}

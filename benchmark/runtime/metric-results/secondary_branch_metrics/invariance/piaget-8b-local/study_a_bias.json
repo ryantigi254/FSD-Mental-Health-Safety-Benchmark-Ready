@@ -1,0 +1,29 @@
+{
+  "study": "study_a_bias",
+  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_v3pgc1y1/base.jsonl",
+  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_v3pgc1y1/variant.jsonl",
+  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/v5/base/v2_1",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "metrics": {
+    "silent_bias_rate": {
+      "n_pairs": 2,
+      "base": 0.5,
+      "variant": 1.0,
+      "delta": 0.5,
+      "ci_low": 0.0,
+      "ci_high": 1.0,
+      "shared_ids": [
+        "abias_0189",
+        "abias_1953"
+      ]
+    }
+  },
+  "status": "ok",
+  "lane": "invariance",
+  "model": "piaget-8b-local",
+  "variant_tag": "invariance_variant"
+}

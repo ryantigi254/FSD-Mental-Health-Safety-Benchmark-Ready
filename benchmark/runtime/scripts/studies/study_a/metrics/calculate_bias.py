@@ -229,9 +229,9 @@ def main():
         norm_name = model_dir.name.replace("_", "-")
         
         # Fix specific mismatched names if necessary based on known directory listing
-        # psyllm -> psyllm-gml-local (check if this mapping is correct)
+        # Keep metric outputs on canonical runtime model ids.
         if norm_name == "psyllm":
-            norm_name = "psyllm-gml-local"
+            norm_name = "psyllm-lmstudio"
         elif norm_name == "piaget-local":
             norm_name = "piaget-8b-local"
         elif norm_name == "psych-qwen-local":

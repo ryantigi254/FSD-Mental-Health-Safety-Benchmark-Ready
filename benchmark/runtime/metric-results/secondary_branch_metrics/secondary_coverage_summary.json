@@ -1,0 +1,37 @@
+{
+  "status_counts": {
+    "controllability": {
+      "missing_cache": 6,
+      "ok": 24
+    },
+    "invariance": {
+      "missing_cache": 7,
+      "ok": 23
+    },
+    "ctrl-invariance": {
+      "missing_cache": 9,
+      "ok": 21
+    }
+  },
+  "provenance": {
+    "controllability": {
+      "data_root": "/tmp/nlp-ready-controllability/benchmark/runtime/data/controllability/misc/controllability_splits_large/base",
+      "source": "controllability-v2.1 branch worktree"
+    },
+    "invariance": {
+      "data_root": "/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/v5/base/v2_1",
+      "source": "metric-invariance branch worktree",
+      "note": "Directory is labelled v5, but manifest source_root is frozen_splits/v6_1 and parent_version is v6.1_strict_no_generation."
+    },
+    "ctrl-invariance": {
+      "data_root": "/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/ctrl/base/v2_1",
+      "source": "metric-invariance branch worktree",
+      "note": "Manifest source profile is controllability and parent_version is v6.1_strict_no_generation."
+    },
+    "nli": {
+      "use_nli": true,
+      "nli_stride": 1,
+      "device": "NLIModel auto-selects mps/cuda/cpu; samples showed PyTorch MPS dispatch during Study C NLI."
+    }
+  }
+}

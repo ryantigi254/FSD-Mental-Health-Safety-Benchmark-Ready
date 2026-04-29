@@ -1,0 +1,72 @@
+{
+  "rebuilt_count": 2,
+  "failed_count": 3,
+  "rebuilt": [
+    {
+      "canonical_model": "psyche-r1-local",
+      "lane": "ctrl-invariance",
+      "study": "study_a_bias",
+      "filename": "study_a_bias_invariance_generations.jsonl",
+      "branch": "origin/metric-invariance",
+      "commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "commit_iso": "2026-04-27T15:10:35+01:00",
+      "subject": "fix(study_b): use chars/2 token estimate and 40% overflow budget cut",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/psyche-r1-lmstudio/study_a_bias_invariance_generations.jsonl",
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyche-r1-local/study_a_bias_invariance_generations.jsonl",
+      "bytes": 520506
+    },
+    {
+      "canonical_model": "psyche-r1-local",
+      "lane": "controllability",
+      "study": "study_b",
+      "filename": "ctrl_study_b_generations.jsonl",
+      "branch": "origin/metric-invariance",
+      "commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "commit_iso": "2026-04-27T15:10:35+01:00",
+      "subject": "fix(study_b): use chars/2 token estimate and 40% overflow budget cut",
+      "source_path": "benchmark/runtime/results_ctrl_v2_1/psyche-r1-lmstudio/ctrl_study_b_generations.jsonl",
+      "destination": "benchmark/runtime/results/psyche-r1-local/ctrl_study_b_generations.jsonl",
+      "bytes": 1645540
+    }
+  ],
+  "failed": [
+    {
+      "canonical_model": "psyche-r1-local",
+      "lane": "controllability",
+      "study": "study_b_multi_turn",
+      "filename": "ctrl_study_b_multi_turn_generations.jsonl",
+      "branch": "origin/metric-invariance",
+      "commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "commit_iso": "2026-04-27T15:10:35+01:00",
+      "subject": "fix(study_b): use chars/2 token estimate and 40% overflow budget cut",
+      "source_path": "benchmark/runtime/results_ctrl_v2_1/psyche_r1_lmstudio/ctrl_study_b_multi_turn_generations.jsonl",
+      "error": "materialised blob is still LFS pointer/too small",
+      "bytes": 133
+    },
+    {
+      "canonical_model": "psyche-r1-local",
+      "lane": "controllability",
+      "study": "study_c",
+      "filename": "ctrl_study_c_generations.jsonl",
+      "branch": "origin/metric-invariance",
+      "commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "commit_iso": "2026-04-27T15:10:35+01:00",
+      "subject": "fix(study_b): use chars/2 token estimate and 40% overflow budget cut",
+      "source_path": "benchmark/runtime/results_ctrl_v2_1/psyche_r1_lmstudio/ctrl_study_c_generations.jsonl",
+      "error": "materialised blob is still LFS pointer/too small",
+      "bytes": 134
+    },
+    {
+      "canonical_model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_a_bias",
+      "filename": "ctrl_study_a_bias_generations.jsonl",
+      "branch": "origin/metric-invariance",
+      "commit": "c4a3869745abfaac61c9bdfc86a391a8c3eceeb9",
+      "commit_iso": "2026-03-15T21:21:26Z",
+      "subject": "feat(controllability): add gpt-oss controllability generations",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl",
+      "error": "fatal: benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl: smudge filter lfs failed\nunknown command \"\"\n"
+    }
+  ]
+}

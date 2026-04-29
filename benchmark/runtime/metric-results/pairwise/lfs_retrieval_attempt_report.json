@@ -1,0 +1,23 @@
+{
+  "recovered_plain_git_show": [
+    {
+      "destination": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl",
+      "bytes": 1770649,
+      "commit": "c4a38697"
+    }
+  ],
+  "missing_lfs_objects": [
+    {
+      "destination": "benchmark/runtime/results/psyche-r1-local/ctrl_study_b_multi_turn_generations.jsonl",
+      "oid": "fbe750362b3af9fd8d7cc62d0cdba0a3c0fa3f30f4d273c235c7f43c91581790",
+      "size": 51209860
+    },
+    {
+      "destination": "benchmark/runtime/results/psyche-r1-local/ctrl_study_c_generations.jsonl",
+      "oid": "15f4eb3f86bb90928374551e5c204cb5a7d3f9e893deece0efbe5d5df8536fbf",
+      "size": 195665930
+    }
+  ],
+  "local_lfs_cache_hits": 0,
+  "remote_fetch_attempt": "blocked_by_runtime_usage_limit"
+}

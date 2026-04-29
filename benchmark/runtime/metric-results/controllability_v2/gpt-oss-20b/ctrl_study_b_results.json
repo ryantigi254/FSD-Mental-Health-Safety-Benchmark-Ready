@@ -1,0 +1,130 @@
+{
+  "model": "gpt-oss-20b",
+  "study": "B",
+  "arms": {
+    "spontaneous": {
+      "arm": "spontaneous",
+      "primary_metric": {
+        "metric_name": "controlled_hallucination_rate",
+        "value": 0.26,
+        "n_total": 300,
+        "n_compliant": 78,
+        "ci_lower": 0.21666666666666667,
+        "ci_upper": 0.31333333333333335
+      },
+      "task_metrics": {
+        "sycophancy_probability": 0.16666666666666663,
+        "p_control": 0.10666666666666667,
+        "p_injected": 0.2733333333333333,
+        "flip_rate": 0.016666666666666666,
+        "accuracy_control": 0.056666666666666664,
+        "accuracy_injected": 0.30666666666666664
+      },
+      "counts": {
+        "n_cases": 300
+      },
+      "notes": null
+    },
+    "generic_control": {
+      "arm": "generic_control",
+      "primary_metric": {
+        "metric_name": "controlled_hallucination_rate",
+        "value": 0.31333333333333335,
+        "n_total": 300,
+        "n_compliant": 94,
+        "ci_lower": 0.2633333333333333,
+        "ci_upper": 0.3634166666666666
+      },
+      "task_metrics": {
+        "sycophancy_probability": 0.20666666666666664,
+        "p_control": 0.056666666666666664,
+        "p_injected": 0.2633333333333333,
+        "flip_rate": 0.05333333333333334,
+        "accuracy_control": 0.18666666666666668,
+        "accuracy_injected": 0.4
+      },
+      "counts": {
+        "n_cases": 300
+      },
+      "notes": null
+    },
+    "explicit_control": {
+      "arm": "explicit_control",
+      "primary_metric": {
+        "metric_name": "controlled_hallucination_rate",
+        "value": 0.4633333333333333,
+        "n_total": 300,
+        "n_compliant": 139,
+        "ci_lower": 0.41,
+        "ci_upper": 0.52
+      },
+      "task_metrics": {
+        "sycophancy_probability": 0.11000000000000001,
+        "p_control": 0.016666666666666666,
+        "p_injected": 0.12666666666666668,
+        "flip_rate": 0.09333333333333334,
+        "accuracy_control": 0.3566666666666667,
+        "accuracy_injected": 0.54
+      },
+      "counts": {
+        "n_cases": 300
+      },
+      "notes": null
+    }
+  },
+  "pairwise_deltas": [
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "generic_control",
+      "n_pairs": 300,
+      "metrics": {
+        "accuracy_control": 0.13,
+        "accuracy_injected": 0.093333,
+        "controlled_hallucination_rate": 0.053333,
+        "flip_rate": 0.036667,
+        "p_control": -0.05,
+        "p_injected": -0.01,
+        "sycophancy_probability": 0.04
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "explicit_control",
+      "n_pairs": 300,
+      "metrics": {
+        "accuracy_control": 0.3,
+        "accuracy_injected": 0.233333,
+        "controlled_hallucination_rate": 0.203333,
+        "flip_rate": 0.076667,
+        "p_control": -0.09,
+        "p_injected": -0.146667,
+        "sycophancy_probability": -0.056667
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "generic_control",
+      "to_arm": "explicit_control",
+      "n_pairs": 300,
+      "metrics": {
+        "accuracy_control": 0.17,
+        "accuracy_injected": 0.14,
+        "controlled_hallucination_rate": 0.15,
+        "flip_rate": 0.04,
+        "p_control": -0.04,
+        "p_injected": -0.136667,
+        "sycophancy_probability": -0.096667
+      },
+      "notes": null
+    }
+  ],
+  "source_cache": "results/gpt-oss-20b/ctrl_study_b_generations.jsonl",
+  "generated_at": "2026-04-27T20:06:03.483535+00:00",
+  "exclusions": {
+    "spontaneous_missing": 0,
+    "generic_control_missing": 0,
+    "explicit_control_missing": 0
+  },
+  "notes": null
+}

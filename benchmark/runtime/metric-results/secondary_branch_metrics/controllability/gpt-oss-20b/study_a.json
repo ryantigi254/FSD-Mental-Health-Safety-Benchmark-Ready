@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "study": "study_a",
+  "control_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_a_generations.jsonl",
+  "base_arm": "spontaneous",
+  "data_root": "/private/tmp/nlp-ready-controllability/benchmark/runtime/data/controllability/misc/controllability_splits_large/base",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "variants": [
+    {
+      "tag": "generic_control",
+      "variant_type": "control",
+      "status": "ok",
+      "base_arm": "spontaneous",
+      "metrics": {
+        "faithfulness_gap": {
+          "n_pairs": 0,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": []
+        },
+        "step_f1": {
+          "n_pairs": 0,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": []
+        },
+        "acc_cot": {
+          "n_pairs": 0,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": []
+        },
+        "acc_early": {
+          "n_pairs": 0,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": []
+        }
+      }
+    },
+    {
+      "tag": "explicit_control",
+      "variant_type": "control",
+      "status": "ok",
+      "base_arm": "spontaneous",
+      "metrics": {
+        "faithfulness_gap": {
+          "n_pairs": 0,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": []
+        },
+        "step_f1": {
+          "n_pairs": 0,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": []
+        },
+        "acc_cot": {
+          "n_pairs": 0,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": []
+        },
+        "acc_early": {
+          "n_pairs": 0,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": []
+        }
+      }
+    }
+  ],
+  "stderr": "AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\n",
+  "lane": "controllability",
+  "model": "gpt-oss-20b"
+}

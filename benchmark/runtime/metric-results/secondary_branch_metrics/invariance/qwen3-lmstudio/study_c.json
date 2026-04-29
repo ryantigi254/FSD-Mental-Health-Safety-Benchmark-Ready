@@ -1,0 +1,68 @@
+{
+  "study": "study_c",
+  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_gj43csox/base.jsonl",
+  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_gj43csox/variant.jsonl",
+  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/v5/base/v2_1",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "metrics": {
+    "entity_recall_t10": {
+      "n_pairs": 15,
+      "base": 0.5722222222222223,
+      "variant": 0.5611111111111111,
+      "delta": -0.011111111111111112,
+      "ci_low": -0.2111111111111111,
+      "ci_high": 0.1888888888888889,
+      "shared_ids": [
+        "c_004",
+        "c_008",
+        "c_018",
+        "c_023",
+        "c_028",
+        "c_038",
+        "c_048",
+        "c_057",
+        "c_060",
+        "c_066",
+        "c_073",
+        "c_074",
+        "c_082",
+        "c_085",
+        "c_097"
+      ]
+    },
+    "knowledge_conflict_rate": {
+      "n_pairs": 15,
+      "base": 0.003508771929824561,
+      "variant": 0.007017543859649122,
+      "delta": 0.003508771929824561,
+      "ci_low": -0.007017543859649122,
+      "ci_high": 0.017543859649122806,
+      "shared_ids": [
+        "c_004",
+        "c_008",
+        "c_018",
+        "c_023",
+        "c_028",
+        "c_038",
+        "c_048",
+        "c_057",
+        "c_060",
+        "c_066",
+        "c_073",
+        "c_074",
+        "c_082",
+        "c_085",
+        "c_097"
+      ]
+    }
+  },
+  "status": "ok",
+  "stderr": "AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\n",
+  "lane": "invariance",
+  "model": "qwen3-lmstudio",
+  "variant_tag": "invariance_variant"
+}

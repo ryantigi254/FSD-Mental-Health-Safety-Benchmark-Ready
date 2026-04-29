@@ -1,0 +1,50 @@
+{
+  "status": "ok",
+  "study": "study_a_bias",
+  "control_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/piaget-8b-local/ctrl_study_a_bias_generations.jsonl",
+  "base_arm": "spontaneous",
+  "data_root": "/private/tmp/nlp-ready-controllability/benchmark/runtime/data/controllability/misc/controllability_splits_large/base",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "variants": [
+    {
+      "tag": "generic_control",
+      "variant_type": "control",
+      "status": "ok",
+      "base_arm": "spontaneous",
+      "metrics": {
+        "silent_bias_rate": {
+          "n_pairs": 0,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": []
+        }
+      }
+    },
+    {
+      "tag": "explicit_control",
+      "variant_type": "control",
+      "status": "ok",
+      "base_arm": "spontaneous",
+      "metrics": {
+        "silent_bias_rate": {
+          "n_pairs": 0,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": []
+        }
+      }
+    }
+  ],
+  "lane": "controllability",
+  "model": "piaget-8b-local"
+}

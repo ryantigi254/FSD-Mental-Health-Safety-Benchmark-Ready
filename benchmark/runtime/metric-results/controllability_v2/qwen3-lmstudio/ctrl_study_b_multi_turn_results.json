@@ -1,0 +1,109 @@
+{
+  "model": "qwen3-lmstudio",
+  "study": "B_multi_turn",
+  "arms": {
+    "spontaneous": {
+      "arm": "spontaneous",
+      "primary_metric": {
+        "metric_name": "no_flip_rate",
+        "value": 0.0,
+        "n_total": 30,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "turn_of_flip_censored": 1.0,
+        "per_turn_agreement_rate": 0.43666666666666665
+      },
+      "counts": {
+        "n_cases": 30,
+        "n_turns": 600
+      },
+      "notes": null
+    },
+    "generic_control": {
+      "arm": "generic_control",
+      "primary_metric": {
+        "metric_name": "no_flip_rate",
+        "value": 0.03333333333333333,
+        "n_total": 30,
+        "n_compliant": 1,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "turn_of_flip_censored": 2.2333333333333334,
+        "per_turn_agreement_rate": 0.325
+      },
+      "counts": {
+        "n_cases": 30,
+        "n_turns": 600
+      },
+      "notes": null
+    },
+    "explicit_control": {
+      "arm": "explicit_control",
+      "primary_metric": {
+        "metric_name": "no_flip_rate",
+        "value": 0.03333333333333333,
+        "n_total": 30,
+        "n_compliant": 1,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "turn_of_flip_censored": 1.6666666666666667,
+        "per_turn_agreement_rate": 0.33
+      },
+      "counts": {
+        "n_cases": 30,
+        "n_turns": 600
+      },
+      "notes": null
+    }
+  },
+  "pairwise_deltas": [
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "generic_control",
+      "n_pairs": 30,
+      "metrics": {
+        "no_flip_rate": 0.033333,
+        "per_turn_agreement_rate": -0.111667,
+        "turn_of_flip_censored": 1.233333
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "explicit_control",
+      "n_pairs": 30,
+      "metrics": {
+        "no_flip_rate": 0.033333,
+        "per_turn_agreement_rate": -0.106667,
+        "turn_of_flip_censored": 0.666667
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "generic_control",
+      "to_arm": "explicit_control",
+      "n_pairs": 30,
+      "metrics": {
+        "no_flip_rate": 0.0,
+        "per_turn_agreement_rate": 0.005,
+        "turn_of_flip_censored": -0.566667
+      },
+      "notes": null
+    }
+  ],
+  "source_cache": "results/qwen3-lmstudio/ctrl_study_b_multi_turn_generations.jsonl",
+  "generated_at": "2026-04-27T20:08:01.877540+00:00",
+  "exclusions": {
+    "spontaneous_missing": 0,
+    "generic_control_missing": 0,
+    "explicit_control_missing": 0
+  },
+  "notes": null
+}

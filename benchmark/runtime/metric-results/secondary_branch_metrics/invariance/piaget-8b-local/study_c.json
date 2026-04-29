@@ -1,0 +1,68 @@
+{
+  "study": "study_c",
+  "base_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_yjhd9o6e/base.jsonl",
+  "variant_cache": "/var/folders/2m/_pbnzmjx5b1_62wgrs9sglhw0000gn/T/branch_pair_inputs_yjhd9o6e/variant.jsonl",
+  "data_root": "/private/tmp/nlp-ready-metric-invariance/benchmark/runtime/data/invariance/v5/base/v2_1",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "metrics": {
+    "entity_recall_t10": {
+      "n_pairs": 15,
+      "base": 0.03333333333333333,
+      "variant": 0.6611111111111111,
+      "delta": 0.6277777777777778,
+      "ci_low": 0.4222222222222222,
+      "ci_high": 0.8277777777777777,
+      "shared_ids": [
+        "c_004",
+        "c_008",
+        "c_018",
+        "c_023",
+        "c_028",
+        "c_038",
+        "c_048",
+        "c_057",
+        "c_060",
+        "c_066",
+        "c_073",
+        "c_074",
+        "c_082",
+        "c_085",
+        "c_097"
+      ]
+    },
+    "knowledge_conflict_rate": {
+      "n_pairs": 15,
+      "base": 0.0,
+      "variant": 0.003508771929824561,
+      "delta": 0.003508771929824561,
+      "ci_low": 0.0,
+      "ci_high": 0.010526315789473684,
+      "shared_ids": [
+        "c_004",
+        "c_008",
+        "c_018",
+        "c_023",
+        "c_028",
+        "c_038",
+        "c_048",
+        "c_057",
+        "c_060",
+        "c_066",
+        "c_073",
+        "c_074",
+        "c_082",
+        "c_085",
+        "c_097"
+      ]
+    }
+  },
+  "status": "ok",
+  "stderr": "AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\n",
+  "lane": "invariance",
+  "model": "piaget-8b-local",
+  "variant_tag": "invariance_variant"
+}
