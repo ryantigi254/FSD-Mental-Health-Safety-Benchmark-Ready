@@ -271,7 +271,11 @@ plt.show()
         code_cell(
             """
 if context_df.empty:
-    print("No supporting diagnostic metrics configured for this study.")
+    print(
+        "No additional supporting diagnostics are defined for this study arm. "
+        "Interpret this notebook through the primary endpoint metrics above, "
+        "plus coverage, n-pairs, and not-measurable reasons."
+    )
 else:
     display(secondary_metric_headline(context_df).round(4))
     fig, ax = plt.subplots(figsize=(12, max(4, 0.55 * max(len(context_df), 4))), constrained_layout=True)

@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
 from matplotlib.patches import Rectangle
+from matplotlib.colors import TwoSlopeNorm
 
 
 MODEL_COLOURS = {
@@ -782,10 +783,44 @@ def plot_secondary_model_heatmap(
         ax.text(0.5, 0.5, "No heatmap values available", ha="center", va="center", transform=ax.transAxes)
         ax.set_axis_off()
         return
-    vmax = float(np.nanmax(np.abs(pivot.to_numpy()))) if np.isfinite(pivot.to_numpy()).any() else 1.0
-    vmax = max(vmax, 1e-6)
     values = pivot.to_numpy(dtype=float)
-    im = ax.imshow(values, aspect="auto", cmap="coolwarm", vmin=-vmax, vmax=vmax)
+    finite_values = values[np.isfinite(values)]
+    vmax = float(np.nanmax(np.abs(finite_values))) if finite_values.size else 1.0
+    vmax = max(vmax, 1e-6)
+    cmap = plt.get_cmap("coolwarm")
+    norm = TwoSlopeNorm(vmin=-vmax, vcenter=0.0, vmax=vmax)
+
+    ax.set_facecolor("#fafafa")
+    for j in range(len(pivot.columns)):
+        ax.axvline(j, color="#eeeeee", linewidth=1.0, zorder=0)
+    for i in range(len(pivot.index)):
+        ax.axhline(i, color="#eeeeee", linewidth=1.0, zorder=0)
+
+    for i, model in enumerate(pivot.index):
+        for j, metric in enumerate(pivot.columns):
+            value = pivot.loc[model, metric]
+            if not np.isfinite(value):
+                continue
+            size = 110 + 520 * min(abs(float(value)) / vmax, 1.0)
+            ax.scatter(
+                j,
+                i,
+                s=size,
+                color=cmap(norm(float(value))),
+                edgecolor=model_colour(model),
+                linewidth=2.0,
+                zorder=2,
+            )
+            ax.text(
+                j + 0.16,
+                i,
+                f"{float(value):+.3f}",
+                ha="left",
+                va="center",
+                fontsize=8,
+                color="0.15",
+                zorder=3,
+            )
     ax.set_xticks(np.arange(len(pivot.columns)))
     ax.set_xticklabels(pivot.columns, rotation=35, ha="right")
     ax.set_yticks(np.arange(len(pivot.index)))
@@ -802,14 +837,13 @@ def plot_secondary_model_heatmap(
                 clip_on=False,
             )
         )
-    for i in range(values.shape[0]):
-        for j in range(values.shape[1]):
-            value = values[i, j]
-            if np.isfinite(value):
-                text_colour = "white" if abs(value) > (0.55 * vmax) else "black"
-                ax.text(j, i, f"{value:+.3f}", ha="center", va="center", fontsize=7, color=text_colour)
-    ax.set_ylabel("Model (left strip = model colour)")
-    cbar = ax.figure.colorbar(im, ax=ax, shrink=0.82)
+    ax.set_xlim(-0.65, len(pivot.columns) - 0.05)
+    ax.set_ylim(len(pivot.index) - 0.5, -0.5)
+    ax.set_ylabel("Model (left strip / dot outline = model colour)")
+    ax.grid(False)
+    sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
+    sm.set_array([])
+    cbar = ax.figure.colorbar(sm, ax=ax, shrink=0.82)
     cbar.set_label(f"Median {value_col}")
 
 
@@ -930,14 +964,20 @@ def plot_secondary_coverage_heatmap(
         ax.text(0.5, 0.5, "No coverage rows", ha="center", va="center", transform=ax.transAxes)
         ax.set_axis_off()
         return
-    status_score = {"ok": 2.0, "not_measurable": 1.0, "missing_cache": 0.0, "error": -1.0}
     cov = coverage.copy()
-    cov["score"] = cov["status"].map(status_score).fillna(0.0)
-    pivot = cov.pivot_table(index="model", columns="study", values="score", aggfunc="max")
+    status_rank = {"error": 0, "missing_cache": 1, "not_measurable": 2, "ok": 3}
+    rank_status = {value: key for key, value in status_rank.items()}
+    cov["status_rank"] = cov["status"].map(status_rank).fillna(1).astype(int)
+    pivot = cov.pivot_table(index="model", columns="study", values="status_rank", aggfunc="max")
     pivot = pivot.reindex(index=[model for model in SECONDARY_MODELS if model in set(cov["model"])])
     pivot = pivot.reindex(columns=[study for study in SECONDARY_STUDIES if study in set(cov["study"])])
-    status_cmap = plt.get_cmap("Greys")
-    im = ax.imshow(pivot.to_numpy(dtype=float), aspect="auto", cmap=status_cmap, vmin=-1.0, vmax=2.0)
+    status_style = {
+        "ok": {"label": "ok", "face": "#dff3e4", "edge": "#2e7d32", "text": "#1b5e20"},
+        "not_measurable": {"label": "n/m", "face": "#eef1f6", "edge": "#6b7280", "text": "#374151"},
+        "missing_cache": {"label": "missing", "face": "#fff1d6", "edge": "#b7791f", "text": "#7c4a03"},
+        "error": {"label": "error", "face": "#fce0df", "edge": "#c62828", "text": "#8e1b1b"},
+    }
+    ax.set_facecolor("white")
     ax.set_xticks(np.arange(len(pivot.columns)))
     ax.set_xticklabels(pivot.columns, rotation=35, ha="right")
     ax.set_yticks(np.arange(len(pivot.index)))
@@ -956,12 +996,30 @@ def plot_secondary_coverage_heatmap(
     for i in range(pivot.shape[0]):
         for j in range(pivot.shape[1]):
             value = pivot.iat[i, j]
-            label = "ok" if value == 2.0 else "n/m" if value == 1.0 else "miss" if value == 0.0 else "err"
-            ax.text(j, i, label, ha="center", va="center", fontsize=8, color="white" if value >= 1.8 else "black")
+            status = rank_status.get(int(value), "missing_cache") if np.isfinite(value) else "missing_cache"
+            style = status_style[status]
+            ax.add_patch(
+                Rectangle(
+                    (j - 0.42, i - 0.34),
+                    0.84,
+                    0.68,
+                    facecolor=style["face"],
+                    edgecolor=style["edge"],
+                    linewidth=1.2,
+                    zorder=1,
+                )
+            )
+            ax.text(j, i, style["label"], ha="center", va="center", fontsize=8, color=style["text"], zorder=2)
     ax.set_title(title)
+    ax.set_xlim(-0.65, len(pivot.columns) - 0.5)
+    ax.set_ylim(len(pivot.index) - 0.5, -0.5)
     ax.set_ylabel("Model (left strip = model colour)")
-    cbar = ax.figure.colorbar(im, ax=ax, shrink=0.82)
-    cbar.set_label("coverage status: err < missing < not measurable < ok")
+    ax.grid(False)
+    handles = [
+        Rectangle((0, 0), 1, 1, facecolor=style["face"], edgecolor=style["edge"], label=style["label"])
+        for style in status_style.values()
+    ]
+    ax.legend(handles=handles, title="Coverage", loc="upper left", bbox_to_anchor=(1.02, 1.0))
 
 
 def plot_secondary_arm_values(
