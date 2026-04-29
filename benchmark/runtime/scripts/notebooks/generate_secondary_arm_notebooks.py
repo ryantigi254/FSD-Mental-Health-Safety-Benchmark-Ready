@@ -19,6 +19,61 @@ STUDIES = {
     "study_c": "Study C",
 }
 
+STUDY_LENSES = {
+    "study_a": {
+        "question": "diagnostic accuracy and reasoning quality under the arm change",
+        "primary_metrics": ["acc_cot", "step_f1"],
+        "context_metrics": ["faithfulness_gap", "acc_early"],
+        "interpretation": (
+            "For Study A, read the secondary arm as a perturbation check on the "
+            "core diagnosis/reasoning result. Accuracy and Step-F1 are the "
+            "primary lens; faithfulness gap and early accuracy are supporting "
+            "diagnostics where the branch metric can measure them."
+        ),
+    },
+    "study_a_bias": {
+        "question": "whether the arm change alters silent-bias behaviour",
+        "primary_metrics": ["silent_bias_rate"],
+        "context_metrics": [],
+        "interpretation": (
+            "For Study A Bias, the relevant outcome is silent-bias rate. A "
+            "zero delta here means the paired arm did not change the measured "
+            "silent-bias rate for the shared cases."
+        ),
+    },
+    "study_b": {
+        "question": "sycophancy and evidence/stance behaviour under the arm change",
+        "primary_metrics": ["sycophancy_probability", "injected_agreement_rate", "turn_of_flip_proxy"],
+        "context_metrics": ["control_agreement_rate"],
+        "interpretation": (
+            "For Study B, the central question is whether the arm changes "
+            "sycophancy-like agreement and flip behaviour. Agreement-rate "
+            "metrics are relevant as stance diagnostics, not as generic model "
+            "quality scores."
+        ),
+    },
+    "study_b_multi_turn": {
+        "question": "multi-turn softening and flip dynamics under the arm change",
+        "primary_metrics": ["sycophancy_auc", "turn_of_flip", "soften_before_flip"],
+        "context_metrics": ["stance_shift_slope"],
+        "interpretation": (
+            "For Study B Multi-turn, the relevant view is temporal: whether the "
+            "arm changes accumulated sycophancy, the turn of flip, or softening "
+            "before a flip. Stance-shift slope is a supporting trend diagnostic."
+        ),
+    },
+    "study_c": {
+        "question": "longitudinal recall and conflict behaviour under the arm change",
+        "primary_metrics": ["entity_recall_t10", "knowledge_conflict_rate"],
+        "context_metrics": [],
+        "interpretation": (
+            "For Study C, the relevant outcomes are entity recall and NLI-backed "
+            "knowledge-conflict rate. Treat conflict deltas as the safety signal "
+            "and recall deltas as the continuity/retention signal."
+        ),
+    },
+}
+
 ARM_NOTEBOOKS = [
     {
         "folder": NOTEBOOK_ROOT / "controllability",
@@ -74,7 +129,7 @@ from notebook_utils import (
     plot_secondary_delta_ci,
     plot_secondary_model_heatmap,
     plot_secondary_per_model_heatmaps,
-    secondary_metric_headline,
+secondary_metric_headline,
     secondary_missing_table,
     secondary_not_measurable_table,
     secondary_threshold_audit,
@@ -86,12 +141,19 @@ runtime_root = find_runtime_root()
 metric_root = runtime_root / "metric-results" / "secondary_branch_metrics"
 study = "{study}"
 lanes = {lanes!r}
+primary_metrics = {primary_metrics!r}
+context_metrics = {context_metrics!r}
 flat_all = load_secondary_flat(metric_root)
 coverage_all = load_secondary_coverage(metric_root)
 df = flat_all[(flat_all["study"] == study) & (flat_all["lane"].isin(lanes))].copy()
 coverage = coverage_all[(coverage_all["study"] == study) & (coverage_all["lane"].isin(lanes))].copy()
+primary_df = df[df["metric"].isin(primary_metrics)].copy()
+context_df = df[df["metric"].isin(context_metrics)].copy()
 print("Runtime root:", runtime_root)
 print("Rows:", len(df), "Coverage rows:", len(coverage))
+print("Primary study metrics:", ", ".join(primary_metrics))
+if context_metrics:
+    print("Context diagnostics:", ", ".join(context_metrics))
 """
 
 
@@ -104,6 +166,7 @@ def code_cell(text: str):
 
 
 def build_notebook(*, study: str, title: str, lanes: list[str], description: str) -> nbf.NotebookNode:
+    lens = STUDY_LENSES[study]
     nb = nbf.v4.new_notebook()
     nb.metadata = {
         "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
@@ -112,7 +175,26 @@ def build_notebook(*, study: str, title: str, lanes: list[str], description: str
     nb.cells = [
         markdown_cell(f"# {title}"),
         markdown_cell(description),
-        code_cell(SETUP_TEMPLATE.format(study=study, lanes=lanes)),
+        markdown_cell(
+            f"""
+## Study Lens
+
+This notebook treats the secondary metric arm as a perturbation of the study's
+own endpoint: **{lens["question"]}**.
+
+Primary plotted metrics: `{", ".join(lens["primary_metrics"])}`.
+
+Supporting diagnostics: `{", ".join(lens["context_metrics"]) if lens["context_metrics"] else "none"}`.
+"""
+        ),
+        code_cell(
+            SETUP_TEMPLATE.format(
+                study=study,
+                lanes=lanes,
+                primary_metrics=lens["primary_metrics"],
+                context_metrics=lens["context_metrics"],
+            )
+        ),
         markdown_cell("## Provenance and coverage"),
         code_cell(
             """
@@ -131,6 +213,24 @@ headline = secondary_metric_headline(df)
 display(headline.round(4))
 audit = secondary_threshold_audit(df)
 display(audit.round(4))
+"""
+        ),
+        markdown_cell("## Primary study endpoint deltas"),
+        code_cell(
+            """
+display(secondary_metric_headline(primary_df).round(4))
+display(secondary_threshold_audit(primary_df).round(4))
+fig, ax = plt.subplots(figsize=(12, max(5, 0.55 * max(len(primary_df), 6))), constrained_layout=True)
+plot_secondary_delta_ci(primary_df, ax=ax, title=f"{study}: primary endpoint paired deltas", max_rows=24)
+plt.show()
+"""
+        ),
+        markdown_cell("## Primary endpoint base versus variant"),
+        code_cell(
+            """
+fig, ax = plt.subplots(figsize=(12, max(5, 0.45 * max(len(primary_df), 6))), constrained_layout=True)
+plot_secondary_arm_values(primary_df, ax=ax, title=f"{study}: primary endpoint base and variant values", max_rows=24)
+plt.show()
 """
         ),
         markdown_cell("## Paired-delta confidence intervals"),
@@ -153,18 +253,30 @@ plt.show()
         code_cell(
             """
 fig, ax = plt.subplots(figsize=(10, 5.2), constrained_layout=True)
-plot_secondary_model_heatmap(df, ax=ax, title=f"{study}: median paired delta by model")
+plot_secondary_model_heatmap(primary_df, ax=ax, title=f"{study}: primary metric median paired delta by model")
 plt.show()
 """
         ),
         markdown_cell("## Model-separated metric heatmaps"),
         code_cell(
             """
-models_with_rows = sorted(df.loc[(df["status"] == "ok") & df["delta"].notna(), "model"].unique())
+models_with_rows = sorted(primary_df.loc[(primary_df["status"] == "ok") & primary_df["delta"].notna(), "model"].unique())
 height = max(4.5, 1.75 * max(len(models_with_rows), 1))
 fig, axes = plt.subplots(max(len(models_with_rows), 1), 1, figsize=(13, height), constrained_layout=True)
-plot_secondary_per_model_heatmaps(df, axes=axes, title=f"{study}: paired deltas separated by model")
+plot_secondary_per_model_heatmaps(primary_df, axes=axes, title=f"{study}: primary paired deltas separated by model")
 plt.show()
+"""
+        ),
+        markdown_cell("## Supporting diagnostics"),
+        code_cell(
+            """
+if context_df.empty:
+    print("No supporting diagnostic metrics configured for this study.")
+else:
+    display(secondary_metric_headline(context_df).round(4))
+    fig, ax = plt.subplots(figsize=(12, max(4, 0.55 * max(len(context_df), 4))), constrained_layout=True)
+    plot_secondary_delta_ci(context_df, ax=ax, title=f"{study}: supporting diagnostic deltas", max_rows=18)
+    plt.show()
 """
         ),
         markdown_cell("## Per-model sensitivity ranking"),
@@ -194,6 +306,8 @@ Rows marked `not_measurable` are explicit coverage/metric-applicability gaps, no
 zero-valued results. Treat CIs crossing zero as descriptive only. Treat CIs
 excluding zero as reportable paired shifts, while keeping the small paired sample
 sizes visible in the tables.
+
+{lens["interpretation"]}
 """
         ),
     ]
