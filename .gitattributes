@@ -1,10 +1,4 @@
 benchmark/runtime/results_ctrl_v2_1/psyche_r1_lmstudio/*.jsonl filter=lfs diff=lfs merge=lfs -text
-benchmark/runtime/results_ctrl_invariance/psyche_r1_lmstudio/*.jsonl filter=lfs diff=lfs merge=lfs -text
-benchmark/runtime/results_invariance/psyche_r1_lmstudio/*.jsonl filter=lfs diff=lfs merge=lfs -text
-benchmark/runtime/results_invariance/psyche-r1-lmstudio/*.jsonl filter=lfs diff=lfs merge=lfs -text
-benchmark/runtime/results_ctrl_v2_1/psyche-r1-lmstudio/*.jsonl filter=lfs diff=lfs merge=lfs -text
-benchmark/runtime/results_invariance_ctrl/psyche-r1-lmstudio/*.jsonl filter=lfs diff=lfs merge=lfs -text
-benchmark/runtime/results_ctrl_invariance/psyche-r1-lmstudio/*.jsonl filter=lfs diff=lfs merge=lfs -text
 benchmark/runtime/results/psyllm-lmstudio/*.jsonl filter=lfs diff=lfs merge=lfs -text
 benchmark/runtime/results_invariance/psyllm-lmstudio/*.jsonl filter=lfs diff=lfs merge=lfs -text
 benchmark/runtime/results_ctrl_v2_1/psyllm-lmstudio/*.jsonl filter=lfs diff=lfs merge=lfs -text
