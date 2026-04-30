@@ -1146,6 +1146,10 @@ REASONING_METRIC_LABELS = {
     "reasoning_marker_present": "Reasoning marker rate",
     "final_answer_marker_present": "Final-answer marker rate",
     "control_phrase_adherence": "Control adherence score",
+    "meta_discussion_present": "Meta-discussion rate",
+    "reasoning_control_success_proxy": "Visible reasoning control proxy",
+    "output_control_success_proxy": "Output control proxy",
+    "control_adherence_without_meta_discussion": "Adherence without meta-discussion",
 }
 
 
@@ -1325,6 +1329,111 @@ def plot_reasoning_adherence_tiles(
     ax.set_ylabel("Model (left strip = model colour)")
     ax.set_title(title)
     ax.grid(False)
+
+
+def plot_reasoning_control_success_bars(
+    df: pd.DataFrame,
+    *,
+    ax,
+    title: str,
+) -> None:
+    metrics = [
+        "reasoning_control_success_proxy",
+        "output_control_success_proxy",
+        "control_adherence_without_meta_discussion",
+    ]
+    plot_df = df[
+        (df["metric"].astype(str).isin(metrics))
+        & (df["status"].fillna("") == "ok")
+        & df["variant_value"].notna()
+    ].copy()
+    if plot_df.empty:
+        ax.text(0.5, 0.5, "No proxy control-rate rows", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        return
+    plot_df["metric_label"] = plot_df["metric"].map(lambda m: REASONING_METRIC_LABELS.get(str(m), str(m)))
+    plot_df["arm_label"] = plot_df["model"].astype(str) + "\n" + plot_df["variant"].astype(str)
+    arms = list(dict.fromkeys(plot_df["arm_label"]))
+    metric_labels = [REASONING_METRIC_LABELS[m] for m in metrics if m in set(plot_df["metric"])]
+    width = 0.22
+    x = np.arange(len(arms))
+    for offset, metric_label in enumerate(metric_labels):
+        sub = plot_df[plot_df["metric_label"] == metric_label].set_index("arm_label").reindex(arms)
+        xpos = x + (offset - (len(metric_labels) - 1) / 2.0) * width
+        colours = [model_colour(str(arm).split("\n", 1)[0]) for arm in arms]
+        bars = ax.bar(
+            xpos,
+            sub["variant_value"].astype(float),
+            width=width,
+            label=metric_label,
+            color=colours,
+            edgecolor="black",
+            linewidth=0.7,
+            alpha=0.72 if offset == 0 else 0.92,
+            hatch="" if offset == 0 else ("//" if offset == 1 else ".."),
+        )
+        for bar, value in zip(bars, sub["variant_value"]):
+            if pd.notna(value):
+                ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.015, f"{float(value):.2f}", ha="center", va="bottom", fontsize=7, rotation=90)
+    ax.set_xticks(x)
+    ax.set_xticklabels(arms, rotation=45, ha="right", fontsize=8)
+    ax.set_ylim(0, 1.08)
+    ax.set_ylabel("Variant-arm proxy success rate")
+    ax.set_title(title)
+    ax.grid(axis="y", alpha=0.25)
+    ax.legend(loc="upper left", bbox_to_anchor=(1.02, 1.0), title="Proxy")
+
+
+def plot_reasoning_length_control_bars(
+    df: pd.DataFrame,
+    *,
+    ax,
+    title: str,
+) -> None:
+    metrics = ["visible_reasoning_tokens", "output_tokens"]
+    plot_df = df[
+        (df["metric"].astype(str).isin(metrics))
+        & (df["status"].fillna("") == "ok")
+        & df["delta"].notna()
+    ].copy()
+    if plot_df.empty:
+        ax.text(0.5, 0.5, "No length-control rows", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        return
+    plot_df["metric_label"] = plot_df["metric"].map(lambda m: REASONING_METRIC_LABELS.get(str(m), str(m)))
+    plot_df["arm_label"] = plot_df["model"].astype(str) + "\n" + plot_df["variant"].astype(str)
+    arms = list(dict.fromkeys(plot_df["arm_label"]))
+    width = 0.34
+    x = np.arange(len(arms))
+    for offset, metric in enumerate(metrics):
+        label = REASONING_METRIC_LABELS[metric]
+        sub = plot_df[plot_df["metric"] == metric].set_index("arm_label").reindex(arms)
+        xpos = x + (offset - 0.5) * width
+        values = sub["delta"].astype(float)
+        errors = np.vstack([
+            np.maximum(values - sub["ci_low"].astype(float), 0.0),
+            np.maximum(sub["ci_high"].astype(float) - values, 0.0),
+        ])
+        ax.bar(
+            xpos,
+            values,
+            yerr=errors,
+            width=width,
+            label=label,
+            color=[model_colour(str(arm).split("\n", 1)[0]) for arm in arms],
+            edgecolor="black",
+            linewidth=0.7,
+            alpha=0.65 if metric == "visible_reasoning_tokens" else 0.95,
+            hatch="//" if metric == "visible_reasoning_tokens" else "",
+            capsize=3,
+        )
+    ax.axhline(0.0, color="#b91c1c", linestyle="--", linewidth=1.2)
+    ax.set_xticks(x)
+    ax.set_xticklabels(arms, rotation=45, ha="right", fontsize=8)
+    ax.set_ylabel("Variant minus base token delta")
+    ax.set_title(title)
+    ax.grid(axis="y", alpha=0.25)
+    ax.legend(loc="upper left", bbox_to_anchor=(1.02, 1.0), title="Length feature")
 
 
 def secondary_saturation_notes(df: pd.DataFrame, coverage: pd.DataFrame | None = None) -> pd.DataFrame:

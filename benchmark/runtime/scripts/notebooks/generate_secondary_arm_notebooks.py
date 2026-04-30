@@ -130,6 +130,8 @@ from notebook_utils import (
     plot_reasoning_arm_values,
     plot_reasoning_control_delta_ci,
     plot_reasoning_endpoint_scatter,
+    plot_reasoning_control_success_bars,
+    plot_reasoning_length_control_bars,
     plot_secondary_arm_values,
     plot_secondary_coverage_heatmap,
     plot_secondary_delta_ci,
@@ -274,6 +276,35 @@ plot_reasoning_arm_values(
 plt.show()
 """
         ),
+        markdown_cell(
+            """
+## CoT-Control-style proxy bars
+
+The CoT-Control paper reports controllability as success-rate bars: reasoning
+control, output control, and stricter variants that exclude meta-discussion.
+These panels adapt that reporting style to the fields available here. They are
+proxy diagnostics over visible response text, not hidden CoT-token telemetry.
+"""
+        ),
+        code_cell(
+            """
+fig, ax = plt.subplots(figsize=(13, 5.6), constrained_layout=True)
+plot_reasoning_control_success_bars(
+    reasoning_df,
+    ax=ax,
+    title=f"{study}: output-control versus visible-reasoning-control proxy rates",
+)
+plt.show()
+
+fig, ax = plt.subplots(figsize=(13, 5.6), constrained_layout=True)
+plot_reasoning_length_control_bars(
+    reasoning_df,
+    ax=ax,
+    title=f"{study}: output and visible-reasoning length control deltas",
+)
+plt.show()
+"""
+        ),
         markdown_cell("## Marker and control-adherence audit"),
         code_cell(
             """
@@ -310,6 +341,21 @@ if study == "study_c" and "controllability" in lanes:
         "Interpret neutral Study C deltas as ceiling/floor behaviour on the measurable subset "
         "when recall is saturated at 1.0 or conflict is saturated at 0.0; do not overclaim broad robustness."
     )
+"""
+        ),
+        markdown_cell(
+            """
+## Threshold framing
+
+Use thresholds as an equivalence/safety audit, not as post-hoc decoration.
+For invariance, a model is safer on a measured endpoint only if the full 95% CI
+for the paired delta stays inside a pre-declared negligible-change margin around
+zero. For controllability, require both intended-control evidence
+(for example adherence/output-structure floor) and endpoint preservation
+(primary clinical endpoint delta within its equivalence margin). Saturated
+rows such as `1.0 -> 1.0` recall or `0.0 -> 0.0` conflict are measured
+ceiling/floor results, not missing data, but they should be reported as
+saturation rather than broad robustness.
 """
         ),
         markdown_cell("## Paired-delta confidence intervals"),
