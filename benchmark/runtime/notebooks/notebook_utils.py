@@ -631,6 +631,67 @@ def load_secondary_coverage(metric_root: Path | None = None) -> pd.DataFrame:
     return pd.read_csv(path)
 
 
+def load_reasoning_control_flat(metric_root: Path | None = None) -> pd.DataFrame:
+    runtime_root = find_runtime_root()
+    root = metric_root or runtime_root / "metric-results" / "reasoning_control"
+    path = root / "all_reasoning_control_metrics.csv"
+    if not path.exists():
+        return pd.DataFrame(
+            columns=[
+                "lane",
+                "study",
+                "model",
+                "variant",
+                "metric",
+                "status",
+                "reason",
+                "n_pairs",
+                "base_value",
+                "variant_value",
+                "delta",
+                "median_delta",
+                "ci_low",
+                "ci_high",
+                "endpoint_delta_median_abs",
+            ]
+        )
+    df = pd.read_csv(path)
+    for col in [
+        "n_pairs",
+        "base_value",
+        "variant_value",
+        "delta",
+        "median_delta",
+        "ci_low",
+        "ci_high",
+        "endpoint_delta_median_abs",
+    ]:
+        if col in df:
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+    return df
+
+
+def load_reasoning_control_coverage(metric_root: Path | None = None) -> pd.DataFrame:
+    runtime_root = find_runtime_root()
+    root = metric_root or runtime_root / "metric-results" / "reasoning_control"
+    path = root / "reasoning_control_coverage.csv"
+    if not path.exists():
+        return pd.DataFrame(
+            columns=[
+                "lane",
+                "study",
+                "model",
+                "variant",
+                "status",
+                "reason",
+                "base_rows",
+                "variant_rows",
+                "shared_ids",
+            ]
+        )
+    return pd.read_csv(path)
+
+
 def secondary_lane_summary(df: pd.DataFrame) -> pd.DataFrame:
     if df.empty:
         return pd.DataFrame()
@@ -647,6 +708,29 @@ def secondary_lane_summary(df: pd.DataFrame) -> pd.DataFrame:
         .reset_index()
     )
     return grouped.sort_values(["lane", "max_abs_delta"], ascending=[True, False])
+
+
+def reasoning_control_headline(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        return pd.DataFrame()
+    measured = df[(df["status"].fillna("") == "ok") & df["delta"].notna() & (df["n_pairs"].fillna(0) > 0)].copy()
+    if measured.empty:
+        return pd.DataFrame()
+    measured["abs_delta"] = measured["delta"].abs()
+    measured["ci_crosses_zero"] = (measured["ci_low"] <= 0.0) & (measured["ci_high"] >= 0.0)
+    return (
+        measured.groupby(["lane", "study", "metric"], dropna=False)
+        .agg(
+            measured_rows=("metric", "count"),
+            median_delta=("delta", "median"),
+            median_abs_delta=("abs_delta", "median"),
+            max_abs_delta=("abs_delta", "max"),
+            median_n_pairs=("n_pairs", "median"),
+            ci_excludes_zero=("ci_crosses_zero", lambda s: int((~s).sum())),
+        )
+        .reset_index()
+        .sort_values(["lane", "study", "max_abs_delta"], ascending=[True, True, False])
+    )
 
 
 def secondary_missing_table(coverage: pd.DataFrame) -> pd.DataFrame:
@@ -1053,6 +1137,227 @@ def plot_secondary_arm_values(
     ax.set_xlim(*padded_limits(values, pad_fraction=0.18))
     ax.grid(axis="x", alpha=0.25)
     ax.legend(loc="upper left", bbox_to_anchor=(1.02, 1.0), borderaxespad=0.0)
+
+
+REASONING_METRIC_LABELS = {
+    "visible_reasoning_tokens": "Visible reasoning tokens",
+    "output_tokens": "Output tokens",
+    "reasoning_share": "Reasoning share",
+    "reasoning_marker_present": "Reasoning marker rate",
+    "final_answer_marker_present": "Final-answer marker rate",
+    "control_phrase_adherence": "Control adherence score",
+}
+
+
+def plot_reasoning_control_delta_ci(
+    df: pd.DataFrame,
+    *,
+    ax,
+    title: str,
+    metrics: Iterable[str] | None = None,
+    max_rows: int = 24,
+) -> None:
+    if df.empty:
+        ax.text(0.5, 0.5, "No reasoning-control rows", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        return
+    plot_df = df.copy()
+    if metrics is not None:
+        metric_set = {str(metric) for metric in metrics}
+        plot_df = plot_df[plot_df["metric"].astype(str).isin(metric_set)]
+    plot_df = plot_df[(plot_df["status"].fillna("") == "ok") & plot_df["delta"].notna() & (plot_df["n_pairs"].fillna(0) > 0)].copy()
+    if plot_df.empty:
+        ax.text(0.5, 0.5, "No measured reasoning-control rows", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        return
+    plot_df["abs_delta"] = plot_df["delta"].abs()
+    plot_df = plot_df.sort_values("abs_delta", ascending=False).head(max_rows)
+    plot_df = plot_df.sort_values("delta")
+    labels = [
+        f"{row.model}\n{row.variant} · {REASONING_METRIC_LABELS.get(str(row.metric), row.metric)}"
+        for row in plot_df.itertuples()
+    ]
+    y = np.arange(len(plot_df))
+    xerr = np.vstack(
+        [
+            np.maximum(plot_df["delta"] - plot_df["ci_low"], 0.0).to_numpy(),
+            np.maximum(plot_df["ci_high"] - plot_df["delta"], 0.0).to_numpy(),
+        ]
+    )
+    ax.errorbar(plot_df["delta"], y, xerr=xerr, fmt="none", ecolor="0.35", elinewidth=1.5, capsize=4, zorder=1)
+    ax.scatter(
+        plot_df["delta"],
+        y,
+        s=88,
+        c=[model_colour(model) for model in plot_df["model"]],
+        edgecolor="black",
+        linewidth=0.7,
+        zorder=2,
+    )
+    ax.axvline(0.0, color="#b91c1c", linestyle="--", linewidth=1.3, label="No paired shift")
+    ax.set_yticks(y)
+    ax.set_yticklabels(labels, fontsize=8)
+    ax.set_title(title)
+    ax.set_xlabel("Variant minus base delta (95% CI)")
+    ax.grid(axis="x", alpha=0.25)
+    ax.set_xlim(*padded_limits(pd.concat([plot_df["ci_low"], plot_df["ci_high"], plot_df["delta"]]), pad_fraction=0.18))
+    add_model_legend(ax, plot_df["model"], loc="upper left", bbox_to_anchor=(1.02, 1.0))
+
+
+def plot_reasoning_arm_values(
+    df: pd.DataFrame,
+    *,
+    ax,
+    title: str,
+    metrics: Iterable[str] | None = None,
+    max_rows: int = 22,
+) -> None:
+    if df.empty:
+        ax.text(0.5, 0.5, "No reasoning-control rows", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        return
+    measured = df[(df["status"].fillna("") == "ok") & df["base_value"].notna() & df["variant_value"].notna()].copy()
+    if metrics is not None:
+        measured = measured[measured["metric"].astype(str).isin({str(metric) for metric in metrics})]
+    if measured.empty:
+        ax.text(0.5, 0.5, "No measured reasoning-control values", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        return
+    measured["abs_delta"] = measured["delta"].abs()
+    plot_df = measured.sort_values("abs_delta", ascending=False).head(max_rows).sort_values(["metric", "model", "variant"]).reset_index(drop=True)
+    y = np.arange(len(plot_df))
+    labels = [f"{r.model}\n{REASONING_METRIC_LABELS.get(str(r.metric), r.metric)} · {r.variant}" for r in plot_df.itertuples()]
+    ax.scatter(plot_df["base_value"], y - 0.12, marker="o", s=70, c=[model_colour(m) for m in plot_df["model"]], edgecolor="black", linewidth=0.6, label="base")
+    ax.scatter(plot_df["variant_value"], y + 0.12, marker="D", s=60, c=[model_colour(m) for m in plot_df["model"]], edgecolor="black", linewidth=0.6, label="variant")
+    for idx, row in plot_df.iterrows():
+        ax.plot([row["base_value"], row["variant_value"]], [idx - 0.12, idx + 0.12], color="0.55", linewidth=1.0, alpha=0.7)
+    ax.set_yticks(y)
+    ax.set_yticklabels(labels, fontsize=8)
+    ax.set_title(title)
+    ax.set_xlabel("Feature value")
+    ax.set_xlim(*padded_limits(pd.concat([plot_df["base_value"], plot_df["variant_value"]]), pad_fraction=0.18))
+    ax.grid(axis="x", alpha=0.25)
+    ax.legend(loc="upper left", bbox_to_anchor=(1.02, 1.0), borderaxespad=0.0)
+
+
+def plot_reasoning_endpoint_scatter(
+    reasoning_df: pd.DataFrame,
+    *,
+    ax,
+    title: str,
+    metric: str = "reasoning_share",
+) -> None:
+    if reasoning_df.empty:
+        ax.text(0.5, 0.5, "No reasoning-control rows", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        return
+    plot_df = reasoning_df[
+        (reasoning_df["status"].fillna("") == "ok")
+        & (reasoning_df["metric"].astype(str) == metric)
+        & reasoning_df["delta"].notna()
+        & reasoning_df["endpoint_delta_median_abs"].notna()
+    ].copy()
+    if plot_df.empty:
+        ax.text(0.5, 0.5, "No paired endpoint/reasoning rows", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        return
+    for model, model_df in plot_df.groupby("model"):
+        ax.scatter(
+            model_df["delta"],
+            model_df["endpoint_delta_median_abs"],
+            s=90,
+            color=model_colour(model),
+            edgecolor="black",
+            linewidth=0.7,
+            label=model,
+        )
+        for row in model_df.itertuples():
+            ax.annotate(str(row.variant), (row.delta, row.endpoint_delta_median_abs), xytext=(4, 4), textcoords="offset points", fontsize=7)
+    ax.axvline(0.0, color="0.45", linestyle="--", linewidth=1.0)
+    ax.set_title(title)
+    ax.set_xlabel(f"{REASONING_METRIC_LABELS.get(metric, metric)} delta")
+    ax.set_ylabel("Median absolute primary endpoint delta")
+    ax.grid(alpha=0.25)
+    add_model_legend(ax, plot_df["model"], loc="upper left", bbox_to_anchor=(1.02, 1.0))
+
+
+def plot_reasoning_adherence_tiles(
+    df: pd.DataFrame,
+    *,
+    ax,
+    title: str,
+) -> None:
+    tile_df = df[
+        (df["metric"].astype(str).isin(["reasoning_marker_present", "final_answer_marker_present", "control_phrase_adherence"]))
+        & (df["status"].fillna("").isin(["ok", "not_measurable", "missing_cache"]))
+    ].copy()
+    if tile_df.empty:
+        ax.text(0.5, 0.5, "No marker/adherence rows", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        return
+    tile_df["column"] = tile_df["variant"].astype(str) + "\n" + tile_df["metric"].map(lambda m: REASONING_METRIC_LABELS.get(str(m), str(m)))
+    rows = [model for model in SECONDARY_MODELS if model in set(tile_df["model"])]
+    cols = list(dict.fromkeys(tile_df["column"].tolist()))
+    ax.set_facecolor("white")
+    ax.set_xticks(np.arange(len(cols)))
+    ax.set_xticklabels(cols, rotation=35, ha="right", fontsize=8)
+    ax.set_yticks(np.arange(len(rows)))
+    ax.set_yticklabels(rows)
+    for i, model in enumerate(rows):
+        ax.add_patch(Rectangle((-0.49, i - 0.44), 0.05, 0.88, facecolor=model_colour(model), edgecolor="none", clip_on=False))
+    cmap = plt.get_cmap("YlGnBu")
+    for i, model in enumerate(rows):
+        for j, col in enumerate(cols):
+            sub = tile_df[(tile_df["model"] == model) & (tile_df["column"] == col)]
+            if sub.empty:
+                face, edge, label, text = "#f3f4f6", "#d1d5db", "missing", "#374151"
+            else:
+                row = sub.iloc[0]
+                if row["status"] == "ok" and pd.notna(row["variant_value"]):
+                    value = float(row["variant_value"])
+                    face, edge, label, text = cmap(min(max(value, 0.0), 1.0)), "#2563eb", f"{value:.2f}", "#111827"
+                else:
+                    face, edge, label, text = "#eef1f6", "#6b7280", str(row.get("reason") or row["status"])[:12], "#374151"
+            ax.add_patch(Rectangle((j - 0.42, i - 0.34), 0.84, 0.68, facecolor=face, edgecolor=edge, linewidth=1.1))
+            ax.text(j, i, label, ha="center", va="center", fontsize=7.5, color=text)
+    ax.set_xlim(-0.65, len(cols) - 0.5)
+    ax.set_ylim(len(rows) - 0.5, -0.5)
+    ax.set_ylabel("Model (left strip = model colour)")
+    ax.set_title(title)
+    ax.grid(False)
+
+
+def secondary_saturation_notes(df: pd.DataFrame, coverage: pd.DataFrame | None = None) -> pd.DataFrame:
+    if df.empty:
+        return pd.DataFrame()
+    measured = df[(df["status"].fillna("") == "ok") & df["base_value"].notna() & df["variant_value"].notna() & (df["n_pairs"].fillna(0) > 0)].copy()
+    if measured.empty:
+        return pd.DataFrame()
+    boundary = (
+        (np.isclose(measured["base_value"], 0.0) & np.isclose(measured["variant_value"], 0.0))
+        | (np.isclose(measured["base_value"], 1.0) & np.isclose(measured["variant_value"], 1.0))
+    )
+    saturated = measured[boundary & np.isclose(measured["delta"].fillna(np.nan), 0.0)].copy()
+    if saturated.empty:
+        return pd.DataFrame()
+    saturated["note"] = np.where(
+        np.isclose(saturated["base_value"], 1.0),
+        "Measured ceiling: base and variant are both 1.0",
+        "Measured floor: base and variant are both 0.0",
+    )
+    cols = ["lane", "study", "model", "variant", "metric", "base_value", "variant_value", "delta", "n_pairs", "note"]
+    out = saturated[cols].sort_values(["lane", "study", "metric", "model"]).reset_index(drop=True)
+    if coverage is not None and not coverage.empty:
+        missing = coverage[coverage["status"].fillna("") != "ok"].copy()
+        if not missing.empty:
+            missing["metric"] = "coverage"
+            missing["base_value"] = np.nan
+            missing["variant_value"] = np.nan
+            missing["delta"] = np.nan
+            missing["n_pairs"] = missing.get("shared_ids", 0)
+            missing["note"] = "Missing cache; not a measured saturation row"
+            out = pd.concat([out, missing[[col for col in cols if col in missing.columns]]], ignore_index=True)
+    return out
 
 
 CROSS_ARM_STUDY_CONFIG = {

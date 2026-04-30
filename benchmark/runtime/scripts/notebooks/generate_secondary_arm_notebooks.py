@@ -122,16 +122,24 @@ if str(NOTEBOOK_UTILS_DIR) not in sys.path:
 
 from notebook_utils import (
     find_runtime_root,
+    load_reasoning_control_coverage,
+    load_reasoning_control_flat,
     load_secondary_coverage,
     load_secondary_flat,
+    plot_reasoning_adherence_tiles,
+    plot_reasoning_arm_values,
+    plot_reasoning_control_delta_ci,
+    plot_reasoning_endpoint_scatter,
     plot_secondary_arm_values,
     plot_secondary_coverage_heatmap,
     plot_secondary_delta_ci,
     plot_secondary_model_heatmap,
     plot_secondary_per_model_heatmaps,
-secondary_metric_headline,
+    reasoning_control_headline,
+    secondary_metric_headline,
     secondary_missing_table,
     secondary_not_measurable_table,
+    secondary_saturation_notes,
     secondary_threshold_audit,
     setup_notebook_style,
 )
@@ -139,18 +147,24 @@ secondary_metric_headline,
 setup_notebook_style()
 runtime_root = find_runtime_root()
 metric_root = runtime_root / "metric-results" / "secondary_branch_metrics"
+reasoning_root = runtime_root / "metric-results" / "reasoning_control"
 study = "{study}"
 lanes = {lanes!r}
 primary_metrics = {primary_metrics!r}
 context_metrics = {context_metrics!r}
 flat_all = load_secondary_flat(metric_root)
 coverage_all = load_secondary_coverage(metric_root)
+reasoning_all = load_reasoning_control_flat(reasoning_root)
+reasoning_coverage_all = load_reasoning_control_coverage(reasoning_root)
 df = flat_all[(flat_all["study"] == study) & (flat_all["lane"].isin(lanes))].copy()
 coverage = coverage_all[(coverage_all["study"] == study) & (coverage_all["lane"].isin(lanes))].copy()
+reasoning_df = reasoning_all[(reasoning_all["study"] == study) & (reasoning_all["lane"].isin(lanes))].copy()
+reasoning_coverage = reasoning_coverage_all[(reasoning_coverage_all["study"] == study) & (reasoning_coverage_all["lane"].isin(lanes))].copy()
 primary_df = df[df["metric"].isin(primary_metrics)].copy()
 context_df = df[df["metric"].isin(context_metrics)].copy()
 print("Runtime root:", runtime_root)
 print("Rows:", len(df), "Coverage rows:", len(coverage))
+print("Reasoning-control rows:", len(reasoning_df), "Coverage rows:", len(reasoning_coverage))
 print("Primary study metrics:", ", ".join(primary_metrics))
 if context_metrics:
     print("Context diagnostics:", ", ".join(context_metrics))
@@ -231,6 +245,71 @@ plt.show()
 fig, ax = plt.subplots(figsize=(12, max(5, 0.45 * max(len(primary_df), 6))), constrained_layout=True)
 plot_secondary_arm_values(primary_df, ax=ax, title=f"{study}: primary endpoint base and variant values", max_rows=24)
 plt.show()
+"""
+        ),
+        markdown_cell("## Reasoning and output control"),
+        code_cell(
+            """
+display(reasoning_control_headline(reasoning_df).round(4))
+display(reasoning_df[reasoning_df["status"].fillna("") != "ok"].sort_values(["lane", "model", "variant", "metric"]))
+
+fig, ax = plt.subplots(figsize=(12, max(5, 0.48 * max(len(reasoning_df), 8))), constrained_layout=True)
+plot_reasoning_control_delta_ci(
+    reasoning_df,
+    ax=ax,
+    title=f"{study}: visible reasoning and output-control paired deltas",
+    metrics=["visible_reasoning_tokens", "output_tokens", "reasoning_share", "final_answer_marker_present"],
+    max_rows=26,
+)
+plt.show()
+
+fig, ax = plt.subplots(figsize=(12, max(5, 0.42 * max(len(reasoning_df), 8))), constrained_layout=True)
+plot_reasoning_arm_values(
+    reasoning_df,
+    ax=ax,
+    title=f"{study}: visible reasoning/output base versus variant",
+    metrics=["visible_reasoning_tokens", "output_tokens", "reasoning_share"],
+    max_rows=22,
+)
+plt.show()
+"""
+        ),
+        markdown_cell("## Marker and control-adherence audit"),
+        code_cell(
+            """
+fig, ax = plt.subplots(figsize=(13, 5.6), constrained_layout=True)
+plot_reasoning_adherence_tiles(reasoning_df, ax=ax, title=f"{study}: marker and control-adherence rates")
+plt.show()
+
+fig, ax = plt.subplots(figsize=(8.8, 5.4), constrained_layout=True)
+plot_reasoning_endpoint_scatter(
+    reasoning_df,
+    ax=ax,
+    title=f"{study}: reasoning-share shift versus primary endpoint shift",
+    metric="reasoning_share",
+)
+plt.show()
+"""
+        ),
+        markdown_cell("## Baseline and saturation notes"),
+        code_cell(
+            """
+saturation = secondary_saturation_notes(primary_df, coverage)
+if saturation.empty:
+    print("No measured ceiling/floor saturation rows detected for the primary endpoint metrics.")
+else:
+    display(saturation.round(4))
+
+if study == "study_c" and "controllability" in lanes:
+    measured_models = sorted(coverage.loc[coverage["status"].fillna("") == "ok", "model"].unique())
+    missing_models = sorted(coverage.loc[coverage["status"].fillna("") != "ok", "model"].unique())
+    print("Study C controllability note:")
+    print("Measured models:", ", ".join(measured_models) if measured_models else "none")
+    print("Missing-cache models:", ", ".join(missing_models) if missing_models else "none")
+    print(
+        "Interpret neutral Study C deltas as ceiling/floor behaviour on the measurable subset "
+        "when recall is saturated at 1.0 or conflict is saturated at 0.0; do not overclaim broad robustness."
+    )
 """
         ),
         markdown_cell("## Paired-delta confidence intervals"),
