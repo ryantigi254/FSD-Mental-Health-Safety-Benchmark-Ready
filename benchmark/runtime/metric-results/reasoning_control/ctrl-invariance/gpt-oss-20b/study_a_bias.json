@@ -2,8 +2,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_a_bias_generations.jsonl",
     "base_value": 57.10344827586207,
-    "ci_high": 1.3448275862068966,
-    "ci_low": -33.93103448275862,
+    "ci_high": 2.6551724137931036,
+    "ci_low": -33.44827586206897,
     "delta": -14.551724137931034,
     "endpoint_delta_median_abs": null,
     "lane": "ctrl-invariance",
@@ -21,8 +21,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_a_bias_generations.jsonl",
     "base_value": 388.58620689655174,
-    "ci_high": 151.82758620689654,
-    "ci_low": 9.137931034482758,
+    "ci_high": 149.72413793103448,
+    "ci_low": 16.379310344827587,
     "delta": 86.10344827586206,
     "endpoint_delta_median_abs": null,
     "lane": "ctrl-invariance",
@@ -40,8 +40,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_a_bias_generations.jsonl",
     "base_value": 0.14137169581185888,
-    "ci_high": -0.010092474032486186,
-    "ci_low": -0.06454705769807789,
+    "ci_high": -0.011459224353280555,
+    "ci_low": -0.06362028749293012,
     "delta": -0.035548839375524416,
     "endpoint_delta_median_abs": null,
     "lane": "ctrl-invariance",
@@ -97,7 +97,7 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_a_bias_generations.jsonl",
     "base_value": 0.8620689655172413,
-    "ci_high": 0.19540229885057472,
+    "ci_high": 0.20689655172413796,
     "ci_low": 0.08045977011494253,
     "delta": 0.13793103448275862,
     "endpoint_delta_median_abs": null,
@@ -173,7 +173,7 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_a_bias_generations.jsonl",
     "base_value": 0.6896551724137931,
-    "ci_high": 0.2413793103448276,
+    "ci_high": 0.27586206896551724,
     "ci_low": -0.27586206896551724,
     "delta": 0.0,
     "endpoint_delta_median_abs": null,

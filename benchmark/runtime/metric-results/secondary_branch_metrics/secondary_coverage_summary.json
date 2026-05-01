@@ -1,7 +1,7 @@
 {
   "controllability": {
-    "missing_cache": 6,
-    "ok": 24
+    "missing_cache": 4,
+    "ok": 26
   },
   "invariance": {
     "missing_cache": 7,

@@ -21,8 +21,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/study_b_generations.jsonl",
     "base_value": 315.1,
-    "ci_high": -10.975,
-    "ci_low": -64.175,
+    "ci_high": -10.5875,
+    "ci_low": -65.6,
     "delta": -37.35625,
     "endpoint_delta_median_abs": null,
     "lane": "invariance",
@@ -116,7 +116,7 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/study_b_generations.jsonl",
     "base_value": 0.40625,
-    "ci_high": -0.15625,
+    "ci_high": -0.15,
     "ci_low": -0.3625,
     "delta": -0.25625,
     "endpoint_delta_median_abs": null,

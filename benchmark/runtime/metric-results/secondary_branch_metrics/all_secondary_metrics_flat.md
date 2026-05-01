@@ -108,6 +108,18 @@
 | controllability | psyche-r1-local | study_b | explicit_control | control_agreement_rate | 84 | 0.0714 | 0.0000 | -0.0714 | [-0.1310, -0.0238] |
 | controllability | psyche-r1-local | study_b | explicit_control | injected_agreement_rate | 84 | 0.1548 | 0.0238 | -0.1310 | [-0.2262, -0.0476] |
 | controllability | psyche-r1-local | study_b | explicit_control | turn_of_flip_proxy | 84 | 1.1905 | 1.5476 | 0.3571 | [0.1548, 0.6190] |
+| controllability | psyche-r1-local | study_b_multi_turn | generic_control | turn_of_flip | 209 | 1.0000 | 1.0000 | 0.0000 | [0.0000, 0.0000] |
+| controllability | psyche-r1-local | study_b_multi_turn | generic_control | stance_shift_slope | 209 | 0.0082 | 0.0081 | -0.0001 | [-0.0053, 0.0048] |
+| controllability | psyche-r1-local | study_b_multi_turn | generic_control | sycophancy_auc | 209 | -0.6161 | -0.5348 | 0.0813 | [0.0440, 0.1191] |
+| controllability | psyche-r1-local | study_b_multi_turn | generic_control | soften_before_flip | 209 | 0.0000 | 0.0000 | 0.0000 | [0.0000, 0.0000] |
+| controllability | psyche-r1-local | study_b_multi_turn | explicit_control | turn_of_flip | 209 | 1.0000 | 1.0000 | 0.0000 | [0.0000, 0.0000] |
+| controllability | psyche-r1-local | study_b_multi_turn | explicit_control | stance_shift_slope | 209 | 0.0082 | 0.0097 | 0.0015 | [-0.0039, 0.0071] |
+| controllability | psyche-r1-local | study_b_multi_turn | explicit_control | sycophancy_auc | 209 | -0.6161 | -0.5060 | 0.1102 | [0.0754, 0.1476] |
+| controllability | psyche-r1-local | study_b_multi_turn | explicit_control | soften_before_flip | 209 | 0.0000 | 0.0000 | 0.0000 | [0.0000, 0.0000] |
+| controllability | psyche-r1-local | study_c | generic_control | entity_recall_t10 | 500 | 1.0000 | 1.0000 | 0.0000 | [0.0000, 0.0000] |
+| controllability | psyche-r1-local | study_c | generic_control | knowledge_conflict_rate | 500 | 0.0000 | 0.0000 | 0.0000 | [0.0000, 0.0000] |
+| controllability | psyche-r1-local | study_c | explicit_control | entity_recall_t10 | 500 | 1.0000 | 1.0000 | 0.0000 | [0.0000, 0.0000] |
+| controllability | psyche-r1-local | study_c | explicit_control | knowledge_conflict_rate | 500 | 0.0000 | 0.0000 | 0.0000 | [0.0000, 0.0000] |
 | controllability | psyllm-lmstudio | study_a | generic_control | faithfulness_gap | 0 |  |  |  |  |
 | controllability | psyllm-lmstudio | study_a | generic_control | step_f1 | 104 | 0.0374 | 0.0378 | 0.0004 | [-0.0093, 0.0100] |
 | controllability | psyllm-lmstudio | study_a | generic_control | acc_cot | 133 | 0.0000 | 0.0000 | 0.0000 | [0.0000, 0.0000] |

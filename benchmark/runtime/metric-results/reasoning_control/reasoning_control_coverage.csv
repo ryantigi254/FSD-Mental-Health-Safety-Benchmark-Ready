@@ -45,10 +45,10 @@ controllability,study_a_bias,psyche-r1-local,generic_control,missing_cache,missi
 controllability,study_a_bias,psyche-r1-local,explicit_control,missing_cache,missing_cache,,,0,0,0
 controllability,study_b,psyche-r1-local,generic_control,ok,,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_b_generations.jsonl,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_b_generations.jsonl,172,173,87
 controllability,study_b,psyche-r1-local,explicit_control,ok,,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_b_generations.jsonl,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_b_generations.jsonl,172,172,85
-controllability,study_b_multi_turn,psyche-r1-local,generic_control,missing_cache,missing_cache,,,0,0,0
-controllability,study_b_multi_turn,psyche-r1-local,explicit_control,missing_cache,missing_cache,,,0,0,0
-controllability,study_c,psyche-r1-local,generic_control,missing_cache,missing_cache,,,0,0,0
-controllability,study_c,psyche-r1-local,explicit_control,missing_cache,missing_cache,,,0,0,0
+controllability,study_b_multi_turn,psyche-r1-local,generic_control,ok,,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_b_multi_turn_generations.jsonl,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_b_multi_turn_generations.jsonl,4180,4180,209
+controllability,study_b_multi_turn,psyche-r1-local,explicit_control,ok,,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_b_multi_turn_generations.jsonl,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_b_multi_turn_generations.jsonl,4180,4180,209
+controllability,study_c,psyche-r1-local,generic_control,ok,,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_c_generations.jsonl,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_c_generations.jsonl,10000,10000,500
+controllability,study_c,psyche-r1-local,explicit_control,ok,,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_c_generations.jsonl,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_c_generations.jsonl,10000,10000,500
 controllability,study_a,psyllm-lmstudio,generic_control,missing_cache,missing_cache,,,0,0,0
 controllability,study_a,psyllm-lmstudio,explicit_control,missing_cache,missing_cache,,,0,0,0
 controllability,study_a_bias,psyllm-lmstudio,generic_control,missing_cache,missing_cache,,,0,0,0
@@ -112,8 +112,8 @@ ctrl-invariance,study_c,gpt-oss-20b,ctrl-invariance,not_measurable,no_shared_ids
 ctrl-invariance,study_a,psyche-r1-local,ctrl-invariance,missing_cache,missing_cache,,,0,0,0
 ctrl-invariance,study_a_bias,psyche-r1-local,ctrl-invariance,missing_cache,missing_cache,,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/psyche-r1-local/study_a_bias_invariance_generations.jsonl,0,0,0
 ctrl-invariance,study_b,psyche-r1-local,ctrl-invariance,missing_cache,missing_cache,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_b_generations.jsonl,,0,0,0
-ctrl-invariance,study_b_multi_turn,psyche-r1-local,ctrl-invariance,missing_cache,missing_cache,,,0,0,0
-ctrl-invariance,study_c,psyche-r1-local,ctrl-invariance,missing_cache,missing_cache,,,0,0,0
+ctrl-invariance,study_b_multi_turn,psyche-r1-local,ctrl-invariance,missing_cache,missing_cache,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_b_multi_turn_generations.jsonl,,0,0,0
+ctrl-invariance,study_c,psyche-r1-local,ctrl-invariance,missing_cache,missing_cache,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyche-r1-local/ctrl_study_c_generations.jsonl,,0,0,0
 ctrl-invariance,study_a,psyllm-lmstudio,ctrl-invariance,missing_cache,missing_cache,,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/study_a_invariance_generations.jsonl,0,0,0
 ctrl-invariance,study_a_bias,psyllm-lmstudio,ctrl-invariance,missing_cache,missing_cache,,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/study_a_bias_invariance_generations.jsonl,0,0,0
 ctrl-invariance,study_b,psyllm-lmstudio,ctrl-invariance,missing_cache,missing_cache,,/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/study_b_invariance_generations.jsonl,0,0,0

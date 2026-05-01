@@ -2,8 +2,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyllm-lmstudio/study_b_multi_turn_generations.jsonl",
     "base_value": 244.83333333333334,
-    "ci_high": 7.666666666666667,
-    "ci_low": -75.41666666666667,
+    "ci_high": 3.5833333333333335,
+    "ci_low": -75.91666666666667,
     "delta": -34.166666666666664,
     "endpoint_delta_median_abs": null,
     "lane": "invariance",
@@ -21,8 +21,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyllm-lmstudio/study_b_multi_turn_generations.jsonl",
     "base_value": 310.25,
-    "ci_high": 20.416666666666668,
-    "ci_low": -55.333333333333336,
+    "ci_high": 21.5,
+    "ci_low": -54.333333333333336,
     "delta": -19.0,
     "endpoint_delta_median_abs": null,
     "lane": "invariance",
@@ -40,8 +40,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/psyllm-lmstudio/study_b_multi_turn_generations.jsonl",
     "base_value": 0.7796321650832795,
-    "ci_high": -0.011721780467381695,
-    "ci_low": -0.10743722603188892,
+    "ci_high": -0.010361741508647984,
+    "ci_low": -0.10549407276397227,
     "delta": -0.056133218037822445,
     "endpoint_delta_median_abs": null,
     "lane": "invariance",

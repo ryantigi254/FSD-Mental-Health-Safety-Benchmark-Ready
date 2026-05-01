@@ -2,8 +2,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/piaget-8b-local/study_b_generations.jsonl",
     "base_value": 310.86875,
-    "ci_high": -0.13125,
-    "ci_low": -54.3875,
+    "ci_high": -1.04375,
+    "ci_low": -54.7125,
     "delta": -27.275,
     "endpoint_delta_median_abs": null,
     "lane": "invariance",
@@ -21,8 +21,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/piaget-8b-local/study_b_generations.jsonl",
     "base_value": 678.1625,
-    "ci_high": 58.0,
-    "ci_low": -22.95625,
+    "ci_high": 60.4,
+    "ci_low": -21.85625,
     "delta": 17.93125,
     "endpoint_delta_median_abs": null,
     "lane": "invariance",
@@ -40,8 +40,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/piaget-8b-local/study_b_generations.jsonl",
     "base_value": 0.44184697672177686,
-    "ci_high": -0.0063511553195631475,
-    "ci_low": -0.05485131417757887,
+    "ci_high": -0.006892752506255608,
+    "ci_low": -0.05528949079630614,
     "delta": -0.031968926183900674,
     "endpoint_delta_median_abs": null,
     "lane": "invariance",
@@ -59,7 +59,7 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/piaget-8b-local/study_b_generations.jsonl",
     "base_value": 0.94375,
-    "ci_high": 0.0875,
+    "ci_high": 0.08125,
     "ci_low": 0.00625,
     "delta": 0.04375,
     "endpoint_delta_median_abs": null,

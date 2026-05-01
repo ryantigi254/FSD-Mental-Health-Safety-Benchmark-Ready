@@ -2,8 +2,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_b_multi_turn_generations.jsonl",
     "base_value": 10.766666666666667,
-    "ci_high": -0.43333333333333335,
-    "ci_low": -3.433333333333333,
+    "ci_high": -0.4666666666666667,
+    "ci_low": -3.3666666666666667,
     "delta": -1.8333333333333333,
     "endpoint_delta_median_abs": 0.0666666666666666,
     "lane": "controllability",
@@ -21,8 +21,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_b_multi_turn_generations.jsonl",
     "base_value": 338.76666666666665,
-    "ci_high": 119.33333333333333,
-    "ci_low": -38.13333333333333,
+    "ci_high": 124.66666666666667,
+    "ci_low": -42.5,
     "delta": 38.43333333333333,
     "endpoint_delta_median_abs": 0.0666666666666666,
     "lane": "controllability",
@@ -40,8 +40,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_b_multi_turn_generations.jsonl",
     "base_value": 0.0361864235763771,
-    "ci_high": 0.003950231500037891,
-    "ci_low": -0.011867103857471676,
+    "ci_high": 0.003665846285415822,
+    "ci_low": -0.012031533300898187,
     "delta": -0.00390063315140725,
     "endpoint_delta_median_abs": 0.0666666666666666,
     "lane": "controllability",
@@ -192,7 +192,7 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_b_multi_turn_generations.jsonl",
     "base_value": 10.766666666666667,
-    "ci_high": 2.6,
+    "ci_high": 2.6666666666666665,
     "ci_low": -1.7,
     "delta": 0.26666666666666666,
     "endpoint_delta_median_abs": 0.0,
@@ -211,8 +211,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_b_multi_turn_generations.jsonl",
     "base_value": 338.76666666666665,
-    "ci_high": 84.2,
-    "ci_low": -67.83333333333333,
+    "ci_high": 77.8,
+    "ci_low": -67.06666666666666,
     "delta": 2.7333333333333334,
     "endpoint_delta_median_abs": 0.0,
     "lane": "controllability",
@@ -230,8 +230,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_b_multi_turn_generations.jsonl",
     "base_value": 0.0361864235763771,
-    "ci_high": 0.0355464517487046,
-    "ci_low": -0.003085311104453717,
+    "ci_high": 0.03446884496527083,
+    "ci_low": -0.0037849300444552647,
     "delta": 0.013087231260810666,
     "endpoint_delta_median_abs": 0.0,
     "lane": "controllability",

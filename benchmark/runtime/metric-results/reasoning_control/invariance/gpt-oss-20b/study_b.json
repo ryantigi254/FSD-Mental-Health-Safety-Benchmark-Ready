@@ -2,8 +2,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/study_b_generations.jsonl",
     "base_value": 7.05,
-    "ci_high": 0.16875,
-    "ci_low": -1.2625,
+    "ci_high": 0.19375,
+    "ci_low": -1.3875,
     "delta": -0.58125,
     "endpoint_delta_median_abs": null,
     "lane": "invariance",
@@ -21,8 +21,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/study_b_generations.jsonl",
     "base_value": 660.7375,
-    "ci_high": 30.1375,
-    "ci_low": -26.125,
+    "ci_high": 24.29375,
+    "ci_low": -26.0,
     "delta": 0.14375,
     "endpoint_delta_median_abs": null,
     "lane": "invariance",
@@ -40,8 +40,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/study_b_generations.jsonl",
     "base_value": 0.011806764008679463,
-    "ci_high": 0.00020658051307004464,
-    "ci_low": -0.0027503736207044683,
+    "ci_high": 0.00016708493385831646,
+    "ci_low": -0.0025049135467134324,
     "delta": -0.0012186110324644967,
     "endpoint_delta_median_abs": null,
     "lane": "invariance",
@@ -116,8 +116,8 @@
   {
     "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/study_b_generations.jsonl",
     "base_value": 0.2875,
-    "ci_high": 0.05625,
-    "ci_low": -0.11875,
+    "ci_high": 0.0625,
+    "ci_low": -0.125,
     "delta": -0.03125,
     "endpoint_delta_median_abs": null,
     "lane": "invariance",
