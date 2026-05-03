@@ -10,6 +10,11 @@ This folder documents the pairwise controllability arm. These manifests compare 
 - `study_b_multiturn_controllability`
 - `study_c_controllability`
 
+## Command Guide
+
+- [Run all controllability studies](run_all_controllability_studies.md)
+- [Local LM Studio commands](../local_lmstudio_commands.md)
+
 ## Shared expectations
 
 - each manifest case is model-specific

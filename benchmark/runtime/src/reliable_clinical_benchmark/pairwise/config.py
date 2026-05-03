@@ -78,7 +78,7 @@ class GenerationParams(BaseModel):
     """Generation parameters passed to an LM Studio judge."""
 
     temperature: float = 0.1
-    max_tokens: int = 2048
+    max_tokens: Optional[int] = None
     top_p: float = 0.95
 
     class Config:

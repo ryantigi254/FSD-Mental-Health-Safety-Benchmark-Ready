@@ -17,6 +17,14 @@ from typing import Any, Callable, Dict, Iterable, List, Optional
 
 _MANIFEST_VERSION = "pairwise.cases.v1"
 
+CORE_MAIN_LANE_CASE_BUDGETS: Dict[str, int] = {
+    "study_a": 150,
+    "study_a_bias": 300,
+    "study_b": 250,
+    "study_b_multiturn": 300,
+    "study_c": 250,
+}
+
 SLICE_METADATA: Dict[str, Dict[str, Any]] = {
     "study_a": {"layer": "core", "notes": ["Study A cleaned cached generations."]},
     "study_a_bias": {
@@ -166,7 +174,7 @@ def _empty_manifest(*, slice_id: str, layer: str, notes: List[str]) -> Dict[str,
 
 def _build_study_a(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     source_root = runtime_root / "processed" / "_archived" / "duplicates" / "study_a_cleaned"
-    return _build_from_jsonl_dirs(
+    manifest = _build_from_jsonl_dirs(
         source_root=source_root,
         filename="study_a_generations.jsonl",
         case_key=lambda row: row["id"],
@@ -177,11 +185,12 @@ def _build_study_a(runtime_root: Path, include_systems: set[str]) -> Dict[str, A
         boundary_notes=["Candidate responses are historical runtime panel outputs."],
         include_systems=include_systems,
     )
+    return _apply_case_budget(manifest, slice_id="study_a")
 
 
 def _build_study_a_bias(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     source_root = runtime_root / "results"
-    return _build_from_jsonl_dirs(
+    manifest = _build_from_jsonl_dirs(
         source_root=source_root,
         filename="study_a_bias_generations.jsonl",
         case_key=lambda row: row["id"],
@@ -199,11 +208,12 @@ def _build_study_a_bias(runtime_root: Path, include_systems: set[str]) -> Dict[s
         include_row=lambda row: str(row.get("status") or "").strip().lower() == "ok",
         include_systems=include_systems,
     )
+    return _apply_case_budget(manifest, slice_id="study_a_bias")
 
 
 def _build_study_b(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     source_root = runtime_root / "processed" / "_archived" / "duplicates" / "study_b_cleaned"
-    return _build_from_jsonl_dirs(
+    manifest = _build_from_jsonl_dirs(
         source_root=source_root,
         filename="study_b_generations.jsonl",
         case_key=_study_b_case_key,
@@ -218,11 +228,12 @@ def _build_study_b(runtime_root: Path, include_systems: set[str]) -> Dict[str, A
         boundary_notes=["Candidate responses are historical runtime panel outputs."],
         include_systems=include_systems,
     )
+    return _apply_case_budget(manifest, slice_id="study_b")
 
 
 def _build_study_b_multiturn(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     source_root = runtime_root / "results"
-    return _build_from_jsonl_dirs(
+    manifest = _build_from_jsonl_dirs(
         source_root=source_root,
         filename="study_b_multi_turn_generations.jsonl",
         case_key=_study_b_multiturn_case_key,
@@ -241,11 +252,12 @@ def _build_study_b_multiturn(runtime_root: Path, include_systems: set[str]) -> D
         boundary_notes=["Candidate responses are historical runtime panel outputs."],
         include_systems=include_systems,
     )
+    return _apply_case_budget(manifest, slice_id="study_b_multiturn")
 
 
 def _build_study_c(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
     source_root = runtime_root / "processed" / "_archived" / "duplicates" / "study_c_cleaned"
-    return _build_from_jsonl_dirs(
+    manifest = _build_from_jsonl_dirs(
         source_root=source_root,
         filename="study_c_generations.jsonl",
         case_key=_study_c_case_key,
@@ -260,6 +272,7 @@ def _build_study_c(runtime_root: Path, include_systems: set[str]) -> Dict[str, A
         boundary_notes=["Candidate responses are historical runtime panel outputs."],
         include_systems=include_systems,
     )
+    return _apply_case_budget(manifest, slice_id="study_c")
 
 
 def _build_study_a_controllability(runtime_root: Path, include_systems: set[str]) -> Dict[str, Any]:
@@ -876,6 +889,32 @@ def _finalise_grouped_cases(
     }
 
 
+def _apply_case_budget(manifest: Dict[str, Any], *, slice_id: str) -> Dict[str, Any]:
+    budget = CORE_MAIN_LANE_CASE_BUDGETS.get(slice_id)
+    if not budget or manifest.get("status") != "ready":
+        return manifest
+
+    cases = list(manifest.get("cases", []))
+    if len(cases) <= budget:
+        return manifest
+
+    expected_response_count = len(manifest.get("systems", []))
+    complete_cases = [
+        case
+        for case in cases
+        if len(case.get("responses", [])) == expected_response_count
+    ]
+    if len(complete_cases) >= budget:
+        cases = complete_cases
+
+    manifest = dict(manifest)
+    manifest["cases"] = cases[:budget]
+    manifest["boundary_notes"] = list(manifest.get("boundary_notes", [])) + [
+        f"Main-lane case budget applied: first {budget} deterministic complete case_ids retained."
+    ]
+    return manifest
+
+
 def _missing_source_manifest(boundary_notes: List[str], source_root: Path) -> Dict[str, Any]:
     return {
         "status": "missing_inputs",
@@ -917,12 +956,16 @@ def _study_c_case_key(row: Dict[str, Any]) -> str:
 
 
 def _read_jsonl(path: Path) -> Iterable[Dict[str, Any]]:
-    with path.open("r", encoding="utf-8") as handle:
-        for line in handle:
-            line = line.strip()
-            if not line or line.startswith("version https://git-lfs.github.com/spec/v1"):
-                continue
-            yield json.loads(line)
+    try:
+        text = path.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        text = path.read_text(encoding="cp1252")
+
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith("version https://git-lfs.github.com/spec/v1"):
+            continue
+        yield json.loads(line)
 
 
 def _load_bias_legacy_catalogue(runtime_root: Path) -> Dict[str, str]:

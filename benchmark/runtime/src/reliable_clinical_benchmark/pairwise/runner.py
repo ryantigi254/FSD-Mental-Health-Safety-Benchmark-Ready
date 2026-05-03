@@ -4,6 +4,7 @@ Pairwise evaluation runner.
 
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict
 import importlib.util
 import json
@@ -325,14 +326,24 @@ class PairwiseRunner:
         *,
         comparison_groups: Sequence[Dict[str, Any]],
         judge,
+        workers: int = 1,
     ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
         raw_records: List[Dict[str, Any]] = []
         parsed_records: List[Dict[str, Any]] = []
-        for comparison in comparison_groups:
-            judge_raw, judge_parsed = self._run_orders_for_judge(
+
+        def run_one(comparison: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+            return self._run_orders_for_judge(
                 comparison=comparison,
                 judge=judge,
             )
+
+        if workers <= 1 or len(comparison_groups) <= 1:
+            group_results = [run_one(comparison) for comparison in comparison_groups]
+        else:
+            with ThreadPoolExecutor(max_workers=workers) as executor:
+                group_results = list(executor.map(run_one, comparison_groups))
+
+        for judge_raw, judge_parsed in group_results:
             raw_records.extend(judge_raw)
             parsed_records.extend(judge_parsed)
             self._persist_records(judge_raw, judge_parsed)
@@ -501,7 +512,7 @@ class PairwiseRunner:
         *,
         model_string: str,
         temperature: float,
-        max_tokens: int,
+        max_tokens: int | None,
         top_p: float,
         system_prompt: str,
         prompt: str,

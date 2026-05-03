@@ -25,6 +25,21 @@ DEFAULT_CANDIDATE_SYSTEMS = [
     "psyche-r1-local",
 ]
 
+SLICE_CANDIDATE_SYSTEMS = {
+    "study_a_bias": [
+        "deepseek-r1-lmstudio",
+        "gpt-oss-20b",
+        "qwen3-lmstudio",
+        "psyche-r1-lmstudio",
+    ],
+    "study_b_multiturn": [
+        "gpt-oss-20b",
+        "piaget-lmstudio",
+        "psyche-r1-lmstudio",
+        "psyllm-lmstudio",
+    ],
+}
+
 JUDGE_MANIFEST_V1 = {
     "manifest_version": "pairwise.judges.v1",
     "judges": [
@@ -33,28 +48,28 @@ JUDGE_MANIFEST_V1 = {
             "display_name": "Qwen 3.5 27B Claude 4.6 Opus Distill v2",
             "hf_source": "Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled-v2-GGUF",
             "local_model_id": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
-            "generation_params": {"temperature": 0.1, "max_tokens": 1024, "top_p": 0.95},
+            "generation_params": {"temperature": 0.1, "top_p": 0.95},
         },
         {
             "judge_id": "jackrong_qwopus35_27b_v35",
             "display_name": "Qwopus 3.5 27B v3.5",
             "hf_source": "Jackrong/Qwopus3.5-27B-v3.5-GGUF",
             "local_model_id": "qwopus3.5-27b-v3.5",
-            "generation_params": {"temperature": 0.1, "max_tokens": 1024, "top_p": 0.95},
+            "generation_params": {"temperature": 0.1, "top_p": 0.95},
         },
         {
             "judge_id": "teichai_glm47_flash_opus45",
             "display_name": "GLM 4.7 Flash Claude Opus 4.5 Distill",
             "hf_source": "TeichAI/GLM-4.7-Flash-Claude-Opus-4.5-High-Reasoning-Distill-GGUF",
             "local_model_id": "glm-4.7-flash-claude-opus-4.5-high-reasoning-distill",
-            "generation_params": {"temperature": 0.1, "max_tokens": 1024, "top_p": 0.95},
+            "generation_params": {"temperature": 0.1, "top_p": 0.95},
         },
         {
             "judge_id": "teichai_gemma4_31b_it_opus",
             "display_name": "Gemma 4 31B IT Claude Opus Distill",
             "hf_source": "TeichAI/gemma-4-31B-it-Claude-Opus-Distill-GGUF",
-            "local_model_id": "gemma-4-31b-it-claude-opus-distill",
-            "generation_params": {"temperature": 0.1, "max_tokens": 1024, "top_p": 0.95},
+            "local_model_id": "gemma-4-31b-it-claude-opus-distill-v2",
+            "generation_params": {"temperature": 0.1, "top_p": 0.95},
         },
     ],
 }
@@ -68,7 +83,7 @@ JUDGE_MANIFEST_V2 = {
             "hf_source": "Jackrong/Qwopus3.5-27B-v3.5-GGUF",
             "local_model_id": "qwopus3.5-27b-v3.5",
             "role": "primary",
-            "generation_params": {"temperature": 0.1, "max_tokens": 1024, "top_p": 0.95},
+            "generation_params": {"temperature": 0.1, "top_p": 0.95},
         },
         {
             "judge_id": "teichai_glm47_flash_opus45",
@@ -76,7 +91,7 @@ JUDGE_MANIFEST_V2 = {
             "hf_source": "TeichAI/GLM-4.7-Flash-Claude-Opus-4.5-High-Reasoning-Distill-GGUF",
             "local_model_id": "glm-4.7-flash-claude-opus-4.5-high-reasoning-distill",
             "role": "audit",
-            "generation_params": {"temperature": 0.1, "max_tokens": 1024, "top_p": 0.95},
+            "generation_params": {"temperature": 0.1, "top_p": 0.95},
         },
         {
             "judge_id": "jackrong_qwen35_27b_claude46_opus_v2",
@@ -85,16 +100,16 @@ JUDGE_MANIFEST_V2 = {
             "local_model_id": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2",
             "role": "escalation",
             "escalation_rank": 1,
-            "generation_params": {"temperature": 0.1, "max_tokens": 1024, "top_p": 0.95},
+            "generation_params": {"temperature": 0.1, "top_p": 0.95},
         },
         {
             "judge_id": "teichai_gemma4_31b_it_opus",
             "display_name": "Gemma 4 31B IT Claude Opus Distill",
             "hf_source": "TeichAI/gemma-4-31B-it-Claude-Opus-Distill-GGUF",
-            "local_model_id": "gemma-4-31b-it-claude-opus-distill",
+            "local_model_id": "gemma-4-31b-it-claude-opus-distill-v2",
             "role": "escalation",
             "escalation_rank": 2,
-            "generation_params": {"temperature": 0.1, "max_tokens": 1024, "top_p": 0.95},
+            "generation_params": {"temperature": 0.1, "top_p": 0.95},
         },
     ],
 }
@@ -108,7 +123,7 @@ RUN_SPECS = [
     ("study_a", "core", "core_communication"),
     ("study_a_bias", "core", "core_communication"),
     ("study_b", "core", "core_communication"),
-    ("study_b_multiturn", "core", "stakeholder_tagged"),
+    ("study_b_multiturn", "core", "stakeholder_main_lane"),
     ("study_c", "core", "core_communication"),
     ("study_a_controllability", "controllability", "controllability"),
     ("study_a_bias_controllability", "controllability", "controllability"),
@@ -145,7 +160,7 @@ def main() -> int:
             slice_id=slice_id,
             runtime_root=RUNTIME_ROOT,
             output_path=manifest_path,
-            include_systems=DEFAULT_CANDIDATE_SYSTEMS,
+            include_systems=SLICE_CANDIDATE_SYSTEMS.get(slice_id, DEFAULT_CANDIDATE_SYSTEMS),
         )
         built_manifests.append(str(manifest_path))
 

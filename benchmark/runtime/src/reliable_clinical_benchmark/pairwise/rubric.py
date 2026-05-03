@@ -221,6 +221,10 @@ ALL_CRITERIA: Dict[str, CriterionDef] = {
 RUBRIC_FAMILIES: Dict[str, List[str]] = {
     "core_communication": list(CORE_CRITERIA.keys()),
     "stakeholder_tagged": list(STAKEHOLDER_CRITERIA.keys()),
+    "stakeholder_main_lane": [
+        "method_fit",
+        "multi_turn_repair_quality",
+    ],
     "controllability": list(CONTROLLABILITY_CRITERIA.keys()),
     "invariance": list(INVARIANCE_CRITERIA.keys()),
 }

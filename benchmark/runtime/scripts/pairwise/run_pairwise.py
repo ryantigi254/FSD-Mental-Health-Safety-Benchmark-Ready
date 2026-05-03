@@ -19,7 +19,6 @@ from reliable_clinical_benchmark.pairwise.aggregator import PairwiseAggregator  
 from reliable_clinical_benchmark.pairwise.config import load_pairwise_run_spec  # noqa: E402
 from reliable_clinical_benchmark.pairwise.report import PairwiseReportBuilder  # noqa: E402
 from reliable_clinical_benchmark.pairwise.runner import PairwiseRunner  # noqa: E402
-from reliable_clinical_benchmark.utils.logging_config import setup_logging  # noqa: E402
 
 
 logger = logging.getLogger(__name__)
@@ -64,6 +63,7 @@ def _selected_judge_plan(
     *,
     selected_judges: list[str],
     existing_parsed_records: list[Dict[str, Any]],
+    max_groups: int | None = None,
 ) -> list[Dict[str, Any]]:
     plan: list[Dict[str, Any]] = []
     simulated_records = list(existing_parsed_records)
@@ -74,6 +74,8 @@ def _selected_judge_plan(
             judge=judge,
             existing_parsed_records=simulated_records,
         )
+        if max_groups is not None:
+            pending_groups = pending_groups[:max_groups]
         plan.append(
             {
                 "judge_id": judge.judge_id,
@@ -99,7 +101,11 @@ def _selected_judge_plan(
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
-    setup_logging("INFO" if args.verbose else "WARNING")
+    logging.basicConfig(level=logging.INFO if args.verbose else logging.WARNING)
+    if args.workers < 1:
+        raise SystemExit("--workers must be >= 1")
+    if args.max_groups is not None and args.max_groups < 1:
+        raise SystemExit("--max-groups must be >= 1 when provided")
 
     run_spec = load_pairwise_run_spec(args.config)
     case_manifest = json.loads(Path(run_spec.config.case_manifest_path).read_text(encoding="utf-8"))
@@ -132,6 +138,7 @@ def main() -> int:
             runner,
             selected_judges=selected_judges,
             existing_parsed_records=existing_parsed_records,
+            max_groups=args.max_groups,
         )
         if selected_judges and run_spec.config.run_mode == "stacked"
         else []
@@ -155,6 +162,8 @@ def main() -> int:
                     "case_count": len(case_manifest.get("cases", [])),
                     "selected_judges": selected_judges or "all",
                     "judge_plan": judge_plan,
+                    "workers": args.workers,
+                    "max_groups": args.max_groups,
                     "existing_parsed_records": len(existing_parsed_records),
                     "judges": [
                         {
@@ -184,9 +193,12 @@ def main() -> int:
                 judge=judge,
                 existing_parsed_records=all_parsed_records,
             )
+            if args.max_groups is not None:
+                pending_groups = pending_groups[: args.max_groups]
             judge_raw, judge_parsed = runner.run_groups_for_judge(
                 comparison_groups=pending_groups,
                 judge=judge,
+                workers=args.workers,
             )
             raw_records.extend(judge_raw)
             parsed_records.extend(judge_parsed)
@@ -207,6 +219,8 @@ def main() -> int:
                 "selected_judges": selected_judges or "all",
                 "planned_calls_min": planned_bounds["min"],
                 "planned_calls_max": planned_bounds["max"],
+                "workers": args.workers,
+                "max_groups": args.max_groups,
                 "executed_raw_records": len(raw_records),
                 "executed_parsed_records": len(parsed_records),
                 "loaded_parsed_records": len(all_parsed_records),
@@ -230,6 +244,18 @@ def build_parser() -> argparse.ArgumentParser:
         help="Optional judge_id to run. Repeat the flag to queue multiple judges while keeping one LM Studio model loaded at a time.",
     )
     parser.add_argument("--dry-run", action="store_true", help="Show the planned run without judge calls.")
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=1,
+        help="Number of parallel comparison groups to run for a selected judge.",
+    )
+    parser.add_argument(
+        "--max-groups",
+        type=int,
+        default=None,
+        help="Optional cap on pending comparison groups for pilot runs.",
+    )
     parser.add_argument("-v", "--verbose", action="store_true", help="Enable INFO logging.")
     return parser
 

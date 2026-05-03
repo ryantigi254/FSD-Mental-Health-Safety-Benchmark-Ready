@@ -75,6 +75,14 @@ Pooled summaries are secondary views. Per-judge outputs, escalation rates, and p
 
 Notebooks read only the canonical report files.
 
+## Command Guides
+
+- [General pairwise commands](pairwise_commands.md)
+- [Local LM Studio commands](local_lmstudio_commands.md)
+- [Run all core studies](core/run_all_core_studies.md)
+- [Run all controllability studies](controllability/run_all_controllability_studies.md)
+- [Run all invariance studies](invariance/run_all_invariance_studies.md)
+
 ## Judge-audit layer
 
 The pairwise subsystem also carries a separate judge meta-evaluation layer. It does not treat the judges as ground truth. Instead it scores each judge against a small labelled audit slice on:

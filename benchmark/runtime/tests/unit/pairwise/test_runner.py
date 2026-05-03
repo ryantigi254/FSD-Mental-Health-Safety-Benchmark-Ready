@@ -219,3 +219,43 @@ def test_pending_groups_for_escalation_only_include_disputed_cases():
 
     assert len(pending) == 1
     assert pending[0]["comparison_key"] == "disagreement_case::clarity::model_a__vs__model_b"
+
+
+def test_run_groups_for_judge_supports_workers(monkeypatch, tmp_path):
+    runner = _stacked_runner()
+    runner.output_root = tmp_path / "pairwise"
+    runner.raw_dir = runner.output_root / "raw" / runner.run_spec.config.run_id
+    runner.parsed_dir = runner.output_root / "parsed" / runner.run_spec.config.run_id
+    runner.raw_dir.mkdir(parents=True)
+    runner.parsed_dir.mkdir(parents=True)
+    judge = runner.run_spec.judge_manifest.primary_judge()
+    groups = runner.comparison_groups()
+
+    def fake_run_orders(*, comparison, judge):
+        raw = {
+            "judge_id": judge.judge_id,
+            "slice_id": runner.run_spec.config.slice_id,
+            "comparison_key": comparison["comparison_key"],
+        }
+        parsed = {
+            "judge_id": judge.judge_id,
+            "slice_id": runner.run_spec.config.slice_id,
+            "comparison_key": comparison["comparison_key"],
+            "order": "AB",
+        }
+        return [raw], [parsed]
+
+    monkeypatch.setattr(runner, "_run_orders_for_judge", fake_run_orders)
+
+    raw_records, parsed_records = runner.run_groups_for_judge(
+        comparison_groups=groups,
+        judge=judge,
+        workers=2,
+    )
+
+    assert [record["comparison_key"] for record in raw_records] == [
+        group["comparison_key"] for group in groups
+    ]
+    assert len(parsed_records) == len(groups)
+    assert (runner.raw_dir / f"{judge.judge_id}__study_a.jsonl").exists()
+    assert (runner.parsed_dir / f"{judge.judge_id}__study_a.jsonl").exists()

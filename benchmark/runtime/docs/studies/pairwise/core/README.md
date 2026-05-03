@@ -12,7 +12,8 @@ This folder documents the core pairwise comparison slices. These runs compare di
 
 ## Command guide
 
-- [Run all core studies](/Users/ryangichuru/Documents/SSD-K/Uni/3rd%20year/NLP-ready/benchmark/runtime/docs/studies/pairwise/core/run_all_core_studies.md)
+- [Run all core studies](run_all_core_studies.md)
+- [Local LM Studio commands](../local_lmstudio_commands.md)
 
 ## Shared expectations
 

@@ -86,7 +86,7 @@ done
 
 Load this LM Studio model next:
 
-- `gemma-4-31b-it-claude-opus-distill`
+- `gemma-4-31b-it-claude-opus-distill-v2`
 
 Then run:
 

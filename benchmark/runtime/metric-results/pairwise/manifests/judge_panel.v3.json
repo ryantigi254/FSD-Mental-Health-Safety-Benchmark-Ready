@@ -9,7 +9,6 @@
       "role": "primary",
       "generation_params": {
         "temperature": 0.1,
-        "max_tokens": 1024,
         "top_p": 0.95
       }
     },
@@ -21,7 +20,6 @@
       "role": "audit",
       "generation_params": {
         "temperature": 0.1,
-        "max_tokens": 1024,
         "top_p": 0.95
       }
     },
@@ -34,7 +32,6 @@
       "escalation_rank": 1,
       "generation_params": {
         "temperature": 0.1,
-        "max_tokens": 1024,
         "top_p": 0.95
       }
     },
@@ -42,12 +39,11 @@
       "judge_id": "teichai_gemma4_31b_it_opus",
       "display_name": "Gemma 4 31B IT Claude Opus Distill",
       "hf_source": "TeichAI/gemma-4-31B-it-Claude-Opus-Distill-GGUF",
-      "local_model_id": "gemma-4-31b-it-claude-opus-distill",
+      "local_model_id": "gemma-4-31b-it-claude-opus-distill-v2",
       "role": "escalation",
       "escalation_rank": 2,
       "generation_params": {
         "temperature": 0.1,
-        "max_tokens": 1024,
         "top_p": 0.95
       }
     }

@@ -4,7 +4,7 @@
   "slice_id": "study_b_multiturn",
   "case_manifest_path": "../study_b_multiturn_case_manifest.json",
   "judge_manifest_path": "../judge_panel.v3.json",
-  "rubric_family": "stakeholder_tagged",
+  "rubric_family": "stakeholder_main_lane",
   "run_mode": "stacked",
   "allow_ties": true,
   "orders": [

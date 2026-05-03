@@ -8,6 +8,11 @@ This folder documents the invariance arm of pairwise evaluation. These runs comp
 - `ctrl_invariance` via `invariance_under_control`
 - `invariance_ctrl` via `control_under_invariance`
 
+## Command Guide
+
+- [Run all invariance studies](run_all_invariance_studies.md)
+- [Local LM Studio commands](../local_lmstudio_commands.md)
+
 ## Shared expectations
 
 - only matched base-versus-perturbed pairs belong here

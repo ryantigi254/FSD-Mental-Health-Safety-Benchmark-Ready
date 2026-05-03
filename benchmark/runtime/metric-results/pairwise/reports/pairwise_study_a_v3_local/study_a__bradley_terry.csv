@@ -1,0 +1,5 @@
+scope,system_id,score,se,ci_lower,ci_upper,decisive_total
+local_qwen35_primary,deepseek-r1-lmstudio,-0.116636,4999.999793,-9799.936152,9799.70288,38
+local_qwen35_primary,gpt-oss-20b,1.410998,4999.999794,-9798.408521,9801.230518,81
+local_qwen35_primary,psyche-r1-local,-1.196614,4999.999794,-9801.016133,9798.622905,15
+local_qwen35_primary,qwen3-lmstudio,-0.097749,4999.999793,-9799.917266,9799.721769,33
