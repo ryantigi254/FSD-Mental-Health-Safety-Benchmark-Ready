@@ -27,6 +27,7 @@ benchmark/runtime/walkthrough.md
 
 # Local benchmark runtime artefacts
 benchmark/runtime/.venv-runtime-ryangichuru-20260215/
+benchmark/runtime/.venv-pairwise-22837352-20260430/
 benchmark/runtime/Misc/datasets/
 benchmark/runtime/.conda-envs/
 benchmark/runtime/.conda-pkgs/
@@ -69,6 +70,10 @@ scripts/*.sh
 
 # Local Codex run history
 codex_logs/
+state/
+WARNING/
+pairwise-secondary-eval-plan.md
+.gitignore.bak
 
 # Local PGFPlots test drafts
 benchmark/runtime/tests/unit/test_generate_pgfplots.py

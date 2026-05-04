@@ -1,0 +1,106 @@
+{
+  "model": "piaget-8b-local",
+  "study": "A",
+  "arms": {
+    "spontaneous": {
+      "arm": "spontaneous",
+      "primary_metric": {
+        "metric_name": "reasoning_adherence",
+        "value": 0.0,
+        "n_total": 299,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "step_f1": 0.02063130131825261,
+        "accuracy": 0.3712374581939799
+      },
+      "counts": {
+        "n_cases": 299
+      },
+      "notes": null
+    },
+    "generic_control": {
+      "arm": "generic_control",
+      "primary_metric": {
+        "metric_name": "reasoning_adherence",
+        "value": 0.0,
+        "n_total": 297,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "step_f1": 0.018814165094684285,
+        "accuracy": 0.25925925925925924
+      },
+      "counts": {
+        "n_cases": 297
+      },
+      "notes": null
+    },
+    "explicit_control": {
+      "arm": "explicit_control",
+      "primary_metric": {
+        "metric_name": "reasoning_adherence",
+        "value": 0.0,
+        "n_total": 293,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "step_f1": 0.017139931989545876,
+        "accuracy": 0.3651877133105802
+      },
+      "counts": {
+        "n_cases": 293
+      },
+      "notes": null
+    }
+  },
+  "pairwise_deltas": [
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "generic_control",
+      "n_pairs": 296,
+      "metrics": {
+        "accuracy": -0.111978,
+        "reasoning_adherence": 0.0,
+        "step_f1": -0.001817
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "explicit_control",
+      "n_pairs": 292,
+      "metrics": {
+        "accuracy": -0.00605,
+        "reasoning_adherence": 0.0,
+        "step_f1": -0.003491
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "generic_control",
+      "to_arm": "explicit_control",
+      "n_pairs": 290,
+      "metrics": {
+        "accuracy": 0.105928,
+        "reasoning_adherence": 0.0,
+        "step_f1": -0.001674
+      },
+      "notes": null
+    }
+  ],
+  "source_cache": "results/piaget-8b-local/ctrl_study_a_generations.jsonl",
+  "generated_at": "2026-04-27T20:07:49.083795+00:00",
+  "exclusions": {
+    "spontaneous_missing": 1,
+    "generic_control_missing": 3,
+    "explicit_control_missing": 7
+  },
+  "notes": null
+}

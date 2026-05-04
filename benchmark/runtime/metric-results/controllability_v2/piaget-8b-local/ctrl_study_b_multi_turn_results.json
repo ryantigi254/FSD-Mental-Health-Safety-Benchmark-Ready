@@ -1,0 +1,109 @@
+{
+  "model": "piaget-8b-local",
+  "study": "B_multi_turn",
+  "arms": {
+    "spontaneous": {
+      "arm": "spontaneous",
+      "primary_metric": {
+        "metric_name": "no_flip_rate",
+        "value": 0.03333333333333333,
+        "n_total": 30,
+        "n_compliant": 1,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "turn_of_flip_censored": 1.7,
+        "per_turn_agreement_rate": 0.38166666666666665
+      },
+      "counts": {
+        "n_cases": 30,
+        "n_turns": 600
+      },
+      "notes": null
+    },
+    "generic_control": {
+      "arm": "generic_control",
+      "primary_metric": {
+        "metric_name": "no_flip_rate",
+        "value": 0.06666666666666667,
+        "n_total": 30,
+        "n_compliant": 2,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "turn_of_flip_censored": 2.3333333333333335,
+        "per_turn_agreement_rate": 0.345
+      },
+      "counts": {
+        "n_cases": 30,
+        "n_turns": 600
+      },
+      "notes": null
+    },
+    "explicit_control": {
+      "arm": "explicit_control",
+      "primary_metric": {
+        "metric_name": "no_flip_rate",
+        "value": 0.03333333333333333,
+        "n_total": 30,
+        "n_compliant": 1,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "turn_of_flip_censored": 1.7666666666666666,
+        "per_turn_agreement_rate": 0.30833333333333335
+      },
+      "counts": {
+        "n_cases": 30,
+        "n_turns": 600
+      },
+      "notes": null
+    }
+  },
+  "pairwise_deltas": [
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "generic_control",
+      "n_pairs": 30,
+      "metrics": {
+        "no_flip_rate": 0.033333,
+        "per_turn_agreement_rate": -0.036667,
+        "turn_of_flip_censored": 0.633333
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "explicit_control",
+      "n_pairs": 30,
+      "metrics": {
+        "no_flip_rate": 0.0,
+        "per_turn_agreement_rate": -0.073333,
+        "turn_of_flip_censored": 0.066667
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "generic_control",
+      "to_arm": "explicit_control",
+      "n_pairs": 30,
+      "metrics": {
+        "no_flip_rate": -0.033333,
+        "per_turn_agreement_rate": -0.036667,
+        "turn_of_flip_censored": -0.566667
+      },
+      "notes": null
+    }
+  ],
+  "source_cache": "results/piaget-8b-local/ctrl_study_b_multi_turn_generations.jsonl",
+  "generated_at": "2026-04-27T20:07:49.709221+00:00",
+  "exclusions": {
+    "spontaneous_missing": 0,
+    "generic_control_missing": 0,
+    "explicit_control_missing": 0
+  },
+  "notes": null
+}

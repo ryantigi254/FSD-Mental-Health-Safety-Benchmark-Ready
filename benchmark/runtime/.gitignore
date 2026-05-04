@@ -32,6 +32,10 @@ processed/_archived/
 # Local model weights and caches (all contents ignored)
 models/
 models/**
+!src/reliable_clinical_benchmark/models/
+!src/reliable_clinical_benchmark/models/**
+src/reliable_clinical_benchmark/models/__pycache__/
+src/reliable_clinical_benchmark/models/__pycache__/**
 offload/
 wandb/
 data/*

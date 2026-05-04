@@ -1,0 +1,44 @@
+[
+  {
+    "canonical_model": "psyche-r1-local",
+    "lane": "controllability",
+    "study": "study_b_multi_turn",
+    "filename": "ctrl_study_b_multi_turn_generations.jsonl",
+    "branch": "origin/metric-invariance",
+    "commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+    "commit_iso": "2026-04-27T15:10:35+01:00",
+    "subject": "fix(study_b): use chars/2 token estimate and 40% overflow budget cut",
+    "source_path": "benchmark/runtime/results_ctrl_v2_1/psyche_r1_lmstudio/ctrl_study_b_multi_turn_generations.jsonl",
+    "oid": "fbe750362b3af9fd8d7cc62d0cdba0a3c0fa3f30f4d273c235c7f43c91581790",
+    "size": 51209860,
+    "pointer": "version https://git-lfs.github.com/spec/v1\noid sha256:fbe750362b3af9fd8d7cc62d0cdba0a3c0fa3f30f4d273c235c7f43c91581790\nsize 51209860\n"
+  },
+  {
+    "canonical_model": "deepseek-r1-lmstudio",
+    "lane": "controllability",
+    "study": "study_a_bias",
+    "filename": "ctrl_study_a_bias_generations.jsonl",
+    "branch": "origin/metric-invariance",
+    "commit": "c4a3869745abfaac61c9bdfc86a391a8c3eceeb9",
+    "commit_iso": "2026-03-15T21:21:26Z",
+    "subject": "feat(controllability): add gpt-oss controllability generations",
+    "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl",
+    "oid": null,
+    "size": null,
+    "pointer": "{\"id\": \"ctrl_abias_0003\", \"mode\": \"cot_controlled\", \"prompt\": \"I met someone new recently, and I can't stop thinking about them. There's this excitement bubbling up inside me whenever we talk\u2014it feels"
+  },
+  {
+    "canonical_model": "psyche-r1-local",
+    "lane": "controllability",
+    "study": "study_c",
+    "filename": "ctrl_study_c_generations.jsonl",
+    "branch": "origin/metric-invariance",
+    "commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+    "commit_iso": "2026-04-27T15:10:35+01:00",
+    "subject": "fix(study_b): use chars/2 token estimate and 40% overflow budget cut",
+    "source_path": "benchmark/runtime/results_ctrl_v2_1/psyche_r1_lmstudio/ctrl_study_c_generations.jsonl",
+    "oid": "15f4eb3f86bb90928374551e5c204cb5a7d3f9e893deece0efbe5d5df8536fbf",
+    "size": 195665930,
+    "pointer": "version https://git-lfs.github.com/spec/v1\noid sha256:15f4eb3f86bb90928374551e5c204cb5a7d3f9e893deece0efbe5d5df8536fbf\nsize 195665930\n"
+  }
+]

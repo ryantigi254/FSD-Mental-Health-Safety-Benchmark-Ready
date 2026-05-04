@@ -3,6 +3,8 @@
 import logging
 from typing import List, Tuple
 
+import torch
+
 logger = logging.getLogger(__name__)
 
 _DEFAULT_MAX_LENGTH = 512
@@ -19,16 +21,24 @@ class NLIModel:
     ):
         logger.info(f"Loading NLI model: {model_name}")
         self.max_length = int(max_length)
+        import torch
         from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+        if torch.backends.mps.is_available():
+            self.device = torch.device("mps")
+        elif torch.cuda.is_available():
+            self.device = torch.device("cuda")
+        else:
+            self.device = torch.device("cpu")
+        logger.info("NLI model device: %s", self.device)
 
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
+        self.model.to(self.device)
         self.model.eval()
 
     def predict(self, premise: str, hypothesis: str) -> str:
         """Predict relationship between premise and hypothesis."""
-        import torch
-
         inputs = self.tokenizer(
             str(premise or ""),
             str(hypothesis or ""),
@@ -36,6 +46,7 @@ class NLIModel:
             max_length=self.max_length,
             return_tensors="pt",
         )
+        inputs = {key: value.to(self.device) for key, value in inputs.items()}
 
         with torch.no_grad():
             logits = self.model(**inputs).logits
@@ -51,8 +62,6 @@ class NLIModel:
 
     def batch_predict(self, premise_hypothesis_pairs: list) -> list:
         """Batch prediction for multiple pairs."""
-        import torch
-
         pairs: List[Tuple[str, str]] = [
             (str(p or ""), str(h or "")) for p, h in premise_hypothesis_pairs
         ]
@@ -70,6 +79,7 @@ class NLIModel:
             padding=True,
             return_tensors="pt",
         )
+        inputs = {key: value.to(self.device) for key, value in inputs.items()}
 
         with torch.no_grad():
             logits = self.model(**inputs).logits
@@ -86,4 +96,3 @@ class NLIModel:
                 out.append("neutral")
 
         return out
-

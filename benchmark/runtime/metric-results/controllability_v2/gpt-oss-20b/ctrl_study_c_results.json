@@ -1,0 +1,115 @@
+{
+  "model": "gpt-oss-20b",
+  "study": "C",
+  "arms": {
+    "spontaneous": {
+      "arm": "spontaneous",
+      "primary_metric": {
+        "metric_name": "controlled_entity_recall",
+        "value": 0.7566666666666667,
+        "n_total": 600,
+        "n_compliant": 454,
+        "ci_lower": 0.72,
+        "ci_upper": 0.7916666666666666
+      },
+      "task_metrics": {
+        "recall_at_t10": 0.7666666666666667,
+        "mean_entity_recall": 0.8008333333333333
+      },
+      "counts": {
+        "n_cases": 30,
+        "n_summaries": 600
+      },
+      "notes": [
+        "Study C applies the controllability arm to summary generation only."
+      ]
+    },
+    "generic_control": {
+      "arm": "generic_control",
+      "primary_metric": {
+        "metric_name": "controlled_entity_recall",
+        "value": 0.8316666666666667,
+        "n_total": 600,
+        "n_compliant": 499,
+        "ci_lower": 0.8,
+        "ci_upper": 0.8600416666666666
+      },
+      "task_metrics": {
+        "recall_at_t10": 0.8833333333333333,
+        "mean_entity_recall": 0.8808333333333334
+      },
+      "counts": {
+        "n_cases": 30,
+        "n_summaries": 600
+      },
+      "notes": [
+        "Study C applies the controllability arm to summary generation only."
+      ]
+    },
+    "explicit_control": {
+      "arm": "explicit_control",
+      "primary_metric": {
+        "metric_name": "controlled_entity_recall",
+        "value": 0.8316666666666667,
+        "n_total": 600,
+        "n_compliant": 499,
+        "ci_lower": 0.8,
+        "ci_upper": 0.86
+      },
+      "task_metrics": {
+        "recall_at_t10": 0.8833333333333333,
+        "mean_entity_recall": 0.8825
+      },
+      "counts": {
+        "n_cases": 30,
+        "n_summaries": 600
+      },
+      "notes": [
+        "Study C applies the controllability arm to summary generation only."
+      ]
+    }
+  },
+  "pairwise_deltas": [
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "generic_control",
+      "n_pairs": 30,
+      "metrics": {
+        "controlled_entity_recall": 0.075,
+        "mean_entity_recall": 0.08,
+        "recall_at_t10": 0.116667
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "explicit_control",
+      "n_pairs": 30,
+      "metrics": {
+        "controlled_entity_recall": 0.075,
+        "mean_entity_recall": 0.081667,
+        "recall_at_t10": 0.116667
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "generic_control",
+      "to_arm": "explicit_control",
+      "n_pairs": 30,
+      "metrics": {
+        "controlled_entity_recall": 0.0,
+        "mean_entity_recall": 0.001667,
+        "recall_at_t10": 0.0
+      },
+      "notes": null
+    }
+  ],
+  "source_cache": "results/gpt-oss-20b/ctrl_study_c_generations.jsonl",
+  "generated_at": "2026-04-27T20:06:03.955342+00:00",
+  "exclusions": {
+    "spontaneous_missing": 0,
+    "generic_control_missing": 0,
+    "explicit_control_missing": 0
+  },
+  "notes": null
+}

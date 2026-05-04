@@ -1,0 +1,15 @@
+{
+  "controllability": {
+    "missing_cache": 4,
+    "ok": 26
+  },
+  "invariance": {
+    "missing_cache": 7,
+    "ok": 23
+  },
+  "ctrl-invariance": {
+    "missing_cache": 9,
+    "ok": 17,
+    "not_measurable": 4
+  }
+}

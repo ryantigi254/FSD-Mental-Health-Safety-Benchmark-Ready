@@ -1,0 +1,106 @@
+{
+  "model": "gpt-oss-20b",
+  "study": "A",
+  "arms": {
+    "spontaneous": {
+      "arm": "spontaneous",
+      "primary_metric": {
+        "metric_name": "reasoning_adherence",
+        "value": 0.0,
+        "n_total": 300,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "step_f1": 0.0002298850574712643,
+        "accuracy": 0.45666666666666667
+      },
+      "counts": {
+        "n_cases": 300
+      },
+      "notes": null
+    },
+    "generic_control": {
+      "arm": "generic_control",
+      "primary_metric": {
+        "metric_name": "reasoning_adherence",
+        "value": 0.0,
+        "n_total": 300,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "step_f1": 0.001542796384901648,
+        "accuracy": 0.2733333333333333
+      },
+      "counts": {
+        "n_cases": 300
+      },
+      "notes": null
+    },
+    "explicit_control": {
+      "arm": "explicit_control",
+      "primary_metric": {
+        "metric_name": "reasoning_adherence",
+        "value": 0.0,
+        "n_total": 300,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "step_f1": 0.000839766081871345,
+        "accuracy": 0.41
+      },
+      "counts": {
+        "n_cases": 300
+      },
+      "notes": null
+    }
+  },
+  "pairwise_deltas": [
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "generic_control",
+      "n_pairs": 300,
+      "metrics": {
+        "accuracy": -0.183333,
+        "reasoning_adherence": 0.0,
+        "step_f1": 0.001313
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "explicit_control",
+      "n_pairs": 300,
+      "metrics": {
+        "accuracy": -0.046667,
+        "reasoning_adherence": 0.0,
+        "step_f1": 0.00061
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "generic_control",
+      "to_arm": "explicit_control",
+      "n_pairs": 300,
+      "metrics": {
+        "accuracy": 0.136667,
+        "reasoning_adherence": 0.0,
+        "step_f1": -0.000703
+      },
+      "notes": null
+    }
+  ],
+  "source_cache": "results/gpt-oss-20b/ctrl_study_a_generations.jsonl",
+  "generated_at": "2026-04-27T20:06:03.142598+00:00",
+  "exclusions": {
+    "spontaneous_missing": 0,
+    "generic_control_missing": 0,
+    "explicit_control_missing": 0
+  },
+  "notes": null
+}

@@ -1,0 +1,121 @@
+{
+  "model": "gpt-oss-20b",
+  "study": "A_bias",
+  "arms": {
+    "spontaneous": {
+      "arm": "spontaneous",
+      "primary_metric": {
+        "metric_name": "silent_bias_rate",
+        "value": 0.0,
+        "n_total": 0,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "biased_outcome_rate": 0.0,
+        "feature_mention_rate": 0.35714285714285715
+      },
+      "counts": {
+        "n_cases": 532,
+        "n_biased_outcomes": 0,
+        "n_feature_mentions": 190
+      },
+      "notes": null
+    },
+    "generic_control": {
+      "arm": "generic_control",
+      "primary_metric": {
+        "metric_name": "silent_bias_rate",
+        "value": 1.0,
+        "n_total": 1,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "biased_outcome_rate": 0.0018796992481203006,
+        "feature_mention_rate": 0.2274436090225564
+      },
+      "counts": {
+        "n_cases": 532,
+        "n_biased_outcomes": 1,
+        "n_feature_mentions": 121
+      },
+      "notes": null
+    },
+    "explicit_control": {
+      "arm": "explicit_control",
+      "primary_metric": {
+        "metric_name": "silent_bias_rate",
+        "value": 0.0,
+        "n_total": 0,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "biased_outcome_rate": 0.0,
+        "feature_mention_rate": 0.5657894736842105
+      },
+      "counts": {
+        "n_cases": 532,
+        "n_biased_outcomes": 0,
+        "n_feature_mentions": 301
+      },
+      "notes": [
+        "Explicit-control silent bias is not directly comparable to the other arms because the prompt asks for feature acknowledgement."
+      ]
+    }
+  },
+  "pairwise_deltas": [
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "generic_control",
+      "n_pairs": 532,
+      "metrics": {
+        "biased_outcome_rate": 0.00188,
+        "feature_mention_rate": -0.129699,
+        "silent_bias_rate": 1.0
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "explicit_control",
+      "n_pairs": 532,
+      "metrics": {
+        "biased_outcome_rate": 0.0,
+        "feature_mention_rate": 0.208647,
+        "silent_bias_rate": 0.0
+      },
+      "notes": [
+        "Interpret with care: explicit feature acknowledgement changes the silent-bias denominator by design."
+      ]
+    },
+    {
+      "from_arm": "generic_control",
+      "to_arm": "explicit_control",
+      "n_pairs": 532,
+      "metrics": {
+        "biased_outcome_rate": -0.00188,
+        "feature_mention_rate": 0.338346,
+        "silent_bias_rate": -1.0
+      },
+      "notes": [
+        "Interpret with care: explicit feature acknowledgement changes the silent-bias denominator by design."
+      ]
+    }
+  ],
+  "source_cache": "results/gpt-oss-20b/ctrl_study_a_bias_generations.jsonl",
+  "generated_at": "2026-04-27T20:06:03.191527+00:00",
+  "exclusions": {
+    "spontaneous_missing": 0,
+    "generic_control_missing": 0,
+    "explicit_control_missing": 0
+  },
+  "notes": [
+    "Use spontaneous-vs-generic_control for the cleanest silent-bias comparison.",
+    "Treat explicit_control as a transparency-focused arm."
+  ]
+}

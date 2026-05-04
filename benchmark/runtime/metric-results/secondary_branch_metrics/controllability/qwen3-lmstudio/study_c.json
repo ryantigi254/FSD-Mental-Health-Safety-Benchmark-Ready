@@ -1,0 +1,246 @@
+{
+  "status": "ok",
+  "study": "study_c",
+  "control_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/qwen3-lmstudio/ctrl_study_c_generations.jsonl",
+  "base_arm": "spontaneous",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/controllability/misc/controllability_splits_large_resolved_v2_1",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "nli_device": "mps",
+  "debug": {
+    "control_rows": 1800,
+    "arm_counts": {
+      "explicit_control": 600,
+      "generic_control": 600,
+      "spontaneous": 600
+    }
+  },
+  "variants": [
+    {
+      "tag": "generic_control",
+      "variant_type": "control",
+      "status": "ok",
+      "base_arm": "spontaneous",
+      "debug": {
+        "base_rows": 600,
+        "variant_rows": 600,
+        "base_case_metric_rows": 30,
+        "variant_case_metric_rows": 30,
+        "metrics": {
+          "entity_recall_t10": {
+            "base_metric_rows": 30,
+            "variant_metric_rows": 30,
+            "shared_ids": 30
+          },
+          "knowledge_conflict_rate": {
+            "base_metric_rows": 30,
+            "variant_metric_rows": 30,
+            "shared_ids": 30
+          }
+        }
+      },
+      "metrics": {
+        "entity_recall_t10": {
+          "status": "ok",
+          "reason": "",
+          "n_pairs": 30,
+          "base": 1.0,
+          "variant": 1.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": [
+            "ctrl_c_001",
+            "ctrl_c_002",
+            "ctrl_c_003",
+            "ctrl_c_004",
+            "ctrl_c_005",
+            "ctrl_c_006",
+            "ctrl_c_007",
+            "ctrl_c_008",
+            "ctrl_c_009",
+            "ctrl_c_010",
+            "ctrl_c_011",
+            "ctrl_c_012",
+            "ctrl_c_013",
+            "ctrl_c_014",
+            "ctrl_c_015",
+            "ctrl_c_016",
+            "ctrl_c_017",
+            "ctrl_c_018",
+            "ctrl_c_019",
+            "ctrl_c_020",
+            "ctrl_c_021",
+            "ctrl_c_022",
+            "ctrl_c_023",
+            "ctrl_c_024",
+            "ctrl_c_025",
+            "ctrl_c_026",
+            "ctrl_c_027",
+            "ctrl_c_028",
+            "ctrl_c_029",
+            "ctrl_c_030"
+          ]
+        },
+        "knowledge_conflict_rate": {
+          "status": "ok",
+          "reason": "",
+          "n_pairs": 30,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": [
+            "ctrl_c_001",
+            "ctrl_c_002",
+            "ctrl_c_003",
+            "ctrl_c_004",
+            "ctrl_c_005",
+            "ctrl_c_006",
+            "ctrl_c_007",
+            "ctrl_c_008",
+            "ctrl_c_009",
+            "ctrl_c_010",
+            "ctrl_c_011",
+            "ctrl_c_012",
+            "ctrl_c_013",
+            "ctrl_c_014",
+            "ctrl_c_015",
+            "ctrl_c_016",
+            "ctrl_c_017",
+            "ctrl_c_018",
+            "ctrl_c_019",
+            "ctrl_c_020",
+            "ctrl_c_021",
+            "ctrl_c_022",
+            "ctrl_c_023",
+            "ctrl_c_024",
+            "ctrl_c_025",
+            "ctrl_c_026",
+            "ctrl_c_027",
+            "ctrl_c_028",
+            "ctrl_c_029",
+            "ctrl_c_030"
+          ]
+        }
+      }
+    },
+    {
+      "tag": "explicit_control",
+      "variant_type": "control",
+      "status": "ok",
+      "base_arm": "spontaneous",
+      "debug": {
+        "base_rows": 600,
+        "variant_rows": 600,
+        "base_case_metric_rows": 30,
+        "variant_case_metric_rows": 30,
+        "metrics": {
+          "entity_recall_t10": {
+            "base_metric_rows": 30,
+            "variant_metric_rows": 30,
+            "shared_ids": 30
+          },
+          "knowledge_conflict_rate": {
+            "base_metric_rows": 30,
+            "variant_metric_rows": 30,
+            "shared_ids": 30
+          }
+        }
+      },
+      "metrics": {
+        "entity_recall_t10": {
+          "status": "ok",
+          "reason": "",
+          "n_pairs": 30,
+          "base": 1.0,
+          "variant": 1.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": [
+            "ctrl_c_001",
+            "ctrl_c_002",
+            "ctrl_c_003",
+            "ctrl_c_004",
+            "ctrl_c_005",
+            "ctrl_c_006",
+            "ctrl_c_007",
+            "ctrl_c_008",
+            "ctrl_c_009",
+            "ctrl_c_010",
+            "ctrl_c_011",
+            "ctrl_c_012",
+            "ctrl_c_013",
+            "ctrl_c_014",
+            "ctrl_c_015",
+            "ctrl_c_016",
+            "ctrl_c_017",
+            "ctrl_c_018",
+            "ctrl_c_019",
+            "ctrl_c_020",
+            "ctrl_c_021",
+            "ctrl_c_022",
+            "ctrl_c_023",
+            "ctrl_c_024",
+            "ctrl_c_025",
+            "ctrl_c_026",
+            "ctrl_c_027",
+            "ctrl_c_028",
+            "ctrl_c_029",
+            "ctrl_c_030"
+          ]
+        },
+        "knowledge_conflict_rate": {
+          "status": "ok",
+          "reason": "",
+          "n_pairs": 30,
+          "base": 0.0,
+          "variant": 0.0,
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "shared_ids": [
+            "ctrl_c_001",
+            "ctrl_c_002",
+            "ctrl_c_003",
+            "ctrl_c_004",
+            "ctrl_c_005",
+            "ctrl_c_006",
+            "ctrl_c_007",
+            "ctrl_c_008",
+            "ctrl_c_009",
+            "ctrl_c_010",
+            "ctrl_c_011",
+            "ctrl_c_012",
+            "ctrl_c_013",
+            "ctrl_c_014",
+            "ctrl_c_015",
+            "ctrl_c_016",
+            "ctrl_c_017",
+            "ctrl_c_018",
+            "ctrl_c_019",
+            "ctrl_c_020",
+            "ctrl_c_021",
+            "ctrl_c_022",
+            "ctrl_c_023",
+            "ctrl_c_024",
+            "ctrl_c_025",
+            "ctrl_c_026",
+            "ctrl_c_027",
+            "ctrl_c_028",
+            "ctrl_c_029",
+            "ctrl_c_030"
+          ]
+        }
+      }
+    }
+  ],
+  "stderr": "AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\n",
+  "lane": "controllability",
+  "model": "qwen3-lmstudio"
+}

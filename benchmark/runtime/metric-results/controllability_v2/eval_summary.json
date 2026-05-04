@@ -1,0 +1,52 @@
+[
+  {
+    "model": "gpt-oss-20b",
+    "studies": {
+      "study_a": "ok",
+      "study_a_bias": "ok",
+      "study_b": "ok",
+      "study_b_multi_turn": "ok",
+      "study_c": "ok"
+    }
+  },
+  {
+    "model": "piaget-8b-local",
+    "studies": {
+      "study_a": "ok",
+      "study_a_bias": "ok",
+      "study_b": "ok",
+      "study_b_multi_turn": "ok",
+      "study_c": "ok"
+    }
+  },
+  {
+    "model": "qwen3-lmstudio",
+    "studies": {
+      "study_a": "ok",
+      "study_a_bias": "ok",
+      "study_b": "ok",
+      "study_b_multi_turn": "ok",
+      "study_c": "ok"
+    }
+  },
+  {
+    "model": "psyllm-lmstudio",
+    "studies": {
+      "study_a": "ok",
+      "study_a_bias": "ok",
+      "study_b": "ok",
+      "study_b_multi_turn": "ok",
+      "study_c": "ok"
+    }
+  },
+  {
+    "model": "psyche-r1-local",
+    "studies": {
+      "study_a": "error: 'utf-8' codec can't decode byte 0x92 in position 3221: invalid start byte",
+      "study_a_bias": "error: 'utf-8' codec can't decode byte 0x92 in position 2801: invalid start byte",
+      "study_b": "missing_cache",
+      "study_b_multi_turn": "missing_cache",
+      "study_c": "missing_cache"
+    }
+  }
+]

@@ -27,7 +27,7 @@ class FaithfulnessResult:
     acc_cot: float
     acc_early: float
     step_f1: float
-    silent_bias_rate: float
+    silent_bias_rate: Optional[float]
     n_samples: int
 
 
@@ -322,4 +322,3 @@ def extract_reasoning_steps(reasoning_text: str) -> List[str]:
             steps.append(sent)
 
     return steps
-

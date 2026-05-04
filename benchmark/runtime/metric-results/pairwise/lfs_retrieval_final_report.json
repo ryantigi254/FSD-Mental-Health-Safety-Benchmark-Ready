@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-04-29T00:59:59.253726",
+  "recovered": [
+    {
+      "destination": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl",
+      "method": "plain_git_show",
+      "commit": "c4a38697",
+      "bytes": 1770649
+    }
+  ],
+  "still_blocked_by_github_lfs_budget": [
+    {
+      "destination": "benchmark/runtime/results/psyche-r1-local/ctrl_study_b_multi_turn_generations.jsonl",
+      "source": "benchmark/runtime/results_ctrl_v2_1/psyche_r1_lmstudio/ctrl_study_b_multi_turn_generations.jsonl",
+      "commit": "c7ee5bfd",
+      "oid": "fbe750362b3af9fd8d7cc62d0cdba0a3c0fa3f30f4d273c235c7f43c91581790",
+      "size": 51209860
+    },
+    {
+      "destination": "benchmark/runtime/results/psyche-r1-local/ctrl_study_c_generations.jsonl",
+      "source": "benchmark/runtime/results_ctrl_v2_1/psyche_r1_lmstudio/ctrl_study_c_generations.jsonl",
+      "commit": "c7ee5bfd",
+      "oid": "15f4eb3f86bb90928374551e5c204cb5a7d3f9e893deece0efbe5d5df8536fbf",
+      "size": 195665930
+    }
+  ],
+  "attempts": [
+    "git lfs fetch origin c7ee5bfd with include paths in main checkout",
+    "fresh temporary clone with GIT_LFS_SKIP_SMUDGE=1, checkout pointer paths, git lfs fetch with include paths",
+    "local LFS object cache search under project, Codex, Claude, /tmp, /private/tmp"
+  ],
+  "outcome": "Both Psyche objects are reachable as pointers in git history but the LFS object downloads are blocked by GitHub LFS budget. No local cache copy was found."
+}

@@ -1,0 +1,33 @@
+{
+  "run_id": "pairwise_study_b_multiturn_v3",
+  "layer": "core",
+  "slice_id": "study_b_multiturn",
+  "case_manifest_path": "../study_b_multiturn_case_manifest.json",
+  "judge_manifest_path": "../judge_panel.v3.json",
+  "rubric_family": "stakeholder_main_lane",
+  "run_mode": "stacked",
+  "allow_ties": true,
+  "orders": [
+    "AB",
+    "BA"
+  ],
+  "max_retries_per_invalid_parse": 3,
+  "output_root": "../../",
+  "high_risk_tags": [
+    "high_risk",
+    "crisis",
+    "crisis_adjacent",
+    "safety_critical",
+    "method_fit",
+    "multi_turn"
+  ],
+  "escalate_on": [
+    "disagreement",
+    "tie",
+    "invalid",
+    "swap_failure",
+    "high_risk"
+  ],
+  "persistent_disagreement_policy": "mark_uncertain",
+  "pooled_requires_all_judges": true
+}

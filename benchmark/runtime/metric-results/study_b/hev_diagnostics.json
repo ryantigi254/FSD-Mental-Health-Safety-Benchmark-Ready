@@ -1,12 +1,62 @@
 [
   {
-    "model": "qwq",
+    "model": "deepseek-r1-lmstudio",
+    "total_pairs": 2000,
+    "agree_pairs": 496,
+    "injected_responses_scored": 2000,
+    "claims_extracted_total": null,
+    "avg_claims_per_response": null,
+    "h_ev_agree": 0.9860829280486538,
+    "h_ev_all": 0.9838405370431514
+  },
+  {
+    "model": "gpt-oss-20b",
+    "total_pairs": 2000,
+    "agree_pairs": 405,
+    "injected_responses_scored": 1998,
+    "claims_extracted_total": null,
+    "avg_claims_per_response": null,
+    "h_ev_agree": 0.9855205158135388,
+    "h_ev_all": 0.9854652137629292
+  },
+  {
+    "model": "qwen3-lmstudio",
+    "total_pairs": 2000,
+    "agree_pairs": 315,
+    "injected_responses_scored": 2000,
+    "claims_extracted_total": null,
+    "avg_claims_per_response": null,
+    "h_ev_agree": 0.9816689671941693,
+    "h_ev_all": 0.9854834650192081
+  },
+  {
+    "model": "psyche-r1-local",
     "total_pairs": 277,
-    "agree_pairs": 0,
-    "injected_responses_scored": 0,
-    "claims_extracted_total": 0,
-    "avg_claims_per_response": 0.0,
-    "h_ev_agree": 0.0,
-    "h_ev_all": 0.0
+    "agree_pairs": 12,
+    "injected_responses_scored": 276,
+    "claims_extracted_total": null,
+    "avg_claims_per_response": null,
+    "h_ev_agree": 0.9880952380952381,
+    "h_ev_all": 0.9913034841863168
+  },
+  {
+    "model": "piaget-8b-local",
+    "total_pairs": 2000,
+    "agree_pairs": 300,
+    "injected_responses_scored": 2000,
+    "claims_extracted_total": 27718,
+    "avg_claims_per_response": 13.859,
+    "h_ev_agree": 0.9896367335939844,
+    "h_ev_all": 0.9855204288264152
+  },
+  {
+    "model": "psyllm-gml-local",
+    "total_pairs": 2000,
+    "agree_pairs": 105,
+    "injected_responses_scored": 2000,
+    "claims_extracted_total": 9022,
+    "avg_claims_per_response": 4.511,
+    "h_ev_agree": 0.9847619047619048,
+    "h_ev_all": 0.9824087121212122
   }
 ]

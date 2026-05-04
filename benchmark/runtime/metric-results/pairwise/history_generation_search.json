@@ -1,0 +1,229 @@
+{
+  "missing_targets": [
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_a",
+      "filename": "ctrl_study_a_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "invariance",
+      "study": "study_a",
+      "filename": "study_a_invariance_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "ctrl-invariance",
+      "study": "study_a",
+      "filename": "study_a_invariance_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_a_bias",
+      "filename": "ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "invariance",
+      "study": "study_a_bias",
+      "filename": "study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "ctrl-invariance",
+      "study": "study_a_bias",
+      "filename": "study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_b",
+      "filename": "ctrl_study_b_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "invariance",
+      "study": "study_b",
+      "filename": "study_b_invariance_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "ctrl-invariance",
+      "study": "study_b",
+      "filename": "study_b_invariance_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_b_multi_turn",
+      "filename": "ctrl_study_b_multi_turn_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "invariance",
+      "study": "study_b_multi_turn",
+      "filename": "study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "ctrl-invariance",
+      "study": "study_b_multi_turn",
+      "filename": "study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_c",
+      "filename": "ctrl_study_c_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "invariance",
+      "study": "study_c",
+      "filename": "study_c_invariance_generations.jsonl"
+    },
+    {
+      "model": "deepseek-r1-lmstudio",
+      "lane": "ctrl-invariance",
+      "study": "study_c",
+      "filename": "study_c_invariance_generations.jsonl"
+    },
+    {
+      "model": "psyche-r1-local",
+      "lane": "ctrl-invariance",
+      "study": "study_a",
+      "filename": "study_a_invariance_generations.jsonl"
+    },
+    {
+      "model": "psyche-r1-local",
+      "lane": "controllability",
+      "study": "study_b",
+      "filename": "ctrl_study_b_generations.jsonl"
+    },
+    {
+      "model": "psyche-r1-local",
+      "lane": "ctrl-invariance",
+      "study": "study_b",
+      "filename": "study_b_invariance_generations.jsonl"
+    },
+    {
+      "model": "psyche-r1-local",
+      "lane": "controllability",
+      "study": "study_b_multi_turn",
+      "filename": "ctrl_study_b_multi_turn_generations.jsonl"
+    },
+    {
+      "model": "psyche-r1-local",
+      "lane": "invariance",
+      "study": "study_b_multi_turn",
+      "filename": "study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "model": "psyche-r1-local",
+      "lane": "ctrl-invariance",
+      "study": "study_b_multi_turn",
+      "filename": "study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "model": "psyche-r1-local",
+      "lane": "controllability",
+      "study": "study_c",
+      "filename": "ctrl_study_c_generations.jsonl"
+    },
+    {
+      "model": "psyche-r1-local",
+      "lane": "invariance",
+      "study": "study_c",
+      "filename": "study_c_invariance_generations.jsonl"
+    },
+    {
+      "model": "psyche-r1-local",
+      "lane": "ctrl-invariance",
+      "study": "study_c",
+      "filename": "study_c_invariance_generations.jsonl"
+    }
+  ],
+  "findings": [
+    {
+      "canonical_model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_a_bias",
+      "filename": "ctrl_study_a_bias_generations.jsonl",
+      "branch": "origin/controllability-v2.1",
+      "commit": "c4a3869745abfaac61c9bdfc86a391a8c3eceeb9",
+      "commit_iso": "2026-03-15T21:21:26Z",
+      "subject": "feat(controllability): add gpt-oss controllability generations",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "canonical_model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_a_bias",
+      "filename": "ctrl_study_a_bias_generations.jsonl",
+      "branch": "origin/v6.1-parent-data",
+      "commit": "c4a3869745abfaac61c9bdfc86a391a8c3eceeb9",
+      "commit_iso": "2026-03-15T21:21:26Z",
+      "subject": "feat(controllability): add gpt-oss controllability generations",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "canonical_model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_a_bias",
+      "filename": "ctrl_study_a_bias_generations.jsonl",
+      "branch": "origin/v6.1-parent-data",
+      "commit": "8e6f2bf8b4faa393111fe7d379e4ed5fd792ce44",
+      "commit_iso": "2026-03-14T03:30:14Z",
+      "subject": "feat(analysis): regroup controllability figures and expand radar series",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "canonical_model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_a_bias",
+      "filename": "ctrl_study_a_bias_generations.jsonl",
+      "branch": "origin/v6.1-parent-data",
+      "commit": "0a68d5e62cc490b9a70f823306fbc841002e18bb",
+      "commit_iso": "2026-03-14T02:20:02Z",
+      "subject": "feat(controllability): preserve probe-backed v5 gold provenance",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "canonical_model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_a_bias",
+      "filename": "ctrl_study_a_bias_generations.jsonl",
+      "branch": "origin/v6.1-parent-data",
+      "commit": "1ad25d9d365ca1aca4b70384544ba52d8f229847",
+      "commit_iso": "2026-03-13T22:05:45Z",
+      "subject": "fix(controllability): resolve clinician-readiness blockers",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "canonical_model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_a_bias",
+      "filename": "ctrl_study_a_bias_generations.jsonl",
+      "branch": "origin/v6.1-parent-data",
+      "commit": "b3565bb5a351f7ad6d3bf01f1067acfbcf1b207d",
+      "commit_iso": "2026-03-13T22:05:45Z",
+      "subject": "chore(docs): justify readiness and re-home scaled plots",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl"
+    }
+  ],
+  "chosen": [
+    {
+      "canonical_model": "deepseek-r1-lmstudio",
+      "lane": "controllability",
+      "study": "study_a_bias",
+      "filename": "ctrl_study_a_bias_generations.jsonl",
+      "branch": "origin/controllability-v2.1",
+      "commit": "c4a3869745abfaac61c9bdfc86a391a8c3eceeb9",
+      "commit_iso": "2026-03-15T21:21:26Z",
+      "subject": "feat(controllability): add gpt-oss controllability generations",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl"
+    }
+  ]
+}

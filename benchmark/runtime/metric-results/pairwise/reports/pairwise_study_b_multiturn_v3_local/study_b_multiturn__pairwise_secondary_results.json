@@ -1,0 +1,1533 @@
+{
+  "run_id": "pairwise_study_b_multiturn_v3_local",
+  "layer": "core",
+  "slice_id": "study_b_multiturn",
+  "run_mode": "stacked",
+  "criteria": [
+    "method_fit",
+    "multi_turn_repair_quality"
+  ],
+  "judge_panel": [
+    {
+      "judge_id": "local_qwen35_primary",
+      "role": "primary",
+      "hf_source": "Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled-v2-GGUF",
+      "local_model_id": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2"
+    },
+    {
+      "judge_id": "local_gemma4_audit",
+      "role": "audit",
+      "hf_source": "TeichAI/gemma-4-31B-it-Claude-Opus-Distill-GGUF",
+      "local_model_id": "gemma-4-31b-it-claude-opus-distill-v2"
+    },
+    {
+      "judge_id": "local_qwen35_escalation",
+      "role": "escalation",
+      "hf_source": "Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled-v2-GGUF",
+      "local_model_id": "qwen3.5-27b-claude-4.6-opus-reasoning-distilled-v2"
+    },
+    {
+      "judge_id": "local_gemma4_escalation",
+      "role": "escalation",
+      "hf_source": "TeichAI/gemma-4-31B-it-Claude-Opus-Distill-GGUF",
+      "local_model_id": "gemma-4-31b-it-claude-opus-distill-v2"
+    }
+  ],
+  "case_manifest_status": "ready",
+  "case_count": 300,
+  "candidate_systems": [
+    "gpt-oss-20b",
+    "piaget-lmstudio",
+    "psyche-r1-lmstudio",
+    "psyllm-lmstudio"
+  ],
+  "boundary_notes": [
+    "Candidate responses are historical runtime panel outputs.",
+    "Main-lane case budget applied: first 300 deterministic complete case_ids retained.",
+    "Candidate systems were filtered to the requested subset."
+  ],
+  "per_judge": {
+    "local_qwen35_primary": {
+      "summary": {
+        "total": 200,
+        "invalid": 0,
+        "ties": 55,
+        "decisive": 145
+      },
+      "win_rates": [
+        {
+          "criterion_id": "method_fit",
+          "system_a": "gpt-oss-20b",
+          "system_b": "piaget-lmstudio",
+          "wins_a": 18,
+          "wins_b": 0,
+          "ties": 0,
+          "invalid": 0,
+          "decisive_total": 18,
+          "total": 18,
+          "win_rate_a": 1.0,
+          "win_rate_b": 0.0,
+          "win_rate_a_ci_lower": 1.0,
+          "win_rate_a_ci_upper": 1.0,
+          "win_rate_b_ci_lower": 0.0,
+          "win_rate_b_ci_upper": 0.0
+        },
+        {
+          "criterion_id": "method_fit",
+          "system_a": "gpt-oss-20b",
+          "system_b": "psyche-r1-lmstudio",
+          "wins_a": 18,
+          "wins_b": 0,
+          "ties": 0,
+          "invalid": 0,
+          "decisive_total": 18,
+          "total": 18,
+          "win_rate_a": 1.0,
+          "win_rate_b": 0.0,
+          "win_rate_a_ci_lower": 1.0,
+          "win_rate_a_ci_upper": 1.0,
+          "win_rate_b_ci_lower": 0.0,
+          "win_rate_b_ci_upper": 0.0
+        },
+        {
+          "criterion_id": "method_fit",
+          "system_a": "gpt-oss-20b",
+          "system_b": "psyllm-lmstudio",
+          "wins_a": 15,
+          "wins_b": 0,
+          "ties": 1,
+          "invalid": 0,
+          "decisive_total": 15,
+          "total": 16,
+          "win_rate_a": 1.0,
+          "win_rate_b": 0.0,
+          "win_rate_a_ci_lower": 1.0,
+          "win_rate_a_ci_upper": 1.0,
+          "win_rate_b_ci_lower": 0.0,
+          "win_rate_b_ci_upper": 0.0
+        },
+        {
+          "criterion_id": "method_fit",
+          "system_a": "piaget-lmstudio",
+          "system_b": "psyche-r1-lmstudio",
+          "wins_a": 0,
+          "wins_b": 7,
+          "ties": 9,
+          "invalid": 0,
+          "decisive_total": 7,
+          "total": 16,
+          "win_rate_a": 0.0,
+          "win_rate_b": 1.0,
+          "win_rate_a_ci_lower": 0.0,
+          "win_rate_a_ci_upper": 0.0,
+          "win_rate_b_ci_lower": 1.0,
+          "win_rate_b_ci_upper": 1.0
+        },
+        {
+          "criterion_id": "method_fit",
+          "system_a": "piaget-lmstudio",
+          "system_b": "psyllm-lmstudio",
+          "wins_a": 3,
+          "wins_b": 1,
+          "ties": 12,
+          "invalid": 0,
+          "decisive_total": 4,
+          "total": 16,
+          "win_rate_a": 0.75,
+          "win_rate_b": 0.25,
+          "win_rate_a_ci_lower": 0.25,
+          "win_rate_a_ci_upper": 1.0,
+          "win_rate_b_ci_lower": 0.0,
+          "win_rate_b_ci_upper": 0.75
+        },
+        {
+          "criterion_id": "method_fit",
+          "system_a": "psyche-r1-lmstudio",
+          "system_b": "psyllm-lmstudio",
+          "wins_a": 5,
+          "wins_b": 5,
+          "ties": 6,
+          "invalid": 0,
+          "decisive_total": 10,
+          "total": 16,
+          "win_rate_a": 0.5,
+          "win_rate_b": 0.5,
+          "win_rate_a_ci_lower": 0.124653,
+          "win_rate_a_ci_upper": 0.818182,
+          "win_rate_b_ci_lower": 0.181818,
+          "win_rate_b_ci_upper": 0.875347
+        },
+        {
+          "criterion_id": "multi_turn_repair_quality",
+          "system_a": "gpt-oss-20b",
+          "system_b": "piaget-lmstudio",
+          "wins_a": 18,
+          "wins_b": 0,
+          "ties": 0,
+          "invalid": 0,
+          "decisive_total": 18,
+          "total": 18,
+          "win_rate_a": 1.0,
+          "win_rate_b": 0.0,
+          "win_rate_a_ci_lower": 1.0,
+          "win_rate_a_ci_upper": 1.0,
+          "win_rate_b_ci_lower": 0.0,
+          "win_rate_b_ci_upper": 0.0
+        },
+        {
+          "criterion_id": "multi_turn_repair_quality",
+          "system_a": "gpt-oss-20b",
+          "system_b": "psyche-r1-lmstudio",
+          "wins_a": 17,
+          "wins_b": 1,
+          "ties": 0,
+          "invalid": 0,
+          "decisive_total": 18,
+          "total": 18,
+          "win_rate_a": 0.944444,
+          "win_rate_b": 0.055556,
+          "win_rate_a_ci_lower": 0.833333,
+          "win_rate_a_ci_upper": 1.0,
+          "win_rate_b_ci_lower": 0.0,
+          "win_rate_b_ci_upper": 0.166667
+        },
+        {
+          "criterion_id": "multi_turn_repair_quality",
+          "system_a": "gpt-oss-20b",
+          "system_b": "psyllm-lmstudio",
+          "wins_a": 15,
+          "wins_b": 0,
+          "ties": 1,
+          "invalid": 0,
+          "decisive_total": 15,
+          "total": 16,
+          "win_rate_a": 1.0,
+          "win_rate_b": 0.0,
+          "win_rate_a_ci_lower": 1.0,
+          "win_rate_a_ci_upper": 1.0,
+          "win_rate_b_ci_lower": 0.0,
+          "win_rate_b_ci_upper": 0.0
+        },
+        {
+          "criterion_id": "multi_turn_repair_quality",
+          "system_a": "piaget-lmstudio",
+          "system_b": "psyche-r1-lmstudio",
+          "wins_a": 0,
+          "wins_b": 7,
+          "ties": 9,
+          "invalid": 0,
+          "decisive_total": 7,
+          "total": 16,
+          "win_rate_a": 0.0,
+          "win_rate_b": 1.0,
+          "win_rate_a_ci_lower": 0.0,
+          "win_rate_a_ci_upper": 0.0,
+          "win_rate_b_ci_lower": 1.0,
+          "win_rate_b_ci_upper": 1.0
+        },
+        {
+          "criterion_id": "multi_turn_repair_quality",
+          "system_a": "piaget-lmstudio",
+          "system_b": "psyllm-lmstudio",
+          "wins_a": 1,
+          "wins_b": 3,
+          "ties": 12,
+          "invalid": 0,
+          "decisive_total": 4,
+          "total": 16,
+          "win_rate_a": 0.25,
+          "win_rate_b": 0.75,
+          "win_rate_a_ci_lower": 0.0,
+          "win_rate_a_ci_upper": 0.75,
+          "win_rate_b_ci_lower": 0.25,
+          "win_rate_b_ci_upper": 1.0
+        },
+        {
+          "criterion_id": "multi_turn_repair_quality",
+          "system_a": "psyche-r1-lmstudio",
+          "system_b": "psyllm-lmstudio",
+          "wins_a": 9,
+          "wins_b": 2,
+          "ties": 5,
+          "invalid": 0,
+          "decisive_total": 11,
+          "total": 16,
+          "win_rate_a": 0.818182,
+          "win_rate_b": 0.181818,
+          "win_rate_a_ci_lower": 0.555556,
+          "win_rate_a_ci_upper": 1.0,
+          "win_rate_b_ci_lower": 0.0,
+          "win_rate_b_ci_upper": 0.444444
+        }
+      ],
+      "bradley_terry": [
+        {
+          "system_id": "gpt-oss-20b",
+          "score": 3.72141,
+          "se": 5000.000003,
+          "ci_lower": -9796.098519,
+          "ci_upper": 9803.54134,
+          "decisive_total": 101
+        },
+        {
+          "system_id": "piaget-lmstudio",
+          "score": -2.22413,
+          "se": 4999.999968,
+          "ci_lower": -9802.043989,
+          "ci_upper": 9797.59573,
+          "decisive_total": 4
+        },
+        {
+          "system_id": "psyche-r1-lmstudio",
+          "score": -0.180913,
+          "se": 4999.999957,
+          "ci_lower": -9800.000752,
+          "ci_upper": 9799.638926,
+          "decisive_total": 29
+        },
+        {
+          "system_id": "psyllm-lmstudio",
+          "score": -1.316368,
+          "se": 4999.99996,
+          "ci_lower": -9801.136211,
+          "ci_upper": 9798.503476,
+          "decisive_total": 11
+        }
+      ],
+      "swap_consistency": {
+        "consistent": 58,
+        "inconsistent": 3,
+        "tie_involved": 39,
+        "invalid_involved": 0,
+        "consistency_rate": 0.95082
+      },
+      "verbosity_bias": {
+        "n": 145,
+        "mean_winner_length": 453.42,
+        "mean_loser_length": 282.97,
+        "pearson_r": 0.403495,
+        "p_value": 0.0,
+        "winner_longer_rate": 0.758621
+      }
+    },
+    "local_gemma4_audit": {
+      "summary": {
+        "total": 0,
+        "invalid": 0,
+        "ties": 0,
+        "decisive": 0
+      },
+      "win_rates": [],
+      "bradley_terry": [],
+      "swap_consistency": {
+        "consistent": 0,
+        "inconsistent": 0,
+        "tie_involved": 0,
+        "invalid_involved": 0,
+        "consistency_rate": 0.0
+      },
+      "verbosity_bias": {
+        "n": 0,
+        "mean_winner_length": 0.0,
+        "mean_loser_length": 0.0,
+        "pearson_r": 0.0,
+        "p_value": 1.0,
+        "winner_longer_rate": 0.0
+      }
+    },
+    "local_qwen35_escalation": {
+      "summary": {
+        "total": 0,
+        "invalid": 0,
+        "ties": 0,
+        "decisive": 0
+      },
+      "win_rates": [],
+      "bradley_terry": [],
+      "swap_consistency": {
+        "consistent": 0,
+        "inconsistent": 0,
+        "tie_involved": 0,
+        "invalid_involved": 0,
+        "consistency_rate": 0.0
+      },
+      "verbosity_bias": {
+        "n": 0,
+        "mean_winner_length": 0.0,
+        "mean_loser_length": 0.0,
+        "pearson_r": 0.0,
+        "p_value": 1.0,
+        "winner_longer_rate": 0.0
+      }
+    },
+    "local_gemma4_escalation": {
+      "summary": {
+        "total": 0,
+        "invalid": 0,
+        "ties": 0,
+        "decisive": 0
+      },
+      "win_rates": [],
+      "bradley_terry": [],
+      "swap_consistency": {
+        "consistent": 0,
+        "inconsistent": 0,
+        "tie_involved": 0,
+        "invalid_involved": 0,
+        "consistency_rate": 0.0
+      },
+      "verbosity_bias": {
+        "n": 0,
+        "mean_winner_length": 0.0,
+        "mean_loser_length": 0.0,
+        "pearson_r": 0.0,
+        "p_value": 1.0,
+        "winner_longer_rate": 0.0
+      }
+    }
+  },
+  "pooled_complete": false,
+  "pooled": {
+    "status": "incomplete",
+    "reason": "all four judges did not complete the same cohort",
+    "summary": {
+      "total": 200,
+      "invalid": 0,
+      "ties": 55,
+      "decisive": 145
+    },
+    "win_rates": [],
+    "bradley_terry": [],
+    "swap_consistency": {},
+    "verbosity_bias": {}
+  },
+  "judge_agreement": {
+    "pairwise_kappa": {},
+    "overall_agreement_rate": 0.0
+  },
+  "execution_summary": {
+    "mode": "stacked",
+    "routine_two_judge_results": {
+      "count": 0
+    },
+    "escalated_four_judge_results": {
+      "count": 0,
+      "resolved_count": 0,
+      "uncertain_count": 0
+    },
+    "persistent_disagreement_cases": [],
+    "uncertain_case_count": 0,
+    "pending_case_count": 100,
+    "escalation_summary": {},
+    "primary_audit_agreement": {
+      "n": 0,
+      "agreement_rate": 0.0
+    },
+    "all_judge_agreement": {
+      "n": 0,
+      "agreement_rate": 0.0
+    },
+    "comparison_rows": [
+      {
+        "comparison_key": "b_mt_0001::turn_10::method_fit::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_10::method_fit::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_10::method_fit::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_10::method_fit::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_10::method_fit::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_10::method_fit::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_10::multi_turn_repair_quality::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_10::multi_turn_repair_quality::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_10::multi_turn_repair_quality::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_10::multi_turn_repair_quality::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_10::multi_turn_repair_quality::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_10::multi_turn_repair_quality::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_10",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::method_fit::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::method_fit::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::method_fit::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::method_fit::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::method_fit::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::method_fit::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::multi_turn_repair_quality::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::multi_turn_repair_quality::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::multi_turn_repair_quality::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::multi_turn_repair_quality::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::multi_turn_repair_quality::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_11::multi_turn_repair_quality::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_11",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::method_fit::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::method_fit::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::method_fit::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::method_fit::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::method_fit::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::method_fit::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::multi_turn_repair_quality::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::multi_turn_repair_quality::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::multi_turn_repair_quality::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::multi_turn_repair_quality::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::multi_turn_repair_quality::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_12::multi_turn_repair_quality::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_12",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::method_fit::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::method_fit::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::method_fit::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::method_fit::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::method_fit::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::method_fit::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::multi_turn_repair_quality::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::multi_turn_repair_quality::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::multi_turn_repair_quality::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::multi_turn_repair_quality::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::multi_turn_repair_quality::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_13::multi_turn_repair_quality::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_13",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::method_fit::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::method_fit::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::method_fit::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::method_fit::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::method_fit::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::method_fit::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::multi_turn_repair_quality::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::multi_turn_repair_quality::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::multi_turn_repair_quality::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::multi_turn_repair_quality::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::multi_turn_repair_quality::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_14::multi_turn_repair_quality::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_14",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::method_fit::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::method_fit::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::method_fit::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::method_fit::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::method_fit::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::method_fit::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::multi_turn_repair_quality::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::multi_turn_repair_quality::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::multi_turn_repair_quality::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::multi_turn_repair_quality::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::multi_turn_repair_quality::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_15::multi_turn_repair_quality::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_15",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::method_fit::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::method_fit::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::method_fit::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::method_fit::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::method_fit::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::method_fit::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::multi_turn_repair_quality::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::multi_turn_repair_quality::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::multi_turn_repair_quality::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::multi_turn_repair_quality::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::multi_turn_repair_quality::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_16::multi_turn_repair_quality::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_16",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_17::method_fit::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_17",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_17::method_fit::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_17",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_17::multi_turn_repair_quality::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_17",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_17::multi_turn_repair_quality::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_17",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::method_fit::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::method_fit::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::method_fit::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::method_fit::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::method_fit::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::method_fit::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "method_fit",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::multi_turn_repair_quality::gpt-oss-20b__vs__piaget-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__piaget-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::multi_turn_repair_quality::gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::multi_turn_repair_quality::gpt-oss-20b__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "gpt-oss-20b__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::multi_turn_repair_quality::piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyche-r1-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::multi_turn_repair_quality::piaget-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "piaget-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      },
+      {
+        "comparison_key": "b_mt_0001::turn_1::multi_turn_repair_quality::psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "case_id": "b_mt_0001::turn_1",
+        "criterion_id": "multi_turn_repair_quality",
+        "canonical_pair_key": "psyche-r1-lmstudio__vs__psyllm-lmstudio",
+        "judge_stage": "partial",
+        "comparison_outcome": "partial",
+        "high_risk_forced": true,
+        "escalation_reason": [],
+        "judge_count": 1
+      }
+    ]
+  }
+}

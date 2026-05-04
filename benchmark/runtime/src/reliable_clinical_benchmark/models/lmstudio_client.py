@@ -87,7 +87,7 @@ def chat_completion(
     model: str,
     messages: List[Dict[str, str]],
     temperature: float,
-    max_tokens: int,
+    max_tokens: Optional[int],
     top_p: float,
     timeout: Optional[Union[int, Tuple[int, Optional[int]]]] = None,
     api_key: Optional[str] = None,
@@ -102,11 +102,12 @@ def chat_completion(
     - Logging for debugging
 
     Args:
-        api_base: Base URL for LM Studio API (e.g., "http://localhost:1234/v1")
+        api_base: Base URL for LM Studio API (e.g., "http://localhost:1234/api/v1" or "http://localhost:1234/v1")
         model: Model name/identifier as recognised by LM Studio
         messages: List of message dicts with "role" and "content" keys
         temperature: Sampling temperature (0.0-2.0)
-        max_tokens: Maximum tokens to generate
+        max_tokens: Maximum tokens to generate. If None, omit the request-side
+            limit and let LM Studio's loaded-model/server settings decide.
         top_p: Nucleus sampling parameter
         timeout: Request timeout in seconds. If None, no timeout (default: None).
                  Can be a tuple (connect_timeout, read_timeout) for fine-grained control.
@@ -122,24 +123,48 @@ def chat_completion(
     Example:
         >>> messages = [{"role": "user", "content": "What is depression?"}]
         >>> response = chat_completion(
-        ...     api_base="http://localhost:1234/v1",
+        ...     api_base="http://localhost:1234/api/v1",
         ...     model="PsyLLM-8B",
         ...     messages=messages,
         ...     temperature=0.7,
-        ...     max_tokens=512,
+        ...     max_tokens=None,
         ...     top_p=0.9
         ... )
     """
-    endpoint = f"{api_base}/chat/completions"
+    api_base = api_base.rstrip("/")
+    use_rest_chat = api_base.endswith("/api/v1")
+    endpoint = (
+        f"{api_base}/chat"
+        if use_rest_chat
+        else f"{api_base}/chat/completions"
+    )
 
-    payload: Dict[str, Any] = {
-        "model": model,
-        "messages": messages,
-        "temperature": temperature,
-        "max_tokens": max_tokens,
-        "top_p": top_p,
-        "tool_choice": "none",
-    }
+    if use_rest_chat:
+        system_prompt = "\n\n".join(
+            str(message.get("content", ""))
+            for message in messages
+            if message.get("role") == "system"
+        )
+        input_text = "\n\n".join(
+            str(message.get("content", ""))
+            for message in messages
+            if message.get("role") != "system"
+        )
+        payload: Dict[str, Any] = {
+            "model": model,
+            "system_prompt": system_prompt,
+            "input": input_text,
+        }
+    else:
+        payload = {
+            "model": model,
+            "messages": messages,
+            "temperature": temperature,
+            "top_p": top_p,
+            "tool_choice": "none",
+        }
+        if max_tokens is not None:
+            payload["max_tokens"] = max_tokens
 
     # Use tuple timeout: (connect_timeout, read_timeout)
     # Connect timeout: 30s to fail fast if server is down
@@ -168,6 +193,11 @@ def chat_completion(
         )
         response.raise_for_status()
         result = response.json()
+
+        if use_rest_chat:
+            output = result.get("output", "")
+            content_text, content_reasoning = _split_content_and_reasoning(output)
+            return content_text or content_reasoning
 
         choice = result["choices"][0]["message"]
         content_text, content_reasoning = _split_content_and_reasoning(

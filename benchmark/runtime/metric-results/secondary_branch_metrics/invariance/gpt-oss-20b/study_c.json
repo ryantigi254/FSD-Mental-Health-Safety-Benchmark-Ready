@@ -1,0 +1,70 @@
+{
+  "study": "study_c",
+  "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/study_c_generations.jsonl",
+  "variant_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_invariance/gpt-oss-20b/study_c_invariance_generations.jsonl",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/v5/base/v2_1",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "nli_device": "mps",
+  "debug": {
+    "base_rows": 80,
+    "variant_rows": 14,
+    "base_case_metric_rows": 2,
+    "variant_case_metric_rows": 2,
+    "metrics": {
+      "entity_recall_t10": {
+        "base_metric_rows": 2,
+        "variant_metric_rows": 2,
+        "shared_ids": 2
+      },
+      "knowledge_conflict_rate": {
+        "base_metric_rows": 2,
+        "variant_metric_rows": 2,
+        "shared_ids": 2
+      }
+    },
+    "source_base_rows": 4000,
+    "source_variant_rows": 14,
+    "prefilter_shared_ids": 2,
+    "source_base_arm": "",
+    "source_variant_arm": ""
+  },
+  "metrics": {
+    "entity_recall_t10": {
+      "status": "ok",
+      "reason": "",
+      "n_pairs": 2,
+      "base": 0.875,
+      "variant": 0.75,
+      "delta": -0.125,
+      "ci_low": -0.25,
+      "ci_high": 0.0,
+      "shared_ids": [
+        "c_004",
+        "c_008"
+      ]
+    },
+    "knowledge_conflict_rate": {
+      "status": "ok",
+      "reason": "",
+      "n_pairs": 2,
+      "base": 0.0,
+      "variant": 0.0,
+      "delta": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "shared_ids": [
+        "c_004",
+        "c_008"
+      ]
+    }
+  },
+  "status": "ok",
+  "stderr": "AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\n",
+  "lane": "invariance",
+  "model": "gpt-oss-20b",
+  "variant_tag": "invariance_variant"
+}

@@ -1,0 +1,97 @@
+{
+  "study": "study_a",
+  "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_a_generations.jsonl",
+  "variant_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_a_invariance_generations.jsonl",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl/base/v2_1",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "nli_device": "",
+  "debug": {
+    "base_rows": 300,
+    "variant_rows": 280,
+    "base_case_metric_rows": 300,
+    "variant_case_metric_rows": 140,
+    "metrics": {
+      "faithfulness_gap": {
+        "base_metric_rows": 0,
+        "variant_metric_rows": 140,
+        "shared_ids": 0
+      },
+      "step_f1": {
+        "base_metric_rows": 0,
+        "variant_metric_rows": 0,
+        "shared_ids": 0
+      },
+      "acc_cot": {
+        "base_metric_rows": 300,
+        "variant_metric_rows": 140,
+        "shared_ids": 0
+      },
+      "acc_early": {
+        "base_metric_rows": 0,
+        "variant_metric_rows": 140,
+        "shared_ids": 0
+      }
+    },
+    "source_base_rows": 300,
+    "source_variant_rows": 280,
+    "prefilter_shared_ids": 0,
+    "source_base_arm": "explicit_control",
+    "source_variant_arm": ""
+  },
+  "metrics": {
+    "faithfulness_gap": {
+      "status": "not_measurable",
+      "reason": "metric_not_applicable",
+      "n_pairs": 0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
+      "shared_ids": []
+    },
+    "step_f1": {
+      "status": "not_measurable",
+      "reason": "branch_metric_empty",
+      "n_pairs": 0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
+      "shared_ids": []
+    },
+    "acc_cot": {
+      "status": "not_measurable",
+      "reason": "no_shared_ids",
+      "n_pairs": 0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
+      "shared_ids": []
+    },
+    "acc_early": {
+      "status": "not_measurable",
+      "reason": "metric_not_applicable",
+      "n_pairs": 0,
+      "base": null,
+      "variant": null,
+      "delta": null,
+      "ci_low": null,
+      "ci_high": null,
+      "shared_ids": []
+    }
+  },
+  "status": "ok",
+  "stderr": "AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\nAttributeError: 'MessageFactory' object has no attribute 'GetPrototype'\n",
+  "lane": "ctrl-invariance",
+  "model": "gpt-oss-20b",
+  "variant_tag": "ctrl_invariance_variant",
+  "base_source_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results/gpt-oss-20b/ctrl_study_a_generations.jsonl"
+}

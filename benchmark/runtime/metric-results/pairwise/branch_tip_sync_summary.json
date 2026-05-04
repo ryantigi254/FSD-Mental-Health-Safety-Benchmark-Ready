@@ -1,0 +1,1313 @@
+{
+  "generated_at": "2026-04-28T23:39:54.690899+00:00",
+  "branch_tips": [
+    {
+      "ref": "origin/codex/worker-system-all-studies-port",
+      "commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "commit_iso": "2026-04-17T17:46:29+01:00"
+    },
+    {
+      "ref": "origin/metric-invariance",
+      "commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "commit_iso": "2026-04-27T15:10:35+01:00"
+    },
+    {
+      "ref": "origin/controllability-v2.1",
+      "commit": "a218fd23fb5050d2e4d08fa1897b2af18793750f",
+      "commit_iso": "2026-04-22T05:57:42+01:00"
+    },
+    {
+      "ref": "origin/v6.1-parent-data",
+      "commit": "cd6b16f7792f7420d933314be59efd0d88aae29c",
+      "commit_iso": "2026-04-01T17:26:41+01:00"
+    }
+  ],
+  "copied_files": [
+    {
+      "destination": "benchmark/runtime/results/deepseek-r1-lmstudio/study_a_bias_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/deepseek-r1-lmstudio/study_a_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/study_a_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/deepseek-r1-lmstudio/study_b_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/study_b_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/deepseek-r1-lmstudio/study_b_multi_turn_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/study_b_multi_turn_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/deepseek-r1-lmstudio/study_c_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/study_c_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/gpt-oss-20b/study_a_bias_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/gpt-oss-20b/study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/gpt-oss-20b/study_a_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/gpt-oss-20b/study_a_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/gpt-oss-20b/study_b_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/gpt-oss-20b/study_b_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/gpt-oss-20b/study_b_multi_turn_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/gpt-oss-20b/study_b_multi_turn_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/gpt-oss-20b/study_c_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/gpt-oss-20b/study_c_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/piaget-8b-local/study_b_multi_turn_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results/piaget-lmstudio/study_b_multi_turn_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/piaget-8b-local/study_c_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results/piaget-lmstudio/study_c_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/psych-qwen-space-api/study_a_bias_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/psych-qwen-space-api/study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/psyllm-lmstudio/study_a_bias_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results/psyllm-lmstudio/study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/psyllm-lmstudio/study_a_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results/psyllm-lmstudio/study_a_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/psyllm-lmstudio/study_b_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results/psyllm-lmstudio/study_b_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/psyllm-lmstudio/study_b_multi_turn_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results/psyllm-lmstudio/study_b_multi_turn_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/psyllm-lmstudio/study_c_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results/psyllm-lmstudio/study_c_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3-lmstudio/study_a_bias_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/qwen3-lmstudio/study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3-lmstudio/study_a_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/qwen3-lmstudio/study_a_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3-lmstudio/study_b_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/qwen3-lmstudio/study_b_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3-lmstudio/study_b_multi_turn_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/qwen3-lmstudio/study_b_multi_turn_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results/qwen3-lmstudio/study_c_generations.jsonl",
+      "source_ref": "origin/codex/worker-system-all-studies-port",
+      "source_commit": "bfa22fe0581154b830f3a5ee02c31fdba3061c86",
+      "source_path": "benchmark/runtime/results/qwen3-lmstudio/study_c_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_b_multi_turn_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_c_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/gpt-oss-20b/study_c_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/medgemma-lmstudio/ctrl_study_a_bias_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/medgemma_lmstudio/ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/medgemma-lmstudio/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/medgemma_lmstudio/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/medgemma-lmstudio/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/medgemma_lmstudio/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/piaget-8b-local/ctrl_study_a_bias_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/piaget-lmstudio/ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/piaget-8b-local/ctrl_study_a_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/piaget-lmstudio/ctrl_study_a_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/piaget-8b-local/ctrl_study_b_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/piaget-lmstudio/ctrl_study_b_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/piaget-8b-local/ctrl_study_b_multi_turn_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/piaget-lmstudio/ctrl_study_b_multi_turn_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/piaget-8b-local/ctrl_study_c_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/piaget-lmstudio/ctrl_study_c_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/piaget-8b-local/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/piaget-8b-local/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/piaget-8b-local/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/piaget-8b-local/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/piaget-8b-local/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/piaget-8b-local/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/piaget-8b-local/study_b_multi_turn_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/piaget-8b-local/study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/piaget-8b-local/study_c_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/piaget-8b-local/study_c_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyche-r1-local/ctrl_study_a_bias_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/psyche-r1-lmstudio/ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyche-r1-local/ctrl_study_a_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/psyche-r1-lmstudio/ctrl_study_a_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyche-r1-local/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/psyche-r1-lmstudio/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/ctrl_study_a_bias_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/ctrl_study_a_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/ctrl_study_a_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/ctrl_study_b_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/ctrl_study_b_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/ctrl_study_b_multi_turn_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/ctrl_study_b_multi_turn_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/ctrl_study_c_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/ctrl_study_c_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/psyllm-lmstudio/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/psyllm-lmstudio/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/psyllm-lmstudio/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/study_b_multi_turn_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/psyllm-lmstudio/study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/psyllm-lmstudio/study_c_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/psyllm-lmstudio/study_c_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_bias_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_instruction_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_instruction_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_lexical_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_lexical_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_surface_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_surface_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_syntax_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_a_syntax_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_cultural_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_cultural_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_mild_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_mild_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_moderate_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_moderate_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_pressure_milder_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_pressure_milder_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_pressure_stronger_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_pressure_stronger_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_schedule_earlier_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_schedule_earlier_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_schedule_later_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_schedule_later_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_tone_confrontational_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_tone_confrontational_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_tone_direct_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_tone_direct_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_tone_gentle_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_multi_turn_tone_gentle_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_paraphrase_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_paraphrase_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_question_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_question_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_strong_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_b_strong_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_c_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_c_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_c_noncritical_reorder_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_c_noncritical_reorder_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_c_patient_turn_rephrase_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_c_patient_turn_rephrase_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_c_summary_long_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_c_summary_long_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_c_summary_short_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/ctrl_study_c_summary_short_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_a_invariance_instruction_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_a_invariance_instruction_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_a_invariance_lexical_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_a_invariance_lexical_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_a_invariance_surface_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_a_invariance_surface_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_a_invariance_syntax_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_a_invariance_syntax_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_invariance_cultural_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_invariance_cultural_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_invariance_mild_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_invariance_mild_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_invariance_moderate_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_invariance_moderate_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_invariance_paraphrase_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_invariance_paraphrase_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_invariance_question_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_invariance_question_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_invariance_strong_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_invariance_strong_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_pressure_milder_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_multi_turn_invariance_pressure_milder_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_pressure_stronger_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_multi_turn_invariance_pressure_stronger_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_schedule_earlier_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_multi_turn_invariance_schedule_earlier_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_schedule_later_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_multi_turn_invariance_schedule_later_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_tone_confrontational_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_multi_turn_invariance_tone_confrontational_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_tone_direct_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_multi_turn_invariance_tone_direct_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_tone_gentle_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_b_multi_turn_invariance_tone_gentle_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_c_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_c_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_c_invariance_noncritical_reorder_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_c_invariance_noncritical_reorder_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_c_invariance_patient_turn_rephrase_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_c_invariance_patient_turn_rephrase_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_c_invariance_summary_long_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_c_invariance_summary_long_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwen3-lmstudio/study_c_invariance_summary_short_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance_ctrl/qwen3-lmstudio/study_c_invariance_summary_short_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwq/ctrl_study_a_bias_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwq/ctrl_study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwq/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwq/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwq/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwq/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwq/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwq/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_ctrl_invariance/qwq/study_b_multi_turn_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_ctrl_invariance/qwq/study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/gpt-oss-20b/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/gpt-oss-20b/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/gpt-oss-20b/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/gpt-oss-20b/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/gpt-oss-20b/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/gpt-oss-20b/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/gpt-oss-20b/study_b_multi_turn_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/gpt-oss-20b/study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/gpt-oss-20b/study_c_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/gpt-oss-20b/study_c_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/medgemma-lmstudio/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/medgemma-lmstudio/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/medgemma-lmstudio/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/medgemma-lmstudio/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/medgemma-lmstudio/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/medgemma-lmstudio/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/piaget-8b-local/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/piaget-8b-local/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/piaget-8b-local/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/piaget-8b-local/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/piaget-8b-local/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/piaget-8b-local/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/piaget-8b-local/study_b_multi_turn_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/piaget-8b-local/study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/piaget-8b-local/study_c_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/piaget-8b-local/study_c_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psych-qwen-32b-local/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psych-qwen-32b-local/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyche-r1-local/study_a_bias_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyche-r1-lmstudio/study_a_bias_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyche-r1-local/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyche-r1-lmstudio/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyche-r1-local/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyche-r1-lmstudio/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyche-r1-local/study_a_invariance_instruction_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyche-r1-lmstudio/study_a_invariance_instruction_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyche-r1-local/study_a_invariance_lexical_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyche-r1-lmstudio/study_a_invariance_lexical_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyche-r1-local/study_a_invariance_surface_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyche-r1-lmstudio/study_a_invariance_surface_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyche-r1-local/study_a_invariance_syntax_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyche-r1-lmstudio/study_a_invariance_syntax_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyche-r1-local/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyche-r1-lmstudio/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyllm-lmstudio/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyllm-lmstudio/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyllm-lmstudio/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyllm-lmstudio/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyllm-lmstudio/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyllm-lmstudio/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyllm-lmstudio/study_b_multi_turn_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyllm-lmstudio/study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/psyllm-lmstudio/study_c_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/psyllm-lmstudio/study_c_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_invariance_instruction_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_invariance_instruction_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_invariance_lexical_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_invariance_lexical_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_invariance_surface_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_invariance_surface_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_invariance_syntax_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_a_invariance_syntax_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_cultural_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_cultural_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_mild_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_mild_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_moderate_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_moderate_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_paraphrase_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_paraphrase_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_question_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_question_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_strong_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_invariance_strong_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_pressure_milder_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_pressure_milder_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_pressure_stronger_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_pressure_stronger_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_schedule_earlier_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_schedule_earlier_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_schedule_later_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_schedule_later_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_tone_confrontational_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_tone_confrontational_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_tone_direct_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_tone_direct_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_tone_gentle_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_b_multi_turn_invariance_tone_gentle_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_c_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_c_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_c_invariance_noncritical_reorder_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_c_invariance_noncritical_reorder_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_c_invariance_patient_turn_rephrase_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_c_invariance_patient_turn_rephrase_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_c_invariance_summary_long_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_c_invariance_summary_long_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_c_invariance_summary_short_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3-lmstudio/study_c_invariance_summary_short_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3.5-27b-distilled/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3.5-27b-distilled/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3.5-27b-distilled/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3.5-27b-distilled/study_b_multi_turn_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0/study_b_multi_turn_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwen3.5-27b-distilled/study_c_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0/study_c_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwq/study_a_bias_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwq/study_a_bias_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwq/study_a_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwq/study_a_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwq/study_b_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwq/study_b_invariance_generations.jsonl"
+    },
+    {
+      "destination": "benchmark/runtime/results_invariance/qwq/study_b_multi_turn_invariance_generations.jsonl",
+      "source_ref": "origin/metric-invariance",
+      "source_commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+      "source_path": "benchmark/runtime/results_invariance/qwq/study_b_multi_turn_invariance_generations.jsonl"
+    }
+  ],
+  "local_alias_backfills": [],
+  "coverage": {
+    "raw": {
+      "medgemma-lmstudio": {
+        "study_a": true,
+        "study_a_bias": true
+      },
+      "psyche-r1-local": {
+        "study_a": true,
+        "study_b_mt": true,
+        "study_c": true,
+        "study_b": true,
+        "study_a_bias": true
+      },
+      "gpt-oss-20b": {
+        "study_a": true,
+        "study_b_mt": true,
+        "study_c": true,
+        "study_b": true,
+        "study_a_bias": true
+      },
+      "psych-qwen-space-api": {
+        "study_a_bias": true
+      },
+      "qwen3.5-27b-distilled": {
+        "study_a": true,
+        "study_a_bias": true
+      },
+      "psych-qwen-32b": {
+        "study_a": true,
+        "study_a_bias": true
+      },
+      "deepseek-r1-lmstudio": {
+        "study_a": true,
+        "study_b_mt": true,
+        "study_c": true,
+        "study_b": true,
+        "study_a_bias": true
+      },
+      "psyllm-gml-local": {
+        "study_a": true,
+        "study_b": true
+      },
+      "qwen3-lmstudio": {
+        "study_a": true,
+        "study_b_mt": true,
+        "study_c": true,
+        "study_b": true,
+        "study_a_bias": true
+      },
+      "psych-qwen-32b-local": {
+        "study_a": true,
+        "study_b": true,
+        "study_a_bias": true
+      },
+      "piaget-8b-local": {
+        "study_a": true,
+        "study_b_mt": true,
+        "study_c": true,
+        "study_b": true,
+        "study_a_bias": true
+      },
+      "psyche-r1-lmstudio": {
+        "study_a": true,
+        "study_b_mt": true,
+        "study_c": true,
+        "study_b": true,
+        "study_a_bias": true
+      },
+      "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0": {
+        "study_a": true,
+        "study_a_bias": true
+      },
+      "psyllm-lmstudio": {
+        "study_a": true,
+        "study_b_mt": true,
+        "study_c": true,
+        "study_b": true,
+        "study_a_bias": true
+      },
+      "piaget-lmstudio": {
+        "study_a": true,
+        "study_b_mt": true,
+        "study_c": true,
+        "study_b": true,
+        "study_a_bias": true
+      },
+      "qwq": {
+        "study_a": true,
+        "study_a_bias": true
+      }
+    },
+    "controllability": {
+      "gpt-oss-20b": {
+        "ctrl_a_bias": true,
+        "ctrl_c": true,
+        "ctrl_b_mt": true,
+        "ctrl_b": true,
+        "ctrl_a": true
+      },
+      "qwen3-lmstudio": {
+        "ctrl_a_bias": true,
+        "ctrl_c": true,
+        "ctrl_b_mt": true,
+        "ctrl_b": true,
+        "ctrl_a": true
+      },
+      "piaget-8b-local": {
+        "ctrl_a_bias": true,
+        "ctrl_c": true,
+        "ctrl_b_mt": true,
+        "ctrl_b": true,
+        "ctrl_a": true
+      },
+      "piaget-lmstudio": {
+        "ctrl_a_bias": true,
+        "ctrl_c": true,
+        "ctrl_b_mt": true,
+        "ctrl_b": true,
+        "ctrl_a": true
+      },
+      "medgemma-lmstudio": {
+        "ctrl_a_bias": true
+      },
+      "psyche-r1-local": {
+        "ctrl_a_bias": true,
+        "ctrl_a": true
+      },
+      "medgemma_lmstudio": {
+        "ctrl_a_bias": true
+      },
+      "psyllm-lmstudio": {
+        "ctrl_a_bias": true,
+        "ctrl_c": true,
+        "ctrl_b_mt": true,
+        "ctrl_b": true,
+        "ctrl_a": true
+      },
+      "qwq": {
+        "ctrl_a_bias": true
+      }
+    },
+    "invariance": {
+      "medgemma-lmstudio": {
+        "study_a": true,
+        "study_b": true,
+        "study_a_bias": true
+      },
+      "psyche-r1-local": {
+        "study_a": true,
+        "study_b": true,
+        "study_a_bias": true
+      },
+      "gpt-oss-20b": {
+        "study_c": true,
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      },
+      "qwen3.5-27b-distilled": {
+        "study_c": true,
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      },
+      "qwen3-lmstudio": {
+        "study_c": true,
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      },
+      "psych-qwen-32b-local": {
+        "study_a_bias": true
+      },
+      "piaget-8b-local": {
+        "study_c": true,
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      },
+      "qwen3.5-27b-claude-4.6-opus-reasoning-distilled@q8-0": {
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      },
+      "psyllm-lmstudio": {
+        "study_c": true,
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      },
+      "qwq": {
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      }
+    },
+    "ctrl_invariance": {
+      "medgemma-lmstudio": {
+        "study_a": true,
+        "study_a_bias": true
+      },
+      "psyche-r1-local": {
+        "study_a_bias": true
+      },
+      "gpt-oss-20b": {
+        "study_c": true,
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      },
+      "qwen3-lmstudio": {
+        "study_c": true,
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      },
+      "piaget-8b-local": {
+        "study_c": true,
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      },
+      "psyllm-lmstudio": {
+        "study_c": true,
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      },
+      "qwq": {
+        "study_a": true,
+        "study_b": true,
+        "study_b_mt": true,
+        "study_a_bias": true
+      }
+    }
+  }
+}

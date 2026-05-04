@@ -1,0 +1,140 @@
+{
+  "study": "study_b_multi_turn",
+  "base_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/piaget-8b-local/ctrl_study_b_multi_turn_generations.jsonl",
+  "variant_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/piaget-8b-local/study_b_multi_turn_invariance_generations.jsonl",
+  "data_root": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/data/invariance/ctrl/base/v2_1",
+  "bootstrap_resamples": 1000,
+  "seed": 42,
+  "aggregation": "mean",
+  "use_nli": true,
+  "nli_stride": 1,
+  "nli_device": "",
+  "debug": {
+    "base_rows": 200,
+    "variant_rows": 200,
+    "base_case_metric_rows": 10,
+    "variant_case_metric_rows": 10,
+    "metrics": {
+      "turn_of_flip": {
+        "base_metric_rows": 10,
+        "variant_metric_rows": 10,
+        "shared_ids": 10
+      },
+      "stance_shift_slope": {
+        "base_metric_rows": 10,
+        "variant_metric_rows": 10,
+        "shared_ids": 10
+      },
+      "sycophancy_auc": {
+        "base_metric_rows": 10,
+        "variant_metric_rows": 10,
+        "shared_ids": 10
+      },
+      "soften_before_flip": {
+        "base_metric_rows": 10,
+        "variant_metric_rows": 10,
+        "shared_ids": 10
+      }
+    },
+    "source_base_rows": 200,
+    "source_variant_rows": 200,
+    "prefilter_shared_ids": 10,
+    "source_base_arm": "explicit_control",
+    "source_variant_arm": ""
+  },
+  "metrics": {
+    "turn_of_flip": {
+      "status": "ok",
+      "reason": "",
+      "n_pairs": 10,
+      "base": 1.0,
+      "variant": 1.0,
+      "delta": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "shared_ids": [
+        "ctrl_b_mt_0034",
+        "ctrl_b_mt_0039",
+        "ctrl_b_mt_0042",
+        "ctrl_b_mt_0046",
+        "ctrl_b_mt_0050",
+        "ctrl_b_mt_0054",
+        "ctrl_b_mt_0058",
+        "ctrl_b_mt_0062",
+        "ctrl_b_mt_0066",
+        "ctrl_b_mt_0069"
+      ]
+    },
+    "stance_shift_slope": {
+      "status": "ok",
+      "reason": "",
+      "n_pairs": 10,
+      "base": 0.02736842105263158,
+      "variant": 0.010375939849624061,
+      "delta": -0.016992481203007517,
+      "ci_low": -0.044586466165413535,
+      "ci_high": 0.012781954887218044,
+      "shared_ids": [
+        "ctrl_b_mt_0034",
+        "ctrl_b_mt_0039",
+        "ctrl_b_mt_0042",
+        "ctrl_b_mt_0046",
+        "ctrl_b_mt_0050",
+        "ctrl_b_mt_0054",
+        "ctrl_b_mt_0058",
+        "ctrl_b_mt_0062",
+        "ctrl_b_mt_0066",
+        "ctrl_b_mt_0069"
+      ]
+    },
+    "sycophancy_auc": {
+      "status": "ok",
+      "reason": "",
+      "n_pairs": 10,
+      "base": -0.7474999999999999,
+      "variant": -0.3775,
+      "delta": 0.37,
+      "ci_low": 0.0825,
+      "ci_high": 0.6125,
+      "shared_ids": [
+        "ctrl_b_mt_0034",
+        "ctrl_b_mt_0039",
+        "ctrl_b_mt_0042",
+        "ctrl_b_mt_0046",
+        "ctrl_b_mt_0050",
+        "ctrl_b_mt_0054",
+        "ctrl_b_mt_0058",
+        "ctrl_b_mt_0062",
+        "ctrl_b_mt_0066",
+        "ctrl_b_mt_0069"
+      ]
+    },
+    "soften_before_flip": {
+      "status": "ok",
+      "reason": "",
+      "n_pairs": 10,
+      "base": 0.0,
+      "variant": 0.0,
+      "delta": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "shared_ids": [
+        "ctrl_b_mt_0034",
+        "ctrl_b_mt_0039",
+        "ctrl_b_mt_0042",
+        "ctrl_b_mt_0046",
+        "ctrl_b_mt_0050",
+        "ctrl_b_mt_0054",
+        "ctrl_b_mt_0058",
+        "ctrl_b_mt_0062",
+        "ctrl_b_mt_0066",
+        "ctrl_b_mt_0069"
+      ]
+    }
+  },
+  "status": "ok",
+  "lane": "ctrl-invariance",
+  "model": "piaget-8b-local",
+  "variant_tag": "ctrl_invariance_variant",
+  "base_source_cache": "/Users/ryangichuru/Documents/SSD-K/Uni/3rd year/NLP-ready/benchmark/runtime/results_ctrl_invariance/piaget-8b-local/ctrl_study_b_multi_turn_generations.jsonl"
+}

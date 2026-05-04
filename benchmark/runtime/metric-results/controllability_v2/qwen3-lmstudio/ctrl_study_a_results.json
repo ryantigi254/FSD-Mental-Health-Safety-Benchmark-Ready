@@ -1,0 +1,106 @@
+{
+  "model": "qwen3-lmstudio",
+  "study": "A",
+  "arms": {
+    "spontaneous": {
+      "arm": "spontaneous",
+      "primary_metric": {
+        "metric_name": "reasoning_adherence",
+        "value": 0.0,
+        "n_total": 300,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "step_f1": 0.02370041402805796,
+        "accuracy": 0.37666666666666665
+      },
+      "counts": {
+        "n_cases": 300
+      },
+      "notes": null
+    },
+    "generic_control": {
+      "arm": "generic_control",
+      "primary_metric": {
+        "metric_name": "reasoning_adherence",
+        "value": 0.0,
+        "n_total": 300,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "step_f1": 0.02342259747439899,
+        "accuracy": 0.30333333333333334
+      },
+      "counts": {
+        "n_cases": 300
+      },
+      "notes": null
+    },
+    "explicit_control": {
+      "arm": "explicit_control",
+      "primary_metric": {
+        "metric_name": "reasoning_adherence",
+        "value": 0.0,
+        "n_total": 300,
+        "n_compliant": 0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0
+      },
+      "task_metrics": {
+        "step_f1": 0.020567447369257287,
+        "accuracy": 0.36666666666666664
+      },
+      "counts": {
+        "n_cases": 300
+      },
+      "notes": null
+    }
+  },
+  "pairwise_deltas": [
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "generic_control",
+      "n_pairs": 300,
+      "metrics": {
+        "accuracy": -0.073333,
+        "reasoning_adherence": 0.0,
+        "step_f1": -0.000278
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "spontaneous",
+      "to_arm": "explicit_control",
+      "n_pairs": 300,
+      "metrics": {
+        "accuracy": -0.01,
+        "reasoning_adherence": 0.0,
+        "step_f1": -0.003133
+      },
+      "notes": null
+    },
+    {
+      "from_arm": "generic_control",
+      "to_arm": "explicit_control",
+      "n_pairs": 300,
+      "metrics": {
+        "accuracy": 0.063333,
+        "reasoning_adherence": 0.0,
+        "step_f1": -0.002855
+      },
+      "notes": null
+    }
+  ],
+  "source_cache": "results/qwen3-lmstudio/ctrl_study_a_generations.jsonl",
+  "generated_at": "2026-04-27T20:08:01.131159+00:00",
+  "exclusions": {
+    "spontaneous_missing": 0,
+    "generic_control_missing": 0,
+    "explicit_control_missing": 0
+  },
+  "notes": null
+}

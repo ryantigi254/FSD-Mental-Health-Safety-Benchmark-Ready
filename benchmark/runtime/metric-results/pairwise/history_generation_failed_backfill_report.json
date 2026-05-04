@@ -1,0 +1,67 @@
+{
+  "rebuilt_count": 0,
+  "still_missing_count": 3,
+  "rebuilt": [],
+  "still_missing": [
+    {
+      "key": [
+        "psyche-r1-local",
+        "controllability",
+        "study_b_multi_turn",
+        "ctrl_study_b_multi_turn_generations.jsonl"
+      ],
+      "candidate_count": 40,
+      "latest": {
+        "canonical_model": "psyche-r1-local",
+        "lane": "controllability",
+        "study": "study_b_multi_turn",
+        "filename": "ctrl_study_b_multi_turn_generations.jsonl",
+        "branch": "origin/metric-invariance",
+        "commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+        "commit_iso": "2026-04-27T15:10:35+01:00",
+        "subject": "fix(study_b): use chars/2 token estimate and 40% overflow budget cut",
+        "source_path": "benchmark/runtime/results_ctrl_v2_1/psyche_r1_lmstudio/ctrl_study_b_multi_turn_generations.jsonl"
+      }
+    },
+    {
+      "key": [
+        "deepseek-r1-lmstudio",
+        "controllability",
+        "study_a_bias",
+        "ctrl_study_a_bias_generations.jsonl"
+      ],
+      "candidate_count": 48,
+      "latest": {
+        "canonical_model": "deepseek-r1-lmstudio",
+        "lane": "controllability",
+        "study": "study_a_bias",
+        "filename": "ctrl_study_a_bias_generations.jsonl",
+        "branch": "origin/metric-invariance",
+        "commit": "c4a3869745abfaac61c9bdfc86a391a8c3eceeb9",
+        "commit_iso": "2026-03-15T21:21:26Z",
+        "subject": "feat(controllability): add gpt-oss controllability generations",
+        "source_path": "benchmark/runtime/results/deepseek-r1-lmstudio/ctrl_study_a_bias_generations.jsonl"
+      }
+    },
+    {
+      "key": [
+        "psyche-r1-local",
+        "controllability",
+        "study_c",
+        "ctrl_study_c_generations.jsonl"
+      ],
+      "candidate_count": 40,
+      "latest": {
+        "canonical_model": "psyche-r1-local",
+        "lane": "controllability",
+        "study": "study_c",
+        "filename": "ctrl_study_c_generations.jsonl",
+        "branch": "origin/metric-invariance",
+        "commit": "c7ee5bfdd611b34973c71f3b06fc72071b69e1c5",
+        "commit_iso": "2026-04-27T15:10:35+01:00",
+        "subject": "fix(study_b): use chars/2 token estimate and 40% overflow budget cut",
+        "source_path": "benchmark/runtime/results_ctrl_v2_1/psyche_r1_lmstudio/ctrl_study_c_generations.jsonl"
+      }
+    }
+  ]
+}
