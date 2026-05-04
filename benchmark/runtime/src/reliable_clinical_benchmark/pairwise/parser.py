@@ -10,22 +10,19 @@ from dataclasses import asdict, dataclass
 
 logger = logging.getLogger(__name__)
 
-_VERDICT_PATTERNS = [
-    (re.compile(r"\[\[\s*(?:Response\s+)?A\s*\]\]", re.IGNORECASE), "A"),
-    (re.compile(r"\[\[\s*(?:Response\s+)?B\s*\]\]", re.IGNORECASE), "B"),
-    (re.compile(r"\[\[\s*TIE\s*\]\]", re.IGNORECASE), "TIE"),
-    (re.compile(r"(?m)^\s*Verdict\s*:\s*\[\[\s*(?:Response\s+)?A\s*\]\]\s*$", re.IGNORECASE), "A"),
-    (re.compile(r"(?m)^\s*Verdict\s*:\s*\[\[\s*(?:Response\s+)?B\s*\]\]\s*$", re.IGNORECASE), "B"),
-    (re.compile(r"(?m)^\s*Verdict\s*:\s*\[\[\s*TIE\s*\]\]\s*$", re.IGNORECASE), "TIE"),
-    (re.compile(r"\[\s*(?:Response\s+)?A\s*\]", re.IGNORECASE), "A"),
-    (re.compile(r"\[\s*(?:Response\s+)?B\s*\]", re.IGNORECASE), "B"),
-    (re.compile(r"\[\s*TIE\s*\]", re.IGNORECASE), "TIE"),
-    (re.compile(r"(?m)^\s*(?:Verdict\s*:\s*)?A\s*$", re.IGNORECASE), "A"),
-    (re.compile(r"(?m)^\s*(?:Verdict\s*:\s*)?B\s*$", re.IGNORECASE), "B"),
-    (re.compile(r"(?m)^\s*(?:Verdict\s*:\s*)?TIE\s*$", re.IGNORECASE), "TIE"),
-    (re.compile(r"(?:winner|verdict|choice)\s*:\s*(?:Response\s+)?A\b", re.IGNORECASE), "A"),
-    (re.compile(r"(?:winner|verdict|choice)\s*:\s*(?:Response\s+)?B\b", re.IGNORECASE), "B"),
-    (re.compile(r"(?:winner|verdict|choice)\s*:\s*TIE\b", re.IGNORECASE), "TIE"),
+_VERDICT_LINE_PATTERNS = [
+    (re.compile(r"^\s*(?:verdict\s*:\s*)?\[\[\s*(?:response\s+)?a\s*\]\]\s*$", re.IGNORECASE), "A"),
+    (re.compile(r"^\s*(?:verdict\s*:\s*)?\[\[\s*(?:response\s+)?b\s*\]\]\s*$", re.IGNORECASE), "B"),
+    (re.compile(r"^\s*(?:verdict\s*:\s*)?\[\[\s*tie\s*\]\]\s*$", re.IGNORECASE), "TIE"),
+    (re.compile(r"^\s*(?:verdict\s*:\s*)?\[\s*(?:response\s+)?a\s*\]\s*$", re.IGNORECASE), "A"),
+    (re.compile(r"^\s*(?:verdict\s*:\s*)?\[\s*(?:response\s+)?b\s*\]\s*$", re.IGNORECASE), "B"),
+    (re.compile(r"^\s*(?:verdict\s*:\s*)?\[\s*tie\s*\]\s*$", re.IGNORECASE), "TIE"),
+    (re.compile(r"^\s*(?:winner|verdict|choice)\s*:\s*(?:response\s+)?a\s*$", re.IGNORECASE), "A"),
+    (re.compile(r"^\s*(?:winner|verdict|choice)\s*:\s*(?:response\s+)?b\s*$", re.IGNORECASE), "B"),
+    (re.compile(r"^\s*(?:winner|verdict|choice)\s*:\s*tie\s*$", re.IGNORECASE), "TIE"),
+    (re.compile(r"^\s*(?:verdict\s*:\s*)?a\s*$", re.IGNORECASE), "A"),
+    (re.compile(r"^\s*(?:verdict\s*:\s*)?b\s*$", re.IGNORECASE), "B"),
+    (re.compile(r"^\s*(?:verdict\s*:\s*)?tie\s*$", re.IGNORECASE), "TIE"),
 ]
 
 _EXCERPT_MAX = 600
@@ -60,19 +57,30 @@ class PairwiseParser:
     """Extract structured verdicts from raw judge responses."""
 
     @staticmethod
-    def extract_verdict(text: str) -> str:
-        for pattern, label in _VERDICT_PATTERNS:
-            if pattern.search(text):
-                return label
-        return "INVALID"
+    def _verdict_line_index(text: str) -> tuple[int, str] | None:
+        lines = str(text or "").splitlines()
+        for idx in range(len(lines) - 1, -1, -1):
+            line = lines[idx]
+            if not line.strip():
+                continue
+            for pattern, label in _VERDICT_LINE_PATTERNS:
+                if pattern.match(line):
+                    return idx, label
+            return None
+        return None
 
-    @staticmethod
-    def extract_reasoning(text: str) -> str:
-        for pattern, _label in _VERDICT_PATTERNS:
-            match = pattern.search(text)
-            if match:
-                excerpt = text[: match.start()].strip()
-                return excerpt[-_EXCERPT_MAX:]
+    @classmethod
+    def extract_verdict(cls, text: str) -> str:
+        verdict = cls._verdict_line_index(text)
+        return verdict[1] if verdict is not None else "INVALID"
+
+    @classmethod
+    def extract_reasoning(cls, text: str) -> str:
+        verdict = cls._verdict_line_index(text)
+        if verdict is not None:
+            lines = str(text or "").splitlines()
+            excerpt = "\n".join(lines[: verdict[0]]).strip()
+            return excerpt[-_EXCERPT_MAX:]
         return text[-_EXCERPT_MAX:].strip() if text else ""
 
     @staticmethod

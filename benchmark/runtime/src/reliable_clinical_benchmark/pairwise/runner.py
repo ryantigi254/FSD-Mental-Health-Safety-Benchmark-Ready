@@ -21,6 +21,7 @@ from .prompt_templates import (
     SYSTEM_PROMPT_VERSION,
     TEMPLATES,
     USER_TEMPLATE_VERSION,
+    get_system_prompt,
 )
 from .rubric import ALL_CRITERIA, criteria_for_case
 
@@ -392,6 +393,9 @@ class PairwiseRunner:
             response_b=display_b["text"],
         )
 
+        system_prompt, system_prompt_ver = get_system_prompt(
+            self.run_spec.config.rubric_family
+        )
         raw_response = ""
         parsed = None
         for attempt in range(1 + self.run_spec.config.max_retries_per_invalid_parse):
@@ -400,7 +404,7 @@ class PairwiseRunner:
                 temperature=judge.generation_params.temperature,
                 max_tokens=judge.generation_params.max_tokens,
                 top_p=judge.generation_params.top_p,
-                system_prompt=PAIRWISE_JUDGE_SYSTEM_PROMPT,
+                system_prompt=system_prompt,
                 prompt=prompt,
             )
             parsed = self.parser.parse(
@@ -447,9 +451,9 @@ class PairwiseRunner:
             "display_system_b": display_b["system_id"],
             "response_length_a": _response_length(response_a),
             "response_length_b": _response_length(response_b),
-            "system_prompt_version": SYSTEM_PROMPT_VERSION,
+            "system_prompt_version": system_prompt_ver,
             "prompt_template_version": USER_TEMPLATE_VERSION,
-            "system_prompt": PAIRWISE_JUDGE_SYSTEM_PROMPT,
+            "system_prompt": system_prompt,
             "prompt_text": prompt,
             "raw_response": raw_response,
             "timestamp": datetime.now(timezone.utc).isoformat(),

@@ -12,6 +12,7 @@ def bootstrap_confidence_interval(
     n_iterations: int = 1000,
     confidence_level: float = 0.95,
     statistic_fn: Callable = np.mean,
+    seed: int = 0,
 ) -> Tuple[float, float, float]:
     """
     Compute bootstrap confidence interval.
@@ -31,9 +32,10 @@ def bootstrap_confidence_interval(
 
     point_estimate = statistic_fn(data)
 
+    rng = np.random.default_rng(seed)
     bootstrap_stats = []
     for _ in range(n_iterations):
-        sample = np.random.choice(data, size=n, replace=True)
+        sample = rng.choice(data, size=n, replace=True)
         bootstrap_stats.append(statistic_fn(sample))
 
     bootstrap_stats = np.array(bootstrap_stats)
@@ -59,6 +61,7 @@ def cluster_bootstrap_confidence_interval(
     n_iterations: int = 1000,
     confidence_level: float = 0.95,
     statistic_fn: Callable = np.mean,
+    seed: int = 0,
 ) -> Tuple[float, float, float]:
     """
     Compute cluster bootstrap CI by resampling cluster IDs with replacement.
@@ -79,8 +82,9 @@ def cluster_bootstrap_confidence_interval(
     point_estimate = float(statistic_fn(values_np))
     bootstrap_stats = []
 
+    rng = np.random.default_rng(seed)
     for _ in range(n_iterations):
-        sampled_clusters = np.random.choice(
+        sampled_clusters = rng.choice(
             unique_clusters, size=len(unique_clusters), replace=True
         )
         sampled_indices = np.concatenate(

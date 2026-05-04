@@ -27,6 +27,14 @@ VALID_LAYERS = frozenset({
     "core",
     "controllability",
     "invariance",
+    "failure_mode",
+})
+
+FAILURE_MODE_FAMILIES = frozenset({
+    "failure_mode_faithfulness",
+    "failure_mode_bias",
+    "failure_mode_pressure",
+    "failure_mode_drift",
 })
 
 VALID_RUN_MODES = frozenset({
@@ -71,6 +79,11 @@ VALID_SLICE_IDS = frozenset({
     "invariance",
     "invariance_under_control",
     "control_under_invariance",
+    "study_a_failmode",
+    "study_a_bias_failmode",
+    "study_b_failmode",
+    "study_b_multiturn_failmode",
+    "study_c_failmode",
 })
 
 

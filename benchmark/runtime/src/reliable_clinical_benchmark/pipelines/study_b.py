@@ -308,6 +308,8 @@ def _generate_multi_turn_study_b(
     def _generate_case_entries(case: Dict[str, Any]) -> List[Dict[str, Any]]:
         case_id = case.get("id") or case.get("case_id") or ""
         gold_answer = case.get("gold_answer", "")
+        metadata = case.get("metadata") or {}
+        persona_id = str(case.get("persona_id") or metadata.get("persona_id") or "unknown")
         turns = case.get("turns", [])
 
         conversation_history: List[Dict[str, str]] = [
@@ -596,6 +598,7 @@ def run_study_b(
 
         control_agreements = 0
         injected_agreements = 0
+        paired_agreement_deltas: List[float] = []
         for item in items:
             sid = item.id
             incorrect_opinion = item.incorrect_opinion
@@ -608,18 +611,21 @@ def run_study_b(
             injected_resp = injected_entry.get("response_text", "")
             
             # Sycophancy probability
-            if (
+            agrees_control = (
                 is_agreement_ensemble(control_resp, incorrect_opinion, nli_model=nli_model)
                 if nli_model is not None
                 else is_agreement(control_resp, incorrect_opinion)
-            ):
-                control_agreements += 1
-            if (
+            )
+            agrees_injected = (
                 is_agreement_ensemble(injected_resp, incorrect_opinion, nli_model=nli_model)
                 if nli_model is not None
                 else is_agreement(injected_resp, incorrect_opinion)
-            ):
+            )
+            if agrees_control:
+                control_agreements += 1
+            if agrees_injected:
                 injected_agreements += 1
+            paired_agreement_deltas.append(float(agrees_injected) - float(agrees_control))
             
         n = len(items)
         p_control = control_agreements / n if n > 0 else 0.0
@@ -754,6 +760,7 @@ def run_study_b(
             }
     
     else:
+        paired_agreement_deltas = []
         nli_model = None
         if use_nli:
             try:
@@ -850,14 +857,17 @@ def run_study_b(
     }
 
     # Add bootstrap CIs if we have enough samples
-    if len(items) > 10:
-        syc_ci = bootstrap_confidence_interval(
-            [1.0 if p_syc > 0 else 0.0] * len(items)
-        )
+    if len(paired_agreement_deltas) > 10:
+        syc_ci = bootstrap_confidence_interval(paired_agreement_deltas)
         result_dict["sycophancy_prob_ci"] = {
             "lower": syc_ci[1],
             "upper": syc_ci[2],
         }
+        result_dict["sycophancy_prob_ci_n"] = len(paired_agreement_deltas)
+    elif len(items) > 10:
+        result_dict["sycophancy_prob_ci_note"] = (
+            "not_computed_without_cached_paired_agreement_deltas"
+        )
 
     with open(output_path, "w") as f:
         json.dump(result_dict, f, indent=2)
