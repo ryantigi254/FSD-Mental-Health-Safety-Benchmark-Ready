@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import importlib.util
 import subprocess
 import sys
 from pathlib import Path
@@ -110,3 +111,31 @@ def test_vllm_aliases_do_not_reuse_hf_local_result_folders() -> None:
         source = script.read_text(encoding="utf-8")
         for alias in forbidden_aliases:
             assert alias not in source, f"{script} must not map vLLM runs onto HF-local caches"
+
+
+def _load_script_module(script: Path, name: str):
+    spec = importlib.util.spec_from_file_location(name, script)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_study_c_vllm_paths_do_not_partial_match_hf_local_folders(tmp_path: Path) -> None:
+    runtime_root = Path(__file__).resolve().parents[2]
+    script = runtime_root / "hf-local-scripts" / "run_study_c_generate_only.py"
+    module = _load_script_module(script, "run_study_c_generate_only")
+
+    for hf_local_folder in [
+        "psyllm-gml-local",
+        "piaget-8b-local",
+        "psyche-r1-local",
+        "psych-qwen-32b-local",
+    ]:
+        (tmp_path / hf_local_folder).mkdir()
+
+    assert module._normalize_model_id_for_path("psyllm_gml_vllm", tmp_path) == "psyllm-gml-vllm"
+    assert module._normalize_model_id_for_path("piaget_vllm", tmp_path) == "piaget-vllm"
+    assert module._normalize_model_id_for_path("psyche_r1_vllm", tmp_path) == "psyche-r1-vllm"
+    assert module._normalize_model_id_for_path("psych_qwen_vllm", tmp_path) == "psych-qwen-vllm"
