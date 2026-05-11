@@ -293,11 +293,13 @@ def get_model_runner(
     elif model_id_lower in ("psych_qwen", "psych_qwen_32b", "psych-qwen-32b"):
         return PsychQwen32BRunner(config=config)
     elif model_id_lower in ("psych_qwen_local", "psych-qwen-32b-local", "psych-qwen-local-hf"):
-        return PsychQwen32BLocalRunner(
-            model_name=_resolve_local_model_path("Psych_Qwen_32B"),
-            quantization=quantization,
-            config=config,
-        )
+        runner_kwargs = {
+            "model_name": _resolve_local_model_path("Psych_Qwen_32B"),
+            "config": config,
+        }
+        if quantization is not None:
+            runner_kwargs["quantization"] = quantization
+        return PsychQwen32BLocalRunner(**runner_kwargs)
     elif model_id_lower in (
         "ollama_minimax_m2_5_cloud",
         "minimax_m2_5_cloud",

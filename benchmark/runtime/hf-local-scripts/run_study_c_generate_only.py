@@ -137,10 +137,6 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "qwen3_lmstudio": "qwen3-lmstudio",
         "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
         "minimax_m2_5_cloud": "minimax-m2.5-cloud",
-        "psyllm_gml_vllm": "psyllm-gml-local",
-        "piaget_vllm": "piaget-8b-local",
-        "psyche_r1_vllm": "psyche-r1-local",
-        "psych_qwen_vllm": "psych-qwen-32b-local",
 
     }
 
@@ -197,6 +193,10 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
     # Try partial matching: if normalized model_id is a prefix of any existing folder
 
     normalized_base = model_id.replace("_", "-").lower()
+
+    if normalized_base.endswith("-vllm"):
+
+        return normalized_base
 
     if output_dir.exists():
 
@@ -398,11 +398,6 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
         "qwen3_lmstudio": "qwen3-lmstudio",
         "ollama_minimax_m2_5_cloud": "minimax-m2.5-cloud",
         "minimax_m2_5_cloud": "minimax-m2.5-cloud",
-        # vLLM-served local models → same results folders as HF-local
-        "psyllm_gml_vllm": "psyllm-gml-local",
-        "piaget_vllm": "piaget-8b-local",
-        "psyche_r1_vllm": "psyche-r1-local",
-        "psych_qwen_vllm": "psych-qwen-32b-local",
     }
     alias_target = alias_map.get(model_id)
     if alias_target:
@@ -431,6 +426,10 @@ def _normalize_model_id_for_path(model_id: str, output_dir: Path) -> str:
     
     # Try partial matching: if normalized model_id is a prefix of any existing folder
     normalized_base = model_id.replace("_", "-").lower()
+
+    if normalized_base.endswith("-vllm"):
+        return normalized_base
+
     if output_dir.exists():
         for existing_folder in output_dir.iterdir():
             if existing_folder.is_dir():
