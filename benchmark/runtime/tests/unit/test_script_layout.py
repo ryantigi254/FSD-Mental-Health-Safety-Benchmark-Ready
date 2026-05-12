@@ -5,6 +5,27 @@ import sys
 from pathlib import Path
 
 
+def test_duplicate_hf_local_scripts_exit_before_stale_body() -> None:
+    runtime_root = Path(__file__).resolve().parents[2]
+    scripts = [
+        runtime_root / "hf-local-scripts" / "run_study_a_generate_only.py",
+        runtime_root / "hf-local-scripts" / "run_study_b_generate_only.py",
+        runtime_root / "hf-local-scripts" / "run_study_b_multi_turn_generate_only.py",
+        runtime_root / "hf-local-scripts" / "run_study_c_generate_only.py",
+    ]
+
+    for script in scripts:
+        text = script.read_text(encoding="utf-8")
+        if text.count('if __name__ == "__main__":') < 2:
+            continue
+
+        first_guard = text.split('if __name__ == "__main__":', 1)[1]
+        before_duplicate_body = first_guard.split("import argparse", 1)[0]
+        assert "raise SystemExit(main())" in before_duplicate_body, (
+            f"{script} can fall through into its stale duplicate script body"
+        )
+
+
 def test_canonical_scripts_exist() -> None:
     runtime_root = Path(__file__).resolve().parents[2]
 
