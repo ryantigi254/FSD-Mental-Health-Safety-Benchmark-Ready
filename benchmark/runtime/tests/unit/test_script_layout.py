@@ -53,3 +53,13 @@ def test_core_entrypoints_expose_help() -> None:
             text=True,
         )
         assert completed.returncode == 0, completed.stdout + completed.stderr
+
+
+def test_study_a_generate_only_has_single_entrypoint() -> None:
+    runtime_root = Path(__file__).resolve().parents[2]
+    script = runtime_root / "hf-local-scripts" / "run_study_a_generate_only.py"
+    source = script.read_text(encoding="utf-8")
+
+    assert source.count('if __name__ == "__main__":') == 1
+    assert source.count("def _parse_args()") == 1
+    assert "--quantization" in source
